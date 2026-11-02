@@ -81,17 +81,21 @@
 
       <section id="add-screen" class="screen form-screen" aria-labelledby="form-title" hidden>
         <header class="screen-header">
-          <button class="text-button" data-go-home type="button">← Back</button>
+          <button id="add-back-button" class="text-button" type="button">← Back</button>
         </header>
         <form id="card-form" class="card-form">
           <p class="eyebrow">GROW YOUR DICTIONARY</p>
           <h1 id="form-title">Add a new word</h1>
           <label class="field-label" for="japanese-word">Japanese (romaji)</label>
           <input id="japanese-word" name="japanese" type="text" placeholder="e.g. ohayou" autocomplete="off" required />
-          <p id="hiragana-preview" class="hiragana-preview" aria-live="polite"></p>
+          <label class="field-label" for="hiragana-word">Hiragana</label>
+          <input id="hiragana-word" name="hiragana" type="text" placeholder="ひらがな" autocomplete="off" required />
           <label class="field-label" for="english-translation">English translation</label>
           <textarea id="english-translation" name="english" rows="6" placeholder="Meaning, examples, or notes for yourself" required></textarea>
-          <button class="primary-button" type="submit">OK</button>
+          <div class="form-actions">
+            <button id="cancel-edit-button" class="secondary-button" type="button" hidden>Cancel</button>
+            <button class="primary-button" type="submit">OK</button>
+          </div>
         </form>
       </section>
 

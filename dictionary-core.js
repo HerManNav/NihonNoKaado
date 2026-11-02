@@ -134,5 +134,11 @@
     return cards.filter((_, cardIndex) => cardIndex !== index);
   }
 
-  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shuffle, createPracticeDeck, removeCardAt };
+  function updateCardAt(cards, index, updates) {
+    if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
+    if (!Number.isInteger(index) || index < 0 || index >= cards.length) return [...cards];
+    return cards.map((card, cardIndex) => cardIndex === index ? { ...card, ...updates } : card);
+  }
+
+  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shuffle, createPracticeDeck, removeCardAt, updateCardAt };
 });

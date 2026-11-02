@@ -1,4 +1,4 @@
-const CACHE_NAME = "japanese-cards-pwa-v5";
+const CACHE_NAME = "japanese-cards-pwa-v10";
 const APP_FILES = [
   "./",
   "./index.html",

@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, serializeDictionary, romajiToHiragana, createPracticeDeck, removeCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, serializeDictionary, romajiToHiragana, createPracticeDeck, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -17,8 +17,11 @@ const dictionaryListCount = document.querySelector("#dictionary-list-count");
 const wordList = document.querySelector("#word-list");
 const cardForm = document.querySelector("#card-form");
 const japaneseInput = document.querySelector("#japanese-word");
-const hiraganaPreview = document.querySelector("#hiragana-preview");
+const hiraganaInput = document.querySelector("#hiragana-word");
 const englishInput = document.querySelector("#english-translation");
+const formTitle = document.querySelector("#form-title");
+const formSubmitButton = cardForm.querySelector("[type='submit']");
+const cancelEditButton = document.querySelector("#cancel-edit-button");
 const flashcard = document.querySelector("#flashcard");
 const promptWord = document.querySelector("#prompt-word");
 const answerWord = document.querySelector("#answer-word");
@@ -33,6 +36,9 @@ const dictionaryActions = document.querySelector("#dictionary-actions");
 const addButton = document.querySelector("#add-button");
 const importFile = document.querySelector("#import-file");
 let storageWarning = "";
+let editingCardIndex = null;
+let formReturnScreen = "home";
+let hiraganaManuallyEdited = false;
 
 let cards = loadCards();
 let practiceDeck = [];
@@ -80,7 +86,7 @@ function updateDictionaryCount() {
   if (storageWarning) dictionaryCount.textContent += ` · ${storageWarning}`;
 }
 
-function renderDictionaryList() {
+function renderDictionaryList(highlightIndex = -1) {
   const count = cards.length;
   dictionaryListCount.textContent = count === 1 ? "1 word" : `${count} words`;
   wordList.replaceChildren();
@@ -96,6 +102,10 @@ function renderDictionaryList() {
   cards.forEach((card, index) => {
     const row = document.createElement("article");
     row.className = "word-row";
+    if (index === highlightIndex) {
+      row.classList.add("is-updated");
+      row.addEventListener("animationend", () => row.classList.remove("is-updated"), { once: true });
+    }
 
     const removeButton = document.createElement("button");
     removeButton.className = "remove-word-button";
@@ -104,6 +114,13 @@ function renderDictionaryList() {
     removeButton.setAttribute("aria-label", `Remove ${card.japanese}`);
     removeButton.title = "Remove this word";
     removeButton.addEventListener("click", () => removeDictionaryCard(index));
+
+    const editButton = document.createElement("button");
+    editButton.className = "edit-word-button";
+    editButton.type = "button";
+    editButton.textContent = "Edit";
+    editButton.setAttribute("aria-label", `Edit ${card.japanese}`);
+    editButton.addEventListener("click", () => startEditingCard(index));
 
     const details = document.createElement("div");
     details.className = "word-details";
@@ -118,7 +135,7 @@ function renderDictionaryList() {
     const english = document.createElement("p");
     english.textContent = card.english.replace(/\r\n|\r|\n/g, "    ");
     details.append(japanese, english);
-    row.append(removeButton, details);
+    row.append(removeButton, details, editButton);
     wordList.append(row);
   });
 }
@@ -306,10 +323,37 @@ sessionOptions.forEach((button) => button.addEventListener("click", () => {
 }));
 function startAddingWord() {
   cardForm.reset();
-  hiraganaPreview.textContent = "";
+  editingCardIndex = null;
+  formReturnScreen = "home";
+  hiraganaManuallyEdited = false;
+  formTitle.textContent = "Add a new word";
+  formSubmitButton.textContent = "OK";
+  cancelEditButton.hidden = true;
   closeDictionaryMenu();
   showScreen("add");
   japaneseInput.focus();
+}
+
+function startEditingCard(index) {
+  const card = cards[index];
+  if (!card) return;
+  editingCardIndex = index;
+  formReturnScreen = "dictionary";
+  hiraganaManuallyEdited = false;
+  japaneseInput.value = card.japanese;
+  hiraganaInput.value = card.hiragana || romajiToHiragana(card.japanese);
+  englishInput.value = card.english;
+  formTitle.textContent = "Edit word";
+  formSubmitButton.textContent = "Save changes";
+  cancelEditButton.hidden = false;
+  showScreen("add");
+  japaneseInput.focus();
+}
+
+function cancelCardForm() {
+  const returnScreen = formReturnScreen;
+  editingCardIndex = null;
+  showScreen(returnScreen);
 }
 
 function confirmClearDictionary() {
@@ -379,21 +423,32 @@ dictionaryButton.addEventListener("click", () => {
 cardForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const japanese = japaneseInput.value.trim();
+  const hiragana = hiraganaInput.value.trim() || romajiToHiragana(japanese);
   const english = englishInput.value.trim();
   if (!japanese || !english) return;
-  const hiragana = romajiToHiragana(japanese);
-  const nextCards = [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english }];
+  const nextCards = editingCardIndex === null
+    ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english }]
+    : updateCardAt(cards, editingCardIndex, { japanese, hiragana, english });
   if (!saveCards(nextCards)) {
     window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
     return;
   }
   cards = nextCards;
-  showScreen("home");
+  const returnScreen = formReturnScreen;
+  const editedIndex = editingCardIndex;
+  editingCardIndex = null;
+  showScreen(returnScreen);
+  if (returnScreen === "dictionary") {
+    renderDictionaryList(editedIndex);
+    wordList.children[editedIndex]?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
 });
 
 japaneseInput.addEventListener("input", () => {
-  hiraganaPreview.textContent = romajiToHiragana(japaneseInput.value.trim());
+  if (!hiraganaManuallyEdited) hiraganaInput.value = romajiToHiragana(japaneseInput.value.trim());
 });
+
+hiraganaInput.addEventListener("input", () => { hiraganaManuallyEdited = true; });
 
 flashcard.addEventListener("click", () => {
   if (answerRevealed) advancePractice();
@@ -410,5 +465,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.querySelectorAll("[data-go-home]").forEach((button) => button.addEventListener("click", () => showScreen("home")));
+document.querySelector("#add-back-button").addEventListener("click", cancelCardForm);
+cancelEditButton.addEventListener("click", cancelCardForm);
 
 updateDictionaryCount();

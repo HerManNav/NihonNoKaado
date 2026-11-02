@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createPracticeDeck, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shuffle } = require("../dictionary-core.js");
+const { createPracticeDeck, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shuffle, updateCardAt } = require("../dictionary-core.js");
 
 test("imports the app's named dictionary format and trims card fields", () => {
   const cards = parseImportedDictionary({
@@ -34,14 +34,16 @@ test("imports and trims an explicit hiragana field", () => {
   assert.equal(cards[0].hiragana, "ねこ");
 });
 
-test("exports hiragana with each card and preserves it on import", () => {
-  const sourceCards = [{ japanese: "arigatou", hiragana: "ありがとう", english: "thank you" }];
+test("exports edited hiragana with each card and preserves it on import", () => {
+  const sourceCards = [{ japanese: "arigatou", hiragana: "ありがとー", english: "thank you (casual)" }];
   const json = serializeDictionary(sourceCards, "Travel", "2026-11-02T12:00:00.000Z");
   const parsedJson = JSON.parse(json);
 
-  assert.deepEqual(parsedJson.cards, [{ japanese: "arigatou", hiragana: "ありがとう", english: "thank you" }]);
-  assert.equal(sourceCards[0].hiragana, "ありがとう");
-  assert.equal(parseImportedDictionary(parsedJson, () => "round-trip")[0].hiragana, "ありがとう");
+  assert.deepEqual(parsedJson.cards, [{ japanese: "arigatou", hiragana: "ありがとー", english: "thank you (casual)" }]);
+  assert.equal(sourceCards[0].hiragana, "ありがとー");
+  const importedCard = parseImportedDictionary(parsedJson, () => "round-trip")[0];
+  assert.equal(importedCard.hiragana, "ありがとー");
+  assert.equal(importedCard.english, "thank you (casual)");
 });
 
 test("converts common gojuon and alternate Hepburn spellings", () => {
@@ -184,4 +186,26 @@ test("removes the selected card without changing the original list", () => {
   assert.deepEqual(removeCardAt(cards, 1), [{ japanese: "a" }, { japanese: "c" }]);
   assert.deepEqual(cards, [{ japanese: "a" }, { japanese: "b" }, { japanese: "c" }]);
   assert.deepEqual(removeCardAt(cards, 99), cards);
+});
+
+test("updates romaji, hiragana, and English while preserving card identity and source data", () => {
+  const cards = [
+    { id: "card-1", japanese: "arigatou", hiragana: "ありがとう", english: "thank you" },
+    { id: "card-2", japanese: "neko", hiragana: "ねこ", english: "cat" },
+  ];
+  const updatedCards = updateCardAt(cards, 0, {
+    japanese: "arigatou gozaimasu",
+    hiragana: "ありがとうございます",
+    english: "thank you (polite)",
+  });
+
+  assert.deepEqual(updatedCards[0], {
+    id: "card-1",
+    japanese: "arigatou gozaimasu",
+    hiragana: "ありがとうございます",
+    english: "thank you (polite)",
+  });
+  assert.equal(updatedCards[1], cards[1]);
+  assert.deepEqual(cards[0], { id: "card-1", japanese: "arigatou", hiragana: "ありがとう", english: "thank you" });
+  assert.deepEqual(updateCardAt(cards, 10, { japanese: "ignored" }), cards);
 });
