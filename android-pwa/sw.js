@@ -1,4 +1,4 @@
-const CACHE_NAME = "japanese-cards-pwa-v1";
+const CACHE_NAME = "japanese-cards-pwa-v2";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -8,6 +8,7 @@ const APP_FILES = [
   "../index.html",
   "../styles.css",
   "../app.js",
+  "../dictionary-core.js",
 ];
 
 self.addEventListener("install", (event) => {

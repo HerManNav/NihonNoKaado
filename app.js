@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const EXPORT_FORMAT = "japanese-cards-dictionary";
+const { parseImportedDictionary, createPracticeDeck } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -107,23 +107,6 @@ function exportDictionary() {
   closeDictionaryMenu();
 }
 
-function parseImportedDictionary(data) {
-  const imported = Array.isArray(data) ? data : data?.cards;
-  if (!Array.isArray(imported)) throw new Error("This file does not contain a Japanese Cards dictionary.");
-  if (!Array.isArray(data) && data.format && data.format !== EXPORT_FORMAT) {
-    throw new Error("This file is for a different dictionary format.");
-  }
-  if (!Array.isArray(data) && data.version && data.version !== 1) {
-    throw new Error("This dictionary version is not supported.");
-  }
-  return imported.map((card, index) => {
-    const japanese = typeof card?.japanese === "string" ? card.japanese.trim() : "";
-    const english = typeof card?.english === "string" ? card.english.trim() : "";
-    if (!japanese || !english) throw new Error(`Card ${index + 1} is missing its Japanese word or English translation.`);
-    return { id: crypto.randomUUID?.() || `${Date.now()}-${index}`, japanese, english };
-  });
-}
-
 async function importDictionary(file) {
   if (!file) return;
   try {
@@ -144,28 +127,6 @@ async function importDictionary(file) {
   }
 }
 
-function shuffle(items) {
-  const result = [...items];
-  for (let i = result.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-}
-
-function createPracticeDeck(size) {
-  const deck = [];
-  while (deck.length < size) {
-    const batch = shuffle(cards);
-    if (batch.length > 1 && deck.length > 0 && batch[0] === deck[deck.length - 1]) {
-      const differentCardIndex = batch.findIndex((card) => card !== deck[deck.length - 1]);
-      [batch[0], batch[differentCardIndex]] = [batch[differentCardIndex], batch[0]];
-    }
-    deck.push(...batch.slice(0, size - deck.length));
-  }
-  return deck;
-}
-
 function startPractice() {
   if (cards.length === 0) {
     document.querySelector("#dictionary-count").textContent = "Add your first word to start practicing or import a dictionary.";
@@ -175,7 +136,7 @@ function startPractice() {
     return;
   }
   const sessionSize = selectedSessionSize === "all" ? cards.length : selectedSessionSize;
-  practiceDeck = createPracticeDeck(sessionSize);
+  practiceDeck = createPracticeDeck(cards, sessionSize);
   practiceIndex = 0;
   showScreen("practice");
   renderPracticeCard();
