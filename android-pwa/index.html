@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f6f2" />
+    <meta name="description" content="A simple Japanese and English flashcard dictionary." />
+    <title>Japanese Cards</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <style>
+      :root, html, body { width: 100%; height: 100%; margin: 0; background: #f7f6f2; }
+      body { overflow: hidden; }
+      iframe { display: block; width: 100%; height: 100%; height: 100dvh; border: 0; }
+    </style>
+  </head>
+  <body>
+    <iframe src="../index.html" title="Japanese Cards"></iframe>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch((error) => {
+            console.error("Japanese Cards offline support could not be enabled.", error);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
