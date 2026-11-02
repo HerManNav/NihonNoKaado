@@ -1,0 +1,357 @@
+const STORAGE_KEY = "japanese-cards.dictionary.v1";
+const EXPORT_FORMAT = "japanese-cards-dictionary";
+
+const screens = {
+  home: document.querySelector("#home-screen"),
+  practice: document.querySelector("#practice-screen"),
+  add: document.querySelector("#add-screen"),
+  clear: document.querySelector("#clear-screen"),
+};
+
+const startButton = document.querySelector("#start-button");
+const originLanguage = document.querySelector("#origin-language");
+const dictionaryCount = document.querySelector("#dictionary-count");
+const cardForm = document.querySelector("#card-form");
+const japaneseInput = document.querySelector("#japanese-word");
+const englishInput = document.querySelector("#english-translation");
+const flashcard = document.querySelector("#flashcard");
+const promptWord = document.querySelector("#prompt-word");
+const answerWord = document.querySelector("#answer-word");
+const revealHint = document.querySelector("#reveal-hint");
+const progressLabel = document.querySelector("#progress-label");
+const sessionOptions = document.querySelectorAll("[data-session-size]");
+const progressTrack = document.querySelector("#progress-track");
+const progressFill = document.querySelector("#progress-fill");
+const progressPoints = document.querySelector("#progress-points");
+const cardsRemaining = document.querySelector("#cards-remaining");
+const dictionaryActions = document.querySelector("#dictionary-actions");
+const addButton = document.querySelector("#add-button");
+const importFile = document.querySelector("#import-file");
+let storageWarning = "";
+
+let cards = loadCards();
+let practiceDeck = [];
+let practiceIndex = 0;
+let answerRevealed = false;
+let selectedSessionSize = 5;
+let advancingPractice = false;
+let keyboardNavigation = false;
+
+function loadCards() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(saved)
+      ? saved.filter((card) => typeof card?.japanese === "string" && typeof card?.english === "string")
+      : [];
+  } catch {
+    storageWarning = "Saved dictionary could not be read. Export a backup after restoring it.";
+    return [];
+  }
+}
+
+function saveCards(nextCards) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextCards));
+    storageWarning = "";
+    return true;
+  } catch {
+    storageWarning = "Browser storage is unavailable. Export a backup before closing this page.";
+    updateDictionaryCount();
+    return false;
+  }
+}
+
+function showScreen(name) {
+  Object.entries(screens).forEach(([key, screen]) => { screen.hidden = key !== name; });
+  if (name === "home") updateDictionaryCount();
+}
+
+function updateDictionaryCount() {
+  const count = cards.length;
+  dictionaryCount.classList.remove("is-empty-prompt");
+  dictionaryCount.textContent = count === 1 ? "1 word in your dictionary" : `${count} words in your dictionary`;
+  if (storageWarning) dictionaryCount.textContent += ` · ${storageWarning}`;
+}
+
+function closeDictionaryMenu() {
+  dictionaryActions.classList.remove("is-open");
+  addButton.setAttribute("aria-expanded", "false");
+}
+
+function openDictionaryMenu() {
+  dictionaryActions.classList.add("is-open");
+  addButton.setAttribute("aria-expanded", "true");
+}
+
+function exportDictionary() {
+  const requestedName = window.prompt("Name this dictionary:", "My Japanese dictionary");
+  if (requestedName === null) return;
+  const dictionaryName = requestedName.trim() || "Japanese dictionary";
+  const dictionary = {
+    format: EXPORT_FORMAT,
+    version: 1,
+    name: dictionaryName,
+    exportedAt: new Date().toISOString(),
+    cards: cards.map(({ japanese, english }) => ({ japanese, english })),
+  };
+  const blob = new Blob([JSON.stringify(dictionary, null, 2)], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  const safeName = dictionaryName.replace(/[<>:"\/\\|?*\u0000-\u001F]/g, "").replace(/\s+/g, "-") || "japanese-dictionary";
+  link.download = `${safeName}.json`;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  closeDictionaryMenu();
+}
+
+function parseImportedDictionary(data) {
+  const imported = Array.isArray(data) ? data : data?.cards;
+  if (!Array.isArray(imported)) throw new Error("This file does not contain a Japanese Cards dictionary.");
+  if (!Array.isArray(data) && data.format && data.format !== EXPORT_FORMAT) {
+    throw new Error("This file is for a different dictionary format.");
+  }
+  if (!Array.isArray(data) && data.version && data.version !== 1) {
+    throw new Error("This dictionary version is not supported.");
+  }
+  return imported.map((card, index) => {
+    const japanese = typeof card?.japanese === "string" ? card.japanese.trim() : "";
+    const english = typeof card?.english === "string" ? card.english.trim() : "";
+    if (!japanese || !english) throw new Error(`Card ${index + 1} is missing its Japanese word or English translation.`);
+    return { id: crypto.randomUUID?.() || `${Date.now()}-${index}`, japanese, english };
+  });
+}
+
+async function importDictionary(file) {
+  if (!file) return;
+  try {
+    const importedCards = parseImportedDictionary(JSON.parse(await file.text()));
+    if (cards.length > 0 && !window.confirm(`Replace your current dictionary of ${cards.length} cards with ${importedCards.length} imported cards?`)) return;
+    if (!saveCards(importedCards)) {
+      window.alert("The dictionary could not be saved in this browser. Export a backup before closing this page.");
+      return;
+    }
+    cards = importedCards;
+    updateDictionaryCount();
+    dictionaryCount.textContent += ` · Imported ${cards.length} ${cards.length === 1 ? "card" : "cards"}.`;
+  } catch (error) {
+    window.alert(error instanceof Error ? error.message : "The dictionary could not be imported.");
+  } finally {
+    importFile.value = "";
+    closeDictionaryMenu();
+  }
+}
+
+function shuffle(items) {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+function createPracticeDeck(size) {
+  const deck = [];
+  while (deck.length < size) {
+    const batch = shuffle(cards);
+    if (batch.length > 1 && deck.length > 0 && batch[0] === deck[deck.length - 1]) {
+      const differentCardIndex = batch.findIndex((card) => card !== deck[deck.length - 1]);
+      [batch[0], batch[differentCardIndex]] = [batch[differentCardIndex], batch[0]];
+    }
+    deck.push(...batch.slice(0, size - deck.length));
+  }
+  return deck;
+}
+
+function startPractice() {
+  if (cards.length === 0) {
+    document.querySelector("#dictionary-count").textContent = "Add your first word to start practicing or import a dictionary.";
+    dictionaryCount.classList.remove("is-empty-prompt");
+    void dictionaryCount.offsetWidth;
+    dictionaryCount.classList.add("is-empty-prompt");
+    return;
+  }
+  const sessionSize = selectedSessionSize === "all" ? cards.length : selectedSessionSize;
+  practiceDeck = createPracticeDeck(sessionSize);
+  practiceIndex = 0;
+  showScreen("practice");
+  renderPracticeCard();
+}
+
+function renderPracticeCard() {
+  const card = practiceDeck[practiceIndex];
+  const fromEnglish = originLanguage.value === "english";
+  promptWord.textContent = fromEnglish ? card.english : card.japanese;
+  answerWord.textContent = fromEnglish ? card.japanese : card.english;
+  answerWord.hidden = true;
+  answerWord.classList.remove("is-appearing");
+  revealHint.hidden = false;
+  flashcard.classList.remove("is-revealing", "is-advancing", "is-entering");
+  flashcard.disabled = false;
+  advancingPractice = false;
+  flashcard.setAttribute("aria-expanded", "false");
+  answerRevealed = false;
+  progressLabel.textContent = `${practiceIndex} of ${practiceDeck.length} completed`;
+  renderSessionProgress();
+}
+
+function renderSessionProgress() {
+  const total = practiceDeck.length;
+  const shown = practiceIndex + 1;
+  const remaining = total - practiceIndex;
+  const points = Array.from({ length: total }, (_, index) => {
+    const position = total === 1 ? 50 : (index / (total - 1)) * 100;
+    const reached = index < shown ? " is-reached" : "";
+    return `<span class="progress-point${reached}" style="left: ${position}%"></span>`;
+  }).join("");
+
+  progressPoints.innerHTML = points;
+  progressFill.style.width = `${total === 1 ? 0 : ((shown - 1) / (total - 1)) * 100}%`;
+  progressTrack.setAttribute("aria-valuemax", String(total));
+  progressTrack.setAttribute("aria-valuenow", String(shown));
+  progressTrack.setAttribute("aria-valuetext", `Card ${shown} of ${total}`);
+  cardsRemaining.textContent = `${remaining} ${remaining === 1 ? "card" : "cards"} left`;
+}
+
+function revealAnswer() {
+  if (answerRevealed) return;
+  answerRevealed = true;
+  answerWord.hidden = false;
+  answerWord.classList.remove("is-appearing");
+  flashcard.classList.remove("is-revealing");
+  void flashcard.offsetWidth;
+  flashcard.classList.add("is-revealing");
+  answerWord.classList.add("is-appearing");
+  revealHint.hidden = true;
+  flashcard.setAttribute("aria-expanded", "true");
+}
+
+function advancePractice() {
+  if (advancingPractice) return;
+  advancingPractice = true;
+  flashcard.disabled = true;
+  flashcard.classList.add("is-advancing");
+
+  window.setTimeout(() => {
+    if (practiceIndex === practiceDeck.length - 1) {
+      progressLabel.textContent = `${practiceDeck.length} of ${practiceDeck.length} completed`;
+      showScreen("home");
+      return;
+    }
+    practiceIndex += 1;
+    renderPracticeCard();
+    flashcard.classList.add("is-entering");
+    window.setTimeout(() => flashcard.classList.remove("is-entering"), 240);
+  }, 170);
+}
+
+startButton.addEventListener("click", startPractice);
+sessionOptions.forEach((button) => button.addEventListener("click", () => {
+  selectedSessionSize = button.dataset.sessionSize === "all" ? "all" : Number(button.dataset.sessionSize);
+  sessionOptions.forEach((option) => {
+    const isSelected = option === button;
+    option.classList.toggle("is-selected", isSelected);
+    option.setAttribute("aria-pressed", String(isSelected));
+  });
+}));
+function startAddingWord() {
+  cardForm.reset();
+  closeDictionaryMenu();
+  showScreen("add");
+  japaneseInput.focus();
+}
+
+function confirmClearDictionary() {
+  document.querySelector("#clear-description").textContent = cards.length === 1
+    ? "This will delete the 1 card saved in this browser."
+    : `This will delete all ${cards.length} cards saved in this browser.`;
+  closeDictionaryMenu();
+  showScreen("clear");
+}
+
+function clearDictionary() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    window.alert("The saved dictionary could not be deleted from this browser.");
+    return;
+  }
+  cards = [];
+  storageWarning = "";
+  showScreen("home");
+}
+
+addButton.addEventListener("click", (event) => {
+  // Hover opens the menu on desktop; clicks toggle it on touch and keyboard.
+  if (event.detail === 0 || window.matchMedia("(hover: none)").matches) {
+    if (dictionaryActions.classList.contains("is-open")) closeDictionaryMenu();
+    else openDictionaryMenu();
+  }
+});
+dictionaryActions.addEventListener("pointerenter", (event) => {
+  if (event.pointerType === "mouse") openDictionaryMenu();
+});
+dictionaryActions.addEventListener("pointerleave", (event) => {
+  if (event.pointerType === "mouse" && !dictionaryActions.contains(document.activeElement)) closeDictionaryMenu();
+});
+dictionaryActions.addEventListener("focusin", () => {
+  if (keyboardNavigation) openDictionaryMenu();
+});
+dictionaryActions.addEventListener("focusout", (event) => {
+  if (!dictionaryActions.contains(event.relatedTarget)) closeDictionaryMenu();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Tab") keyboardNavigation = true;
+});
+document.addEventListener("pointerdown", (event) => {
+  keyboardNavigation = false;
+  if (!dictionaryActions.contains(event.target)) closeDictionaryMenu();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && dictionaryActions.classList.contains("is-open")) {
+    closeDictionaryMenu();
+    keyboardNavigation = false;
+    addButton.focus();
+  }
+});
+document.querySelector("#add-word-action").addEventListener("click", startAddingWord);
+document.querySelector("#export-action").addEventListener("click", exportDictionary);
+document.querySelector("#import-action").addEventListener("click", () => importFile.click());
+document.querySelector("#clear-action").addEventListener("click", confirmClearDictionary);
+document.querySelector("#confirm-clear").addEventListener("click", clearDictionary);
+importFile.addEventListener("change", () => importDictionary(importFile.files?.[0]));
+
+cardForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const japanese = japaneseInput.value.trim();
+  const english = englishInput.value.trim();
+  if (!japanese || !english) return;
+  const nextCards = [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, english }];
+  if (!saveCards(nextCards)) {
+    window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
+    return;
+  }
+  cards = nextCards;
+  showScreen("home");
+});
+
+flashcard.addEventListener("click", () => {
+  if (answerRevealed) advancePractice();
+  else revealAnswer();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.code !== "Space" || screens.practice.hidden) return;
+  const target = event.target;
+  if (target instanceof Element && target.closest("button, input, textarea, select, a, [contenteditable='true']")) return;
+  event.preventDefault();
+  if (answerRevealed) advancePractice();
+  else revealAnswer();
+});
+
+document.querySelectorAll("[data-go-home]").forEach((button) => button.addEventListener("click", () => showScreen("home")));
+
+updateDictionaryCount();

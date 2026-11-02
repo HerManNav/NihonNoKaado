@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f6f2" />
+    <title>Japanese Cards</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="home-screen" class="screen home-screen" aria-labelledby="app-title">
+        <div class="home-content">
+          <p class="eyebrow">YOUR PERSONAL DICTIONARY</p>
+          <h1 id="app-title">Japanese Cards</h1>
+          <p class="intro">すこしずつれんしゅうしましょう。<br />ことばをひとつずつおぼえましょう。</p>
+
+          <label class="field-label" for="origin-language">Show me</label>
+          <select id="origin-language" class="select-control">
+            <option value="english">English first</option>
+            <option value="japanese">Japanese first</option>
+          </select>
+          <p class="field-label session-label">Cards per session</p>
+          <div class="session-options" role="group" aria-label="Cards per practice session">
+            <button class="session-option is-selected" type="button" data-session-size="5" aria-pressed="true">5</button>
+            <button class="session-option" type="button" data-session-size="10" aria-pressed="false">10</button>
+            <button class="session-option" type="button" data-session-size="20" aria-pressed="false">20</button>
+            <button class="session-option session-option-wide" type="button" data-session-size="all" aria-pressed="false">Whole dictionary</button>
+          </div>
+          <button id="start-button" class="primary-button" type="button">Start learning</button>
+          <p id="dictionary-count" class="subtle-text" aria-live="polite"></p>
+        </div>
+        <div id="dictionary-actions" class="dictionary-actions">
+          <div id="dictionary-action-menu" class="dictionary-action-menu" aria-label="Dictionary actions">
+            <button id="clear-action" class="dictionary-action" type="button">Clear dictionary</button>
+            <button id="import-action" class="dictionary-action" type="button">Import dictionary</button>
+            <button id="export-action" class="dictionary-action" type="button">Export dictionary</button>
+            <button id="add-word-action" class="dictionary-action" type="button">Add new word</button>
+          </div>
+          <button id="add-button" class="add-button" type="button" aria-label="Dictionary actions" aria-controls="dictionary-action-menu" aria-expanded="false" title="Dictionary actions">+</button>
+          <input id="import-file" type="file" accept=".json,application/json" hidden />
+        </div>
+      </section>
+
+      <section id="practice-screen" class="screen practice-screen" aria-label="Practice" hidden>
+        <header class="screen-header">
+          <button class="text-button" data-go-home type="button">← Back</button>
+          <p id="progress-label" class="subtle-text"></p>
+        </header>
+        <div class="practice-content">
+          <p class="eyebrow">YOUR CARD</p>
+          <button id="flashcard" class="flashcard" type="button" aria-expanded="false">
+            <span id="prompt-word" class="prompt-word"></span>
+            <span id="reveal-hint" class="reveal-hint">Tap to reveal translation</span>
+            <span id="answer-word" class="answer-word" hidden></span>
+          </button>
+          <div class="session-progress">
+            <div id="progress-track" class="progress-track" role="progressbar" aria-label="Session progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1">
+              <span class="progress-line" aria-hidden="true"></span>
+              <span id="progress-fill" class="progress-fill" aria-hidden="true"></span>
+              <span id="progress-points" class="progress-points" aria-hidden="true"></span>
+            </div>
+            <p id="cards-remaining" class="cards-remaining" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="add-screen" class="screen form-screen" aria-labelledby="form-title" hidden>
+        <header class="screen-header">
+          <button class="text-button" data-go-home type="button">← Back</button>
+        </header>
+        <form id="card-form" class="card-form">
+          <p class="eyebrow">GROW YOUR DICTIONARY</p>
+          <h1 id="form-title">Add a new word</h1>
+          <label class="field-label" for="japanese-word">Japanese (romaji)</label>
+          <input id="japanese-word" name="japanese" type="text" placeholder="e.g. ohayou" autocomplete="off" required />
+          <label class="field-label" for="english-translation">English translation</label>
+          <textarea id="english-translation" name="english" rows="6" placeholder="Meaning, examples, or notes for yourself" required></textarea>
+          <button class="primary-button" type="submit">OK</button>
+        </form>
+      </section>
+
+      <section id="clear-screen" class="screen clear-screen" aria-labelledby="clear-title" hidden>
+        <div class="clear-confirmation">
+          <p class="eyebrow">DICTIONARY SETTINGS</p>
+          <h1 id="clear-title">Clear your dictionary?</h1>
+          <p id="clear-description" class="clear-description"></p>
+          <p class="clear-warning">This cannot be undone.</p>
+          <button id="confirm-clear" class="danger-button" type="button">Delete all cards</button>
+          <button class="text-button cancel-clear" data-go-home type="button">Cancel</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
