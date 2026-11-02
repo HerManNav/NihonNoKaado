@@ -15,7 +15,6 @@
         <div class="home-content">
           <p class="eyebrow">YOUR PERSONAL DICTIONARY</p>
           <h1 id="app-title">Japanese Cards</h1>
-          <p class="intro">すこしずつれんしゅうしましょう。<br />ことばをひとつずつおぼえましょう。</p>
 
           <label class="field-label" for="origin-language">Show me</label>
           <select id="origin-language" class="select-control">
@@ -33,13 +32,20 @@
           <p id="dictionary-count" class="subtle-text" aria-live="polite"></p>
         </div>
         <div id="dictionary-actions" class="dictionary-actions">
-          <div id="dictionary-action-menu" class="dictionary-action-menu" aria-label="Dictionary actions">
-            <button id="clear-action" class="dictionary-action" type="button">Clear dictionary</button>
-            <button id="import-action" class="dictionary-action" type="button">Import dictionary</button>
-            <button id="export-action" class="dictionary-action" type="button">Export dictionary</button>
-            <button id="add-word-action" class="dictionary-action" type="button">Add new word</button>
+          <button id="add-button" class="add-button" type="button" aria-label="Add a new word" title="Add a new word">+</button>
+          <div id="dictionary-tools" class="dictionary-tools">
+            <button id="dictionary-tools-button" class="dictionary-tools-button" type="button" aria-label="Dictionary tools" aria-controls="dictionary-action-menu" aria-expanded="false" title="Dictionary tools">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z" />
+                <path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h8" />
+              </svg>
+            </button>
+            <div id="dictionary-action-menu" class="dictionary-action-menu" aria-label="Dictionary tools">
+              <button id="clear-action" class="dictionary-action" type="button">Clear dictionary</button>
+              <button id="import-action" class="dictionary-action" type="button">Import dictionary</button>
+              <button id="export-action" class="dictionary-action" type="button">Export dictionary</button>
+            </div>
           </div>
-          <button id="add-button" class="add-button" type="button" aria-label="Dictionary actions" aria-controls="dictionary-action-menu" aria-expanded="false" title="Dictionary actions">+</button>
           <input id="import-file" type="file" accept=".json,application/json" hidden />
         </div>
         <button id="dictionary-button" class="dictionary-button" type="button">View dictionary (0)</button>
@@ -80,6 +86,7 @@
       </section>
 
       <section id="add-screen" class="screen form-screen" aria-labelledby="form-title" hidden>
+        <p id="add-feedback" class="add-feedback" role="status" aria-live="polite" hidden></p>
         <header class="screen-header">
           <button id="add-back-button" class="text-button" type="button">← Back</button>
         </header>
@@ -92,10 +99,12 @@
           <input id="hiragana-word" name="hiragana" type="text" placeholder="ひらがな" autocomplete="off" required />
           <label class="field-label" for="english-translation">English translation</label>
           <textarea id="english-translation" name="english" rows="6" placeholder="Meaning, examples, or notes for yourself" required></textarea>
+          <p id="enter-hint" class="enter-hint">Press Enter to add · Shift+Enter for a new line</p>
           <div class="form-actions">
             <button id="cancel-edit-button" class="secondary-button" type="button" hidden>Cancel</button>
-            <button class="primary-button" type="submit">OK</button>
+            <button class="primary-button" type="submit">Add</button>
           </div>
+          <button id="back-to-learning-button" class="text-button back-to-learning-button" type="button">Back to learning</button>
         </form>
       </section>
 

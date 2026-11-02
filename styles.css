@@ -37,14 +37,19 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .subtle-text { color: #85867e; font-size: 13px; margin: 16px 0 0; }
 #dictionary-count.is-empty-prompt { color: #b43d36; animation: empty-dictionary-blink 650ms ease-in-out 3 both; }
 @keyframes empty-dictionary-blink { 0%, 100% { color: #b43d36; opacity: 1; } 50% { color: #b43d36; opacity: .2; } }
-.dictionary-actions { position: fixed; z-index: 5; right: 28px; bottom: 28px; display: flex; flex-direction: column; align-items: flex-end; }
+.dictionary-actions { position: fixed; z-index: 5; right: 28px; bottom: 28px; display: flex; align-items: flex-end; gap: 10px; }
 .add-button { width: 58px; height: 58px; border: 0; border-radius: 50%; color: #fff; background: #30392f; font-size: 34px; font-weight: 300; line-height: 1; box-shadow: 0 6px 18px #20211f26; }
 .add-button:hover { background: #414b3f; }
+.dictionary-tools { position: relative; }
+.dictionary-tools-button { display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid #deded5; border-radius: 50%; background: #fff; color: #30392f; box-shadow: 0 6px 18px #20211f18; }
+.dictionary-tools-button:hover { background: #f0f1eb; border-color: #c8c9bd; }
+.dictionary-tools-button:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
+.dictionary-tools-button svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
 .dictionary-button { position: fixed; z-index: 4; left: 50%; bottom: 36px; transform: translateX(-50%); min-height: 44px; padding: 0 18px; border: 1px solid #e1e0d8; border-radius: 999px; background: #fff; color: #30392f; font-size: 14px; font-weight: 650; box-shadow: 0 5px 16px #20211f12; white-space: nowrap; }
 .dictionary-button:hover { background: #f0f1eb; border-color: #c8c9bd; }
 .dictionary-button:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
-.dictionary-action-menu { display: flex; flex-direction: column; align-items: flex-end; gap: 9px; margin-bottom: 12px; opacity: 0; pointer-events: none; transform: translateY(8px) scale(.98); transform-origin: bottom right; transition: opacity .16s ease, transform .16s ease; visibility: hidden; }
-.dictionary-actions:hover .dictionary-action-menu, .dictionary-actions.is-open .dictionary-action-menu { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); visibility: visible; }
+.dictionary-action-menu { position: absolute; right: 0; bottom: calc(100% + 12px); display: flex; flex-direction: column; align-items: flex-end; gap: 9px; opacity: 0; pointer-events: none; transform: translateY(8px) scale(.98); transform-origin: bottom right; transition: opacity .16s ease, transform .16s ease; visibility: hidden; }
+.dictionary-tools:hover .dictionary-action-menu, .dictionary-tools.is-open .dictionary-action-menu { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); visibility: visible; }
 .dictionary-action { min-height: 42px; padding: 0 17px; border: 1px solid #e1e0d8; border-radius: 999px; background: #fff; color: #30392f; font-size: 14px; font-weight: 650; white-space: nowrap; box-shadow: 0 5px 16px #20211f12; }
 .dictionary-action:hover, .dictionary-action:focus-visible { background: #f0f1eb; border-color: #c8c9bd; outline: none; }
 
@@ -109,11 +114,16 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .card-form h1 { font-size: 34px; margin-bottom: 32px; }
 .card-form input { margin-bottom: 22px; }
 .card-form textarea { resize: vertical; min-height: 138px; margin-bottom: 20px; line-height: 1.5; }
+.enter-hint { align-self: center; margin: -9px 0 16px; color: #85867e; font-size: 12px; text-align: center; }
 .form-actions { display: flex; gap: 10px; }
 .form-actions .primary-button { flex: 1; width: auto; }
 .secondary-button { flex: 1; min-height: 50px; padding: 14px 20px; border: 1px solid #ead5d2; border-radius: 10px; background: #fff8f7; color: #a93e38; font-weight: 650; }
 .secondary-button:hover { background: #fbe9e7; border-color: #d8aaa5; }
 .secondary-button:focus-visible { outline: 3px solid #a93e3850; outline-offset: 2px; }
+.back-to-learning-button { align-self: center; margin-top: 14px; }
+.add-feedback { position: fixed; z-index: 10; top: 18px; left: 50%; width: min(calc(100% - 32px), 460px); margin: 0; padding: 12px 16px; transform: translateX(-50%); border: 1px solid #bfd0b7; border-radius: 12px; background: #e7f0e2; color: #354b32; box-shadow: 0 6px 20px #20211f18; font-size: 14px; font-weight: 650; text-align: center; }
+.add-feedback.is-visible { animation: add-feedback-in 180ms ease-out both; }
+@keyframes add-feedback-in { from { opacity: 0; transform: translate(-50%, -6px); } to { opacity: 1; transform: translate(-50%, 0); } }
 
 .clear-screen { display: grid; place-items: center; }
 .clear-confirmation { width: min(100%, 430px); text-align: center; }
@@ -128,8 +138,8 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 @media (max-width: 520px) {
   .screen { padding: 22px; }
   .dictionary-actions { right: 20px; bottom: 20px; }
-  .add-button { width: 54px; height: 54px; }
-  .dictionary-button { bottom: 25px; }
+  .add-button, .dictionary-tools-button { width: 54px; height: 54px; }
+  .dictionary-button { bottom: 88px; }
   .flashcard { min-height: 250px; }
 }
 

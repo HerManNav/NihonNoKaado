@@ -22,6 +22,9 @@ const englishInput = document.querySelector("#english-translation");
 const formTitle = document.querySelector("#form-title");
 const formSubmitButton = cardForm.querySelector("[type='submit']");
 const cancelEditButton = document.querySelector("#cancel-edit-button");
+const backToLearningButton = document.querySelector("#back-to-learning-button");
+const addFeedback = document.querySelector("#add-feedback");
+const enterHint = document.querySelector("#enter-hint");
 const flashcard = document.querySelector("#flashcard");
 const promptWord = document.querySelector("#prompt-word");
 const answerWord = document.querySelector("#answer-word");
@@ -32,13 +35,15 @@ const progressTrack = document.querySelector("#progress-track");
 const progressFill = document.querySelector("#progress-fill");
 const progressPoints = document.querySelector("#progress-points");
 const cardsRemaining = document.querySelector("#cards-remaining");
-const dictionaryActions = document.querySelector("#dictionary-actions");
+const dictionaryTools = document.querySelector("#dictionary-tools");
+const dictionaryToolsButton = document.querySelector("#dictionary-tools-button");
 const addButton = document.querySelector("#add-button");
 const importFile = document.querySelector("#import-file");
 let storageWarning = "";
 let editingCardIndex = null;
 let formReturnScreen = "home";
 let hiraganaManuallyEdited = false;
+let addFeedbackTimeout = null;
 
 let cards = loadCards();
 let practiceDeck = [];
@@ -151,13 +156,13 @@ function removeDictionaryCard(index) {
 }
 
 function closeDictionaryMenu() {
-  dictionaryActions.classList.remove("is-open");
-  addButton.setAttribute("aria-expanded", "false");
+  dictionaryTools.classList.remove("is-open");
+  dictionaryToolsButton.setAttribute("aria-expanded", "false");
 }
 
 function openDictionaryMenu() {
-  dictionaryActions.classList.add("is-open");
-  addButton.setAttribute("aria-expanded", "true");
+  dictionaryTools.classList.add("is-open");
+  dictionaryToolsButton.setAttribute("aria-expanded", "true");
 }
 
 function exportDictionary() {
@@ -326,9 +331,13 @@ function startAddingWord() {
   editingCardIndex = null;
   formReturnScreen = "home";
   hiraganaManuallyEdited = false;
+  addFeedback.hidden = true;
+  window.clearTimeout(addFeedbackTimeout);
   formTitle.textContent = "Add a new word";
-  formSubmitButton.textContent = "OK";
+  formSubmitButton.textContent = "Add";
   cancelEditButton.hidden = true;
+  backToLearningButton.hidden = false;
+  enterHint.hidden = false;
   closeDictionaryMenu();
   showScreen("add");
   japaneseInput.focus();
@@ -346,6 +355,8 @@ function startEditingCard(index) {
   formTitle.textContent = "Edit word";
   formSubmitButton.textContent = "Save changes";
   cancelEditButton.hidden = false;
+  backToLearningButton.hidden = true;
+  enterHint.hidden = true;
   showScreen("add");
   japaneseInput.focus();
 }
@@ -354,6 +365,19 @@ function cancelCardForm() {
   const returnScreen = formReturnScreen;
   editingCardIndex = null;
   showScreen(returnScreen);
+}
+
+function showAddFeedback(japanese) {
+  window.clearTimeout(addFeedbackTimeout);
+  addFeedback.textContent = `Added “${japanese}” to your dictionary.`;
+  addFeedback.hidden = false;
+  addFeedback.classList.remove("is-visible");
+  void addFeedback.offsetWidth;
+  addFeedback.classList.add("is-visible");
+  addFeedbackTimeout = window.setTimeout(() => {
+    addFeedback.classList.remove("is-visible");
+    addFeedback.hidden = true;
+  }, 2600);
 }
 
 function confirmClearDictionary() {
@@ -376,45 +400,45 @@ function clearDictionary() {
   showScreen("home");
 }
 
-addButton.addEventListener("click", (event) => {
-  // Hover opens the menu on desktop; clicks toggle it on touch and keyboard.
+addButton.addEventListener("click", startAddingWord);
+dictionaryToolsButton.addEventListener("click", (event) => {
   if (event.detail === 0 || window.matchMedia("(hover: none)").matches) {
-    if (dictionaryActions.classList.contains("is-open")) closeDictionaryMenu();
+    if (dictionaryTools.classList.contains("is-open")) closeDictionaryMenu();
     else openDictionaryMenu();
   }
 });
-dictionaryActions.addEventListener("pointerenter", (event) => {
+dictionaryTools.addEventListener("pointerenter", (event) => {
   if (event.pointerType === "mouse") openDictionaryMenu();
 });
-dictionaryActions.addEventListener("pointerleave", (event) => {
-  if (event.pointerType === "mouse" && !dictionaryActions.contains(document.activeElement)) closeDictionaryMenu();
+dictionaryTools.addEventListener("pointerleave", (event) => {
+  if (event.pointerType === "mouse" && !dictionaryTools.contains(document.activeElement)) closeDictionaryMenu();
 });
-dictionaryActions.addEventListener("focusin", () => {
+dictionaryTools.addEventListener("focusin", () => {
   if (keyboardNavigation) openDictionaryMenu();
 });
-dictionaryActions.addEventListener("focusout", (event) => {
-  if (!dictionaryActions.contains(event.relatedTarget)) closeDictionaryMenu();
+dictionaryTools.addEventListener("focusout", (event) => {
+  if (!dictionaryTools.contains(event.relatedTarget)) closeDictionaryMenu();
 });
 document.addEventListener("keydown", (event) => {
   if (event.key === "Tab") keyboardNavigation = true;
 });
 document.addEventListener("pointerdown", (event) => {
   keyboardNavigation = false;
-  if (!dictionaryActions.contains(event.target)) closeDictionaryMenu();
+  if (!dictionaryTools.contains(event.target)) closeDictionaryMenu();
 });
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && dictionaryActions.classList.contains("is-open")) {
+  if (event.key === "Escape" && dictionaryTools.classList.contains("is-open")) {
     closeDictionaryMenu();
     keyboardNavigation = false;
-    addButton.focus();
+    dictionaryToolsButton.focus();
   }
 });
-document.querySelector("#add-word-action").addEventListener("click", startAddingWord);
 document.querySelector("#export-action").addEventListener("click", exportDictionary);
 document.querySelector("#import-action").addEventListener("click", () => importFile.click());
 document.querySelector("#clear-action").addEventListener("click", confirmClearDictionary);
 document.querySelector("#confirm-clear").addEventListener("click", clearDictionary);
 importFile.addEventListener("change", () => importDictionary(importFile.files?.[0]));
+backToLearningButton.addEventListener("click", cancelCardForm);
 dictionaryButton.addEventListener("click", () => {
   renderDictionaryList();
   showScreen("dictionary");
@@ -426,7 +450,8 @@ cardForm.addEventListener("submit", (event) => {
   const hiragana = hiraganaInput.value.trim() || romajiToHiragana(japanese);
   const english = englishInput.value.trim();
   if (!japanese || !english) return;
-  const nextCards = editingCardIndex === null
+  const isEditing = editingCardIndex !== null;
+  const nextCards = !isEditing
     ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english }]
     : updateCardAt(cards, editingCardIndex, { japanese, hiragana, english });
   if (!saveCards(nextCards)) {
@@ -434,6 +459,13 @@ cardForm.addEventListener("submit", (event) => {
     return;
   }
   cards = nextCards;
+  if (!isEditing) {
+    cardForm.reset();
+    hiraganaManuallyEdited = false;
+    showAddFeedback(japanese);
+    japaneseInput.focus();
+    return;
+  }
   const returnScreen = formReturnScreen;
   const editedIndex = editingCardIndex;
   editingCardIndex = null;
@@ -441,6 +473,13 @@ cardForm.addEventListener("submit", (event) => {
   if (returnScreen === "dictionary") {
     renderDictionaryList(editedIndex);
     wordList.children[editedIndex]?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+});
+
+cardForm.addEventListener("keydown", (event) => {
+  if (editingCardIndex === null && event.key === "Enter" && !event.shiftKey && event.target === englishInput) {
+    event.preventDefault();
+    cardForm.requestSubmit();
   }
 });
 
