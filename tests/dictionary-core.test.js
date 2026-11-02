@@ -34,13 +34,12 @@ test("imports and trims an explicit hiragana field", () => {
   assert.equal(cards[0].hiragana, "ねこ");
 });
 
-test("exports only romaji and English fields, then regenerates hiragana on import", () => {
+test("exports hiragana with each card and preserves it on import", () => {
   const sourceCards = [{ japanese: "arigatou", hiragana: "ありがとう", english: "thank you" }];
   const json = serializeDictionary(sourceCards, "Travel", "2026-11-02T12:00:00.000Z");
   const parsedJson = JSON.parse(json);
 
-  assert.deepEqual(parsedJson.cards, [{ japanese: "arigatou", english: "thank you" }]);
-  assert.equal(Object.hasOwn(parsedJson.cards[0], "hiragana"), false);
+  assert.deepEqual(parsedJson.cards, [{ japanese: "arigatou", hiragana: "ありがとう", english: "thank you" }]);
   assert.equal(sourceCards[0].hiragana, "ありがとう");
   assert.equal(parseImportedDictionary(parsedJson, () => "round-trip")[0].hiragana, "ありがとう");
 });

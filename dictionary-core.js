@@ -94,7 +94,7 @@
       version: 1,
       name,
       exportedAt,
-      cards: cards.map(({ japanese, english }) => ({ japanese, english })),
+      cards: cards.map(({ japanese, hiragana, english }) => ({ japanese, hiragana, english })),
     }, null, 2);
   }
 
