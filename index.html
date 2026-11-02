@@ -42,6 +42,7 @@
           <button id="add-button" class="add-button" type="button" aria-label="Dictionary actions" aria-controls="dictionary-action-menu" aria-expanded="false" title="Dictionary actions">+</button>
           <input id="import-file" type="file" accept=".json,application/json" hidden />
         </div>
+        <button id="dictionary-button" class="dictionary-button" type="button">View dictionary (0)</button>
       </section>
 
       <section id="practice-screen" class="screen practice-screen" aria-label="Practice" hidden>
@@ -64,6 +65,17 @@
             </div>
             <p id="cards-remaining" class="cards-remaining" aria-live="polite"></p>
           </div>
+        </div>
+      </section>
+
+      <section id="dictionary-screen" class="screen dictionary-screen" aria-labelledby="dictionary-title" hidden>
+        <header class="screen-header">
+          <button class="text-button" data-go-home type="button">← Back</button>
+          <p id="dictionary-list-count" class="subtle-text"></p>
+        </header>
+        <div class="dictionary-list-content">
+          <h1 id="dictionary-title">Current dictionary</h1>
+          <div id="word-list" class="word-list" aria-live="polite"></div>
         </div>
       </section>
 

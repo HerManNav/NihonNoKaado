@@ -1,9 +1,10 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, createPracticeDeck } = window.JapaneseCardsCore;
+const { parseImportedDictionary, createPracticeDeck, removeCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
   practice: document.querySelector("#practice-screen"),
+  dictionary: document.querySelector("#dictionary-screen"),
   add: document.querySelector("#add-screen"),
   clear: document.querySelector("#clear-screen"),
 };
@@ -11,6 +12,9 @@ const screens = {
 const startButton = document.querySelector("#start-button");
 const originLanguage = document.querySelector("#origin-language");
 const dictionaryCount = document.querySelector("#dictionary-count");
+const dictionaryButton = document.querySelector("#dictionary-button");
+const dictionaryListCount = document.querySelector("#dictionary-list-count");
+const wordList = document.querySelector("#word-list");
 const cardForm = document.querySelector("#card-form");
 const japaneseInput = document.querySelector("#japanese-word");
 const englishInput = document.querySelector("#english-translation");
@@ -70,7 +74,55 @@ function updateDictionaryCount() {
   const count = cards.length;
   dictionaryCount.classList.remove("is-empty-prompt");
   dictionaryCount.textContent = count === 1 ? "1 word in your dictionary" : `${count} words in your dictionary`;
+  dictionaryButton.textContent = `View dictionary (${count})`;
   if (storageWarning) dictionaryCount.textContent += ` · ${storageWarning}`;
+}
+
+function renderDictionaryList() {
+  const count = cards.length;
+  dictionaryListCount.textContent = count === 1 ? "1 word" : `${count} words`;
+  wordList.replaceChildren();
+
+  if (count === 0) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.className = "empty-word-list";
+    emptyMessage.textContent = "Your dictionary is empty. Add or import words from the home screen.";
+    wordList.append(emptyMessage);
+    return;
+  }
+
+  cards.forEach((card, index) => {
+    const row = document.createElement("article");
+    row.className = "word-row";
+
+    const removeButton = document.createElement("button");
+    removeButton.className = "remove-word-button";
+    removeButton.type = "button";
+    removeButton.textContent = "×";
+    removeButton.setAttribute("aria-label", `Remove ${card.japanese}`);
+    removeButton.title = "Remove this word";
+    removeButton.addEventListener("click", () => removeDictionaryCard(index));
+
+    const details = document.createElement("div");
+    details.className = "word-details";
+    const japanese = document.createElement("strong");
+    japanese.textContent = card.japanese;
+    const english = document.createElement("p");
+    english.textContent = card.english;
+    details.append(japanese, english);
+    row.append(removeButton, details);
+    wordList.append(row);
+  });
+}
+
+function removeDictionaryCard(index) {
+  const nextCards = removeCardAt(cards, index);
+  if (!saveCards(nextCards)) {
+    window.alert("The word could not be removed from browser storage.");
+    return;
+  }
+  cards = nextCards;
+  renderDictionaryList();
 }
 
 function closeDictionaryMenu() {
@@ -284,6 +336,10 @@ document.querySelector("#import-action").addEventListener("click", () => importF
 document.querySelector("#clear-action").addEventListener("click", confirmClearDictionary);
 document.querySelector("#confirm-clear").addEventListener("click", clearDictionary);
 importFile.addEventListener("change", () => importDictionary(importFile.files?.[0]));
+dictionaryButton.addEventListener("click", () => {
+  renderDictionaryList();
+  showScreen("dictionary");
+});
 
 cardForm.addEventListener("submit", (event) => {
   event.preventDefault();

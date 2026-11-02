@@ -15,7 +15,7 @@ button { cursor: pointer; }
 .app-shell { min-height: 100vh; }
 .screen { min-height: 100vh; padding: 32px; }
 .home-screen { display: grid; place-items: center; position: relative; }
-.home-content { width: min(100%, 380px); text-align: center; display: flex; align-items: center; flex-direction: column; }
+.home-content { width: min(100%, 380px); padding-bottom: 64px; text-align: center; display: flex; align-items: center; flex-direction: column; }
 .eyebrow { color: #77796f; font-size: 11px; font-weight: 700; letter-spacing: .16em; margin: 0 0 12px; }
 h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.1; margin: 0; }
 .intro { color: #77796f; margin: 12px 0 38px; }
@@ -40,6 +40,9 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .dictionary-actions { position: fixed; z-index: 5; right: 28px; bottom: 28px; display: flex; flex-direction: column; align-items: flex-end; }
 .add-button { width: 58px; height: 58px; border: 0; border-radius: 50%; color: #fff; background: #30392f; font-size: 34px; font-weight: 300; line-height: 1; box-shadow: 0 6px 18px #20211f26; }
 .add-button:hover { background: #414b3f; }
+.dictionary-button { position: fixed; z-index: 4; left: 50%; bottom: 36px; transform: translateX(-50%); min-height: 44px; padding: 0 18px; border: 1px solid #e1e0d8; border-radius: 999px; background: #fff; color: #30392f; font-size: 14px; font-weight: 650; box-shadow: 0 5px 16px #20211f12; white-space: nowrap; }
+.dictionary-button:hover { background: #f0f1eb; border-color: #c8c9bd; }
+.dictionary-button:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
 .dictionary-action-menu { display: flex; flex-direction: column; align-items: flex-end; gap: 9px; margin-bottom: 12px; opacity: 0; pointer-events: none; transform: translateY(8px) scale(.98); transform-origin: bottom right; transition: opacity .16s ease, transform .16s ease; visibility: hidden; }
 .dictionary-actions:hover .dictionary-action-menu, .dictionary-actions.is-open .dictionary-action-menu { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); visibility: visible; }
 .dictionary-action { min-height: 42px; padding: 0 17px; border: 1px solid #e1e0d8; border-radius: 999px; background: #fff; color: #30392f; font-size: 14px; font-weight: 650; white-space: nowrap; box-shadow: 0 5px 16px #20211f12; }
@@ -77,6 +80,19 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .progress-point.is-reached { background: #68745f; border-color: #68745f; }
 .cards-remaining { color: #77796f; font-size: 13px; margin: 10px 0 0; text-align: center; }
 
+.dictionary-screen { display: flex; flex-direction: column; }
+.dictionary-list-content { display: flex; flex: 1; flex-direction: column; width: min(100%, 700px); min-height: 0; margin: 0 auto; padding-top: 24px; }
+.dictionary-list-content h1 { font-size: clamp(28px, 5vw, 36px); }
+.word-list { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; margin-top: 22px; padding: 2px 8px 20px 2px; }
+.word-row { display: grid; flex: 0 0 auto; grid-template-columns: 42px minmax(0, 1fr); align-items: stretch; gap: 12px; border: 1px solid #e3e2d9; border-radius: 13px; background: #fff; padding: 12px; }
+.remove-word-button { align-self: start; width: 34px; height: 34px; border: 1px solid #ead5d2; border-radius: 50%; background: #fff8f7; color: #a93e38; font-size: 21px; line-height: 1; }
+.remove-word-button:hover { background: #fbe9e7; border-color: #d8aaa5; }
+.remove-word-button:focus-visible { outline: 3px solid #a93e3850; outline-offset: 2px; }
+.word-details { min-width: 0; padding-top: 1px; }
+.word-details strong { display: block; color: #30392f; font-size: 16px; overflow-wrap: anywhere; }
+.word-details p { color: #65675f; font-size: 14px; line-height: 1.5; margin: 5px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.empty-word-list { color: #85867e; line-height: 1.5; text-align: center; padding: 35px 15px; }
+
 .card-form { width: min(100%, 460px); margin: auto; display: flex; flex-direction: column; }
 .card-form .eyebrow { margin-bottom: 12px; }
 .card-form h1 { font-size: 34px; margin-bottom: 32px; }
@@ -98,6 +114,7 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
   .screen { padding: 22px; }
   .dictionary-actions { right: 20px; bottom: 20px; }
   .add-button { width: 54px; height: 54px; }
+  .dictionary-button { bottom: 25px; }
   .flashcard { min-height: 250px; }
 }
 

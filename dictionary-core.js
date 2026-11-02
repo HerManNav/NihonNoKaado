@@ -52,5 +52,11 @@
     return deck;
   }
 
-  return { parseImportedDictionary, shuffle, createPracticeDeck };
+  function removeCardAt(cards, index) {
+    if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
+    if (!Number.isInteger(index) || index < 0 || index >= cards.length) return [...cards];
+    return cards.filter((_, cardIndex) => cardIndex !== index);
+  }
+
+  return { parseImportedDictionary, shuffle, createPracticeDeck, removeCardAt };
 });

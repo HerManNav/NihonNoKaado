@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createPracticeDeck, parseImportedDictionary, shuffle } = require("../dictionary-core.js");
+const { createPracticeDeck, parseImportedDictionary, removeCardAt, shuffle } = require("../dictionary-core.js");
 
 test("imports the app's named dictionary format and trims card fields", () => {
   const cards = parseImportedDictionary({
@@ -75,4 +75,12 @@ test("rejects impossible session sizes and empty dictionaries", () => {
   assert.throws(() => createPracticeDeck([], 1), /empty dictionary/);
   assert.throws(() => createPracticeDeck([{ japanese: "a" }], -1), /non-negative integer/);
   assert.deepEqual(createPracticeDeck([], 0), []);
+});
+
+test("removes the selected card without changing the original list", () => {
+  const cards = [{ japanese: "a" }, { japanese: "b" }, { japanese: "c" }];
+
+  assert.deepEqual(removeCardAt(cards, 1), [{ japanese: "a" }, { japanese: "c" }]);
+  assert.deepEqual(cards, [{ japanese: "a" }, { japanese: "b" }, { japanese: "c" }]);
+  assert.deepEqual(removeCardAt(cards, 99), cards);
 });
