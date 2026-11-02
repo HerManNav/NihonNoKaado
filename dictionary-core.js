@@ -87,6 +87,17 @@
     });
   }
 
+  function serializeDictionary(cards, name, exportedAt = new Date().toISOString()) {
+    if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
+    return JSON.stringify({
+      format: EXPORT_FORMAT,
+      version: 1,
+      name,
+      exportedAt,
+      cards: cards.map(({ japanese, english }) => ({ japanese, english })),
+    }, null, 2);
+  }
+
   function createId(index) {
     return globalThis.crypto?.randomUUID?.() || `${Date.now()}-${index}`;
   }
@@ -123,5 +134,5 @@
     return cards.filter((_, cardIndex) => cardIndex !== index);
   }
 
-  return { parseImportedDictionary, romajiToHiragana, shuffle, createPracticeDeck, removeCardAt };
+  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shuffle, createPracticeDeck, removeCardAt };
 });

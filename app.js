@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, romajiToHiragana, createPracticeDeck, removeCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, serializeDictionary, romajiToHiragana, createPracticeDeck, removeCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -144,22 +144,32 @@ function openDictionaryMenu() {
 }
 
 function exportDictionary() {
-  const requestedName = window.prompt("Name this dictionary:", "my_japan_dict_" + new Date().toISOString().slice(0, 10).replace(/-/g, "_"));
+  const defaultName = `my_japan_dict_${new Date().toISOString().slice(0, 10).replace(/-/g, "_")}`;
+  const requestedName = window.prompt("Name this dictionary:", defaultName);
   if (requestedName === null) return;
   const dictionaryName = requestedName.trim() || "Japanese dictionary";
-  const dictionary = {
-    format: EXPORT_FORMAT,
-    version: 1,
-    name: dictionaryName,
-    exportedAt: new Date().toISOString(),
-    cards: cards.map(({ japanese, hiragana, english }) => ({ japanese, hiragana, english })),
-  };
-  const blob = new Blob([JSON.stringify(dictionary, null, 2)], { type: "application/json;charset=utf-8" });
+  downloadDictionary(dictionaryName);
+}
+
+function createDictionaryExport(dictionaryName) {
+  return new Blob([createDictionaryJson(dictionaryName)], { type: "application/json;charset=utf-8" });
+}
+
+function createDictionaryJson(dictionaryName) {
+  return serializeDictionary(cards, dictionaryName);
+}
+
+function getSafeDictionaryFilename(dictionaryName) {
+  const safeName = dictionaryName.replace(/[<>:"/\\|?*\u0000-\u001F]/g, "").replace(/\s+/g, "-") || "japanese-dictionary";
+  return `${safeName}.json`;
+}
+
+function downloadDictionary(dictionaryName) {
+  const blob = createDictionaryExport(dictionaryName);
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  const safeName = dictionaryName.replace(/[<>:"\/\\|?*\u0000-\u001F]/g, "").replace(/\s+/g, "-") || "japanese-dictionary";
-  link.download = `${safeName}.json`;
+  link.download = getSafeDictionaryFilename(dictionaryName);
   document.body.append(link);
   link.click();
   link.remove();

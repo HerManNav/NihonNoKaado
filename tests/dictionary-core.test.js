@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createPracticeDeck, parseImportedDictionary, removeCardAt, romajiToHiragana, shuffle } = require("../dictionary-core.js");
+const { createPracticeDeck, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shuffle } = require("../dictionary-core.js");
 
 test("imports the app's named dictionary format and trims card fields", () => {
   const cards = parseImportedDictionary({
@@ -32,6 +32,17 @@ test("imports and trims an explicit hiragana field", () => {
   ], () => "test-id");
 
   assert.equal(cards[0].hiragana, "ねこ");
+});
+
+test("exports only romaji and English fields, then regenerates hiragana on import", () => {
+  const sourceCards = [{ japanese: "arigatou", hiragana: "ありがとう", english: "thank you" }];
+  const json = serializeDictionary(sourceCards, "Travel", "2026-11-02T12:00:00.000Z");
+  const parsedJson = JSON.parse(json);
+
+  assert.deepEqual(parsedJson.cards, [{ japanese: "arigatou", english: "thank you" }]);
+  assert.equal(Object.hasOwn(parsedJson.cards[0], "hiragana"), false);
+  assert.equal(sourceCards[0].hiragana, "ありがとう");
+  assert.equal(parseImportedDictionary(parsedJson, () => "round-trip")[0].hiragana, "ありがとう");
 });
 
 test("converts common gojuon and alternate Hepburn spellings", () => {
