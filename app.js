@@ -108,7 +108,7 @@ function renderDictionaryList() {
     const japanese = document.createElement("strong");
     japanese.textContent = card.japanese;
     const english = document.createElement("p");
-    english.textContent = card.english;
+    english.textContent = card.english.replace(/\r\n|\r|\n/g, "    ");
     details.append(japanese, english);
     row.append(removeButton, details);
     wordList.append(row);
