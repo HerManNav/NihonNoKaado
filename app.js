@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, createPracticeDeck, removeCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, romajiToHiragana, createPracticeDeck, removeCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -17,6 +17,7 @@ const dictionaryListCount = document.querySelector("#dictionary-list-count");
 const wordList = document.querySelector("#word-list");
 const cardForm = document.querySelector("#card-form");
 const japaneseInput = document.querySelector("#japanese-word");
+const hiraganaPreview = document.querySelector("#hiragana-preview");
 const englishInput = document.querySelector("#english-translation");
 const flashcard = document.querySelector("#flashcard");
 const promptWord = document.querySelector("#prompt-word");
@@ -46,6 +47,7 @@ function loadCards() {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     return Array.isArray(saved)
       ? saved.filter((card) => typeof card?.japanese === "string" && typeof card?.english === "string")
+        .map((card) => ({ ...card, hiragana: typeof card.hiragana === "string" && card.hiragana ? card.hiragana : romajiToHiragana(card.japanese) }))
       : [];
   } catch {
     storageWarning = "Saved dictionary could not be read. Export a backup after restoring it.";
@@ -105,8 +107,14 @@ function renderDictionaryList() {
 
     const details = document.createElement("div");
     details.className = "word-details";
-    const japanese = document.createElement("strong");
-    japanese.textContent = card.japanese;
+    const japanese = document.createElement("div");
+    japanese.className = "japanese-word-display";
+    const romaji = document.createElement("strong");
+    romaji.textContent = card.japanese;
+    const hiragana = document.createElement("span");
+    hiragana.className = "hiragana-subtext";
+    hiragana.textContent = card.hiragana || romajiToHiragana(card.japanese);
+    japanese.append(romaji, hiragana);
     const english = document.createElement("p");
     english.textContent = card.english.replace(/\r\n|\r|\n/g, "    ");
     details.append(japanese, english);
@@ -136,7 +144,7 @@ function openDictionaryMenu() {
 }
 
 function exportDictionary() {
-  const requestedName = window.prompt("Name this dictionary:", "My Japanese dictionary");
+  const requestedName = window.prompt("Name this dictionary:", "my_japan_dict_" + new Date().toISOString().slice(0, 10).replace(/-/g, "_"));
   if (requestedName === null) return;
   const dictionaryName = requestedName.trim() || "Japanese dictionary";
   const dictionary = {
@@ -144,7 +152,7 @@ function exportDictionary() {
     version: 1,
     name: dictionaryName,
     exportedAt: new Date().toISOString(),
-    cards: cards.map(({ japanese, english }) => ({ japanese, english })),
+    cards: cards.map(({ japanese, hiragana, english }) => ({ japanese, hiragana, english })),
   };
   const blob = new Blob([JSON.stringify(dictionary, null, 2)], { type: "application/json;charset=utf-8" });
   const url = URL.createObjectURL(blob);
@@ -197,8 +205,13 @@ function startPractice() {
 function renderPracticeCard() {
   const card = practiceDeck[practiceIndex];
   const fromEnglish = originLanguage.value === "english";
-  promptWord.textContent = fromEnglish ? card.english : card.japanese;
-  answerWord.textContent = fromEnglish ? card.japanese : card.english;
+  if (fromEnglish) {
+    promptWord.textContent = card.english;
+    renderJapaneseWord(answerWord, card);
+  } else {
+    renderJapaneseWord(promptWord, card);
+    answerWord.textContent = card.english;
+  }
   answerWord.hidden = true;
   answerWord.classList.remove("is-appearing");
   revealHint.hidden = false;
@@ -209,6 +222,17 @@ function renderPracticeCard() {
   answerRevealed = false;
   progressLabel.textContent = `${practiceIndex} of ${practiceDeck.length} completed`;
   renderSessionProgress();
+}
+
+function renderJapaneseWord(container, card) {
+  container.replaceChildren();
+  const romaji = document.createElement("span");
+  romaji.className = "romaji-word";
+  romaji.textContent = card.japanese;
+  const hiragana = document.createElement("span");
+  hiragana.className = "hiragana-subtext";
+  hiragana.textContent = card.hiragana || romajiToHiragana(card.japanese);
+  container.append(romaji, hiragana);
 }
 
 function renderSessionProgress() {
@@ -272,6 +296,7 @@ sessionOptions.forEach((button) => button.addEventListener("click", () => {
 }));
 function startAddingWord() {
   cardForm.reset();
+  hiraganaPreview.textContent = "";
   closeDictionaryMenu();
   showScreen("add");
   japaneseInput.focus();
@@ -346,13 +371,18 @@ cardForm.addEventListener("submit", (event) => {
   const japanese = japaneseInput.value.trim();
   const english = englishInput.value.trim();
   if (!japanese || !english) return;
-  const nextCards = [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, english }];
+  const hiragana = romajiToHiragana(japanese);
+  const nextCards = [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english }];
   if (!saveCards(nextCards)) {
     window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
     return;
   }
   cards = nextCards;
   showScreen("home");
+});
+
+japaneseInput.addEventListener("input", () => {
+  hiraganaPreview.textContent = romajiToHiragana(japaneseInput.value.trim());
 });
 
 flashcard.addEventListener("click", () => {

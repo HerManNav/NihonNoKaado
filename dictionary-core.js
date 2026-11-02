@@ -4,6 +4,68 @@
   else root.JapaneseCardsCore = api;
 })(globalThis, function createDictionaryCore() {
   const EXPORT_FORMAT = "japanese-cards-dictionary";
+  const ROMAJI_SYLLABLES = {
+    kya: "きゃ", kyu: "きゅ", kyo: "きょ", gya: "ぎゃ", gyu: "ぎゅ", gyo: "ぎょ",
+    sha: "しゃ", shu: "しゅ", sho: "しょ", ja: "じゃ", ju: "じゅ", jo: "じょ",
+    cha: "ちゃ", chu: "ちゅ", cho: "ちょ", nya: "にゃ", nyu: "にゅ", nyo: "にょ",
+    hya: "ひゃ", hyu: "ひゅ", hyo: "ひょ", bya: "びゃ", byu: "びゅ", byo: "びょ",
+    pya: "ぴゃ", pyu: "ぴゅ", pyo: "ぴょ", mya: "みゃ", myu: "みゅ", myo: "みょ",
+    rya: "りゃ", ryu: "りゅ", ryo: "りょ",
+    shi: "し", chi: "ち", tsu: "つ", fu: "ふ", ji: "じ", si: "し", ti: "ち", tu: "つ",
+    ka: "か", ki: "き", ku: "く", ke: "け", ko: "こ", ga: "が", gi: "ぎ", gu: "ぐ", ge: "げ", go: "ご",
+    sa: "さ", su: "す", se: "せ", so: "そ", za: "ざ", zi: "じ", zu: "ず", ze: "ぜ", zo: "ぞ",
+    ta: "た", te: "て", to: "と", da: "だ", di: "ぢ", du: "づ", de: "で", do: "ど",
+    na: "な", ni: "に", nu: "ぬ", ne: "ね", no: "の", ha: "は", hi: "ひ", hu: "ふ", he: "へ", ho: "ほ",
+    ba: "ば", bi: "び", bu: "ぶ", be: "べ", bo: "ぼ", pa: "ぱ", pi: "ぴ", pu: "ぷ", pe: "ぺ", po: "ぽ",
+    ma: "ま", mi: "み", mu: "む", me: "め", mo: "も", ya: "や", yu: "ゆ", yo: "よ",
+    ra: "ら", ri: "り", ru: "る", re: "れ", ro: "ろ", wa: "わ", wo: "を", n: "ん",
+    a: "あ", i: "い", u: "う", e: "え", o: "お",
+  };
+  const ROMAJI_WORDS = { konnichiwa: "こんにちは", konbanwa: "こんばんは" };
+
+  function romajiToHiragana(value) {
+    const input = String(value ?? "").toLowerCase();
+    if (ROMAJI_WORDS[input]) return ROMAJI_WORDS[input];
+    let output = "";
+    for (let index = 0; index < input.length;) {
+      const char = input[index];
+      if (/[^a-z]/.test(char)) {
+        output += char;
+        index += 1;
+        continue;
+      }
+      // Hepburn spells the geminated "ch" sound with "tch" (for example, matcha).
+      if (input.slice(index, index + 3) === "tch") {
+        output += "っ";
+        index += 1;
+        continue;
+      }
+      if (index + 1 < input.length && char === input[index + 1] && /[bcdfghjklmpqrstvwxyz]/.test(char) && char !== "n") {
+        output += "っ";
+        index += 1;
+        continue;
+      }
+      if (char === "n" && input[index + 1] === "'") {
+        output += "ん";
+        index += 2;
+        continue;
+      }
+      if (char === "n" && index + 1 < input.length && !/[aiueoyn]/.test(input[index + 1])) {
+        output += "ん";
+        index += 1;
+        continue;
+      }
+      const syllable = [3, 2, 1].map((length) => input.slice(index, index + length)).find((part) => ROMAJI_SYLLABLES[part]);
+      if (syllable) {
+        output += ROMAJI_SYLLABLES[syllable];
+        index += syllable.length;
+      } else {
+        output += char;
+        index += 1;
+      }
+    }
+    return output;
+  }
 
   function parseImportedDictionary(data, makeId = createId) {
     const imported = Array.isArray(data) ? data : data?.cards;
@@ -18,7 +80,10 @@
       const japanese = typeof card?.japanese === "string" ? card.japanese.trim() : "";
       const english = typeof card?.english === "string" ? card.english.trim() : "";
       if (!japanese || !english) throw new Error(`Card ${index + 1} is missing its Japanese word or English translation.`);
-      return { id: makeId(index), japanese, english };
+      const hiragana = typeof card?.hiragana === "string" && card.hiragana.trim()
+        ? card.hiragana.trim()
+        : romajiToHiragana(japanese);
+      return { id: makeId(index), japanese, hiragana, english };
     });
   }
 
@@ -58,5 +123,5 @@
     return cards.filter((_, cardIndex) => cardIndex !== index);
   }
 
-  return { parseImportedDictionary, shuffle, createPracticeDeck, removeCardAt };
+  return { parseImportedDictionary, romajiToHiragana, shuffle, createPracticeDeck, removeCardAt };
 });

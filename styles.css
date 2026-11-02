@@ -63,6 +63,8 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .flashcard.is-advancing { animation: card-out 170ms cubic-bezier(.4, 0, .8, .5) both; pointer-events: none; }
 .flashcard.is-entering { animation: card-in 230ms cubic-bezier(.2, .7, .3, 1) both; }
 .prompt-word { font-size: clamp(30px, 7vw, 48px); font-weight: 650; letter-spacing: -.04em; line-height: 1.2; overflow-wrap: anywhere; }
+.romaji-word { display: block; }
+.hiragana-subtext { display: block; margin-top: 6px; color: #85867e; font-size: .58em; font-weight: 500; letter-spacing: .03em; line-height: 1.35; }
 .reveal-hint { color: #85867e; font-size: 14px; margin-top: 24px; }
 .answer-word { border-top: 1px solid #ecebe4; color: #55574f; font-size: 20px; line-height: 1.55; margin-top: 26px; padding-top: 22px; width: 100%; overflow-wrap: anywhere; }
 .answer-word.is-appearing { animation: answer-appear 260ms ease-out both; }
@@ -90,6 +92,7 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .remove-word-button:focus-visible { outline: 3px solid #a93e3850; outline-offset: 2px; }
 .word-details { min-width: 0; padding-top: 1px; }
 .word-details strong { display: block; color: #30392f; font-size: 16px; overflow-wrap: anywhere; }
+.word-details .hiragana-subtext { font-size: 14px; margin-top: 2px; }
 .word-details p { color: #65675f; font-size: 14px; line-height: 1.5; margin: 5px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .empty-word-list { color: #85867e; line-height: 1.5; text-align: center; padding: 35px 15px; }
 
@@ -97,6 +100,8 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .card-form .eyebrow { margin-bottom: 12px; }
 .card-form h1 { font-size: 34px; margin-bottom: 32px; }
 .card-form input { margin-bottom: 22px; }
+.card-form input#japanese-word { margin-bottom: 0; }
+.hiragana-preview { min-height: 22px; align-self: flex-start; margin: 6px 0 18px; color: #85867e; font-size: 14px; }
 .card-form textarea { resize: vertical; min-height: 138px; margin-bottom: 20px; line-height: 1.5; }
 .card-form .primary-button { width: 100%; }
 
