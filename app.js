@@ -96,7 +96,7 @@ function showScreen(name) {
 function updateDictionaryCount() {
   const count = cards.length;
   dictionaryCount.classList.remove("is-empty-prompt");
-  dictionaryCount.textContent = count === 1 ? "1 word in your dictionary" : `${count} words in your dictionary`;
+  dictionaryCount.textContent = count === 1 ? "1 word in your dictionary" : `${count} Cards in your dictionary`;
   dictionaryButton.textContent = `View dictionary (${count})`;
   if (storageWarning) dictionaryCount.textContent += ` · ${storageWarning}`;
 }
