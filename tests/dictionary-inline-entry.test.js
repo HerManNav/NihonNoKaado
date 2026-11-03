@@ -13,17 +13,29 @@ function declarationsFor(selector) {
   return rule[1];
 }
 
-test("dictionary list appends a blank entry after saved entries, including when empty", () => {
-  assert.match(app, /cards\.forEach\([\s\S]*?wordList\.append\(createDictionaryEntryRow\(\)\);/);
+test("dictionary list keeps its blank entry before saved entries, including when empty", () => {
+  const renderStart = app.indexOf("function renderDictionaryList");
+  const renderEnd = app.indexOf("function createDictionaryEntryRow", renderStart);
+  const renderDictionary = app.slice(renderStart, renderEnd);
+  const blankEntryIndex = renderDictionary.indexOf("wordList.append(createDictionaryEntryRow());");
+  const cardsIndex = renderDictionary.indexOf("cards.forEach((card, index) => {");
+
+  assert.ok(blankEntryIndex >= 0 && blankEntryIndex < cardsIndex);
   assert.match(app, /row\.className = "word-row dictionary-entry-row"/);
   assert.match(app, /japanese\.className = "dictionary-entry-japanese"/);
   assert.match(app, /hiragana\.className = "dictionary-entry-hiragana"/);
   assert.match(app, /meanings\.append\(createDictionaryMeaningInput\(\)\)/);
 });
 
-test("inline entry saves all nonblank meanings and focuses the next blank entry", () => {
+test("inline entry prepends each saved card below the form and keeps focus at the top without scrolling", () => {
+  const addStart = app.indexOf("function addDictionaryEntry");
+  const addEnd = app.indexOf("function removeDictionaryCard", addStart);
+  const addDictionary = app.slice(addStart, addEnd);
+
   assert.match(app, /const meanings = \[\.\.\.row\.querySelectorAll\("\.dictionary-entry-meaning"\)\][\s\S]*?\.filter\(Boolean\)/);
-  assert.match(app, /cards = nextCards;\s*renderDictionaryList\(cards\.length - 1\);[\s\S]*?\.dictionary-entry-japanese"\)\?\.focus\(\)/);
+  assert.match(addDictionary, /const nextCards = \[\{ id:[^\n]*, japanese, hiragana, english, meanings \}, \.\.\.cards\]/);
+  assert.match(addDictionary, /cards = nextCards;\s*renderDictionaryList\(0\);\s*wordList\.scrollTop = 0;\s*wordList\.querySelector\("\.dictionary-entry-japanese"\)\?\.focus\(\{ preventScroll: true \}\)/);
+  assert.doesNotMatch(addDictionary, /scrollIntoView/);
   assert.match(app, /getDictionaryEntryKeyAction\(event\.key, event\.shiftKey/);
   assert.match(app, /action === "add-card"[\s\S]*?addDictionaryEntry\(\)/);
 });

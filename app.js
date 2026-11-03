@@ -119,6 +119,7 @@ function renderDictionaryList(highlightIndex = -1) {
   const count = cards.length;
   dictionaryListCount.textContent = count === 1 ? "1 word" : `${count} words`;
   wordList.replaceChildren();
+  wordList.append(createDictionaryEntryRow());
 
   cards.forEach((card, index) => {
     const row = document.createElement("article");
@@ -159,8 +160,6 @@ function renderDictionaryList(highlightIndex = -1) {
     row.append(removeButton, details, editButton);
     wordList.append(row);
   });
-
-  wordList.append(createDictionaryEntryRow());
 }
 
 function createDictionaryEntryRow() {
@@ -227,15 +226,15 @@ function addDictionaryEntry() {
   if (!japanese || meanings.length === 0) return;
 
   const english = meanings[0];
-  const nextCards = [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings }];
+  const nextCards = [{ id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings }, ...cards];
   if (!saveCards(nextCards)) {
     window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
     return;
   }
   cards = nextCards;
-  renderDictionaryList(cards.length - 1);
-  wordList.lastElementChild?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  wordList.querySelector(".dictionary-entry-japanese")?.focus();
+  renderDictionaryList(0);
+  wordList.scrollTop = 0;
+  wordList.querySelector(".dictionary-entry-japanese")?.focus({ preventScroll: true });
 }
 
 function removeDictionaryCard(index) {
