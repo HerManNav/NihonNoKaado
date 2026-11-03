@@ -13,7 +13,6 @@
     <main class="app-shell">
       <section id="home-screen" class="screen home-screen" aria-labelledby="app-title">
         <div class="home-content">
-          <p class="eyebrow">YOUR PERSONAL DICTIONARY</p>
           <h1 id="app-title">Japanese Cards</h1>
 
           <label class="field-label" for="origin-language">Show me</label>
@@ -28,7 +27,7 @@
             <button class="session-option" type="button" data-session-size="20" aria-pressed="false">20</button>
             <button class="session-option session-option-wide" type="button" data-session-size="all" aria-pressed="false">Whole dictionary</button>
           </div>
-          <button id="start-button" class="primary-button" type="button">Start learning</button>
+          <button id="start-button" class="primary-button" type="button">Start session</button>
           <p id="dictionary-count" class="subtle-text" aria-live="polite"></p>
         </div>
         <div id="dictionary-actions" class="dictionary-actions">
@@ -92,8 +91,7 @@
           <button id="add-back-button" class="text-button" type="button">← Back</button>
         </header>
         <form id="card-form" class="card-form">
-          <p class="eyebrow">GROW YOUR DICTIONARY</p>
-          <h1 id="form-title">Add a new word</h1>
+          <h1 id="form-title">Add a new Card</h1>
           <label class="field-label" for="japanese-word">Japanese (romaji)</label>
           <input id="japanese-word" name="japanese" type="text" placeholder="e.g. ohayou" autocomplete="off" required />
           <label class="field-label" for="hiragana-word">Hiragana</label>

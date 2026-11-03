@@ -505,7 +505,7 @@ function startAddingWord() {
   hiraganaManuallyEdited = false;
   addFeedback.hidden = true;
   window.clearTimeout(addFeedbackTimeout);
-  formTitle.textContent = "Add a new word";
+  formTitle.textContent = "Add a new Card";
   formSubmitButton.textContent = "Add";
   cancelEditButton.hidden = true;
   backToLearningButton.hidden = false;
