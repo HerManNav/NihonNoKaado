@@ -73,17 +73,18 @@
     if (data && !Array.isArray(data) && data.format && data.format !== EXPORT_FORMAT) {
       throw new Error("This file is for a different dictionary format.");
     }
-    if (data && !Array.isArray(data) && data.version && data.version !== 1) {
+    if (data && !Array.isArray(data) && data.version && ![1, 2].includes(data.version)) {
       throw new Error("This dictionary version is not supported.");
     }
     return imported.map((card, index) => {
       const japanese = typeof card?.japanese === "string" ? card.japanese.trim() : "";
-      const english = typeof card?.english === "string" ? card.english.trim() : "";
-      if (!japanese || !english) throw new Error(`Card ${index + 1} is missing its Japanese word or English translation.`);
+      const rawMeanings = Array.isArray(card?.meanings) ? card.meanings : (Array.isArray(card?.english) ? card.english : [card?.english]);
+      const meanings = rawMeanings.filter((meaning) => typeof meaning === "string").map((meaning) => meaning.trim()).filter(Boolean);
+      if (!japanese || meanings.length === 0) throw new Error(`Card ${index + 1} is missing its Japanese word or English translation.`);
       const hiragana = typeof card?.hiragana === "string" && card.hiragana.trim()
         ? card.hiragana.trim()
         : romajiToHiragana(japanese);
-      return { id: makeId(index), japanese, hiragana, english };
+      return { id: makeId(index), japanese, hiragana, english: meanings[0], meanings };
     });
   }
 
@@ -91,10 +92,16 @@
     if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
     return JSON.stringify({
       format: EXPORT_FORMAT,
-      version: 1,
+      version: 2,
       name,
       exportedAt,
-      cards: cards.map(({ japanese, hiragana, english }) => ({ japanese, hiragana, english })),
+      cards: cards.map((card) => {
+        const meanings = Array.isArray(card.meanings) ? card.meanings : [card.english];
+        const exported = { japanese: card.japanese, hiragana: card.hiragana };
+        if (meanings.length > 1) exported.meanings = meanings;
+        else exported.english = meanings[0];
+        return exported;
+      }),
     }, null, 2);
   }
 
@@ -128,6 +135,35 @@
     return deck;
   }
 
+  function createMeaningPracticeRun(cards, random = Math.random) {
+    if (!Array.isArray(cards) || cards.length === 0) throw new RangeError("Cannot practice an empty dictionary.");
+    if (cards.some((card) => !Array.isArray(card.meanings) || card.meanings.length === 0)) {
+      throw new TypeError("Every practice card must have at least one English meaning.");
+    }
+
+    let pool;
+    let seenMeanings;
+    function reset() {
+      pool = [...cards];
+      seenMeanings = new Map(cards.map((card) => [card, card.meanings.map(() => false)]));
+    }
+
+    function draw() {
+      if (pool.length === 0) reset();
+      const cardIndex = Math.floor(random() * pool.length);
+      const card = pool[cardIndex];
+      const seen = seenMeanings.get(card);
+      const unseenIndices = seen.flatMap((wasSeen, index) => wasSeen ? [] : [index]);
+      const meaningIndex = unseenIndices[Math.floor(random() * unseenIndices.length)];
+      seen[meaningIndex] = true;
+      if (seen.every(Boolean)) pool.splice(cardIndex, 1);
+      return { card, meaningIndex, meaning: card.meanings[meaningIndex], runComplete: pool.length === 0 };
+    }
+
+    reset();
+    return { draw, reset };
+  }
+
   function removeCardAt(cards, index) {
     if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
     if (!Number.isInteger(index) || index < 0 || index >= cards.length) return [...cards];
@@ -140,5 +176,5 @@
     return cards.map((card, cardIndex) => cardIndex === index ? { ...card, ...updates } : card);
   }
 
-  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shuffle, createPracticeDeck, removeCardAt, updateCardAt };
+  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shuffle, createPracticeDeck, createMeaningPracticeRun, removeCardAt, updateCardAt };
 });

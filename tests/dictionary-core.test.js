@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createPracticeDeck, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shuffle, updateCardAt } = require("../dictionary-core.js");
+const { createMeaningPracticeRun, createPracticeDeck, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shuffle, updateCardAt } = require("../dictionary-core.js");
 
 test("imports the app's named dictionary format and trims card fields", () => {
   const cards = parseImportedDictionary({
@@ -15,6 +15,7 @@ test("imports the app's named dictionary format and trims card fields", () => {
     japanese: "eki",
     hiragana: "えき",
     english: "station\nExample: eki wa doko desu ka?",
+    meanings: ["station\nExample: eki wa doko desu ka?"],
   }]);
 });
 
@@ -24,6 +25,28 @@ test("imports a plain array for hand-authored dictionaries", () => {
   assert.equal(cards[0].japanese, "arigatou");
   assert.equal(cards[0].hiragana, "ありがとう");
   assert.equal(cards[0].english, "thank you");
+  assert.deepEqual(cards[0].meanings, ["thank you"]);
+});
+
+test("imports multiple English meanings, trimming and discarding blank entries", () => {
+  const cards = parseImportedDictionary([{
+    japanese: "  hashi ",
+    meanings: ["  chopsticks  ", "", "  bridge\nExample: hashio wataru  ", 42],
+  }], () => "multi-id");
+
+  assert.deepEqual(cards[0], {
+    id: "multi-id",
+    japanese: "hashi",
+    hiragana: "はし",
+    english: "chopsticks",
+    meanings: ["chopsticks", "bridge\nExample: hashio wataru"],
+  });
+});
+
+test("imports an English array and keeps duplicate meanings as separate entries", () => {
+  const cards = parseImportedDictionary([{ japanese: "neko", english: ["cat", "cat"] }], () => "cats");
+
+  assert.deepEqual(cards[0].meanings, ["cat", "cat"]);
 });
 
 test("imports and trims an explicit hiragana field", () => {
@@ -44,6 +67,26 @@ test("exports edited hiragana with each card and preserves it on import", () => 
   const importedCard = parseImportedDictionary(parsedJson, () => "round-trip")[0];
   assert.equal(importedCard.hiragana, "ありがとー");
   assert.equal(importedCard.english, "thank you (casual)");
+});
+
+test("exports and reimports all edited meanings", () => {
+  const sourceCards = [{
+    japanese: "hashi",
+    hiragana: "はし",
+    english: "chopsticks",
+    meanings: ["chopsticks", "bridge", "edge; used in this example"],
+  }];
+  const exported = JSON.parse(serializeDictionary(sourceCards, "Travel", "2026-11-03T12:00:00.000Z"));
+
+  assert.equal(exported.version, 2);
+  assert.deepEqual(exported.cards, [{
+    japanese: "hashi",
+    hiragana: "はし",
+    meanings: ["chopsticks", "bridge", "edge; used in this example"],
+  }]);
+  const imported = parseImportedDictionary(exported, () => "round-trip")[0];
+  assert.deepEqual(imported.meanings, sourceCards[0].meanings);
+  assert.equal(imported.english, "chopsticks");
 });
 
 test("converts common gojuon and alternate Hepburn spellings", () => {
@@ -133,7 +176,7 @@ test("rejects unsupported formats and versions", () => {
     /different dictionary format/,
   );
   assert.throws(
-    () => parseImportedDictionary({ format: "japanese-cards-dictionary", version: 2, cards: [] }),
+    () => parseImportedDictionary({ format: "japanese-cards-dictionary", version: 3, cards: [] }),
     /version is not supported/,
   );
 });
@@ -143,6 +186,13 @@ test("rejects cards without both a Japanese word and English translation", () =>
   assert.throws(() => parseImportedDictionary([{ english: "cat" }]), /Card 1 is missing/);
   assert.throws(() => parseImportedDictionary({ cards: "not an array" }), /does not contain/);
   assert.throws(() => parseImportedDictionary(null), /does not contain/);
+});
+
+test("rejects a multi-meaning card when every supplied meaning is blank", () => {
+  assert.throws(
+    () => parseImportedDictionary([{ japanese: "neko", meanings: [" ", "\n"] }]),
+    /Card 1 is missing/,
+  );
 });
 
 test("shuffle returns a permutation without changing the source", () => {
@@ -178,6 +228,46 @@ test("rejects impossible session sizes and empty dictionaries", () => {
   assert.throws(() => createPracticeDeck([], 1), /empty dictionary/);
   assert.throws(() => createPracticeDeck([{ japanese: "a" }], -1), /non-negative integer/);
   assert.deepEqual(createPracticeDeck([], 0), []);
+});
+
+test("English practice shows every meaning once per run, then resets for the next run", () => {
+  const cards = [
+    { japanese: "hashi", meanings: ["chopsticks", "bridge"] },
+    { japanese: "neko", meanings: ["cat"] },
+  ];
+  const run = createMeaningPracticeRun(cards, () => 0);
+  const firstRun = [run.draw(), run.draw(), run.draw()];
+
+  assert.deepEqual(firstRun.map(({ card, meaning }) => `${card.japanese}:${meaning}`), [
+    "hashi:chopsticks",
+    "hashi:bridge",
+    "neko:cat",
+  ]);
+  assert.equal(firstRun[0].runComplete, false);
+  assert.equal(firstRun[1].runComplete, false);
+  assert.equal(firstRun[2].runComplete, true);
+
+  const nextRunDraw = run.draw();
+  assert.equal(nextRunDraw.meaning, "chopsticks");
+  assert.equal(nextRunDraw.runComplete, false);
+});
+
+test("English practice tracks duplicate meaning strings by their separate field positions", () => {
+  const duplicateMeaningCard = { japanese: "neko", meanings: ["cat", "cat"] };
+  const run = createMeaningPracticeRun([duplicateMeaningCard], () => 0);
+
+  const first = run.draw();
+  const second = run.draw();
+  assert.equal(first.meaning, "cat");
+  assert.equal(second.meaning, "cat");
+  assert.equal(first.meaningIndex, 0);
+  assert.equal(second.meaningIndex, 1);
+  assert.equal(second.runComplete, true);
+});
+
+test("English practice rejects empty dictionaries and cards without meanings", () => {
+  assert.throws(() => createMeaningPracticeRun([]), /empty dictionary/);
+  assert.throws(() => createMeaningPracticeRun([{ japanese: "neko", meanings: [] }]), /at least one English meaning/);
 });
 
 test("removes the selected card without changing the original list", () => {

@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, serializeDictionary, romajiToHiragana, createPracticeDeck, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, serializeDictionary, romajiToHiragana, createPracticeDeck, createMeaningPracticeRun, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -18,6 +18,7 @@ const wordList = document.querySelector("#word-list");
 const cardForm = document.querySelector("#card-form");
 const japaneseInput = document.querySelector("#japanese-word");
 const hiraganaInput = document.querySelector("#hiragana-word");
+const englishMeanings = document.querySelector("#english-meanings");
 const englishInput = document.querySelector("#english-translation");
 const formTitle = document.querySelector("#form-title");
 const formSubmitButton = cardForm.querySelector("[type='submit']");
@@ -47,6 +48,8 @@ let addFeedbackTimeout = null;
 
 let cards = loadCards();
 let practiceDeck = [];
+let englishPracticeRun = null;
+let practiceTarget = 0;
 let practiceIndex = 0;
 let answerRevealed = false;
 let selectedSessionSize = 5;
@@ -57,8 +60,11 @@ function loadCards() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     return Array.isArray(saved)
-      ? saved.filter((card) => typeof card?.japanese === "string" && typeof card?.english === "string")
-        .map((card) => ({ ...card, hiragana: typeof card.hiragana === "string" && card.hiragana ? card.hiragana : romajiToHiragana(card.japanese) }))
+      ? saved.filter((card) => typeof card?.japanese === "string" && (typeof card?.english === "string" || Array.isArray(card?.meanings)))
+        .map((card) => {
+          const meanings = (Array.isArray(card.meanings) ? card.meanings : [card.english]).filter((meaning) => typeof meaning === "string").map((meaning) => meaning.trim()).filter(Boolean);
+          return { ...card, english: meanings[0] || "", meanings, hiragana: typeof card.hiragana === "string" && card.hiragana ? card.hiragana : romajiToHiragana(card.japanese) };
+        }).filter((card) => card.meanings.length > 0)
       : [];
   } catch {
     storageWarning = "Saved dictionary could not be read. Export a backup after restoring it.";
@@ -138,7 +144,7 @@ function renderDictionaryList(highlightIndex = -1) {
     hiragana.textContent = card.hiragana || romajiToHiragana(card.japanese);
     japanese.append(romaji, hiragana);
     const english = document.createElement("p");
-    english.textContent = card.english.replace(/\r\n|\r|\n/g, "    ");
+    english.textContent = card.meanings.map((meaning) => meaning.replace(/\r\n|\r|\n/g, "    ")).join("  ·  ");
     details.append(japanese, english);
     row.append(removeButton, details, editButton);
     wordList.append(row);
@@ -227,22 +233,28 @@ function startPractice() {
     dictionaryCount.classList.add("is-empty-prompt");
     return;
   }
-  const sessionSize = selectedSessionSize === "all" ? cards.length : selectedSessionSize;
-  practiceDeck = createPracticeDeck(cards, sessionSize);
+  const fromEnglish = originLanguage.value === "english";
+  const allMeaningCount = cards.reduce((total, card) => total + card.meanings.length, 0);
+  const sessionSize = selectedSessionSize === "all" ? allMeaningCount : selectedSessionSize;
+  practiceTarget = sessionSize;
+  practiceDeck = fromEnglish ? [] : createPracticeDeck(cards, sessionSize);
+  englishPracticeRun = fromEnglish ? createMeaningPracticeRun(cards) : null;
   practiceIndex = 0;
   showScreen("practice");
   renderPracticeCard();
 }
 
 function renderPracticeCard() {
-  const card = practiceDeck[practiceIndex];
   const fromEnglish = originLanguage.value === "english";
+  if (fromEnglish && !practiceDeck[practiceIndex]) drawEnglishPracticeCard();
+  const entry = practiceDeck[practiceIndex];
+  const card = fromEnglish ? entry.card : entry;
   if (fromEnglish) {
-    promptWord.textContent = card.english;
+    promptWord.textContent = entry.meaning;
     renderJapaneseWord(answerWord, card);
   } else {
     renderJapaneseWord(promptWord, card);
-    answerWord.textContent = card.english;
+    answerWord.textContent = card.meanings.join("\n\n");
   }
   answerWord.hidden = true;
   answerWord.classList.remove("is-appearing");
@@ -252,7 +264,7 @@ function renderPracticeCard() {
   advancingPractice = false;
   flashcard.setAttribute("aria-expanded", "false");
   answerRevealed = false;
-  progressLabel.textContent = `${practiceIndex} of ${practiceDeck.length} completed`;
+  progressLabel.textContent = `${practiceIndex} of ${practiceTarget} completed`;
   renderSessionProgress();
 }
 
@@ -267,8 +279,34 @@ function renderJapaneseWord(container, card) {
   container.append(romaji, hiragana);
 }
 
+function drawEnglishPracticeCard() {
+  practiceDeck[practiceIndex] = englishPracticeRun.draw();
+}
+
+function meaningInputs() {
+  return [...englishMeanings.querySelectorAll("input")];
+}
+
+function addMeaningInput(value = "") {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.name = "meanings";
+  input.placeholder = "Another meaning";
+  input.value = value;
+  englishMeanings.append(input);
+  return input;
+}
+
+function resetMeaningInputs(values = [""]) {
+  const inputs = meaningInputs();
+  inputs.slice(1).forEach((input) => input.remove());
+  const first = meaningInputs()[0] || addMeaningInput();
+  first.value = values[0] || "";
+  values.slice(1).forEach((value) => addMeaningInput(value));
+}
+
 function renderSessionProgress() {
-  const total = practiceDeck.length;
+  const total = practiceTarget;
   const shown = practiceIndex + 1;
   const remaining = total - practiceIndex;
   const points = Array.from({ length: total }, (_, index) => {
@@ -305,8 +343,8 @@ function advancePractice() {
   flashcard.classList.add("is-advancing");
 
   window.setTimeout(() => {
-    if (practiceIndex === practiceDeck.length - 1) {
-      progressLabel.textContent = `${practiceDeck.length} of ${practiceDeck.length} completed`;
+    if (practiceIndex === practiceTarget - 1) {
+      progressLabel.textContent = `${practiceTarget} of ${practiceTarget} completed`;
       showScreen("home");
       return;
     }
@@ -328,6 +366,7 @@ sessionOptions.forEach((button) => button.addEventListener("click", () => {
 }));
 function startAddingWord() {
   cardForm.reset();
+  resetMeaningInputs();
   editingCardIndex = null;
   formReturnScreen = "home";
   hiraganaManuallyEdited = false;
@@ -351,7 +390,7 @@ function startEditingCard(index) {
   hiraganaManuallyEdited = false;
   japaneseInput.value = card.japanese;
   hiraganaInput.value = card.hiragana || romajiToHiragana(card.japanese);
-  englishInput.value = card.english;
+  resetMeaningInputs(card.meanings?.length ? card.meanings : [card.english]);
   formTitle.textContent = "Edit word";
   formSubmitButton.textContent = "Save changes";
   cancelEditButton.hidden = false;
@@ -448,12 +487,13 @@ cardForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const japanese = japaneseInput.value.trim();
   const hiragana = hiraganaInput.value.trim() || romajiToHiragana(japanese);
-  const english = englishInput.value.trim();
-  if (!japanese || !english) return;
+  const meanings = meaningInputs().map((input) => input.value.trim()).filter(Boolean);
+  if (!japanese || meanings.length === 0) return;
+  const english = meanings[0];
   const isEditing = editingCardIndex !== null;
   const nextCards = !isEditing
-    ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english }]
-    : updateCardAt(cards, editingCardIndex, { japanese, hiragana, english });
+    ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings }]
+    : updateCardAt(cards, editingCardIndex, { japanese, hiragana, english, meanings });
   if (!saveCards(nextCards)) {
     window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
     return;
@@ -461,6 +501,7 @@ cardForm.addEventListener("submit", (event) => {
   cards = nextCards;
   if (!isEditing) {
     cardForm.reset();
+    resetMeaningInputs();
     hiraganaManuallyEdited = false;
     showAddFeedback(japanese);
     japaneseInput.focus();
@@ -477,7 +518,15 @@ cardForm.addEventListener("submit", (event) => {
 });
 
 cardForm.addEventListener("keydown", (event) => {
-  if (editingCardIndex === null && event.key === "Enter" && !event.shiftKey && event.target === englishInput) {
+  if (!(event.target instanceof HTMLInputElement) || !event.target.matches("#english-meanings input")) return;
+  if (event.key === "Tab" && !event.shiftKey) {
+    event.preventDefault();
+    const inputs = meaningInputs();
+    const index = inputs.indexOf(event.target);
+    (inputs[index + 1] || addMeaningInput()).focus();
+    return;
+  }
+  if (event.key === "Enter") {
     event.preventDefault();
     cardForm.requestSubmit();
   }

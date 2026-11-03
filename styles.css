@@ -113,8 +113,10 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .card-form .eyebrow { margin-bottom: 12px; }
 .card-form h1 { font-size: 34px; margin-bottom: 32px; }
 .card-form input { margin-bottom: 22px; }
-.card-form textarea { resize: vertical; min-height: 138px; margin-bottom: 20px; line-height: 1.5; }
-.enter-hint { align-self: center; margin: -9px 0 16px; color: #85867e; font-size: 12px; text-align: center; }
+.english-meanings { display: flex; flex-direction: column; }
+.english-meanings input { margin-bottom: 22px; }
+.meaning-tab-hint { align-self: flex-end; margin: -5px 0 16px; color: #85867e; font-size: 12px; }
+.enter-hint { align-self: center; margin: 8px 0 16px; color: #85867e; font-size: 12px; text-align: center; }
 .form-actions { display: flex; gap: 10px; }
 .form-actions .primary-button { flex: 1; width: auto; }
 .secondary-button { flex: 1; min-height: 50px; padding: 14px 20px; border: 1px solid #ead5d2; border-radius: 10px; background: #fff8f7; color: #a93e38; font-weight: 650; }

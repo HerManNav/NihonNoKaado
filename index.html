@@ -97,9 +97,12 @@
           <input id="japanese-word" name="japanese" type="text" placeholder="e.g. ohayou" autocomplete="off" required />
           <label class="field-label" for="hiragana-word">Hiragana</label>
           <input id="hiragana-word" name="hiragana" type="text" placeholder="ひらがな" autocomplete="off" required />
-          <label class="field-label" for="english-translation">English translation</label>
-          <textarea id="english-translation" name="english" rows="6" placeholder="Meaning, examples, or notes for yourself" required></textarea>
-          <p id="enter-hint" class="enter-hint">Press Enter to add · Shift+Enter for a new line</p>
+          <label class="field-label" for="english-translation">English meaning(s)</label>
+          <div id="english-meanings" class="english-meanings">
+            <input id="english-translation" name="meanings" type="text" placeholder="e.g. good morning" required />
+          </div>
+          <p class="meaning-tab-hint">Press Tab to add another meaning</p>
+          <p id="enter-hint" class="enter-hint">Press Enter to add</p>
           <div class="form-actions">
             <button id="cancel-edit-button" class="secondary-button" type="button" hidden>Cancel</button>
             <button class="primary-button" type="submit">Add</button>
