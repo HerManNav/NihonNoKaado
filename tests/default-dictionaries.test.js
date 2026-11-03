@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { readFileSync } = require("node:fs");
+const { existsSync, readFileSync } = require("node:fs");
 const { join } = require("node:path");
 const { parseImportedDictionary, prepareDefaultDictionary } = require("../dictionary-core.js");
 
@@ -14,12 +14,15 @@ function readDictionary(file) {
   return JSON.parse(readFileSync(join(root, "dictionaries", file), "utf8"));
 }
 
-test("default dictionary catalog offers exact 10, 50, and 100 card JSON sets", () => {
+test("default dictionary catalog keeps 50 and 100 and offers 500, 1,000, and 2,000 card sets", () => {
   assert.deepEqual(manifest.dictionaries.map(({ id, count }) => [id, count]), [
-    ["common-10", 10],
     ["common-50", 50],
     ["common-100", 100],
+    ["common-500", 500],
+    ["common-1000", 1000],
+    ["common-2000", 2000],
   ]);
+  assert.equal(existsSync(join(root, "dictionaries", "most-common-10.json")), false);
 
   for (const { count, file } of manifest.dictionaries) {
     const source = readDictionary(file);
@@ -27,20 +30,40 @@ test("default dictionary catalog offers exact 10, 50, and 100 card JSON sets", (
   }
 });
 
-test("each default dataset has unique romaji and imports with hiragana and English meanings", () => {
+test("each default dataset has unique romaji and a complete sense-matched example per meaning", () => {
   for (const { count, file } of manifest.dictionaries) {
-    const imported = parseImportedDictionary(readDictionary(file), (index) => `${file}-${index}`);
+    const source = readDictionary(file);
+    const imported = parseImportedDictionary(source, (index) => `${file}-${index}`);
     assert.equal(new Set(imported.map(({ japanese }) => japanese)).size, count, `${file} has duplicate romaji`);
-    assert.ok(imported.every(({ hiragana, meanings }) => hiragana && meanings.length > 0), `${file} has incomplete cards`);
+    assert.ok(imported.every(({ hiragana, meanings, examples }) =>
+      hiragana && meanings.length > 0 && examples.length === meanings.length
+      && examples.every((example) => example.romaji && example.hiragana && example.english)), `${file} has an incomplete card or example`);
+    assert.ok(source.cards.every((card) => card.examples?.length === 1), `${file} must include one example for its one base meaning`);
   }
 });
 
-test("10- and 50-card options contain the corresponding prefix of the 100-card list", () => {
+test("default example romaji uses readable word spacing without changing punctuation", () => {
+  const examples = manifest.dictionaries.flatMap(({ file }) => readDictionary(file).cards.flatMap((card) => card.examples || []));
+  assert.ok(examples.some(({ romaji }) => romaji === "watashi ha gakusei da."));
+  assert.ok(examples.some(({ romaji }) => romaji === "nani wo suru?"));
+  assert.ok(examples.some(({ romaji }) => /\w\s+\w/.test(romaji)), "Expected segmented romaji words");
+  assert.ok(examples.every(({ romaji }) => !/\s{2}|\s+[.,!?;:]/.test(romaji)), "Spacing should not create doubled spaces or split punctuation");
+});
+
+test("the retained 50-card set remains the prefix of the retained 100-card list", () => {
   const fullList = readDictionary("most-common-100.json").cards;
-  for (const count of [10, 50]) {
-    assert.deepEqual(readDictionary(`most-common-${count}.json`).cards, fullList.slice(0, count));
-    assert.equal(prepareDefaultDictionary(readDictionary("most-common-100.json"), count, (index) => String(index)).length, count);
-  }
+  assert.deepEqual(readDictionary("most-common-50.json").cards, fullList.slice(0, 50));
+  assert.equal(prepareDefaultDictionary(readDictionary("most-common-100.json"), 50, (index) => String(index)).length, 50);
+});
+
+test("500, 1,000, and 2,000-word decks share an ascending frequency-ranked prefix", () => {
+  const cards500 = readDictionary("most-common-500.json").cards;
+  const cards1000 = readDictionary("most-common-1000.json").cards;
+  const cards2000 = readDictionary("most-common-2000.json").cards;
+  assert.deepEqual(cards500, cards1000.slice(0, 500));
+  assert.deepEqual(cards1000, cards2000.slice(0, 1000));
+  assert.equal(manifest.frequencySource, "https://noosflashcards.com/resources/frequency-lists/japanese");
+  assert.equal(manifest.meaningAndExampleSource, "https://www.tkgje.jp/");
 });
 
 test("the + button opens a native-looking page and selecting a set opens the in-app confirmation", () => {
@@ -72,8 +95,10 @@ test("cancel and Escape return to the list without loading the selected dictiona
   assert.match(app, /event\.key === "Escape" && !screens\.defaultConfirm\.hidden && !defaultDictionaryLoadInProgress\)[\s\S]*?cancelDefaultDictionaryLoad\(\)/);
 });
 
-test("source attribution is a separated paragraph below the loading instructions", () => {
-  assert.match(html, /<p class="default-dictionaries-description">[^<]*<\/p>\s*<p class="default-dictionaries-source">[^<]*<a href="https:\/\/travelwithlanguages\.com/);
+test("source attributions are separated below the loading instructions", () => {
+  assert.match(html, /<p class="default-dictionaries-description">[\s\S]*?<\/p>\s*<p class="default-dictionaries-source">[\s\S]*?<\/p>\s*<p class="default-dictionaries-source">[\s\S]*?href="https:\/\/www\.tkgje\.jp/);
+  assert.match(html, /href="https:\/\/noosflashcards\.com\/resources\/frequency-lists\/japanese"/);
+  assert.match(html, /href="https:\/\/travelwithlanguages\.com\/blog\/most-common-japanese-words\.html"/);
   assert.match(styles, /\.default-dictionaries-source\s*\{[^}]*margin:\s*16px\s+0\s+0/s);
 });
 

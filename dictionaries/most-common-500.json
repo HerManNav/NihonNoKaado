@@ -1,0 +1,6008 @@
+{
+  "format": "japanese-cards-dictionary",
+  "version": 3,
+  "name": "Most common Japanese — 500 words",
+  "source": "Frequency ranks: https://noosflashcards.com/resources/frequency-lists/japanese (Leipzig Corpora Collection news counts; licensed CC BY-SA 4.0). English meanings and sense-tagged examples: https://github.com/tkgally/je-dict-1 (CC0). The list skips duplicate romaji and entries without a complete example tagged to the selected sense.",
+  "cards": [
+    {
+      "japanese": "no",
+      "hiragana": "の",
+      "english": "nominalizer",
+      "examples": [
+        {
+          "romaji": "akai no ga hoshii.",
+          "hiragana": "あかいのがほしい。",
+          "english": "I want the red one."
+        }
+      ]
+    },
+    {
+      "japanese": "ni",
+      "hiragana": "に",
+      "english": "destination/direction marker",
+      "examples": [
+        {
+          "romaji": "gakkou ni iku.",
+          "hiragana": "がっこうにいく。",
+          "english": "I go to school."
+        }
+      ]
+    },
+    {
+      "japanese": "ga",
+      "hiragana": "が",
+      "english": "subject marker",
+      "examples": [
+        {
+          "romaji": "ame ga futte iru.",
+          "hiragana": "あめがふっている。",
+          "english": "It's raining."
+        }
+      ]
+    },
+    {
+      "japanese": "de",
+      "hiragana": "で",
+      "english": "at, in (location of action)",
+      "examples": [
+        {
+          "romaji": "toshokan de benkyoushimasu.",
+          "hiragana": "としょかんでべんきょうします。",
+          "english": "I study at the library."
+        }
+      ]
+    },
+    {
+      "japanese": "to",
+      "hiragana": "と",
+      "english": "and (connecting nouns)",
+      "examples": [
+        {
+          "romaji": "koohii to koucha, dochira ga ii desu ka.",
+          "hiragana": "こーひーとこうちゃ、どちらがいいですか。",
+          "english": "Which would you like, coffee or tea?"
+        }
+      ]
+    },
+    {
+      "japanese": "mo",
+      "hiragana": "も",
+      "english": "also, too",
+      "examples": [
+        {
+          "romaji": "watashi mo iku.",
+          "hiragana": "わたしもいく。",
+          "english": "I'll go too."
+        }
+      ]
+    },
+    {
+      "japanese": "suru",
+      "hiragana": "する",
+      "english": "to do, to perform",
+      "examples": [
+        {
+          "romaji": "nani wo suru?",
+          "hiragana": "なにをする?",
+          "english": "What will you do?"
+        }
+      ]
+    },
+    {
+      "japanese": "iru",
+      "hiragana": "いる",
+      "english": "to exist, to be (for living things)",
+      "examples": [
+        {
+          "romaji": "neko ga imasu.",
+          "hiragana": "ねこがいます。",
+          "english": "There is a cat. / I have a cat."
+        }
+      ]
+    },
+    {
+      "japanese": "na",
+      "hiragana": "な",
+      "english": "attributive form of copula",
+      "examples": [
+        {
+          "romaji": "shizuka na heya.",
+          "hiragana": "しずかなへや。",
+          "english": "A quiet room."
+        }
+      ]
+    },
+    {
+      "japanese": "kara",
+      "hiragana": "から",
+      "english": "from (starting point)",
+      "examples": [
+        {
+          "romaji": "eki kara aruite juppun desu.",
+          "hiragana": "えきからあるいてじゅっぷんです。",
+          "english": "It's a 10-minute walk from the station."
+        }
+      ]
+    },
+    {
+      "japanese": "hi",
+      "hiragana": "ひ",
+      "english": "day",
+      "examples": [
+        {
+          "romaji": "ii hi desu ne.",
+          "hiragana": "いいひですね。",
+          "english": "It's a nice day, isn't it?"
+        }
+      ]
+    },
+    {
+      "japanese": "koto",
+      "hiragana": "こと",
+      "english": "thing, matter, affair (abstract)",
+      "examples": [
+        {
+          "romaji": "taisetsuna koto wo wasuremashita.",
+          "hiragana": "たいせつなことをわすれました。",
+          "english": "I forgot something important."
+        }
+      ]
+    },
+    {
+      "japanese": "ya",
+      "hiragana": "や",
+      "english": "and, among other things",
+      "examples": [
+        {
+          "romaji": "atsui toki ha mizu ya ocha ga oishii.",
+          "hiragana": "あついときはみずやおちゃがおいしい。",
+          "english": "When it's hot, water, tea, and other drinks taste good."
+        }
+      ]
+    },
+    {
+      "japanese": "nai",
+      "hiragana": "ない",
+      "english": "nonexistent, there is no",
+      "examples": [
+        {
+          "romaji": "mizu ga nai.",
+          "hiragana": "みずがない。",
+          "english": "There is no water."
+        }
+      ]
+    },
+    {
+      "japanese": "hito",
+      "hiragana": "ひと",
+      "english": "person, human being",
+      "examples": [
+        {
+          "romaji": "hito ga iru.",
+          "hiragana": "ひとがいる。",
+          "english": "There is a person."
+        }
+      ]
+    },
+    {
+      "japanese": "toshi",
+      "hiragana": "とし",
+      "english": "year",
+      "examples": [
+        {
+          "romaji": "kotoshi ha isogashii.",
+          "hiragana": "ことしはいそがしい。",
+          "english": "This year is busy."
+        }
+      ]
+    },
+    {
+      "japanese": "aru",
+      "hiragana": "ある",
+      "english": "to exist, to be (for inanimate objects)",
+      "examples": [
+        {
+          "romaji": "hon ga aru.",
+          "hiragana": "ほんがある。",
+          "english": "There is a book."
+        }
+      ]
+    },
+    {
+      "japanese": "ichi",
+      "hiragana": "いち",
+      "english": "market, fair, bazaar",
+      "examples": [
+        {
+          "romaji": "asaichi de yasai wo katta.",
+          "hiragana": "あさいちでやさいをかった。",
+          "english": "I bought vegetables at the morning market."
+        }
+      ]
+    },
+    {
+      "japanese": "mono",
+      "hiragana": "もの",
+      "english": "person, one who",
+      "examples": [
+        {
+          "romaji": "kankei mononominyuushitsuka.",
+          "hiragana": "かんけいもののみにゅうしつか。",
+          "english": "Authorized persons only."
+        }
+      ]
+    },
+    {
+      "japanese": "ka",
+      "hiragana": "か",
+      "english": "question marker",
+      "examples": [
+        {
+          "romaji": "kore ha nan desu ka.",
+          "hiragana": "これはなんですか。",
+          "english": "What is this?"
+        }
+      ]
+    },
+    {
+      "japanese": "mato",
+      "hiragana": "まと",
+      "english": "target; mark; bull's-eye",
+      "examples": [
+        {
+          "romaji": "mato ni atatta.",
+          "hiragana": "まとにあたった。",
+          "english": "It hit the target."
+        }
+      ]
+    },
+    {
+      "japanese": "da",
+      "hiragana": "だ",
+      "english": "is, am, are (plain copula)",
+      "examples": [
+        {
+          "romaji": "watashi ha gakusei da.",
+          "hiragana": "わたしはがくせいだ。",
+          "english": "I am a student."
+        }
+      ]
+    },
+    {
+      "japanese": "tsuki",
+      "hiragana": "つき",
+      "english": "moon",
+      "examples": [
+        {
+          "romaji": "tsuki ga kirei da.",
+          "hiragana": "つきがきれいだ。",
+          "english": "The moon is beautiful."
+        }
+      ]
+    },
+    {
+      "japanese": "you",
+      "hiragana": "よう",
+      "english": "appearance, manner, way",
+      "examples": [
+        {
+          "romaji": "ame ga furu you da.",
+          "hiragana": "あめがふるようだ。",
+          "english": "It looks like it's going to rain."
+        }
+      ]
+    },
+    {
+      "japanese": "mashi",
+      "hiragana": "まし",
+      "english": "better, preferable",
+      "examples": [
+        {
+          "romaji": "mada mashida.",
+          "hiragana": "まだましだ。",
+          "english": "It's still better (than the alternative)."
+        }
+      ]
+    },
+    {
+      "japanese": "made",
+      "hiragana": "まで",
+      "english": "until, to (time endpoint)",
+      "examples": [
+        {
+          "romaji": "juuniji made okiteimashita.",
+          "hiragana": "じゅうにじまでおきていました。",
+          "english": "I was up until 12 o'clock."
+        }
+      ]
+    },
+    {
+      "japanese": "toiu",
+      "hiragana": "という",
+      "english": "called, named, known as",
+      "examples": [
+        {
+          "romaji": "tanaka toiu hito kara denwa ga atta.",
+          "hiragana": "たなかというひとからでんわがあった。",
+          "english": "There was a call from someone called Tanaka."
+        }
+      ]
+    },
+    {
+      "japanese": "he",
+      "hiragana": "へ",
+      "english": "direction/goal marker",
+      "examples": [
+        {
+          "romaji": "toukyou he iku.",
+          "hiragana": "とうきょうへいく。",
+          "english": "To go to Tokyo."
+        }
+      ]
+    },
+    {
+      "japanese": "toshite",
+      "hiragana": "として",
+      "english": "as, in the capacity of, in the role of",
+      "examples": [
+        {
+          "romaji": "kyoushi toshite hataraku.",
+          "hiragana": "きょうしとしてはたらく。",
+          "english": "To work as a teacher."
+        }
+      ]
+    },
+    {
+      "japanese": "ken",
+      "hiragana": "けん",
+      "english": "prefecture",
+      "examples": [
+        {
+          "romaji": "chibaken ni sundeimasu.",
+          "hiragana": "ちばけんにすんでいます。",
+          "english": "I live in Chiba Prefecture."
+        }
+      ]
+    },
+    {
+      "japanese": "kai",
+      "hiragana": "かい",
+      "english": "meeting; gathering; party; get-together",
+      "examples": [
+        {
+          "romaji": "kai ha nanji kara?",
+          "hiragana": "かいはなんじから？",
+          "english": "What time does the gathering start?"
+        }
+      ]
+    },
+    {
+      "japanese": "kono",
+      "hiragana": "この",
+      "english": "this (modifying a noun)",
+      "examples": [
+        {
+          "romaji": "kono hon ha omoshiroi desu.",
+          "hiragana": "このほんはおもしろいです。",
+          "english": "This book is interesting."
+        }
+      ]
+    },
+    {
+      "japanese": "chuugoku",
+      "hiragana": "ちゅうごく",
+      "english": "China (the country); the People's Republic of China",
+      "examples": [
+        {
+          "romaji": "chuugoku ni itta koto ga aru.",
+          "hiragana": "ちゅうごくにいったことがある。",
+          "english": "I've been to China."
+        }
+      ]
+    },
+    {
+      "japanese": "naru",
+      "hiragana": "なる",
+      "english": "to become, to turn into",
+      "examples": [
+        {
+          "romaji": "haru ni natta.",
+          "hiragana": "はるになった。",
+          "english": "Spring has come."
+        }
+      ]
+    },
+    {
+      "japanese": "tame",
+      "hiragana": "ため",
+      "english": "for (the sake of), for the purpose of",
+      "examples": [
+        {
+          "romaji": "kodomo no tame ni tsukutta.",
+          "hiragana": "こどものためにつくった。",
+          "english": "I made it for my child."
+        }
+      ]
+    },
+    {
+      "japanese": "sono",
+      "hiragana": "その",
+      "english": "that (modifying a noun)",
+      "examples": [
+        {
+          "romaji": "sono hon wo kudasai.",
+          "hiragana": "そのほんをください。",
+          "english": "Please give me that book."
+        }
+      ]
+    },
+    {
+      "japanese": "tai",
+      "hiragana": "たい",
+      "english": "want to (do); would like to (do)",
+      "examples": [
+        {
+          "romaji": "mizu ga nomi tai.",
+          "hiragana": "みずがのみたい。",
+          "english": "I want to drink some water."
+        }
+      ]
+    },
+    {
+      "japanese": "toki",
+      "hiragana": "とき",
+      "english": "time, moment",
+      "examples": [
+        {
+          "romaji": "toki ga tatsu no ha hayai desu ne.",
+          "hiragana": "ときがたつのははやいですね。",
+          "english": "Time passes quickly, doesn't it?"
+        }
+      ]
+    },
+    {
+      "japanese": "mae",
+      "hiragana": "まえ",
+      "english": "front",
+      "examples": [
+        {
+          "romaji": "mae wo mite.",
+          "hiragana": "まえをみて。",
+          "english": "Look ahead."
+        }
+      ]
+    },
+    {
+      "japanese": "yaku",
+      "hiragana": "やく",
+      "english": "approximately; about",
+      "examples": [
+        {
+          "romaji": "yaku10 nin ga sankashita.",
+          "hiragana": "やく10にんがさんかした。",
+          "english": "About 10 people participated."
+        }
+      ]
+    },
+    {
+      "japanese": "en",
+      "hiragana": "えん",
+      "english": "yen (Japanese currency)",
+      "examples": [
+        {
+          "romaji": "kore ha hyaku en desu.",
+          "hiragana": "これはひゃくえんです。",
+          "english": "This is 100 yen."
+        }
+      ]
+    },
+    {
+      "japanese": "machi",
+      "hiragana": "まち",
+      "english": "town, city",
+      "examples": [
+        {
+          "romaji": "kono machi ha shizuka desu.",
+          "hiragana": "このまちはしずかです。",
+          "english": "This town is quiet."
+        }
+      ]
+    },
+    {
+      "japanese": "juu",
+      "hiragana": "じゅう",
+      "english": "ten",
+      "examples": [
+        {
+          "romaji": "juppun de tsukimasu.",
+          "hiragana": "じゅっぷんでつきます。",
+          "english": "I'll arrive in ten minutes."
+        }
+      ]
+    },
+    {
+      "japanese": "ato",
+      "hiragana": "あと",
+      "english": "after, later",
+      "examples": [
+        {
+          "romaji": "chuushoku no ato, sukoshi hirune wo shita.",
+          "hiragana": "ちゅうしょくのあと、すこしひるねをした。",
+          "english": "After lunch, I took a short nap."
+        }
+      ]
+    },
+    {
+      "japanese": "sekai",
+      "hiragana": "せかい",
+      "english": "world, earth",
+      "examples": [
+        {
+          "romaji": "sekai ha hiroi.",
+          "hiragana": "せかいはひろい。",
+          "english": "The world is vast."
+        }
+      ]
+    },
+    {
+      "japanese": "dekiru",
+      "hiragana": "できる",
+      "english": "to be able to, can",
+      "examples": [
+        {
+          "romaji": "nihongo ga dekiru.",
+          "hiragana": "にほんごができる。",
+          "english": "I can speak Japanese."
+        }
+      ]
+    },
+    {
+      "japanese": "sei",
+      "hiragana": "せい",
+      "english": "-ness; -ity; nature; quality",
+      "examples": [
+        {
+          "romaji": "kanrensei ga takai.",
+          "hiragana": "かんれんせいがたかい。",
+          "english": "The relevance is high."
+        }
+      ]
+    },
+    {
+      "japanese": "taikai",
+      "hiragana": "たいかい",
+      "english": "tournament, competition, meet",
+      "examples": [
+        {
+          "romaji": "raigetsu, tenisu no taikai ni deru.",
+          "hiragana": "らいげつ、てにすのたいかいにでる。",
+          "english": "I'm participating in a tennis tournament next month."
+        }
+      ]
+    },
+    {
+      "japanese": "kore",
+      "hiragana": "これ",
+      "english": "this (thing)",
+      "examples": [
+        {
+          "romaji": "kore ha nan desu ka.",
+          "hiragana": "これはなんですか。",
+          "english": "What is this?"
+        }
+      ]
+    },
+    {
+      "japanese": "a",
+      "hiragana": "あっ",
+      "english": "ah!; oh!; oops!",
+      "examples": [
+        {
+          "romaji": "a, abunai!",
+          "hiragana": "あっ、あぶない！",
+          "english": "Ah, watch out!"
+        }
+      ]
+    },
+    {
+      "japanese": "nari",
+      "hiragana": "なり",
+      "english": "is (classical/literary copula)",
+      "examples": [
+        {
+          "romaji": "keizoku ha chikara nari.",
+          "hiragana": "けいぞくはちからなり。",
+          "english": "Persistence is power. (Continuity is strength.)"
+        }
+      ]
+    },
+    {
+      "japanese": "mondai",
+      "hiragana": "もんだい",
+      "english": "question, problem (on a test)",
+      "examples": [
+        {
+          "romaji": "kono mondai ha muzukashii desu.",
+          "hiragana": "このもんだいはむずかしいです。",
+          "english": "This problem is difficult."
+        }
+      ]
+    },
+    {
+      "japanese": "me",
+      "hiragana": "め",
+      "english": "eye",
+      "examples": [
+        {
+          "romaji": "me ga ookii desu ne.",
+          "hiragana": "めがおおきいですね。",
+          "english": "You have big eyes."
+        }
+      ]
+    },
+    {
+      "japanese": "chiiki",
+      "hiragana": "ちいき",
+      "english": "region, area, district",
+      "examples": [
+        {
+          "romaji": "kono chiiki ha anzen da.",
+          "hiragana": "このちいきはあんぜんだ。",
+          "english": "This area is safe."
+        }
+      ]
+    },
+    {
+      "japanese": "san",
+      "hiragana": "さん",
+      "english": "three",
+      "examples": [
+        {
+          "romaji": "san ji ni aimashou.",
+          "hiragana": "さんじにあいましょう。",
+          "english": "Let's meet at three o'clock."
+        }
+      ]
+    },
+    {
+      "japanese": "senshu",
+      "hiragana": "せんしゅ",
+      "english": "player, athlete, competitor",
+      "examples": [
+        {
+          "romaji": "kare ha yakyuu senshu da.",
+          "hiragana": "かれはやきゅうせんしゅだ。",
+          "english": "He is a baseball player."
+        }
+      ]
+    },
+    {
+      "japanese": "kigyou",
+      "hiragana": "きぎょう",
+      "english": "company, enterprise, business",
+      "examples": [
+        {
+          "romaji": "ookina kigyou de hataraiteimasu.",
+          "hiragana": "おおきなきぎょうではたらいています。",
+          "english": "I work at a large company."
+        }
+      ]
+    },
+    {
+      "japanese": "kankei",
+      "hiragana": "かんけい",
+      "english": "relationship, connection",
+      "examples": [
+        {
+          "romaji": "futari no kankei ha yoi.",
+          "hiragana": "ふたりのかんけいはよい。",
+          "english": "The relationship between the two is good."
+        }
+      ]
+    },
+    {
+      "japanese": "mata",
+      "hiragana": "また",
+      "english": "again",
+      "examples": [
+        {
+          "romaji": "mata aimashou.",
+          "hiragana": "またあいましょう。",
+          "english": "Let's meet again."
+        }
+      ]
+    },
+    {
+      "japanese": "keizai",
+      "hiragana": "けいざい",
+      "english": "economy, economics",
+      "examples": [
+        {
+          "romaji": "nihon no keizai ha seichou shiteiru.",
+          "hiragana": "にほんのけいざいはせいちょうしている。",
+          "english": "Japan's economy is growing."
+        }
+      ]
+    },
+    {
+      "japanese": "ima",
+      "hiragana": "いま",
+      "english": "now, at this moment",
+      "examples": [
+        {
+          "romaji": "ima nanji desu ka.",
+          "hiragana": "いまなんじですか。",
+          "english": "What time is it now?"
+        }
+      ]
+    },
+    {
+      "japanese": "iin",
+      "hiragana": "いいん",
+      "english": "committee member",
+      "examples": [
+        {
+          "romaji": "kanojo ha gakkyuu iin desu.",
+          "hiragana": "かのじょはがっきゅういいんです。",
+          "english": "She is the class representative."
+        }
+      ]
+    },
+    {
+      "japanese": "jikan",
+      "hiragana": "じかん",
+      "english": "time",
+      "examples": [
+        {
+          "romaji": "jikan ga nai.",
+          "hiragana": "じかんがない。",
+          "english": "I don't have time."
+        }
+      ]
+    },
+    {
+      "japanese": "daihyou",
+      "hiragana": "だいひょう",
+      "english": "representative, delegate",
+      "examples": [
+        {
+          "romaji": "kare ha nihon daihyou toshite shutsujou shita.",
+          "hiragana": "かれはにほんだいひょうとしてしゅつじょうした。",
+          "english": "He participated as a representative of Japan."
+        }
+      ]
+    },
+    {
+      "japanese": "kuni",
+      "hiragana": "くに",
+      "english": "country, nation",
+      "examples": [
+        {
+          "romaji": "dono kuni kara kimashita ka.",
+          "hiragana": "どのくにからきましたか。",
+          "english": "Which country are you from?"
+        }
+      ]
+    },
+    {
+      "japanese": "yori",
+      "hiragana": "より",
+      "english": "than (comparison)",
+      "examples": [
+        {
+          "romaji": "natsu yori fuyu ga suki desu.",
+          "hiragana": "なつよりふゆがすきです。",
+          "english": "I like winter more than summer."
+        }
+      ]
+    },
+    {
+      "japanese": "ooku",
+      "hiragana": "おおく",
+      "english": "many; much; a large number; the majority",
+      "examples": [
+        {
+          "romaji": "ooku no hito ga sankashita.",
+          "hiragana": "おおくのひとがさんかした。",
+          "english": "Many people participated."
+        }
+      ]
+    },
+    {
+      "japanese": "nagara",
+      "hiragana": "ながら",
+      "english": "while (doing)",
+      "examples": [
+        {
+          "romaji": "ongaku wo kiki nagara benkyousuru.",
+          "hiragana": "おんがくをききながらべんきょうする。",
+          "english": "I study while listening to music."
+        }
+      ]
+    },
+    {
+      "japanese": "jibun",
+      "hiragana": "じぶん",
+      "english": "oneself, myself, yourself",
+      "examples": [
+        {
+          "romaji": "jibun de yatte mite kudasai.",
+          "hiragana": "じぶんでやってみてください。",
+          "english": "Please try doing it yourself."
+        }
+      ]
+    },
+    {
+      "japanese": "node",
+      "hiragana": "ので",
+      "english": "because, since, so",
+      "examples": [
+        {
+          "romaji": "ame ga futteiru node, dekakenai.",
+          "hiragana": "あめがふっているので、でかけない。",
+          "english": "Since it's raining, I won't go out."
+        }
+      ]
+    },
+    {
+      "japanese": "happyou",
+      "hiragana": "はっぴょう",
+      "english": "announcement, publication",
+      "examples": [
+        {
+          "romaji": "shinseihin wo happyou shita.",
+          "hiragana": "しんせいひんをはっぴょうした。",
+          "english": "We announced the new product."
+        }
+      ]
+    },
+    {
+      "japanese": "sanka",
+      "hiragana": "さんか",
+      "english": "participation, joining",
+      "examples": [
+        {
+          "romaji": "kaigi ni sanka suru.",
+          "hiragana": "かいぎにさんかする。",
+          "english": "I'll participate in the meeting."
+        }
+      ]
+    },
+    {
+      "japanese": "hitsuyou",
+      "hiragana": "ひつよう",
+      "english": "necessary, needed, required",
+      "examples": [
+        {
+          "romaji": "okane ga hitsuyou desu.",
+          "hiragana": "おかねがひつようです。",
+          "english": "I need money."
+        }
+      ]
+    },
+    {
+      "japanese": "niyoru",
+      "hiragana": "による",
+      "english": "due to; caused by; resulting from",
+      "examples": [
+        {
+          "romaji": "jishin niyoru higai ga hirogatteiru.",
+          "hiragana": "じしんによるひがいがひろがっている。",
+          "english": "Damage from the earthquake is spreading."
+        }
+      ]
+    },
+    {
+      "japanese": "zenkoku",
+      "hiragana": "ぜんこく",
+      "english": "the whole country, nationwide",
+      "examples": [
+        {
+          "romaji": "zenkoku de hanbaisareteiru.",
+          "hiragana": "ぜんこくではんばいされている。",
+          "english": "It's sold nationwide."
+        }
+      ]
+    },
+    {
+      "japanese": "nara",
+      "hiragana": "なら",
+      "english": "if, in the case of",
+      "examples": [
+        {
+          "romaji": "kono teido nara heiki da.",
+          "hiragana": "このていどならへいきだ。",
+          "english": "If it's to this extent, it's fine."
+        }
+      ]
+    },
+    {
+      "japanese": "jouhou",
+      "hiragana": "じょうほう",
+      "english": "information, data, news",
+      "examples": [
+        {
+          "romaji": "saishin no jouhou wo otodokeshimasu.",
+          "hiragana": "さいしんのじょうほうをおとどけします。",
+          "english": "We will deliver the latest information to you."
+        }
+      ]
+    },
+    {
+      "japanese": "sore",
+      "hiragana": "それ",
+      "english": "that (thing)",
+      "examples": [
+        {
+          "romaji": "sore ha nan?",
+          "hiragana": "それはなん?",
+          "english": "What is that?"
+        }
+      ]
+    },
+    {
+      "japanese": "ie",
+      "hiragana": "いえ",
+      "english": "house, home",
+      "examples": [
+        {
+          "romaji": "ie ni kaerimasu.",
+          "hiragana": "いえにかえります。",
+          "english": "I'm going home."
+        }
+      ]
+    },
+    {
+      "japanese": "shakai",
+      "hiragana": "しゃかい",
+      "english": "society, community",
+      "examples": [
+        {
+          "romaji": "shakai no ruuru wo mamoru.",
+          "hiragana": "しゃかいのるーるをまもる。",
+          "english": "I follow society's rules."
+        }
+      ]
+    },
+    {
+      "japanese": "jigyou",
+      "hiragana": "じぎょう",
+      "english": "business, enterprise, undertaking",
+      "examples": [
+        {
+          "romaji": "atarashii jigyou wo hajimeru.",
+          "hiragana": "あたらしいじぎょうをはじめる。",
+          "english": "To start a new business."
+        }
+      ]
+    },
+    {
+      "japanese": "ijou",
+      "hiragana": "いじょう",
+      "english": "above, more than or equal to",
+      "examples": [
+        {
+          "romaji": "hatachi ijou no kata nomi nyuujou dekimasu.",
+          "hiragana": "はたちいじょうのかたのみにゅうじょうできます。",
+          "english": "Only those 20 and older may enter."
+        }
+      ]
+    },
+    {
+      "japanese": "tsukihi",
+      "hiragana": "つきひ",
+      "english": "time, passage of time, months and days",
+      "examples": [
+        {
+          "romaji": "tsukihi ga tatsu no ha hayai.",
+          "hiragana": "つきひがたつのははやい。",
+          "english": "Time passes quickly."
+        }
+      ]
+    },
+    {
+      "japanese": "omoi",
+      "hiragana": "おもい",
+      "english": "thought, feeling, emotion",
+      "examples": [
+        {
+          "romaji": "omoi wo kotoba ni suru.",
+          "hiragana": "おもいをことばにする。",
+          "english": "To put one's feelings into words."
+        }
+      ]
+    },
+    {
+      "japanese": "mise",
+      "hiragana": "みせ",
+      "english": "store, shop",
+      "examples": [
+        {
+          "romaji": "kono mise ha nanji made aiteimasu ka?",
+          "hiragana": "このみせはなんじまであいていますか？",
+          "english": "Until what time is this store open?"
+        }
+      ]
+    },
+    {
+      "japanese": "toshitsuki",
+      "hiragana": "としつき",
+      "english": "years, the passage of time",
+      "examples": [
+        {
+          "romaji": "nagai toshitsuki ga tatta.",
+          "hiragana": "ながいとしつきがたった。",
+          "english": "Many years have passed."
+        }
+      ]
+    },
+    {
+      "japanese": "seifu",
+      "hiragana": "せいふ",
+      "english": "government, administration",
+      "examples": [
+        {
+          "romaji": "seifu ha atarashii seisaku wo happyou shita.",
+          "hiragana": "せいふはあたらしいせいさくをはっぴょうした。",
+          "english": "The government announced a new policy."
+        }
+      ]
+    },
+    {
+      "japanese": "oku",
+      "hiragana": "おく",
+      "english": "one hundred million; 100,000,000",
+      "examples": [
+        {
+          "romaji": "sekai no jinkou ha 80oku nin wo koeta.",
+          "hiragana": "せかいのじんこうは80おくにんをこえた。",
+          "english": "The world population has exceeded 8 billion."
+        }
+      ]
+    },
+    {
+      "japanese": "ue",
+      "hiragana": "うえ",
+      "english": "above, on top, upper part",
+      "examples": [
+        {
+          "romaji": "hon ha tsukue no ue ni arimasu.",
+          "hiragana": "ほんはつくえのうえにあります。",
+          "english": "The book is on the desk."
+        }
+      ]
+    },
+    {
+      "japanese": "muke",
+      "hiragana": "むけ",
+      "english": "aimed at; intended for; for ~",
+      "examples": [
+        {
+          "romaji": "kono hon ha kodomomukeda.",
+          "hiragana": "このほんはこどもむけだ。",
+          "english": "This book is intended for children."
+        }
+      ]
+    },
+    {
+      "japanese": "hanasu",
+      "hiragana": "はなす",
+      "english": "to speak, to talk",
+      "examples": [
+        {
+          "romaji": "nihongo wo hanasu.",
+          "hiragana": "にほんごをはなす。",
+          "english": "I speak Japanese."
+        }
+      ]
+    },
+    {
+      "japanese": "konkai",
+      "hiragana": "こんかい",
+      "english": "this time, now",
+      "examples": [
+        {
+          "romaji": "konkai ha dame datta.",
+          "hiragana": "こんかいはだめだった。",
+          "english": "It was no good this time."
+        }
+      ]
+    },
+    {
+      "japanese": "josei",
+      "hiragana": "じょせい",
+      "english": "woman, female",
+      "examples": [
+        {
+          "romaji": "josei sen'you sharyou ni norimashita.",
+          "hiragana": "じょせいせんようしゃりょうにのりました。",
+          "english": "I rode in the women-only car."
+        }
+      ]
+    },
+    {
+      "japanese": "kanou",
+      "hiragana": "かのう",
+      "english": "possible, feasible, practicable",
+      "examples": [
+        {
+          "romaji": "sore ha kanou desu ka.",
+          "hiragana": "それはかのうですか。",
+          "english": "Is that possible?"
+        }
+      ]
+    },
+    {
+      "japanese": "shinbun",
+      "hiragana": "しんぶん",
+      "english": "newspaper",
+      "examples": [
+        {
+          "romaji": "shinbun ni notteita.",
+          "hiragana": "しんぶんにのっていた。",
+          "english": "It was in the newspaper."
+        }
+      ]
+    },
+    {
+      "japanese": "kankou",
+      "hiragana": "かんこう",
+      "english": "sightseeing, tourism",
+      "examples": [
+        {
+          "romaji": "kyouto ni kankou ni ikimashita.",
+          "hiragana": "きょうとにかんこうにいきました。",
+          "english": "I went sightseeing in Kyoto."
+        }
+      ]
+    },
+    {
+      "japanese": "katsudou",
+      "hiragana": "かつどう",
+      "english": "activity, action",
+      "examples": [
+        {
+          "romaji": "boranteia katsudou ni sankasuru.",
+          "hiragana": "ぼらんてぃあかつどうにさんかする。",
+          "english": "To participate in volunteer activities."
+        }
+      ]
+    },
+    {
+      "japanese": "sen",
+      "hiragana": "せん",
+      "english": "selection; anthology",
+      "examples": [
+        {
+          "romaji": "kessaku sen wo shuppan shita.",
+          "hiragana": "けっさくせんをしゅっぱんした。",
+          "english": "They published a selection of masterpieces."
+        }
+      ]
+    },
+    {
+      "japanese": "ten",
+      "hiragana": "てん",
+      "english": "point, score",
+      "examples": [
+        {
+          "romaji": "100ten wo totta.",
+          "hiragana": "100てんをとった。",
+          "english": "I got 100 points."
+        }
+      ]
+    },
+    {
+      "japanese": "kangae",
+      "hiragana": "かんがえ",
+      "english": "thought, idea, opinion",
+      "examples": [
+        {
+          "romaji": "ii kangae ga arimasu.",
+          "hiragana": "いいかんがえがあります。",
+          "english": "I have a good idea."
+        }
+      ]
+    },
+    {
+      "japanese": "sou",
+      "hiragana": "そう",
+      "english": "so, that way, like that",
+      "examples": [
+        {
+          "romaji": "sou omoi masu.",
+          "hiragana": "そうおもいます。",
+          "english": "I think so."
+        }
+      ]
+    },
+    {
+      "japanese": "moto",
+      "hiragana": "もと",
+      "english": "origin, source",
+      "examples": [
+        {
+          "romaji": "jiko no moto ha nan desu ka.",
+          "hiragana": "じこのもとはなんですか。",
+          "english": "What was the cause of the accident?"
+        }
+      ]
+    },
+    {
+      "japanese": "demo",
+      "hiragana": "でも",
+      "english": "but, however",
+      "examples": [
+        {
+          "romaji": "ikitai. demo, jikan ga nai.",
+          "hiragana": "いきたい。でも、じかんがない。",
+          "english": "I want to go. But I don't have time."
+        }
+      ]
+    },
+    {
+      "japanese": "chiimu",
+      "hiragana": "ちーむ",
+      "english": "team",
+      "examples": [
+        {
+          "romaji": "watashi tachi no chiimu ga katta.",
+          "hiragana": "わたしたちのちーむがかった。",
+          "english": "Our team won."
+        }
+      ]
+    },
+    {
+      "japanese": "genzai",
+      "hiragana": "げんざい",
+      "english": "present time, now",
+      "examples": [
+        {
+          "romaji": "genzai to kako ha chigau.",
+          "hiragana": "げんざいとかこはちがう。",
+          "english": "The present is different from the past."
+        }
+      ]
+    },
+    {
+      "japanese": "beikoku",
+      "hiragana": "べいこく",
+      "english": "the United States; America",
+      "examples": [
+        {
+          "romaji": "beikoku ni ryuugaku shita.",
+          "hiragana": "べいこくにりゅうがくした。",
+          "english": "I studied abroad in the United States."
+        }
+      ]
+    },
+    {
+      "japanese": "kokusai",
+      "hiragana": "こくさい",
+      "english": "international, global",
+      "examples": [
+        {
+          "romaji": "kokusai kaigi ni sankashita.",
+          "hiragana": "こくさいかいぎにさんかした。",
+          "english": "I participated in an international conference."
+        }
+      ]
+    },
+    {
+      "japanese": "hou",
+      "hiragana": "ほう",
+      "english": "direction, side, way",
+      "examples": [
+        {
+          "romaji": "eki ha kita no hou ni arimasu.",
+          "hiragana": "えきはきたのほうにあります。",
+          "english": "The station is in the north direction."
+        }
+      ]
+    },
+    {
+      "japanese": "shashin",
+      "hiragana": "しゃしん",
+      "english": "photograph, photo",
+      "examples": [
+        {
+          "romaji": "shashin wo totte mo ii desu ka.",
+          "hiragana": "しゃしんをとってもいいですか。",
+          "english": "May I take a photo?"
+        }
+      ]
+    },
+    {
+      "japanese": "senkyo",
+      "hiragana": "せんきょ",
+      "english": "election",
+      "examples": [
+        {
+          "romaji": "raigetsu senkyo ga aru.",
+          "hiragana": "らいげつせんきょがある。",
+          "english": "There's an election next month."
+        }
+      ]
+    },
+    {
+      "japanese": "kaisai",
+      "hiragana": "かいさい",
+      "english": "holding; hosting; staging",
+      "examples": [
+        {
+          "romaji": "raigetsu, kaigi ga kaisai sareru.",
+          "hiragana": "らいげつ、かいぎがかいさいされる。",
+          "english": "A meeting will be held next month."
+        }
+      ]
+    },
+    {
+      "japanese": "chousa",
+      "hiragana": "ちょうさ",
+      "english": "investigation, inquiry, examination",
+      "examples": [
+        {
+          "romaji": "gen'in wo chousa suru.",
+          "hiragana": "げんいんをちょうさする。",
+          "english": "To investigate the cause."
+        }
+      ]
+    },
+    {
+      "japanese": "shien",
+      "hiragana": "しえん",
+      "english": "support",
+      "examples": [
+        {
+          "romaji": "hisaisha he no shien wo yobikakeru.",
+          "hiragana": "ひさいしゃへのしえんをよびかける。",
+          "english": "To call for support for disaster victims."
+        }
+      ]
+    },
+    {
+      "japanese": "kotoshi",
+      "hiragana": "ことし",
+      "english": "this year",
+      "examples": [
+        {
+          "romaji": "kotoshi ha isogashii desu.",
+          "hiragana": "ことしはいそがしいです。",
+          "english": "I'm busy this year."
+        }
+      ]
+    },
+    {
+      "japanese": "hon",
+      "hiragana": "ほん",
+      "english": "book",
+      "examples": [
+        {
+          "romaji": "hon wo yomu.",
+          "hiragana": "ほんをよむ。",
+          "english": "I read a book."
+        }
+      ]
+    },
+    {
+      "japanese": "shiai",
+      "hiragana": "しあい",
+      "english": "match, game, bout, competition",
+      "examples": [
+        {
+          "romaji": "shiai ni kachimashita.",
+          "hiragana": "しあいにかちました。",
+          "english": "We won the match."
+        }
+      ]
+    },
+    {
+      "japanese": "riyou",
+      "hiragana": "りよう",
+      "english": "use, utilization",
+      "examples": [
+        {
+          "romaji": "toshokan wo riyou shiteimasu.",
+          "hiragana": "としょかんをりようしています。",
+          "english": "I use the library."
+        }
+      ]
+    },
+    {
+      "japanese": "ii",
+      "hiragana": "いい",
+      "english": "good, fine, nice",
+      "examples": [
+        {
+          "romaji": "ii tenki da.",
+          "hiragana": "いいてんきだ。",
+          "english": "It's nice weather."
+        }
+      ]
+    },
+    {
+      "japanese": "jidai",
+      "hiragana": "じだい",
+      "english": "era, period, age",
+      "examples": [
+        {
+          "romaji": "edo jidai no tatemono desu.",
+          "hiragana": "えどじだいのたてものです。",
+          "english": "It's a building from the Edo period."
+        }
+      ]
+    },
+    {
+      "japanese": "hanbai",
+      "hiragana": "はんばい",
+      "english": "sale, selling, sales",
+      "examples": [
+        {
+          "romaji": "kono shouhin ha zenkoku de hanbai sareteiru.",
+          "hiragana": "このしょうひんはぜんこくではんばいされている。",
+          "english": "This product is sold nationwide."
+        }
+      ]
+    },
+    {
+      "japanese": "daro",
+      "hiragana": "だろ",
+      "english": "right?, see?, I told you so",
+      "examples": [
+        {
+          "romaji": "hora, itta daro.",
+          "hiragana": "ほら、いっただろ。",
+          "english": "See, I told you."
+        }
+      ]
+    },
+    {
+      "japanese": "tokoro",
+      "hiragana": "ところ",
+      "english": "place, location",
+      "examples": [
+        {
+          "romaji": "shizuka na tokoro ga suki desu.",
+          "hiragana": "しずかなところがすきです。",
+          "english": "I like quiet places."
+        }
+      ]
+    },
+    {
+      "japanese": "kin",
+      "hiragana": "きん",
+      "english": "gold (metal)",
+      "examples": [
+        {
+          "romaji": "kin ha takai.",
+          "hiragana": "きんはたかい。",
+          "english": "Gold is expensive."
+        }
+      ]
+    },
+    {
+      "japanese": "chi",
+      "hiragana": "ち",
+      "english": "land; place; region",
+      "examples": [
+        {
+          "romaji": "ikoku no chi de hataraku.",
+          "hiragana": "いこくのちではたらく。",
+          "english": "To work in a foreign land."
+        }
+      ]
+    },
+    {
+      "japanese": "kenkyuu",
+      "hiragana": "けんきゅう",
+      "english": "research, study, investigation",
+      "examples": [
+        {
+          "romaji": "kono kenkyuu ha juuyou da.",
+          "hiragana": "このけんきゅうはじゅうようだ。",
+          "english": "This research is important."
+        }
+      ]
+    },
+    {
+      "japanese": "kantoku",
+      "hiragana": "かんとく",
+      "english": "director (film/TV)",
+      "examples": [
+        {
+          "romaji": "kono eiga no kantoku ha dare desu ka.",
+          "hiragana": "このえいがのかんとくはだれですか。",
+          "english": "Who is the director of this movie?"
+        }
+      ]
+    },
+    {
+      "japanese": "ne",
+      "hiragana": "ね",
+      "english": "seeking confirmation (right?, isn't it?)",
+      "examples": [
+        {
+          "romaji": "ii tenki desune.",
+          "hiragana": "いいてんきですね。",
+          "english": "Nice weather, isn't it?"
+        }
+      ]
+    },
+    {
+      "japanese": "shisetsu",
+      "hiragana": "しせつ",
+      "english": "facility, institution, establishment",
+      "examples": [
+        {
+          "romaji": "supootsu shisetsu wo riyousuru.",
+          "hiragana": "すぽーつしせつをりようする。",
+          "english": "I use sports facilities."
+        }
+      ]
+    },
+    {
+      "japanese": "koukou",
+      "hiragana": "こうこう",
+      "english": "high school, senior high school",
+      "examples": [
+        {
+          "romaji": "koukou ni nyuugakushimashita.",
+          "hiragana": "こうこうににゅうがくしました。",
+          "english": "I entered high school."
+        }
+      ]
+    },
+    {
+      "japanese": "kureru",
+      "hiragana": "くれる",
+      "english": "to give (to me/us)",
+      "examples": [
+        {
+          "romaji": "tomodachi ga hon wo kuremashita.",
+          "hiragana": "ともだちがほんをくれました。",
+          "english": "My friend gave me a book."
+        }
+      ]
+    },
+    {
+      "japanese": "go",
+      "hiragana": "ご",
+      "english": "five",
+      "examples": [
+        {
+          "romaji": "go ji ni okimasu.",
+          "hiragana": "ごじにおきます。",
+          "english": "I wake up at five o'clock."
+        }
+      ]
+    },
+    {
+      "japanese": "kyouryoku",
+      "hiragana": "きょうりょく",
+      "english": "cooperation, collaboration",
+      "examples": [
+        {
+          "romaji": "go kyouryoku arigatou gozaimasu.",
+          "hiragana": "ごきょうりょくありがとうございます。",
+          "english": "Thank you for your cooperation."
+        }
+      ]
+    },
+    {
+      "japanese": "ba",
+      "hiragana": "ば",
+      "english": "place, location",
+      "examples": [
+        {
+          "romaji": "sono ba wo hanareta.",
+          "hiragana": "そのばをはなれた。",
+          "english": "I left the place."
+        }
+      ]
+    },
+    {
+      "japanese": "seikatsu",
+      "hiragana": "せいかつ",
+      "english": "life, living, livelihood",
+      "examples": [
+        {
+          "romaji": "seikatsuhi ga takai.",
+          "hiragana": "せいかつひがたかい。",
+          "english": "The cost of living is high."
+        }
+      ]
+    },
+    {
+      "japanese": "gakkou",
+      "hiragana": "がっこう",
+      "english": "school",
+      "examples": [
+        {
+          "romaji": "gakkou ni iku.",
+          "hiragana": "がっこうにいく。",
+          "english": "I go to school."
+        }
+      ]
+    },
+    {
+      "japanese": "yotei",
+      "hiragana": "よてい",
+      "english": "plan, schedule, program",
+      "examples": [
+        {
+          "romaji": "raishuu no yotei ha nan desu ka.",
+          "hiragana": "らいしゅうのよていはなんですか。",
+          "english": "What are your plans for next week?"
+        }
+      ]
+    },
+    {
+      "japanese": "gogo",
+      "hiragana": "ごご",
+      "english": "afternoon, PM",
+      "examples": [
+        {
+          "romaji": "gogo3 ji ni aimashou.",
+          "hiragana": "ごご3じにあいましょう。",
+          "english": "Let's meet at 3 PM."
+        }
+      ]
+    },
+    {
+      "japanese": "taiou",
+      "hiragana": "たいおう",
+      "english": "response, dealing with",
+      "examples": [
+        {
+          "romaji": "jinsokuna taiou wo o negaishimasu.",
+          "hiragana": "じんそくなたいおうをおねがいします。",
+          "english": "Please respond promptly."
+        }
+      ]
+    },
+    {
+      "japanese": "ichiba",
+      "hiragana": "いちば",
+      "english": "market, marketplace",
+      "examples": [
+        {
+          "romaji": "ichiba de shinsenna yasai wo kau.",
+          "hiragana": "いちばでしんせんなやさいをかう。",
+          "english": "To buy fresh vegetables at the market."
+        }
+      ]
+    },
+    {
+      "japanese": "kaihatsu",
+      "hiragana": "かいはつ",
+      "english": "development (of products, technology, land)",
+      "examples": [
+        {
+          "romaji": "shinseihin no kaihatsu ni torikundeiru.",
+          "hiragana": "しんせいひんのかいはつにとりくんでいる。",
+          "english": "We are working on developing a new product."
+        }
+      ]
+    },
+    {
+      "japanese": "hatten",
+      "hiragana": "はってん",
+      "english": "development, growth, expansion",
+      "examples": [
+        {
+          "romaji": "keizai ga kyuusoku ni hatten shita.",
+          "hiragana": "けいざいがきゅうそくにはってんした。",
+          "english": "The economy developed rapidly."
+        }
+      ]
+    },
+    {
+      "japanese": "nendo",
+      "hiragana": "ねんど",
+      "english": "fiscal year, financial year",
+      "examples": [
+        {
+          "romaji": "konnendo no yosan.",
+          "hiragana": "こんねんどのよさん。",
+          "english": "This fiscal year's budget."
+        }
+      ]
+    },
+    {
+      "japanese": "kaisha",
+      "hiragana": "かいしゃ",
+      "english": "company, corporation",
+      "examples": [
+        {
+          "romaji": "kaisha ni ikimasu.",
+          "hiragana": "かいしゃにいきます。",
+          "english": "I'm going to the office."
+        }
+      ]
+    },
+    {
+      "japanese": "bunka",
+      "hiragana": "ぶんか",
+      "english": "culture, civilization",
+      "examples": [
+        {
+          "romaji": "nihon no bunka ni kyoumi ga aru.",
+          "hiragana": "にほんのぶんかにきょうみがある。",
+          "english": "I'm interested in Japanese culture."
+        }
+      ]
+    },
+    {
+      "japanese": "nyuusu",
+      "hiragana": "にゅーす",
+      "english": "news",
+      "examples": [
+        {
+          "romaji": "ookina nyuusu ga atta.",
+          "hiragana": "おおきなにゅーすがあった。",
+          "english": "There was big news."
+        }
+      ]
+    },
+    {
+      "japanese": "keikaku",
+      "hiragana": "けいかく",
+      "english": "plan, project, scheme",
+      "examples": [
+        {
+          "romaji": "keikaku wo tatemashou.",
+          "hiragana": "けいかくをたてましょう。",
+          "english": "Let's make a plan."
+        }
+      ]
+    },
+    {
+      "japanese": "uchi",
+      "hiragana": "うち",
+      "english": "inside, within",
+      "examples": [
+        {
+          "romaji": "uchi to soto no ondo ga chigaimasu.",
+          "hiragana": "うちとそとのおんどがちがいます。",
+          "english": "The temperature inside and outside is different."
+        }
+      ]
+    },
+    {
+      "japanese": "shikashi",
+      "hiragana": "しかし",
+      "english": "however, but, nevertheless",
+      "examples": [
+        {
+          "romaji": "shikashi, muzukashii.",
+          "hiragana": "しかし、むずかしい。",
+          "english": "However, it's difficult."
+        }
+      ]
+    },
+    {
+      "japanese": "te",
+      "hiragana": "て",
+      "english": "hand",
+      "examples": [
+        {
+          "romaji": "te wo arau.",
+          "hiragana": "てをあらう。",
+          "english": "To wash one's hands."
+        }
+      ]
+    },
+    {
+      "japanese": "tara",
+      "hiragana": "たら",
+      "english": "if (hypothetical condition)",
+      "examples": [
+        {
+          "romaji": "ame ga futtara, chuushi desu.",
+          "hiragana": "あめがふったら、ちゅうしです。",
+          "english": "If it rains, it'll be called off."
+        }
+      ]
+    },
+    {
+      "japanese": "kennai",
+      "hiragana": "けんない",
+      "english": "within the prefecture; inside the prefecture",
+      "examples": [
+        {
+          "romaji": "kennai ni sundeiru.",
+          "hiragana": "けんないにすんでいる。",
+          "english": "I live within the prefecture."
+        }
+      ]
+    },
+    {
+      "japanese": "sakunen",
+      "hiragana": "さくねん",
+      "english": "last year",
+      "examples": [
+        {
+          "romaji": "sakunen ha taihen na toshi datta.",
+          "hiragana": "さくねんはたいへんなとしだった。",
+          "english": "Last year was a tough year."
+        }
+      ]
+    },
+    {
+      "japanese": "kankyou",
+      "hiragana": "かんきょう",
+      "english": "environment, surroundings",
+      "examples": [
+        {
+          "romaji": "kankyou wo mamoru koto ga taisetsu desu.",
+          "hiragana": "かんきょうをまもることがたいせつです。",
+          "english": "It's important to protect the environment."
+        }
+      ]
+    },
+    {
+      "japanese": "baai",
+      "hiragana": "ばあい",
+      "english": "case, situation, circumstance",
+      "examples": [
+        {
+          "romaji": "ame no baai ha chuushi desu.",
+          "hiragana": "あめのばあいはちゅうしです。",
+          "english": "In case of rain, it will be cancelled."
+        }
+      ]
+    },
+    {
+      "japanese": "hajimete",
+      "hiragana": "はじめて",
+      "english": "for the first time",
+      "examples": [
+        {
+          "romaji": "nihon ni hajimete kimashita.",
+          "hiragana": "にほんにはじめてきました。",
+          "english": "I came to Japan for the first time."
+        }
+      ]
+    },
+    {
+      "japanese": "kekka",
+      "hiragana": "けっか",
+      "english": "result, outcome, consequence",
+      "examples": [
+        {
+          "romaji": "shiken no kekka ga deta.",
+          "hiragana": "しけんのけっかがでた。",
+          "english": "The test results came out."
+        }
+      ]
+    },
+    {
+      "japanese": "setsumei",
+      "hiragana": "せつめい",
+      "english": "explanation, description",
+      "examples": [
+        {
+          "romaji": "setsumei wo kiite kudasai.",
+          "hiragana": "せつめいをきいてください。",
+          "english": "Please listen to the explanation."
+        }
+      ]
+    },
+    {
+      "japanese": "kyouiku",
+      "hiragana": "きょういく",
+      "english": "education, schooling",
+      "examples": [
+        {
+          "romaji": "kyouiku wo ukeru.",
+          "hiragana": "きょういくをうける。",
+          "english": "To receive education."
+        }
+      ]
+    },
+    {
+      "japanese": "kongo",
+      "hiragana": "こんご",
+      "english": "from now on, hereafter, in the future",
+      "examples": [
+        {
+          "romaji": "kongo ha kiwotsukemasu.",
+          "hiragana": "こんごはきをつけます。",
+          "english": "I will be careful from now on."
+        }
+      ]
+    },
+    {
+      "japanese": "jisshi",
+      "hiragana": "じっし",
+      "english": "implementation, enforcement, carrying out",
+      "examples": [
+        {
+          "romaji": "atarashii seido wo raigetsu kara jisshi suru.",
+          "hiragana": "あたらしいせいどをらいげつからじっしする。",
+          "english": "The new system will be implemented starting next month."
+        }
+      ]
+    },
+    {
+      "japanese": "dou",
+      "hiragana": "どう",
+      "english": "how, in what way",
+      "examples": [
+        {
+          "romaji": "nihon no seikatsu ha dou desu ka?",
+          "hiragana": "にほんのせいかつはどうですか？",
+          "english": "How is life in Japan?"
+        }
+      ]
+    },
+    {
+      "japanese": "shachou",
+      "hiragana": "しゃちょう",
+      "english": "company president, CEO, head of a company",
+      "examples": [
+        {
+          "romaji": "shachou ni aitai desu.",
+          "hiragana": "しゃちょうにあいたいです。",
+          "english": "I want to meet the company president."
+        }
+      ]
+    },
+    {
+      "japanese": "daitouryou",
+      "hiragana": "だいとうりょう",
+      "english": "president (of a country)",
+      "examples": [
+        {
+          "romaji": "amerika no daitouryou ga rainichi shita.",
+          "hiragana": "あめりかのだいとうりょうがらいにちした。",
+          "english": "The President of the United States visited Japan."
+        }
+      ]
+    },
+    {
+      "japanese": "gijutsu",
+      "hiragana": "ぎじゅつ",
+      "english": "technique, skill",
+      "examples": [
+        {
+          "romaji": "gijutsu ga takai.",
+          "hiragana": "ぎじゅつがたかい。",
+          "english": "The skill level is high."
+        }
+      ]
+    },
+    {
+      "japanese": "sentaa",
+      "hiragana": "せんたー",
+      "english": "center, facility",
+      "examples": [
+        {
+          "romaji": "sentaa ni itta.",
+          "hiragana": "せんたーにいった。",
+          "english": "I went to the center."
+        }
+      ]
+    },
+    {
+      "japanese": "kensetsu",
+      "hiragana": "けんせつ",
+      "english": "construction, building",
+      "examples": [
+        {
+          "romaji": "kensetsu genba de hataraku.",
+          "hiragana": "けんせつげんばではたらく。",
+          "english": "To work at a construction site."
+        }
+      ]
+    },
+    {
+      "japanese": "yakyuu",
+      "hiragana": "やきゅう",
+      "english": "baseball",
+      "examples": [
+        {
+          "romaji": "yakyuu ga suki desu.",
+          "hiragana": "やきゅうがすきです。",
+          "english": "I like baseball."
+        }
+      ]
+    },
+    {
+      "japanese": "koe",
+      "hiragana": "こえ",
+      "english": "voice",
+      "examples": [
+        {
+          "romaji": "ii koe desu ne.",
+          "hiragana": "いいこえですね。",
+          "english": "You have a nice voice."
+        }
+      ]
+    },
+    {
+      "japanese": "nenkan",
+      "hiragana": "ねんかん",
+      "english": "years (duration)",
+      "examples": [
+        {
+          "romaji": "san nenkan nihon ni sundeimashita.",
+          "hiragana": "さんねんかんにほんにすんでいました。",
+          "english": "I lived in Japan for three years."
+        }
+      ]
+    },
+    {
+      "japanese": "shutsujou",
+      "hiragana": "しゅつじょう",
+      "english": "participation, entry",
+      "examples": [
+        {
+          "romaji": "orinpikku ni shutsujou suru koto ga yume da.",
+          "hiragana": "おりんぴっくにしゅつじょうすることがゆめだ。",
+          "english": "My dream is to participate in the Olympics."
+        }
+      ]
+    },
+    {
+      "japanese": "shimin",
+      "hiragana": "しみん",
+      "english": "citizen, city resident",
+      "examples": [
+        {
+          "romaji": "shimin puuru de oyoida.",
+          "hiragana": "しみんぷーるでおよいだ。",
+          "english": "I swam at the public pool."
+        }
+      ]
+    },
+    {
+      "japanese": "ookina",
+      "hiragana": "おおきな",
+      "english": "big, large",
+      "examples": [
+        {
+          "romaji": "ookina koe de hanasu.",
+          "hiragana": "おおきなこえではなす。",
+          "english": "To speak in a loud voice."
+        }
+      ]
+    },
+    {
+      "japanese": "ippou",
+      "hiragana": "いっぽう",
+      "english": "one side, one party",
+      "examples": [
+        {
+          "romaji": "ippou no hanashi dake de ha wakaranai.",
+          "hiragana": "いっぽうのはなしだけではわからない。",
+          "english": "You can't understand from just one side's story."
+        }
+      ]
+    },
+    {
+      "japanese": "shushou",
+      "hiragana": "しゅしょう",
+      "english": "prime minister",
+      "examples": [
+        {
+          "romaji": "atarashii shushou ga erabareta.",
+          "hiragana": "あたらしいしゅしょうがえらばれた。",
+          "english": "A new prime minister was elected."
+        }
+      ]
+    },
+    {
+      "japanese": "chiku",
+      "hiragana": "ちく",
+      "english": "district, area, zone",
+      "examples": [
+        {
+          "romaji": "kono chiku ha shizuka da.",
+          "hiragana": "このちくはしずかだ。",
+          "english": "This district is quiet."
+        }
+      ]
+    },
+    {
+      "japanese": "kanji",
+      "hiragana": "かんじ",
+      "english": "feeling, sense, impression",
+      "examples": [
+        {
+          "romaji": "ii kanji desu ne.",
+          "hiragana": "いいかんじですね。",
+          "english": "It has a nice feel to it."
+        }
+      ]
+    },
+    {
+      "japanese": "gun",
+      "hiragana": "ぐん",
+      "english": "army, military forces, troops",
+      "examples": [
+        {
+          "romaji": "gun ga tettai shita.",
+          "hiragana": "ぐんがてったいした。",
+          "english": "The army retreated."
+        }
+      ]
+    },
+    {
+      "japanese": "eikyou",
+      "hiragana": "えいきょう",
+      "english": "influence, effect",
+      "examples": [
+        {
+          "romaji": "kankyou ni eikyou wo ataeru.",
+          "hiragana": "かんきょうにえいきょうをあたえる。",
+          "english": "To have an effect on the environment."
+        }
+      ]
+    },
+    {
+      "japanese": "kaigi",
+      "hiragana": "かいぎ",
+      "english": "meeting, conference",
+      "examples": [
+        {
+          "romaji": "san ji kara kaigi ga arimasu.",
+          "hiragana": "さんじからかいぎがあります。",
+          "english": "There's a meeting from 3 o'clock."
+        }
+      ]
+    },
+    {
+      "japanese": "tsugi",
+      "hiragana": "つぎ",
+      "english": "next, following",
+      "examples": [
+        {
+          "romaji": "tsugi ha nani wo shimasu ka.",
+          "hiragana": "つぎはなにをしますか。",
+          "english": "What will we do next?"
+        }
+      ]
+    },
+    {
+      "japanese": "anzen",
+      "hiragana": "あんぜん",
+      "english": "safe, secure",
+      "examples": [
+        {
+          "romaji": "koko ha anzen desu ka.",
+          "hiragana": "ここはあんぜんですか。",
+          "english": "Is it safe here?"
+        }
+      ]
+    },
+    {
+      "japanese": "chuushin",
+      "hiragana": "ちゅうしん",
+      "english": "center, middle",
+      "examples": [
+        {
+          "romaji": "toukyou ha nihon no chuushinda.",
+          "hiragana": "とうきょうはにほんのちゅうしんだ。",
+          "english": "Tokyo is the center of Japan."
+        }
+      ]
+    },
+    {
+      "japanese": "sakuhin",
+      "hiragana": "さくひん",
+      "english": "work, piece, production",
+      "examples": [
+        {
+          "romaji": "kono gaka no sakuhin ga suki da.",
+          "hiragana": "このがかのさくひんがすきだ。",
+          "english": "I like this painter's works."
+        }
+      ]
+    },
+    {
+      "japanese": "arata",
+      "hiragana": "あらた",
+      "english": "new, fresh",
+      "examples": [
+        {
+          "romaji": "aratana mondai ga deta.",
+          "hiragana": "あらたなもんだいがでた。",
+          "english": "A new problem came up."
+        }
+      ]
+    },
+    {
+      "japanese": "satsuei",
+      "hiragana": "さつえい",
+      "english": "photography, taking photographs",
+      "examples": [
+        {
+          "romaji": "kinen satsuei wo shimashou.",
+          "hiragana": "きねんさつえいをしましょう。",
+          "english": "Let's take a commemorative photo."
+        }
+      ]
+    },
+    {
+      "japanese": "kaichou",
+      "hiragana": "かいちょう",
+      "english": "chairman; president; head",
+      "examples": [
+        {
+          "romaji": "atarashii kaichou ga erabareta.",
+          "hiragana": "あたらしいかいちょうがえらばれた。",
+          "english": "A new chairman was elected."
+        }
+      ]
+    },
+    {
+      "japanese": "daigaku",
+      "hiragana": "だいがく",
+      "english": "university, college",
+      "examples": [
+        {
+          "romaji": "daigaku de nani wo benkyoushiteimasu ka?",
+          "hiragana": "だいがくでなにをべんきょうしていますか？",
+          "english": "What are you studying at university?"
+        }
+      ]
+    },
+    {
+      "japanese": "teikyou",
+      "hiragana": "ていきょう",
+      "english": "provision, offering, supply",
+      "examples": [
+        {
+          "romaji": "jouhou wo teikyou suru.",
+          "hiragana": "じょうほうをていきょうする。",
+          "english": "To provide information."
+        }
+      ]
+    },
+    {
+      "japanese": "soshite",
+      "hiragana": "そして",
+      "english": "and, and then",
+      "examples": [
+        {
+          "romaji": "soshite kaetta.",
+          "hiragana": "そしてかえった。",
+          "english": "And then I went home."
+        }
+      ]
+    },
+    {
+      "japanese": "yuushou",
+      "hiragana": "ゆうしょう",
+      "english": "victory, championship, winning first place",
+      "examples": [
+        {
+          "romaji": "kare ha taikai de yuushou shita.",
+          "hiragana": "かれはたいかいでゆうしょうした。",
+          "english": "He won the championship at the tournament."
+        }
+      ]
+    },
+    {
+      "japanese": "supootsu",
+      "hiragana": "すぽーつ",
+      "english": "sports, athletics",
+      "examples": [
+        {
+          "romaji": "supootsu ga suki da.",
+          "hiragana": "すぽーつがすきだ。",
+          "english": "I like sports."
+        }
+      ]
+    },
+    {
+      "japanese": "chihou",
+      "hiragana": "ちほう",
+      "english": "region, district, area",
+      "examples": [
+        {
+          "romaji": "kantou chihou ha ame ga ooi.",
+          "hiragana": "かんとうちほうはあめがおおい。",
+          "english": "The Kanto region gets a lot of rain."
+        }
+      ]
+    },
+    {
+      "japanese": "gozen",
+      "hiragana": "ごぜん",
+      "english": "morning, AM",
+      "examples": [
+        {
+          "romaji": "gozen10 ji ni kite kudasai.",
+          "hiragana": "ごぜん10じにきてください。",
+          "english": "Please come at 10 AM."
+        }
+      ]
+    },
+    {
+      "japanese": "joukyou",
+      "hiragana": "じょうきょう",
+      "english": "situation, circumstances",
+      "examples": [
+        {
+          "romaji": "genzai no joukyou wo oshiete kudasai.",
+          "hiragana": "げんざいのじょうきょうをおしえてください。",
+          "english": "Please tell me about the current situation."
+        }
+      ]
+    },
+    {
+      "japanese": "kanri",
+      "hiragana": "かんり",
+      "english": "management, administration, control",
+      "examples": [
+        {
+          "romaji": "deeta wo kanri suru.",
+          "hiragana": "でーたをかんりする。",
+          "english": "To manage data."
+        }
+      ]
+    },
+    {
+      "japanese": "hachi",
+      "hiragana": "はち",
+      "english": "eight",
+      "examples": [
+        {
+          "romaji": "hachi ji kara shigoto desu.",
+          "hiragana": "はちじからしごとです。",
+          "english": "Work starts at eight o'clock."
+        }
+      ]
+    },
+    {
+      "japanese": "jimoto",
+      "hiragana": "じもと",
+      "english": "local area; hometown; one's local community",
+      "examples": [
+        {
+          "romaji": "jimoto no mise de kau.",
+          "hiragana": "じもとのみせでかう。",
+          "english": "To buy at a local store."
+        }
+      ]
+    },
+    {
+      "japanese": "yo",
+      "hiragana": "よ",
+      "english": "assertion, emphasis",
+      "examples": [
+        {
+          "romaji": "ame ga futteiru yo.",
+          "hiragana": "あめがふっているよ。",
+          "english": "It's raining, you know."
+        }
+      ]
+    },
+    {
+      "japanese": "ooi",
+      "hiragana": "おおい",
+      "english": "many, much, numerous",
+      "examples": [
+        {
+          "romaji": "shukudai ga ooi.",
+          "hiragana": "しゅくだいがおおい。",
+          "english": "There's a lot of homework."
+        }
+      ]
+    },
+    {
+      "japanese": "shinai",
+      "hiragana": "しない",
+      "english": "within the city; in the city; inside the city limits",
+      "examples": [
+        {
+          "romaji": "shinai no hoteru ni tomaru.",
+          "hiragana": "しないのほてるにとまる。",
+          "english": "To stay at a hotel in the city."
+        }
+      ]
+    },
+    {
+      "japanese": "juuyou",
+      "hiragana": "じゅうよう",
+      "english": "important, essential, crucial",
+      "examples": [
+        {
+          "romaji": "kore ha juuyouna mondai desu.",
+          "hiragana": "これはじゅうようなもんだいです。",
+          "english": "This is an important issue."
+        }
+      ]
+    },
+    {
+      "japanese": "shiki",
+      "hiragana": "しき",
+      "english": "formula; mathematical expression; equation",
+      "examples": [
+        {
+          "romaji": "kono shiki wo toite kudasai.",
+          "hiragana": "このしきをといてください。",
+          "english": "Please solve this equation."
+        }
+      ]
+    },
+    {
+      "japanese": "onaji",
+      "hiragana": "おなじ",
+      "english": "same, identical",
+      "examples": [
+        {
+          "romaji": "onaji hon wo motteiru.",
+          "hiragana": "おなじほんをもっている。",
+          "english": "I have the same book."
+        }
+      ]
+    },
+    {
+      "japanese": "seisaku",
+      "hiragana": "せいさく",
+      "english": "policy, political measures",
+      "examples": [
+        {
+          "romaji": "kono seisaku no nerai ha nan desu ka.",
+          "hiragana": "このせいさくのねらいはなんですか。",
+          "english": "What is the aim of this policy?"
+        }
+      ]
+    },
+    {
+      "japanese": "saabisu",
+      "hiragana": "さーびす",
+      "english": "service",
+      "examples": [
+        {
+          "romaji": "kono hoteru ha saabisu ga ii.",
+          "hiragana": "このほてるはさーびすがいい。",
+          "english": "This hotel has good service."
+        }
+      ]
+    },
+    {
+      "japanese": "shigoto",
+      "hiragana": "しごと",
+      "english": "work, job, occupation",
+      "examples": [
+        {
+          "romaji": "shigoto ha nan desu ka.",
+          "hiragana": "しごとはなんですか。",
+          "english": "What is your job?"
+        }
+      ]
+    },
+    {
+      "japanese": "hanashi",
+      "hiragana": "はなし",
+      "english": "talk, story, tale",
+      "examples": [
+        {
+          "romaji": "omoshiroi hanashi wo kiita.",
+          "hiragana": "おもしろいはなしをきいた。",
+          "english": "I heard an interesting story."
+        }
+      ]
+    },
+    {
+      "japanese": "shoukai",
+      "hiragana": "しょうかい",
+      "english": "introduction, presentation",
+      "examples": [
+        {
+          "romaji": "tomodachi wo shoukai shimasu.",
+          "hiragana": "ともだちをしょうかいします。",
+          "english": "Let me introduce my friend."
+        }
+      ]
+    },
+    {
+      "japanese": "touhyou",
+      "hiragana": "とうひょう",
+      "english": "voting, casting a ballot",
+      "examples": [
+        {
+          "romaji": "senkyo de touhyou ni ikimashitaka.",
+          "hiragana": "せんきょでとうひょうにいきましたか。",
+          "english": "Did you go to vote in the election?"
+        }
+      ]
+    },
+    {
+      "japanese": "hyaku",
+      "hiragana": "ひゃく",
+      "english": "hundred, 100",
+      "examples": [
+        {
+          "romaji": "hyaku en desu.",
+          "hiragana": "ひゃくえんです。",
+          "english": "It's 100 yen."
+        }
+      ]
+    },
+    {
+      "japanese": "tsuyoi",
+      "hiragana": "つよい",
+      "english": "strong, powerful",
+      "examples": [
+        {
+          "romaji": "kare ha tsuyoidesu.",
+          "hiragana": "かれはつよいです。",
+          "english": "He is strong."
+        }
+      ]
+    },
+    {
+      "japanese": "kuruma",
+      "hiragana": "くるま",
+      "english": "car, automobile",
+      "examples": [
+        {
+          "romaji": "atarashii kuruma wo kaimashita.",
+          "hiragana": "あたらしいくるまをかいました。",
+          "english": "I bought a new car."
+        }
+      ]
+    },
+    {
+      "japanese": "kazoku",
+      "hiragana": "かぞく",
+      "english": "family",
+      "examples": [
+        {
+          "romaji": "kazoku ha 4 nin desu.",
+          "hiragana": "かぞくは4にんです。",
+          "english": "My family has 4 people."
+        }
+      ]
+    },
+    {
+      "japanese": "gorin",
+      "hiragana": "ごりん",
+      "english": "the Olympics, the Olympic Games",
+      "examples": [
+        {
+          "romaji": "gorin no kaikaishiki wo mita.",
+          "hiragana": "ごりんのかいかいしきをみた。",
+          "english": "I watched the Olympic opening ceremony."
+        }
+      ]
+    },
+    {
+      "japanese": "giin",
+      "hiragana": "ぎいん",
+      "english": "member of parliament, congressman, legislator",
+      "examples": [
+        {
+          "romaji": "kokkai giin ni rikkouhosuru.",
+          "hiragana": "こっかいぎいんにりっこうほする。",
+          "english": "To run for parliament."
+        }
+      ]
+    },
+    {
+      "japanese": "rekishi",
+      "hiragana": "れきし",
+      "english": "history",
+      "examples": [
+        {
+          "romaji": "rekishi wo benkyousuru.",
+          "hiragana": "れきしをべんきょうする。",
+          "english": "To study history."
+        }
+      ]
+    },
+    {
+      "japanese": "meetoru",
+      "hiragana": "めーとる",
+      "english": "meter (unit of length)",
+      "examples": [
+        {
+          "romaji": "kono heya ha 5meetoru×4meetoru desu.",
+          "hiragana": "このへやは5めーとる×4めーとるです。",
+          "english": "This room is 5 meters by 4 meters."
+        }
+      ]
+    },
+    {
+      "japanese": "kyuu",
+      "hiragana": "きゅう",
+      "english": "nine",
+      "examples": [
+        {
+          "romaji": "ku ji ni nemasu.",
+          "hiragana": "くじにねます。",
+          "english": "I go to bed at nine o'clock."
+        }
+      ]
+    },
+    {
+      "japanese": "eiga",
+      "hiragana": "えいが",
+      "english": "movie, film",
+      "examples": [
+        {
+          "romaji": "eiga wo miru.",
+          "hiragana": "えいがをみる。",
+          "english": "To watch a movie."
+        }
+      ]
+    },
+    {
+      "japanese": "kyaku",
+      "hiragana": "きゃく",
+      "english": "guest, visitor",
+      "examples": [
+        {
+          "romaji": "kyaku ga kimasu.",
+          "hiragana": "きゃくがきます。",
+          "english": "A guest is coming."
+        }
+      ]
+    },
+    {
+      "japanese": "kisha",
+      "hiragana": "きしゃ",
+      "english": "reporter, journalist, press member",
+      "examples": [
+        {
+          "romaji": "kisha ga shuzai ni kita.",
+          "hiragana": "きしゃがしゅざいにきた。",
+          "english": "A reporter came to do an interview."
+        }
+      ]
+    },
+    {
+      "japanese": "roku",
+      "hiragana": "ろく",
+      "english": "six",
+      "examples": [
+        {
+          "romaji": "roku ji ni okimasu.",
+          "hiragana": "ろくじにおきます。",
+          "english": "I wake up at six o'clock."
+        }
+      ]
+    },
+    {
+      "japanese": "kokumin",
+      "hiragana": "こくみん",
+      "english": "citizens, nationals",
+      "examples": [
+        {
+          "romaji": "nihon kokumin toshite hokori wo motsu.",
+          "hiragana": "にほんこくみんとしてほこりをもつ。",
+          "english": "To be proud as a Japanese citizen."
+        }
+      ]
+    },
+    {
+      "japanese": "seisan",
+      "hiragana": "せいさん",
+      "english": "production, manufacturing",
+      "examples": [
+        {
+          "romaji": "seisan ryou wo fuyasu.",
+          "hiragana": "せいさんりょうをふやす。",
+          "english": "To increase production volume."
+        }
+      ]
+    },
+    {
+      "japanese": "niyotte",
+      "hiragana": "によって",
+      "english": "by, by means of (agent/cause)",
+      "examples": [
+        {
+          "romaji": "kono e ha yuumei na gaka niyotte egakareta.",
+          "hiragana": "このえはゆうめいながかによってえがかれた。",
+          "english": "This painting was painted by a famous artist."
+        }
+      ]
+    },
+    {
+      "japanese": "shichou",
+      "hiragana": "しちょう",
+      "english": "mayor, city mayor",
+      "examples": [
+        {
+          "romaji": "atarashii shichou ga shuunin shita.",
+          "hiragana": "あたらしいしちょうがしゅうにんした。",
+          "english": "A new mayor took office."
+        }
+      ]
+    },
+    {
+      "japanese": "jiken",
+      "hiragana": "じけん",
+      "english": "incident, case, affair",
+      "examples": [
+        {
+          "romaji": "ookina jiken ga arimashita.",
+          "hiragana": "おおきなじけんがありました。",
+          "english": "There was a major incident."
+        }
+      ]
+    },
+    {
+      "japanese": "juumin",
+      "hiragana": "じゅうみん",
+      "english": "residents, inhabitants, citizens",
+      "examples": [
+        {
+          "romaji": "juumin no iken wo kiku beki da.",
+          "hiragana": "じゅうみんのいけんをきくべきだ。",
+          "english": "We should listen to the residents' opinions."
+        }
+      ]
+    },
+    {
+      "japanese": "tantou",
+      "hiragana": "たんとう",
+      "english": "being in charge, having responsibility for",
+      "examples": [
+        {
+          "romaji": "tantou sha ni kakunin shimasu.",
+          "hiragana": "たんとうしゃにかくにんします。",
+          "english": "I'll check with the person in charge."
+        }
+      ]
+    },
+    {
+      "japanese": "kouryuu",
+      "hiragana": "こうりゅう",
+      "english": "exchange, interaction",
+      "examples": [
+        {
+          "romaji": "kouryuu wo fukameru.",
+          "hiragana": "こうりゅうをふかめる。",
+          "english": "To deepen exchange."
+        }
+      ]
+    },
+    {
+      "japanese": "jiko",
+      "hiragana": "じこ",
+      "english": "accident",
+      "examples": [
+        {
+          "romaji": "jiko ga arimashita.",
+          "hiragana": "じこがありました。",
+          "english": "There was an accident."
+        }
+      ]
+    },
+    {
+      "japanese": "omou",
+      "hiragana": "おもう",
+      "english": "to think, to believe",
+      "examples": [
+        {
+          "romaji": "dou omoi masu ka.",
+          "hiragana": "どうおもいますか。",
+          "english": "What do you think?"
+        }
+      ]
+    },
+    {
+      "japanese": "takai",
+      "hiragana": "たかい",
+      "english": "high, tall",
+      "examples": [
+        {
+          "romaji": "kono yama ha takai desu.",
+          "hiragana": "このやまはたかいです。",
+          "english": "This mountain is tall."
+        }
+      ]
+    },
+    {
+      "japanese": "dansei",
+      "hiragana": "だんせい",
+      "english": "man, male",
+      "examples": [
+        {
+          "romaji": "kono kaisha ha dansei shain ga ooi.",
+          "hiragana": "このかいしゃはだんせいしゃいんがおおい。",
+          "english": "This company has many male employees."
+        }
+      ]
+    },
+    {
+      "japanese": "ninki",
+      "hiragana": "にんき",
+      "english": "popularity, public favor",
+      "examples": [
+        {
+          "romaji": "ninki no shouhin desu.",
+          "hiragana": "にんきのしょうひんです。",
+          "english": "It's a popular product."
+        }
+      ]
+    },
+    {
+      "japanese": "dantai",
+      "hiragana": "だんたい",
+      "english": "organization, group, association",
+      "examples": [
+        {
+          "romaji": "boranteia dantai ni sanka shiteiru.",
+          "hiragana": "ぼらんてぃあだんたいにさんかしている。",
+          "english": "I'm participating in a volunteer organization."
+        }
+      ]
+    },
+    {
+      "japanese": "ibento",
+      "hiragana": "いべんと",
+      "english": "event, happening, occasion",
+      "examples": [
+        {
+          "romaji": "ekimae hiroba de ibento ga hirakareteiru.",
+          "hiragana": "えきまえひろばでいべんとがひらかれている。",
+          "english": "An event is being held in the station square."
+        }
+      ]
+    },
+    {
+      "japanese": "eki",
+      "hiragana": "えき",
+      "english": "station",
+      "examples": [
+        {
+          "romaji": "eki made aruku.",
+          "hiragana": "えきまであるく。",
+          "english": "To walk to the station."
+        }
+      ]
+    },
+    {
+      "japanese": "kouho",
+      "hiragana": "こうほ",
+      "english": "candidate, nominee",
+      "examples": [
+        {
+          "romaji": "kouho ni agaru.",
+          "hiragana": "こうほにあがる。",
+          "english": "To be nominated as a candidate."
+        }
+      ]
+    },
+    {
+      "japanese": "taishou",
+      "hiragana": "たいしょう",
+      "english": "target, object, subject",
+      "examples": [
+        {
+          "romaji": "kono waribiki ha gakusei ga taishou desu.",
+          "hiragana": "このわりびきはがくせいがたいしょうです。",
+          "english": "This discount is targeted at students."
+        }
+      ]
+    },
+    {
+      "japanese": "shouhi",
+      "hiragana": "しょうひ",
+      "english": "consumption, expenditure",
+      "examples": [
+        {
+          "romaji": "denki no shouhi wo herasou.",
+          "hiragana": "でんきのしょうひをへらそう。",
+          "english": "Let's reduce electricity consumption."
+        }
+      ]
+    },
+    {
+      "japanese": "dorama",
+      "hiragana": "どらま",
+      "english": "TV drama, drama series",
+      "examples": [
+        {
+          "romaji": "nihon no dorama ha omoshiroi.",
+          "hiragana": "にほんのどらまはおもしろい。",
+          "english": "Japanese dramas are interesting."
+        }
+      ]
+    },
+    {
+      "japanese": "seiken",
+      "hiragana": "せいけん",
+      "english": "political power, governing authority",
+      "examples": [
+        {
+          "romaji": "seiken ga koutai shita.",
+          "hiragana": "せいけんがこうたいした。",
+          "english": "The government changed hands."
+        }
+      ]
+    },
+    {
+      "japanese": "kyoudou",
+      "hiragana": "きょうどう",
+      "english": "cooperation, collaboration, joint (effort)",
+      "examples": [
+        {
+          "romaji": "kyoudou de kenkyuu wo susumeru.",
+          "hiragana": "きょうどうでけんきゅうをすすめる。",
+          "english": "To advance research jointly."
+        }
+      ]
+    },
+    {
+      "japanese": "chuuou",
+      "hiragana": "ちゅうおう",
+      "english": "center, middle",
+      "examples": [
+        {
+          "romaji": "heya no chuuou ni tatta.",
+          "hiragana": "へやのちゅうおうにたった。",
+          "english": "I stood in the center of the room."
+        }
+      ]
+    },
+    {
+      "japanese": "koko",
+      "hiragana": "ここ",
+      "english": "here, this place",
+      "examples": [
+        {
+          "romaji": "koko ni suwatte kudasai.",
+          "hiragana": "ここにすわってください。",
+          "english": "Please sit here."
+        }
+      ]
+    },
+    {
+      "japanese": "higai",
+      "hiragana": "ひがい",
+      "english": "damage, harm, injury",
+      "examples": [
+        {
+          "romaji": "higai wo ukeru.",
+          "hiragana": "ひがいをうける。",
+          "english": "To suffer damage."
+        }
+      ]
+    },
+    {
+      "japanese": "sugata",
+      "hiragana": "すがた",
+      "english": "figure, form, shape",
+      "examples": [
+        {
+          "romaji": "kare no sugata ga mienaku natta.",
+          "hiragana": "かれのすがたがみえなくなった。",
+          "english": "His figure disappeared from sight."
+        }
+      ]
+    },
+    {
+      "japanese": "touji",
+      "hiragana": "とうじ",
+      "english": "at that time, in those days",
+      "examples": [
+        {
+          "romaji": "touji ha taihen deshita.",
+          "hiragana": "とうじはたいへんでした。",
+          "english": "Those days were difficult."
+        }
+      ]
+    },
+    {
+      "japanese": "taisaku",
+      "hiragana": "たいさく",
+      "english": "countermeasure, measure, solution",
+      "examples": [
+        {
+          "romaji": "taisaku wo kangaeru.",
+          "hiragana": "たいさくをかんがえる。",
+          "english": "Think of a solution."
+        }
+      ]
+    },
+    {
+      "japanese": "shouhin",
+      "hiragana": "しょうひん",
+      "english": "product, goods, merchandise, commodity",
+      "examples": [
+        {
+          "romaji": "shouhin wo chuumonshita.",
+          "hiragana": "しょうひんをちゅうもんした。",
+          "english": "I ordered a product."
+        }
+      ]
+    },
+    {
+      "japanese": "kakunin",
+      "hiragana": "かくにん",
+      "english": "confirmation, verification, checking",
+      "examples": [
+        {
+          "romaji": "yoyaku wo kakunin shite kudasai.",
+          "hiragana": "よやくをかくにんしてください。",
+          "english": "Please confirm the reservation."
+        }
+      ]
+    },
+    {
+      "japanese": "saki",
+      "hiragana": "さき",
+      "english": "ahead, in front",
+      "examples": [
+        {
+          "romaji": "kono michi no saki ni eki ga arimasu.",
+          "hiragana": "このみちのさきにえきがあります。",
+          "english": "There is a station ahead on this road."
+        }
+      ]
+    },
+    {
+      "japanese": "basho",
+      "hiragana": "ばしょ",
+      "english": "place, location, spot",
+      "examples": [
+        {
+          "romaji": "kono basho ha doko desu ka.",
+          "hiragana": "このばしょはどこですか。",
+          "english": "Where is this place?"
+        }
+      ]
+    },
+    {
+      "japanese": "hitotsu",
+      "hiragana": "ひとつ",
+      "english": "one (thing)",
+      "examples": [
+        {
+          "romaji": "ringo wo hitotsu kudasai.",
+          "hiragana": "りんごをひとつください。",
+          "english": "One apple, please."
+        }
+      ]
+    },
+    {
+      "japanese": "kyouka",
+      "hiragana": "きょうか",
+      "english": "strengthening, reinforcement, intensification",
+      "examples": [
+        {
+          "romaji": "sekyuritei wo kyouka suru hitsuyou ga aru.",
+          "hiragana": "せきゅりてぃをきょうかするひつようがある。",
+          "english": "We need to strengthen security."
+        }
+      ]
+    },
+    {
+      "japanese": "seito",
+      "hiragana": "せいと",
+      "english": "student, pupil",
+      "examples": [
+        {
+          "romaji": "kono gakkou ni ha seito ga 500 nin imasu.",
+          "hiragana": "このがっこうにはせいとが500にんいます。",
+          "english": "There are 500 students at this school."
+        }
+      ]
+    },
+    {
+      "japanese": "kokka",
+      "hiragana": "こっか",
+      "english": "state, nation",
+      "examples": [
+        {
+          "romaji": "kokka no anzen wo mamoru.",
+          "hiragana": "こっかのあんぜんをまもる。",
+          "english": "To protect national security."
+        }
+      ]
+    },
+    {
+      "japanese": "kojin",
+      "hiragana": "こじん",
+      "english": "individual (person)",
+      "examples": [
+        {
+          "romaji": "houjin dehanaku kojin toshite keiyaku shita.",
+          "hiragana": "ほうじんではなくこじんとしてけいやくした。",
+          "english": "I signed the contract as an individual, not as a corporation."
+        }
+      ]
+    },
+    {
+      "japanese": "hoka",
+      "hiragana": "ほか",
+      "english": "other, another, else",
+      "examples": [
+        {
+          "romaji": "hoka ni shitsumon ha arimasu ka.",
+          "hiragana": "ほかにしつもんはありますか。",
+          "english": "Are there any other questions?"
+        }
+      ]
+    },
+    {
+      "japanese": "sangyou",
+      "hiragana": "さんぎょう",
+      "english": "industry, business sector",
+      "examples": [
+        {
+          "romaji": "jidousha sangyou ha juuyou da.",
+          "hiragana": "じどうしゃさんぎょうはじゅうようだ。",
+          "english": "The automobile industry is important."
+        }
+      ]
+    },
+    {
+      "japanese": "ichibu",
+      "hiragana": "いちぶ",
+      "english": "part; portion; section; some",
+      "examples": [
+        {
+          "romaji": "sankasha no ichibu ha hantaishita.",
+          "hiragana": "さんかしゃのいちぶははんたいした。",
+          "english": "Some of the participants objected."
+        }
+      ]
+    },
+    {
+      "japanese": "hogo",
+      "hiragana": "ほご",
+      "english": "protection, care, shelter",
+      "examples": [
+        {
+          "romaji": "kankyou wo hogo suru koto ga taisetsu da.",
+          "hiragana": "かんきょうをほごすることがたいせつだ。",
+          "english": "It's important to protect the environment."
+        }
+      ]
+    },
+    {
+      "japanese": "senmon",
+      "hiragana": "せんもん",
+      "english": "specialty, specialization, expertise",
+      "examples": [
+        {
+          "romaji": "watashi no senmon ha keizaigaku desu.",
+          "hiragana": "わたしのせんもんはけいざいがくです。",
+          "english": "My major/specialty is economics."
+        }
+      ]
+    },
+    {
+      "japanese": "denwa",
+      "hiragana": "でんわ",
+      "english": "telephone, phone",
+      "examples": [
+        {
+          "romaji": "denwa ga natte iru.",
+          "hiragana": "でんわがなっている。",
+          "english": "The phone is ringing."
+        }
+      ]
+    },
+    {
+      "japanese": "kinen",
+      "hiragana": "きねん",
+      "english": "commemoration, memento, memorial",
+      "examples": [
+        {
+          "romaji": "kinen shashin wo toru.",
+          "hiragana": "きねんしゃしんをとる。",
+          "english": "To take a commemorative photo."
+        }
+      ]
+    },
+    {
+      "japanese": "akiraka",
+      "hiragana": "あきらか",
+      "english": "obvious, evident",
+      "examples": [
+        {
+          "romaji": "kare no machigai ha akirakada.",
+          "hiragana": "かれのまちがいはあきらかだ。",
+          "english": "His mistake is obvious."
+        }
+      ]
+    },
+    {
+      "japanese": "okonau",
+      "hiragana": "おこなう",
+      "english": "to carry out, to conduct, to perform",
+      "examples": [
+        {
+          "romaji": "raishuu kaigi wo okonaimasu.",
+          "hiragana": "らいしゅうかいぎをおこないます。",
+          "english": "We will hold a meeting next week."
+        }
+      ]
+    },
+    {
+      "japanese": "kotoba",
+      "hiragana": "ことば",
+      "english": "word, words",
+      "examples": [
+        {
+          "romaji": "kono kotoba no imi ga wakarimasen.",
+          "hiragana": "このことばのいみがわかりません。",
+          "english": "I don't understand the meaning of this word."
+        }
+      ]
+    },
+    {
+      "japanese": "gou",
+      "hiragana": "ごう",
+      "english": "number, issue (of a magazine or publication)",
+      "examples": [
+        {
+          "romaji": "saishin gou wo yomu.",
+          "hiragana": "さいしんごうをよむ。",
+          "english": "To read the latest issue."
+        }
+      ]
+    },
+    {
+      "japanese": "saigo",
+      "hiragana": "さいご",
+      "english": "last, final, end",
+      "examples": [
+        {
+          "romaji": "saigo made tabete kudasai.",
+          "hiragana": "さいごまでたべてください。",
+          "english": "Please finish your food."
+        }
+      ]
+    },
+    {
+      "japanese": "kokunai",
+      "hiragana": "こくない",
+      "english": "domestic, within the country",
+      "examples": [
+        {
+          "romaji": "kokunai ryokou ni iku.",
+          "hiragana": "こくないりょこうにいく。",
+          "english": "To go on a domestic trip."
+        }
+      ]
+    },
+    {
+      "japanese": "shuu",
+      "hiragana": "しゅう",
+      "english": "state, province",
+      "examples": [
+        {
+          "romaji": "kariforuniashuu ni sun de iru.",
+          "hiragana": "かりふぉるにあしゅうにすんでいる。",
+          "english": "I live in California."
+        }
+      ]
+    },
+    {
+      "japanese": "kaijou",
+      "hiragana": "かいじょう",
+      "english": "venue, meeting place, site",
+      "examples": [
+        {
+          "romaji": "kaijou ha eki no chikaku desu.",
+          "hiragana": "かいじょうはえきのちかくです。",
+          "english": "The venue is near the station."
+        }
+      ]
+    },
+    {
+      "japanese": "shou",
+      "hiragana": "しょう",
+      "english": "prize, award",
+      "examples": [
+        {
+          "romaji": "kanojo ha nooberushou wo uketa.",
+          "hiragana": "かのじょはのーべるしょうをうけた。",
+          "english": "She received the Nobel Prize."
+        }
+      ]
+    },
+    {
+      "japanese": "toushi",
+      "hiragana": "とうし",
+      "english": "investment; investing",
+      "examples": [
+        {
+          "romaji": "kabushiki ni toushi suru.",
+          "hiragana": "かぶしきにとうしする。",
+          "english": "Invest in stocks."
+        }
+      ]
+    },
+    {
+      "japanese": "taiken",
+      "hiragana": "たいけん",
+      "english": "experience, firsthand experience",
+      "examples": [
+        {
+          "romaji": "kichou nataikendatta.",
+          "hiragana": "きちょうなたいけんだった。",
+          "english": "It was a valuable experience."
+        }
+      ]
+    },
+    {
+      "japanese": "shiyou",
+      "hiragana": "しよう",
+      "english": "use, usage, utilization",
+      "examples": [
+        {
+          "romaji": "kono kikai no shiyou houhou wo oshiete kudasai.",
+          "hiragana": "このきかいのしようほうほうをおしえてください。",
+          "english": "Please teach me how to use this machine."
+        }
+      ]
+    },
+    {
+      "japanese": "michi",
+      "hiragana": "みち",
+      "english": "road, street, path",
+      "examples": [
+        {
+          "romaji": "kono michi wo massugu itte kudasai.",
+          "hiragana": "このみちをまっすぐいってください。",
+          "english": "Please go straight down this road."
+        }
+      ]
+    },
+    {
+      "japanese": "toku",
+      "hiragana": "とく",
+      "english": "profit, gain, advantage, benefit",
+      "examples": [
+        {
+          "romaji": "matomegai shita hou ga tokuda.",
+          "hiragana": "まとめがいしたほうがとくだ。",
+          "english": "It's a better deal to buy in bulk."
+        }
+      ]
+    },
+    {
+      "japanese": "kaigai",
+      "hiragana": "かいがい",
+      "english": "overseas, abroad, foreign countries",
+      "examples": [
+        {
+          "romaji": "kaigai ni itta koto ga arimasu ka.",
+          "hiragana": "かいがいにいったことがありますか。",
+          "english": "Have you ever been abroad?"
+        }
+      ]
+    },
+    {
+      "japanese": "kiwa",
+      "hiragana": "きわ",
+      "english": "edge; border; verge",
+      "examples": [
+        {
+          "romaji": "mizugiwa ni tatsu.",
+          "hiragana": "みずぎわにたつ。",
+          "english": "Stand at the water's edge."
+        }
+      ]
+    },
+    {
+      "japanese": "ryou",
+      "hiragana": "りょう",
+      "english": "counter for train cars, railroad cars",
+      "examples": [
+        {
+          "romaji": "kono densha ha juuryouda.",
+          "hiragana": "このでんしゃはじゅうりょうだ。",
+          "english": "This train has ten cars."
+        }
+      ]
+    },
+    {
+      "japanese": "kyoukai",
+      "hiragana": "きょうかい",
+      "english": "association, society, organization",
+      "examples": [
+        {
+          "romaji": "sakkaakyoukai ni tourokushita.",
+          "hiragana": "さっかーきょうかいにとうろくした。",
+          "english": "I registered with the football association."
+        }
+      ]
+    },
+    {
+      "japanese": "kaiken",
+      "hiragana": "かいけん",
+      "english": "press conference, public statement",
+      "examples": [
+        {
+          "romaji": "kisha kaiken wo hiraku.",
+          "hiragana": "きしゃかいけんをひらく。",
+          "english": "To hold a press conference."
+        }
+      ]
+    },
+    {
+      "japanese": "kata",
+      "hiragana": "かた",
+      "english": "type, model",
+      "examples": [
+        {
+          "romaji": "Agata desu.",
+          "hiragana": "Aがたです。",
+          "english": "I'm blood type A."
+        }
+      ]
+    },
+    {
+      "japanese": "shidou",
+      "hiragana": "しどう",
+      "english": "guidance, instruction",
+      "examples": [
+        {
+          "romaji": "sensei no shidou no motode kenkyuu wo susumeta.",
+          "hiragana": "せんせいのしどうのもとでけんきゅうをすすめた。",
+          "english": "I conducted research under the teacher's guidance."
+        }
+      ]
+    },
+    {
+      "japanese": "kikan",
+      "hiragana": "きかん",
+      "english": "organization, institution, agency",
+      "examples": [
+        {
+          "romaji": "seifu kikan de hataraku.",
+          "hiragana": "せいふきかんではたらく。",
+          "english": "To work at a government agency."
+        }
+      ]
+    },
+    {
+      "japanese": "kakudai",
+      "hiragana": "かくだい",
+      "english": "enlargement, magnification",
+      "examples": [
+        {
+          "romaji": "gazou wo kakudai shite kudasai.",
+          "hiragana": "がぞうをかくだいしてください。",
+          "english": "Please enlarge the image."
+        }
+      ]
+    },
+    {
+      "japanese": "sorezore",
+      "hiragana": "それぞれ",
+      "english": "each, respectively, individually",
+      "examples": [
+        {
+          "romaji": "sorezore no heya ga aru.",
+          "hiragana": "それぞれのへやがある。",
+          "english": "Each person has their own room."
+        }
+      ]
+    },
+    {
+      "japanese": "seido",
+      "hiragana": "せいど",
+      "english": "system, institution, organization",
+      "examples": [
+        {
+          "romaji": "atarashii seido ga dounyuu sareta.",
+          "hiragana": "あたらしいせいどがどうにゅうされた。",
+          "english": "A new system was introduced."
+        }
+      ]
+    },
+    {
+      "japanese": "desho",
+      "hiragana": "でしょ",
+      "english": "right?, don't you think?",
+      "examples": [
+        {
+          "romaji": "kore, kawaii desho?",
+          "hiragana": "これ、かわいいでしょ？",
+          "english": "This is cute, right?"
+        }
+      ]
+    },
+    {
+      "japanese": "kichi",
+      "hiragana": "きち",
+      "english": "base; headquarters",
+      "examples": [
+        {
+          "romaji": "beigunkichi ga okinawa ni aru.",
+          "hiragana": "べいぐんきちがおきなわにある。",
+          "english": "There is a U.S. military base in Okinawa."
+        }
+      ]
+    },
+    {
+      "japanese": "naiyou",
+      "hiragana": "ないよう",
+      "english": "contents, substance, content",
+      "examples": [
+        {
+          "romaji": "naiyou wo kakunin shite kudasai.",
+          "hiragana": "ないようをかくにんしてください。",
+          "english": "Please check the contents."
+        }
+      ]
+    },
+    {
+      "japanese": "mizu",
+      "hiragana": "みず",
+      "english": "water",
+      "examples": [
+        {
+          "romaji": "mizu wo nomu.",
+          "hiragana": "みずをのむ。",
+          "english": "To drink water."
+        }
+      ]
+    },
+    {
+      "japanese": "sougou",
+      "hiragana": "そうごう",
+      "english": "synthesis; bringing together; overall",
+      "examples": [
+        {
+          "romaji": "sougouteki ni handansuru.",
+          "hiragana": "そうごうてきにはんだんする。",
+          "english": "To judge comprehensively."
+        }
+      ]
+    },
+    {
+      "japanese": "saishuu",
+      "hiragana": "さいしゅう",
+      "english": "last, final, ultimate",
+      "examples": [
+        {
+          "romaji": "saishuu kai no housou ha raishuu no kin'youbi de, fan kara ooku no hankyou ga yoserarete iru.",
+          "hiragana": "さいしゅうかいのほうそうはらいしゅうのきんようびで、ふぁんからおおくのはんきょうがよせられている。",
+          "english": "The final episode will air next Friday, and many fans have been responding."
+        }
+      ]
+    },
+    {
+      "japanese": "keiken",
+      "hiragana": "けいけん",
+      "english": "experience",
+      "examples": [
+        {
+          "romaji": "ii keiken ni natta.",
+          "hiragana": "いいけいけんになった。",
+          "english": "It was a good experience."
+        }
+      ]
+    },
+    {
+      "japanese": "jitsugen",
+      "hiragana": "じつげん",
+      "english": "realization, actualization, achievement",
+      "examples": [
+        {
+          "romaji": "yume wo jitsugen sasetai.",
+          "hiragana": "ゆめをじつげんさせたい。",
+          "english": "I want to make my dream come true."
+        }
+      ]
+    },
+    {
+      "japanese": "mottomo",
+      "hiragana": "もっとも",
+      "english": "most, the most",
+      "examples": [
+        {
+          "romaji": "kore ga mottomo taisetsudesu.",
+          "hiragana": "これがもっともたいせつです。",
+          "english": "This is the most important."
+        }
+      ]
+    },
+    {
+      "japanese": "aite",
+      "hiragana": "あいて",
+      "english": "partner, companion",
+      "examples": [
+        {
+          "romaji": "hanashi aite ga hoshii.",
+          "hiragana": "はなしあいてがほしい。",
+          "english": "I want someone to talk to."
+        }
+      ]
+    },
+    {
+      "japanese": "tenkai",
+      "hiragana": "てんかい",
+      "english": "development, unfolding, expansion",
+      "examples": [
+        {
+          "romaji": "monogatari no tenkai ga omoshiroi.",
+          "hiragana": "ものがたりのてんかいがおもしろい。",
+          "english": "The development of the story is interesting."
+        }
+      ]
+    },
+    {
+      "japanese": "kei",
+      "hiragana": "けい",
+      "english": "total, sum",
+      "examples": [
+        {
+          "romaji": "kei10 nin.",
+          "hiragana": "けい10にん。",
+          "english": "A total of 10 people."
+        }
+      ]
+    },
+    {
+      "japanese": "keiei",
+      "hiragana": "けいえい",
+      "english": "management, administration",
+      "examples": [
+        {
+          "romaji": "kare ha daigaku de keiei gaku wo mananda.",
+          "hiragana": "かれはだいがくでけいえいがくをまなんだ。",
+          "english": "He studied business administration at university."
+        }
+      ]
+    },
+    {
+      "japanese": "saidai",
+      "hiragana": "さいだい",
+      "english": "maximum, largest",
+      "examples": [
+        {
+          "romaji": "saidai100 nin made haireru.",
+          "hiragana": "さいだい100にんまではいれる。",
+          "english": "Up to a maximum of 100 people can enter."
+        }
+      ]
+    },
+    {
+      "japanese": "shusai",
+      "hiragana": "しゅさい",
+      "english": "hosting, sponsoring, organizing (an event)",
+      "examples": [
+        {
+          "romaji": "shi ga shusai suru ibento da.",
+          "hiragana": "しがしゅさいするいべんとだ。",
+          "english": "It's an event hosted by the city."
+        }
+      ]
+    },
+    {
+      "japanese": "tokubetsu",
+      "hiragana": "とくべつ",
+      "english": "special, particular, exceptional",
+      "examples": [
+        {
+          "romaji": "tokubetsu na hito da.",
+          "hiragana": "とくべつなひとだ。",
+          "english": "You're a special person."
+        }
+      ]
+    },
+    {
+      "japanese": "guruupu",
+      "hiragana": "ぐるーぷ",
+      "english": "group",
+      "examples": [
+        {
+          "romaji": "guruupu ni wakarete hanashiaimashita.",
+          "hiragana": "ぐるーぷにわかれてはなしあいました。",
+          "english": "We split into groups and discussed."
+        }
+      ]
+    },
+    {
+      "japanese": "umi",
+      "hiragana": "うみ",
+      "english": "sea, ocean",
+      "examples": [
+        {
+          "romaji": "natsuyasumi ni umi he ikimashita.",
+          "hiragana": "なつやすみにうみへいきました。",
+          "english": "I went to the sea during summer vacation."
+        }
+      ]
+    },
+    {
+      "japanese": "kesshou",
+      "hiragana": "けっしょう",
+      "english": "final, finals",
+      "examples": [
+        {
+          "romaji": "kesshousen ha raishuu da.",
+          "hiragana": "けっしょうせんはらいしゅうだ。",
+          "english": "The final match is next week."
+        }
+      ]
+    },
+    {
+      "japanese": "kettei",
+      "hiragana": "けってい",
+      "english": "decision, determination",
+      "examples": [
+        {
+          "romaji": "kettei wo kudasu.",
+          "hiragana": "けっていをくだす。",
+          "english": "To make a decision."
+        }
+      ]
+    },
+    {
+      "japanese": "kanren",
+      "hiragana": "かんれん",
+      "english": "relation, connection, relevance",
+      "examples": [
+        {
+          "romaji": "kono jiken to kanren ga aru.",
+          "hiragana": "このじけんとかんれんがある。",
+          "english": "It is related to this incident."
+        }
+      ]
+    },
+    {
+      "japanese": "chikaku",
+      "hiragana": "ちかく",
+      "english": "nearby, vicinity, neighborhood",
+      "examples": [
+        {
+          "romaji": "eki no chikaku ni aru.",
+          "hiragana": "えきのちかくにある。",
+          "english": "It's near the station."
+        }
+      ]
+    },
+    {
+      "japanese": "roudou",
+      "hiragana": "ろうどう",
+      "english": "labor, work, toil",
+      "examples": [
+        {
+          "romaji": "hachijikanroudou ga kihon da.",
+          "hiragana": "はちじかんろうどうがきほんだ。",
+          "english": "An eight-hour workday is the standard."
+        }
+      ]
+    },
+    {
+      "japanese": "gaikoku",
+      "hiragana": "がいこく",
+      "english": "foreign country, abroad",
+      "examples": [
+        {
+          "romaji": "gaikoku ni ikitai.",
+          "hiragana": "がいこくにいきたい。",
+          "english": "I want to go abroad."
+        }
+      ]
+    },
+    {
+      "japanese": "koukai",
+      "hiragana": "こうかい",
+      "english": "release to the public, opening, disclosure",
+      "examples": [
+        {
+          "romaji": "shinsaku ga koukai sareta.",
+          "hiragana": "しんさくがこうかいされた。",
+          "english": "The new film was released."
+        }
+      ]
+    },
+    {
+      "japanese": "ki",
+      "hiragana": "き",
+      "english": "spirit, mind",
+      "examples": [
+        {
+          "romaji": "ki wo tsukete.",
+          "hiragana": "きをつけて。",
+          "english": "Be careful."
+        }
+      ]
+    },
+    {
+      "japanese": "kiji",
+      "hiragana": "きじ",
+      "english": "article, news story",
+      "examples": [
+        {
+          "romaji": "shinbun kiji wo yomu.",
+          "hiragana": "しんぶんきじをよむ。",
+          "english": "To read a newspaper article."
+        }
+      ]
+    },
+    {
+      "japanese": "yoku",
+      "hiragana": "よく",
+      "english": "often, frequently",
+      "examples": [
+        {
+          "romaji": "yoku hon wo yomimasu.",
+          "hiragana": "よくほんをよみます。",
+          "english": "I often read books."
+        }
+      ]
+    },
+    {
+      "japanese": "hin",
+      "hiragana": "ひん",
+      "english": "goods, items, articles",
+      "examples": [
+        {
+          "romaji": "shouhin wo naraberu.",
+          "hiragana": "しょうひんをならべる。",
+          "english": "To display merchandise."
+        }
+      ]
+    },
+    {
+      "japanese": "tada",
+      "hiragana": "ただ",
+      "english": "free (of charge)",
+      "examples": [
+        {
+          "romaji": "kono mizu ha tada desu.",
+          "hiragana": "このみずはただです。",
+          "english": "This water is free."
+        }
+      ]
+    },
+    {
+      "japanese": "seibi",
+      "hiragana": "せいび",
+      "english": "maintenance, servicing, overhaul",
+      "examples": [
+        {
+          "romaji": "kuruma no seibi wo tanonda.",
+          "hiragana": "くるまのせいびをたのんだ。",
+          "english": "I requested car maintenance."
+        }
+      ]
+    },
+    {
+      "japanese": "kyougi",
+      "hiragana": "きょうぎ",
+      "english": "conference, discussion, consultation",
+      "examples": [
+        {
+          "romaji": "kono ken nitsuite kyougi suru hitsuyou ga aru.",
+          "hiragana": "このけんについてきょうぎするひつようがある。",
+          "english": "We need to discuss this matter."
+        }
+      ]
+    },
+    {
+      "japanese": "renshuu",
+      "hiragana": "れんしゅう",
+      "english": "practice; training; exercise; drill",
+      "examples": [
+        {
+          "romaji": "piano no renshuu wo suru.",
+          "hiragana": "ぴあののれんしゅうをする。",
+          "english": "To practice piano."
+        }
+      ]
+    },
+    {
+      "japanese": "shizen",
+      "hiragana": "しぜん",
+      "english": "nature, the natural world",
+      "examples": [
+        {
+          "romaji": "shizen wo taisetsu ni shimashou.",
+          "hiragana": "しぜんをたいせつにしましょう。",
+          "english": "Let's take care of nature."
+        }
+      ]
+    },
+    {
+      "japanese": "houdou",
+      "hiragana": "ほうどう",
+      "english": "news coverage, reporting",
+      "examples": [
+        {
+          "romaji": "jiken ga ookiku houdou sareta.",
+          "hiragana": "じけんがおおきくほうどうされた。",
+          "english": "The incident was widely reported."
+        }
+      ]
+    },
+    {
+      "japanese": "saikou",
+      "hiragana": "さいこう",
+      "english": "highest, maximum",
+      "examples": [
+        {
+          "romaji": "saikou kiroku wo dashita.",
+          "hiragana": "さいこうきろくをだした。",
+          "english": "I set a new record."
+        }
+      ]
+    },
+    {
+      "japanese": "zentai",
+      "hiragana": "ぜんたい",
+      "english": "whole, entirety, overall",
+      "examples": [
+        {
+          "romaji": "zentai wo mite handansuru beki da.",
+          "hiragana": "ぜんたいをみてはんだんするべきだ。",
+          "english": "You should judge by looking at the whole picture."
+        }
+      ]
+    },
+    {
+      "japanese": "renzoku",
+      "hiragana": "れんぞく",
+      "english": "continuation, series, succession",
+      "examples": [
+        {
+          "romaji": "mikka renzoku de ame ga futta.",
+          "hiragana": "みっかれんぞくであめがふった。",
+          "english": "It rained for three consecutive days."
+        }
+      ]
+    },
+    {
+      "japanese": "suishin",
+      "hiragana": "すいしん",
+      "english": "promotion, advancement, driving forward",
+      "examples": [
+        {
+          "romaji": "seisaku wo suishin suru.",
+          "hiragana": "せいさくをすいしんする。",
+          "english": "To promote a policy."
+        }
+      ]
+    },
+    {
+      "japanese": "sonna",
+      "hiragana": "そんな",
+      "english": "such, that kind of, like that",
+      "examples": [
+        {
+          "romaji": "sonnakoto iwanaide.",
+          "hiragana": "そんなこといわないで。",
+          "english": "Don't say such things."
+        }
+      ]
+    },
+    {
+      "japanese": "ippan",
+      "hiragana": "いっぱん",
+      "english": "general, ordinary, common",
+      "examples": [
+        {
+          "romaji": "ippantekini ieba.",
+          "hiragana": "いっぱんてきにいえば。",
+          "english": "Generally speaking."
+        }
+      ]
+    },
+    {
+      "japanese": "kako",
+      "hiragana": "かこ",
+      "english": "the past, former times",
+      "examples": [
+        {
+          "romaji": "kako wo furikaeru.",
+          "hiragana": "かこをふりかえる。",
+          "english": "To look back on the past."
+        }
+      ]
+    },
+    {
+      "japanese": "kiroku",
+      "hiragana": "きろく",
+      "english": "record, documentation",
+      "examples": [
+        {
+          "romaji": "kaigi no kiroku wo totta.",
+          "hiragana": "かいぎのきろくをとった。",
+          "english": "I took the minutes of the meeting."
+        }
+      ]
+    },
+    {
+      "japanese": "hana",
+      "hiragana": "はな",
+      "english": "flower, blossom",
+      "examples": [
+        {
+          "romaji": "niwa ni kireina hana ga saiteimasu.",
+          "hiragana": "にわにきれいなはながさいています。",
+          "english": "Beautiful flowers are blooming in the garden."
+        }
+      ]
+    },
+    {
+      "japanese": "sekinin",
+      "hiragana": "せきにん",
+      "english": "responsibility, duty, obligation",
+      "examples": [
+        {
+          "romaji": "sore ha watashi no sekinin desu.",
+          "hiragana": "それはわたしのせきにんです。",
+          "english": "That is my responsibility."
+        }
+      ]
+    },
+    {
+      "japanese": "kamo",
+      "hiragana": "かも",
+      "english": "maybe, might be, perhaps",
+      "examples": [
+        {
+          "romaji": "ame kamo.",
+          "hiragana": "あめかも。",
+          "english": "It might rain."
+        }
+      ]
+    },
+    {
+      "japanese": "mura",
+      "hiragana": "むら",
+      "english": "village",
+      "examples": [
+        {
+          "romaji": "mura ni sundeiru.",
+          "hiragana": "むらにすんでいる。",
+          "english": "I live in a village."
+        }
+      ]
+    },
+    {
+      "japanese": "setchi",
+      "hiragana": "せっち",
+      "english": "installation, establishment, setting up",
+      "examples": [
+        {
+          "romaji": "saigai taisaku honbu ga setchisareta.",
+          "hiragana": "さいがいたいさくほんぶがせっちされた。",
+          "english": "A disaster response headquarters was established."
+        }
+      ]
+    },
+    {
+      "japanese": "miyako",
+      "hiragana": "みやこ",
+      "english": "capital city",
+      "examples": [
+        {
+          "romaji": "kyouto ha mukashi no miyako datta.",
+          "hiragana": "きょうとはむかしのみやこだった。",
+          "english": "Kyoto was the former capital."
+        }
+      ]
+    },
+    {
+      "japanese": "sakkaa",
+      "hiragana": "さっかー",
+      "english": "soccer, football",
+      "examples": [
+        {
+          "romaji": "sakkaa no shiai wo mi ni iku.",
+          "hiragana": "さっかーのしあいをみにいく。",
+          "english": "I'm going to watch a soccer match."
+        }
+      ]
+    },
+    {
+      "japanese": "atarashii",
+      "hiragana": "あたらしい",
+      "english": "new, fresh",
+      "examples": [
+        {
+          "romaji": "atarashii kuruma wo kaimashita.",
+          "hiragana": "あたらしいくるまをかいました。",
+          "english": "I bought a new car."
+        }
+      ]
+    },
+    {
+      "japanese": "riyuu",
+      "hiragana": "りゆう",
+      "english": "reason, cause, grounds",
+      "examples": [
+        {
+          "romaji": "riyuu ha wakarimasen.",
+          "hiragana": "りゆうはわかりません。",
+          "english": "I don't know the reason."
+        }
+      ]
+    },
+    {
+      "japanese": "danshi",
+      "hiragana": "だんし",
+      "english": "boy, young man, male",
+      "examples": [
+        {
+          "romaji": "danshi toire ha doko desu ka.",
+          "hiragana": "だんしといれはどこですか。",
+          "english": "Where is the men's restroom?"
+        }
+      ]
+    },
+    {
+      "japanese": "kadai",
+      "hiragana": "かだい",
+      "english": "assignment, homework",
+      "examples": [
+        {
+          "romaji": "kadai wo teishutsu shite kudasai.",
+          "hiragana": "かだいをていしゅつしてください。",
+          "english": "Please submit your assignment."
+        }
+      ]
+    },
+    {
+      "japanese": "morau",
+      "hiragana": "もらう",
+      "english": "to receive, to get",
+      "examples": [
+        {
+          "romaji": "tomodachi kara purezento wo moraimashita.",
+          "hiragana": "ともだちからぷれぜんとをもらいました。",
+          "english": "I received a present from my friend."
+        }
+      ]
+    },
+    {
+      "japanese": "un'ei",
+      "hiragana": "うんえい",
+      "english": "operation, management, administration",
+      "examples": [
+        {
+          "romaji": "ibento no un'ei wo tantou shiteiru.",
+          "hiragana": "いべんとのうんえいをたんとうしている。",
+          "english": "I'm in charge of event operations."
+        }
+      ]
+    },
+    {
+      "japanese": "kaishi",
+      "hiragana": "かいし",
+      "english": "start, beginning, commencement",
+      "examples": [
+        {
+          "romaji": "kaigi ha juuji ni kaishi shimasu.",
+          "hiragana": "かいぎはじゅうじにかいしします。",
+          "english": "The meeting will start at 10 o'clock."
+        }
+      ]
+    },
+    {
+      "japanese": "iken",
+      "hiragana": "いけん",
+      "english": "opinion, view, idea",
+      "examples": [
+        {
+          "romaji": "iken ga awanai.",
+          "hiragana": "いけんがあわない。",
+          "english": "Our opinions don't match."
+        }
+      ]
+    },
+    {
+      "japanese": "sagyou",
+      "hiragana": "さぎょう",
+      "english": "work, operation, task",
+      "examples": [
+        {
+          "romaji": "sagyou wo kaishisuru.",
+          "hiragana": "さぎょうをかいしする。",
+          "english": "To start the work."
+        }
+      ]
+    },
+    {
+      "japanese": "kentou",
+      "hiragana": "けんとう",
+      "english": "examination, consideration",
+      "examples": [
+        {
+          "romaji": "keikaku wo kentou suru.",
+          "hiragana": "けいかくをけんとうする。",
+          "english": "To examine the plan."
+        }
+      ]
+    },
+    {
+      "japanese": "chuumoku",
+      "hiragana": "ちゅうもく",
+      "english": "attention, notice, observation",
+      "examples": [
+        {
+          "romaji": "kono mondai ni chuumoku shite kudasai.",
+          "hiragana": "このもんだいにちゅうもくしてください。",
+          "english": "Please pay attention to this issue."
+        }
+      ]
+    },
+    {
+      "japanese": "boueki",
+      "hiragana": "ぼうえき",
+      "english": "trade, commerce",
+      "examples": [
+        {
+          "romaji": "boueki gaisha de hataraiteiru.",
+          "hiragana": "ぼうえきがいしゃではたらいている。",
+          "english": "I work at a trading company."
+        }
+      ]
+    },
+    {
+      "japanese": "shuzai",
+      "hiragana": "しゅざい",
+      "english": "news gathering; coverage",
+      "examples": [
+        {
+          "romaji": "genba de shuzai suru.",
+          "hiragana": "げんばでしゅざいする。",
+          "english": "To cover the story at the scene."
+        }
+      ]
+    },
+    {
+      "japanese": "hassei",
+      "hiragana": "はっせい",
+      "english": "occurrence, outbreak",
+      "examples": [
+        {
+          "romaji": "jiko ga hassei shita.",
+          "hiragana": "じこがはっせいした。",
+          "english": "An accident occurred."
+        }
+      ]
+    },
+    {
+      "japanese": "chiji",
+      "hiragana": "ちじ",
+      "english": "governor (of a prefecture)",
+      "examples": [
+        {
+          "romaji": "chiji senkyo ha raigetsu da.",
+          "hiragana": "ちじせんきょはらいげつだ。",
+          "english": "The gubernatorial election is next month."
+        }
+      ]
+    },
+    {
+      "japanese": "wari",
+      "hiragana": "わり",
+      "english": "rate, ratio, proportion",
+      "examples": [
+        {
+          "romaji": "gonin ni hitori no wari de goukakusuru.",
+          "hiragana": "ごにんにひとりのわりでごうかくする。",
+          "english": "One in five people pass."
+        }
+      ]
+    },
+    {
+      "japanese": "shusshin",
+      "hiragana": "しゅっしん",
+      "english": "one's origin, hometown",
+      "examples": [
+        {
+          "romaji": "shusshin ha doko desu ka.",
+          "hiragana": "しゅっしんはどこですか。",
+          "english": "Where are you from?"
+        }
+      ]
+    },
+    {
+      "japanese": "houshin",
+      "hiragana": "ほうしん",
+      "english": "policy, course, direction",
+      "examples": [
+        {
+          "romaji": "kaisha no houshin ni shitagau.",
+          "hiragana": "かいしゃのほうしんにしたがう。",
+          "english": "To follow the company's policy."
+        }
+      ]
+    },
+    {
+      "japanese": "kenkou",
+      "hiragana": "けんこう",
+      "english": "health",
+      "examples": [
+        {
+          "romaji": "kenkou ga daiji da.",
+          "hiragana": "けんこうがだいじだ。",
+          "english": "Health is important."
+        }
+      ]
+    },
+    {
+      "japanese": "tenji",
+      "hiragana": "てんじ",
+      "english": "exhibition, display, showing",
+      "examples": [
+        {
+          "romaji": "sakuhin wo tenji suru.",
+          "hiragana": "さくひんをてんじする。",
+          "english": "To exhibit works."
+        }
+      ]
+    },
+    {
+      "japanese": "iryou",
+      "hiragana": "いりょう",
+      "english": "medical care, medical treatment",
+      "examples": [
+        {
+          "romaji": "iryou hi ga takai.",
+          "hiragana": "いりょうひがたかい。",
+          "english": "Medical costs are high."
+        }
+      ]
+    },
+    {
+      "japanese": "mokuhyou",
+      "hiragana": "もくひょう",
+      "english": "goal, objective, target",
+      "examples": [
+        {
+          "romaji": "mokuhyou wo kimeru.",
+          "hiragana": "もくひょうをきめる。",
+          "english": "To set a goal."
+        }
+      ]
+    },
+    {
+      "japanese": "hyouka",
+      "hiragana": "ひょうか",
+      "english": "evaluation, assessment, appraisal",
+      "examples": [
+        {
+          "romaji": "shain no gyouseki wo hyouka suru.",
+          "hiragana": "しゃいんのぎょうせきをひょうかする。",
+          "english": "To evaluate employees' performance."
+        }
+      ]
+    },
+    {
+      "japanese": "sonogo",
+      "hiragana": "そのご",
+      "english": "after that; subsequently; since then",
+      "examples": [
+        {
+          "romaji": "sonogo, kare ha renrakushite konakatta.",
+          "hiragana": "そのご、かれはれんらくしてこなかった。",
+          "english": "After that, he didn't contact me."
+        }
+      ]
+    },
+    {
+      "japanese": "jidou",
+      "hiragana": "じどう",
+      "english": "children, juveniles",
+      "examples": [
+        {
+          "romaji": "jidou bungaku wo kenkyuushiteiru.",
+          "hiragana": "じどうぶんがくをけんきゅうしている。",
+          "english": "I am researching children's literature."
+        }
+      ]
+    },
+    {
+      "japanese": "kouka",
+      "hiragana": "こうか",
+      "english": "effect, result",
+      "examples": [
+        {
+          "romaji": "kouka ga nai.",
+          "hiragana": "こうかがない。",
+          "english": "It has no effect."
+        }
+      ]
+    },
+    {
+      "japanese": "kourei",
+      "hiragana": "こうれい",
+      "english": "old age; advanced age",
+      "examples": [
+        {
+          "romaji": "kourei no kata ni ha kochira no seki wo douzo.",
+          "hiragana": "こうれいのかたにはこちらのせきをどうぞ。",
+          "english": "Please offer this seat to elderly people."
+        }
+      ]
+    },
+    {
+      "japanese": "an",
+      "hiragana": "あん",
+      "english": "plan, proposal",
+      "examples": [
+        {
+          "romaji": "an wo dasu.",
+          "hiragana": "あんをだす。",
+          "english": "To put forward a proposal."
+        }
+      ]
+    },
+    {
+      "japanese": "yakata",
+      "hiragana": "やかた",
+      "english": "mansion; manor; grand residence",
+      "examples": [
+        {
+          "romaji": "oka no ue ni furui yakata ga aru.",
+          "hiragana": "おかのうえにふるいやかたがある。",
+          "english": "There is an old mansion on the hill."
+        }
+      ]
+    },
+    {
+      "japanese": "fukkou",
+      "hiragana": "ふっこう",
+      "english": "reconstruction; rebuilding; restoration",
+      "examples": [
+        {
+          "romaji": "fukkou ga susundeiru.",
+          "hiragana": "ふっこうがすすんでいる。",
+          "english": "Reconstruction is progressing."
+        }
+      ]
+    },
+    {
+      "japanese": "kimochi",
+      "hiragana": "きもち",
+      "english": "feeling, emotion",
+      "examples": [
+        {
+          "romaji": "kimochi wo tsutaetai.",
+          "hiragana": "きもちをつたえたい。",
+          "english": "I want to convey my feelings."
+        }
+      ]
+    },
+    {
+      "japanese": "ikou",
+      "hiragana": "いこう",
+      "english": "from...onward; after; since",
+      "examples": [
+        {
+          "romaji": "10 ji ikou ha shizukani shite kudasai.",
+          "hiragana": "10じいこうはしずかにしてください。",
+          "english": "Please be quiet after 10 o'clock."
+        }
+      ]
+    },
+    {
+      "japanese": "kin'yuu",
+      "hiragana": "きんゆう",
+      "english": "finance, banking, monetary",
+      "examples": [
+        {
+          "romaji": "kin'yuu kiki ga okita.",
+          "hiragana": "きんゆうききがおきた。",
+          "english": "A financial crisis occurred."
+        }
+      ]
+    },
+    {
+      "japanese": "gakusei",
+      "hiragana": "がくせい",
+      "english": "student",
+      "examples": [
+        {
+          "romaji": "gakusei desu ka?",
+          "hiragana": "がくせいですか？",
+          "english": "Are you a student?"
+        }
+      ]
+    },
+    {
+      "japanese": "motsu",
+      "hiragana": "もつ",
+      "english": "to hold, to carry",
+      "examples": [
+        {
+          "romaji": "kore wo motte.",
+          "hiragana": "これをもって。",
+          "english": "Hold this."
+        }
+      ]
+    },
+    {
+      "japanese": "katsuyou",
+      "hiragana": "かつよう",
+      "english": "conjugation, inflection",
+      "examples": [
+        {
+          "romaji": "doushi no katsuyou wo oboeru.",
+          "hiragana": "どうしのかつようをおぼえる。",
+          "english": "To learn verb conjugation."
+        }
+      ]
+    },
+    {
+      "japanese": "doru",
+      "hiragana": "どる",
+      "english": "dollar",
+      "examples": [
+        {
+          "romaji": "100doru haratta.",
+          "hiragana": "100どるはらった。",
+          "english": "I paid 100 dollars."
+        }
+      ]
+    },
+    {
+      "japanese": "hitobito",
+      "hiragana": "ひとびと",
+      "english": "people, men and women",
+      "examples": [
+        {
+          "romaji": "ooku no hitobito ga atsumatta.",
+          "hiragana": "おおくのひとびとがあつまった。",
+          "english": "Many people gathered."
+        }
+      ]
+    },
+    {
+      "japanese": "senshuken",
+      "hiragana": "せんしゅけん",
+      "english": "championship; championship title",
+      "examples": [
+        {
+          "romaji": "sekai senshuken ga raigetsu kaisaisareru.",
+          "hiragana": "せかいせんしゅけんがらいげつかいさいされる。",
+          "english": "The world championship will be held next month."
+        }
+      ]
+    },
+    {
+      "japanese": "kikaku",
+      "hiragana": "きかく",
+      "english": "planning, project, proposal",
+      "examples": [
+        {
+          "romaji": "atarashii kikaku wo tateru.",
+          "hiragana": "あたらしいきかくをたてる。",
+          "english": "To create a new plan/project."
+        }
+      ]
+    },
+    {
+      "japanese": "riigu",
+      "hiragana": "りーぐ",
+      "english": "league (sports)",
+      "examples": [
+        {
+          "romaji": "riigusen ga hajimatta.",
+          "hiragana": "りーぐせんがはじまった。",
+          "english": "The league games have started."
+        }
+      ]
+    },
+    {
+      "japanese": "issho",
+      "hiragana": "いっしょ",
+      "english": "together",
+      "examples": [
+        {
+          "romaji": "issho ni ikimashou.",
+          "hiragana": "いっしょにいきましょう。",
+          "english": "Let's go together."
+        }
+      ]
+    },
+    {
+      "japanese": "hantai",
+      "hiragana": "はんたい",
+      "english": "opposition, objection",
+      "examples": [
+        {
+          "romaji": "sono keikaku ni hantai da.",
+          "hiragana": "そのけいかくにはんたいだ。",
+          "english": "I'm opposed to that plan."
+        }
+      ]
+    },
+    {
+      "japanese": "shiji",
+      "hiragana": "しじ",
+      "english": "support, backing, endorsement",
+      "examples": [
+        {
+          "romaji": "kokumin no shiji wo eru.",
+          "hiragana": "こくみんのしじをえる。",
+          "english": "To gain the support of the people."
+        }
+      ]
+    },
+    {
+      "japanese": "kibo",
+      "hiragana": "きぼ",
+      "english": "scale, size, scope",
+      "examples": [
+        {
+          "romaji": "daikibo na jishin ga hassei shita.",
+          "hiragana": "だいきぼなじしんがはっせいした。",
+          "english": "A large-scale earthquake occurred."
+        }
+      ]
+    },
+    {
+      "japanese": "nishi",
+      "hiragana": "にし",
+      "english": "west",
+      "examples": [
+        {
+          "romaji": "nishi he iku.",
+          "hiragana": "にしへいく。",
+          "english": "To go west."
+        }
+      ]
+    },
+    {
+      "japanese": "housou",
+      "hiragana": "ほうそう",
+      "english": "broadcast, broadcasting",
+      "examples": [
+        {
+          "romaji": "nyuusu wo housou suru.",
+          "hiragana": "にゅーすをほうそうする。",
+          "english": "To broadcast news."
+        }
+      ]
+    },
+    {
+      "japanese": "sutaato",
+      "hiragana": "すたーと",
+      "english": "start, beginning, launch",
+      "examples": [
+        {
+          "romaji": "reesu ga sutaato shita.",
+          "hiragana": "れーすがすたーとした。",
+          "english": "The race started."
+        }
+      ]
+    },
+    {
+      "japanese": "mukae",
+      "hiragana": "むかえ",
+      "english": "greeting, welcome",
+      "examples": [
+        {
+          "romaji": "atatakai mukaedatta.",
+          "hiragana": "あたたかいむかえだった。",
+          "english": "It was a warm welcome."
+        }
+      ]
+    },
+    {
+      "japanese": "joutai",
+      "hiragana": "じょうたい",
+      "english": "state, condition, situation",
+      "examples": [
+        {
+          "romaji": "kanja no joutai ha anteishiteiru.",
+          "hiragana": "かんじゃのじょうたいはあんていしている。",
+          "english": "The patient's condition is stable."
+        }
+      ]
+    },
+    {
+      "japanese": "juutaku",
+      "hiragana": "じゅうたく",
+      "english": "residence, housing, dwelling",
+      "examples": [
+        {
+          "romaji": "juutaku roon wo kunde ie wo katta.",
+          "hiragana": "じゅうたくろーんをくんでいえをかった。",
+          "english": "I took out a housing loan and bought a house."
+        }
+      ]
+    },
+    {
+      "japanese": "sonzai",
+      "hiragana": "そんざい",
+      "english": "existence, being",
+      "examples": [
+        {
+          "romaji": "kami no sonzai wo shinjimasu ka.",
+          "hiragana": "かみのそんざいをしんじますか。",
+          "english": "Do you believe in the existence of God?"
+        }
+      ]
+    },
+    {
+      "japanese": "zouka",
+      "hiragana": "ぞうか",
+      "english": "increase, rise, growth",
+      "examples": [
+        {
+          "romaji": "jinkou ga zouka shiteiru.",
+          "hiragana": "じんこうがぞうかしている。",
+          "english": "The population is increasing."
+        }
+      ]
+    },
+    {
+      "japanese": "men",
+      "hiragana": "めん",
+      "english": "aspect; side",
+      "examples": [
+        {
+          "romaji": "purasu men mo aru.",
+          "hiragana": "ぷらすめんもある。",
+          "english": "There are also positive aspects."
+        }
+      ]
+    },
+    {
+      "japanese": "tokuni",
+      "hiragana": "とくに",
+      "english": "particularly, especially",
+      "examples": [
+        {
+          "romaji": "tokuni nihonryouri ga sukidesu.",
+          "hiragana": "とくににほんりょうりがすきです。",
+          "english": "I especially like Japanese food."
+        }
+      ]
+    },
+    {
+      "japanese": "sensou",
+      "hiragana": "せんそう",
+      "english": "war, warfare",
+      "examples": [
+        {
+          "romaji": "sensou ga owatta.",
+          "hiragana": "せんそうがおわった。",
+          "english": "The war ended."
+        }
+      ]
+    },
+    {
+      "japanese": "kagaku",
+      "hiragana": "かがく",
+      "english": "science",
+      "examples": [
+        {
+          "romaji": "kagaku ga shinposhita.",
+          "hiragana": "かがくがしんぽした。",
+          "english": "Science has advanced."
+        }
+      ]
+    },
+    {
+      "japanese": "shokuin",
+      "hiragana": "しょくいん",
+      "english": "staff member; employee; personnel",
+      "examples": [
+        {
+          "romaji": "shokuin ni kiite kudasai.",
+          "hiragana": "しょくいんにきいてください。",
+          "english": "Please ask a staff member."
+        }
+      ]
+    },
+    {
+      "japanese": "toujou",
+      "hiragana": "とうじょう",
+      "english": "appearance on stage; entrance; debut",
+      "examples": [
+        {
+          "romaji": "shujinkou ga toujou suru.",
+          "hiragana": "しゅじんこうがとうじょうする。",
+          "english": "The main character appears."
+        }
+      ]
+    },
+    {
+      "japanese": "hai",
+      "hiragana": "はい",
+      "english": "cups, glasses, bowls",
+      "examples": [
+        {
+          "romaji": "koohii wo ippai kudasai.",
+          "hiragana": "こーひーをいっぱいください。",
+          "english": "One cup of coffee, please."
+        }
+      ]
+    },
+    {
+      "japanese": "menbaa",
+      "hiragana": "めんばー",
+      "english": "member",
+      "examples": [
+        {
+          "romaji": "chiimu no menbaa wo shoukaisuru.",
+          "hiragana": "ちーむのめんばーをしょうかいする。",
+          "english": "I introduce the team members."
+        }
+      ]
+    },
+    {
+      "japanese": "betsu",
+      "hiragana": "べつ",
+      "english": "different, another",
+      "examples": [
+        {
+          "romaji": "betsu no houhou wo kangaemashou.",
+          "hiragana": "べつのほうほうをかんがえましょう。",
+          "english": "Let's think of a different method."
+        }
+      ]
+    },
+    {
+      "japanese": "umare",
+      "hiragana": "うまれ",
+      "english": "birth",
+      "examples": [
+        {
+          "romaji": "kare ha umare ga yoi.",
+          "hiragana": "かれはうまれがよい。",
+          "english": "He comes from a good family."
+        }
+      ]
+    },
+    {
+      "japanese": "kaikaku",
+      "hiragana": "かいかく",
+      "english": "reform",
+      "examples": [
+        {
+          "romaji": "kyouiku kaikaku ga hitsuyou da.",
+          "hiragana": "きょういくかいかくがひつようだ。",
+          "english": "Educational reform is necessary."
+        }
+      ]
+    },
+    {
+      "japanese": "jishin",
+      "hiragana": "じしん",
+      "english": "oneself (emphatic, following a noun or pronoun)",
+      "examples": [
+        {
+          "romaji": "watashijishin mo odoroita.",
+          "hiragana": "わたしじしんもおどろいた。",
+          "english": "I myself was surprised too."
+        }
+      ]
+    },
+    {
+      "japanese": "shika",
+      "hiragana": "しか",
+      "english": "only; nothing but",
+      "examples": [
+        {
+          "romaji": "mizu shika nomanai.",
+          "hiragana": "みずしかのまない。",
+          "english": "I only drink water."
+        }
+      ]
+    },
+    {
+      "japanese": "deeta",
+      "hiragana": "でーた",
+      "english": "data; information",
+      "examples": [
+        {
+          "romaji": "deeta wo atsumete bunsekisuru.",
+          "hiragana": "でーたをあつめてぶんせきする。",
+          "english": "To collect and analyze data."
+        }
+      ]
+    },
+    {
+      "japanese": "katsuyaku",
+      "hiragana": "かつやく",
+      "english": "active role, great performance, being active (in a field)",
+      "examples": [
+        {
+          "romaji": "kare ha sekai de katsuyaku shiteiru.",
+          "hiragana": "かれはせかいでかつやくしている。",
+          "english": "He is active on the world stage."
+        }
+      ]
+    },
+    {
+      "japanese": "hyoumei",
+      "hiragana": "ひょうめい",
+      "english": "declaration, expression, statement, making clear",
+      "examples": [
+        {
+          "romaji": "shushou ga jinin no ikou wo hyoumei shita.",
+          "hiragana": "しゅしょうがじにんのいこうをひょうめいした。",
+          "english": "The prime minister expressed his intention to resign."
+        }
+      ]
+    },
+    {
+      "japanese": "kyouchou",
+      "hiragana": "きょうちょう",
+      "english": "emphasis, stress",
+      "examples": [
+        {
+          "romaji": "anzen no juuyousei wo kyouchou suru.",
+          "hiragana": "あんぜんのじゅうようせいをきょうちょうする。",
+          "english": "To emphasize the importance of safety."
+        }
+      ]
+    },
+    {
+      "japanese": "kita",
+      "hiragana": "きた",
+      "english": "north",
+      "examples": [
+        {
+          "romaji": "kita ha samui.",
+          "hiragana": "きたはさむい。",
+          "english": "The north is cold."
+        }
+      ]
+    },
+    {
+      "japanese": "shuuhen",
+      "hiragana": "しゅうへん",
+      "english": "surroundings; vicinity; area around",
+      "examples": [
+        {
+          "romaji": "orinpikku kikanchuu ha, kaijou shuuhen no keibi ga kyouka sareta.",
+          "hiragana": "おりんぴっくきかんちゅうは、かいじょうしゅうへんのけいびがきょうかされた。",
+          "english": "Security around the venue was strengthened during the Olympics."
+        }
+      ]
+    },
+    {
+      "japanese": "rikai",
+      "hiragana": "りかい",
+      "english": "understanding, comprehension",
+      "examples": [
+        {
+          "romaji": "rikai dekimasuka.",
+          "hiragana": "りかいできますか。",
+          "english": "Can you understand?"
+        }
+      ]
+    },
+    {
+      "japanese": "byouin",
+      "hiragana": "びょういん",
+      "english": "hospital",
+      "examples": [
+        {
+          "romaji": "byouin ni ikimasu.",
+          "hiragana": "びょういんにいきます。",
+          "english": "I'm going to the hospital."
+        }
+      ]
+    },
+    {
+      "japanese": "soshiki",
+      "hiragana": "そしき",
+      "english": "organization, group",
+      "examples": [
+        {
+          "romaji": "ookina soshiki de hataraiteiru.",
+          "hiragana": "おおきなそしきではたらいている。",
+          "english": "I work for a large organization."
+        }
+      ]
+    },
+    {
+      "japanese": "koutsuu",
+      "hiragana": "こうつう",
+      "english": "traffic",
+      "examples": [
+        {
+          "romaji": "koutsuu jiko ni kiwotsukete kudasai.",
+          "hiragana": "こうつうじこにきをつけてください。",
+          "english": "Please be careful of traffic accidents."
+        }
+      ]
+    },
+    {
+      "japanese": "fan",
+      "hiragana": "ふぁん",
+      "english": "fan, enthusiast, supporter",
+      "examples": [
+        {
+          "romaji": "sakkaa no niwaka fan ga fueta.",
+          "hiragana": "さっかーのにわかふぁんがふえた。",
+          "english": "The number of bandwagon soccer fans increased."
+        }
+      ]
+    },
+    {
+      "japanese": "honsha",
+      "hiragana": "ほんしゃ",
+      "english": "head office; headquarters",
+      "examples": [
+        {
+          "romaji": "honsha ha toukyou ni aru.",
+          "hiragana": "ほんしゃはとうきょうにある。",
+          "english": "The head office is in Tokyo."
+        }
+      ]
+    },
+    {
+      "japanese": "mokuteki",
+      "hiragana": "もくてき",
+      "english": "purpose, goal, objective",
+      "examples": [
+        {
+          "romaji": "mokuteki ha nan desu ka.",
+          "hiragana": "もくてきはなんですか。",
+          "english": "What is the purpose?"
+        }
+      ]
+    },
+    {
+      "japanese": "hinan",
+      "hiragana": "ひなん",
+      "english": "evacuation; taking refuge",
+      "examples": [
+        {
+          "romaji": "jishin de takadai ni hinan shita.",
+          "hiragana": "じしんでたかだいにひなんした。",
+          "english": "We evacuated to high ground due to the earthquake."
+        }
+      ]
+    },
+    {
+      "japanese": "kouen",
+      "hiragana": "こうえん",
+      "english": "park",
+      "examples": [
+        {
+          "romaji": "kouen de asobimashou.",
+          "hiragana": "こうえんであそびましょう。",
+          "english": "Let's play in the park."
+        }
+      ]
+    },
+    {
+      "japanese": "kakaku",
+      "hiragana": "かかく",
+      "english": "price, cost, value",
+      "examples": [
+        {
+          "romaji": "kakaku ga agatta.",
+          "hiragana": "かかくがあがった。",
+          "english": "The price went up."
+        }
+      ]
+    },
+    {
+      "japanese": "miru",
+      "hiragana": "みる",
+      "english": "to see, to look at",
+      "examples": [
+        {
+          "romaji": "yama wo miru.",
+          "hiragana": "やまをみる。",
+          "english": "To look at the mountain."
+        }
+      ]
+    },
+    {
+      "japanese": "toori",
+      "hiragana": "とおり",
+      "english": "street, road, avenue",
+      "examples": [
+        {
+          "romaji": "kono toori wo massugu itte kudasai.",
+          "hiragana": "このとおりをまっすぐいってください。",
+          "english": "Please go straight down this street."
+        }
+      ]
+    },
+    {
+      "japanese": "okonai",
+      "hiragana": "おこない",
+      "english": "behavior, deed, conduct",
+      "examples": [
+        {
+          "romaji": "higoro no okonai ga ii.",
+          "hiragana": "ひごろのおこないがいい。",
+          "english": "Their everyday conduct is good."
+        }
+      ]
+    },
+    {
+      "japanese": "teema",
+      "hiragana": "てーま",
+      "english": "theme, topic, subject",
+      "examples": [
+        {
+          "romaji": "konkai no teema ha kankyoumondai desu.",
+          "hiragana": "こんかいのてーまはかんきょうもんだいです。",
+          "english": "Today's theme is environmental issues."
+        }
+      ]
+    },
+    {
+      "japanese": "netto",
+      "hiragana": "ねっと",
+      "english": "internet",
+      "examples": [
+        {
+          "romaji": "netto de shiraberu.",
+          "hiragana": "ねっとでしらべる。",
+          "english": "To look it up on the internet."
+        }
+      ]
+    },
+    {
+      "japanese": "kataru",
+      "hiragana": "かたる",
+      "english": "to tell, to narrate",
+      "examples": [
+        {
+          "romaji": "keiken wo kataru.",
+          "hiragana": "けいけんをかたる。",
+          "english": "To tell of one's experiences."
+        }
+      ]
+    },
+    {
+      "japanese": "dounyuu",
+      "hiragana": "どうにゅう",
+      "english": "introduction; implementation; adoption",
+      "examples": [
+        {
+          "romaji": "shitetsu kakusha ga ICkaado wo dounyuu shita.",
+          "hiragana": "してつかくしゃがICかーどをどうにゅうした。",
+          "english": "Each private railway company introduced IC cards."
+        }
+      ]
+    },
+    {
+      "japanese": "hisai",
+      "hiragana": "ひさい",
+      "english": "being affected by a disaster; suffering damage from a calamity",
+      "examples": [
+        {
+          "romaji": "hisaichi ni busshi wo todokeru.",
+          "hiragana": "ひさいちにぶっしをとどける。",
+          "english": "To deliver supplies to the disaster-affected area."
+        }
+      ]
+    },
+    {
+      "japanese": "seizou",
+      "hiragana": "せいぞう",
+      "english": "manufacture, production, making",
+      "examples": [
+        {
+          "romaji": "kono koujou de ha jidousha wo seizou shiteiru.",
+          "hiragana": "このこうじょうではじどうしゃをせいぞうしている。",
+          "english": "This factory manufactures automobiles."
+        }
+      ]
+    },
+    {
+      "japanese": "unten",
+      "hiragana": "うんてん",
+      "english": "driving (a vehicle)",
+      "examples": [
+        {
+          "romaji": "unten menkyo wo totta.",
+          "hiragana": "うんてんめんきょをとった。",
+          "english": "I got my driver's license."
+        }
+      ]
+    },
+    {
+      "japanese": "gaku",
+      "hiragana": "がく",
+      "english": "amount, sum (of money)",
+      "examples": [
+        {
+          "romaji": "sougaku ha ikura desu ka.",
+          "hiragana": "そうがくはいくらですか。",
+          "english": "What is the total amount?"
+        }
+      ]
+    },
+    {
+      "japanese": "saito",
+      "hiragana": "さいと",
+      "english": "website",
+      "examples": [
+        {
+          "romaji": "kono saito ha benri da.",
+          "hiragana": "このさいとはべんりだ。",
+          "english": "This website is useful."
+        }
+      ]
+    },
+    {
+      "japanese": "kyouju",
+      "hiragana": "きょうじゅ",
+      "english": "professor",
+      "examples": [
+        {
+          "romaji": "tanaka kyouju no jugyou ha ninki ga aru.",
+          "hiragana": "たなかきょうじゅのじゅぎょうはにんきがある。",
+          "english": "Professor Tanaka's classes are popular."
+        }
+      ]
+    },
+    {
+      "japanese": "jiyuu",
+      "hiragana": "じゆう",
+      "english": "free, unrestricted",
+      "examples": [
+        {
+          "romaji": "jiyuu na jikan ga hoshii.",
+          "hiragana": "じゆうなじかんがほしい。",
+          "english": "I want free time."
+        }
+      ]
+    },
+    {
+      "japanese": "taisetsu",
+      "hiragana": "たいせつ",
+      "english": "important, precious, valuable",
+      "examples": [
+        {
+          "romaji": "kazoku ha taisetsu da.",
+          "hiragana": "かぞくはたいせつだ。",
+          "english": "Family is important."
+        }
+      ]
+    },
+    {
+      "japanese": "shougai",
+      "hiragana": "しょうがい",
+      "english": "obstacle, impediment, hindrance",
+      "examples": [
+        {
+          "romaji": "keikaku ni shougai ga shoujita.",
+          "hiragana": "けいかくにしょうがいがしょうじた。",
+          "english": "An obstacle arose in the plan."
+        }
+      ]
+    },
+    {
+      "japanese": "kaidan",
+      "hiragana": "かいだん",
+      "english": "conference, talks, meeting, discussion",
+      "examples": [
+        {
+          "romaji": "shunou kaidan ga okonawareta.",
+          "hiragana": "しゅのうかいだんがおこなわれた。",
+          "english": "A summit meeting was held."
+        }
+      ]
+    },
+    {
+      "japanese": "torikumi",
+      "hiragana": "とりくみ",
+      "english": "effort, initiative, undertaking, approach",
+      "examples": [
+        {
+          "romaji": "atarashii torikumi wo hajimeru.",
+          "hiragana": "あたらしいとりくみをはじめる。",
+          "english": "To start a new initiative."
+        }
+      ]
+    },
+    {
+      "japanese": "undou",
+      "hiragana": "うんどう",
+      "english": "physical exercise, sports, athletics",
+      "examples": [
+        {
+          "romaji": "maiasa undou wo shiteimasu.",
+          "hiragana": "まいあさうんどうをしています。",
+          "english": "I exercise every morning."
+        }
+      ]
+    },
+    {
+      "japanese": "jidousha",
+      "hiragana": "じどうしゃ",
+      "english": "automobile, car",
+      "examples": [
+        {
+          "romaji": "jidoushagaisha ni tsutometeimasu.",
+          "hiragana": "じどうしゃがいしゃにつとめています。",
+          "english": "I work for a car company."
+        }
+      ]
+    },
+    {
+      "japanese": "bangumi",
+      "hiragana": "ばんぐみ",
+      "english": "(TV/radio) program, show",
+      "examples": [
+        {
+          "romaji": "sukina bangumi ha nan desu ka.",
+          "hiragana": "すきなばんぐみはなんですか。",
+          "english": "What's your favorite program?"
+        }
+      ]
+    },
+    {
+      "japanese": "bun'ya",
+      "hiragana": "ぶんや",
+      "english": "field, area, sphere",
+      "examples": [
+        {
+          "romaji": "senmon bun'ya ha nan desuka.",
+          "hiragana": "せんもんぶんやはなんですか。",
+          "english": "What is your field of specialization?"
+        }
+      ]
+    },
+    {
+      "japanese": "daibu",
+      "hiragana": "だいぶ",
+      "english": "considerably, fairly, quite",
+      "examples": [
+        {
+          "romaji": "daibu atatakaku narimashita ne.",
+          "hiragana": "だいぶあたたかくなりましたね。",
+          "english": "It's gotten quite warm, hasn't it?"
+        }
+      ]
+    },
+    {
+      "japanese": "dousha",
+      "hiragana": "どうしゃ",
+      "english": "the company (just mentioned); the said company",
+      "examples": [
+        {
+          "romaji": "dousha no shachou.",
+          "hiragana": "どうしゃのしゃちょう。",
+          "english": "The company's president."
+        }
+      ]
+    },
+    {
+      "japanese": "senryaku",
+      "hiragana": "せんりゃく",
+      "english": "strategy",
+      "examples": [
+        {
+          "romaji": "eigyou senryaku wo tateru.",
+          "hiragana": "えいぎょうせんりゃくをたてる。",
+          "english": "To develop a sales strategy."
+        }
+      ]
+    },
+    {
+      "japanese": "houmon",
+      "hiragana": "ほうもん",
+      "english": "visit, call",
+      "examples": [
+        {
+          "romaji": "okyakusama no otaku wo houmon suru.",
+          "hiragana": "おきゃくさまのおたくをほうもんする。",
+          "english": "To visit a customer's home."
+        }
+      ]
+    },
+    {
+      "japanese": "shisutemu",
+      "hiragana": "しすてむ",
+      "english": "system; organized structure or method",
+      "examples": [
+        {
+          "romaji": "shisutemu ni shougai ga hasseishita.",
+          "hiragana": "しすてむにしょうがいがはっせいした。",
+          "english": "A system failure occurred."
+        }
+      ]
+    },
+    {
+      "japanese": "uttae",
+      "hiragana": "うったえ",
+      "english": "appeal, plea, call",
+      "examples": [
+        {
+          "romaji": "shimin no uttae ni mimiwokatamukeru.",
+          "hiragana": "しみんのうったえにみみをかたむける。",
+          "english": "To listen to the appeals of the citizens."
+        }
+      ]
+    },
+    {
+      "japanese": "tomo",
+      "hiragana": "とも",
+      "english": "both; all (of them)",
+      "examples": [
+        {
+          "romaji": "futari tomo gakusei da.",
+          "hiragana": "ふたりともがくせいだ。",
+          "english": "Both of them are students."
+        }
+      ]
+    },
+    {
+      "japanese": "irai",
+      "hiragana": "いらい",
+      "english": "since, ever since",
+      "examples": [
+        {
+          "romaji": "sotsugyou irai, atteinai.",
+          "hiragana": "そつぎょういらい、あっていない。",
+          "english": "I haven't seen them since graduation."
+        }
+      ]
+    },
+    {
+      "japanese": "toushu",
+      "hiragana": "とうしゅ",
+      "english": "pitcher",
+      "examples": [
+        {
+          "romaji": "senpatsu toushu ga nanakai wo mushitten ni osaeta.",
+          "hiragana": "せんぱつとうしゅがななかいをむしってんにおさえた。",
+          "english": "The starting pitcher held the opponents scoreless through seven innings."
+        }
+      ]
+    },
+    {
+      "japanese": "toppu",
+      "hiragana": "とっぷ",
+      "english": "top, first place",
+      "examples": [
+        {
+          "romaji": "toppu wo hashitteiru.",
+          "hiragana": "とっぷをはしっている。",
+          "english": "I'm running in first place."
+        }
+      ]
+    },
+    {
+      "japanese": "imi",
+      "hiragana": "いみ",
+      "english": "meaning, sense",
+      "examples": [
+        {
+          "romaji": "kono kotoba no imi ha nan desu ka.",
+          "hiragana": "このことばのいみはなんですか。",
+          "english": "What is the meaning of this word?"
+        }
+      ]
+    },
+    {
+      "japanese": "kaimaku",
+      "hiragana": "かいまく",
+      "english": "opening (of a curtain); start of a performance",
+      "examples": [
+        {
+          "romaji": "butai no kaimaku wo matsu.",
+          "hiragana": "ぶたいのかいまくをまつ。",
+          "english": "To wait for the curtain to open."
+        }
+      ]
+    },
+    {
+      "japanese": "kibou",
+      "hiragana": "きぼう",
+      "english": "hope, wish, aspiration",
+      "examples": [
+        {
+          "romaji": "kibou ga aru.",
+          "hiragana": "きぼうがある。",
+          "english": "There is hope."
+        }
+      ]
+    },
+    {
+      "japanese": "heikin",
+      "hiragana": "へいきん",
+      "english": "average, mean",
+      "examples": [
+        {
+          "romaji": "heikin ten ha 70 ten datta.",
+          "hiragana": "へいきんてんは70てんだった。",
+          "english": "The average score was 70 points."
+        }
+      ]
+    },
+    {
+      "japanese": "ryokou",
+      "hiragana": "りょこう",
+      "english": "trip, travel, journey",
+      "examples": [
+        {
+          "romaji": "raigetsu ryokou ni ikimasu.",
+          "hiragana": "らいげつりょこうにいきます。",
+          "english": "I'm going on a trip next month."
+        }
+      ]
+    },
+    {
+      "japanese": "dare",
+      "hiragana": "だれ",
+      "english": "who",
+      "examples": [
+        {
+          "romaji": "ano hito ha dare desu ka?",
+          "hiragana": "あのひとはだれですか？",
+          "english": "Who is that person?"
+        }
+      ]
+    },
+    {
+      "japanese": "miryoku",
+      "hiragana": "みりょく",
+      "english": "charm, appeal, fascination",
+      "examples": [
+        {
+          "romaji": "kanojo ni ha dokutoku no miryoku ga aru.",
+          "hiragana": "かのじょにはどくとくのみりょくがある。",
+          "english": "She has a unique charm."
+        }
+      ]
+    },
+    {
+      "japanese": "kaizen",
+      "hiragana": "かいぜん",
+      "english": "improvement, betterment",
+      "examples": [
+        {
+          "romaji": "seikatsu wo kaizen shitai.",
+          "hiragana": "せいかつをかいぜんしたい。",
+          "english": "I want to improve my lifestyle."
+        }
+      ]
+    },
+    {
+      "japanese": "eigyou",
+      "hiragana": "えいぎょう",
+      "english": "business, trade",
+      "examples": [
+        {
+          "romaji": "kare ha chiisana mise wo eigyou shiteiru.",
+          "hiragana": "かれはちいさなみせをえいぎょうしている。",
+          "english": "He runs a small shop."
+        }
+      ]
+    },
+    {
+      "japanese": "houhou",
+      "hiragana": "ほうほう",
+      "english": "method, way, means, technique",
+      "examples": [
+        {
+          "romaji": "mondai wo kaiketsu suru houhou wo kangaeyou.",
+          "hiragana": "もんだいをかいけつするほうほうをかんがえよう。",
+          "english": "Let's think of a way to solve the problem."
+        }
+      ]
+    },
+    {
+      "japanese": "kouji",
+      "hiragana": "こうじ",
+      "english": "construction work, engineering work",
+      "examples": [
+        {
+          "romaji": "douro kouji de juutaishiteiru.",
+          "hiragana": "どうろこうじでじゅうたいしている。",
+          "english": "There's a traffic jam due to road construction."
+        }
+      ]
+    },
+    {
+      "japanese": "daga",
+      "hiragana": "だが",
+      "english": "but; however",
+      "examples": [
+        {
+          "romaji": "doryoku shita. daga, seikou shinakatta.",
+          "hiragana": "どりょくした。だが、せいこうしなかった。",
+          "english": "I made an effort. However, I didn't succeed."
+        }
+      ]
+    },
+    {
+      "japanese": "ika",
+      "hiragana": "いか",
+      "english": "below, under, less than or equal to",
+      "examples": [
+        {
+          "romaji": "juuhassaiika ha nyuujou dekimasen.",
+          "hiragana": "じゅうはっさいいかはにゅうじょうできません。",
+          "english": "Those 18 and under cannot enter."
+        }
+      ]
+    },
+    {
+      "japanese": "ugoki",
+      "hiragana": "うごき",
+      "english": "movement, motion",
+      "examples": [
+        {
+          "romaji": "teki no ugoki wo miru.",
+          "hiragana": "てきのうごきをみる。",
+          "english": "I watch the enemy's movements."
+        }
+      ]
+    },
+    {
+      "japanese": "ban",
+      "hiragana": "ばん",
+      "english": "number; order",
+      "examples": [
+        {
+          "romaji": "3ban hoomu kara hassha shimasu.",
+          "hiragana": "3ばんほーむからはっしゃします。",
+          "english": "It will depart from platform 3."
+        }
+      ]
+    },
+    {
+      "japanese": "haru",
+      "hiragana": "はる",
+      "english": "spring (season)",
+      "examples": [
+        {
+          "romaji": "haru ha sakura ga kirei desu.",
+          "hiragana": "はるはさくらがきれいです。",
+          "english": "Cherry blossoms are beautiful in spring."
+        }
+      ]
+    },
+    {
+      "japanese": "ko",
+      "hiragana": "こ",
+      "english": "child",
+      "examples": [
+        {
+          "romaji": "kashikoi kodesu ne.",
+          "hiragana": "かしこいこですね。",
+          "english": "What a smart child."
+        }
+      ]
+    },
+    {
+      "japanese": "ishiki",
+      "hiragana": "いしき",
+      "english": "consciousness",
+      "examples": [
+        {
+          "romaji": "ishiki wo ushinaimashita.",
+          "hiragana": "いしきをうしないました。",
+          "english": "I lost consciousness."
+        }
+      ]
+    },
+    {
+      "japanese": "hihan",
+      "hiragana": "ひはん",
+      "english": "criticism, critique",
+      "examples": [
+        {
+          "romaji": "seifu no seisaku wo hihan suru.",
+          "hiragana": "せいふのせいさくをひはんする。",
+          "english": "To criticize the government's policies."
+        }
+      ]
+    },
+    {
+      "japanese": "toitta",
+      "hiragana": "といった",
+      "english": "such as; like; of the kind",
+      "examples": [
+        {
+          "romaji": "eigo ya chuugokugo toitta gengo.",
+          "hiragana": "えいごやちゅうごくごといったげんご。",
+          "english": "Languages such as English and Chinese."
+        }
+      ]
+    },
+    {
+      "japanese": "otoko",
+      "hiragana": "おとこ",
+      "english": "man, male",
+      "examples": [
+        {
+          "romaji": "ano otoko no hito ha tanaka san desu.",
+          "hiragana": "あのおとこのひとはたなかさんです。",
+          "english": "That man is Mr. Tanaka."
+        }
+      ]
+    },
+    {
+      "japanese": "jiki",
+      "hiragana": "じき",
+      "english": "time, period, season",
+      "examples": [
+        {
+          "romaji": "sakura no saku jiki ga chikazuite kita.",
+          "hiragana": "さくらのさくじきがちかづいてきた。",
+          "english": "The cherry blossom season is approaching."
+        }
+      ]
+    },
+    {
+      "japanese": "soko",
+      "hiragana": "そこ",
+      "english": "there (near you)",
+      "examples": [
+        {
+          "romaji": "soko ni nani ga aru?",
+          "hiragana": "そこになにがある?",
+          "english": "What is there?"
+        }
+      ]
+    },
+    {
+      "japanese": "suki",
+      "hiragana": "すき",
+      "english": "like, fond of",
+      "examples": [
+        {
+          "romaji": "inu ga suki.",
+          "hiragana": "いぬがすき。",
+          "english": "I like dogs."
+        }
+      ]
+    },
+    {
+      "japanese": "tenpo",
+      "hiragana": "てんぽ",
+      "english": "shop, store, business premises",
+      "examples": [
+        {
+          "romaji": "atarashii tenpo ga oopun shita.",
+          "hiragana": "あたらしいてんぽがおーぷんした。",
+          "english": "A new store opened."
+        }
+      ]
+    },
+    {
+      "japanese": "tanoshimi",
+      "hiragana": "たのしみ",
+      "english": "enjoyment, pleasure, fun",
+      "examples": [
+        {
+          "romaji": "dokusho ga tanoshimidesu.",
+          "hiragana": "どくしょがたのしみです。",
+          "english": "Reading is my pleasure."
+        }
+      ]
+    },
+    {
+      "japanese": "ongaku",
+      "hiragana": "おんがく",
+      "english": "music",
+      "examples": [
+        {
+          "romaji": "ongaku wo kiiteimasu.",
+          "hiragana": "おんがくをきいています。",
+          "english": "I'm listening to music."
+        }
+      ]
+    },
+    {
+      "japanese": "jissai",
+      "hiragana": "じっさい",
+      "english": "reality, actuality, practice",
+      "examples": [
+        {
+          "romaji": "riron to jissai ha chigau.",
+          "hiragana": "りろんとじっさいはちがう。",
+          "english": "Theory and practice are different."
+        }
+      ]
+    },
+    {
+      "japanese": "oopun",
+      "hiragana": "おーぷん",
+      "english": "opening, grand opening",
+      "examples": [
+        {
+          "romaji": "atarashii kafe ga oopun shita.",
+          "hiragana": "あたらしいかふぇがおーぷんした。",
+          "english": "A new café opened."
+        }
+      ]
+    },
+    {
+      "japanese": "totemo",
+      "hiragana": "とても",
+      "english": "very, extremely",
+      "examples": [
+        {
+          "romaji": "kono ryouri ha totemo oishii desu.",
+          "hiragana": "このりょうりはとてもおいしいです。",
+          "english": "This dish is very delicious."
+        }
+      ]
+    },
+    {
+      "japanese": "dono",
+      "hiragana": "どの",
+      "english": "which",
+      "examples": [
+        {
+          "romaji": "dono hon ga hoshii desu ka?",
+          "hiragana": "どのほんがほしいですか？",
+          "english": "Which book do you want?"
+        }
+      ]
+    },
+    {
+      "japanese": "junbi",
+      "hiragana": "じゅんび",
+      "english": "preparation, arrangements",
+      "examples": [
+        {
+          "romaji": "ryokou no junbi wo shiteiru.",
+          "hiragana": "りょこうのじゅんびをしている。",
+          "english": "I'm preparing for the trip."
+        }
+      ]
+    },
+    {
+      "japanese": "saigai",
+      "hiragana": "さいがい",
+      "english": "disaster; calamity; catastrophe",
+      "examples": [
+        {
+          "romaji": "saigai ni sonaete hijoushoku wo youishita.",
+          "hiragana": "さいがいにそなえてひじょうしょくをよういした。",
+          "english": "I prepared emergency food in case of a disaster."
+        }
+      ]
+    },
+    {
+      "japanese": "bubun",
+      "hiragana": "ぶぶん",
+      "english": "part, portion",
+      "examples": [
+        {
+          "romaji": "kono bubun wo naoshite kudasai.",
+          "hiragana": "このぶぶんをなおしてください。",
+          "english": "Please fix this part."
+        }
+      ]
+    },
+    {
+      "japanese": "sukoshi",
+      "hiragana": "すこし",
+      "english": "a little",
+      "examples": [
+        {
+          "romaji": "nihongo ga sukoshi wakarimasu.",
+          "hiragana": "にほんごがすこしわかります。",
+          "english": "I understand a little Japanese."
+        }
+      ]
+    },
+    {
+      "japanese": "bouei",
+      "hiragana": "ぼうえい",
+      "english": "defense; protection",
+      "examples": [
+        {
+          "romaji": "kuni wo bouei suru.",
+          "hiragana": "くにをぼうえいする。",
+          "english": "To defend the country."
+        }
+      ]
+    },
+    {
+      "japanese": "ningen",
+      "hiragana": "にんげん",
+      "english": "human being, human",
+      "examples": [
+        {
+          "romaji": "ningen no karada no taihan ha mizu da.",
+          "hiragana": "にんげんのからだのたいはんはみずだ。",
+          "english": "Most of the human body is water."
+        }
+      ]
+    },
+    {
+      "japanese": "atama",
+      "hiragana": "あたま",
+      "english": "head",
+      "examples": [
+        {
+          "romaji": "atama ga itai desu.",
+          "hiragana": "あたまがいたいです。",
+          "english": "I have a headache."
+        }
+      ]
+    },
+    {
+      "japanese": "migi",
+      "hiragana": "みぎ",
+      "english": "right",
+      "examples": [
+        {
+          "romaji": "migi ni magaru.",
+          "hiragana": "みぎにまがる。",
+          "english": "To turn right."
+        }
+      ]
+    },
+    {
+      "japanese": "kakuho",
+      "hiragana": "かくほ",
+      "english": "securing, obtaining, ensuring",
+      "examples": [
+        {
+          "romaji": "anzen wo kakuho suru.",
+          "hiragana": "あんぜんをかくほする。",
+          "english": "To ensure safety."
+        }
+      ]
+    },
+    {
+      "japanese": "ouen",
+      "hiragana": "おうえん",
+      "english": "cheering, rooting for",
+      "examples": [
+        {
+          "romaji": "chiimu wo ouen suru.",
+          "hiragana": "ちーむをおうえんする。",
+          "english": "To cheer for the team."
+        }
+      ]
+    },
+    {
+      "japanese": "yama",
+      "hiragana": "やま",
+      "english": "mountain",
+      "examples": [
+        {
+          "romaji": "yama ni noboru.",
+          "hiragana": "やまにのぼる。",
+          "english": "To climb a mountain."
+        }
+      ]
+    },
+    {
+      "japanese": "sue",
+      "hiragana": "すえ",
+      "english": "end, tip",
+      "examples": [
+        {
+          "romaji": "suekko ha kazoku minna ni kawaigararete iru.",
+          "hiragana": "すえっこはかぞくみんなにかわいがられている。",
+          "english": "The youngest child is doted on by the whole family."
+        }
+      ]
+    },
+    {
+      "japanese": "kihon",
+      "hiragana": "きほん",
+      "english": "basis, foundation, basics",
+      "examples": [
+        {
+          "romaji": "kihon wo manabu.",
+          "hiragana": "きほんをまなぶ。",
+          "english": "To learn the basics."
+        }
+      ]
+    },
+    {
+      "japanese": "koudou",
+      "hiragana": "こうどう",
+      "english": "action, behavior",
+      "examples": [
+        {
+          "romaji": "koudou ni utsusu.",
+          "hiragana": "こうどうにうつす。",
+          "english": "To put into action."
+        }
+      ]
+    }
+  ]
+}

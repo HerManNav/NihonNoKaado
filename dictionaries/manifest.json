@@ -1,13 +1,9 @@
 {
-  "version": 1,
+  "version": 2,
   "source": "https://travelwithlanguages.com/blog/most-common-japanese-words.html",
+  "frequencySource": "https://noosflashcards.com/resources/frequency-lists/japanese",
+  "meaningAndExampleSource": "https://www.tkgje.jp/",
   "dictionaries": [
-    {
-      "id": "common-10",
-      "name": "Most common Japanese — 10 words",
-      "file": "most-common-10.json",
-      "count": 10
-    },
     {
       "id": "common-50",
       "name": "Most common Japanese — 50 words",
@@ -19,6 +15,24 @@
       "name": "Most common Japanese — 100 words",
       "file": "most-common-100.json",
       "count": 100
+    },
+    {
+      "id": "common-500",
+      "name": "Most common Japanese — 500 words",
+      "file": "most-common-500.json",
+      "count": 500
+    },
+    {
+      "id": "common-1000",
+      "name": "Most common Japanese — 1,000 words",
+      "file": "most-common-1000.json",
+      "count": 1000
+    },
+    {
+      "id": "common-2000",
+      "name": "Most common Japanese — 2,000 words",
+      "file": "most-common-2000.json",
+      "count": 2000
     }
   ]
 }

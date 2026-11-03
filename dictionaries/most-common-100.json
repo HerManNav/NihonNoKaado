@@ -1,108 +1,1208 @@
 {
   "format": "japanese-cards-dictionary",
-  "version": 2,
+  "version": 3,
   "name": "Most common Japanese — 100 words",
-  "source": "Frequency ranks based on Japanese news and online articles; English glosses simplified for learners. https://travelwithlanguages.com/blog/most-common-japanese-words.html",
+  "source": "Frequency ranks based on Japanese news and online articles; English glosses simplified for learners. https://travelwithlanguages.com/blog/most-common-japanese-words.html; sense-tagged example sentences: https://github.com/tkgally/je-dict-1 (CC0).; sense-tagged example sentences: https://github.com/tkgally/je-dict-1 (CC0).; sense-tagged example sentences: https://github.com/tkgally/je-dict-1 (CC0).",
   "cards": [
-    { "japanese": "da", "english": "to be; casual copula" },
-    { "japanese": "suru", "english": "to do" },
-    { "japanese": "desu", "english": "to be; polite copula" },
-    { "japanese": "iru", "english": "to exist; to be (living things)" },
-    { "japanese": "watashi", "english": "I; me" },
-    { "japanese": "aru", "english": "to exist; to be (things)" },
-    { "japanese": "koto", "english": "thing; matter; event" },
-    { "japanese": "nani", "english": "what" },
-    { "japanese": "sore", "english": "that; it" },
-    { "japanese": "naru", "english": "to become" },
-    { "japanese": "kono", "english": "this (before a noun)" },
-    { "japanese": "kore", "english": "this; this one" },
-    { "japanese": "sou", "english": "so; that way" },
-    { "japanese": "iu", "english": "to say; to tell" },
-    { "japanese": "kare", "english": "he; him; boyfriend" },
-    { "japanese": "dou", "english": "how; what way" },
-    { "japanese": "ii", "english": "good; fine" },
-    { "japanese": "hito", "english": "person" },
-    { "japanese": "anata", "english": "you" },
-    { "japanese": "ore", "english": "I; me (very casual, masculine)" },
-    { "japanese": "sono", "english": "that (before a noun)" },
-    { "japanese": "kimi", "english": "you (familiar)" },
-    { "japanese": "yaru", "english": "to do; to give (casual)" },
-    { "japanese": "miru", "english": "to see; to watch" },
-    { "japanese": "iku", "english": "to go" },
-    { "japanese": "kureru", "english": "to give (to me or my group)" },
-    { "japanese": "dekiru", "english": "can; to be able to" },
-    { "japanese": "koko", "english": "here" },
-    { "japanese": "omae", "english": "you (very casual, can sound rude)" },
-    { "japanese": "shiru", "english": "to know; to find out" },
-    { "japanese": "kuru", "english": "to come" },
-    { "japanese": "mou", "english": "already; anymore" },
-    { "japanese": "dare", "english": "who" },
-    { "japanese": "ima", "english": "now" },
-    { "japanese": "mono", "english": "thing; object; person" },
-    { "japanese": "kedo", "english": "but; though" },
-    { "japanese": "kanojo", "english": "she; her; girlfriend" },
-    { "japanese": "boku", "english": "I; me (casual, often masculine)" },
-    { "japanese": "ano", "english": "that (over there); um…" },
-    { "japanese": "wakaru", "english": "to understand" },
-    { "japanese": "toshi", "english": "year; age" },
-    { "japanese": "naka", "english": "inside; middle" },
-    { "japanese": "mae", "english": "front; before; ago" },
-    { "japanese": "toki", "english": "time; when" },
-    { "japanese": "kiku", "english": "to listen; to ask" },
-    { "japanese": "jibun", "english": "oneself; myself" },
-    { "japanese": "tsuku", "english": "to arrive; to reach" },
-    { "japanese": "motsu", "english": "to have; to hold" },
-    { "japanese": "doko", "english": "where" },
-    { "japanese": "soshite", "english": "and; and then" },
-    { "japanese": "hanashi", "english": "story; talk; conversation" },
-    { "japanese": "sonna", "english": "that kind of; such" },
-    { "japanese": "deru", "english": "to leave; to come out" },
-    { "japanese": "hitsuyou", "english": "necessary; need" },
-    { "japanese": "nan", "english": "what (short form of nani)" },
-    { "japanese": "hanasu", "english": "to speak; to talk" },
-    { "japanese": "matsu", "english": "to wait" },
-    { "japanese": "dasu", "english": "to take out; to submit" },
-    { "japanese": "kata", "english": "person (polite); direction; way" },
-    { "japanese": "ichi", "english": "one" },
-    { "japanese": "kangaeru", "english": "to think; to consider" },
-    { "japanese": "ie", "english": "house; home" },
-    { "japanese": "shinu", "english": "to die" },
-    { "japanese": "ki", "english": "spirit; mood; attention" },
-    { "japanese": "jikan", "english": "time; hour" },
-    { "japanese": "chotto", "english": "a little; a moment" },
-    { "japanese": "hontou", "english": "truth; really; true" },
-    { "japanese": "wareware", "english": "we; us (formal)" },
-    { "japanese": "hai", "english": "yes; here (in response)" },
-    { "japanese": "mada", "english": "still; not yet" },
-    { "japanese": "kudasaru", "english": "to give (respectful)" },
-    { "japanese": "soko", "english": "there; that place" },
-    { "japanese": "hi", "english": "day; sun" },
-    { "japanese": "sekai", "english": "world" },
-    { "japanese": "yoi", "english": "good; fine" },
-    { "japanese": "naze", "english": "why" },
-    { "japanese": "tsukau", "english": "to use" },
-    { "japanese": "daijoubu", "english": "okay; all right" },
-    { "japanese": "ato", "english": "after; later; remaining" },
-    { "japanese": "konna", "english": "this kind of; like this" },
-    { "japanese": "otoko", "english": "man; male" },
-    { "japanese": "hoka", "english": "other; another" },
-    { "japanese": "te", "english": "hand" },
-    { "japanese": "shigoto", "english": "work; job" },
-    { "japanese": "mondai", "english": "problem; question" },
-    { "japanese": "mata", "english": "again; also; another time" },
-    { "japanese": "onaji", "english": "same" },
-    { "japanese": "hairu", "english": "to enter; to go in" },
-    { "japanese": "chigau", "english": "to differ; to be wrong" },
-    { "japanese": "issho", "english": "together; same" },
-    { "japanese": "au", "english": "to meet" },
-    { "japanese": "youna", "english": "like; such as" },
-    { "japanese": "tsukuru", "english": "to make; to create" },
-    { "japanese": "mitai", "english": "like; seem; want to see (context dependent)" },
-    { "japanese": "modoru", "english": "to return; to go back" },
-    { "japanese": "kyou", "english": "today" },
-    { "japanese": "warui", "english": "bad; sorry" },
-    { "japanese": "mitsukeru", "english": "to find; to discover" },
-    { "japanese": "ko", "english": "child; young one" },
-    { "japanese": "anta", "english": "you (very casual)" }
+    {
+      "japanese": "da",
+      "english": "to be; casual copula",
+      "hiragana": "だ",
+      "examples": [
+        {
+          "romaji": "watashi ha gakusei da.",
+          "hiragana": "わたしはがくせいだ。",
+          "english": "I am a student."
+        }
+      ]
+    },
+    {
+      "japanese": "suru",
+      "english": "to do",
+      "hiragana": "する",
+      "examples": [
+        {
+          "romaji": "nani wo suru?",
+          "hiragana": "なにをする?",
+          "english": "What will you do?"
+        }
+      ]
+    },
+    {
+      "japanese": "desu",
+      "english": "to be; polite copula",
+      "hiragana": "です",
+      "examples": [
+        {
+          "romaji": "watashi ha gakusei desu.",
+          "hiragana": "わたしはがくせいです。",
+          "english": "I am a student."
+        }
+      ]
+    },
+    {
+      "japanese": "iru",
+      "english": "to exist; to be (living things)",
+      "hiragana": "いる",
+      "examples": [
+        {
+          "romaji": "neko ga imasu.",
+          "hiragana": "ねこがいます。",
+          "english": "There is a cat. / I have a cat."
+        }
+      ]
+    },
+    {
+      "japanese": "watashi",
+      "english": "I; me",
+      "hiragana": "わたし",
+      "examples": [
+        {
+          "romaji": "watashi ha gakusei desu.",
+          "hiragana": "わたしはがくせいです。",
+          "english": "I am a student."
+        }
+      ]
+    },
+    {
+      "japanese": "aru",
+      "english": "to exist; to be (things)",
+      "hiragana": "ある",
+      "examples": [
+        {
+          "romaji": "hon ga aru.",
+          "hiragana": "ほんがある。",
+          "english": "There is a book."
+        }
+      ]
+    },
+    {
+      "japanese": "koto",
+      "english": "thing; matter; event",
+      "hiragana": "こと",
+      "examples": [
+        {
+          "romaji": "taisetsuna koto wo wasuremashita.",
+          "hiragana": "たいせつなことをわすれました。",
+          "english": "I forgot something important."
+        }
+      ]
+    },
+    {
+      "japanese": "nani",
+      "english": "what",
+      "hiragana": "なに",
+      "examples": [
+        {
+          "romaji": "kore ha nan desu ka?",
+          "hiragana": "これはなんですか？",
+          "english": "What is this?"
+        }
+      ]
+    },
+    {
+      "japanese": "sore",
+      "english": "that; it",
+      "hiragana": "それ",
+      "examples": [
+        {
+          "romaji": "sore ha nan?",
+          "hiragana": "それはなん?",
+          "english": "What is that?"
+        }
+      ]
+    },
+    {
+      "japanese": "naru",
+      "english": "to become",
+      "hiragana": "なる",
+      "examples": [
+        {
+          "romaji": "haru ni natta.",
+          "hiragana": "はるになった。",
+          "english": "Spring has come."
+        }
+      ]
+    },
+    {
+      "japanese": "kono",
+      "english": "this (before a noun)",
+      "hiragana": "この",
+      "examples": [
+        {
+          "romaji": "kono hon ha omoshiroi desu.",
+          "hiragana": "このほんはおもしろいです。",
+          "english": "This book is interesting."
+        }
+      ]
+    },
+    {
+      "japanese": "kore",
+      "english": "this; this one",
+      "hiragana": "これ",
+      "examples": [
+        {
+          "romaji": "kore ha nan desu ka.",
+          "hiragana": "これはなんですか。",
+          "english": "What is this?"
+        }
+      ]
+    },
+    {
+      "japanese": "sou",
+      "english": "so; that way",
+      "hiragana": "そう",
+      "examples": [
+        {
+          "romaji": "sou omoi masu.",
+          "hiragana": "そうおもいます。",
+          "english": "I think so."
+        }
+      ]
+    },
+    {
+      "japanese": "iu",
+      "english": "to say; to tell",
+      "hiragana": "いう",
+      "examples": [
+        {
+          "romaji": "kare ha\"ikitakunai\"to iimashita.",
+          "hiragana": "かれは「いきたくない」といいました。",
+          "english": "He said, 'I don't want to go.'"
+        }
+      ]
+    },
+    {
+      "japanese": "kare",
+      "english": "he; him; boyfriend",
+      "hiragana": "かれ",
+      "examples": [
+        {
+          "romaji": "kare ha gakusei desu.",
+          "hiragana": "かれはがくせいです。",
+          "english": "He is a student."
+        }
+      ]
+    },
+    {
+      "japanese": "dou",
+      "english": "how; what way",
+      "hiragana": "どう",
+      "examples": [
+        {
+          "romaji": "nihon no seikatsu ha dou desu ka?",
+          "hiragana": "にほんのせいかつはどうですか？",
+          "english": "How is life in Japan?"
+        }
+      ]
+    },
+    {
+      "japanese": "ii",
+      "english": "good; fine",
+      "hiragana": "いい",
+      "examples": [
+        {
+          "romaji": "ii tenki da.",
+          "hiragana": "いいてんきだ。",
+          "english": "It's nice weather."
+        }
+      ]
+    },
+    {
+      "japanese": "hito",
+      "english": "person",
+      "hiragana": "ひと",
+      "examples": [
+        {
+          "romaji": "hito ga iru.",
+          "hiragana": "ひとがいる。",
+          "english": "There is a person."
+        }
+      ]
+    },
+    {
+      "japanese": "anata",
+      "english": "you",
+      "hiragana": "あなた",
+      "examples": [
+        {
+          "romaji": "anata no o namae ha?",
+          "hiragana": "あなたのおなまえは？",
+          "english": "What is your name?"
+        }
+      ]
+    },
+    {
+      "japanese": "ore",
+      "english": "I; me (very casual, masculine)",
+      "hiragana": "おれ",
+      "examples": [
+        {
+          "romaji": "ore ha gakusei da.",
+          "hiragana": "おれはがくせいだ。",
+          "english": "I'm a student."
+        }
+      ]
+    },
+    {
+      "japanese": "sono",
+      "english": "that (before a noun)",
+      "hiragana": "その",
+      "examples": [
+        {
+          "romaji": "sono hon wo kudasai.",
+          "hiragana": "そのほんをください。",
+          "english": "Please give me that book."
+        }
+      ]
+    },
+    {
+      "japanese": "kimi",
+      "english": "you (familiar)",
+      "hiragana": "きみ",
+      "examples": [
+        {
+          "romaji": "kimi mo kuru?",
+          "hiragana": "きみもくる？",
+          "english": "Are you coming too?"
+        }
+      ]
+    },
+    {
+      "japanese": "yaru",
+      "english": "to do; to give (casual)",
+      "hiragana": "やる",
+      "examples": [
+        {
+          "romaji": "shukudai wo yaru.",
+          "hiragana": "しゅくだいをやる。",
+          "english": "To do homework."
+        }
+      ]
+    },
+    {
+      "japanese": "miru",
+      "english": "to see; to watch",
+      "hiragana": "みる",
+      "examples": [
+        {
+          "romaji": "terebi wo miru.",
+          "hiragana": "てれびをみる。",
+          "english": "To watch TV."
+        }
+      ]
+    },
+    {
+      "japanese": "iku",
+      "english": "to go",
+      "hiragana": "いく",
+      "examples": [
+        {
+          "romaji": "gakkou ni iku.",
+          "hiragana": "がっこうにいく。",
+          "english": "I go to school."
+        }
+      ]
+    },
+    {
+      "japanese": "kureru",
+      "english": "to give (to me or my group)",
+      "hiragana": "くれる",
+      "examples": [
+        {
+          "romaji": "tomodachi ga hon wo kuremashita.",
+          "hiragana": "ともだちがほんをくれました。",
+          "english": "My friend gave me a book."
+        }
+      ]
+    },
+    {
+      "japanese": "dekiru",
+      "english": "can; to be able to",
+      "hiragana": "できる",
+      "examples": [
+        {
+          "romaji": "nihongo ga dekiru.",
+          "hiragana": "にほんごができる。",
+          "english": "I can speak Japanese."
+        }
+      ]
+    },
+    {
+      "japanese": "koko",
+      "english": "here",
+      "hiragana": "ここ",
+      "examples": [
+        {
+          "romaji": "koko ni suwatte kudasai.",
+          "hiragana": "ここにすわってください。",
+          "english": "Please sit here."
+        }
+      ]
+    },
+    {
+      "japanese": "omae",
+      "english": "you (very casual, can sound rude)",
+      "hiragana": "おまえ",
+      "examples": [
+        {
+          "romaji": "omae, nani yatterunda?",
+          "hiragana": "おまえ、なにやってるんだ？",
+          "english": "Hey, what are you doing?"
+        }
+      ]
+    },
+    {
+      "japanese": "shiru",
+      "english": "to know; to find out",
+      "hiragana": "しる",
+      "examples": [
+        {
+          "romaji": "shirimashita.",
+          "hiragana": "しりました。",
+          "english": "I found out."
+        }
+      ]
+    },
+    {
+      "japanese": "kuru",
+      "english": "to come",
+      "hiragana": "くる",
+      "examples": [
+        {
+          "romaji": "kotchi ni kite!",
+          "hiragana": "こっちにきて！",
+          "english": "Come here!"
+        }
+      ]
+    },
+    {
+      "japanese": "mou",
+      "english": "already; anymore",
+      "hiragana": "もう",
+      "examples": [
+        {
+          "romaji": "mou tabemashita ka?",
+          "hiragana": "もうたべましたか？",
+          "english": "Have you already eaten?"
+        }
+      ]
+    },
+    {
+      "japanese": "dare",
+      "english": "who",
+      "hiragana": "だれ",
+      "examples": [
+        {
+          "romaji": "ano hito ha dare desu ka?",
+          "hiragana": "あのひとはだれですか？",
+          "english": "Who is that person?"
+        }
+      ]
+    },
+    {
+      "japanese": "ima",
+      "english": "now",
+      "hiragana": "いま",
+      "examples": [
+        {
+          "romaji": "ima ikimasu.",
+          "hiragana": "いまいきます。",
+          "english": "I'm coming now. / I'll be right there."
+        }
+      ]
+    },
+    {
+      "japanese": "mono",
+      "english": "thing; object; person",
+      "hiragana": "もの",
+      "examples": [
+        {
+          "romaji": "ii mono wo katta.",
+          "hiragana": "いいものをかった。",
+          "english": "I bought something good."
+        }
+      ]
+    },
+    {
+      "japanese": "kedo",
+      "english": "but; though",
+      "hiragana": "けど",
+      "examples": [
+        {
+          "romaji": "takai kedo, kaitai.",
+          "hiragana": "たかいけど、かいたい。",
+          "english": "It's expensive, but I want to buy it."
+        }
+      ]
+    },
+    {
+      "japanese": "kanojo",
+      "english": "she; her; girlfriend",
+      "hiragana": "かのじょ",
+      "examples": [
+        {
+          "romaji": "kanojo ha gakusei desu.",
+          "hiragana": "かのじょはがくせいです。",
+          "english": "She is a student."
+        }
+      ]
+    },
+    {
+      "japanese": "boku",
+      "english": "I; me (casual, often masculine)",
+      "hiragana": "ぼく",
+      "examples": [
+        {
+          "romaji": "boku ha gakusei desu.",
+          "hiragana": "ぼくはがくせいです。",
+          "english": "I am a student."
+        }
+      ]
+    },
+    {
+      "japanese": "ano",
+      "english": "that (over there); um…",
+      "hiragana": "あの",
+      "examples": [
+        {
+          "romaji": "ano yama ha nan desu ka.",
+          "hiragana": "あのやまはなんですか。",
+          "english": "What is that mountain?"
+        }
+      ]
+    },
+    {
+      "japanese": "wakaru",
+      "english": "to understand",
+      "hiragana": "わかる",
+      "examples": [
+        {
+          "romaji": "wakatta.",
+          "hiragana": "わかった。",
+          "english": "Got it."
+        }
+      ]
+    },
+    {
+      "japanese": "toshi",
+      "english": "year; age",
+      "hiragana": "とし",
+      "examples": [
+        {
+          "romaji": "kotoshi ha isogashii.",
+          "hiragana": "ことしはいそがしい。",
+          "english": "This year is busy."
+        }
+      ]
+    },
+    {
+      "japanese": "naka",
+      "english": "inside; middle",
+      "hiragana": "なか",
+      "examples": [
+        {
+          "romaji": "hako no naka wo miru.",
+          "hiragana": "はこのなかをみる。",
+          "english": "To look inside the box."
+        }
+      ]
+    },
+    {
+      "japanese": "mae",
+      "english": "front; before; ago",
+      "hiragana": "まえ",
+      "examples": [
+        {
+          "romaji": "mae wo mite.",
+          "hiragana": "まえをみて。",
+          "english": "Look ahead."
+        }
+      ]
+    },
+    {
+      "japanese": "toki",
+      "english": "time; when",
+      "hiragana": "とき",
+      "examples": [
+        {
+          "romaji": "nihon ni itta toki, fujisan wo mimashita.",
+          "hiragana": "にほんにいったとき、ふじさんをみました。",
+          "english": "When I went to Japan, I saw Mt. Fuji."
+        }
+      ]
+    },
+    {
+      "japanese": "kiku",
+      "english": "to listen; to ask",
+      "hiragana": "きく",
+      "examples": [
+        {
+          "romaji": "ongaku wo kiku.",
+          "hiragana": "おんがくをきく。",
+          "english": "I listen to music."
+        }
+      ]
+    },
+    {
+      "japanese": "jibun",
+      "english": "oneself; myself",
+      "hiragana": "じぶん",
+      "examples": [
+        {
+          "romaji": "jibun de yatte mite kudasai.",
+          "hiragana": "じぶんでやってみてください。",
+          "english": "Please try doing it yourself."
+        }
+      ]
+    },
+    {
+      "japanese": "tsuku",
+      "english": "to arrive; to reach",
+      "hiragana": "つく",
+      "examples": [
+        {
+          "romaji": "eki ni tsukimashita.",
+          "hiragana": "えきにつきました。",
+          "english": "I arrived at the station."
+        }
+      ]
+    },
+    {
+      "japanese": "motsu",
+      "english": "to have; to hold",
+      "hiragana": "もつ",
+      "examples": [
+        {
+          "romaji": "kore wo motte.",
+          "hiragana": "これをもって。",
+          "english": "Hold this."
+        }
+      ]
+    },
+    {
+      "japanese": "doko",
+      "english": "where",
+      "hiragana": "どこ",
+      "examples": [
+        {
+          "romaji": "toire ha doko desu ka?",
+          "hiragana": "といれはどこですか？",
+          "english": "Where is the restroom?"
+        }
+      ]
+    },
+    {
+      "japanese": "soshite",
+      "english": "and; and then",
+      "hiragana": "そして",
+      "examples": [
+        {
+          "romaji": "soshite kaetta.",
+          "hiragana": "そしてかえった。",
+          "english": "And then I went home."
+        }
+      ]
+    },
+    {
+      "japanese": "hanashi",
+      "english": "story; talk; conversation",
+      "hiragana": "はなし",
+      "examples": [
+        {
+          "romaji": "omoshiroi hanashi wo kiita.",
+          "hiragana": "おもしろいはなしをきいた。",
+          "english": "I heard an interesting story."
+        }
+      ]
+    },
+    {
+      "japanese": "sonna",
+      "english": "that kind of; such",
+      "hiragana": "そんな",
+      "examples": [
+        {
+          "romaji": "sonnakoto iwanaide.",
+          "hiragana": "そんなこといわないで。",
+          "english": "Don't say such things."
+        }
+      ]
+    },
+    {
+      "japanese": "deru",
+      "english": "to leave; to come out",
+      "hiragana": "でる",
+      "examples": [
+        {
+          "romaji": "kekka ga demashita.",
+          "hiragana": "けっかがでました。",
+          "english": "The results came out."
+        }
+      ]
+    },
+    {
+      "japanese": "hitsuyou",
+      "english": "necessary; need",
+      "hiragana": "ひつよう",
+      "examples": [
+        {
+          "romaji": "okane ga hitsuyou desu.",
+          "hiragana": "おかねがひつようです。",
+          "english": "I need money."
+        }
+      ]
+    },
+    {
+      "japanese": "nan",
+      "english": "what (short form of nani)",
+      "hiragana": "なん",
+      "examples": [
+        {
+          "romaji": "nan'youbi ni aimashou ka.",
+          "hiragana": "なんようびにあいましょうか。",
+          "english": "What day of the week shall we meet?"
+        }
+      ]
+    },
+    {
+      "japanese": "hanasu",
+      "english": "to speak; to talk",
+      "hiragana": "はなす",
+      "examples": [
+        {
+          "romaji": "nihongo wo hanasu.",
+          "hiragana": "にほんごをはなす。",
+          "english": "I speak Japanese."
+        }
+      ]
+    },
+    {
+      "japanese": "matsu",
+      "english": "to wait",
+      "hiragana": "まつ",
+      "examples": [
+        {
+          "romaji": "chotto matte.",
+          "hiragana": "ちょっとまって。",
+          "english": "Wait a moment."
+        }
+      ]
+    },
+    {
+      "japanese": "dasu",
+      "english": "to take out; to submit",
+      "hiragana": "だす",
+      "examples": [
+        {
+          "romaji": "kaban kara hon wo dashite kudasai.",
+          "hiragana": "かばんからほんをだしてください。",
+          "english": "Please take the book out of the bag."
+        }
+      ]
+    },
+    {
+      "japanese": "kata",
+      "english": "person (polite); direction; way",
+      "hiragana": "かた",
+      "examples": [
+        {
+          "romaji": "anokata ha donata desu ka.",
+          "hiragana": "あのかたはどなたですか。",
+          "english": "Who is that person?"
+        }
+      ]
+    },
+    {
+      "japanese": "ichi",
+      "english": "one",
+      "hiragana": "いち",
+      "examples": [
+        {
+          "romaji": "ichi kara juu made kazoete kudasai.",
+          "hiragana": "いちからじゅうまでかぞえてください。",
+          "english": "Please count from one to ten."
+        }
+      ]
+    },
+    {
+      "japanese": "kangaeru",
+      "english": "to think; to consider",
+      "hiragana": "かんがえる",
+      "examples": [
+        {
+          "romaji": "yoku kangae masu.",
+          "hiragana": "よくかんがえます。",
+          "english": "I'll think carefully."
+        }
+      ]
+    },
+    {
+      "japanese": "ie",
+      "english": "house; home",
+      "hiragana": "いえ",
+      "examples": [
+        {
+          "romaji": "ie ni kaerimasu.",
+          "hiragana": "いえにかえります。",
+          "english": "I'm going home."
+        }
+      ]
+    },
+    {
+      "japanese": "shinu",
+      "english": "to die",
+      "hiragana": "しぬ",
+      "examples": [
+        {
+          "romaji": "sono inu ha kyonen shinimashita.",
+          "hiragana": "そのいぬはきょねんしにました。",
+          "english": "That dog died last year."
+        }
+      ]
+    },
+    {
+      "japanese": "ki",
+      "english": "spirit; mood; attention",
+      "hiragana": "き",
+      "examples": [
+        {
+          "romaji": "ki wo tsukete.",
+          "hiragana": "きをつけて。",
+          "english": "Be careful."
+        }
+      ]
+    },
+    {
+      "japanese": "jikan",
+      "english": "time; hour",
+      "hiragana": "じかん",
+      "examples": [
+        {
+          "romaji": "jikan ga nai.",
+          "hiragana": "じかんがない。",
+          "english": "I don't have time."
+        }
+      ]
+    },
+    {
+      "japanese": "chotto",
+      "english": "a little; a moment",
+      "hiragana": "ちょっと",
+      "examples": [
+        {
+          "romaji": "chotto takai.",
+          "hiragana": "ちょっとたかい。",
+          "english": "It's a bit expensive."
+        }
+      ]
+    },
+    {
+      "japanese": "hontou",
+      "english": "truth; really; true",
+      "hiragana": "ほんとう",
+      "examples": [
+        {
+          "romaji": "hontou desu ka.",
+          "hiragana": "ほんとうですか。",
+          "english": "Is that true? / Really?"
+        }
+      ]
+    },
+    {
+      "japanese": "wareware",
+      "english": "we; us (formal)",
+      "hiragana": "われわれ",
+      "examples": [
+        {
+          "romaji": "wareware no mokuhyou ha meikaku da.",
+          "hiragana": "われわれのもくひょうはめいかくだ。",
+          "english": "Our goal is clear."
+        }
+      ]
+    },
+    {
+      "japanese": "hai",
+      "english": "yes; here (in response)",
+      "hiragana": "はい",
+      "examples": [
+        {
+          "romaji": "kaitou sha no 80% ga\"hai\"to kotaeta.",
+          "hiragana": "かいとうしゃの80%が「はい」とこたえた。",
+          "english": "80% of respondents answered 'yes.'"
+        }
+      ]
+    },
+    {
+      "japanese": "mada",
+      "english": "still; not yet",
+      "hiragana": "まだ",
+      "examples": [
+        {
+          "romaji": "mada tabeteimasen.",
+          "hiragana": "まだたべていません。",
+          "english": "I haven't eaten yet."
+        }
+      ]
+    },
+    {
+      "japanese": "kudasaru",
+      "english": "to give (respectful)",
+      "hiragana": "くださる",
+      "examples": [
+        {
+          "romaji": "sensei ga hon wo kudasatta.",
+          "hiragana": "せんせいがほんをくださった。",
+          "english": "The teacher gave me a book."
+        }
+      ]
+    },
+    {
+      "japanese": "soko",
+      "english": "there; that place",
+      "hiragana": "そこ",
+      "examples": [
+        {
+          "romaji": "soko ni nani ga aru?",
+          "hiragana": "そこになにがある?",
+          "english": "What is there?"
+        }
+      ]
+    },
+    {
+      "japanese": "hi",
+      "english": "day; sun",
+      "hiragana": "ひ",
+      "examples": [
+        {
+          "romaji": "ii hi desu ne.",
+          "hiragana": "いいひですね。",
+          "english": "It's a nice day, isn't it?"
+        }
+      ]
+    },
+    {
+      "japanese": "sekai",
+      "english": "world",
+      "hiragana": "せかい",
+      "examples": [
+        {
+          "romaji": "sekai ha hiroi.",
+          "hiragana": "せかいはひろい。",
+          "english": "The world is vast."
+        }
+      ]
+    },
+    {
+      "japanese": "yoi",
+      "english": "good; fine",
+      "hiragana": "よい",
+      "examples": [
+        {
+          "romaji": "tenki ga yoi.",
+          "hiragana": "てんきがよい。",
+          "english": "The weather is good."
+        }
+      ]
+    },
+    {
+      "japanese": "naze",
+      "english": "why",
+      "hiragana": "なぜ",
+      "examples": [
+        {
+          "romaji": "naze konakatta no.",
+          "hiragana": "なぜこなかったの。",
+          "english": "Why didn't you come?"
+        }
+      ]
+    },
+    {
+      "japanese": "tsukau",
+      "english": "to use",
+      "hiragana": "つかう",
+      "examples": [
+        {
+          "romaji": "hashi wo tsukau.",
+          "hiragana": "はしをつかう。",
+          "english": "I use chopsticks."
+        }
+      ]
+    },
+    {
+      "japanese": "daijoubu",
+      "english": "okay; all right",
+      "hiragana": "だいじょうぶ",
+      "examples": [
+        {
+          "romaji": "daijoubu desu.",
+          "hiragana": "だいじょうぶです。",
+          "english": "I'm fine."
+        }
+      ]
+    },
+    {
+      "japanese": "ato",
+      "english": "after; later; remaining",
+      "hiragana": "あと",
+      "examples": [
+        {
+          "romaji": "chuushoku no ato, sukoshi hirune wo shita.",
+          "hiragana": "ちゅうしょくのあと、すこしひるねをした。",
+          "english": "After lunch, I took a short nap."
+        }
+      ]
+    },
+    {
+      "japanese": "konna",
+      "english": "this kind of; like this",
+      "hiragana": "こんな",
+      "examples": [
+        {
+          "romaji": "konna hon wo sagashiteimashita.",
+          "hiragana": "こんなほんをさがしていました。",
+          "english": "I was looking for a book like this."
+        }
+      ]
+    },
+    {
+      "japanese": "otoko",
+      "english": "man; male",
+      "hiragana": "おとこ",
+      "examples": [
+        {
+          "romaji": "ano otoko no hito ha tanaka san desu.",
+          "hiragana": "あのおとこのひとはたなかさんです。",
+          "english": "That man is Mr. Tanaka."
+        }
+      ]
+    },
+    {
+      "japanese": "hoka",
+      "english": "other; another",
+      "hiragana": "ほか",
+      "examples": [
+        {
+          "romaji": "hoka ni shitsumon ha arimasu ka.",
+          "hiragana": "ほかにしつもんはありますか。",
+          "english": "Are there any other questions?"
+        }
+      ]
+    },
+    {
+      "japanese": "te",
+      "english": "hand",
+      "hiragana": "て",
+      "examples": [
+        {
+          "romaji": "te wo arau.",
+          "hiragana": "てをあらう。",
+          "english": "To wash one's hands."
+        }
+      ]
+    },
+    {
+      "japanese": "shigoto",
+      "english": "work; job",
+      "hiragana": "しごと",
+      "examples": [
+        {
+          "romaji": "shigoto ha nan desu ka.",
+          "hiragana": "しごとはなんですか。",
+          "english": "What is your job?"
+        }
+      ]
+    },
+    {
+      "japanese": "mondai",
+      "english": "problem; question",
+      "hiragana": "もんだい",
+      "examples": [
+        {
+          "romaji": "kono mondai ha muzukashii desu.",
+          "hiragana": "このもんだいはむずかしいです。",
+          "english": "This problem is difficult."
+        }
+      ]
+    },
+    {
+      "japanese": "mata",
+      "english": "again; also; another time",
+      "hiragana": "また",
+      "examples": [
+        {
+          "romaji": "mata aimashou.",
+          "hiragana": "またあいましょう。",
+          "english": "Let's meet again."
+        }
+      ]
+    },
+    {
+      "japanese": "onaji",
+      "english": "same",
+      "hiragana": "おなじ",
+      "examples": [
+        {
+          "romaji": "onaji hon wo motteiru.",
+          "hiragana": "おなじほんをもっている。",
+          "english": "I have the same book."
+        }
+      ]
+    },
+    {
+      "japanese": "hairu",
+      "english": "to enter; to go in",
+      "hiragana": "はいる",
+      "examples": [
+        {
+          "romaji": "heya ni haitte kudasai.",
+          "hiragana": "へやにはいってください。",
+          "english": "Please enter the room."
+        }
+      ]
+    },
+    {
+      "japanese": "chigau",
+      "english": "to differ; to be wrong",
+      "hiragana": "ちがう",
+      "examples": [
+        {
+          "romaji": "kangae ga chigau.",
+          "hiragana": "かんがえがちがう。",
+          "english": "We think differently."
+        }
+      ]
+    },
+    {
+      "japanese": "issho",
+      "english": "together; same",
+      "hiragana": "いっしょ",
+      "examples": [
+        {
+          "romaji": "issho ni ikimashou.",
+          "hiragana": "いっしょにいきましょう。",
+          "english": "Let's go together."
+        }
+      ]
+    },
+    {
+      "japanese": "au",
+      "english": "to meet",
+      "hiragana": "あう",
+      "examples": [
+        {
+          "romaji": "tomodachi ni au.",
+          "hiragana": "ともだちにあう。",
+          "english": "I meet my friend."
+        }
+      ]
+    },
+    {
+      "japanese": "youna",
+      "english": "like; such as",
+      "hiragana": "ような",
+      "examples": [
+        {
+          "romaji": "yume no youna hanashi da.",
+          "hiragana": "ゆめのようなはなしだ。",
+          "english": "It sounds like a dream come true."
+        }
+      ]
+    },
+    {
+      "japanese": "tsukuru",
+      "english": "to make; to create",
+      "hiragana": "つくる",
+      "examples": [
+        {
+          "romaji": "gohan wo tsukuru.",
+          "hiragana": "ごはんをつくる。",
+          "english": "I make a meal."
+        }
+      ]
+    },
+    {
+      "japanese": "mitai",
+      "english": "like; seem; want to see (context dependent)",
+      "hiragana": "みたい",
+      "examples": [
+        {
+          "romaji": "kodomo mitaida.",
+          "hiragana": "こどもみたいだ。",
+          "english": "It's like a child. / How childish."
+        }
+      ]
+    },
+    {
+      "japanese": "modoru",
+      "english": "to return; to go back",
+      "hiragana": "もどる",
+      "examples": [
+        {
+          "romaji": "sugu modoru.",
+          "hiragana": "すぐもどる。",
+          "english": "I'll be right back."
+        }
+      ]
+    },
+    {
+      "japanese": "kyou",
+      "english": "today",
+      "hiragana": "きょう",
+      "examples": [
+        {
+          "romaji": "kyou ha nan'youbi desu ka.",
+          "hiragana": "きょうはなんようびですか。",
+          "english": "What day of the week is today?"
+        }
+      ]
+    },
+    {
+      "japanese": "warui",
+      "english": "bad; sorry",
+      "hiragana": "わるい",
+      "examples": [
+        {
+          "romaji": "warui, okureta.",
+          "hiragana": "わるい、おくれた。",
+          "english": "Sorry, I'm late."
+        }
+      ]
+    },
+    {
+      "japanese": "mitsukeru",
+      "english": "to find; to discover",
+      "hiragana": "みつける",
+      "examples": [
+        {
+          "romaji": "kagi wo mitsuketa.",
+          "hiragana": "かぎをみつけた。",
+          "english": "I found the key."
+        }
+      ]
+    },
+    {
+      "japanese": "ko",
+      "english": "child; young one",
+      "hiragana": "こ",
+      "examples": [
+        {
+          "romaji": "kashikoi kodesu ne.",
+          "hiragana": "かしこいこですね。",
+          "english": "What a smart child."
+        }
+      ]
+    },
+    {
+      "japanese": "anta",
+      "english": "you (very casual)",
+      "hiragana": "あんた",
+      "examples": [
+        {
+          "romaji": "anta, dare?",
+          "hiragana": "あんた、だれ？",
+          "english": "Who are you?"
+        }
+      ]
+    }
   ]
 }
