@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -21,7 +21,6 @@ const cardForm = document.querySelector("#card-form");
 const japaneseInput = document.querySelector("#japanese-word");
 const hiraganaInput = document.querySelector("#hiragana-word");
 const englishMeanings = document.querySelector("#english-meanings");
-const englishInput = document.querySelector("#english-translation");
 const formTitle = document.querySelector("#form-title");
 const formSubmitButton = cardForm.querySelector("[type='submit']");
 const cancelEditButton = document.querySelector("#cancel-edit-button");
@@ -81,7 +80,16 @@ function loadCards() {
       ? saved.filter((card) => typeof card?.japanese === "string" && (typeof card?.english === "string" || Array.isArray(card?.meanings)))
         .map((card) => {
           const meanings = (Array.isArray(card.meanings) ? card.meanings : [card.english]).filter((meaning) => typeof meaning === "string").map((meaning) => meaning.trim()).filter(Boolean);
-          return { ...card, english: meanings[0] || "", meanings, hiragana: typeof card.hiragana === "string" && card.hiragana ? card.hiragana : romajiToHiragana(card.japanese) };
+          const examples = meanings.map((_, index) => {
+            const example = Array.isArray(card.examples) ? card.examples[index] || {} : {};
+            const romaji = typeof example.romaji === "string" ? example.romaji.trim() : "";
+            return {
+              romaji,
+              hiragana: typeof example.hiragana === "string" && example.hiragana.trim() ? example.hiragana.trim() : romajiToHiragana(romaji),
+              english: typeof example.english === "string" ? example.english.trim() : "",
+            };
+          });
+          return { ...card, english: meanings[0] || "", meanings, examples, hiragana: typeof card.hiragana === "string" && card.hiragana ? card.hiragana : romajiToHiragana(card.japanese) };
         }).filter((card) => card.meanings.length > 0)
       : [];
   } catch {
@@ -190,14 +198,13 @@ function createDictionaryEntryRow() {
 
   const meanings = document.createElement("div");
   meanings.className = "dictionary-entry-meanings";
-  meanings.append(createDictionaryMeaningInput());
+  const firstMeaning = createDictionaryMeaningInput();
+  meanings.append(firstMeaning);
 
   const meaningRow = document.createElement("div");
   meaningRow.className = "dictionary-entry-meaning-row";
-  const hints = document.createElement("div");
-  hints.className = "dictionary-entry-hints";
-  hints.innerHTML = '<span>Press <kbd>Tab</kbd> for another meaning</span><span>Press <kbd>Enter</kbd> to add card</span>';
-  meaningRow.append(meanings, hints);
+  meaningRow.append(meanings);
+  firstMeaning.querySelector(".dictionary-entry-hints").hidden = false;
   details.append(japanese, hiragana, meaningRow);
 
   const buttonSpacer = document.createElement("span");
@@ -208,12 +215,47 @@ function createDictionaryEntryRow() {
 }
 
 function createDictionaryMeaningInput(value = "") {
+  const group = document.createElement("div");
+  group.className = "dictionary-entry-meaning-group";
   const input = document.createElement("input");
   input.type = "text";
-  input.className = "dictionary-entry-meaning";
+  input.className = "dictionary-entry-meaning meaning-translation";
   input.placeholder = "English meaning";
   input.setAttribute("aria-label", "New English meaning");
   input.value = value;
+  const control = document.createElement("div");
+  control.className = "dictionary-entry-meaning-control";
+  const hints = document.createElement("div");
+  hints.className = "dictionary-entry-hints";
+  hints.hidden = true;
+  hints.innerHTML = '<span>Press <kbd>Tab</kbd> for another meaning</span><span>Press <kbd>Enter</kbd> to add card</span>';
+  control.append(input, hints);
+  const exampleFields = document.createElement("div");
+  exampleFields.className = "dictionary-entry-example-fields";
+  exampleFields.append(
+    createEntryExampleInput("romaji", "Example (romaji)"),
+    createEntryExampleInput("hiragana", "Example (hiragana)"),
+    createEntryExampleInput("english", "Example translation"),
+  );
+  group.append(control, exampleFields);
+  return group;
+}
+
+function showDictionaryMeaningHints(row, activeGroup) {
+  row.querySelectorAll(".dictionary-entry-meaning-group").forEach((group) => {
+    const hints = group.querySelector(".dictionary-entry-hints");
+    if (hints) hints.hidden = group !== activeGroup;
+  });
+}
+
+function createEntryExampleInput(field, placeholder) {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = `dictionary-entry-example-${field}`;
+  input.placeholder = placeholder;
+  input.setAttribute("aria-label", `New ${placeholder.toLowerCase()}`);
+  input.autocomplete = "off";
+  if (field === "hiragana") input.dataset.manuallyEdited = "false";
   return input;
 }
 
@@ -222,11 +264,25 @@ function addDictionaryEntry() {
   if (!row) return;
   const japanese = row.querySelector(".dictionary-entry-japanese").value.trim();
   const hiragana = row.querySelector(".dictionary-entry-hiragana").value.trim() || romajiToHiragana(japanese);
-  const meanings = [...row.querySelectorAll(".dictionary-entry-meaning")].map((input) => input.value.trim()).filter(Boolean);
+  const groups = [...row.querySelectorAll(".dictionary-entry-meaning-group")];
+  const meaningEntries = groups.map((group) => {
+    const romaji = group.querySelector(".dictionary-entry-example-romaji").value.trim();
+    const customHiragana = group.querySelector(".dictionary-entry-example-hiragana").value.trim();
+    return {
+      meaning: group.querySelector(".meaning-translation").value.trim(),
+      example: {
+        romaji,
+        hiragana: customHiragana || romajiToHiragana(romaji),
+        english: group.querySelector(".dictionary-entry-example-english").value.trim(),
+      },
+    };
+  }).filter((entry) => entry.meaning);
+  const meanings = meaningEntries.map((entry) => entry.meaning);
+  const examples = meaningEntries.map((entry) => entry.example);
   if (!japanese || meanings.length === 0) return;
 
   const english = meanings[0];
-  const nextCards = [{ id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings }, ...cards];
+  const nextCards = [{ id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings, examples }, ...cards];
   if (!saveCards(nextCards)) {
     window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
     return;
@@ -348,9 +404,11 @@ function renderPracticeCard() {
   if (fromEnglish) {
     promptWord.textContent = entry.meaning;
     renderJapaneseWord(answerWord, card);
+    const exampleBlock = createPracticeExample(card.examples?.[entry.meaningIndex]);
+    if (exampleBlock) answerWord.append(exampleBlock);
   } else {
     renderJapaneseWord(promptWord, card);
-    answerWord.textContent = card.meanings.join("\n\n");
+    renderPracticeAnswer(answerWord, card, card.meanings.map((_, index) => index));
   }
   const showFullCard = isReviewing || answerRevealed;
   answerWord.hidden = !showFullCard;
@@ -376,30 +434,83 @@ function renderJapaneseWord(container, card) {
   container.append(romaji, hiragana);
 }
 
+function renderPracticeAnswer(container, card, meaningIndexes) {
+  container.replaceChildren();
+  meaningIndexes.forEach((meaningIndex) => {
+    const meaning = document.createElement("div");
+    meaning.className = "practice-meaning";
+    const translation = document.createElement("span");
+    translation.className = "practice-translation";
+    translation.textContent = card.meanings[meaningIndex] || "";
+    meaning.append(translation);
+    const exampleBlock = createPracticeExample(card.examples?.[meaningIndex]);
+    if (exampleBlock) meaning.append(exampleBlock);
+    container.append(meaning);
+  });
+}
+
+function createPracticeExample(example) {
+  if (!example || !(example.romaji || example.hiragana || example.english)) return null;
+  const exampleBlock = document.createElement("div");
+  exampleBlock.className = "practice-example";
+  const exampleRomaji = document.createElement("span");
+  exampleRomaji.className = "practice-example-romaji";
+  exampleRomaji.textContent = example.romaji || "";
+  const exampleHiragana = document.createElement("span");
+  exampleHiragana.className = "practice-example-hiragana";
+  exampleHiragana.textContent = example.hiragana || romajiToHiragana(example.romaji || "");
+  const exampleTranslation = document.createElement("span");
+  exampleTranslation.className = "practice-example-translation";
+  exampleTranslation.textContent = example.english || "";
+  exampleBlock.append(exampleRomaji, exampleHiragana, exampleTranslation);
+  return exampleBlock;
+}
+
 function drawEnglishPracticeCard(index = practiceIndex) {
   practiceDeck[index] = englishPracticeRun.draw();
 }
 
 function meaningInputs() {
-  return [...englishMeanings.querySelectorAll("input")];
+  return [...englishMeanings.querySelectorAll(".meaning-translation")];
 }
 
-function addMeaningInput(value = "") {
+function addMeaningInput(value = "", example = {}) {
+  const group = document.createElement("div");
+  group.className = "meaning-entry-group";
   const input = document.createElement("input");
   input.type = "text";
   input.name = "meanings";
+  input.className = "meaning-translation";
   input.placeholder = "Another meaning";
   input.value = value;
-  englishMeanings.append(input);
+  const exampleFields = document.createElement("div");
+  exampleFields.className = "meaning-example-fields";
+  const fields = [
+    ["romaji", "Example (romaji)"],
+    ["hiragana", "Example (hiragana)"],
+    ["english", "Example translation"],
+  ];
+  fields.forEach(([field, placeholder]) => {
+    const exampleInput = document.createElement("input");
+    exampleInput.type = "text";
+    exampleInput.className = `meaning-example-${field}`;
+    exampleInput.placeholder = placeholder;
+    exampleInput.setAttribute("aria-label", `${placeholder} for ${value || "meaning"}`);
+    exampleInput.autocomplete = "off";
+    exampleInput.value = example[field] || (field === "hiragana" ? romajiToHiragana(example.romaji || "") : "");
+    if (field === "hiragana") exampleInput.dataset.manuallyEdited = example.hiragana ? "true" : "false";
+    exampleFields.append(exampleInput);
+  });
+  group.append(input, exampleFields);
+  englishMeanings.append(group);
   return input;
 }
 
-function resetMeaningInputs(values = [""]) {
-  const inputs = meaningInputs();
-  inputs.slice(1).forEach((input) => input.remove());
-  const first = meaningInputs()[0] || addMeaningInput();
-  first.value = values[0] || "";
-  values.slice(1).forEach((value) => addMeaningInput(value));
+function resetMeaningInputs(values = [""], examples = []) {
+  englishMeanings.replaceChildren();
+  const first = addMeaningInput(values[0] || "", examples[0] || {});
+  values.slice(1).forEach((value, index) => addMeaningInput(value, examples[index + 1] || {}));
+  if (!first.id) first.id = "english-translation";
 }
 
 function renderSessionProgress() {
@@ -648,7 +759,7 @@ function startEditingCard(index) {
   hiraganaManuallyEdited = false;
   japaneseInput.value = card.japanese;
   hiraganaInput.value = card.hiragana || romajiToHiragana(card.japanese);
-  resetMeaningInputs(card.meanings?.length ? card.meanings : [card.english]);
+  resetMeaningInputs(card.meanings?.length ? card.meanings : [card.english], card.examples || []);
   formTitle.textContent = "Edit word";
   formSubmitButton.textContent = "Save changes";
   cancelEditButton.hidden = false;
@@ -750,6 +861,18 @@ dictionaryButton.addEventListener("click", () => {
 
 wordList.addEventListener("input", (event) => {
   if (!(event.target instanceof HTMLInputElement)) return;
+  if (event.target.matches(".dictionary-entry-example-hiragana")) {
+    event.target.dataset.manuallyEdited = "true";
+    return;
+  }
+  if (event.target.matches(".dictionary-entry-example-romaji")) {
+    const hiragana = event.target.closest(".dictionary-entry-meaning-group")?.querySelector(".dictionary-entry-example-hiragana");
+    if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
+      hiragana.value = romajiToHiragana(event.target.value.trim());
+      hiragana.dataset.manuallyEdited = "false";
+    }
+    return;
+  }
   if (event.target.matches(".dictionary-entry-hiragana")) {
     event.target.dataset.manuallyEdited = "true";
     return;
@@ -762,29 +885,40 @@ wordList.addEventListener("input", (event) => {
   }
 });
 
+wordList.addEventListener("focusin", (event) => {
+  if (!(event.target instanceof HTMLInputElement)) return;
+  const row = event.target.closest(".dictionary-entry-row");
+  const group = event.target.closest(".dictionary-entry-meaning-group");
+  if (row && group) showDictionaryMeaningHints(row, group);
+});
+
 wordList.addEventListener("keydown", (event) => {
   if (!(event.target instanceof HTMLInputElement)) return;
   const row = event.target.closest(".dictionary-entry-row");
   if (!row) return;
   const isJapaneseField = event.target.matches(".dictionary-entry-japanese");
   const isMeaningField = event.target.matches(".dictionary-entry-meaning");
-  if (!isJapaneseField && !isMeaningField) return;
+  const isExampleRomajiField = event.target.matches(".dictionary-entry-example-romaji");
+  const isExampleEndField = event.target.matches(".dictionary-entry-example-english");
+  if (!isJapaneseField && !isMeaningField && !isExampleRomajiField && !isExampleEndField) return;
   const meaningInputs = [...row.querySelectorAll(".dictionary-entry-meaning")];
-  const meaningIndex = meaningInputs.indexOf(event.target);
-  const action = getDictionaryEntryKeyAction(event.key, event.shiftKey, isJapaneseField ? "japanese" : "meaning", meaningIndex, meaningInputs.length);
-
-  if (action === "focus-meaning") {
+  const meaningIndex = meaningInputs.indexOf(event.target.closest(".dictionary-entry-meaning-group")?.querySelector(".dictionary-entry-meaning"));
+  const isLastGroup = meaningIndex === meaningInputs.length - 1;
+  if (event.key === "Tab" && !event.shiftKey && isJapaneseField) {
     event.preventDefault();
     meaningInputs[0]?.focus();
-  } else if (action === "add-meaning") {
+  } else if (event.key === "Tab" && !event.shiftKey && isExampleRomajiField) {
     event.preventDefault();
-    const nextInput = createDictionaryMeaningInput();
-    row.querySelector(".dictionary-entry-meanings").append(nextInput);
-    nextInput.focus();
-  } else if (action === "focus-next-meaning") {
+    event.target.closest(".dictionary-entry-meaning-group")?.querySelector(".dictionary-entry-example-english")?.focus();
+  } else if (event.key === "Tab" && !event.shiftKey && isExampleEndField && isLastGroup) {
     event.preventDefault();
-    meaningInputs[meaningIndex + 1]?.focus();
-  } else if (action === "add-card") {
+    const nextGroup = createDictionaryMeaningInput();
+    row.querySelector(".dictionary-entry-meanings").append(nextGroup);
+    nextGroup.querySelector(".dictionary-entry-meaning").focus();
+  } else if (event.key === "Enter" && isExampleEndField && isLastGroup) {
+    event.preventDefault();
+    addDictionaryEntry();
+  } else if (event.key === "Enter" && (isMeaningField || isExampleEndField)) {
     event.preventDefault();
     addDictionaryEntry();
   }
@@ -794,13 +928,22 @@ cardForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const japanese = japaneseInput.value.trim();
   const hiragana = hiraganaInput.value.trim() || romajiToHiragana(japanese);
-  const meanings = meaningInputs().map((input) => input.value.trim()).filter(Boolean);
+  const meaningEntries = [...englishMeanings.querySelectorAll(".meaning-entry-group")].map((group) => ({
+    meaning: group.querySelector(".meaning-translation").value.trim(),
+    example: {
+      romaji: group.querySelector(".meaning-example-romaji").value.trim(),
+      hiragana: group.querySelector(".meaning-example-hiragana").value.trim() || romajiToHiragana(group.querySelector(".meaning-example-romaji").value.trim()),
+      english: group.querySelector(".meaning-example-english").value.trim(),
+    },
+  })).filter((entry) => entry.meaning);
+  const meanings = meaningEntries.map((entry) => entry.meaning);
+  const examples = meaningEntries.map((entry) => entry.example);
   if (!japanese || meanings.length === 0) return;
   const english = meanings[0];
   const isEditing = editingCardIndex !== null;
   const nextCards = !isEditing
-    ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings }]
-    : updateCardAt(cards, editingCardIndex, { japanese, hiragana, english, meanings });
+    ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings, examples }]
+    : updateCardAt(cards, editingCardIndex, { japanese, hiragana, english, meanings, examples });
   if (!saveCards(nextCards)) {
     window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
     return;
@@ -825,12 +968,18 @@ cardForm.addEventListener("submit", (event) => {
 });
 
 cardForm.addEventListener("keydown", (event) => {
-  if (!(event.target instanceof HTMLInputElement) || !event.target.matches("#english-meanings input")) return;
-  if (event.key === "Tab" && !event.shiftKey) {
+  if (!(event.target instanceof HTMLInputElement) || !event.target.closest("#english-meanings")) return;
+  const group = event.target.closest(".meaning-entry-group");
+  const groups = [...englishMeanings.querySelectorAll(".meaning-entry-group")];
+  const isLastGroup = groups.at(-1) === group;
+  if (event.key === "Tab" && !event.shiftKey && event.target.matches(".meaning-example-romaji")) {
     event.preventDefault();
-    const inputs = meaningInputs();
-    const index = inputs.indexOf(event.target);
-    (inputs[index + 1] || addMeaningInput()).focus();
+    group.querySelector(".meaning-example-english")?.focus();
+    return;
+  }
+  if (event.key === "Tab" && !event.shiftKey && event.target.matches(".meaning-example-english") && isLastGroup) {
+    event.preventDefault();
+    addMeaningInput().focus();
     return;
   }
   if (event.key === "Enter") {
@@ -842,7 +991,21 @@ cardForm.addEventListener("keydown", (event) => {
 japaneseInput.addEventListener("keydown", (event) => {
   if (!shouldSkipHiraganaOnTab(event.key, event.shiftKey)) return;
   event.preventDefault();
-  englishInput.focus();
+  meaningInputs()[0]?.focus();
+});
+
+englishMeanings.addEventListener("input", (event) => {
+  if (!(event.target instanceof HTMLInputElement)) return;
+  if (event.target.matches(".meaning-example-hiragana")) {
+    event.target.dataset.manuallyEdited = "true";
+    return;
+  }
+  if (!event.target.matches(".meaning-example-romaji")) return;
+  const hiragana = event.target.closest(".meaning-entry-group")?.querySelector(".meaning-example-hiragana");
+  if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
+    hiragana.value = romajiToHiragana(event.target.value.trim());
+    hiragana.dataset.manuallyEdited = "false";
+  }
 });
 
 japaneseInput.addEventListener("input", () => {

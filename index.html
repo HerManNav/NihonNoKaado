@@ -17,8 +17,8 @@
 
           <label class="field-label" for="origin-language">Show me</label>
           <select id="origin-language" class="select-control">
-            <option value="english">English first</option>
             <option value="japanese">Japanese first</option>
+            <option value="english">English first</option>
           </select>
           <p class="field-label session-label">Cards per session</p>
           <div class="session-options" role="group" aria-label="Cards per practice session">
@@ -126,9 +126,16 @@
           <input id="hiragana-word" name="hiragana" type="text" placeholder="ひらがな" autocomplete="off" required />
           <label class="field-label" for="english-translation">English meaning(s)</label>
           <div id="english-meanings" class="english-meanings">
-            <input id="english-translation" name="meanings" type="text" placeholder="e.g. good morning" required />
+            <div class="meaning-entry-group">
+              <input id="english-translation" class="meaning-translation" name="meanings" type="text" placeholder="e.g. good morning" required />
+              <div class="meaning-example-fields">
+                <input class="meaning-example-romaji" type="text" placeholder="Example (romaji)" aria-label="Example in romaji" autocomplete="off" />
+                <input class="meaning-example-hiragana" type="text" placeholder="Example (hiragana)" aria-label="Example in hiragana" autocomplete="off" data-manually-edited="false" />
+                <input class="meaning-example-english" type="text" placeholder="Example translation" aria-label="Example translation" autocomplete="off" />
+              </div>
+            </div>
           </div>
-          <p class="meaning-tab-hint">Press Tab to add another meaning</p>
+          <p class="meaning-tab-hint">Press Tab after an example translation to add another meaning</p>
           <p id="enter-hint" class="enter-hint">Press Enter to add</p>
           <div class="form-actions">
             <button id="cancel-edit-button" class="secondary-button" type="button" hidden>Cancel</button>

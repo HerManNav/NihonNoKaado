@@ -16,6 +16,7 @@ test("imports the app's named dictionary format and trims card fields", () => {
     hiragana: "えき",
     english: "station\nExample: eki wa doko desu ka?",
     meanings: ["station\nExample: eki wa doko desu ka?"],
+    examples: [{ romaji: "", hiragana: "", english: "" }],
   }]);
 });
 
@@ -69,6 +70,10 @@ test("imports multiple English meanings, trimming and discarding blank entries",
     hiragana: "はし",
     english: "chopsticks",
     meanings: ["chopsticks", "bridge\nExample: hashio wataru"],
+    examples: [
+      { romaji: "", hiragana: "", english: "" },
+      { romaji: "", hiragana: "", english: "" },
+    ],
   });
 });
 
@@ -91,31 +96,60 @@ test("exports edited hiragana with each card and preserves it on import", () => 
   const json = serializeDictionary(sourceCards, "Travel", "2026-11-02T12:00:00.000Z");
   const parsedJson = JSON.parse(json);
 
-  assert.deepEqual(parsedJson.cards, [{ japanese: "arigatou", hiragana: "ありがとー", english: "thank you (casual)" }]);
+  assert.deepEqual(parsedJson.cards, [{
+    japanese: "arigatou",
+    hiragana: "ありがとー",
+    examples: [{ romaji: "", hiragana: "", english: "" }],
+    english: "thank you (casual)",
+  }]);
   assert.equal(sourceCards[0].hiragana, "ありがとー");
   const importedCard = parseImportedDictionary(parsedJson, () => "round-trip")[0];
   assert.equal(importedCard.hiragana, "ありがとー");
   assert.equal(importedCard.english, "thank you (casual)");
 });
 
-test("exports and reimports all edited meanings", () => {
+test("exports and reimports all edited meanings and aligned examples", () => {
   const sourceCards = [{
     japanese: "hashi",
     hiragana: "はし",
     english: "chopsticks",
     meanings: ["chopsticks", "bridge", "edge; used in this example"],
+    examples: [
+      { romaji: "hashi o tsukau.", hiragana: "はしをつかう。", english: "Use chopsticks." },
+      { romaji: "hashi o wataru.", hiragana: "はしをわたる。", english: "Cross the bridge." },
+      { romaji: "hashi no hashi.", hiragana: "はしのはし。", english: "The edge of the bridge." },
+    ],
   }];
   const exported = JSON.parse(serializeDictionary(sourceCards, "Travel", "2026-11-03T12:00:00.000Z"));
 
-  assert.equal(exported.version, 2);
+  assert.equal(exported.version, 3);
   assert.deepEqual(exported.cards, [{
     japanese: "hashi",
     hiragana: "はし",
+    examples: sourceCards[0].examples,
     meanings: ["chopsticks", "bridge", "edge; used in this example"],
   }]);
   const imported = parseImportedDictionary(exported, () => "round-trip")[0];
   assert.deepEqual(imported.meanings, sourceCards[0].meanings);
+  assert.deepEqual(imported.examples, sourceCards[0].examples);
   assert.equal(imported.english, "chopsticks");
+});
+
+test("imports partial examples by meaning index and generates missing example hiragana", () => {
+  const imported = parseImportedDictionary([{
+    japanese: "neko",
+    meanings: ["cat", "feline"],
+    examples: [
+      { romaji: "neko ga suki.", english: "I like cats." },
+      { romaji: "", hiragana: "", english: "" },
+      { romaji: "unused", hiragana: "よぶん", english: "ignored extra example" },
+    ],
+  }], () => "example-id")[0];
+
+  assert.deepEqual(imported.examples, [
+    { romaji: "neko ga suki.", hiragana: "ねこ が すき。", english: "I like cats." },
+    { romaji: "", hiragana: "", english: "" },
+  ]);
 });
 
 test("converts common gojuon and alternate Hepburn spellings", () => {
@@ -182,7 +216,7 @@ test("handles syllabic n before consonants, vowels, y, and punctuation", () => {
     ["nani", "なに"],
     ["nya", "にゃ"],
     ["kin'en", "きんえん"],
-    ["san, neko", "さん, ねこ"],
+    ["san, neko", "さん、 ねこ"],
   ];
 
   for (const [romaji, hiragana] of cases) {
@@ -190,8 +224,14 @@ test("handles syllabic n before consonants, vowels, y, and punctuation", () => {
   }
 });
 
-test("preserves spaces, punctuation, existing Japanese text, and unsupported characters", () => {
-  assert.equal(romajiToHiragana("Ohayou, Tokyo!"), "おはよう, ときょ!");
+test("converts common punctuation and paired quotes in complete example sentences", () => {
+  assert.equal(romajiToHiragana("Ohayou, Tokyo!"), "おはよう、 ときょ！");
+  assert.equal(romajiToHiragana('"neko desu."'), "「ねこ です。」");
+  assert.equal(romajiToHiragana("neko... inu? (dare)"), "ねこ… いぬ？ （だれ）");
+  assert.equal(romajiToHiragana("neko: inu; sushi."), "ねこ： いぬ； すし。");
+});
+
+test("preserves spaces, existing Japanese text, and unsupported characters", () => {
   assert.equal(romajiToHiragana("  neko  "), "  ねこ  ");
   assert.equal(romajiToHiragana("ねこ"), "ねこ");
   assert.equal(romajiToHiragana("ko-hi-"), "こ-ひ-");
@@ -231,7 +271,7 @@ test("rejects unsupported formats and versions", () => {
     /different dictionary format/,
   );
   assert.throws(
-    () => parseImportedDictionary({ format: "japanese-cards-dictionary", version: 3, cards: [] }),
+    () => parseImportedDictionary({ format: "japanese-cards-dictionary", version: 4, cards: [] }),
     /version is not supported/,
   );
 });

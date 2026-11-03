@@ -22,15 +22,31 @@
     a: "あ", i: "い", u: "う", e: "え", o: "お",
   };
   const ROMAJI_WORDS = { konnichiwa: "こんにちは", konbanwa: "こんばんは" };
+  const ROMAJI_PUNCTUATION = {
+    ",": "、", ".": "。", "?": "？", "!": "！", ":": "：", ";": "；",
+    "(": "（", ")": "）",
+  };
 
   function romajiToHiragana(value) {
     const input = String(value ?? "").toLowerCase();
     if (ROMAJI_WORDS[input]) return ROMAJI_WORDS[input];
     let output = "";
+    let insideDoubleQuote = false;
     for (let index = 0; index < input.length;) {
       const char = input[index];
+      if (input.slice(index, index + 3) === "...") {
+        output += "…";
+        index += 3;
+        continue;
+      }
+      if (char === '"') {
+        output += insideDoubleQuote ? "」" : "「";
+        insideDoubleQuote = !insideDoubleQuote;
+        index += 1;
+        continue;
+      }
       if (/[^a-z]/.test(char)) {
-        output += char;
+        output += ROMAJI_PUNCTUATION[char] || char;
         index += 1;
         continue;
       }
@@ -91,7 +107,7 @@
     if (data && !Array.isArray(data) && data.format && data.format !== EXPORT_FORMAT) {
       throw new Error("This file is for a different dictionary format.");
     }
-    if (data && !Array.isArray(data) && data.version && ![1, 2].includes(data.version)) {
+    if (data && !Array.isArray(data) && data.version && ![1, 2, 3].includes(data.version)) {
       throw new Error("This dictionary version is not supported.");
     }
     return imported.map((card, index) => {
@@ -102,7 +118,17 @@
       const hiragana = typeof card?.hiragana === "string" && card.hiragana.trim()
         ? card.hiragana.trim()
         : romajiToHiragana(japanese);
-      return { id: makeId(index), japanese, hiragana, english: meanings[0], meanings };
+      const rawExamples = Array.isArray(card?.examples) ? card.examples : [];
+      const examples = meanings.map((_, meaningIndex) => {
+        const example = rawExamples[meaningIndex] || {};
+        const romaji = typeof example.romaji === "string" ? example.romaji.trim() : "";
+        const exampleHiragana = typeof example.hiragana === "string" && example.hiragana.trim()
+          ? example.hiragana.trim()
+          : romajiToHiragana(romaji);
+        const english = typeof example.english === "string" ? example.english.trim() : "";
+        return { romaji, hiragana: exampleHiragana, english };
+      });
+      return { id: makeId(index), japanese, hiragana, english: meanings[0], meanings, examples };
     });
   }
 
@@ -117,12 +143,24 @@
     if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
     return JSON.stringify({
       format: EXPORT_FORMAT,
-      version: 2,
+      version: 3,
       name,
       exportedAt,
       cards: cards.map((card) => {
         const meanings = Array.isArray(card.meanings) ? card.meanings : [card.english];
-        const exported = { japanese: card.japanese, hiragana: card.hiragana };
+        const exported = {
+          japanese: card.japanese,
+          hiragana: card.hiragana,
+          examples: meanings.map((_, index) => {
+            const example = Array.isArray(card.examples) ? card.examples[index] : null;
+            const romaji = typeof example?.romaji === "string" ? example.romaji.trim() : "";
+            return {
+              romaji,
+              hiragana: typeof example?.hiragana === "string" && example.hiragana.trim() ? example.hiragana.trim() : romajiToHiragana(romaji),
+              english: typeof example?.english === "string" ? example.english.trim() : "",
+            };
+          }),
+        };
         if (meanings.length > 1) exported.meanings = meanings;
         else exported.english = meanings[0];
         return exported;

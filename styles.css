@@ -75,6 +75,11 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .reveal-hint { color: #85867e; font-size: 14px; margin-top: 24px; }
 .answer-word { border-top: 1px solid #ecebe4; color: #55574f; font-size: 20px; line-height: 1.55; margin-top: 26px; padding-top: 22px; width: 100%; overflow-wrap: anywhere; }
 .answer-word.is-appearing { animation: answer-appear 260ms ease-out both; }
+.practice-meaning + .practice-meaning { border-top: 1px solid #ecebe4; margin-top: 16px; padding-top: 16px; }
+.practice-example { display: flex; flex-direction: column; gap: 2px; margin: 10px auto 0; color: #77796f; font-size: 15px; line-height: 1.45; }
+.practice-example-romaji { color: #3e493b; font-weight: 650; }
+.practice-example-hiragana { color: #77796f; font-size: 14px; }
+.practice-example-translation { color: #77796f; font-size: 14px; }
 @keyframes reveal-blip { 0% { background-color: #dcebd6; } 42% { background-color: #edf5e9; } 100% { background-color: #fff; } }
 @keyframes answer-appear { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes card-out { to { opacity: 0; transform: translateX(-16px) scale(.985); } }
@@ -141,11 +146,16 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .word-details p { color: #65675f; font-size: 14px; line-height: 1.5; margin: 5px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .dictionary-entry-fields { display: flex; flex-direction: column; gap: 8px; }
 .dictionary-entry-fields input { min-width: 0; padding: 9px 11px; }
-.dictionary-entry-meanings { display: flex; flex-direction: column; gap: 8px; }
+.dictionary-entry-meanings { display: flex; flex-direction: column; gap: 12px; }
+.dictionary-entry-meaning-group { display: flex; flex-direction: column; gap: 7px; }
+.dictionary-entry-meaning-control { display: grid; grid-template-columns: minmax(0, 1fr) minmax(128px, .55fr); align-items: start; gap: 12px; }
+.dictionary-entry-example-fields { display: flex; flex-direction: column; gap: 6px; padding-left: 12px; border-left: 2px solid #e8e9e1; }
+.dictionary-entry-example-fields input { padding: 8px 10px; font-size: 13px; }
 .dictionary-entry-spacer { width: 34px; }
 .dictionary-entry-row { grid-template-columns: 34px minmax(0, 1fr) 34px; align-items: center; border-style: dashed; border-color: #d8ddcf; background: #fbfcf9; }
-.dictionary-entry-meaning-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(128px, .55fr); align-items: center; gap: 12px; }
-.dictionary-entry-hints { display: flex; flex-direction: column; gap: 5px; color: #77796f; font-size: 11px; line-height: 1.3; }
+.dictionary-entry-meaning-row { display: block; }
+.dictionary-entry-hints { display: flex; flex-direction: column; align-self: start; gap: 5px; color: #77796f; font-size: 11px; line-height: 1.3; }
+.dictionary-entry-hints[hidden] { display: none; }
 .dictionary-entry-hints span { white-space: nowrap; }
 .dictionary-entry-hints kbd { display: inline-block; min-width: 39px; margin-right: 4px; padding: 2px 5px; border: 1px solid #deded5; border-radius: 5px; background: #fff; color: #53554e; font: inherit; font-weight: 650; text-align: center; }
 .empty-word-list { color: #85867e; line-height: 1.5; text-align: center; padding: 35px 15px; }
@@ -154,9 +164,12 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .card-form .eyebrow { margin-bottom: 12px; }
 .card-form h1 { font-size: 34px; margin-bottom: 32px; }
 .card-form input { margin-bottom: 22px; }
-.english-meanings { display: flex; flex-direction: column; }
-.english-meanings input { margin-bottom: 22px; }
-.meaning-tab-hint { align-self: flex-end; margin: -5px 0 16px; color: #85867e; font-size: 12px; }
+.english-meanings { display: flex; flex-direction: column; gap: 14px; }
+.meaning-entry-group { display: flex; flex-direction: column; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid #ecebe4; }
+.meaning-entry-group > input { margin-bottom: 0; }
+.meaning-example-fields { display: flex; flex-direction: column; gap: 7px; padding-left: 12px; border-left: 2px solid #e8e9e1; }
+.meaning-example-fields input { margin-bottom: 0; }
+.meaning-tab-hint { align-self: flex-end; margin: 8px 0 12px; color: #85867e; font-size: 12px; text-align: right; }
 .enter-hint { align-self: center; margin: 8px 0 16px; color: #85867e; font-size: 12px; text-align: center; }
 .form-actions { display: flex; gap: 10px; }
 .form-actions .primary-button { flex: 1; width: auto; }
@@ -182,7 +195,7 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
   .screen { padding: 22px; }
   .dictionary-entry-row { grid-template-columns: minmax(0, 1fr); }
   .dictionary-entry-spacer { display: none; }
-  .dictionary-entry-meaning-row { grid-template-columns: minmax(0, 1fr); gap: 7px; }
+  .dictionary-entry-meaning-control { grid-template-columns: minmax(0, 1fr); gap: 7px; }
   .dictionary-entry-hints { flex-direction: row; flex-wrap: wrap; gap: 5px 12px; }
   .dictionary-actions { right: 20px; bottom: 20px; }
   .add-button, .dictionary-tools-button { width: 54px; height: 54px; }
