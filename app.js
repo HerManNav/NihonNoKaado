@@ -514,7 +514,7 @@ dictionaryTools.addEventListener("pointerenter", (event) => {
   if (event.pointerType === "mouse") openDictionaryMenu();
 });
 dictionaryTools.addEventListener("pointerleave", (event) => {
-  if (event.pointerType === "mouse" && !dictionaryTools.contains(document.activeElement)) closeDictionaryMenu();
+  if (event.pointerType === "mouse") closeDictionaryMenu();
 });
 dictionaryTools.addEventListener("focusin", () => {
   if (keyboardNavigation) openDictionaryMenu();

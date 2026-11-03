@@ -6,4 +6,4 @@ Run the maintenance tests from the project root with:
 node --test
 ```
 
-The suite uses Node's built-in test runner and has no package dependencies. It covers legacy and multi-meaning dictionary import/export, meaning-aware English practice runs and resets, clickable review progress ranges and boundaries, romaji-to-hiragana conversion and form autofill/focus rules, and practice-deck shuffling, size, and repetition behavior.
+The suite uses Node's built-in test runner and has no package dependencies. It covers legacy and multi-meaning dictionary import/export, meaning-aware English practice runs and resets, clickable review progress ranges and boundaries, dictionary menu hover stacking and clickability, romaji-to-hiragana conversion and form autofill/focus rules, and practice-deck shuffling, size, and repetition behavior.

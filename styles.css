@@ -49,9 +49,11 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .dictionary-button:hover { background: #f0f1eb; border-color: #c8c9bd; }
 .dictionary-button:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
 .dictionary-action-menu { position: absolute; right: 0; bottom: calc(100% + 12px); display: flex; flex-direction: column; align-items: flex-end; gap: 9px; opacity: 0; pointer-events: none; transform: translateY(8px) scale(.98); transform-origin: bottom right; transition: opacity .16s ease, transform .16s ease; visibility: hidden; }
+.dictionary-action-menu::before { content: ""; position: absolute; z-index: 0; inset: -16px -20px; }
+.dictionary-action-menu::after { content: ""; position: absolute; z-index: 0; top: 100%; left: 0; right: 0; height: 12px; }
 .dictionary-tools:hover .dictionary-action-menu, .dictionary-tools.is-open .dictionary-action-menu { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); visibility: visible; }
-.dictionary-action { min-height: 42px; padding: 0 17px; border: 1px solid #e1e0d8; border-radius: 999px; background: #fff; color: #30392f; font-size: 14px; font-weight: 650; white-space: nowrap; box-shadow: 0 5px 16px #20211f12; }
-.dictionary-action:hover, .dictionary-action:focus-visible { background: #f0f1eb; border-color: #c8c9bd; outline: none; }
+.dictionary-action { position: relative; z-index: 1; min-height: 42px; padding: 0 17px; border: 1px solid #e1e0d8; border-radius: 999px; background: #fff; color: #30392f; font-size: 14px; font-weight: 650; white-space: nowrap; box-shadow: 0 5px 16px #20211f12; transition: background .14s ease, border-color .14s ease; }
+.dictionary-action:hover, .dictionary-action:focus-visible { background: #d2d8c9; border-color: #9da58f; outline: none; }
 
 .practice-screen, .form-screen { display: flex; flex-direction: column; }
 .screen-header { display: flex; align-items: center; justify-content: space-between; min-height: 38px; }
