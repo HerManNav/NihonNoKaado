@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createMeaningPracticeRun, createPracticeDeck, getSessionProgressState, nextReviewIndex, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shouldAutoConvertHiragana, shouldSkipHiraganaOnTab, shuffle, updateCardAt } = require("../dictionary-core.js");
+const { createMeaningPracticeRun, createPracticeDeck, getDictionaryEntryKeyAction, getSessionProgressState, nextReviewIndex, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shouldAutoConvertHiragana, shouldSkipHiraganaOnTab, shuffle, updateCardAt } = require("../dictionary-core.js");
 
 test("imports the app's named dictionary format and trims card fields", () => {
   const cards = parseImportedDictionary({
@@ -182,6 +182,18 @@ test("romaji edits auto-convert hiragana unless a manual value is present", () =
   assert.equal(shouldAutoConvertHiragana(true, ""), true);
   assert.equal(shouldAutoConvertHiragana(true, "   "), true);
   assert.equal(shouldAutoConvertHiragana(false, null), true);
+});
+
+test("dictionary entry keyboard flow skips hiragana and supports repeated meanings and cards", () => {
+  assert.equal(getDictionaryEntryKeyAction("Tab", false, "japanese"), "focus-meaning");
+  assert.equal(getDictionaryEntryKeyAction("Tab", true, "japanese"), null);
+  assert.equal(getDictionaryEntryKeyAction("Tab", false, "meaning", 0, 1), "add-meaning");
+  assert.equal(getDictionaryEntryKeyAction("Tab", false, "meaning", 0, 2), null);
+  assert.equal(getDictionaryEntryKeyAction("Enter", false, "meaning", 0, 2), "focus-next-meaning");
+  assert.equal(getDictionaryEntryKeyAction("Enter", false, "meaning", 1, 2), "add-card");
+  assert.equal(getDictionaryEntryKeyAction("Enter", true, "meaning", 0, 1), null);
+  assert.equal(getDictionaryEntryKeyAction("Escape", false, "meaning", 0, 1), null);
+  assert.equal(getDictionaryEntryKeyAction("Enter", false, "hiragana", 0, 1), null);
 });
 
 test("rejects unsupported formats and versions", () => {

@@ -75,6 +75,16 @@
     return !manuallyEdited || !String(currentHiragana ?? "").trim();
   }
 
+  function getDictionaryEntryKeyAction(key, shiftKey, field, fieldIndex = 0, fieldCount = 1) {
+    if (shiftKey) return null;
+    if (key === "Tab" && field === "japanese") return "focus-meaning";
+    if (field !== "meaning") return null;
+    const isLastMeaning = fieldIndex === fieldCount - 1;
+    if (key === "Tab" && isLastMeaning) return "add-meaning";
+    if (key === "Enter") return isLastMeaning ? "add-card" : "focus-next-meaning";
+    return null;
+  }
+
   function parseImportedDictionary(data, makeId = createId) {
     const imported = Array.isArray(data) ? data : data?.cards;
     if (!Array.isArray(imported)) throw new Error("This file does not contain a Japanese Cards dictionary.");
@@ -239,5 +249,5 @@
     return cards.map((card, cardIndex) => cardIndex === index ? { ...card, ...updates } : card);
   }
 
-  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
+  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
 });

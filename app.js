@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -106,14 +106,6 @@ function renderDictionaryList(highlightIndex = -1) {
   dictionaryListCount.textContent = count === 1 ? "1 word" : `${count} words`;
   wordList.replaceChildren();
 
-  if (count === 0) {
-    const emptyMessage = document.createElement("p");
-    emptyMessage.className = "empty-word-list";
-    emptyMessage.textContent = "Your dictionary is empty. Add or import words from the home screen.";
-    wordList.append(emptyMessage);
-    return;
-  }
-
   cards.forEach((card, index) => {
     const row = document.createElement("article");
     row.className = "word-row";
@@ -153,6 +145,83 @@ function renderDictionaryList(highlightIndex = -1) {
     row.append(removeButton, details, editButton);
     wordList.append(row);
   });
+
+  wordList.append(createDictionaryEntryRow());
+}
+
+function createDictionaryEntryRow() {
+  const row = document.createElement("article");
+  row.className = "word-row dictionary-entry-row";
+  row.setAttribute("aria-label", "Add a dictionary entry");
+
+  const spacer = document.createElement("span");
+  spacer.className = "dictionary-entry-spacer";
+  spacer.setAttribute("aria-hidden", "true");
+
+  const details = document.createElement("div");
+  details.className = "word-details dictionary-entry-fields";
+  const japanese = document.createElement("input");
+  japanese.type = "text";
+  japanese.className = "dictionary-entry-japanese";
+  japanese.placeholder = "Japanese (romaji)";
+  japanese.setAttribute("aria-label", "New Japanese word in romaji");
+  japanese.autocomplete = "off";
+
+  const hiragana = document.createElement("input");
+  hiragana.type = "text";
+  hiragana.className = "dictionary-entry-hiragana";
+  hiragana.placeholder = "Hiragana";
+  hiragana.setAttribute("aria-label", "New word in hiragana");
+  hiragana.autocomplete = "off";
+  hiragana.dataset.manuallyEdited = "false";
+
+  const meanings = document.createElement("div");
+  meanings.className = "dictionary-entry-meanings";
+  meanings.append(createDictionaryMeaningInput());
+
+  const meaningRow = document.createElement("div");
+  meaningRow.className = "dictionary-entry-meaning-row";
+  const hints = document.createElement("div");
+  hints.className = "dictionary-entry-hints";
+  hints.innerHTML = '<span>Press <kbd>Tab</kbd> for another meaning</span><span>Press <kbd>Enter</kbd> to add card</span>';
+  meaningRow.append(meanings, hints);
+  details.append(japanese, hiragana, meaningRow);
+
+  const buttonSpacer = document.createElement("span");
+  buttonSpacer.className = "dictionary-entry-spacer";
+  buttonSpacer.setAttribute("aria-hidden", "true");
+  row.append(spacer, details, buttonSpacer);
+  return row;
+}
+
+function createDictionaryMeaningInput(value = "") {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "dictionary-entry-meaning";
+  input.placeholder = "English meaning";
+  input.setAttribute("aria-label", "New English meaning");
+  input.value = value;
+  return input;
+}
+
+function addDictionaryEntry() {
+  const row = wordList.querySelector(".dictionary-entry-row");
+  if (!row) return;
+  const japanese = row.querySelector(".dictionary-entry-japanese").value.trim();
+  const hiragana = row.querySelector(".dictionary-entry-hiragana").value.trim() || romajiToHiragana(japanese);
+  const meanings = [...row.querySelectorAll(".dictionary-entry-meaning")].map((input) => input.value.trim()).filter(Boolean);
+  if (!japanese || meanings.length === 0) return;
+
+  const english = meanings[0];
+  const nextCards = [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings }];
+  if (!saveCards(nextCards)) {
+    window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
+    return;
+  }
+  cards = nextCards;
+  renderDictionaryList(cards.length - 1);
+  wordList.lastElementChild?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  wordList.querySelector(".dictionary-entry-japanese")?.focus();
 }
 
 function removeDictionaryCard(index) {
@@ -545,6 +614,48 @@ backToLearningButton.addEventListener("click", cancelCardForm);
 dictionaryButton.addEventListener("click", () => {
   renderDictionaryList();
   showScreen("dictionary");
+});
+
+wordList.addEventListener("input", (event) => {
+  if (!(event.target instanceof HTMLInputElement)) return;
+  if (event.target.matches(".dictionary-entry-hiragana")) {
+    event.target.dataset.manuallyEdited = "true";
+    return;
+  }
+  if (!event.target.matches(".dictionary-entry-japanese")) return;
+  const hiragana = event.target.closest(".dictionary-entry-row")?.querySelector(".dictionary-entry-hiragana");
+  if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
+    hiragana.value = romajiToHiragana(event.target.value.trim());
+    hiragana.dataset.manuallyEdited = "false";
+  }
+});
+
+wordList.addEventListener("keydown", (event) => {
+  if (!(event.target instanceof HTMLInputElement)) return;
+  const row = event.target.closest(".dictionary-entry-row");
+  if (!row) return;
+  const isJapaneseField = event.target.matches(".dictionary-entry-japanese");
+  const isMeaningField = event.target.matches(".dictionary-entry-meaning");
+  if (!isJapaneseField && !isMeaningField) return;
+  const meaningInputs = [...row.querySelectorAll(".dictionary-entry-meaning")];
+  const meaningIndex = meaningInputs.indexOf(event.target);
+  const action = getDictionaryEntryKeyAction(event.key, event.shiftKey, isJapaneseField ? "japanese" : "meaning", meaningIndex, meaningInputs.length);
+
+  if (action === "focus-meaning") {
+    event.preventDefault();
+    meaningInputs[0]?.focus();
+  } else if (action === "add-meaning") {
+    event.preventDefault();
+    const nextInput = createDictionaryMeaningInput();
+    row.querySelector(".dictionary-entry-meanings").append(nextInput);
+    nextInput.focus();
+  } else if (action === "focus-next-meaning") {
+    event.preventDefault();
+    meaningInputs[meaningIndex + 1]?.focus();
+  } else if (action === "add-card") {
+    event.preventDefault();
+    addDictionaryEntry();
+  }
 });
 
 cardForm.addEventListener("submit", (event) => {
