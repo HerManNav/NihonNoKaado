@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, serializeDictionary, romajiToHiragana, createPracticeDeck, createMeaningPracticeRun, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -532,8 +532,17 @@ cardForm.addEventListener("keydown", (event) => {
   }
 });
 
+japaneseInput.addEventListener("keydown", (event) => {
+  if (!shouldSkipHiraganaOnTab(event.key, event.shiftKey)) return;
+  event.preventDefault();
+  englishInput.focus();
+});
+
 japaneseInput.addEventListener("input", () => {
-  if (!hiraganaManuallyEdited) hiraganaInput.value = romajiToHiragana(japaneseInput.value.trim());
+  if (shouldAutoConvertHiragana(hiraganaManuallyEdited, hiraganaInput.value)) {
+    hiraganaInput.value = romajiToHiragana(japaneseInput.value.trim());
+    hiraganaManuallyEdited = false;
+  }
 });
 
 hiraganaInput.addEventListener("input", () => { hiraganaManuallyEdited = true; });

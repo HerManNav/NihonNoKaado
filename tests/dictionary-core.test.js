@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createMeaningPracticeRun, createPracticeDeck, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shuffle, updateCardAt } = require("../dictionary-core.js");
+const { createMeaningPracticeRun, createPracticeDeck, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shouldAutoConvertHiragana, shouldSkipHiraganaOnTab, shuffle, updateCardAt } = require("../dictionary-core.js");
 
 test("imports the app's named dictionary format and trims card fields", () => {
   const cards = parseImportedDictionary({
@@ -168,6 +168,20 @@ test("preserves spaces, punctuation, existing Japanese text, and unsupported cha
   assert.equal(romajiToHiragana("ko-hi-"), "こ-ひ-");
   assert.equal(romajiToHiragana(""), "");
   assert.equal(romajiToHiragana(null), "");
+});
+
+test("Tab from romaji skips hiragana, while Shift+Tab keeps normal backwards navigation", () => {
+  assert.equal(shouldSkipHiraganaOnTab("Tab", false), true);
+  assert.equal(shouldSkipHiraganaOnTab("Tab", true), false);
+  assert.equal(shouldSkipHiraganaOnTab("Enter", false), false);
+});
+
+test("romaji edits auto-convert hiragana unless a manual value is present", () => {
+  assert.equal(shouldAutoConvertHiragana(false, "てすと"), true);
+  assert.equal(shouldAutoConvertHiragana(true, "てすと"), false);
+  assert.equal(shouldAutoConvertHiragana(true, ""), true);
+  assert.equal(shouldAutoConvertHiragana(true, "   "), true);
+  assert.equal(shouldAutoConvertHiragana(false, null), true);
 });
 
 test("rejects unsupported formats and versions", () => {
