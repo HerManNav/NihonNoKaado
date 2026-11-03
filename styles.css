@@ -117,6 +117,11 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .default-dictionary-option span { color: #77796f; font-size: 13px; white-space: nowrap; }
 .default-dictionary-list .default-dictionary-retry { align-self: flex-start; flex: 0 0 auto; width: max-content; min-width: 120px; min-height: 44px; border-color: #deded5; background: #fff; color: #485143; white-space: nowrap; }
 .default-dictionary-list .default-dictionary-retry:hover { border-color: #c8c9bd; background: #f0f1eb; }
+.default-dictionary-confirmation { width: min(100%, 460px); }
+.default-dictionary-confirm-actions { display: flex; gap: 10px; margin-top: 22px; }
+.default-dictionary-confirm-actions > button { flex: 1; min-width: 0; }
+.default-dictionary-confirm-actions > button:disabled { cursor: wait; opacity: .65; }
+.default-dictionary-confirm-status { min-height: 20px; margin: 12px 0 0; color: #77796f; font-size: 13px; line-height: 1.5; }
 .word-list { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; margin-top: 22px; padding: 2px 8px 20px 2px; }
 .word-row { display: grid; flex: 0 0 auto; grid-template-columns: 42px minmax(0, 1fr) auto; align-items: stretch; gap: 12px; border: 1px solid #e3e2d9; border-radius: 13px; background: #fff; padding: 12px; }
 .word-row.is-updated { animation: edited-entry-blip 2s ease-in both; }

@@ -6,6 +6,7 @@ const screens = {
   practice: document.querySelector("#practice-screen"),
   dictionary: document.querySelector("#dictionary-screen"),
   defaults: document.querySelector("#default-dictionaries-screen"),
+  defaultConfirm: document.querySelector("#default-dictionary-confirm-screen"),
   add: document.querySelector("#add-screen"),
   clear: document.querySelector("#clear-screen"),
 };
@@ -44,12 +45,21 @@ const addButton = document.querySelector("#add-button");
 const defaultDictionaryList = document.querySelector("#default-dictionary-list");
 const defaultDictionariesCount = document.querySelector("#default-dictionaries-count");
 const defaultDictionariesStatus = document.querySelector("#default-dictionaries-status");
+const defaultDictionaryConfirmTitle = document.querySelector("#default-dictionary-confirm-title");
+const defaultDictionaryConfirmDescription = document.querySelector("#default-dictionary-confirm-description");
+const defaultDictionaryConfirmWarning = document.querySelector("#default-dictionary-confirm-warning");
+const defaultDictionaryConfirmStatus = document.querySelector("#default-dictionary-confirm-status");
+const cancelDefaultDictionaryLoadButton = document.querySelector("#cancel-default-dictionary-load");
+const confirmDefaultDictionaryLoadButton = document.querySelector("#confirm-default-dictionary-load");
 const importFile = document.querySelector("#import-file");
 let storageWarning = "";
 let editingCardIndex = null;
 let formReturnScreen = "home";
 let hiraganaManuallyEdited = false;
 let addFeedbackTimeout = null;
+let pendingDefaultDictionary = null;
+let pendingDefaultDictionaryTrigger = null;
+let defaultDictionaryLoadInProgress = false;
 
 let cards = loadCards();
 let practiceDeck = [];
@@ -559,20 +569,47 @@ function renderDefaultDictionaries(dictionaries) {
     const description = document.createElement("span");
     description.textContent = `${dictionary.count} ${dictionary.count === 1 ? "card" : "cards"}`;
     button.append(name, description);
-    button.addEventListener("click", () => loadDefaultDictionary(dictionary));
+    button.addEventListener("click", () => requestDefaultDictionaryLoad(dictionary, button));
     fragment.append(button);
   });
   defaultDictionaryList.replaceChildren(fragment);
 }
 
-async function loadDefaultDictionary(dictionary) {
-  const currentDescription = cards.length
-    ? `Your current dictionary contains ${cards.length} ${cards.length === 1 ? "card" : "cards"}. It will be replaced by “${dictionary.name}” (${dictionary.count} cards). This cannot be undone. Export a backup first if you want to keep it. Continue?`
+function requestDefaultDictionaryLoad(dictionary, trigger) {
+  pendingDefaultDictionary = dictionary;
+  pendingDefaultDictionaryTrigger = trigger;
+  defaultDictionaryConfirmTitle.textContent = cards.length ? "Replace your dictionary?" : "Load this dictionary?";
+  defaultDictionaryConfirmDescription.textContent = cards.length
+    ? `“${dictionary.name}” contains ${dictionary.count} cards. It will replace your current dictionary of ${cards.length} ${cards.length === 1 ? "card" : "cards"}.`
     : `Load “${dictionary.name}” with ${dictionary.count} cards?`;
-  if (!window.confirm(currentDescription)) return;
+  defaultDictionaryConfirmWarning.textContent = cards.length
+    ? "This cannot be undone. Export a backup first if you want to keep your current cards."
+    : "The cards will be saved in this browser.";
+  defaultDictionaryConfirmStatus.textContent = "";
+  confirmDefaultDictionaryLoadButton.textContent = cards.length ? "Replace and load" : "Load dictionary";
+  confirmDefaultDictionaryLoadButton.disabled = false;
+  cancelDefaultDictionaryLoadButton.disabled = false;
+  showScreen("defaultConfirm");
+  cancelDefaultDictionaryLoadButton.focus();
+}
 
-  defaultDictionariesStatus.textContent = `Loading “${dictionary.name}”…`;
-  defaultDictionaryList.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+function cancelDefaultDictionaryLoad() {
+  if (defaultDictionaryLoadInProgress) return;
+  const trigger = pendingDefaultDictionaryTrigger;
+  pendingDefaultDictionary = null;
+  pendingDefaultDictionaryTrigger = null;
+  showScreen("defaults");
+  trigger?.focus();
+}
+
+async function loadDefaultDictionary() {
+  const dictionary = pendingDefaultDictionary;
+  if (!dictionary || defaultDictionaryLoadInProgress) return;
+  defaultDictionaryLoadInProgress = true;
+  defaultDictionaryConfirmStatus.textContent = `Loading “${dictionary.name}”…`;
+  confirmDefaultDictionaryLoadButton.disabled = true;
+  confirmDefaultDictionaryLoadButton.textContent = "Loading…";
+  cancelDefaultDictionaryLoadButton.disabled = true;
   try {
     const response = await fetch(`dictionaries/${encodeURIComponent(dictionary.file)}`);
     if (!response.ok) throw new Error(`Dictionary request failed (${response.status}).`);
@@ -580,12 +617,17 @@ async function loadDefaultDictionary(dictionary) {
     const importedCards = prepareDefaultDictionary(source, dictionary.count);
     if (!saveCards(importedCards)) throw new Error("The new dictionary could not be saved in this browser.");
     cards = importedCards;
-    defaultDictionariesStatus.textContent = "";
+    pendingDefaultDictionary = null;
+    pendingDefaultDictionaryTrigger = null;
     showScreen("home");
   } catch (error) {
-    defaultDictionariesStatus.textContent = `${defaultDictionaryErrorMessage(`dictionaries/${dictionary.file}`, error)} Your current dictionary is unchanged; try again.`;
-    defaultDictionaryList.querySelectorAll("button").forEach((button) => { button.disabled = false; });
+    defaultDictionaryConfirmStatus.textContent = `${defaultDictionaryErrorMessage(`dictionaries/${dictionary.file}`, error)} Your current dictionary is unchanged; try again.`;
+    confirmDefaultDictionaryLoadButton.disabled = false;
+    confirmDefaultDictionaryLoadButton.textContent = cards.length ? "Replace and load" : "Load dictionary";
+    cancelDefaultDictionaryLoadButton.disabled = false;
     console.error("Unable to load default dictionary:", error);
+  } finally {
+    defaultDictionaryLoadInProgress = false;
   }
 }
 
@@ -689,10 +731,17 @@ document.addEventListener("keydown", (event) => {
     dictionaryToolsButton.focus();
   }
 });
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !screens.defaultConfirm.hidden && !defaultDictionaryLoadInProgress) {
+    cancelDefaultDictionaryLoad();
+  }
+});
 document.querySelector("#export-action").addEventListener("click", exportDictionary);
 document.querySelector("#import-action").addEventListener("click", () => importFile.click());
 document.querySelector("#clear-action").addEventListener("click", confirmClearDictionary);
 document.querySelector("#confirm-clear").addEventListener("click", clearDictionary);
+cancelDefaultDictionaryLoadButton.addEventListener("click", cancelDefaultDictionaryLoad);
+confirmDefaultDictionaryLoadButton.addEventListener("click", loadDefaultDictionary);
 importFile.addEventListener("change", () => importDictionary(importFile.files?.[0]));
 backToLearningButton.addEventListener("click", cancelCardForm);
 dictionaryButton.addEventListener("click", () => {

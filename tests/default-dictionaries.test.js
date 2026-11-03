@@ -43,18 +43,33 @@ test("10- and 50-card options contain the corresponding prefix of the 100-card l
   }
 });
 
-test("the + button opens the default dictionary page and selection confirms before replacing saved cards", () => {
+test("the + button opens a native-looking page and selecting a set opens the in-app confirmation", () => {
   assert.match(html, /id="add-button"[^>]*aria-label="Browse default dictionaries"/);
   assert.match(app, /addButton\.addEventListener\("click", openDefaultDictionaries\)/);
   assert.match(app, /fetch\("dictionaries\/manifest\.json"/);
+  assert.match(html, /id="default-dictionary-confirm-screen"[^>]*aria-labelledby="default-dictionary-confirm-title"/);
+  assert.match(html, /id="default-dictionary-confirm-status"[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(html, /id="cancel-default-dictionary-load"[^>]*>Cancel<\/button>/);
+  assert.match(html, /id="confirm-default-dictionary-load"[^>]*>Replace and load<\/button>/);
+  assert.match(app, /button\.addEventListener\("click", \(\) => requestDefaultDictionaryLoad\(dictionary, button\)\)/);
 
-  const confirmationIndex = app.indexOf("if (!window.confirm(currentDescription)) return;");
+  const showConfirmationIndex = app.indexOf('showScreen("defaultConfirm");', app.indexOf("function requestDefaultDictionaryLoad"));
+  const loadFunctionIndex = app.indexOf("async function loadDefaultDictionary()");
   const fetchIndex = app.indexOf("const response = await fetch(`dictionaries/${encodeURIComponent(dictionary.file)}`);");
   const saveIndex = app.indexOf("if (!saveCards(importedCards)) throw");
   const replaceIndex = app.indexOf("cards = importedCards;", saveIndex);
-  assert.ok(confirmationIndex >= 0 && confirmationIndex < fetchIndex);
+  assert.ok(showConfirmationIndex >= 0 && showConfirmationIndex < fetchIndex);
+  assert.ok(loadFunctionIndex >= 0 && loadFunctionIndex < fetchIndex);
+  assert.match(app, /confirmDefaultDictionaryLoadButton\.addEventListener\("click", loadDefaultDictionary\)/);
   assert.ok(fetchIndex < saveIndex && saveIndex < replaceIndex);
   assert.match(app, /Your current dictionary is unchanged; try again/);
+  assert.doesNotMatch(app.slice(app.indexOf("function requestDefaultDictionaryLoad"), app.indexOf("function defaultDictionaryErrorMessage")), /window\.confirm/);
+});
+
+test("cancel and Escape return to the list without loading the selected dictionary", () => {
+  assert.match(app, /function cancelDefaultDictionaryLoad\(\)[\s\S]*?pendingDefaultDictionary = null;[\s\S]*?showScreen\("defaults"\)/);
+  assert.match(app, /trigger\?\.focus\(\)/);
+  assert.match(app, /event\.key === "Escape" && !screens\.defaultConfirm\.hidden && !defaultDictionaryLoadInProgress\)[\s\S]*?cancelDefaultDictionaryLoad\(\)/);
 });
 
 test("source attribution is a separated paragraph below the loading instructions", () => {
