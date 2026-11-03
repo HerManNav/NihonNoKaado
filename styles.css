@@ -77,6 +77,7 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .answer-word.is-appearing { animation: answer-appear 260ms ease-out both; }
 .practice-meaning + .practice-meaning { border-top: 1px solid #ecebe4; margin-top: 16px; padding-top: 16px; }
 .practice-example { display: flex; flex-direction: column; gap: 2px; margin: 10px auto 0; color: #77796f; font-size: 15px; line-height: 1.45; }
+.practice-example, .practice-example * { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }
 .practice-example-romaji { color: #3e493b; font-weight: 650; }
 .practice-example-hiragana { color: #77796f; font-size: 14px; }
 .practice-example-translation { color: #77796f; font-size: 14px; }

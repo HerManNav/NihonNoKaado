@@ -581,7 +581,14 @@ function advanceReview() {
   renderPracticeCard();
 }
 
+function hasSelectedTextInFlashcard() {
+  const selection = window.getSelection?.();
+  return Boolean(selection && !selection.isCollapsed && selection.toString().trim()
+    && flashcard.contains(selection.anchorNode) && flashcard.contains(selection.focusNode));
+}
+
 function handleFlashcardAction() {
+  if (hasSelectedTextInFlashcard()) return;
   if (reviewIndex !== null) {
     advanceReview();
   } else if (answerRevealed) {
