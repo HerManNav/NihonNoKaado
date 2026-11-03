@@ -1,10 +1,11 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
   practice: document.querySelector("#practice-screen"),
   dictionary: document.querySelector("#dictionary-screen"),
+  defaults: document.querySelector("#default-dictionaries-screen"),
   add: document.querySelector("#add-screen"),
   clear: document.querySelector("#clear-screen"),
 };
@@ -40,6 +41,9 @@ const cardsRemaining = document.querySelector("#cards-remaining");
 const dictionaryTools = document.querySelector("#dictionary-tools");
 const dictionaryToolsButton = document.querySelector("#dictionary-tools-button");
 const addButton = document.querySelector("#add-button");
+const defaultDictionaryList = document.querySelector("#default-dictionary-list");
+const defaultDictionariesCount = document.querySelector("#default-dictionaries-count");
+const defaultDictionariesStatus = document.querySelector("#default-dictionaries-status");
 const importFile = document.querySelector("#import-file");
 let storageWarning = "";
 let editingCardIndex = null;
@@ -515,6 +519,86 @@ function startAddingWord() {
   japaneseInput.focus();
 }
 
+async function openDefaultDictionaries() {
+  closeDictionaryMenu();
+  showScreen("defaults");
+  defaultDictionaryList.replaceChildren();
+  defaultDictionariesCount.textContent = "";
+  defaultDictionariesStatus.textContent = "Loading available dictionaries…";
+  try {
+    const response = await fetch("dictionaries/manifest.json", { cache: "no-cache" });
+    if (!response.ok) throw new Error(`Dictionary catalog request failed (${response.status}).`);
+    const catalog = await response.json();
+    if (!Array.isArray(catalog.dictionaries) || catalog.dictionaries.length === 0) {
+      throw new Error("No default dictionaries are available yet.");
+    }
+    renderDefaultDictionaries(catalog.dictionaries);
+    defaultDictionariesStatus.textContent = "Select a dictionary to replace the one saved in this browser.";
+  } catch (error) {
+    defaultDictionariesStatus.textContent = defaultDictionaryErrorMessage("dictionaries/manifest.json", error);
+    const retryButton = document.createElement("button");
+    retryButton.className = "secondary-button default-dictionary-retry";
+    retryButton.type = "button";
+    retryButton.textContent = "Try again";
+    retryButton.addEventListener("click", openDefaultDictionaries, { once: true });
+    defaultDictionaryList.replaceChildren(retryButton);
+    console.error("Unable to load default dictionary catalog:", error);
+  }
+}
+
+function renderDefaultDictionaries(dictionaries) {
+  defaultDictionariesCount.textContent = dictionaries.length === 1 ? "1 available" : `${dictionaries.length} available`;
+  const fragment = document.createDocumentFragment();
+  dictionaries.forEach((dictionary) => {
+    if (typeof dictionary.id !== "string" || typeof dictionary.name !== "string" || typeof dictionary.file !== "string" || !Number.isInteger(dictionary.count) || dictionary.count < 1) return;
+    const button = document.createElement("button");
+    button.className = "default-dictionary-option";
+    button.type = "button";
+    const name = document.createElement("strong");
+    name.textContent = dictionary.name;
+    const description = document.createElement("span");
+    description.textContent = `${dictionary.count} ${dictionary.count === 1 ? "card" : "cards"}`;
+    button.append(name, description);
+    button.addEventListener("click", () => loadDefaultDictionary(dictionary));
+    fragment.append(button);
+  });
+  defaultDictionaryList.replaceChildren(fragment);
+}
+
+async function loadDefaultDictionary(dictionary) {
+  const currentDescription = cards.length
+    ? `Your current dictionary contains ${cards.length} ${cards.length === 1 ? "card" : "cards"}. It will be replaced by “${dictionary.name}” (${dictionary.count} cards). This cannot be undone. Export a backup first if you want to keep it. Continue?`
+    : `Load “${dictionary.name}” with ${dictionary.count} cards?`;
+  if (!window.confirm(currentDescription)) return;
+
+  defaultDictionariesStatus.textContent = `Loading “${dictionary.name}”…`;
+  defaultDictionaryList.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+  try {
+    const response = await fetch(`dictionaries/${encodeURIComponent(dictionary.file)}`);
+    if (!response.ok) throw new Error(`Dictionary request failed (${response.status}).`);
+    const source = await response.json();
+    const importedCards = prepareDefaultDictionary(source, dictionary.count);
+    if (!saveCards(importedCards)) throw new Error("The new dictionary could not be saved in this browser.");
+    cards = importedCards;
+    defaultDictionariesStatus.textContent = "";
+    showScreen("home");
+  } catch (error) {
+    defaultDictionariesStatus.textContent = `${defaultDictionaryErrorMessage(`dictionaries/${dictionary.file}`, error)} Your current dictionary is unchanged; try again.`;
+    defaultDictionaryList.querySelectorAll("button").forEach((button) => { button.disabled = false; });
+    console.error("Unable to load default dictionary:", error);
+  }
+}
+
+function defaultDictionaryErrorMessage(resource, error) {
+  if (window.location.protocol === "file:") {
+    return "This page was opened directly from disk. Open Japanese Cards through a website or local web server to load its JSON dictionaries.";
+  }
+  const url = new URL(resource, document.baseURI);
+  const statusMatch = String(error?.message || "").match(/\((\d{3})\)/);
+  if (statusMatch) return `The dictionary file at ${url.pathname} returned HTTP ${statusMatch[1]}.`;
+  return `Could not load ${url.pathname}. Check the connection and try again.`;
+}
+
 function startEditingCard(index) {
   const card = cards[index];
   if (!card) return;
@@ -572,7 +656,7 @@ function clearDictionary() {
   showScreen("home");
 }
 
-addButton.addEventListener("click", startAddingWord);
+addButton.addEventListener("click", openDefaultDictionaries);
 dictionaryToolsButton.addEventListener("click", (event) => {
   if (event.detail === 0 || window.matchMedia("(hover: none)").matches) {
     if (dictionaryTools.classList.contains("is-open")) closeDictionaryMenu();

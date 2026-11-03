@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createMeaningPracticeRun, createPracticeDeck, getDictionaryEntryKeyAction, getSessionProgressState, nextReviewIndex, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shouldAutoConvertHiragana, shouldSkipHiraganaOnTab, shuffle, updateCardAt } = require("../dictionary-core.js");
+const { createMeaningPracticeRun, createPracticeDeck, getDictionaryEntryKeyAction, getSessionProgressState, nextReviewIndex, parseImportedDictionary, prepareDefaultDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shouldAutoConvertHiragana, shouldSkipHiraganaOnTab, shuffle, updateCardAt } = require("../dictionary-core.js");
 
 test("imports the app's named dictionary format and trims card fields", () => {
   const cards = parseImportedDictionary({
@@ -26,6 +26,35 @@ test("imports a plain array for hand-authored dictionaries", () => {
   assert.equal(cards[0].hiragana, "ありがとう");
   assert.equal(cards[0].english, "thank you");
   assert.deepEqual(cards[0].meanings, ["thank you"]);
+});
+
+test("prepares a default dictionary with generated hiragana and the requested card count", () => {
+  const source = {
+    format: "japanese-cards-dictionary",
+    version: 2,
+    cards: [
+      { japanese: "neko", english: "cat" },
+      { japanese: "inu", meanings: ["dog", "a domestic animal"] },
+      { japanese: "mizu", english: "water" },
+    ],
+  };
+
+  const cards = prepareDefaultDictionary(source, 2, (index) => `default-${index}`);
+
+  assert.equal(cards.length, 2);
+  assert.deepEqual(cards.map(({ japanese, hiragana }) => [japanese, hiragana]), [
+    ["neko", "ねこ"],
+    ["inu", "いぬ"],
+  ]);
+  assert.deepEqual(cards[1].meanings, ["dog", "a domestic animal"]);
+});
+
+test("rejects invalid default dictionary sizes and a source list that is too short", () => {
+  const source = [{ japanese: "neko", english: "cat" }];
+  for (const count of [0, -1, 1.5, "1", NaN]) {
+    assert.throws(() => prepareDefaultDictionary(source, count), /positive integer/);
+  }
+  assert.throws(() => prepareDefaultDictionary(source, 2), /fewer cards/);
 });
 
 test("imports multiple English meanings, trimming and discarding blank entries", () => {

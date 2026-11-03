@@ -106,6 +106,13 @@
     });
   }
 
+  function prepareDefaultDictionary(data, count, makeId = createId) {
+    if (!Number.isInteger(count) || count < 1) throw new RangeError("Default dictionary size must be a positive integer.");
+    const cards = parseImportedDictionary(data, makeId);
+    if (cards.length < count) throw new Error("The dictionary has fewer cards than its catalog entry specifies.");
+    return cards.slice(0, count);
+  }
+
   function serializeDictionary(cards, name, exportedAt = new Date().toISOString()) {
     if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
     return JSON.stringify({
@@ -249,5 +256,5 @@
     return cards.map((card, cardIndex) => cardIndex === index ? { ...card, ...updates } : card);
   }
 
-  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
+  return { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
 });

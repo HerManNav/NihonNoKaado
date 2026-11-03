@@ -1,0 +1,208 @@
+{
+  "format": "japanese-cards-dictionary",
+  "version": 2,
+  "name": "Most common Japanese — 50 words",
+  "source": "Frequency ranks based on Japanese news and online articles; English glosses simplified for learners. https://travelwithlanguages.com/blog/most-common-japanese-words.html",
+  "cards": [
+    {
+      "japanese": "da",
+      "english": "to be; casual copula"
+    },
+    {
+      "japanese": "suru",
+      "english": "to do"
+    },
+    {
+      "japanese": "desu",
+      "english": "to be; polite copula"
+    },
+    {
+      "japanese": "iru",
+      "english": "to exist; to be (living things)"
+    },
+    {
+      "japanese": "watashi",
+      "english": "I; me"
+    },
+    {
+      "japanese": "aru",
+      "english": "to exist; to be (things)"
+    },
+    {
+      "japanese": "koto",
+      "english": "thing; matter; event"
+    },
+    {
+      "japanese": "nani",
+      "english": "what"
+    },
+    {
+      "japanese": "sore",
+      "english": "that; it"
+    },
+    {
+      "japanese": "naru",
+      "english": "to become"
+    },
+    {
+      "japanese": "kono",
+      "english": "this (before a noun)"
+    },
+    {
+      "japanese": "kore",
+      "english": "this; this one"
+    },
+    {
+      "japanese": "sou",
+      "english": "so; that way"
+    },
+    {
+      "japanese": "iu",
+      "english": "to say; to tell"
+    },
+    {
+      "japanese": "kare",
+      "english": "he; him; boyfriend"
+    },
+    {
+      "japanese": "dou",
+      "english": "how; what way"
+    },
+    {
+      "japanese": "ii",
+      "english": "good; fine"
+    },
+    {
+      "japanese": "hito",
+      "english": "person"
+    },
+    {
+      "japanese": "anata",
+      "english": "you"
+    },
+    {
+      "japanese": "ore",
+      "english": "I; me (very casual, masculine)"
+    },
+    {
+      "japanese": "sono",
+      "english": "that (before a noun)"
+    },
+    {
+      "japanese": "kimi",
+      "english": "you (familiar)"
+    },
+    {
+      "japanese": "yaru",
+      "english": "to do; to give (casual)"
+    },
+    {
+      "japanese": "miru",
+      "english": "to see; to watch"
+    },
+    {
+      "japanese": "iku",
+      "english": "to go"
+    },
+    {
+      "japanese": "kureru",
+      "english": "to give (to me or my group)"
+    },
+    {
+      "japanese": "dekiru",
+      "english": "can; to be able to"
+    },
+    {
+      "japanese": "koko",
+      "english": "here"
+    },
+    {
+      "japanese": "omae",
+      "english": "you (very casual, can sound rude)"
+    },
+    {
+      "japanese": "shiru",
+      "english": "to know; to find out"
+    },
+    {
+      "japanese": "kuru",
+      "english": "to come"
+    },
+    {
+      "japanese": "mou",
+      "english": "already; anymore"
+    },
+    {
+      "japanese": "dare",
+      "english": "who"
+    },
+    {
+      "japanese": "ima",
+      "english": "now"
+    },
+    {
+      "japanese": "mono",
+      "english": "thing; object; person"
+    },
+    {
+      "japanese": "kedo",
+      "english": "but; though"
+    },
+    {
+      "japanese": "kanojo",
+      "english": "she; her; girlfriend"
+    },
+    {
+      "japanese": "boku",
+      "english": "I; me (casual, often masculine)"
+    },
+    {
+      "japanese": "ano",
+      "english": "that (over there); um…"
+    },
+    {
+      "japanese": "wakaru",
+      "english": "to understand"
+    },
+    {
+      "japanese": "toshi",
+      "english": "year; age"
+    },
+    {
+      "japanese": "naka",
+      "english": "inside; middle"
+    },
+    {
+      "japanese": "mae",
+      "english": "front; before; ago"
+    },
+    {
+      "japanese": "toki",
+      "english": "time; when"
+    },
+    {
+      "japanese": "kiku",
+      "english": "to listen; to ask"
+    },
+    {
+      "japanese": "jibun",
+      "english": "oneself; myself"
+    },
+    {
+      "japanese": "tsuku",
+      "english": "to arrive; to reach"
+    },
+    {
+      "japanese": "motsu",
+      "english": "to have; to hold"
+    },
+    {
+      "japanese": "doko",
+      "english": "where"
+    },
+    {
+      "japanese": "soshite",
+      "english": "and; and then"
+    }
+  ]
+}

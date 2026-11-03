@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "source": "https://travelwithlanguages.com/blog/most-common-japanese-words.html",
+  "dictionaries": [
+    {
+      "id": "common-10",
+      "name": "Most common Japanese — 10 words",
+      "file": "most-common-10.json",
+      "count": 10
+    },
+    {
+      "id": "common-50",
+      "name": "Most common Japanese — 50 words",
+      "file": "most-common-50.json",
+      "count": 50
+    },
+    {
+      "id": "common-100",
+      "name": "Most common Japanese — 100 words",
+      "file": "most-common-100.json",
+      "count": 100
+    }
+  ]
+}

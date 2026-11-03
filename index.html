@@ -31,7 +31,7 @@
           <p id="dictionary-count" class="subtle-text" aria-live="polite"></p>
         </div>
         <div id="dictionary-actions" class="dictionary-actions">
-          <button id="add-button" class="add-button" type="button" aria-label="Add a new word" title="Add a new word">+</button>
+          <button id="add-button" class="add-button" type="button" aria-label="Browse default dictionaries" title="Browse default dictionaries">+</button>
           <div id="dictionary-tools" class="dictionary-tools">
             <button id="dictionary-tools-button" class="dictionary-tools-button" type="button" aria-label="Dictionary tools" aria-controls="dictionary-action-menu" aria-expanded="false" title="Dictionary tools">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -82,6 +82,20 @@
         <div class="dictionary-list-content">
           <h1 id="dictionary-title">Current dictionary</h1>
           <div id="word-list" class="word-list" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="default-dictionaries-screen" class="screen dictionary-screen" aria-labelledby="default-dictionaries-title" hidden>
+        <header class="screen-header">
+          <button class="text-button" data-go-home type="button">← Back</button>
+          <p id="default-dictionaries-count" class="subtle-text"></p>
+        </header>
+        <div class="dictionary-list-content">
+          <h1 id="default-dictionaries-title">Default dictionaries</h1>
+          <p class="default-dictionaries-description">Choose a starter dictionary. Loading one will replace the dictionary saved in this browser.</p>
+          <p class="default-dictionaries-source">The word order is based on a frequency list of Japanese news and online articles. <a href="https://travelwithlanguages.com/blog/most-common-japanese-words.html" target="_blank" rel="noreferrer">About the source</a></p>
+          <p id="default-dictionaries-status" class="subtle-text default-dictionaries-status" role="status" aria-live="polite"></p>
+          <div id="default-dictionary-list" class="default-dictionary-list"></div>
         </div>
       </section>
 

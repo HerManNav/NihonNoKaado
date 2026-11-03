@@ -104,6 +104,19 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .dictionary-screen { display: flex; flex-direction: column; }
 .dictionary-list-content { display: flex; flex: 1; flex-direction: column; width: min(100%, 700px); min-height: 0; margin: 0 auto; padding-top: 24px; }
 .dictionary-list-content h1 { font-size: clamp(28px, 5vw, 36px); }
+.default-dictionaries-description { color: #65675f; line-height: 1.55; margin: 12px 0 0; }
+.default-dictionaries-source { color: #77796f; line-height: 1.5; margin: 16px 0 0; }
+.default-dictionaries-source a { color: #485143; font-weight: 650; text-underline-offset: 2px; }
+.default-dictionaries-status { min-height: 20px; margin: 12px 0 0; }
+.default-dictionary-list { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; margin-top: 12px; padding: 2px 8px 20px 2px; }
+.default-dictionary-option { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 70px; padding: 14px 16px; border: 1px solid #e3e2d9; border-radius: 13px; background: #fff; color: #30392f; text-align: left; box-shadow: 0 3px 12px #20211f08; }
+.default-dictionary-option:hover:not(:disabled) { background: #f0f1eb; border-color: #c8c9bd; }
+.default-dictionary-option:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
+.default-dictionary-option:disabled { cursor: progress; opacity: .65; }
+.default-dictionary-option strong { font-size: 15px; }
+.default-dictionary-option span { color: #77796f; font-size: 13px; white-space: nowrap; }
+.default-dictionary-list .default-dictionary-retry { align-self: flex-start; flex: 0 0 auto; width: max-content; min-width: 120px; min-height: 44px; border-color: #deded5; background: #fff; color: #485143; white-space: nowrap; }
+.default-dictionary-list .default-dictionary-retry:hover { border-color: #c8c9bd; background: #f0f1eb; }
 .word-list { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; margin-top: 22px; padding: 2px 8px 20px 2px; }
 .word-row { display: grid; flex: 0 0 auto; grid-template-columns: 42px minmax(0, 1fr) auto; align-items: stretch; gap: 12px; border: 1px solid #e3e2d9; border-radius: 13px; background: #fff; padding: 12px; }
 .word-row.is-updated { animation: edited-entry-blip 2s ease-in both; }
