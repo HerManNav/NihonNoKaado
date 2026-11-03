@@ -143,6 +143,61 @@
     return deck;
   }
 
+  function getSessionProgressState(total, currentIndex, reviewIndex, shownIndices, answerRevealed = false) {
+    if (!Number.isInteger(total) || total < 1) throw new RangeError("Session progress needs at least one card.");
+    if (!Number.isInteger(currentIndex) || currentIndex < 0 || currentIndex >= total) {
+      throw new RangeError("Current card index is outside the session.");
+    }
+    if (reviewIndex !== null && (!Number.isInteger(reviewIndex) || reviewIndex < 0 || reviewIndex >= currentIndex)) {
+      throw new RangeError("Review card must be an earlier session card.");
+    }
+    if (!(shownIndices instanceof Set) && !Array.isArray(shownIndices)) {
+      throw new TypeError("Shown card indices must be a Set or array.");
+    }
+
+    const shown = shownIndices instanceof Set ? shownIndices : new Set(shownIndices);
+    if ([...shown].some((index) => !Number.isInteger(index) || index < 0 || index >= total)) {
+      throw new RangeError("Shown card index is outside the session.");
+    }
+    if (!shown.has(currentIndex) || (reviewIndex !== null && !shown.has(reviewIndex))) {
+      throw new RangeError("Current and reviewed cards must have been shown.");
+    }
+    const position = (index) => total === 1 ? 0 : (index / (total - 1)) * 100;
+    const guessPosition = position(currentIndex);
+    const darkThroughIndex = reviewIndex ?? currentIndex;
+    const darkPosition = position(darkThroughIndex);
+    const reviewPosition = reviewIndex === null ? guessPosition : position(reviewIndex);
+    const points = Array.from({ length: total }, (_, index) => {
+      const isShown = shown.has(index);
+      return {
+        index,
+        isShown,
+        isDark: isShown && index <= darkThroughIndex,
+        isReviewRange: isShown && reviewIndex !== null && index > reviewIndex && index <= currentIndex,
+        isCurrent: index === currentIndex,
+        isGuessing: index === currentIndex && !answerRevealed,
+        isReviewing: index === reviewIndex,
+      };
+    });
+
+    return {
+      shownCount: currentIndex + 1,
+      guessPosition,
+      darkPosition,
+      reviewPosition,
+      reviewWidth: reviewIndex === null ? 0 : guessPosition - reviewPosition,
+      points,
+    };
+  }
+
+  function nextReviewIndex(reviewIndex, currentIndex) {
+    if (reviewIndex === null) return null;
+    if (!Number.isInteger(reviewIndex) || !Number.isInteger(currentIndex) || reviewIndex < 0 || reviewIndex >= currentIndex) {
+      throw new RangeError("Review position must precede the current card.");
+    }
+    return reviewIndex + 1 >= currentIndex ? null : reviewIndex + 1;
+  }
+
   function createMeaningPracticeRun(cards, random = Math.random) {
     if (!Array.isArray(cards) || cards.length === 0) throw new RangeError("Cannot practice an empty dictionary.");
     if (cards.some((card) => !Array.isArray(card.meanings) || card.meanings.length === 0)) {
@@ -184,5 +239,5 @@
     return cards.map((card, cardIndex) => cardIndex === index ? { ...card, ...updates } : card);
   }
 
-  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, shuffle, createPracticeDeck, createMeaningPracticeRun, removeCardAt, updateCardAt };
+  return { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
 });

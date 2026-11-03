@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createMeaningPracticeRun, createPracticeDeck, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shouldAutoConvertHiragana, shouldSkipHiraganaOnTab, shuffle, updateCardAt } = require("../dictionary-core.js");
+const { createMeaningPracticeRun, createPracticeDeck, getSessionProgressState, nextReviewIndex, parseImportedDictionary, removeCardAt, romajiToHiragana, serializeDictionary, shouldAutoConvertHiragana, shouldSkipHiraganaOnTab, shuffle, updateCardAt } = require("../dictionary-core.js");
 
 test("imports the app's named dictionary format and trims card fields", () => {
   const cards = parseImportedDictionary({
@@ -236,6 +236,71 @@ test("whole-dictionary deck includes every current card exactly once", () => {
 
   assert.equal(deck.length, cards.length);
   assert.deepEqual([...deck].sort((a, b) => a.japanese.localeCompare(b.japanese)), cards);
+});
+
+test("progress is dark green through the current guess and leaves unseen cards unavailable", () => {
+  const state = getSessionProgressState(5, 2, null, new Set([0, 1, 2]));
+
+  assert.equal(state.darkPosition, 50);
+  assert.equal(state.reviewWidth, 0);
+  assert.deepEqual(state.points.map(({ isDark }) => isDark), [true, true, true, false, false]);
+  assert.equal(state.points[2].isGuessing, true);
+  assert.equal(state.points[3].isShown, false);
+});
+
+test("review splits progress at the selected card, then continues light green to the guess card", () => {
+  const state = getSessionProgressState(5, 3, 1, new Set([0, 1, 2, 3]));
+
+  assert.equal(state.darkPosition, 25);
+  assert.equal(state.reviewPosition, 25);
+  assert.equal(state.reviewWidth, 50);
+  assert.deepEqual(state.points.map(({ isDark, isReviewRange }) => [isDark, isReviewRange]), [
+    [true, false],
+    [true, false],
+    [false, true],
+    [false, true],
+    [false, false],
+  ]);
+  assert.equal(state.points[1].isReviewing, true);
+  assert.equal(state.points[3].isGuessing, true);
+  assert.equal(state.points[4].isShown, false);
+});
+
+test("reviewing the card directly before the guess keeps a one-step light segment", () => {
+  const state = getSessionProgressState(4, 3, 2, [0, 1, 2, 3]);
+
+  assert.ok(state.darkPosition < 100);
+  assert.equal(state.reviewWidth, 100 - state.darkPosition);
+  assert.equal(state.points[2].isReviewing, true);
+  assert.equal(state.points[3].isReviewRange, true);
+});
+
+test("one-card progress avoids division edge cases and revealed cards stop showing guess mode", () => {
+  const guessing = getSessionProgressState(1, 0, null, [0]);
+  const revealed = getSessionProgressState(1, 0, null, [0], true);
+
+  assert.equal(guessing.guessPosition, 0);
+  assert.equal(guessing.darkPosition, 0);
+  assert.equal(guessing.points[0].isGuessing, true);
+  assert.equal(revealed.points[0].isGuessing, false);
+});
+
+test("review stepping advances through shown cards and stops at the current guess", () => {
+  assert.equal(nextReviewIndex(null, 3), null);
+  assert.equal(nextReviewIndex(0, 3), 1);
+  assert.equal(nextReviewIndex(1, 3), 2);
+  assert.equal(nextReviewIndex(2, 3), null);
+  assert.throws(() => nextReviewIndex(3, 3), /must precede/);
+  assert.throws(() => nextReviewIndex(-1, 3), /must precede/);
+});
+
+test("progress calculation rejects invalid session and review indices", () => {
+  assert.throws(() => getSessionProgressState(0, 0, null, []), /at least one card/);
+  assert.throws(() => getSessionProgressState(4, 4, null, []), /outside the session/);
+  assert.throws(() => getSessionProgressState(4, 2, 2, [0, 1, 2]), /earlier session card/);
+  assert.throws(() => getSessionProgressState(4, 2, null, "0,1,2"), /Set or array/);
+  assert.throws(() => getSessionProgressState(4, 2, null, [0, 1, 4]), /Shown card index is outside/);
+  assert.throws(() => getSessionProgressState(4, 2, null, [0, 1]), /must have been shown/);
 });
 
 test("rejects impossible session sizes and empty dictionaries", () => {

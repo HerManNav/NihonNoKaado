@@ -64,10 +64,11 @@
             <span id="answer-word" class="answer-word" hidden></span>
           </button>
           <div class="session-progress">
-            <div id="progress-track" class="progress-track" role="progressbar" aria-label="Session progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1">
+            <div id="progress-track" class="progress-track" role="group" aria-label="Session progress. Click a shown dot to review that card.">
               <span class="progress-line" aria-hidden="true"></span>
+              <span id="progress-review-fill" class="progress-review-fill" aria-hidden="true"></span>
               <span id="progress-fill" class="progress-fill" aria-hidden="true"></span>
-              <span id="progress-points" class="progress-points" aria-hidden="true"></span>
+              <span id="progress-points" class="progress-points"></span>
             </div>
             <p id="cards-remaining" class="cards-remaining" aria-live="polite"></p>
           </div>

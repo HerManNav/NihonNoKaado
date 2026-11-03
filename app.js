@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -34,6 +34,7 @@ const progressLabel = document.querySelector("#progress-label");
 const sessionOptions = document.querySelectorAll("[data-session-size]");
 const progressTrack = document.querySelector("#progress-track");
 const progressFill = document.querySelector("#progress-fill");
+const progressReviewFill = document.querySelector("#progress-review-fill");
 const progressPoints = document.querySelector("#progress-points");
 const cardsRemaining = document.querySelector("#cards-remaining");
 const dictionaryTools = document.querySelector("#dictionary-tools");
@@ -51,6 +52,9 @@ let practiceDeck = [];
 let englishPracticeRun = null;
 let practiceTarget = 0;
 let practiceIndex = 0;
+let reviewIndex = null;
+let shownPracticeIndices = new Set();
+let shownPracticeCards = new Map();
 let answerRevealed = false;
 let selectedSessionSize = 5;
 let advancingPractice = false;
@@ -240,15 +244,25 @@ function startPractice() {
   practiceDeck = fromEnglish ? [] : createPracticeDeck(cards, sessionSize);
   englishPracticeRun = fromEnglish ? createMeaningPracticeRun(cards) : null;
   practiceIndex = 0;
+  reviewIndex = null;
+  shownPracticeIndices = new Set();
+  shownPracticeCards = new Map();
+  answerRevealed = false;
   showScreen("practice");
   renderPracticeCard();
 }
 
 function renderPracticeCard() {
   const fromEnglish = originLanguage.value === "english";
-  if (fromEnglish && !practiceDeck[practiceIndex]) drawEnglishPracticeCard();
-  const entry = practiceDeck[practiceIndex];
+  const displayIndex = reviewIndex ?? practiceIndex;
+  if (fromEnglish && !practiceDeck[displayIndex]) drawEnglishPracticeCard(displayIndex);
+  const entry = practiceDeck[displayIndex];
   const card = fromEnglish ? entry.card : entry;
+  const isReviewing = reviewIndex !== null;
+  if (!isReviewing) {
+    shownPracticeIndices.add(practiceIndex);
+    shownPracticeCards.set(card.japanese, card);
+  }
   if (fromEnglish) {
     promptWord.textContent = entry.meaning;
     renderJapaneseWord(answerWord, card);
@@ -256,14 +270,15 @@ function renderPracticeCard() {
     renderJapaneseWord(promptWord, card);
     answerWord.textContent = card.meanings.join("\n\n");
   }
-  answerWord.hidden = true;
+  const showFullCard = isReviewing || answerRevealed;
+  answerWord.hidden = !showFullCard;
   answerWord.classList.remove("is-appearing");
-  revealHint.hidden = false;
+  if (isReviewing) answerWord.classList.add("is-appearing");
+  revealHint.hidden = showFullCard;
   flashcard.classList.remove("is-revealing", "is-advancing", "is-entering");
   flashcard.disabled = false;
   advancingPractice = false;
-  flashcard.setAttribute("aria-expanded", "false");
-  answerRevealed = false;
+  flashcard.setAttribute("aria-expanded", String(showFullCard));
   progressLabel.textContent = `${practiceIndex} of ${practiceTarget} completed`;
   renderSessionProgress();
 }
@@ -279,8 +294,8 @@ function renderJapaneseWord(container, card) {
   container.append(romaji, hiragana);
 }
 
-function drawEnglishPracticeCard() {
-  practiceDeck[practiceIndex] = englishPracticeRun.draw();
+function drawEnglishPracticeCard(index = practiceIndex) {
+  practiceDeck[index] = englishPracticeRun.draw();
 }
 
 function meaningInputs() {
@@ -307,19 +322,43 @@ function resetMeaningInputs(values = [""]) {
 
 function renderSessionProgress() {
   const total = practiceTarget;
-  const shown = practiceIndex + 1;
+  const state = getSessionProgressState(total, practiceIndex, reviewIndex, shownPracticeIndices, answerRevealed);
+  const shown = state.shownCount;
   const remaining = total - practiceIndex;
-  const points = Array.from({ length: total }, (_, index) => {
-    const position = total === 1 ? 50 : (index / (total - 1)) * 100;
-    const reached = index < shown ? " is-reached" : "";
-    return `<span class="progress-point${reached}" style="left: ${position}%"></span>`;
-  }).join("");
+  const progressMarker = document.createElement("span");
+  progressMarker.className = "progress-current-marker";
+  progressMarker.textContent = answerRevealed ? "Next" : "Guess";
+  progressMarker.style.left = `${state.guessPosition}%`;
+  progressMarker.setAttribute("aria-hidden", "true");
 
-  progressPoints.innerHTML = points;
-  progressFill.style.width = `${total === 1 ? 0 : ((shown - 1) / (total - 1)) * 100}%`;
-  progressTrack.setAttribute("aria-valuemax", String(total));
-  progressTrack.setAttribute("aria-valuenow", String(shown));
-  progressTrack.setAttribute("aria-valuetext", `Card ${shown} of ${total}`);
+  progressPoints.replaceChildren();
+  state.points.forEach((pointState) => {
+    const { index } = pointState;
+    const position = total === 1 ? 50 : (index / (total - 1)) * 100;
+    const point = document.createElement("button");
+    point.type = "button";
+    point.className = "progress-point";
+    point.style.left = `${position}%`;
+    point.disabled = !pointState.isShown;
+    point.setAttribute("aria-label", index === practiceIndex
+      ? `Current card ${index + 1} of ${total}${answerRevealed ? ", answer revealed" : ", guess this card"}`
+      : `Review card ${index + 1} of ${total}`);
+    if (pointState.isDark) point.classList.add("is-reached");
+    if (pointState.isReviewRange) point.classList.add("is-review-range");
+    if (pointState.isCurrent) {
+      point.classList.add("is-current");
+      point.setAttribute("aria-current", "step");
+      if (pointState.isGuessing) point.classList.add("is-guessing");
+    }
+    if (pointState.isReviewing) point.classList.add("is-reviewing");
+    point.addEventListener("click", () => reviewPracticeCard(index));
+    progressPoints.append(point);
+  });
+  progressPoints.append(progressMarker);
+  progressFill.style.width = `${state.darkPosition}%`;
+  progressReviewFill.style.left = `${state.reviewPosition}%`;
+  progressReviewFill.style.width = `${state.reviewWidth}%`;
+  progressTrack.setAttribute("aria-label", `Session progress, card ${shown} of ${total}. Click a shown dot to review it. The marker shows the current card.`);
   cardsRemaining.textContent = `${remaining} ${remaining === 1 ? "card" : "cards"} left`;
 }
 
@@ -334,6 +373,29 @@ function revealAnswer() {
   answerWord.classList.add("is-appearing");
   revealHint.hidden = true;
   flashcard.setAttribute("aria-expanded", "true");
+  renderSessionProgress();
+}
+
+function reviewPracticeCard(index) {
+  if (advancingPractice || !shownPracticeIndices.has(index)) return;
+  reviewIndex = index === practiceIndex ? null : index;
+  renderPracticeCard();
+}
+
+function advanceReview() {
+  if (reviewIndex === null) return;
+  reviewIndex = nextReviewIndex(reviewIndex, practiceIndex);
+  renderPracticeCard();
+}
+
+function handleFlashcardAction() {
+  if (reviewIndex !== null) {
+    advanceReview();
+  } else if (answerRevealed) {
+    advancePractice();
+  } else {
+    revealAnswer();
+  }
 }
 
 function advancePractice() {
@@ -349,6 +411,8 @@ function advancePractice() {
       return;
     }
     practiceIndex += 1;
+    reviewIndex = null;
+    answerRevealed = false;
     renderPracticeCard();
     flashcard.classList.add("is-entering");
     window.setTimeout(() => flashcard.classList.remove("is-entering"), 240);
@@ -547,18 +611,14 @@ japaneseInput.addEventListener("input", () => {
 
 hiraganaInput.addEventListener("input", () => { hiraganaManuallyEdited = true; });
 
-flashcard.addEventListener("click", () => {
-  if (answerRevealed) advancePractice();
-  else revealAnswer();
-});
+flashcard.addEventListener("click", handleFlashcardAction);
 
 document.addEventListener("keydown", (event) => {
   if (event.code !== "Space" || screens.practice.hidden) return;
   const target = event.target;
   if (target instanceof Element && target.closest("button, input, textarea, select, a, [contenteditable='true']")) return;
   event.preventDefault();
-  if (answerRevealed) advancePractice();
-  else revealAnswer();
+  handleFlashcardAction();
 });
 
 document.querySelectorAll("[data-go-home]").forEach((button) => button.addEventListener("click", () => showScreen("home")));

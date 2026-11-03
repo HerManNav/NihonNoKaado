@@ -78,13 +78,25 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 @keyframes card-out { to { opacity: 0; transform: translateX(-16px) scale(.985); } }
 @keyframes card-in { from { opacity: 0; transform: translateX(16px) scale(.985); } to { opacity: 1; transform: translateX(0) scale(1); } }
 .session-progress { width: 100%; margin-top: 26px; }
-.progress-track { height: 18px; position: relative; }
-.progress-line, .progress-fill { height: 2px; left: 4px; position: absolute; top: 8px; }
+.progress-track { height: 34px; position: relative; }
+.progress-line, .progress-fill, .progress-review-fill { height: 2px; left: 4px; position: absolute; top: 16px; }
 .progress-line { background: #deded5; right: 4px; }
+.progress-review-fill { background: #b9c8af; transition: left .25s ease, width .25s ease; }
 .progress-fill { background: #68745f; transition: width .25s ease; }
 .progress-points { inset: 0 4px; position: absolute; }
-.progress-point { background: #f7f6f2; border: 2px solid #c9cabf; border-radius: 50%; height: 10px; position: absolute; top: 4px; transform: translateX(-50%); transition: background .25s ease, border-color .25s ease; width: 10px; }
-.progress-point.is-reached { background: #68745f; border-color: #68745f; }
+.progress-point { appearance: none; background: transparent; border: 0; border-radius: 50%; cursor: pointer; height: 26px; padding: 0; position: absolute; top: 4px; transform: translateX(-50%); width: 26px; }
+.progress-point::before { content: ""; position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; transform: translate(-50%, -50%); border: 2px solid #c9cabf; border-radius: 50%; background: #f7f6f2; transition: width .18s ease, height .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.progress-point.is-reached::before { background: #68745f; border-color: #68745f; }
+.progress-point.is-review-range::before { background: #b9c8af; border-color: #aebba4; }
+.progress-point.is-current::before { width: 15px; height: 15px; box-shadow: 0 0 0 3px #dcebd6; }
+.progress-point.is-guessing::before { width: 17px; height: 17px; background: #30392f; border-color: #fff; box-shadow: 0 0 0 3px #aebba4, 0 0 0 5px #dcebd6; }
+.progress-point.is-reviewing::before { background: #68745f; border-color: #68745f; box-shadow: 0 0 0 3px #f0ddc9; }
+.progress-point:not(:disabled):hover::before { background: #9aa68f; border-color: #68745f; }
+.progress-point.is-review-range:not(:disabled):hover::before { background: #b9c8af; border-color: #aebba4; }
+.progress-point.is-guessing:hover::before { background: #30392f; border-color: #fff; }
+.progress-point:disabled { cursor: default; }
+.progress-point:focus-visible { outline: 3px solid #797d6450; outline-offset: 3px; }
+.progress-current-marker { position: absolute; top: -8px; z-index: 1; transform: translateX(-50%); color: #30392f; font-size: 10px; font-weight: 750; letter-spacing: .04em; line-height: 1; text-transform: uppercase; white-space: nowrap; pointer-events: none; }
 .cards-remaining { color: #77796f; font-size: 13px; margin: 10px 0 0; text-align: center; }
 
 .dictionary-screen { display: flex; flex-direction: column; }
@@ -143,6 +155,11 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
   .add-button, .dictionary-tools-button { width: 54px; height: 54px; }
   .dictionary-button { bottom: 88px; }
   .flashcard { min-height: 250px; }
+  .progress-point { width: 18px; height: 18px; top: 8px; }
+  .progress-point::before { width: 9px; height: 9px; }
+  .progress-point.is-current::before { width: 12px; height: 12px; }
+  .progress-point.is-guessing::before { width: 14px; height: 14px; }
+  .progress-current-marker { font-size: 9px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
