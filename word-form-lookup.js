@@ -22,6 +22,23 @@
     ["ra", "informal plural suffix"],
     ["gata", "honorific plural suffix"],
   ]);
+  // The short particle と shares its reading with many unrelated words. Its
+  // common conjunction, accompaniment, and quotation senses are present in
+  // JMdict's full gloss list but can disappear behind those homographs when
+  // the four-line popup uses only each entry's first gloss.
+  const PARTICLE_SENSE_HINTS = new Map([
+    ["to", ["and", "with", "used for quoting (thoughts, speech, etc.)"]],
+  ]);
+  const NO_POTENTIAL = new Set(["aru", "wakaru", "amegafuru", "kudasaru"]);
+
+  function isUnsupportedForm(label, lemma, tag, gloss) {
+    if (/potential/.test(label)) {
+      if (tag === "v5r-i" || NO_POTENTIAL.has(lemma)) return true;
+      if (lemma === "iru" && tag === "v5r" && /\bneed(?:ed)?\b/i.test(gloss)) return true;
+    }
+    // ござる takes ござい- before ます, never the regular ござり- stem.
+    return lemma === "gozaru" && /^polite/.test(label);
+  }
 
   function normalizedKey(value) {
     return String(value || "").trim().toLowerCase().replace(/’/g, "'");
@@ -69,8 +86,18 @@
     }
   }
 
+  function addParticleSenseHints(candidates, key, data) {
+    const hints = PARTICLE_SENSE_HINTS.get(key);
+    if (!hints) return;
+    const sourceGlosses = data.lookup?.[key] || [];
+    for (const hint of hints) {
+      if (sourceGlosses.includes(hint)) addCandidate(candidates, hint, 0, 1);
+    }
+  }
+
   function addIrregularForms(candidates, key, data) {
     for (const [label, lemma, gloss, score] of data.irregularForms?.[key] || []) {
+      if (isUnsupportedForm(label, lemma, "", gloss) && lemma !== "gozaru") continue;
       const preferred = key === "shita" && lemma === "suru" && /past/.test(label) ? 1 : 0;
       addCandidate(candidates, `${label} of ${lemma} — ${gloss}`, score, preferred);
     }
@@ -84,6 +111,7 @@
       if (!lemma || lemma === key) continue;
       for (const [tag, gloss, score] of data.lemmas?.[lemma] || []) {
         if (tag !== posTag) continue;
+        if (isUnsupportedForm(label, lemma, tag, gloss)) continue;
         const shownLemma = tag === "vs" ? `${lemma} suru` : lemma;
         addCandidate(candidates, `${label} of ${shownLemma} — ${gloss}`, score);
       }
@@ -100,21 +128,27 @@
       }
       if (!noun) continue;
       const head = bestHead(noun, data);
-      if (head) addCandidate(candidates, `${label} of ${noun} — ${head[0]}`, numericScore(head[1]) - 1, previousKey === noun ? 1 : 0);
+      // With a separate preceding noun, the card supplies the missing context.
+      // Without it, a matching noun suffix must not outrank a real verb form
+      // (e.g. shinda is usually the past of shinu, not shin + da).
+      if (head) addCandidate(candidates, `${label} of ${noun} — ${head[0]}`, numericScore(head[1]) - 1, previousKey === noun ? 1 : -1);
     }
   }
 
-  function addPronounPlural(candidates, key, previousKey, data, nouns, pronouns) {
+  function addPronounPlural(candidates, key, previousKey, data) {
     for (const [suffix, label] of PLURAL_SUFFIXES) {
       let noun = "";
-      const allowsBase = (base) => pronouns.has(base) || (suffix === "tachi" && nouns.has(base));
+      const allowsBase = (base) => {
+        const head = data.groupHeads?.[base];
+        return !!head && (suffix !== "gata" || head[2] === "person");
+      };
       if (key === suffix && previousKey && allowsBase(previousKey)) noun = previousKey;
       else if (key.endsWith(suffix) && key.length > suffix.length) {
         const base = key.slice(0, -suffix.length);
         if (allowsBase(base)) noun = base;
       }
       if (!noun) continue;
-      const head = bestHead(noun, data);
+      const head = data.groupHeads[noun];
       if (head) addCandidate(candidates, `${label} of ${noun} — ${head[0]}`, numericScore(head[1]) - 1, previousKey === noun ? 1 : 0);
     }
   }
@@ -144,12 +178,13 @@
     if (!word || !data || typeof data !== "object") return [];
     const previous = normalizedKey(previousKey);
     const candidates = [];
-    const { nouns, pronouns } = keySets(data);
+    const { nouns } = keySets(data);
     addDirectMeanings(candidates, word, data);
+    addParticleSenseHints(candidates, word, data);
     addIrregularForms(candidates, word, data);
     addRuleForms(candidates, word, data);
     addNounCopula(candidates, word, previous, data, nouns);
-    addPronounPlural(candidates, word, previous, data, nouns, pronouns);
+    addPronounPlural(candidates, word, previous, data);
     addSpacedSuru(candidates, word, previous, data);
 
     candidates.sort((a, b) => b.priority - a.priority || b.score - a.score);

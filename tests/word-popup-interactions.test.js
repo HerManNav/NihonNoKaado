@@ -3,6 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
+const { gunzipSync } = require("node:zlib");
 
 const ROOT = path.resolve(__dirname, "..");
 const appSource = fs.readFileSync(path.join(ROOT, "app.js"), "utf8");
@@ -107,7 +108,7 @@ function pointer(target, pointerType, x, y) {
   };
 }
 
-function makeSession() {
+function makeSession({ realLookup = false } = {}) {
   const document = new Document();
   const flashcard = document.querySelector("#flashcard");
   const prompt = document.querySelector("#prompt-word");
@@ -116,7 +117,8 @@ function makeSession() {
   flashcard.append(prompt, answer);
   const window = {
     JapaneseCardsCore: core,
-    JapaneseWordFormLookup: { findWordMeanings: (key, _data, previous) => [`${key}:${previous || "none"}`] },
+    JapaneseWordFormLookup: realLookup ? require("../word-form-lookup.js")
+      : { findWordMeanings: (key, _data, previous) => [`${key}:${previous || "none"}`] },
     innerWidth: 400,
     setTimeout: () => 1,
     clearTimeout() {},
@@ -126,7 +128,10 @@ function makeSession() {
     localStorage: { getItem: () => null, setItem() {} }, console,
   });
   vm.runInContext(appSource, context, { filename: "app.js" });
-  vm.runInContext("romajiLookup = { format: 3 }; practiceTarget = 1; practiceIndex = 0; answerRevealed = true", context);
+  context.lookupData = realLookup
+    ? JSON.parse(gunzipSync(fs.readFileSync(path.join(ROOT, "dictionaries/romaji-english-jmdict-2026-11-02.json.gz"))))
+    : { format: 4 };
+  vm.runInContext("romajiLookup = lookupData; practiceTarget = 1; practiceIndex = 0; answerRevealed = true", context);
   const card = {
     japanese: "shita", hiragana: "した", meanings: ["did"],
     examples: [{ romaji: "benkyou shita.", hiragana: "べんきょうした。", english: "I studied." }],
@@ -163,6 +168,16 @@ test("desktop hover follows the pointer within an 8px margin and closes beyond i
   document.emit("pointermove", pointer(flashcard, "mouse", 159, 190));
   assert.equal(popup.hidden, true);
   assert.equal(vm.runInContext("activeRomajiToken", context), null);
+});
+
+test("a revealed card uses the real lookup for a common particle sense", async () => {
+  const { context, flashcard, prompt, popup } = makeSession({ realLookup: true });
+  vm.runInContext("practiceDeck = [{ ...card, japanese: 'to' }]; renderPracticeCard()", context);
+  const token = prompt.children[0].children[0];
+  flashcard.emit("pointerover", pointer(token, "mouse", 120, 190));
+  await settlePopup();
+  assert.equal(popup.hidden, false);
+  assert(popup.children.some((line) => line.textContent === "and"));
 });
 
 test("mobile tap anchors the popup above the word without advancing the card", async () => {

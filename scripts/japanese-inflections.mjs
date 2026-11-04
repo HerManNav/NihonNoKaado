@@ -14,7 +14,12 @@ const GODAN = {
   v5m: { ending: "mu", a: "ma", i: "mi", e: "me", o: "mo", te: "nde", ta: "nda" },
   v5r: { ending: "ru", a: "ra", i: "ri", e: "re", o: "ro", te: "tte", ta: "tta" },
   "v5r-i": { ending: "ru", a: "ra", i: "ri", e: "re", o: "ro", te: "tte", ta: "tta" },
+  v5aru: { ending: "ru", a: "ra", i: "i", e: "re", o: "ro", te: "tte", ta: "tta" },
 };
+
+// These verbs express states outside the ordinary ability/possibility reading.
+// Their potential forms are excluded by published conjugation guidance.
+const NO_POTENTIAL = new Set(["aru", "wakaru", "amegafuru", "kudasaru"]);
 
 function addModernVerbForms(add, { te, past, negative, masuStem, conditional, potential, passive, causative, volitional, imperative }) {
   add(te, "te-form");
@@ -57,9 +62,9 @@ function addGodanForms(add, lemma, kind) {
     te: `${base}${rule.te}`,
     past: `${base}${rule.ta}`,
     negative,
-    masuStem: `${base}${rule.i}`,
+    masuStem: `${base}${lemma === "gozaru" ? "i" : rule.i}`,
     conditional: `${base}${rule.e}ba`,
-    potential: `${base}${rule.e}ru`,
+    potential: kind === "v5r-i" || NO_POTENTIAL.has(lemma) ? null : `${base}${rule.e}ru`,
     passive: `${base}${rule.a}reru`,
     causative: `${base}${rule.a}seru`,
     volitional: `${base}${rule.o}u`,

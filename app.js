@@ -101,7 +101,7 @@ async function getRomajiLookup() {
   if (!romajiLookupPromise) {
     romajiLookupPromise = (async () => {
       try {
-        const response = await fetch("dictionaries/romaji-english-jmdict-2026-11-02.json.gz?v=3", { cache: "no-cache" });
+        const response = await fetch("dictionaries/romaji-english-jmdict-2026-11-02.json.gz?v=4", { cache: "no-cache" });
         if (!response.ok) throw new Error(`Dictionary request failed (${response.status}).`);
         if (typeof DecompressionStream !== "function") throw new Error("This browser cannot open the compressed lookup dictionary.");
         const compressed = await response.arrayBuffer();

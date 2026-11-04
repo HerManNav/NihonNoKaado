@@ -117,10 +117,15 @@ const source = await readJmdict(sourceFile);
 const candidates = Object.create(null);
 const headCandidates = Object.create(null);
 const lemmaCandidates = Object.create(null);
+const groupHeads = Object.create(null);
 const nounKeys = new Set();
 const pronounKeys = new Set();
+// -tachi, -ra, and -gata refer to groups of animate beings. JMdict has no
+// animacy tag, so admit only head glosses that clearly name people or animals.
+const personGloss = /^(?:I|you|he|she|we|they|person|people|human|child|children|baby|adult|man|woman|men|women|boy|girl|mother|father|parent|brother|sister|son|daughter|friend|student|teacher|instructor|doctor|nurse|worker|employee|customer|guest|colleague|neighbor|neighbour|grandmother|grandfather|uncle|aunt|cousin|husband|wife|police officer|soldier|president|king|queen|prince|princess|gentleman|lady)(?:\b|$)/i;
+const animalGloss = /^(?:animal|cat|dog|bird|pet|horse|cow|pig|sheep|goat|rabbit|mouse|rat|lion|tiger|bear|wolf|fox|deer|monkey|fish|insect)(?:\b|$)/i;
 const inflectableTags = new Set([
-  "v1", "v1-s", "v5u", "v5u-s", "v5k", "v5k-s", "v5g", "v5s", "v5t", "v5n", "v5b", "v5m", "v5r", "v5r-i",
+  "v1", "v1-s", "v5u", "v5u-s", "v5k", "v5k-s", "v5g", "v5s", "v5t", "v5n", "v5b", "v5m", "v5r", "v5r-i", "v5aru",
   "vs-i", "vs-s", "vs", "vk", "adj-i", "adj-ix", "adj-na", "cop",
 ]);
 for (const word of source.words || []) {
@@ -141,6 +146,13 @@ for (const word of source.words || []) {
     if (!englishGlosses.length) continue;
     if (posTags.includes("n")) nounKeys.add(romaji);
     if (posTags.includes("pn")) pronounKeys.add(romaji);
+    if (posTags.includes("n") || posTags.includes("pn")) {
+      const gloss = englishGlosses[0];
+      const kind = personGloss.test(gloss) ? "person" : animalGloss.test(gloss) ? "animal" : "";
+      if (kind && (!groupHeads[romaji] || rank > groupHeads[romaji][1])) {
+        groupHeads[romaji] = [gloss, rank, kind];
+      }
+    }
     for (const tag of posTags) {
       if (inflectableTags.has(tag)) (lemmaCandidates[romaji] ||= []).push([tag, englishGlosses[0], rank]);
     }
@@ -191,7 +203,7 @@ for (const [romaji, entries] of Object.entries(lemmaCandidates)) {
 const templates = [
   ["v1", "ru"], ["v1-s", "ru"], ["v5u", "u"], ["v5u-s", "u"], ["v5k", "ku"], ["v5k-s", "ku"],
   ["v5g", "gu"], ["v5s", "su"], ["v5t", "tsu"], ["v5n", "nu"], ["v5b", "bu"], ["v5m", "mu"],
-  ["v5r", "ru"], ["v5r-i", "ru"], ["vs-i", "suru"], ["vs-s", "suru"], ["vs", ""], ["vk", "kuru"],
+  ["v5r", "ru"], ["v5r-i", "ru"], ["v5aru", "ru"], ["vs-i", "suru"], ["vs-s", "suru"], ["vs", ""], ["vk", "kuru"],
   ["adj-i", "i"], ["adj-ix", "i"], ["adj-na", ""],
 ];
 const formRules = [];
@@ -209,7 +221,7 @@ for (const [tag, lemmaSuffix] of templates) {
 formRules.sort((left, right) => right[0].length - left[0].length);
 
 const irregularForms = Object.create(null);
-for (const lemma of ["ii", "aru", "da", "desu"]) {
+for (const lemma of ["ii", "aru", "gozaru", "da", "desu"]) {
   for (const [tag, gloss, score] of lemmas[lemma] || []) {
     for (const form of generateInflections(lemma, [tag])) {
       (irregularForms[form.romaji] ||= []).push([form.label, lemma, gloss, score + 100]);
@@ -221,12 +233,13 @@ const payload = JSON.stringify({
   source: "JMdict (EDRDG), distributed as jmdict-simplified 3.6.2",
   frequencySource: "FrequencyWords Japanese OpenSubtitles 2018",
   dictDate: source.dictDate,
-  format: 3,
+  format: 4,
   lookup,
   heads,
   lemmas,
   formRules,
   irregularForms,
+  groupHeads,
   nounKeys: [...nounKeys],
   pronounKeys: [...pronounKeys],
 });

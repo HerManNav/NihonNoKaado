@@ -9,7 +9,7 @@ const dictionaryPath = path.join(__dirname, "../dictionaries/romaji-english-jmdi
 const dictionary = JSON.parse(gunzipSync(readFileSync(dictionaryPath)));
 
 test("compiled lookup retains source data and stays below the hosting file limit", () => {
-  assert.equal(dictionary.format, 3);
+  assert.equal(dictionary.format, 4);
   assert.equal(dictionary.dictDate, "2026-11-02");
   assert(Object.keys(dictionary.lookup).length > 200_000);
   assert(Object.keys(dictionary.lemmas).length > 30_000);
