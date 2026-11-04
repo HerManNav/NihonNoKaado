@@ -9,6 +9,7 @@ const projectDirectory = path.resolve(scriptDirectory, "..");
 const sourceFile = process.argv[2] || path.join(projectDirectory, "dictionaries", "source-data", "jmdict-eng-3.6.2+20261102210542.json.tgz");
 const outputFile = process.argv[3] || path.join(projectDirectory, "dictionaries", "romaji-english-jmdict-2026-11-02.json.gz");
 const frequencyFile = path.join(projectDirectory, "dictionaries", "source-data", "ja_full-OpenSubtitles2018.txt");
+const learnerIndexFile = path.join(projectDirectory, "dictionaries", "source-data", "tkg-entries-index-32c267cb.json");
 
 const kanaToRomaji = {
   きゃ: "kya", きゅ: "kyu", きょ: "kyo", ぎゃ: "gya", ぎゅ: "gyu", ぎょ: "gyo",
@@ -95,20 +96,34 @@ function wordRank(word, reading) {
   const allTags = [...readingTags, ...(word.kanji || []).flatMap((kanji) => kanji.tags || [])];
   const [categoryRank, nfRank] = frequencyRank(allTags);
   const pos = new Set((word.sense || []).flatMap((sense) => sense.partOfSpeech || []));
-  const grammar = pos.has("prt") ? 50000 : pos.has("pn") ? 30000 : pos.has("vs-i") || pos.has("vs-s") || pos.has("vk") ? 20000
+  const grammar = pos.has("vs-i") || pos.has("vs-s") ? 60000 : pos.has("prt") ? 50000 : pos.has("pn") ? 30000 : pos.has("vk") ? 20000
     : pos.has("cop") || pos.has("aux-v") ? 10000 : 0;
   const spellings = (word.kanji || []).map((form) => form.text)
     .filter((form) => (reading.appliesToKanji || []).some((allowed) => allowed === "*" || allowed === form));
   if (!spellings.length) spellings.push(reading.text);
+  // The TKG basic/core tiers identify ordinary learner vocabulary by both
+  // spelling and reading. This resolves frequent romaji homographs that
+  // JMdict entry flags and unsensed surface counts cannot distinguish.
+  const learnerBonus = Math.max(0, ...spellings.map((form) =>
+    learnerTierBonus.get(`${normalizeKana(reading.text)}\0${form}`) || 0));
   const corpusCount = Math.max(0, ...spellings.map((form) => {
     const exact = frequencyCounts.get(form) || 0;
     const stem = form.replace(/[ぁ-ゖ]+$/u, "");
     return Math.max(exact, stem !== form ? frequencyCounts.get(stem) || 0 : 0);
   }));
   const corpusWeight = Math.min(2500, Math.round(Math.log1p(corpusCount) * 200));
-  return grammar + commonReading + commonKanji + corpusWeight + (4 - categoryRank) * 20 + (99 - nfRank);
+  return learnerBonus + grammar + commonReading + commonKanji + corpusWeight + (4 - categoryRank) * 20 + (99 - nfRank);
 }
 
+const learnerIndex = JSON.parse(await readFile(learnerIndexFile, "utf8"));
+const learnerTierBonus = new Map();
+for (const entry of learnerIndex.entries || []) {
+  const bonus = entry.vocabulary_tier === "basic" ? 30000
+    : entry.vocabulary_tier === "core" ? 6000 : 0;
+  if (!bonus || !entry.reading || !entry.headword) continue;
+  const key = `${normalizeKana(entry.reading)}\0${entry.headword}`;
+  learnerTierBonus.set(key, Math.max(bonus, learnerTierBonus.get(key) || 0));
+}
 const frequencyCounts = new Map((await readFile(frequencyFile, "utf8")).trim().split(/\r?\n/).map((line) => {
   const split = line.lastIndexOf(" ");
   return [line.slice(0, split), Number(line.slice(split + 1)) || 0];
@@ -232,8 +247,9 @@ for (const lemma of ["ii", "aru", "gozaru", "da", "desu"]) {
 const payload = JSON.stringify({
   source: "JMdict (EDRDG), distributed as jmdict-simplified 3.6.2",
   frequencySource: "FrequencyWords Japanese OpenSubtitles 2018",
+  learnerTierSource: "TKG Japanese-English Learner's Dictionary basic/core tiers (commit 32c267cbfa7756a2e3542657772759d92d4e2420)",
   dictDate: source.dictDate,
-  format: 4,
+  format: 5,
   lookup,
   heads,
   lemmas,

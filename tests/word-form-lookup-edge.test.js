@@ -9,7 +9,7 @@ const dictionaryPath = path.join(__dirname, "../dictionaries/romaji-english-jmdi
 const dictionary = JSON.parse(gunzipSync(readFileSync(dictionaryPath)));
 
 test("compiled lookup retains source data and stays below the hosting file limit", () => {
-  assert.equal(dictionary.format, 4);
+  assert.equal(dictionary.format, 5);
   assert.equal(dictionary.dictDate, "2026-11-02");
   assert(Object.keys(dictionary.lookup).length > 200_000);
   assert(Object.keys(dictionary.lemmas).length > 30_000);
@@ -19,6 +19,7 @@ test("compiled lookup retains source data and stays below the hosting file limit
   assert(statSync(dictionaryPath).size < 25_000_000);
   assert(statSync(path.join(__dirname, "../dictionaries/source-data/jmdict-eng-3.6.2+20261102210542.json.tgz")).size > 10_000_000);
   assert(statSync(path.join(__dirname, "../dictionaries/source-data/ja_full-OpenSubtitles2018.txt")).size > 100_000);
+  assert(statSync(path.join(__dirname, "../dictionaries/source-data/tkg-entries-index-32c267cb.json")).size < 25_000_000);
 });
 
 test("lookup chooses common meanings and keeps distinct homographs visible", () => {

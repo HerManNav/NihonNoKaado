@@ -108,7 +108,7 @@ function pointer(target, pointerType, x, y) {
   };
 }
 
-function makeSession({ realLookup = false } = {}) {
+function makeSession({ realLookup = false, fetchLookup = false } = {}) {
   const document = new Document();
   const flashcard = document.querySelector("#flashcard");
   const prompt = document.querySelector("#prompt-word");
@@ -126,11 +126,16 @@ function makeSession({ realLookup = false } = {}) {
   const context = vm.createContext({
     document, window, Element, Set, Node: { TEXT_NODE: 3 }, HTMLInputElement: Element,
     localStorage: { getItem: () => null, setItem() {} }, console,
+    Blob, Response, DecompressionStream,
+    fetch: fetchLookup ? async (url) => {
+      assert.match(url, /romaji-english-jmdict-2026-11-02\.json\.gz\?v=5$/);
+      return new Response(fs.readFileSync(path.join(ROOT, "dictionaries/romaji-english-jmdict-2026-11-02.json.gz")));
+    } : undefined,
   });
   vm.runInContext(appSource, context, { filename: "app.js" });
-  context.lookupData = realLookup
+  context.lookupData = fetchLookup ? null : realLookup
     ? JSON.parse(gunzipSync(fs.readFileSync(path.join(ROOT, "dictionaries/romaji-english-jmdict-2026-11-02.json.gz"))))
-    : { format: 4 };
+    : { format: 5 };
   vm.runInContext("romajiLookup = lookupData; practiceTarget = 1; practiceIndex = 0; answerRevealed = true", context);
   const card = {
     japanese: "shita", hiragana: "した", meanings: ["did"],
@@ -170,11 +175,13 @@ test("desktop hover follows the pointer within an 8px margin and closes beyond i
   assert.equal(vm.runInContext("activeRomajiToken", context), null);
 });
 
-test("a revealed card uses the real lookup for a common particle sense", async () => {
-  const { context, flashcard, prompt, popup } = makeSession({ realLookup: true });
+test("a revealed card fetches and opens the real lookup for a common particle sense", async () => {
+  const { context, flashcard, prompt, popup } = makeSession({ realLookup: true, fetchLookup: true });
   vm.runInContext("practiceDeck = [{ ...card, japanese: 'to' }]; renderPracticeCard()", context);
   const token = prompt.children[0].children[0];
   flashcard.emit("pointerover", pointer(token, "mouse", 120, 190));
+  const loaded = await vm.runInContext("romajiLookupPromise", context);
+  assert.equal(loaded.format, 5);
   await settlePopup();
   assert.equal(popup.hidden, false);
   assert(popup.children.some((line) => line.textContent === "and"));

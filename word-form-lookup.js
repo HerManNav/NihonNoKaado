@@ -149,7 +149,7 @@
       }
       if (!noun) continue;
       const head = data.groupHeads[noun];
-      if (head) addCandidate(candidates, `${label} of ${noun} — ${head[0]}`, numericScore(head[1]) - 1, previousKey === noun ? 1 : 0);
+      if (head) addCandidate(candidates, `${label} of ${noun} — ${head[0]}`, numericScore(head[1]) - 1, previousKey === noun ? 1 : -1);
     }
   }
 
