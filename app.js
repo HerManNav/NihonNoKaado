@@ -31,6 +31,7 @@ const flashcard = document.querySelector("#flashcard");
 const promptWord = document.querySelector("#prompt-word");
 const answerWord = document.querySelector("#answer-word");
 const revealHint = document.querySelector("#reveal-hint");
+const swipeRevealHint = document.querySelector("#swipe-reveal-hint");
 const progressLabel = document.querySelector("#progress-label");
 const sessionOptions = document.querySelectorAll("[data-session-size]");
 const progressTrack = document.querySelector("#progress-track");
@@ -72,6 +73,10 @@ let answerRevealed = false;
 let selectedSessionSize = 5;
 let advancingPractice = false;
 let keyboardNavigation = false;
+let flashcardDrag = null;
+let suppressFlashcardClick = false;
+let suppressFlashcardClickTimeout = null;
+let deniedSwipeFeedbackTimeout = null;
 
 function loadCards() {
   try {
@@ -390,7 +395,7 @@ function startPractice() {
   renderPracticeCard();
 }
 
-function renderPracticeCard() {
+function renderPracticeCard(entranceAnimation = "") {
   const fromEnglish = originLanguage.value === "english";
   const displayIndex = reviewIndex ?? practiceIndex;
   if (fromEnglish && !practiceDeck[displayIndex]) drawEnglishPracticeCard(displayIndex);
@@ -415,7 +420,12 @@ function renderPracticeCard() {
   answerWord.classList.remove("is-appearing");
   if (isReviewing) answerWord.classList.add("is-appearing");
   revealHint.hidden = showFullCard;
-  flashcard.classList.remove("is-revealing", "is-advancing", "is-entering");
+  swipeRevealHint.classList.add("is-hidden");
+  swipeRevealHint.classList.remove("is-fading", "is-attention");
+  window.clearTimeout(deniedSwipeFeedbackTimeout);
+  flashcard.classList.remove("is-revealing", "is-advancing", "is-entering", "is-dragging", "is-drag-snap", "is-denied-jitter", "is-swipe-exit-left", "is-swipe-exit-right", "is-swipe-enter-from-left", "is-swipe-enter-from-right");
+  clearFlashcardDragStyles();
+  if (entranceAnimation) flashcard.classList.add(entranceAnimation);
   flashcard.disabled = false;
   advancingPractice = false;
   flashcard.setAttribute("aria-expanded", String(showFullCard));
@@ -557,6 +567,7 @@ function renderSessionProgress() {
 
 function revealAnswer() {
   if (answerRevealed) return;
+  window.clearTimeout(deniedSwipeFeedbackTimeout);
   answerRevealed = true;
   answerWord.hidden = false;
   answerWord.classList.remove("is-appearing");
@@ -565,6 +576,15 @@ function revealAnswer() {
   flashcard.classList.add("is-revealing");
   answerWord.classList.add("is-appearing");
   revealHint.hidden = true;
+  flashcard.classList.remove("is-denied-jitter");
+  if (!swipeRevealHint.classList.contains("is-hidden")) {
+    swipeRevealHint.classList.remove("is-attention");
+    swipeRevealHint.classList.add("is-fading");
+    window.setTimeout(() => {
+      swipeRevealHint.classList.add("is-hidden");
+      swipeRevealHint.classList.remove("is-fading");
+    }, 1000);
+  }
   flashcard.setAttribute("aria-expanded", "true");
   renderSessionProgress();
 }
@@ -575,22 +595,15 @@ function reviewPracticeCard(index) {
   renderPracticeCard();
 }
 
-function advanceReview() {
+function advanceReview(entranceAnimation = "") {
   if (reviewIndex === null) return;
   reviewIndex = nextReviewIndex(reviewIndex, practiceIndex);
-  renderPracticeCard();
-}
-
-function hasSelectedTextInFlashcard() {
-  const selection = window.getSelection?.();
-  return Boolean(selection && !selection.isCollapsed && selection.toString().trim()
-    && flashcard.contains(selection.anchorNode) && flashcard.contains(selection.focusNode));
+  renderPracticeCard(entranceAnimation);
 }
 
 function handleFlashcardAction() {
-  if (hasSelectedTextInFlashcard()) return;
   if (reviewIndex !== null) {
-    advanceReview();
+    transitionFlashcardSwipe(-1, () => advanceReview("is-swipe-enter-from-right"));
   } else if (answerRevealed) {
     advancePractice();
   } else {
@@ -598,25 +611,150 @@ function handleFlashcardAction() {
   }
 }
 
+function finishPracticeAdvance(entranceAnimation = "is-swipe-enter-from-right") {
+  if (practiceIndex === practiceTarget - 1) {
+    progressLabel.textContent = `${practiceTarget} of ${practiceTarget} completed`;
+    showScreen("home");
+    return;
+  }
+  practiceIndex += 1;
+  reviewIndex = null;
+  answerRevealed = false;
+  renderPracticeCard(entranceAnimation);
+}
+
 function advancePractice() {
   if (advancingPractice) return;
+  transitionFlashcardSwipe(-1, () => finishPracticeAdvance());
+}
+
+function clearFlashcardDragStyles() {
+  flashcard.style.removeProperty("--drag-x");
+  flashcard.style.removeProperty("--drag-rotation");
+  flashcard.style.removeProperty("--drag-opacity");
+  flashcard.style.removeProperty("background-color");
+}
+
+function resetFlashcardDrag() {
+  flashcardDrag = null;
+  flashcard.classList.remove("is-dragging");
+  flashcard.classList.add("is-drag-snap");
+  clearFlashcardDragStyles();
+  window.setTimeout(() => flashcard.classList.remove("is-drag-snap"), 200);
+}
+
+function startFlashcardDrag(event) {
+  if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0) || advancingPractice) return;
+  flashcard.classList.remove("is-entering", "is-swipe-enter-from-left", "is-swipe-enter-from-right", "is-drag-snap");
+  flashcardDrag = {
+    pointerId: event.pointerId,
+    startX: event.clientX,
+    startY: event.clientY,
+    deltaX: 0,
+    dragging: false,
+  };
+  flashcard.setPointerCapture(event.pointerId);
+}
+
+function moveFlashcardDrag(event) {
+  if (!flashcardDrag || event.pointerId !== flashcardDrag.pointerId) return;
+  const deltaX = event.clientX - flashcardDrag.startX;
+  const deltaY = event.clientY - flashcardDrag.startY;
+  if (!flashcardDrag.dragging) {
+    if (Math.abs(deltaX) < 8 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+    flashcardDrag.dragging = true;
+    flashcard.classList.add("is-dragging");
+  }
+  if (event.cancelable) event.preventDefault();
+  flashcardDrag.deltaX = deltaX;
+  const width = flashcard.getBoundingClientRect().width || 320;
+  const ratio = deltaX / width;
+  flashcard.style.setProperty("--drag-x", `${deltaX}px`);
+  flashcard.style.setProperty("--drag-rotation", `${Math.max(-9, Math.min(9, ratio * 16))}deg`);
+  flashcard.style.setProperty("--drag-opacity", String(Math.max(0.48, 1 - Math.abs(ratio) * 0.5)));
+  if (reviewIndex === null && !answerRevealed && deltaX < 0) {
+    const redTint = Math.min(0.38, Math.abs(ratio) * 0.75);
+    flashcard.style.backgroundColor = `rgba(194, 54, 47, ${redTint})`;
+  } else {
+    flashcard.style.removeProperty("background-color");
+  }
+}
+
+function transitionFlashcardSwipe(direction, updateCard) {
+  if (advancingPractice) return false;
   advancingPractice = true;
   flashcard.disabled = true;
-  flashcard.classList.add("is-advancing");
+  flashcard.classList.remove("is-dragging", "is-drag-snap", "is-entering", "is-swipe-enter-from-left", "is-swipe-enter-from-right");
+  clearFlashcardDragStyles();
+  flashcard.classList.add(direction < 0 ? "is-swipe-exit-left" : "is-swipe-exit-right");
+  window.setTimeout(updateCard, 190);
+  return true;
+}
 
-  window.setTimeout(() => {
-    if (practiceIndex === practiceTarget - 1) {
-      progressLabel.textContent = `${practiceTarget} of ${practiceTarget} completed`;
-      showScreen("home");
-      return;
+function navigateWithFlashcardSwipe(direction) {
+  if (direction < 0) {
+    if (reviewIndex === null && !answerRevealed) return false;
+    if (reviewIndex !== null) {
+      if (reviewIndex >= practiceIndex) return false;
+      return transitionFlashcardSwipe(direction, () => advanceReview("is-swipe-enter-from-right"));
     }
-    practiceIndex += 1;
-    reviewIndex = null;
-    answerRevealed = false;
-    renderPracticeCard();
-    flashcard.classList.add("is-entering");
-    window.setTimeout(() => flashcard.classList.remove("is-entering"), 240);
-  }, 170);
+    return transitionFlashcardSwipe(direction, () => finishPracticeAdvance());
+  }
+
+  const currentIndex = reviewIndex ?? practiceIndex;
+  if (currentIndex <= 0) return false;
+  return transitionFlashcardSwipe(direction, () => {
+    reviewIndex = currentIndex - 1;
+    renderPracticeCard("is-swipe-enter-from-left");
+  });
+}
+
+function showSwipeDeniedFeedback() {
+  swipeRevealHint.classList.remove("is-hidden");
+  swipeRevealHint.classList.remove("is-fading");
+  swipeRevealHint.classList.add("is-attention");
+  resetFlashcardDrag();
+  window.clearTimeout(deniedSwipeFeedbackTimeout);
+  deniedSwipeFeedbackTimeout = window.setTimeout(() => {
+    flashcard.classList.remove("is-drag-snap");
+    flashcard.classList.add("is-denied-jitter");
+    window.setTimeout(() => flashcard.classList.remove("is-denied-jitter"), 320);
+  }, 185);
+}
+
+function endFlashcardDrag(event) {
+  if (!flashcardDrag || event.pointerId !== flashcardDrag.pointerId) return;
+  const { dragging, deltaX } = flashcardDrag;
+  flashcardDrag = null;
+  if (!dragging) return;
+
+  suppressFlashcardClick = true;
+  window.clearTimeout(suppressFlashcardClickTimeout);
+  suppressFlashcardClickTimeout = window.setTimeout(() => { suppressFlashcardClick = false; }, 0);
+
+  const width = flashcard.getBoundingClientRect().width || 320;
+  const threshold = Math.max(60, width * 0.18);
+  if (Math.abs(deltaX) >= threshold && deltaX < 0 && reviewIndex === null && !answerRevealed) {
+    showSwipeDeniedFeedback();
+    return;
+  }
+  if (Math.abs(deltaX) >= threshold && navigateWithFlashcardSwipe(deltaX < 0 ? -1 : 1)) return;
+  resetFlashcardDrag();
+}
+
+function cancelFlashcardDrag(event) {
+  if (!flashcardDrag || event.pointerId !== flashcardDrag.pointerId) return;
+  resetFlashcardDrag();
+}
+
+function handleFlashcardClick(event) {
+  if (suppressFlashcardClick) {
+    suppressFlashcardClick = false;
+    window.clearTimeout(suppressFlashcardClickTimeout);
+    event.preventDefault();
+    return;
+  }
+  handleFlashcardAction();
 }
 
 startButton.addEventListener("click", startPractice);
@@ -1024,7 +1162,11 @@ japaneseInput.addEventListener("input", () => {
 
 hiraganaInput.addEventListener("input", () => { hiraganaManuallyEdited = true; });
 
-flashcard.addEventListener("click", handleFlashcardAction);
+flashcard.addEventListener("pointerdown", startFlashcardDrag);
+flashcard.addEventListener("pointermove", moveFlashcardDrag);
+flashcard.addEventListener("pointerup", endFlashcardDrag);
+flashcard.addEventListener("pointercancel", cancelFlashcardDrag);
+flashcard.addEventListener("click", handleFlashcardClick);
 
 document.addEventListener("keydown", (event) => {
   if (event.code !== "Space" || screens.practice.hidden) return;

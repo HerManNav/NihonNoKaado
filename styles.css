@@ -61,7 +61,8 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .text-button { border: 0; background: transparent; padding: 8px 0; color: #55574f; font-weight: 600; }
 .text-button:hover { color: #20211f; }
 .practice-content { flex: 1; width: min(100%, 580px); margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 60px; }
-.flashcard { position: relative; isolation: isolate; width: 100%; min-height: 280px; padding: 38px 30px; border: 1px solid #e3e2d9; border-radius: 18px; background: #fff; box-shadow: 0 2px 0 #e1e0d8, 0 7px 0 #eeede7, 0 18px 40px #20211f10; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: inherit; white-space: pre-wrap; overflow: hidden; }
+.flashcard { position: relative; isolation: isolate; width: 100%; min-height: 280px; padding: 38px 30px; border: 1px solid #e3e2d9; border-radius: 18px; background: #fff; box-shadow: 0 2px 0 #e1e0d8, 0 7px 0 #eeede7, 0 18px 40px #20211f10; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: inherit; white-space: pre-wrap; overflow: hidden; touch-action: pan-y; }
+.flashcard, .flashcard * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .flashcard::before { content: ""; position: absolute; z-index: 0; inset: 12px; border: 1px solid #f0efe9; border-radius: 11px; pointer-events: none; }
 .flashcard::after { content: "文"; position: absolute; z-index: 1; right: 22px; bottom: 16px; color: #deded5; font-size: 16px; font-weight: 600; line-height: 1; pointer-events: none; }
 .flashcard > span { position: relative; z-index: 1; }
@@ -69,15 +70,26 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .flashcard.is-revealing { animation: reveal-blip 1440ms ease-out both; }
 .flashcard.is-advancing { animation: card-out 170ms cubic-bezier(.4, 0, .8, .5) both; pointer-events: none; }
 .flashcard.is-entering { animation: card-in 230ms cubic-bezier(.2, .7, .3, 1) both; }
+.flashcard.is-dragging { cursor: grabbing; box-shadow: 0 5px 0 #d8d7ce, 0 12px 0 #e8e7df, 0 26px 48px #20211f24; transform: translate3d(var(--drag-x, 0px), 0, 0) rotate(var(--drag-rotation, 0deg)); opacity: var(--drag-opacity, 1); transition: none; }
+.flashcard.is-drag-snap { transform: translate3d(0, 0, 0) rotate(0); opacity: 1; transition: transform 180ms ease-out, opacity 180ms ease-out; }
+.flashcard.is-swipe-exit-left, .flashcard.is-swipe-exit-right { opacity: 0; transition: transform 190ms cubic-bezier(.35, .05, .75, .35), opacity 190ms ease-out; pointer-events: none; }
+.flashcard.is-swipe-exit-left { transform: translate3d(-115%, 0, 0) rotate(-9deg); }
+.flashcard.is-swipe-exit-right { transform: translate3d(115%, 0, 0) rotate(9deg); }
+.flashcard.is-swipe-enter-from-left { animation: swipe-enter-from-left 220ms cubic-bezier(.2, .7, .3, 1) both; }
+.flashcard.is-swipe-enter-from-right { animation: swipe-enter-from-right 220ms cubic-bezier(.2, .7, .3, 1) both; }
+.flashcard.is-denied-jitter { animation: denied-jitter 320ms ease-out; }
 .prompt-word { font-size: clamp(30px, 7vw, 48px); font-weight: 650; letter-spacing: -.04em; line-height: 1.2; overflow-wrap: anywhere; }
 .romaji-word { display: block; }
 .hiragana-subtext { display: block; margin-top: 6px; color: #85867e; font-size: .58em; font-weight: 500; letter-spacing: .03em; line-height: 1.35; }
 .reveal-hint { color: #85867e; font-size: 14px; margin-top: 24px; }
+.swipe-reveal-hint { color: #a64e47; font-size: 13px; line-height: 1.4; margin: -8px 0 12px; min-height: 18px; text-align: center; transition: opacity 900ms ease-out; }
+.swipe-reveal-hint.is-hidden { opacity: 0; visibility: hidden; }
+.swipe-reveal-hint.is-fading { opacity: 0; }
+.swipe-reveal-hint.is-attention { animation: reveal-needed-blink 1.1s ease-in-out 3; }
 .answer-word { border-top: 1px solid #ecebe4; color: #55574f; font-size: 20px; line-height: 1.55; margin-top: 26px; padding-top: 22px; width: 100%; overflow-wrap: anywhere; }
 .answer-word.is-appearing { animation: answer-appear 260ms ease-out both; }
 .practice-meaning + .practice-meaning { border-top: 1px solid #ecebe4; margin-top: 16px; padding-top: 16px; }
 .practice-example { display: flex; flex-direction: column; gap: 2px; margin: 10px auto 0; color: #77796f; font-size: 15px; line-height: 1.45; }
-.practice-example, .practice-example * { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }
 .practice-example-romaji { color: #3e493b; font-weight: 650; }
 .practice-example-hiragana { color: #77796f; font-size: 14px; }
 .practice-example-translation { color: #77796f; font-size: 14px; }
@@ -85,6 +97,10 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 @keyframes answer-appear { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes card-out { to { opacity: 0; transform: translateX(-16px) scale(.985); } }
 @keyframes card-in { from { opacity: 0; transform: translateX(16px) scale(.985); } to { opacity: 1; transform: translateX(0) scale(1); } }
+@keyframes swipe-enter-from-left { from { opacity: 0; transform: translate3d(-24%, 0, 0) rotate(-4deg); } to { opacity: 1; transform: translate3d(0, 0, 0) rotate(0); } }
+@keyframes swipe-enter-from-right { from { opacity: 0; transform: translate3d(24%, 0, 0) rotate(4deg); } to { opacity: 1; transform: translate3d(0, 0, 0) rotate(0); } }
+@keyframes denied-jitter { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-5px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+@keyframes reveal-needed-blink { 0%, 100% { color: #a64e47; text-shadow: none; } 50% { color: #c52d27; text-shadow: 0 0 7px #cf473d66; } }
 .session-progress { width: 100%; margin-top: 26px; }
 .progress-track { height: 34px; position: relative; }
 .progress-line, .progress-fill, .progress-review-fill { height: 2px; left: 4px; position: absolute; top: 16px; }
