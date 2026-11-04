@@ -6,7 +6,7 @@ const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const projectDirectory = path.resolve(scriptDirectory, "..");
 const sourceDirectory = path.resolve(projectDirectory, "..");
 const webDirectory = path.join(projectDirectory, "www");
-const sharedFiles = ["index.html", "styles.css", "app.js", "dictionary-core.js"];
+const sharedFiles = ["index.html", "styles.css", "app.js", "dictionary-core.js", "word-form-lookup.js"];
 
 await mkdir(webDirectory, { recursive: true });
 await Promise.all(sharedFiles.map((file) => copyFile(

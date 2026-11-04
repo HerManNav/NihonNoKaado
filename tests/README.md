@@ -6,4 +6,4 @@ Run the maintenance tests from the project root with:
 node --test
 ```
 
-The suite uses Node's built-in test runner and has no package dependencies. It covers legacy and multi-meaning dictionary import/export, default dictionary selection and data integrity, meaning-aware English practice runs and resets, clickable review progress ranges and boundaries, pointer-based card swipes and their reveal gate, dictionary menu hover stacking and clickability, inline dictionary entry layout and keyboard flows, romaji-to-hiragana conversion and form autofill/focus rules, and practice-deck shuffling, size, and repetition behavior.
+The suite uses Node's built-in test runner and has no package dependencies. It covers dictionary import/export and starter data, English practice and session progress, card editing and swipes, romaji conversion, inflection rules and homograph ranking, and revealed-card popup behavior for mouse and touch. It also verifies that the preserved dictionary sources reproduce the published lookup and that PWA precache paths exist.

@@ -1,5 +1,6 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
 const { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { findWordMeanings } = window.JapaneseWordFormLookup;
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -28,6 +29,7 @@ const backToLearningButton = document.querySelector("#back-to-learning-button");
 const addFeedback = document.querySelector("#add-feedback");
 const enterHint = document.querySelector("#enter-hint");
 const flashcard = document.querySelector("#flashcard");
+const wordTranslationPopup = document.querySelector("#word-translation-popup");
 const promptWord = document.querySelector("#prompt-word");
 const answerWord = document.querySelector("#answer-word");
 const revealHint = document.querySelector("#reveal-hint");
@@ -77,6 +79,100 @@ let flashcardDrag = null;
 let suppressFlashcardClick = false;
 let suppressFlashcardClickTimeout = null;
 let deniedSwipeFeedbackTimeout = null;
+let romajiLookup = null;
+let romajiLookupPromise = null;
+let activeRomajiToken = null;
+let activePopupMode = null;
+let activePopupPointer = null;
+let lastTappedRomajiToken = null;
+let lastTappedRomajiTokenTimeout = null;
+let lastPointerType = "mouse";
+
+function hideWordTranslationPopup() {
+  activeRomajiToken = null;
+  activePopupMode = null;
+  activePopupPointer = null;
+  wordTranslationPopup.hidden = true;
+  wordTranslationPopup.textContent = "";
+}
+
+async function getRomajiLookup() {
+  if (romajiLookup) return romajiLookup;
+  if (!romajiLookupPromise) {
+    romajiLookupPromise = (async () => {
+      try {
+        const response = await fetch("dictionaries/romaji-english-jmdict-2026-11-02.json.gz?v=3", { cache: "no-cache" });
+        if (!response.ok) throw new Error(`Dictionary request failed (${response.status}).`);
+        if (typeof DecompressionStream !== "function") throw new Error("This browser cannot open the compressed lookup dictionary.");
+        const compressed = await response.arrayBuffer();
+        const jsonStream = new Blob([compressed]).stream().pipeThrough(new DecompressionStream("gzip"));
+        const payload = await new Response(jsonStream).json();
+        if (payload.format !== 3) throw new Error("The lookup dictionary needs a refresh.");
+        romajiLookup = payload;
+        return romajiLookup;
+      } catch (error) {
+        console.warn("Romaji word lookup is unavailable.", error);
+        romajiLookupPromise = null;
+        return null;
+      }
+    })();
+  }
+  return romajiLookupPromise;
+}
+
+function positionWordTranslationPopup(x, y) {
+  const bounds = wordTranslationPopup.getBoundingClientRect();
+  const left = Math.max(bounds.width / 2 + 8, Math.min(window.innerWidth - bounds.width / 2 - 8, x));
+  const top = Math.max(bounds.height + 8, y - 10);
+  wordTranslationPopup.style.left = `${left}px`;
+  wordTranslationPopup.style.top = `${top}px`;
+}
+
+async function showWordTranslation(token, mode, x, y) {
+  const key = token.textContent.trim().toLowerCase().replace(/[’]/g, "'");
+  const previousToken = token.previousElementSibling;
+  const separator = token.previousSibling;
+  const previousKey = previousToken?.classList.contains("romaji-token") && separator?.nodeType === Node.TEXT_NODE
+    && /^\s+$/.test(separator.textContent) ? previousToken.textContent : "";
+  activeRomajiToken = token;
+  activePopupMode = mode;
+  activePopupPointer = { x, y };
+  const lookup = await getRomajiLookup();
+  if (activeRomajiToken !== token) return;
+  const meanings = findWordMeanings(key, lookup, previousKey);
+  if (!meanings?.length) {
+    hideWordTranslationPopup();
+    return;
+  }
+  wordTranslationPopup.replaceChildren(...meanings.map((meaning) => {
+    const line = document.createElement("div");
+    line.className = "word-translation-line";
+    line.textContent = meaning;
+    return line;
+  }));
+  wordTranslationPopup.hidden = false;
+  if (mode === "hover") {
+    const pointer = activePopupPointer || { x, y };
+    positionWordTranslationPopup(pointer.x, pointer.y);
+  }
+  else {
+    const rect = token.getBoundingClientRect();
+    positionWordTranslationPopup(rect.left + rect.width / 2, rect.top - 2);
+  }
+}
+
+function appendRomajiTokens(element, value) {
+  const text = String(value || "");
+  const parts = text.split(/([A-Za-z]+(?:['’][A-Za-z]+)*)/g);
+  parts.forEach((part) => {
+    if (/^[A-Za-z]+(?:['’][A-Za-z]+)*$/.test(part)) {
+      const token = document.createElement("span");
+      token.className = "romaji-token";
+      token.textContent = part;
+      element.append(token);
+    } else if (part) element.append(document.createTextNode(part));
+  });
+}
 
 function loadCards() {
   try {
@@ -116,6 +212,7 @@ function saveCards(nextCards) {
 }
 
 function showScreen(name) {
+  if (name !== "practice") hideWordTranslationPopup();
   Object.entries(screens).forEach(([key, screen]) => { screen.hidden = key !== name; });
   if (name === "home") updateDictionaryCount();
 }
@@ -396,6 +493,7 @@ function startPractice() {
 }
 
 function renderPracticeCard(entranceAnimation = "") {
+  hideWordTranslationPopup();
   const fromEnglish = originLanguage.value === "english";
   const displayIndex = reviewIndex ?? practiceIndex;
   if (fromEnglish && !practiceDeck[displayIndex]) drawEnglishPracticeCard(displayIndex);
@@ -437,7 +535,7 @@ function renderJapaneseWord(container, card) {
   container.replaceChildren();
   const romaji = document.createElement("span");
   romaji.className = "romaji-word";
-  romaji.textContent = card.japanese;
+  appendRomajiTokens(romaji, card.japanese);
   const hiragana = document.createElement("span");
   hiragana.className = "hiragana-subtext";
   hiragana.textContent = card.hiragana || romajiToHiragana(card.japanese);
@@ -465,7 +563,7 @@ function createPracticeExample(example) {
   exampleBlock.className = "practice-example";
   const exampleRomaji = document.createElement("span");
   exampleRomaji.className = "practice-example-romaji";
-  exampleRomaji.textContent = example.romaji || "";
+  appendRomajiTokens(exampleRomaji, example.romaji || "");
   const exampleHiragana = document.createElement("span");
   exampleHiragana.className = "practice-example-hiragana";
   exampleHiragana.textContent = example.hiragana || romajiToHiragana(example.romaji || "");
@@ -645,9 +743,12 @@ function resetFlashcardDrag() {
 
 function startFlashcardDrag(event) {
   if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0) || advancingPractice) return;
+  lastPointerType = event.pointerType;
   flashcard.classList.remove("is-entering", "is-swipe-enter-from-left", "is-swipe-enter-from-right", "is-drag-snap");
   flashcardDrag = {
     pointerId: event.pointerId,
+    pointerType: event.pointerType,
+    startTarget: event.target,
     startX: event.clientX,
     startY: event.clientY,
     deltaX: 0,
@@ -724,9 +825,16 @@ function showSwipeDeniedFeedback() {
 
 function endFlashcardDrag(event) {
   if (!flashcardDrag || event.pointerId !== flashcardDrag.pointerId) return;
-  const { dragging, deltaX } = flashcardDrag;
+  const { dragging, deltaX, startTarget, pointerType } = flashcardDrag;
   flashcardDrag = null;
-  if (!dragging) return;
+  if (!dragging) {
+    if (pointerType !== "mouse" && (answerRevealed || reviewIndex !== null)) {
+      lastTappedRomajiToken = startTarget instanceof Element ? startTarget.closest(".romaji-token") : null;
+      window.clearTimeout(lastTappedRomajiTokenTimeout);
+      lastTappedRomajiTokenTimeout = window.setTimeout(() => { lastTappedRomajiToken = null; }, 500);
+    }
+    return;
+  }
 
   suppressFlashcardClick = true;
   window.clearTimeout(suppressFlashcardClickTimeout);
@@ -754,8 +862,55 @@ function handleFlashcardClick(event) {
     event.preventDefault();
     return;
   }
+  const token = (event.target instanceof Element ? event.target.closest(".romaji-token") : null)
+    || lastTappedRomajiToken;
+  lastTappedRomajiToken = null;
+  window.clearTimeout(lastTappedRomajiTokenTimeout);
+  if (token && (answerRevealed || reviewIndex !== null)) {
+    event.preventDefault();
+    event.stopPropagation();
+    const mode = lastPointerType === "mouse" ? "hover" : "anchor";
+    showWordTranslation(token, mode, event.clientX, event.clientY);
+    return;
+  }
   handleFlashcardAction();
 }
+
+flashcard.addEventListener("pointerover", (event) => {
+  if (event.pointerType !== "mouse" || (!answerRevealed && reviewIndex === null)) return;
+  const token = event.target instanceof Element ? event.target.closest(".romaji-token") : null;
+  if (token) showWordTranslation(token, "hover", event.clientX, event.clientY);
+});
+
+document.addEventListener("pointermove", (event) => {
+  if (event.pointerType !== "mouse" || activePopupMode !== "hover" || !activeRomajiToken) return;
+  const token = event.target instanceof Element ? event.target.closest(".romaji-token") : null;
+  if (token && token !== activeRomajiToken && flashcard.contains(token)) {
+    showWordTranslation(token, "hover", event.clientX, event.clientY);
+    return;
+  }
+  const rect = activeRomajiToken.getBoundingClientRect();
+  const margin = 8;
+  const outside = event.clientX < rect.left - margin || event.clientX > rect.right + margin
+    || event.clientY < rect.top - margin || event.clientY > rect.bottom + margin;
+  if (outside) {
+    hideWordTranslationPopup();
+    return;
+  }
+  activePopupPointer = { x: event.clientX, y: event.clientY };
+  if (!wordTranslationPopup.hidden) positionWordTranslationPopup(event.clientX, event.clientY);
+});
+
+document.addEventListener("pointerdown", (event) => {
+  lastPointerType = event.pointerType;
+  const token = event.target instanceof Element ? event.target.closest(".romaji-token") : null;
+  if (event.pointerType !== "mouse" && !token) hideWordTranslationPopup();
+});
+
+document.addEventListener("click", (event) => {
+  const token = event.target instanceof Element ? event.target.closest(".romaji-token") : null;
+  if (!token) hideWordTranslationPopup();
+});
 
 startButton.addEventListener("click", startPractice);
 sessionOptions.forEach((button) => button.addEventListener("click", () => {

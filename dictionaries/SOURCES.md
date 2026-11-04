@@ -1,5 +1,12 @@
 # Default dictionary sources
 
+## Japanese-English lookup and word forms
+
+- `romaji-english-jmdict-2026-11-02.json.gz` is a compact lookup derived from the English-only JMdict dataset distributed by [jmdict-simplified](https://github.com/scriptin/jmdict-simplified), release `3.6.2+20261102210542` (dictionary date 2026-11-02). It contains 207,169 romaji keys, 483,623 distinct reading-gloss associations, 32,810 inflectable lemmas, and form rules for common modern conjugations. It expands in memory when first used. The popup groups meanings by dictionary entry and shows up to four likely results, including applicable form explanations.
+- JMdict is maintained by the Electronic Dictionary Research and Development Group (EDRDG). The underlying data is copyright © James William Breen and EDRDG, and is provided under the [EDRDG license](https://www.edrdg.org/edrdg/licence.html) and [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The jmdict-simplified release asset is a JSON conversion of that data.
+- The preserved source archive is `dictionaries/source-data/jmdict-eng-3.6.2+20261102210542.json.tgz`. A second preserved source, `dictionaries/source-data/ja_full-OpenSubtitles2018.txt`, comes from [FrequencyWords](https://github.com/hermitdave/FrequencyWords) and is based on OpenSubtitles 2018. Its content is CC BY-SA 4.0. Corpus counts help rank written homographs; they do not provide exact frequencies for each sense.
+- Run `node scripts/build-romaji-lookup.mjs` to rebuild from those sources. `scripts/japanese-inflections.mjs` defines form rules from JMdict part-of-speech tags. The browser checks those rules against matching lemmas, so a form such as `chikazuite` can identify `chikazuku`. It also handles suru nouns, common adjective forms, copula forms, and some group suffixes. Archaic forms and longer auxiliary chains are outside this rule set. The derived data is distributed under the same attribution and share-alike terms as its sources.
+
 ## Sets
 
 - The 50- and 100-word sets retain their existing word order and English glosses from [Travel with Languages](https://travelwithlanguages.com/blog/most-common-japanese-words.html). Their hiragana and example sentences are matched to the closest English sense in the TKG learner dictionary.

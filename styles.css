@@ -61,6 +61,7 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .text-button { border: 0; background: transparent; padding: 8px 0; color: #55574f; font-weight: 600; }
 .text-button:hover { color: #20211f; }
 .practice-content { flex: 1; width: min(100%, 580px); margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 60px; }
+.dictionary-credit { max-width: 360px; margin: 8px auto 0; font-size: 11px; line-height: 1.45; text-align: center; }
 .flashcard { position: relative; isolation: isolate; width: 100%; min-height: 280px; padding: 38px 30px; border: 1px solid #e3e2d9; border-radius: 18px; background: #fff; box-shadow: 0 2px 0 #e1e0d8, 0 7px 0 #eeede7, 0 18px 40px #20211f10; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: inherit; white-space: pre-wrap; overflow: hidden; touch-action: pan-y; }
 .flashcard, .flashcard * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .flashcard::before { content: ""; position: absolute; z-index: 0; inset: 12px; border: 1px solid #f0efe9; border-radius: 11px; pointer-events: none; }
@@ -80,6 +81,8 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .flashcard.is-denied-jitter { animation: denied-jitter 320ms ease-out; }
 .prompt-word { font-size: clamp(30px, 7vw, 48px); font-weight: 650; letter-spacing: -.04em; line-height: 1.2; overflow-wrap: anywhere; }
 .romaji-word { display: block; }
+.romaji-token { border-radius: 3px; -webkit-tap-highlight-color: transparent; }
+.romaji-token:hover { background: #f3f5ef; }
 .hiragana-subtext { display: block; margin-top: 6px; color: #85867e; font-size: .58em; font-weight: 500; letter-spacing: .03em; line-height: 1.35; }
 .reveal-hint { color: #85867e; font-size: 14px; margin-top: 24px; }
 .swipe-reveal-hint { color: #a64e47; font-size: 13px; line-height: 1.4; margin: -8px 0 12px; min-height: 18px; text-align: center; transition: opacity 900ms ease-out; }
@@ -93,6 +96,9 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .practice-example-romaji { color: #3e493b; font-weight: 650; }
 .practice-example-hiragana { color: #77796f; font-size: 14px; }
 .practice-example-translation { color: #77796f; font-size: 14px; }
+.word-translation-popup { position: fixed; z-index: 1000; width: max-content; max-width: min(320px, calc(100vw - 20px)); padding: 7px 10px; border: 1px solid #d9ddd3; border-radius: 8px; background: #263127; box-shadow: 0 4px 14px #20211f2b; color: #fff; font-size: 13px; font-weight: 550; line-height: 1.35; text-align: center; white-space: normal; overflow-wrap: anywhere; transform: translate(-50%, -100%); pointer-events: none; }
+.word-translation-popup[hidden] { display: none; }
+.word-translation-line + .word-translation-line { border-top: 1px solid #ffffff30; margin-top: 5px; padding-top: 5px; }
 @keyframes reveal-blip { 0% { background-color: #dcebd6; } 42% { background-color: #edf5e9; } 100% { background-color: #fff; } }
 @keyframes answer-appear { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes card-out { to { opacity: 0; transform: translateX(-16px) scale(.985); } }

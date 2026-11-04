@@ -7,6 +7,7 @@
     <title>Japanese Cards</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="dictionary-core.js" defer></script>
+    <script src="word-form-lookup.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -29,6 +30,7 @@
           </div>
           <button id="start-button" class="primary-button" type="button">Start session</button>
           <p id="dictionary-count" class="subtle-text" aria-live="polite"></p>
+          <p class="subtle-text dictionary-credit">Romaji meanings use <a href="https://www.edrdg.org/" target="_blank" rel="noreferrer">JMdict</a> by James William Breen and EDRDG. Ranking uses <a href="https://github.com/hermitdave/FrequencyWords" target="_blank" rel="noreferrer">FrequencyWords</a>. Data is <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
         </div>
         <div id="dictionary-actions" class="dictionary-actions">
           <button id="add-button" class="add-button" type="button" aria-label="Browse default dictionaries" title="Browse default dictionaries">+</button>
@@ -72,6 +74,7 @@
             <p id="cards-remaining" class="cards-remaining" aria-live="polite"></p>
           </div>
         </div>
+        <p class="subtle-text dictionary-credit practice-credit">Romaji meanings use <a href="https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project" target="_blank" rel="noreferrer">JMdict</a> by James William Breen and EDRDG. Ranking uses <a href="https://github.com/hermitdave/FrequencyWords" target="_blank" rel="noreferrer">FrequencyWords</a>. Data is <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
       </section>
 
       <section id="dictionary-screen" class="screen dictionary-screen" aria-labelledby="dictionary-title" hidden>
@@ -157,5 +160,6 @@
         </div>
       </section>
     </main>
+    <div id="word-translation-popup" class="word-translation-popup" role="status" aria-live="polite" hidden></div>
   </body>
 </html>
