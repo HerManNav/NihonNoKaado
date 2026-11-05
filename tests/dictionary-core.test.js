@@ -135,6 +135,35 @@ test("exports and reimports all edited meanings and aligned examples", () => {
   assert.equal(imported.english, "chopsticks");
 });
 
+test("contextual word meanings survive default import and export", () => {
+  const example = {
+    romaji: "ame ga futte iru.", hiragana: "あめがふっている。", english: "It's raining.",
+    wordMeanings: [
+      { romaji: "ame", meaning: "rain", entryId: "00583_ame", senseNumber: 1 },
+      { romaji: "ga", meaning: "subject marker", entryId: "00051_ga" },
+      { romaji: "futte", meaning: "te-form of furu — to fall (rain)", entryId: "00473_furu" },
+      { romaji: "iru", meaning: "continuing action", entryId: "00023_iru" },
+    ],
+  };
+  const cards = parseImportedDictionary({ format: "japanese-cards-dictionary", version: 3,
+    cards: [{ japanese: "ga", english: "subject marker", examples: [example] }] }, () => "rain-card");
+  assert.deepEqual(cards[0].examples[0].wordMeanings, example.wordMeanings);
+  const exported = JSON.parse(serializeDictionary(cards, "rain", "2026-11-05T00:00:00.000Z"));
+  assert.deepEqual(exported.cards[0].examples[0].wordMeanings, example.wordMeanings);
+  assert.deepEqual(parseImportedDictionary(exported, () => "round-trip")[0].examples[0].wordMeanings, example.wordMeanings);
+});
+
+test("stale or incomplete contextual annotations are discarded as a unit", () => {
+  const cards = parseImportedDictionary([
+    { japanese: "ame", english: "rain", examples: [{ romaji: "ame ga furu.", english: "It rains.",
+      wordMeanings: [{ romaji: "ame", meaning: "rain" }, { romaji: "wa", meaning: "topic marker" }, { romaji: "furu", meaning: "to fall" }] }] },
+    { japanese: "ame", english: "rain", examples: [{ romaji: "ame ga furu.", english: "It rains.",
+      wordMeanings: [{ romaji: "ame", meaning: "rain" }, { romaji: "ga", meaning: "subject marker" }] }] },
+  ], (index) => `card-${index}`);
+  assert(!("wordMeanings" in cards[0].examples[0]));
+  assert(!("wordMeanings" in cards[1].examples[0]));
+});
+
 test("imports partial examples by meaning index and generates missing example hiragana", () => {
   const imported = parseImportedDictionary([{
     japanese: "neko",

@@ -1,0 +1,109 @@
+{
+  "format": 1,
+  "source": "https://github.com/tkgally/je-dict-1",
+  "sourceCommit": "32c267cbfa7756a2e3542657772759d92d4e2420",
+  "indexFile": "tkg-entries-index-32c267cb.json",
+  "indexSha256": "991e92a8dfc56ddc9fb94278b57b60e54776f02e2182c965b7a0f5d721fa4f75",
+  "cardRecords": 3650,
+  "candidateEntries": 1482,
+  "mode": "linked-targets",
+  "archives": [
+    {
+      "file": "tkg-linked-entries-32c267cb-0000.json.gz",
+      "entries": 100,
+      "bytes": 162652,
+      "sha256": "f2f9b6877d7e040d5bcf473ca1a9b23a454fb4bb24b93feb0e8a58b2ff6b2c85"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0001.json.gz",
+      "entries": 100,
+      "bytes": 158294,
+      "sha256": "8e8ddfdef3bbf8ce1f4c95a288c5c15a08f4eca23fa8389ccc029c4a54cc481c"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0002.json.gz",
+      "entries": 100,
+      "bytes": 149821,
+      "sha256": "d3efd965ea7d023551a9f475c010446ad91cdd75911d412032dee3be54f3a5bb"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0003.json.gz",
+      "entries": 100,
+      "bytes": 153568,
+      "sha256": "f4a6f5b88a73ebfa21c022aecb055d674d786fb5ad2094b7050dc9605d83222f"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0004.json.gz",
+      "entries": 100,
+      "bytes": 147549,
+      "sha256": "d2ae7f6e3731f7e2b7c74406adf61529e3cada9b6b5b7e42854fc64f0c42673d"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0005.json.gz",
+      "entries": 100,
+      "bytes": 124701,
+      "sha256": "eddbef5631d1e0e81d06ad6ef65b3f3ef3c7f30735d144993e5e7d02c31c653f"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0006.json.gz",
+      "entries": 100,
+      "bytes": 141849,
+      "sha256": "a93121e74db2e12df91fc776c80c9a8a8cff003c853865be6d19a14a65661b76"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0007.json.gz",
+      "entries": 100,
+      "bytes": 135549,
+      "sha256": "66409bdc3b1a22db7cfeb5aa4b12b5a62fe7ce5372b83184ad607801115de4b7"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0008.json.gz",
+      "entries": 100,
+      "bytes": 123877,
+      "sha256": "b1edd50a2efbeab896fad7ca72cfc751ae53c1eae9128881527b5a7dad0f370e"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0009.json.gz",
+      "entries": 100,
+      "bytes": 132773,
+      "sha256": "76edc283bf2e457e0fe2905f1ffc6fca1da6ef5ee42f84b1551731b1ddc1bdf0"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0010.json.gz",
+      "entries": 100,
+      "bytes": 123789,
+      "sha256": "28c4d6547b4fee622ec40cb7e81d6a84b892fcc0e440590a03e47fbafd3a4e8a"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0011.json.gz",
+      "entries": 100,
+      "bytes": 102536,
+      "sha256": "bc5ec326e2e664aeda3574e8b5612edbd665878fc7fe91cd23d65dea9ce6e188"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0012.json.gz",
+      "entries": 100,
+      "bytes": 116324,
+      "sha256": "14a71b13f7a52dd06d7cd1e5cb25ff9706c29718785dfd97ff34939f731de7df"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0013.json.gz",
+      "entries": 100,
+      "bytes": 120279,
+      "sha256": "7dfacf15ea31e0515aee377b4c04a2ffe1d2cc72c12f8b806da41705e69c70a2"
+    },
+    {
+      "file": "tkg-linked-entries-32c267cb-0014.json.gz",
+      "entries": 82,
+      "bytes": 103746,
+      "sha256": "a62045974b474ae7f5ffb2c1ed41eef1954ce275182f88feac8e0f508dfa67e4"
+    }
+  ],
+  "coverage": {
+    "exactExampleRecords": 3650,
+    "ambiguousExampleRecords": 1,
+    "linkedOccurrences": 13105,
+    "distinctLinkedTargetIds": 1482,
+    "alsoCardSourceEntries": 746
+  }
+}

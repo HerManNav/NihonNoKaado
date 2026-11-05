@@ -101,6 +101,28 @@
     return null;
   }
 
+  function normalizeWordMeanings(value, romaji) {
+    if (!Array.isArray(value)) return null;
+    const words = String(romaji).match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) || [];
+    if (!words.length || value.length !== words.length) return null;
+    const normalized = [];
+    for (const [index, word] of words.entries()) {
+      const item = value[index];
+      const sameWord = String(item?.romaji || "").toLowerCase().replace(/’/g, "'")
+        === word.toLowerCase().replace(/’/g, "'");
+      if (!sameWord || typeof item.meaning !== "string" || !item.meaning.trim()) return null;
+      const annotation = { romaji: word, meaning: item.meaning.trim() };
+      if (typeof item.entryId === "string" && /^\d{5}_[a-z0-9_'-]+$/i.test(item.entryId)) {
+        annotation.entryId = item.entryId;
+      }
+      if (Number.isInteger(item.senseNumber) && item.senseNumber > 0) {
+        annotation.senseNumber = item.senseNumber;
+      }
+      normalized.push(annotation);
+    }
+    return normalized;
+  }
+
   function parseImportedDictionary(data, makeId = createId) {
     const imported = Array.isArray(data) ? data : data?.cards;
     if (!Array.isArray(imported)) throw new Error("This file does not contain a Japanese Cards dictionary.");
@@ -126,7 +148,10 @@
           ? example.hiragana.trim()
           : romajiToHiragana(romaji);
         const english = typeof example.english === "string" ? example.english.trim() : "";
-        return { romaji, hiragana: exampleHiragana, english };
+        const importedExample = { romaji, hiragana: exampleHiragana, english };
+        const wordMeanings = normalizeWordMeanings(example.wordMeanings, romaji);
+        if (wordMeanings) importedExample.wordMeanings = wordMeanings;
+        return importedExample;
       });
       return { id: makeId(index), japanese, hiragana, english: meanings[0], meanings, examples };
     });
@@ -154,11 +179,14 @@
           examples: meanings.map((_, index) => {
             const example = Array.isArray(card.examples) ? card.examples[index] : null;
             const romaji = typeof example?.romaji === "string" ? example.romaji.trim() : "";
-            return {
+            const exportedExample = {
               romaji,
               hiragana: typeof example?.hiragana === "string" && example.hiragana.trim() ? example.hiragana.trim() : romajiToHiragana(romaji),
               english: typeof example?.english === "string" ? example.english.trim() : "",
             };
+            const wordMeanings = normalizeWordMeanings(example?.wordMeanings, romaji);
+            if (wordMeanings) exportedExample.wordMeanings = wordMeanings;
+            return exportedExample;
           }),
         };
         if (meanings.length > 1) exported.meanings = meanings;
@@ -294,5 +322,5 @@
     return cards.map((card, cardIndex) => cardIndex === index ? { ...card, ...updates } : card);
   }
 
-  return { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
+  return { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
 });

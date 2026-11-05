@@ -1,5 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
-const { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 const { findWordMeanings } = window.JapaneseWordFormLookup;
 
 const screens = {
@@ -137,9 +137,14 @@ async function showWordTranslation(token, mode, x, y) {
   activeRomajiToken = token;
   activePopupMode = mode;
   activePopupPointer = { x, y };
-  const lookup = await getRomajiLookup();
-  if (activeRomajiToken !== token) return;
-  const meanings = findWordMeanings(key, lookup, previousKey);
+  let meanings;
+  if (token.dataset.contextMeaning) {
+    meanings = [token.dataset.contextMeaning];
+  } else {
+    const lookup = await getRomajiLookup();
+    if (activeRomajiToken !== token) return;
+    meanings = findWordMeanings(key, lookup, previousKey);
+  }
   if (!meanings?.length) {
     hideWordTranslationPopup();
     return;
@@ -161,14 +166,18 @@ async function showWordTranslation(token, mode, x, y) {
   }
 }
 
-function appendRomajiTokens(element, value) {
+function appendRomajiTokens(element, value, wordMeanings = null) {
   const text = String(value || "");
   const parts = text.split(/([A-Za-z]+(?:['’][A-Za-z]+)*)/g);
+  const annotations = normalizeWordMeanings(wordMeanings, text);
+  let wordIndex = 0;
   parts.forEach((part) => {
     if (/^[A-Za-z]+(?:['’][A-Za-z]+)*$/.test(part)) {
       const token = document.createElement("span");
       token.className = "romaji-token";
       token.textContent = part;
+      if (annotations) token.dataset.contextMeaning = annotations[wordIndex].meaning;
+      wordIndex += 1;
       element.append(token);
     } else if (part) element.append(document.createTextNode(part));
   });
@@ -184,10 +193,12 @@ function loadCards() {
           const examples = meanings.map((_, index) => {
             const example = Array.isArray(card.examples) ? card.examples[index] || {} : {};
             const romaji = typeof example.romaji === "string" ? example.romaji.trim() : "";
+            const wordMeanings = normalizeWordMeanings(example.wordMeanings, romaji);
             return {
               romaji,
               hiragana: typeof example.hiragana === "string" && example.hiragana.trim() ? example.hiragana.trim() : romajiToHiragana(romaji),
               english: typeof example.english === "string" ? example.english.trim() : "",
+              ...(wordMeanings ? { wordMeanings } : {}),
             };
           });
           return { ...card, english: meanings[0] || "", meanings, examples, hiragana: typeof card.hiragana === "string" && card.hiragana ? card.hiragana : romajiToHiragana(card.japanese) };
@@ -535,7 +546,10 @@ function renderJapaneseWord(container, card) {
   container.replaceChildren();
   const romaji = document.createElement("span");
   romaji.className = "romaji-word";
-  appendRomajiTokens(romaji, card.japanese);
+  const oneWord = /^[A-Za-z]+(?:['’][A-Za-z]+)*$/.test(card.japanese);
+  const oneMeaning = Array.isArray(card.meanings) && card.meanings.length === 1 && card.meanings[0];
+  appendRomajiTokens(romaji, card.japanese,
+    oneWord && oneMeaning ? [{ romaji: card.japanese, meaning: oneMeaning }] : null);
   const hiragana = document.createElement("span");
   hiragana.className = "hiragana-subtext";
   hiragana.textContent = card.hiragana || romajiToHiragana(card.japanese);
@@ -563,7 +577,7 @@ function createPracticeExample(example) {
   exampleBlock.className = "practice-example";
   const exampleRomaji = document.createElement("span");
   exampleRomaji.className = "practice-example-romaji";
-  appendRomajiTokens(exampleRomaji, example.romaji || "");
+  appendRomajiTokens(exampleRomaji, example.romaji || "", example.wordMeanings);
   const exampleHiragana = document.createElement("span");
   exampleHiragana.className = "practice-example-hiragana";
   exampleHiragana.textContent = example.hiragana || romajiToHiragana(example.romaji || "");
@@ -1237,7 +1251,17 @@ cardForm.addEventListener("submit", (event) => {
     },
   })).filter((entry) => entry.meaning);
   const meanings = meaningEntries.map((entry) => entry.meaning);
-  const examples = meaningEntries.map((entry) => entry.example);
+  const examples = meaningEntries.map((entry, index) => {
+    const previousCard = editingCardIndex !== null ? cards[editingCardIndex] : null;
+    const previous = previousCard?.examples?.[index];
+    const current = entry.example;
+    const unchanged = previous?.romaji === current.romaji && previous?.hiragana === current.hiragana
+      && previous?.english === current.english && previousCard?.japanese === japanese
+      && previousCard?.hiragana === hiragana
+      && (previousCard?.meanings?.[index] || (index === 0 ? previousCard?.english : "")) === entry.meaning;
+    return unchanged && Array.isArray(previous.wordMeanings)
+      ? { ...current, wordMeanings: previous.wordMeanings } : current;
+  });
   if (!japanese || meanings.length === 0) return;
   const english = meanings[0];
   const isEditing = editingCardIndex !== null;

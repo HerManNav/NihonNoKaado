@@ -1,0 +1,788 @@
+[
+  {
+    "hiragana": "かんけいもののみにゅうしつか。",
+    "english": "Authorized persons only.",
+    "originalRomaji": "kankei mononominyuushitsuka.",
+    "correctedRomaji": "kankei mono nomi nyuushitsu ka."
+  },
+  {
+    "hiragana": "まだましだ。",
+    "english": "It's still better (than the alternative).",
+    "originalRomaji": "mada mashida.",
+    "correctedRomaji": "mada mashi da."
+  },
+  {
+    "hiragana": "ちばけんにすんでいます。",
+    "english": "I live in Chiba Prefecture.",
+    "originalRomaji": "chibaken ni sundeimasu.",
+    "correctedRomaji": "chiba ken ni sundeimasu."
+  },
+  {
+    "hiragana": "このほんはこどもむけだ。",
+    "english": "This book is intended for children.",
+    "originalRomaji": "kono hon ha kodomomukeda.",
+    "correctedRomaji": "kono hon ha kodomo muke da."
+  },
+  {
+    "hiragana": "いいてんきですね。",
+    "english": "Nice weather, isn't it?",
+    "originalRomaji": "ii tenki desune.",
+    "correctedRomaji": "ii tenki desu ne."
+  },
+  {
+    "hiragana": "こんねんどのよさん。",
+    "english": "This fiscal year's budget.",
+    "originalRomaji": "konnendo no yosan.",
+    "correctedRomaji": "kon nendo no yosan."
+  },
+  {
+    "hiragana": "とうきょうはにほんのちゅうしんだ。",
+    "english": "Tokyo is the center of Japan.",
+    "originalRomaji": "toukyou ha nihon no chuushinda.",
+    "correctedRomaji": "toukyou ha nihon no chuushin da."
+  },
+  {
+    "hiragana": "あらたなもんだいがでた。",
+    "english": "A new problem came up.",
+    "originalRomaji": "aratana mondai ga deta.",
+    "correctedRomaji": "arata na mondai ga deta."
+  },
+  {
+    "hiragana": "これはじゅうようなもんだいです。",
+    "english": "This is an important issue.",
+    "originalRomaji": "kore ha juuyouna mondai desu.",
+    "correctedRomaji": "kore ha juuyou na mondai desu."
+  },
+  {
+    "hiragana": "かれはつよいです。",
+    "english": "He is strong.",
+    "originalRomaji": "kare ha tsuyoidesu.",
+    "correctedRomaji": "kare ha tsuyoi desu."
+  },
+  {
+    "hiragana": "どうおもいますか。",
+    "english": "What do you think?",
+    "originalRomaji": "dou omoi masu ka.",
+    "correctedRomaji": "dou omoimasu ka."
+  },
+  {
+    "hiragana": "かりふぉるにあしゅうにすんでいる。",
+    "english": "I live in California.",
+    "originalRomaji": "kariforuniashuu ni sun de iru.",
+    "correctedRomaji": "kariforunia shuu ni sun de iru."
+  },
+  {
+    "hiragana": "きちょうなたいけんだった。",
+    "english": "It was a valuable experience.",
+    "originalRomaji": "kichou nataikendatta.",
+    "correctedRomaji": "kichou na taiken datta."
+  },
+  {
+    "hiragana": "まとめがいしたほうがとくだ。",
+    "english": "It's a better deal to buy in bulk.",
+    "originalRomaji": "matomegai shita hou ga tokuda.",
+    "correctedRomaji": "matomegai shita hou ga toku da."
+  },
+  {
+    "hiragana": "このでんしゃはじゅうりょうだ。",
+    "english": "This train has ten cars.",
+    "originalRomaji": "kono densha ha juuryouda.",
+    "correctedRomaji": "kono densha ha juu ryou da."
+  },
+  {
+    "hiragana": "さっかーきょうかいにとうろくした。",
+    "english": "I registered with the football association.",
+    "originalRomaji": "sakkaakyoukai ni tourokushita.",
+    "correctedRomaji": "sakkaa kyoukai ni tourokushita."
+  },
+  {
+    "hiragana": "Aがたです。",
+    "english": "I'm blood type A.",
+    "originalRomaji": "Agata desu.",
+    "correctedRomaji": "A gata desu."
+  },
+  {
+    "hiragana": "べいぐんきちがおきなわにある。",
+    "english": "There is a U.S. military base in Okinawa.",
+    "originalRomaji": "beigunkichi ga okinawa ni aru.",
+    "correctedRomaji": "beigun kichi ga okinawa ni aru."
+  },
+  {
+    "hiragana": "はちじかんろうどうがきほんだ。",
+    "english": "An eight-hour workday is the standard.",
+    "originalRomaji": "hachijikanroudou ga kihon da.",
+    "correctedRomaji": "hachi jikan roudou ga kihon da."
+  },
+  {
+    "hiragana": "そんなこといわないで。",
+    "english": "Don't say such things.",
+    "originalRomaji": "sonnakoto iwanaide.",
+    "correctedRomaji": "sonna koto iwanaide."
+  },
+  {
+    "hiragana": "かいぎはじゅうじにかいしします。",
+    "english": "The meeting will start at 10 o'clock.",
+    "originalRomaji": "kaigi ha juuji ni kaishi shimasu.",
+    "correctedRomaji": "kaigi ha juu ji ni kaishi shimasu."
+  },
+  {
+    "hiragana": "りーぐせんがはじまった。",
+    "english": "The league games have started.",
+    "originalRomaji": "riigusen ga hajimatta.",
+    "correctedRomaji": "riigu sen ga hajimatta."
+  },
+  {
+    "hiragana": "あたたかいむかえだった。",
+    "english": "It was a warm welcome.",
+    "originalRomaji": "atatakai mukaedatta.",
+    "correctedRomaji": "atatakai mukae datta."
+  },
+  {
+    "hiragana": "わたしじしんもおどろいた。",
+    "english": "I myself was surprised too.",
+    "originalRomaji": "watashijishin mo odoroita.",
+    "correctedRomaji": "watashi jishin mo odoroita."
+  },
+  {
+    "hiragana": "してつかくしゃがICかーどをどうにゅうした。",
+    "english": "Each private railway company introduced IC cards.",
+    "originalRomaji": "shitetsu kakusha ga ICkaado wo dounyuu shita.",
+    "correctedRomaji": "shitetsu kakusha ga IC kaado wo dounyuu shita."
+  },
+  {
+    "hiragana": "じどうしゃがいしゃにつとめています。",
+    "english": "I work for a car company.",
+    "originalRomaji": "jidoushagaisha ni tsutometeimasu.",
+    "correctedRomaji": "jidousha gaisha ni tsutometeimasu."
+  },
+  {
+    "hiragana": "せんぱつとうしゅがななかいをむしってんにおさえた。",
+    "english": "The starting pitcher held the opponents scoreless through seven innings.",
+    "originalRomaji": "senpatsu toushu ga nanakai wo mushitten ni osaeta.",
+    "correctedRomaji": "senpatsu toushu ga nana kai wo mushitten ni osaeta."
+  },
+  {
+    "hiragana": "かしこいこですね。",
+    "english": "What a smart child.",
+    "originalRomaji": "kashikoi kodesu ne.",
+    "correctedRomaji": "kashikoi ko desu ne."
+  },
+  {
+    "hiragana": "どくしょがたのしみです。",
+    "english": "Reading is my pleasure.",
+    "originalRomaji": "dokusho ga tanoshimidesu.",
+    "correctedRomaji": "dokusho ga tanoshimi desu."
+  },
+  {
+    "hiragana": "よくかんがえます。",
+    "english": "I'll think carefully.",
+    "originalRomaji": "yoku kangae masu.",
+    "correctedRomaji": "yoku kangaemasu."
+  },
+  {
+    "hiragana": "かれがくるっていってた。",
+    "english": "He said he's coming.",
+    "originalRomaji": "kare ga kuru tteitteta.",
+    "correctedRomaji": "kare ga kuru tte itteta."
+  },
+  {
+    "hiragana": "えいぎょうぶもんではたらいている。",
+    "english": "I work in the sales department.",
+    "originalRomaji": "eigyoubumon de hataraiteiru.",
+    "correctedRomaji": "eigyou bumon de hataraiteiru."
+  },
+  {
+    "hiragana": "ITぎょうかいではたらいている。",
+    "english": "I work in the IT industry.",
+    "originalRomaji": "ITgyoukai de hataraiteiru.",
+    "correctedRomaji": "IT gyoukai de hataraiteiru."
+  },
+  {
+    "hiragana": "おおてきぎょうにしゅうしょくする。",
+    "english": "To get a job at a major company.",
+    "originalRomaji": "ootekigyou ni shuushoku suru.",
+    "correctedRomaji": "oote kigyou ni shuushoku suru."
+  },
+  {
+    "hiragana": "しあわせなかていをきずく。",
+    "english": "To build a happy home.",
+    "originalRomaji": "shiawasenakatei wo kizuku.",
+    "correctedRomaji": "shiawase na katei wo kizuku."
+  },
+  {
+    "hiragana": "てきせつなそちをとる。",
+    "english": "To take appropriate measures.",
+    "originalRomaji": "tekisetsu nasochi wo toru.",
+    "correctedRomaji": "tekisetsu na sochi wo toru."
+  },
+  {
+    "hiragana": "ぐんじりょくをきょうかする。",
+    "english": "To strengthen military power.",
+    "originalRomaji": "gunjiryoku wo kyoukasuru.",
+    "correctedRomaji": "gunji ryoku wo kyoukasuru."
+  },
+  {
+    "hiragana": "かれはくるはずだ。",
+    "english": "He should come. / He's supposed to come.",
+    "originalRomaji": "kare ha kuru hazuda.",
+    "correctedRomaji": "kare ha kuru hazu da."
+  },
+  {
+    "hiragana": "これはこうしきなはっぴょうです。",
+    "english": "This is an official announcement.",
+    "originalRomaji": "kore ha koushikina happyou desu.",
+    "correctedRomaji": "kore ha koushiki na happyou desu."
+  },
+  {
+    "hiragana": "りんごとかみかんとかがすきだ。",
+    "english": "I like things like apples and mandarin oranges.",
+    "originalRomaji": "ringo tokamikantoka ga suki da.",
+    "correctedRomaji": "ringo toka mikan toka ga suki da."
+  },
+  {
+    "hiragana": "ほんかくてきなちょうさがはじまった。",
+    "english": "A full-scale investigation has begun.",
+    "originalRomaji": "honkakutekina chousa ga hajimatta.",
+    "correctedRomaji": "honkakuteki na chousa ga hajimatta."
+  },
+  {
+    "hiragana": "このきっぷはむこうです。",
+    "english": "This ticket is invalid.",
+    "originalRomaji": "kono kippu ha mukoudesu.",
+    "correctedRomaji": "kono kippu ha mukou desu."
+  },
+  {
+    "hiragana": "ないすぷれー！",
+    "english": "Nice play!",
+    "originalRomaji": "naisupuree!",
+    "correctedRomaji": "naisu puree!"
+  },
+  {
+    "hiragana": "むすめはこうこうせいです。",
+    "english": "My daughter is a high school student.",
+    "originalRomaji": "musume ha koukouseidesu.",
+    "correctedRomaji": "musume ha koukousei desu."
+  },
+  {
+    "hiragana": "このしごとはかんぜんだ。",
+    "english": "This work is perfect.",
+    "originalRomaji": "kono shigoto ha kanzenda.",
+    "correctedRomaji": "kono shigoto ha kanzen da."
+  },
+  {
+    "hiragana": "ぱっけーじつあーにさんかする。",
+    "english": "To join a package tour.",
+    "originalRomaji": "pakkeejitsuaa ni sankasuru.",
+    "correctedRomaji": "pakkeeji tsuaa ni sankasuru."
+  },
+  {
+    "hiragana": "かのじょはおおきなかいしゃのしゃいんだ。",
+    "english": "She is an employee of a large company.",
+    "originalRomaji": "kanojo ha ookina kaisha no shainda.",
+    "correctedRomaji": "kanojo ha ookina kaisha no shain da."
+  },
+  {
+    "hiragana": "このほんはしりーずのだい3かんだ。",
+    "english": "This book is the third volume in the series.",
+    "originalRomaji": "kono hon ha shiriizu no dai 3kanda.",
+    "correctedRomaji": "kono hon ha shiriizu no dai 3kan da."
+  },
+  {
+    "hiragana": "ゆうしゅうなじんざいをもとめている。",
+    "english": "We are looking for talented people.",
+    "originalRomaji": "yuushuu najinzai wo motometeiru.",
+    "correctedRomaji": "yuushuu na jinzai wo motometeiru."
+  },
+  {
+    "hiragana": "しゅようなもんだいについてはなしましょう。",
+    "english": "Let's talk about the main issues.",
+    "originalRomaji": "shuyouna mondai nitsuite hanashimashou.",
+    "correctedRomaji": "shuyou na mondai nitsuite hanashimashou."
+  },
+  {
+    "hiragana": "くにのよさんは100ちょうえんをこえた。",
+    "english": "The national budget exceeded 100 trillion yen.",
+    "originalRomaji": "kuni no yosan ha 100chouen wo koeta.",
+    "correctedRomaji": "kuni no yosan ha 100chou en wo koeta."
+  },
+  {
+    "hiragana": "かんどうてきなしーんだった。",
+    "english": "It was a moving scene.",
+    "originalRomaji": "kandouteki nashiindatta.",
+    "correctedRomaji": "kandouteki na shiin datta."
+  },
+  {
+    "hiragana": "かれはちゅうごくじんです。",
+    "english": "He is Chinese.",
+    "originalRomaji": "kare ha chuugokujindesu.",
+    "correctedRomaji": "kare ha chuugokujin desu."
+  },
+  {
+    "hiragana": "さんじはんにあいましょう。",
+    "english": "Let's meet at half past three.",
+    "originalRomaji": "sanjihan ni aimashou.",
+    "correctedRomaji": "san ji han ni aimashou."
+  },
+  {
+    "hiragana": "みずがゆたかなとちだ。",
+    "english": "It's land rich in water.",
+    "originalRomaji": "mizu ga yutakana tochi da.",
+    "correctedRomaji": "mizu ga yutaka na tochi da."
+  },
+  {
+    "hiragana": "かれはすまーとなたいけいをしている。",
+    "english": "He has a slim figure.",
+    "originalRomaji": "kare ha sumaatona taikei wo shiteiru.",
+    "correctedRomaji": "kare ha sumaato na taikei wo shiteiru."
+  },
+  {
+    "hiragana": "すーつをにちゃくかった。",
+    "english": "I bought two suits.",
+    "originalRomaji": "suutsu wo nichaku katta.",
+    "correctedRomaji": "suutsu wo ni chaku katta."
+  },
+  {
+    "hiragana": "つうじょうははちじにはじまる。",
+    "english": "It usually starts at eight o'clock.",
+    "originalRomaji": "tsuujou ha hachiji ni hajimaru.",
+    "correctedRomaji": "tsuujou ha hachi ji ni hajimaru."
+  },
+  {
+    "hiragana": "ゆうめいなみせだ。",
+    "english": "It's a famous shop.",
+    "originalRomaji": "yuumeina mise da.",
+    "correctedRomaji": "yuumei na mise da."
+  },
+  {
+    "hiragana": "きんきゅうじたいがはっせいした。",
+    "english": "An emergency situation has occurred.",
+    "originalRomaji": "kinkyuujitai ga hasseishita.",
+    "correctedRomaji": "kinkyuu jitai ga hasseishita."
+  },
+  {
+    "hiragana": "にっかんしをよんでいる。",
+    "english": "I read a daily newspaper.",
+    "originalRomaji": "nikkanshi wo yondeiru.",
+    "correctedRomaji": "nikkan shi wo yondeiru."
+  },
+  {
+    "hiragana": "たようなぶんかをそんちょうする。",
+    "english": "We respect diverse cultures.",
+    "originalRomaji": "tayouna bunka wo sonchousuru.",
+    "correctedRomaji": "tayou na bunka wo sonchousuru."
+  },
+  {
+    "hiragana": "こんさーとほーるでえんそうする。",
+    "english": "Perform at a concert hall.",
+    "originalRomaji": "konsaatohooru de ensousuru.",
+    "correctedRomaji": "konsaato hooru de ensousuru."
+  },
+  {
+    "hiragana": "けんりつこうこうにかよう。",
+    "english": "To attend a prefectural high school.",
+    "originalRomaji": "kenritsukoukou ni kayou.",
+    "correctedRomaji": "kenritsu koukou ni kayou."
+  },
+  {
+    "hiragana": "このきかいのきこうはひじょうにふくざつで、せんもんかでなければしゅうりできない。",
+    "english": "The mechanism of this machine is extremely complex, and only an expert can repair it.",
+    "originalRomaji": "kono kikai no kikou ha hijouni fukuzatsu de, senmonka denakereba shuuri dekinai.",
+    "correctedRomaji": "kono kikai no kikou ha hijouni fukuzatsu de, senmonka de nakereba shuuri dekinai."
+  },
+  {
+    "hiragana": "ねんかんしょとくがいっていがくをこえるとかぜいたいしょうになる。",
+    "english": "If your annual income exceeds a certain amount, it becomes subject to taxation.",
+    "originalRomaji": "nenkanshotoku ga itteigaku wo koeru to kazei taishou ni naru.",
+    "correctedRomaji": "nenkan shotoku ga itteigaku wo koeru to kazei taishou ni naru."
+  },
+  {
+    "hiragana": "ちゅうしょうきぎょうをしえんする。",
+    "english": "To support small and medium-sized enterprises.",
+    "originalRomaji": "chuushoukigyou wo shiensuru.",
+    "correctedRomaji": "chuushou kigyou wo shiensuru."
+  },
+  {
+    "hiragana": "かんきょうもんだいはしんこくです。",
+    "english": "The environmental problem is serious.",
+    "originalRomaji": "kankyou mondai ha shinkokudesu.",
+    "correctedRomaji": "kankyou mondai ha shinkoku desu."
+  },
+  {
+    "hiragana": "かすたまーさぽーとにれんらくする。",
+    "english": "To contact customer support.",
+    "originalRomaji": "kasutamaasapooto ni renrakusuru.",
+    "correctedRomaji": "kasutamaa sapooto ni renrakusuru."
+  },
+  {
+    "hiragana": "ゆうめいなさっかにあった。",
+    "english": "I met a famous author.",
+    "originalRomaji": "yuumei nasakka ni atta.",
+    "correctedRomaji": "yuumei na sakka ni atta."
+  },
+  {
+    "hiragana": "れきしじょうのじゅうようなじんぶつについてまなんだ。",
+    "english": "I learned about important historical figures.",
+    "originalRomaji": "rekishijou no juuyou najinbutsu nitsuite mananda.",
+    "correctedRomaji": "rekishijou no juuyou na jinbutsu nitsuite mananda."
+  },
+  {
+    "hiragana": "せいしきなけいやくをむすんだ。",
+    "english": "We signed a formal contract.",
+    "originalRomaji": "seishikina keiyaku wo musunda.",
+    "correctedRomaji": "seishiki na keiyaku wo musunda."
+  },
+  {
+    "hiragana": "かれはちーむのえーすだ。",
+    "english": "He's the ace of the team.",
+    "originalRomaji": "kare ha chiimu no eesuda.",
+    "correctedRomaji": "kare ha chiimu no eesu da."
+  },
+  {
+    "hiragana": "じゅうだいなはっぴょうがあります。",
+    "english": "There is an important announcement.",
+    "originalRomaji": "juudaina happyou ga arimasu.",
+    "correctedRomaji": "juudai na happyou ga arimasu."
+  },
+  {
+    "hiragana": "このげんそくにしたがうべきだ。",
+    "english": "We should follow this principle.",
+    "originalRomaji": "kono gensoku ni shitagau bekida.",
+    "correctedRomaji": "kono gensoku ni shitagau beki da."
+  },
+  {
+    "hiragana": "かれらはりそうてきなふうふだ。",
+    "english": "They are an ideal married couple.",
+    "originalRomaji": "karera ha risouteki nafuufu da.",
+    "correctedRomaji": "karera ha risouteki na fuufu da."
+  },
+  {
+    "hiragana": "きょういんめんきょをもっている。",
+    "english": "I have a teaching license.",
+    "originalRomaji": "kyouinmenkyo wo motteiru.",
+    "correctedRomaji": "kyouin menkyo wo motteiru."
+  },
+  {
+    "hiragana": "かぞくのためにじぶんをぎせいにした。",
+    "english": "She sacrificed herself for her family.",
+    "originalRomaji": "kazoku no tame ni jibun wo giseinishita.",
+    "correctedRomaji": "kazoku no tame ni jibun wo gisei ni shita."
+  },
+  {
+    "hiragana": "ばすはつうじょうどおりうんこうしている。",
+    "english": "The buses are running on their normal schedule.",
+    "originalRomaji": "basu ha tsuujou dooriunkou shiteiru.",
+    "correctedRomaji": "basu ha tsuujou doori unkou shiteiru."
+  },
+  {
+    "hiragana": "うりあげらんきんぐをみる。",
+    "english": "Look at the sales rankings.",
+    "originalRomaji": "uriagerankingu wo miru.",
+    "correctedRomaji": "uriage rankingu wo miru."
+  },
+  {
+    "hiragana": "すきなきゃらくたーはだれ？",
+    "english": "Who's your favorite character?",
+    "originalRomaji": "suki nakyarakutaa ha dare?",
+    "correctedRomaji": "suki na kyarakutaa ha dare?"
+  },
+  {
+    "hiragana": "かいだんをさんだんのぼる。",
+    "english": "To climb three steps on the stairs.",
+    "originalRomaji": "kaidan wo sandan noboru.",
+    "correctedRomaji": "kaidan wo san dan noboru."
+  },
+  {
+    "hiragana": "かのじょはゆうめいなじょゆうだ。",
+    "english": "She is a famous actress.",
+    "originalRomaji": "kanojo ha yuumei najoyuu da.",
+    "correctedRomaji": "kanojo ha yuumei na joyuu da."
+  },
+  {
+    "hiragana": "けいけんがほうふなひとをさがしている。",
+    "english": "We're looking for someone with rich experience.",
+    "originalRomaji": "keiken ga houfuna hito wo sagashiteiru.",
+    "correctedRomaji": "keiken ga houfu na hito wo sagashiteiru."
+  },
+  {
+    "hiragana": "むすめはちゅうがくせいです。",
+    "english": "My daughter is a middle school student.",
+    "originalRomaji": "musume ha chuugakuseidesu.",
+    "correctedRomaji": "musume ha chuugakusei desu."
+  },
+  {
+    "hiragana": "げんいんはふめいだ。",
+    "english": "The cause is unknown.",
+    "originalRomaji": "gen'in ha fumeida.",
+    "correctedRomaji": "gen'in ha fumei da."
+  },
+  {
+    "hiragana": "かぶぬしそうかいがひらかれた。",
+    "english": "A shareholders' meeting was held.",
+    "originalRomaji": "kabunushisoukai ga hirakareta.",
+    "correctedRomaji": "kabunushi soukai ga hirakareta."
+  },
+  {
+    "hiragana": "ぐろーばるなしてんがたいせつだ。",
+    "english": "A global perspective is important.",
+    "originalRomaji": "guroobaruna shiten ga taisetsu da.",
+    "correctedRomaji": "guroobaru na shiten ga taisetsu da."
+  },
+  {
+    "hiragana": "そうむぶにいどうになった。",
+    "english": "I was transferred to the general affairs department.",
+    "originalRomaji": "soumu bu ni idou ninatta.",
+    "correctedRomaji": "soumu bu ni idou ni natta."
+  },
+  {
+    "hiragana": "てんきがわるいです。",
+    "english": "The weather is bad.",
+    "originalRomaji": "tenki ga waruidesu.",
+    "correctedRomaji": "tenki ga warui desu."
+  },
+  {
+    "hiragana": "ぷれみあむなたいけんができる。",
+    "english": "You can have a premium experience.",
+    "originalRomaji": "puremiamuna taiken ga dekiru.",
+    "correctedRomaji": "puremiamu na taiken ga dekiru."
+  },
+  {
+    "hiragana": "てきせつなことばをえらんでください。",
+    "english": "Please choose appropriate words.",
+    "originalRomaji": "tekisetsuna kotoba wo erande kudasai.",
+    "correctedRomaji": "tekisetsu na kotoba wo erande kudasai."
+  },
+  {
+    "hiragana": "ちちはちゅうがっこうのきょうゆだ。",
+    "english": "My father is a junior high school teacher.",
+    "originalRomaji": "chichi ha chuugakkou no kyouyuda.",
+    "correctedRomaji": "chichi ha chuugakkou no kyouyu da."
+  },
+  {
+    "hiragana": "じしゅれんしゅうにはげむ。",
+    "english": "To work hard at independent practice.",
+    "originalRomaji": "jishurenshuu ni hagemu.",
+    "correctedRomaji": "jishu renshuu ni hagemu."
+  },
+  {
+    "hiragana": "きにゅうれいには「やまだたろう」とかいてある。",
+    "english": "The sample filled-in form says \"Yamada Taro\".",
+    "originalRomaji": "kinyuurei ni ha\"yamadatarou\"to kaitearu.",
+    "correctedRomaji": "kinyuurei ni ha\"yamada tarou\"to kaitearu."
+  },
+  {
+    "hiragana": "えいががじょうえいちゅうだ。",
+    "english": "The movie is currently showing.",
+    "originalRomaji": "eiga ga joueichuuda.",
+    "correctedRomaji": "eiga ga jouei chuu da."
+  },
+  {
+    "hiragana": "せいこうにはさまざまなようそがひつようだ。",
+    "english": "Success requires various elements.",
+    "originalRomaji": "seikou ni ha samazama nayouso ga hitsuyou da.",
+    "correctedRomaji": "seikou ni ha samazama na youso ga hitsuyou da."
+  },
+  {
+    "hiragana": "このほんはとてもさんこうになった。",
+    "english": "This book was very helpful.",
+    "originalRomaji": "kono hon ha totemo sankouninatta.",
+    "correctedRomaji": "kono hon ha totemo sankou ni natta."
+  },
+  {
+    "hiragana": "ひつようなこうもくにきにゅうしてください。",
+    "english": "Please fill in the necessary items.",
+    "originalRomaji": "hitsuyou nakoumoku ni kinyuushite kudasai.",
+    "correctedRomaji": "hitsuyou na koumoku ni kinyuushite kudasai."
+  },
+  {
+    "hiragana": "かのじょはゆうしゅうながくせいです。",
+    "english": "She is an excellent student.",
+    "originalRomaji": "kanojo ha yuushuuna gakusei desu.",
+    "correctedRomaji": "kanojo ha yuushuu na gakusei desu."
+  },
+  {
+    "hiragana": "ふくざつなはなしだ。",
+    "english": "It's a complicated matter.",
+    "originalRomaji": "fukuzatsuna hanashi da.",
+    "correctedRomaji": "fukuzatsu na hanashi da."
+  },
+  {
+    "hiragana": "これがわたしのさだめなのだろう。",
+    "english": "I suppose this is my fate.",
+    "originalRomaji": "kore ga watashi no sadamena no darou.",
+    "correctedRomaji": "kore ga watashi no sadame na no darou."
+  },
+  {
+    "hiragana": "すいちゅうではふかくなるほどあつりょくがおおきくなる。",
+    "english": "Underwater, the deeper you go, the greater the pressure.",
+    "originalRomaji": "suichuu de ha fukaku naru hodoatsuryoku ga ookiku naru.",
+    "correctedRomaji": "suichuu de ha fukaku naru hodo atsuryoku ga ookiku naru."
+  },
+  {
+    "hiragana": "このてらはじゅうようぶんかざいにしていされている。",
+    "english": "This temple is designated as an important cultural property.",
+    "originalRomaji": "kono tera ha juuyoubunkazai ni shitei sareteiru.",
+    "correctedRomaji": "kono tera ha juuyou bunkazai ni shitei sareteiru."
+  },
+  {
+    "hiragana": "すきなしゅもくはすいえいだ。",
+    "english": "My favorite event is swimming.",
+    "originalRomaji": "suki nashumoku ha suiei da.",
+    "correctedRomaji": "suki na shumoku ha suiei da."
+  },
+  {
+    "hiragana": "ちちはうでのいいしょくにんだ。",
+    "english": "My father is a skilled craftsman.",
+    "originalRomaji": "chichi ha ude no ii shokuninda.",
+    "correctedRomaji": "chichi ha ude no ii shokunin da."
+  },
+  {
+    "hiragana": "おおひっとしたえいがだ。",
+    "english": "It's a blockbuster movie.",
+    "originalRomaji": "oohitto shita eiga da.",
+    "correctedRomaji": "oo hitto shita eiga da."
+  },
+  {
+    "hiragana": "こすとぱふぉーまんすがいい。",
+    "english": "It's good value for money.",
+    "originalRomaji": "kosutopafoomansu ga ii.",
+    "correctedRomaji": "kosuto pafoomansu ga ii."
+  },
+  {
+    "hiragana": "あいじょうのあらわれだ。",
+    "english": "It's a manifestation of love.",
+    "originalRomaji": "aijou no arawareda.",
+    "correctedRomaji": "aijou no araware da."
+  },
+  {
+    "hiragana": "こどもたちがげきのれんしゅうをしている。",
+    "english": "The children are rehearsing a play.",
+    "originalRomaji": "ko domotachigageki no renshuu woshiteiru.",
+    "correctedRomaji": "kodomotachi ga geki no renshuu wo shite iru."
+  },
+  {
+    "hiragana": "かれはちーむのしゅりょくだ。",
+    "english": "He is the key player of the team.",
+    "originalRomaji": "kare ha chiimu no shuryokuda.",
+    "correctedRomaji": "kare ha chiimu no shuryoku da."
+  },
+  {
+    "hiragana": "かれはせいじつそのものだ。",
+    "english": "He is sincerity itself.",
+    "originalRomaji": "kare ha seijitsu sonomonoda.",
+    "correctedRomaji": "kare ha seijitsu sonomono da."
+  },
+  {
+    "hiragana": "こうにんかいけいしになる。",
+    "english": "Become a certified public accountant.",
+    "originalRomaji": "kouninkaikeishi ni naru.",
+    "correctedRomaji": "kounin kaikeishi ni naru."
+  },
+  {
+    "hiragana": "これはひみつだよ。",
+    "english": "This is a secret.",
+    "originalRomaji": "kore ha himitsuda yo.",
+    "correctedRomaji": "kore ha himitsu da yo."
+  },
+  {
+    "hiragana": "こくどのやくななわりがさんちだ。",
+    "english": "About seventy percent of the national land is mountainous.",
+    "originalRomaji": "kokudo no yaku nanawari ga sanchi da.",
+    "correctedRomaji": "kokudo no yaku nana wari ga sanchi da."
+  },
+  {
+    "hiragana": "こういうときはどうすればいい？",
+    "english": "What should I do at a time like this?",
+    "originalRomaji": "kouiutoki ha dou sureba ii?",
+    "correctedRomaji": "kouiu toki ha dou sureba ii?"
+  },
+  {
+    "hiragana": "ほしゅてきなかんがえかただ。",
+    "english": "That's a conservative way of thinking.",
+    "originalRomaji": "hoshutekina kangaekata da.",
+    "correctedRomaji": "hoshuteki na kangaekata da."
+  },
+  {
+    "hiragana": "すきなきゅうだんはどこですか。",
+    "english": "Which baseball team do you support?",
+    "originalRomaji": "suki nakyuudan ha doko desu ka.",
+    "correctedRomaji": "suki na kyuudan ha doko desu ka."
+  },
+  {
+    "hiragana": "せいかくなじょうほうをつたえてください。",
+    "english": "Please convey accurate information.",
+    "originalRomaji": "seikakuna jouhou wo tsutaete kudasai.",
+    "correctedRomaji": "seikaku na jouhou wo tsutaete kudasai."
+  },
+  {
+    "hiragana": "かれはたなかけのちょうなんだ。",
+    "english": "He is the eldest son of the Tanaka family.",
+    "originalRomaji": "kare ha tanakake no chounanda.",
+    "correctedRomaji": "kare ha tanaka ke no chounan da."
+  },
+  {
+    "hiragana": "きおんがあがりました。",
+    "english": "The temperature rose.",
+    "originalRomaji": "kion ga agari mashita.",
+    "correctedRomaji": "kion ga agarimashita."
+  },
+  {
+    "hiragana": "ふしぎなはなしだ。",
+    "english": "It's a strange story.",
+    "originalRomaji": "fushigina hanashi da.",
+    "correctedRomaji": "fushigi na hanashi da."
+  },
+  {
+    "hiragana": "しあいをなまちゅうけいでみた。",
+    "english": "I watched the game on a live broadcast.",
+    "originalRomaji": "shiai wo namachuukei de mita.",
+    "correctedRomaji": "shiai wo nama chuukei de mita."
+  },
+  {
+    "hiragana": "かれのまちがいはあきらかだ。",
+    "english": "His mistake is obvious.",
+    "originalRomaji": "kare no machigai ha akirakada.",
+    "correctedRomaji": "kare no machigai ha akiraka da."
+  },
+  {
+    "hiragana": "じゅうはっさいいかはにゅうじょうできません。",
+    "english": "Those 18 and under cannot enter.",
+    "originalRomaji": "juuhassaiika ha nyuujou dekimasen.",
+    "correctedRomaji": "juuhassai ika ha nyuujou dekimasen."
+  },
+  {
+    "hiragana": "きょだいなたてものがみえる。",
+    "english": "I can see a huge building.",
+    "originalRomaji": "kyodaina tatemono ga mieru.",
+    "correctedRomaji": "kyodai na tatemono ga mieru."
+  },
+  {
+    "hiragana": "こどもみたいだ。",
+    "english": "It's like a child. / How childish.",
+    "originalRomaji": "kodomo mitaida.",
+    "correctedRomaji": "kodomo mitai da."
+  },
+  {
+    "hiragana": "さんがつはけっさんきでいそがしい。",
+    "english": "March is busy because it's the fiscal year-end.",
+    "originalRomaji": "sangatsu ha kessanki de isogashii.",
+    "correctedRomaji": "sangatsu ha kessan ki de isogashii."
+  },
+  {
+    "hiragana": "たさいなめにゅーがそろっている。",
+    "english": "There is a varied menu available.",
+    "originalRomaji": "tasaina menyuu ga sorotte iru.",
+    "correctedRomaji": "tasai na menyuu ga sorotte iru."
+  },
+  {
+    "hiragana": "いほうちゅうしゃはやめてください。",
+    "english": "Please do not park illegally.",
+    "originalRomaji": "ihou chuusha hayamete kudasai.",
+    "correctedRomaji": "ihou chuusha ha yamete kudasai."
+  },
+  {
+    "hiragana": "こうとうがっこうをそつぎょうした。",
+    "english": "I graduated from high school.",
+    "originalRomaji": "koutougakkou wo sotsugyoushita.",
+    "correctedRomaji": "koutougakkou wo sotsugyou shita."
+  }
+]

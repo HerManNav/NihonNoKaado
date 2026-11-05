@@ -1,0 +1,32 @@
+[
+  {
+    "sourceEntryId": "00495_iru",
+    "sourceExampleId": "00495_iru_ex7",
+    "reason": "The previous cat sentence had two English translations and two source senses; this example has one existence sense.",
+    "oldExample": {
+      "romaji": "neko ga imasu.",
+      "hiragana": "ねこがいます。",
+      "english": "There is a cat. / I have a cat."
+    },
+    "newExample": {
+      "romaji": "kouen ni tori ga takusan imasu.",
+      "hiragana": "こうえんにとりがたくさんいます。",
+      "english": "There are many birds in the park."
+    }
+  },
+  {
+    "sourceEntryId": "00797_mondai",
+    "sourceExampleId": "00797_mondai_ex7",
+    "reason": "The previous problem sentence could be an exam question or a real-world issue; this example is explicitly about a question's answer.",
+    "oldExample": {
+      "romaji": "kono mondai ha muzukashii desu.",
+      "hiragana": "このもんだいはむずかしいです。",
+      "english": "This problem is difficult."
+    },
+    "newExample": {
+      "romaji": "kono mondai no kotae ha nan desu ka.",
+      "hiragana": "このもんだいのこたえはなんですか。",
+      "english": "What is the answer to this question?"
+    }
+  }
+]

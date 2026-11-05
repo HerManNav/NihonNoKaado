@@ -1,0 +1,248 @@
+{
+  "format": 1,
+  "source": "https://github.com/tkgally/je-dict-1",
+  "sourceCommit": "32c267cbfa7756a2e3542657772759d92d4e2420",
+  "indexFile": "tkg-entries-index-32c267cb.json",
+  "indexSha256": "991e92a8dfc56ddc9fb94278b57b60e54776f02e2182c965b7a0f5d721fa4f75",
+  "cardRecords": 3650,
+  "candidateEntries": 3006,
+  "archives": [
+    {
+      "file": "tkg-example-entries-32c267cb-0000.json.gz",
+      "entries": 100,
+      "bytes": 139884,
+      "sha256": "525cbfb0b8192be89dacd697bb86868942c7b9c7d99e9e72193172bfe0bf632d"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0001.json.gz",
+      "entries": 100,
+      "bytes": 154942,
+      "sha256": "f0697e7e36546518c5222b3f8b49a5e704b5205ee5cbbb79c0ef0132ec26f240"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0002.json.gz",
+      "entries": 100,
+      "bytes": 138543,
+      "sha256": "843c55f93910c5e9b42fcfeefb8c1cbbe40e0053c2d0b9e157190709070c0f0f"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0003.json.gz",
+      "entries": 100,
+      "bytes": 131990,
+      "sha256": "bddc68689b7a7b22a3f4f288e03a8bfe85096adb9ffbacda29a4681197b7b166"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0004.json.gz",
+      "entries": 100,
+      "bytes": 150708,
+      "sha256": "d05b979787509421d57b138faca7697e27043fca0b4ceaf8205692216d5643b0"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0005.json.gz",
+      "entries": 100,
+      "bytes": 125913,
+      "sha256": "93998c81cb566e536dec3309049a2bc02269c85f223321119210ac03ae311992"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0006.json.gz",
+      "entries": 100,
+      "bytes": 126158,
+      "sha256": "7d6151a448270697a8bf9f4f0453b6548ee7f4db4f7137f9ed0dadc93e85fa94"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0007.json.gz",
+      "entries": 100,
+      "bytes": 142762,
+      "sha256": "6a49a89f7b02732c49b97817b4ea81af07da5b3b928d09503226ce18fa8a815d"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0008.json.gz",
+      "entries": 100,
+      "bytes": 128912,
+      "sha256": "b35f8dd56255341c7127d50f0df4fc9ae3693d235fd391f39c52e363f1876c1a"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0009.json.gz",
+      "entries": 100,
+      "bytes": 128861,
+      "sha256": "908aa7e29f873c111b682f3861e7a4bce21a2e7e8caed91b02a7918ab8eafe76"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0010.json.gz",
+      "entries": 100,
+      "bytes": 130491,
+      "sha256": "bedba309fd54dc5341de1fe4cb8df1667c2326928f53ed33b7893b2b4fcf85fc"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0011.json.gz",
+      "entries": 100,
+      "bytes": 114205,
+      "sha256": "c537f265b2e06bf0c1f555129c951fbad2555bce77aae4f32be7351ae05dd8f2"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0012.json.gz",
+      "entries": 100,
+      "bytes": 127747,
+      "sha256": "ef4c9a382211f500ab4b6068f34b4e9a2bced99a9dab337aba81e01c080a5ba1"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0013.json.gz",
+      "entries": 100,
+      "bytes": 128742,
+      "sha256": "ff5c448ceab796778a466a5637d3f7a92eac77e9a17cba5799d1ccb8dcb92de2"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0014.json.gz",
+      "entries": 100,
+      "bytes": 131403,
+      "sha256": "23f618829bea6601ae9dec81fb897ac46e3b17fa32dc258bbab8be786a802640"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0015.json.gz",
+      "entries": 100,
+      "bytes": 118443,
+      "sha256": "8a8dd8fff44329f2a901bda2d773f2a5f5d004d2f2737848614e4bee414a8dc8"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0016.json.gz",
+      "entries": 100,
+      "bytes": 125494,
+      "sha256": "ff6621776eb97a47e44b3cd8a13fa8bdc39036549d45e029fa3657ca577ebb4f"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0017.json.gz",
+      "entries": 100,
+      "bytes": 106336,
+      "sha256": "f5e3fff801d97282d88f34f17739d1a93d8c6fb9d0345be4cd46163eb0c25dda"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0018.json.gz",
+      "entries": 100,
+      "bytes": 104091,
+      "sha256": "4c5eeabb65cd3c4af90f5185280b81083f7aefdeaf82b029904797c4801960f8"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0019.json.gz",
+      "entries": 100,
+      "bytes": 110533,
+      "sha256": "14c9f5b3654c040fba9d658075fd58ed4767004a04f16162436b4332696f54f4"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0020.json.gz",
+      "entries": 100,
+      "bytes": 116946,
+      "sha256": "bb85101c1e2dba43ee292f68ff6480bec823cb1dbc52986b21dcf2b6ce5677fc"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0021.json.gz",
+      "entries": 100,
+      "bytes": 118935,
+      "sha256": "3b2d72c7f6230d4ba822c9b8d54fea2682f1fa8b84b22a539f7cca7efe7e60c4"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0022.json.gz",
+      "entries": 100,
+      "bytes": 118331,
+      "sha256": "708966a7bcb8bcd3cfd4035635a1b884b49bbabba9f94f7ce902dbdf24293fd5"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0023.json.gz",
+      "entries": 100,
+      "bytes": 117434,
+      "sha256": "df4b8e7132d2a5ce3f3e10a34076ba3b1292db9abb959c36c2ed1bdeb2b20ca7"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0024.json.gz",
+      "entries": 100,
+      "bytes": 110415,
+      "sha256": "4297e0d8adac8fb575782694331cb6628153c8d7d1d75faccc19577d008045a5"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0025.json.gz",
+      "entries": 100,
+      "bytes": 113733,
+      "sha256": "08d1acb1bbbea62aa8dc9e0f3a47cd53febb3cdad1029b3addcae83248b59a98"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0026.json.gz",
+      "entries": 100,
+      "bytes": 124150,
+      "sha256": "aa0f127fcfaa12e817ce69fec8e93cec4630ac30bde59d82f1babec1a89c992a"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0027.json.gz",
+      "entries": 100,
+      "bytes": 125554,
+      "sha256": "98edc5c61450fc2c17e838ebb9087405f46a627209fb1be0842f0fef2e04f63f"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0028.json.gz",
+      "entries": 100,
+      "bytes": 108168,
+      "sha256": "fc31e7aee4b21ce9396075f9d954ab7e359882c6c405da0b4cef489334274800"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0029.json.gz",
+      "entries": 100,
+      "bytes": 104806,
+      "sha256": "6ea9c4e614c5d0de4a16f89bfa44739f6679d259d9c9127dc8fd7f69cd9148b7"
+    },
+    {
+      "file": "tkg-example-entries-32c267cb-0030.json.gz",
+      "entries": 6,
+      "bytes": 8893,
+      "sha256": "590fe99585b59215ca6b2f485a9dc1bca9bb5e88796c598dfc5a8f1f62cc48ba"
+    }
+  ],
+  "coverage": {
+    "bySize": {
+      "50": {
+        "records": 50,
+        "uniqueExact": 50,
+        "ambiguousExact": 0,
+        "unmatched": 0,
+        "kanaOnly": 0
+      },
+      "100": {
+        "records": 100,
+        "uniqueExact": 100,
+        "ambiguousExact": 0,
+        "unmatched": 0,
+        "kanaOnly": 0
+      },
+      "500": {
+        "records": 500,
+        "uniqueExact": 500,
+        "ambiguousExact": 0,
+        "unmatched": 0,
+        "kanaOnly": 0
+      },
+      "1000": {
+        "records": 1000,
+        "uniqueExact": 1000,
+        "ambiguousExact": 0,
+        "unmatched": 0,
+        "kanaOnly": 0
+      },
+      "2000": {
+        "records": 2000,
+        "uniqueExact": 1999,
+        "ambiguousExact": 1,
+        "unmatched": 0,
+        "kanaOnly": 0
+      }
+    },
+    "ambiguous": [
+      {
+        "size": 2000,
+        "romaji": "koutai",
+        "example": "There was a player substitution.",
+        "candidates": [
+          "14943_koutai",
+          "04146_koutai"
+        ]
+      }
+    ],
+    "unmatched": []
+  }
+}

@@ -15,6 +15,18 @@
 - The 500-, 1,000-, and 2,000-word sets follow the frequency order in [Noos's Japanese frequency list](https://noosflashcards.com/resources/frequency-lists/japanese), based on Leipzig Corpora Collection news counts. They skip duplicate romaji and entries that have no corresponding TKG entry with a complete, sense-tagged example. The published sets are prefixes of the same filtered order; the 2,000-word set reaches source rank 2,426 after filtering.
 - English glosses and example sentences for all sets come from the [TKG Japanese-English Learner's Dictionary](https://www.tkgje.jp/) and its [public data repository](https://github.com/tkgally/je-dict-1). Each chosen example is tagged to the definition used for that card. The example source is converted to kana and romaji for this app.
 
+## Contextual example translations
+
+The default decks store one `wordMeanings` annotation for each visible romaji word in an example. The annotations are positional, so identical spellings in different sentences or positions can display different English meanings. When a revealed default card shows an annotated example, the popup uses that sentence's single meaning. Imported and user-written examples without annotations still use the general JMdict lookup.
+
+The annotations come from the [TKG public data repository](https://github.com/tkgally/je-dict-1) at commit `32c267cbfa7756a2e3542657772759d92d4e2420`. The complete owner entries for candidate cards and all entries linked in their examples are preserved in `dictionaries/source-data/tkg-example-entries-32c267cb-*.json.gz` and `tkg-linked-entries-32c267cb-*.json.gz`, with manifests recording archive hashes. These archives keep the original entry JSON, including sentence links, definitions, and sense tags. They are retained for later corrections and regeneration.
+
+The source example's sense tag identifies the card word's meaning. Inline links identify other words' dictionary entries; those links generally identify a word rather than its particular sense. The annotation script uses the linked entry's definitions and the sentence context to choose one English explanation. A lexical match alone can be misleading for particles, auxiliary verbs, and homographs, so `tests/contextual-example-meanings.test.js` checks representative cases against the preserved source entries.
+
+There are 9,558 annotated word targets in the 2,000-card deck, and 17,192 occurrences across all five decks. The 500/1,000 decks remain exact prefixes of 2,000. The retained 100-card list contains 35 additional distinct examples, which were annotated separately; 50 remains its prefix. In total, 2,027 distinct sentences are covered. Two ambiguous examples were replaced with examples carrying a single source sense, and 131 exact romaji spacing corrections separate previously fused words.
+
+`scripts/default-example-meaning-overrides.json` preserves 687 sentence-specific editorial decisions, including reviewed ambiguous choices and corrections. The original review queue is retained as `source-data/tkg-context-editorial-input-32c267cb.json`, alongside its correction decisions in `scripts/context-review-decisions.json`. Unflagged choices use source sense tags, grammar rules, or English-context scoring. Complete coverage and zero pending review flags do not prove that every semantic choice is correct; the independent regression sentences check selected difficult cases, and future corrections can be added without rebuilding the general dictionary. Index-only TKG citations have no numbered sense; JMdict and editorial glosses omit a TKG citation when it would identify a different word.
+
 ## Licenses
 
 - The TKG dictionary data is dedicated to the public domain under CC0 1.0.
@@ -42,3 +54,13 @@ To reapply the example spacing to already generated files, run:
 ```sh
 node scripts/space-example-romaji.mjs <project-root> <tkg-repository-root>/entries --write
 ```
+
+To regenerate the contextual word meanings from the preserved TKG archives, first run the annotation script without `--write` to inspect its coverage and review report. Then run it with `--write` after resolving any flagged cases:
+
+```sh
+node scripts/annotate-default-examples.mjs --report=dictionaries/source-data/tkg-context-review-32c267cb.json
+node scripts/annotate-default-examples.mjs --write
+node scripts/annotate-default-examples.mjs --check
+```
+
+`scripts/download-tkg-example-sources.mjs` can verify or resume the pinned archives if needed. It preserves downloaded files and checks their hashes. Run it once for card source entries and again with `--linked-targets` for their linked words.

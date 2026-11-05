@@ -108,7 +108,7 @@ function pointer(target, pointerType, x, y) {
   };
 }
 
-function makeSession({ realLookup = false, fetchLookup = false } = {}) {
+function makeSession({ realLookup = false, fetchLookup = false, savedCards = null } = {}) {
   const document = new Document();
   const flashcard = document.querySelector("#flashcard");
   const prompt = document.querySelector("#prompt-word");
@@ -125,7 +125,7 @@ function makeSession({ realLookup = false, fetchLookup = false } = {}) {
   };
   const context = vm.createContext({
     document, window, Element, Set, Node: { TEXT_NODE: 3 }, HTMLInputElement: Element,
-    localStorage: { getItem: () => null, setItem() {} }, console,
+    localStorage: { getItem: () => savedCards ? JSON.stringify(savedCards) : null, setItem() {} }, console,
     Blob, Response, DecompressionStream,
     fetch: fetchLookup ? async (url) => {
       assert.match(url, /romaji-english-jmdict-2026-11-02\.json\.gz\?v=5$/);
@@ -175,9 +175,81 @@ test("desktop hover follows the pointer within an 8px margin and closes beyond i
   assert.equal(vm.runInContext("activeRomajiToken", context), null);
 });
 
+test("annotated example words show one context meaning without loading the global lookup", async () => {
+  const { context, flashcard, answer, popup } = makeSession();
+  context.card.examples[0].wordMeanings = [
+    { romaji: "benkyou", meaning: "study", entryId: "00527_benkyousuru" },
+    { romaji: "shita", meaning: "did" },
+  ];
+  vm.runInContext("romajiLookup = null; renderPracticeCard()", context);
+  context.fetch = () => { throw new Error("The annotated popup should not fetch the global dictionary"); };
+  const tokens = answer.children[0].children[1].children[0].children;
+  flashcard.emit("pointerover", pointer(tokens[0], "mouse", 120, 190));
+  await settlePopup();
+  assert.equal(popup.hidden, false);
+  assert.deepEqual(popup.children.map((line) => line.textContent), ["study"]);
+  flashcard.emit("pointerover", pointer(tokens[1], "mouse", 145, 190));
+  await settlePopup();
+  assert.deepEqual(popup.children.map((line) => line.textContent), ["did"]);
+  assert.equal(vm.runInContext("romajiLookup", context), null);
+});
+
+test("annotation positions distinguish repeated romaji words", async () => {
+  const { context, flashcard, answer, popup } = makeSession();
+  context.card.examples[0] = {
+    romaji: "to to.", hiragana: "とと。", english: "And with.",
+    wordMeanings: [{ romaji: "to", meaning: "and" }, { romaji: "to", meaning: "with" }],
+  };
+  vm.runInContext("renderPracticeCard()", context);
+  const tokens = answer.children[0].children[1].children[0].children;
+  flashcard.emit("pointerover", pointer(tokens[0], "mouse", 120, 190));
+  await settlePopup();
+  assert.equal(popup.textContent, "and");
+  flashcard.emit("pointerover", pointer(tokens[1], "mouse", 145, 190));
+  await settlePopup();
+  assert.equal(popup.textContent, "with");
+});
+
+test("a stale annotation falls back to the ordinary lookup", async () => {
+  const { context, flashcard, answer, popup } = makeSession();
+  context.card.examples[0].wordMeanings = [
+    { romaji: "shita", meaning: "wrong word" },
+    { romaji: "benkyou", meaning: "wrong word" },
+  ];
+  vm.runInContext("renderPracticeCard()", context);
+  const token = answer.children[0].children[1].children[0].children[0];
+  flashcard.emit("pointerover", pointer(token, "mouse", 120, 190));
+  await settlePopup();
+  assert.equal(popup.textContent, "benkyou:none");
+});
+
+test("context meanings survive a saved dictionary reload", () => {
+  const wordMeanings = [
+    { romaji: "benkyou", meaning: "study", entryId: "00527_benkyousuru" },
+    { romaji: "shita", meaning: "did" },
+  ];
+  const savedCards = [{
+    japanese: "shita", english: "did",
+    examples: [{ romaji: "benkyou shita.", hiragana: "べんきょうした。", english: "I studied.", wordMeanings }],
+  }];
+  const { context } = makeSession({ savedCards });
+  assert.deepEqual(JSON.parse(JSON.stringify(vm.runInContext("cards[0].examples[0].wordMeanings", context))), wordMeanings);
+});
+
+test("a revealed single-meaning headword shows its card meaning on one line", async () => {
+  const { context, flashcard, prompt, popup } = makeSession();
+  vm.runInContext("romajiLookup = null", context);
+  context.fetch = () => { throw new Error("A single-meaning headword should not fetch the global dictionary"); };
+  const token = prompt.children[0].children[0];
+  flashcard.emit("pointerover", pointer(token, "mouse", 120, 190));
+  await settlePopup();
+  assert.deepEqual(popup.children.map((line) => line.textContent), ["did"]);
+  assert.equal(vm.runInContext("romajiLookup", context), null);
+});
+
 test("a revealed card fetches and opens the real lookup for a common particle sense", async () => {
   const { context, flashcard, prompt, popup } = makeSession({ realLookup: true, fetchLookup: true });
-  vm.runInContext("practiceDeck = [{ ...card, japanese: 'to' }]; renderPracticeCard()", context);
+  vm.runInContext("practiceDeck = [{ ...card, japanese: 'to', meanings: ['and', 'if'] }]; renderPracticeCard()", context);
   const token = prompt.children[0].children[0];
   flashcard.emit("pointerover", pointer(token, "mouse", 120, 190));
   const loaded = await vm.runInContext("romajiLookupPromise", context);
@@ -189,6 +261,10 @@ test("a revealed card fetches and opens the real lookup for a common particle se
 
 test("mobile tap anchors the popup above the word without advancing the card", async () => {
   const { context, document, flashcard, answer, popup } = makeSession();
+  context.card.examples[0].wordMeanings = [
+    { romaji: "benkyou", meaning: "study" }, { romaji: "shita", meaning: "did" },
+  ];
+  vm.runInContext("renderPracticeCard()", context);
   const token = answer.children[0].children[1].children[0].children[1];
   token.rect = { left: 110, right: 160, top: 180, bottom: 205, width: 50, height: 25 };
   const down = pointer(token, "touch", 130, 193);
@@ -199,7 +275,7 @@ test("mobile tap anchors the popup above the word without advancing the card", a
   flashcard.emit("click", click);
   await settlePopup();
   assert.equal(popup.hidden, false);
-  assert.equal(popup.textContent, "shita:benkyou");
+  assert.deepEqual(popup.children.map((line) => line.textContent), ["did"]);
   assert.equal(popup.style.left, "135px");
   assert.equal(click.defaultPrevented, true);
   assert.equal(click.propagationStopped, true);
@@ -240,6 +316,7 @@ test("a word on an unrevealed card reveals the answer before lookup is available
 
 test("a lookup that finishes after the pointer leaves does not reopen the popup", async () => {
   const { context, document, flashcard, prompt, popup } = makeSession();
+  vm.runInContext("practiceDeck = [{ ...card, meanings: ['did', 'below'] }]; renderPracticeCard()", context);
   const token = prompt.children[0].children[0];
   token.rect = { left: 100, right: 150, top: 180, bottom: 205, width: 50, height: 25 };
   let release;
