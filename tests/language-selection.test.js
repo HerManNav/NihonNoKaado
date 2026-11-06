@@ -7,6 +7,7 @@ const vm = require("node:vm");
 const ROOT = path.resolve(__dirname, "..");
 const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
 const languageSource = fs.readFileSync(path.join(ROOT, "language.js"), "utf8");
+const styles = fs.readFileSync(path.join(ROOT, "styles.css"), "utf8");
 
 class FakeElement {
   constructor(dataset = {}) {
@@ -42,6 +43,7 @@ class FakeTextNode {
 
 function makeLanguageRuntime() {
   const gate = new FakeElement();
+  gate.classList.add("is-initial-entry");
   const app = new FakeElement();
   app.hidden = true;
   const options = new FakeElement();
@@ -114,7 +116,7 @@ function makeLanguageRuntime() {
   vm.runInContext(languageSource, context, { filename: "language.js" });
   return {
     gate, app, options, loading, loadingLabel, loadingFootnote, loadingPercent, loadingTrack,
-    loadingFill, backButton, buttons, nodes, frames, timers, percentages, document,
+    loadingFill, backButton, buttons, nodes, frames, timers, percentages, document, window,
     runFrames(times) {
       for (const time of times) {
         const frame = frames.shift();
@@ -138,6 +140,52 @@ test("language options show flags and the language button lives only on the home
   assert.match(html, /data-language="en"[\s\S]*?class="language-flag"[\s\S]*?<svg/);
   assert.match(html, /data-language="es"[\s\S]*?class="language-flag"[\s\S]*?<svg/);
   assert.doesNotMatch(html, /A little Japanese, every day\.|Small steps\. Stronger memory\./);
+});
+
+test("the initial language selector fades in without repeating its cold-start animation", () => {
+  assert.match(html, /class="language-gate is-initial-entry"/);
+  assert.match(styles, /\.language-gate\.is-initial-entry\s*\{\s*animation:\s*gate-fade-in\s+420ms/);
+  const runtime = makeLanguageRuntime();
+  runtime.buttons[0].click();
+  assert.equal(runtime.gate.classList.contains("is-initial-entry"), false);
+  runtime.runFrames([0, 165, 337.5, 540, 750, 892.5, 1125, 1297.5, 1500]);
+  runtime.runTimers();
+  runtime.backButton.click();
+  assert.equal(runtime.gate.classList.contains("is-initial-entry"), false);
+  assert.equal(runtime.gate.classList.contains("is-returning"), true);
+});
+
+test("system back from the language selector opened by the home page returns to the app", () => {
+  const runtime = makeLanguageRuntime();
+  const navigation = runtime.window.JapaneseCardsLanguageNavigation;
+  assert.equal(navigation.isSelectorVisible(), true);
+  assert.equal(navigation.backFromSelector(), false, "initial selector is the root");
+  runtime.buttons[0].click();
+  runtime.runFrames([0, 165, 337.5, 540, 750, 892.5, 1125, 1297.5, 1500]);
+  runtime.runTimers();
+  runtime.backButton.click();
+  assert.equal(navigation.backFromSelector(), true, "back is consumed during the transition");
+  runtime.runTimers();
+  assert.equal(navigation.isSelectorVisible(), true);
+  assert.equal(navigation.backFromSelector(), true);
+  assert.equal(runtime.gate.hidden, true);
+  assert.equal(runtime.app.hidden, false);
+  assert.equal(runtime.document.documentElement.lang, "en");
+});
+
+test("system back from home returns to the original selector, then reaches the root", () => {
+  const runtime = makeLanguageRuntime();
+  const navigation = runtime.window.JapaneseCardsLanguageNavigation;
+  runtime.buttons[0].click();
+  runtime.runFrames([0, 165, 337.5, 540, 750, 892.5, 1125, 1297.5, 1500]);
+  runtime.runTimers();
+  assert.equal(navigation.backFromHome(), true);
+  assert.equal(runtime.gate.hidden, false);
+  assert.equal(runtime.options.hidden, false, "language choices appear immediately");
+  assert.equal(runtime.loading.hidden, true, "the loading screen stays hidden during the return transition");
+  runtime.runTimers();
+  assert.equal(navigation.isSelectorVisible(), true);
+  assert.equal(navigation.backFromSelector(), false);
 });
 
 test("the staged selector takes 1.5 seconds, then fades into the selected language", () => {
@@ -176,6 +224,8 @@ test("English remains unchanged and the home-page button returns to language cho
   assert.equal(runtime.app.hidden, false);
 
   runtime.backButton.click();
+  assert.equal(runtime.options.hidden, false, "language choices appear immediately");
+  assert.equal(runtime.loading.hidden, true, "the loading screen stays hidden during the return transition");
   runtime.runTimers();
   assert.equal(runtime.gate.hidden, false);
   assert.equal(runtime.app.hidden, true);

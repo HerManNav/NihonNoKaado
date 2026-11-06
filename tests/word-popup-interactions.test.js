@@ -156,6 +156,37 @@ function makeSession({ realLookup = false, fetchLookup = false, savedCards = nul
 
 async function settlePopup() { await Promise.resolve(); await Promise.resolve(); }
 
+test("system back follows the active screen and cancels confirmations and forms", () => {
+  const { context, window } = makeSession();
+  const back = () => window.JapaneseCardsHandleBack();
+  vm.runInContext('showScreen("defaults")', context);
+  assert.equal(back(), true);
+  assert.equal(vm.runInContext('screens.home.hidden', context), false);
+  vm.runInContext('showScreen("defaultConfirm"); defaultDictionaryLoadInProgress = true', context);
+  assert.equal(back(), true);
+  assert.equal(vm.runInContext('screens.defaultConfirm.hidden', context), false);
+  vm.runInContext('defaultDictionaryLoadInProgress = false', context);
+  assert.equal(back(), true);
+  assert.equal(vm.runInContext('screens.defaults.hidden', context), false);
+  vm.runInContext('formReturnScreen = "dictionary"; showScreen("add")', context);
+  assert.equal(back(), true);
+  assert.equal(vm.runInContext('screens.dictionary.hidden', context), false);
+  assert.equal(back(), true);
+  assert.equal(vm.runInContext('screens.home.hidden', context), false);
+  assert.equal(back(), false);
+});
+
+test("system back dismisses an open word popup before leaving practice", () => {
+  const { context, window, popup } = makeSession();
+  vm.runInContext('showScreen("practice")', context);
+  popup.hidden = false;
+  assert.equal(window.JapaneseCardsHandleBack(), true);
+  assert.equal(popup.hidden, true);
+  assert.equal(vm.runInContext('screens.practice.hidden', context), false);
+  assert.equal(window.JapaneseCardsHandleBack(), true);
+  assert.equal(vm.runInContext('screens.home.hidden', context), false);
+});
+
 test("a revealed card preserves romaji spacing and makes each word a separate target", () => {
   const { answer, prompt } = makeSession();
   const example = answer.children[0].children.find((child) => child.classList.contains("practice-example"));

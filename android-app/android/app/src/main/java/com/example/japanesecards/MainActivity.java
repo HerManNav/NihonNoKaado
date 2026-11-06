@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.core.view.WindowCompat;
 import com.getcapacitor.BridgeActivity;
@@ -23,6 +24,32 @@ public class MainActivity extends BridgeActivity {
             getBridge().getWebView().setBackgroundColor(APP_BACKGROUND);
         }
         applyStatusBarAppearance();
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            private boolean pending;
+
+            @Override
+            public void handleOnBackPressed() {
+                if (pending) return;
+                if (getBridge() == null || getBridge().getWebView() == null) {
+                    fallbackToSystem();
+                    return;
+                }
+                pending = true;
+                getBridge().getWebView().evaluateJavascript(
+                    "Boolean(window.JapaneseCardsHandleBack && window.JapaneseCardsHandleBack())",
+                    handled -> {
+                        pending = false;
+                        if (!"true".equals(handled)) fallbackToSystem();
+                    }
+                );
+            }
+
+            private void fallbackToSystem() {
+                setEnabled(false);
+                getOnBackPressedDispatcher().onBackPressed();
+                setEnabled(true);
+            }
+        });
     }
 
     @Override

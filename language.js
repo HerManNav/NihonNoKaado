@@ -13,6 +13,8 @@
   const nativePrompt = window.prompt.bind(window);
   let translationObserver = null;
   let transitionInProgress = false;
+  let gateCanReturnToApp = false;
+  let hasEnteredApp = false;
 
   const translations = new Map(Object.entries({
     "Show me": "Quiero ver primero",
@@ -246,6 +248,7 @@
 
   function startSelection(language) {
     if (transitionInProgress) return;
+    gate.classList.remove("is-initial-entry");
     const currentLanguage = sessionStorage.getItem("japanese-cards.current-language");
     if (currentLanguage && currentLanguage !== language) {
       sessionStorage.setItem("japanese-cards.pending-language", language);
@@ -285,6 +288,8 @@
           app.hidden = false;
           app.classList.add("is-entering-app");
           window.setTimeout(() => app.classList.remove("is-entering-app"), 500);
+          hasEnteredApp = true;
+          gateCanReturnToApp = false;
           transitionInProgress = false;
         }, 280);
       }, 80);
@@ -293,10 +298,17 @@
   }
 
   document.querySelectorAll("[data-language]").forEach((button) => button.addEventListener("click", () => startSelection(button.dataset.language)));
-  document.querySelector("#language-back-button").addEventListener("click", () => {
+  function showLanguageSelector(canReturnToApp) {
     if (transitionInProgress) return;
+    gateCanReturnToApp = canReturnToApp;
     transitionInProgress = true;
+    languageOptions.hidden = false;
+    loading.hidden = true;
+    loadingFill.style.width = "0%";
+    loadingPercent.textContent = "0%";
+    loadingTrack.setAttribute("aria-valuenow", "0");
     gate.hidden = false;
+    gate.classList.remove("is-initial-entry");
     gate.classList.remove("is-leaving");
     gate.classList.add("is-returning");
     app.classList.add("is-leaving-app");
@@ -304,14 +316,32 @@
       app.hidden = true;
       app.classList.remove("is-leaving-app");
       gate.classList.remove("is-returning");
-      languageOptions.hidden = false;
-      loading.hidden = true;
-      loadingFill.style.width = "0%";
-      loadingPercent.textContent = "0%";
-      loadingTrack.setAttribute("aria-valuenow", "0");
       transitionInProgress = false;
     }, 240);
-  });
+  }
+
+  function returnToAppFromLanguageSelector() {
+    if (transitionInProgress) return true;
+    if (!gateCanReturnToApp) return false;
+    gateCanReturnToApp = false;
+    gate.hidden = true;
+    gate.classList.remove("is-leaving", "is-returning");
+    app.hidden = false;
+    app.classList.remove("is-leaving-app");
+    return true;
+  }
+
+  window.JapaneseCardsLanguageNavigation = {
+    isSelectorVisible: () => !gate.hidden,
+    backFromSelector: returnToAppFromLanguageSelector,
+    backFromHome() {
+      if (transitionInProgress) return true;
+      if (!hasEnteredApp) return false;
+      showLanguageSelector(false);
+      return true;
+    },
+  };
+  document.querySelector("#language-back-button").addEventListener("click", () => showLanguageSelector(true));
 
   const pendingLanguage = sessionStorage.getItem("japanese-cards.pending-language");
   if (pendingLanguage === "en" || pendingLanguage === "es") {

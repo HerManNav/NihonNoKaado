@@ -39,6 +39,7 @@ button { cursor: pointer; }
 .loading-footnote { margin: 10px 0 0; color: #92948b; font-size: 11px; }
 .app-shell.is-entering-app { animation: app-fade-in 420ms ease-out both; }
 .app-shell.is-leaving-app { animation: app-fade-out 220ms ease-in both; pointer-events: none; }
+.language-gate.is-initial-entry { animation: gate-fade-in 420ms ease-out; }
 .language-gate.is-returning { animation: gate-fade-in 240ms ease-out both; }
 @keyframes loading-appear { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes app-fade-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }

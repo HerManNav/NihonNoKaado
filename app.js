@@ -309,6 +309,36 @@ function showScreen(name) {
   if (name === "home") updateDictionaryCount();
 }
 
+// Called by Android's system Back gesture. Return false only at the root so
+// Android can apply its normal behavior; all in-app screens use their existing
+// cancellation paths, including their loading and form guards.
+window.JapaneseCardsHandleBack = function handleSystemBack() {
+  const language = window.JapaneseCardsLanguageNavigation;
+  if (language?.isSelectorVisible()) return language.backFromSelector();
+  if (!wordTranslationPopup.hidden) {
+    wordPopupBlocksCardAdvance = false;
+    hideWordTranslationPopup();
+    return true;
+  }
+  if (dictionaryTools.classList.contains("is-open")) {
+    closeDictionaryMenu();
+    return true;
+  }
+  if (!screens.defaultConfirm.hidden) {
+    if (!defaultDictionaryLoadInProgress) cancelDefaultDictionaryLoad();
+    return true;
+  }
+  if (!screens.add.hidden) {
+    cancelCardForm();
+    return true;
+  }
+  if (!screens.practice.hidden || !screens.dictionary.hidden || !screens.defaults.hidden || !screens.clear.hidden) {
+    showScreen("home");
+    return true;
+  }
+  return language?.backFromHome() || false;
+};
+
 function updateDictionaryCount() {
   const count = cards.length;
   dictionaryCount.classList.remove("is-empty-prompt");
