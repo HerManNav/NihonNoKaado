@@ -108,7 +108,7 @@ function pointer(target, pointerType, x, y) {
   };
 }
 
-function makeSession({ realLookup = false, fetchLookup = false, savedCards = null } = {}) {
+function makeSession({ realLookup = false, fetchLookup = false, savedCards = null, contextDictionary = null } = {}) {
   const document = new Document();
   const flashcard = document.querySelector("#flashcard");
   const prompt = document.querySelector("#prompt-word");
@@ -123,13 +123,21 @@ function makeSession({ realLookup = false, fetchLookup = false, savedCards = nul
     setTimeout: () => 1,
     clearTimeout() {},
   };
+  const persistedValues = new Map();
+  if (savedCards) persistedValues.set("japanese-cards.dictionary.v1", JSON.stringify(savedCards));
   const context = vm.createContext({
     document, window, Element, Set, Node: { TEXT_NODE: 3 }, HTMLInputElement: Element,
-    localStorage: { getItem: () => savedCards ? JSON.stringify(savedCards) : null, setItem() {} }, console,
+    localStorage: {
+      getItem: (key) => persistedValues.get(key) ?? null,
+      setItem: (key, value) => persistedValues.set(key, value),
+    }, console,
     Blob, Response, DecompressionStream,
     fetch: fetchLookup ? async (url) => {
-      assert.match(url, /romaji-english-jmdict-2026-11-02\.json\.gz\?v=5$/);
+      assert.match(url, /romaji-english-jmdict-2026-11-02\.json\.gz\?v=6$/);
       return new Response(fs.readFileSync(path.join(ROOT, "dictionaries/romaji-english-jmdict-2026-11-02.json.gz")));
+    } : contextDictionary ? async (url) => {
+      assert.equal(url, "dictionaries/most-common-2000.json");
+      return { ok: true, json: async () => contextDictionary };
     } : undefined,
   });
   vm.runInContext(appSource, context, { filename: "app.js" });
@@ -143,7 +151,7 @@ function makeSession({ realLookup = false, fetchLookup = false, savedCards = nul
   };
   context.card = card;
   vm.runInContext("practiceDeck = [card]; renderPracticeCard()", context);
-  return { context, document, window, flashcard, prompt, answer, popup: document.querySelector("#word-translation-popup") };
+  return { context, document, window, flashcard, prompt, answer, popup: document.querySelector("#word-translation-popup"), persistedValues };
 }
 
 async function settlePopup() { await Promise.resolve(); await Promise.resolve(); }
@@ -236,6 +244,25 @@ test("context meanings survive a saved dictionary reload", () => {
   assert.deepEqual(JSON.parse(JSON.stringify(vm.runInContext("cards[0].examples[0].wordMeanings", context))), wordMeanings);
 });
 
+test("legacy saved examples restore contextual meanings from the default dictionary", async () => {
+  const wordMeanings = [
+    { romaji: "benkyou", meaning: "study", entryId: "00527_benkyousuru" },
+    { romaji: "shita", meaning: "did" },
+  ];
+  const example = { romaji: "benkyou shita.", hiragana: "べんきょうした。", english: "I studied." };
+  const savedCards = [{ japanese: "shita", hiragana: "した", english: "did", examples: [example] }];
+  const contextDictionary = {
+    cards: [{ japanese: "shita", hiragana: "した", english: "did", examples: [{ ...example, wordMeanings }] }],
+  };
+  const { context, persistedValues } = makeSession({ savedCards, contextDictionary });
+  await vm.runInContext("restoreContextMeaningsForSavedCards()", context);
+
+  const restored = JSON.parse(JSON.stringify(vm.runInContext("cards[0].examples[0].wordMeanings", context)));
+  const savedAgain = JSON.parse(persistedValues.get("japanese-cards.dictionary.v1"));
+  assert.deepEqual(restored, wordMeanings);
+  assert.deepEqual(savedAgain[0].examples[0].wordMeanings, wordMeanings);
+});
+
 test("a revealed single-meaning headword shows its card meaning on one line", async () => {
   const { context, flashcard, prompt, popup } = makeSession();
   vm.runInContext("romajiLookup = null", context);
@@ -257,6 +284,7 @@ test("a revealed card fetches and opens the real lookup for a common particle se
   await settlePopup();
   assert.equal(popup.hidden, false);
   assert(popup.children.some((line) => line.textContent === "and"));
+  assert.equal(popup.children.length, 1, "only the best-ranked meaning should be shown");
 });
 
 test("mobile tap anchors the popup above the word without advancing the card", async () => {
@@ -283,6 +311,51 @@ test("mobile tap anchors the popup above the word without advancing the card", a
   assert.equal(vm.runInContext("answerRevealed", context), true);
   const css = fs.readFileSync(path.join(ROOT, "styles.css"), "utf8");
   assert.match(css, /\.flashcard, \.flashcard \* \{[^}]*-webkit-user-select: none; user-select: none/);
+  assert.match(css, /\.flashcard\s*\{[^}]*-webkit-tap-highlight-color:\s*transparent/);
+});
+
+test("mobile word taps use the fallback token, dismiss before advancing, and keep another word locked", async () => {
+  const { context, document, flashcard, answer, popup } = makeSession();
+  context.card.examples[0].wordMeanings = [
+    { romaji: "benkyou", meaning: "study" }, { romaji: "shita", meaning: "did" },
+  ];
+  vm.runInContext("renderPracticeCard()", context);
+  const [firstToken, secondToken] = answer.children[0].children[1].children[0].children;
+
+  function mobileTap(startTarget) {
+    const down = pointer(startTarget, "touch", 130, 193);
+    flashcard.emit("pointerdown", down);
+    document.emit("pointerdown", down);
+    flashcard.emit("pointerup", pointer(flashcard, "touch", 130, 193));
+    // Some mobile WebViews retarget the synthesized click to the card itself.
+    const click = pointer(flashcard, "touch", 130, 193);
+    flashcard.emit("click", click);
+    return click;
+  }
+
+  mobileTap(firstToken);
+  await settlePopup();
+  assert.equal(popup.textContent, "study");
+  assert.equal(vm.runInContext("wordPopupBlocksCardAdvance", context), true);
+  assert.equal(vm.runInContext("practiceIndex", context), 0);
+
+  mobileTap(secondToken);
+  await settlePopup();
+  assert.equal(popup.textContent, "did");
+  assert.equal(vm.runInContext("wordPopupBlocksCardAdvance", context), true);
+  assert.equal(vm.runInContext("practiceIndex", context), 0);
+
+  const dismissClick = mobileTap(flashcard);
+  assert.equal(dismissClick.defaultPrevented, true);
+  assert.equal(popup.hidden, true);
+  assert.equal(vm.runInContext("wordPopupBlocksCardAdvance", context), false);
+  assert.equal(vm.runInContext("advancingPractice", context), false);
+  assert.equal(vm.runInContext("practiceIndex", context), 0);
+
+  const advanceClick = mobileTap(flashcard);
+  assert.equal(advanceClick.defaultPrevented, false);
+  assert.equal(vm.runInContext("advancingPractice", context), true);
+  assert.equal(vm.runInContext("practiceIndex", context), 0, "the transition callback has not run yet");
 });
 
 test("an outside tap and a new card each dismiss the popup", async () => {

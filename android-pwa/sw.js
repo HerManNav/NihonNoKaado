@@ -1,4 +1,4 @@
-const CACHE_NAME = "japanese-cards-pwa-v32";
+const CACHE_NAME = "japanese-cards-pwa-v37";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -10,6 +10,7 @@ const APP_FILES = [
   "../app.js",
   "../dictionary-core.js",
   "../word-form-lookup.js",
+  "../language.js",
   "../dictionaries/manifest.json",
   "../dictionaries/most-common-50.json",
   "../dictionaries/most-common-100.json",

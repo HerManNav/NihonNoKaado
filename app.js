@@ -1,4 +1,5 @@
 const STORAGE_KEY = "japanese-cards.dictionary.v1";
+const CONTEXT_ANNOTATION_MIGRATION_KEY = "japanese-cards.context-annotation-migration.v1";
 const { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 const { findWordMeanings } = window.JapaneseWordFormLookup;
 
@@ -84,6 +85,7 @@ let romajiLookupPromise = null;
 let activeRomajiToken = null;
 let activePopupMode = null;
 let activePopupPointer = null;
+let wordPopupBlocksCardAdvance = false;
 let lastTappedRomajiToken = null;
 let lastTappedRomajiTokenTimeout = null;
 let lastPointerType = "mouse";
@@ -101,12 +103,23 @@ async function getRomajiLookup() {
   if (!romajiLookupPromise) {
     romajiLookupPromise = (async () => {
       try {
-        const response = await fetch("dictionaries/romaji-english-jmdict-2026-11-02.json.gz?v=5", { cache: "no-cache" });
-        if (!response.ok) throw new Error(`Dictionary request failed (${response.status}).`);
-        if (typeof DecompressionStream !== "function") throw new Error("This browser cannot open the compressed lookup dictionary.");
-        const compressed = await response.arrayBuffer();
-        const jsonStream = new Blob([compressed]).stream().pipeThrough(new DecompressionStream("gzip"));
-        const payload = await new Response(jsonStream).json();
+        const dictionaryPath = "dictionaries/romaji-english-jmdict-2026-11-02";
+        const response = await fetch(`${dictionaryPath}.json.gz?v=6`, { cache: "no-cache" });
+        let payload = null;
+        if (response.ok && typeof DecompressionStream === "function") {
+          try {
+            const compressed = await response.arrayBuffer();
+            const jsonStream = new Blob([compressed]).stream().pipeThrough(new DecompressionStream("gzip"));
+            payload = await new Response(jsonStream).json();
+          } catch (error) {
+            console.info("Using the uncompressed romaji lookup fallback.", error);
+          }
+        }
+        if (!payload) {
+          const fallbackResponse = await fetch(`${dictionaryPath}.json?v=6`, { cache: "no-cache" });
+          if (!fallbackResponse.ok) throw new Error(`Dictionary request failed (${response.status}; fallback ${fallbackResponse.status}).`);
+          payload = await fallbackResponse.json();
+        }
         if (payload.format !== 5) throw new Error("The lookup dictionary needs a refresh.");
         romajiLookup = payload;
         return romajiLookup;
@@ -143,9 +156,10 @@ async function showWordTranslation(token, mode, x, y) {
   } else {
     const lookup = await getRomajiLookup();
     if (activeRomajiToken !== token) return;
-    meanings = findWordMeanings(key, lookup, previousKey);
+    meanings = findWordMeanings(key, lookup, previousKey).slice(0, 1);
   }
   if (!meanings?.length) {
+    wordPopupBlocksCardAdvance = false;
     hideWordTranslationPopup();
     return;
   }
@@ -222,8 +236,75 @@ function saveCards(nextCards) {
   }
 }
 
+function contextualExampleKey(example) {
+  const normalize = (value) => String(value || "").trim().toLowerCase();
+  return JSON.stringify([normalize(example?.romaji), normalize(example?.hiragana), normalize(example?.english)]);
+}
+
+function savedDictionaryContentSignature(savedCards) {
+  const normalize = (value) => String(value || "").trim();
+  const content = JSON.stringify(savedCards.map((card) => [
+    normalize(card.japanese),
+    normalize(card.hiragana),
+    card.meanings.map(normalize),
+    card.examples.map((example) => [normalize(example.romaji), normalize(example.hiragana), normalize(example.english)]),
+  ]));
+  let hash = 2166136261;
+  for (let index = 0; index < content.length; index += 1) {
+    hash ^= content.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `${savedCards.length}:${(hash >>> 0).toString(36)}`;
+}
+
+async function restoreContextMeaningsForSavedCards() {
+  if (!cards.length || !cards.some((card) => card.examples.some((example) => !example.wordMeanings?.length))) return;
+  const signature = savedDictionaryContentSignature(cards);
+  if (localStorage.getItem(CONTEXT_ANNOTATION_MIGRATION_KEY) === signature) return;
+
+  try {
+    const response = await fetch("dictionaries/most-common-2000.json", { cache: "no-cache" });
+    if (!response.ok) throw new Error(`Context dictionary request failed (${response.status}).`);
+    const source = await response.json();
+    const defaultCards = prepareDefaultDictionary(source, source.cards?.length || 0, (index) => `context-${index}`);
+    const annotationsByExample = new Map();
+    defaultCards.forEach((card) => card.examples.forEach((example) => {
+      const key = contextualExampleKey(example);
+      if (example.wordMeanings?.length && !annotationsByExample.has(key)) {
+        annotationsByExample.set(key, example.wordMeanings);
+      }
+    }));
+
+    let changed = false;
+    const updatedCards = cards.map((card) => {
+      let cardChanged = false;
+      const examples = card.examples.map((example) => {
+        if (example.wordMeanings?.length) return example;
+        const annotations = annotationsByExample.get(contextualExampleKey(example));
+        if (!annotations?.length) return example;
+        cardChanged = true;
+        return { ...example, wordMeanings: annotations.map((annotation) => ({ ...annotation })) };
+      });
+      if (!cardChanged) return card;
+      changed = true;
+      return { ...card, examples };
+    });
+
+    if (changed) {
+      if (!saveCards(updatedCards)) return;
+      cards = updatedCards;
+    }
+    localStorage.setItem(CONTEXT_ANNOTATION_MIGRATION_KEY, signature);
+  } catch (error) {
+    console.warn("Could not restore contextual word meanings for the saved dictionary.", error);
+  }
+}
+
 function showScreen(name) {
-  if (name !== "practice") hideWordTranslationPopup();
+  if (name !== "practice") {
+    wordPopupBlocksCardAdvance = false;
+    hideWordTranslationPopup();
+  }
   Object.entries(screens).forEach(([key, screen]) => { screen.hidden = key !== name; });
   if (name === "home") updateDictionaryCount();
 }
@@ -504,6 +585,7 @@ function startPractice() {
 }
 
 function renderPracticeCard(entranceAnimation = "") {
+  wordPopupBlocksCardAdvance = false;
   hideWordTranslationPopup();
   const fromEnglish = originLanguage.value === "english";
   const displayIndex = reviewIndex ?? practiceIndex;
@@ -841,12 +923,22 @@ function endFlashcardDrag(event) {
   if (!flashcardDrag || event.pointerId !== flashcardDrag.pointerId) return;
   const { dragging, deltaX, startTarget, pointerType } = flashcardDrag;
   flashcardDrag = null;
+  const startedOnRomajiToken = startTarget instanceof Element && startTarget.closest(".romaji-token");
   if (!dragging) {
     if (pointerType !== "mouse" && (answerRevealed || reviewIndex !== null)) {
-      lastTappedRomajiToken = startTarget instanceof Element ? startTarget.closest(".romaji-token") : null;
+      lastTappedRomajiToken = startedOnRomajiToken || null;
       window.clearTimeout(lastTappedRomajiTokenTimeout);
       lastTappedRomajiTokenTimeout = window.setTimeout(() => { lastTappedRomajiToken = null; }, 500);
     }
+    return;
+  }
+
+  if (wordPopupBlocksCardAdvance && !startedOnRomajiToken) {
+    wordPopupBlocksCardAdvance = false;
+    suppressFlashcardClick = true;
+    window.clearTimeout(suppressFlashcardClickTimeout);
+    suppressFlashcardClickTimeout = window.setTimeout(() => { suppressFlashcardClick = false; }, 0);
+    resetFlashcardDrag();
     return;
   }
 
@@ -866,6 +958,9 @@ function endFlashcardDrag(event) {
 
 function cancelFlashcardDrag(event) {
   if (!flashcardDrag || event.pointerId !== flashcardDrag.pointerId) return;
+  const startedOutsideRomajiToken = !(flashcardDrag.startTarget instanceof Element
+    && flashcardDrag.startTarget.closest(".romaji-token"));
+  if (startedOutsideRomajiToken && wordTranslationPopup.hidden) wordPopupBlocksCardAdvance = false;
   resetFlashcardDrag();
 }
 
@@ -876,14 +971,22 @@ function handleFlashcardClick(event) {
     event.preventDefault();
     return;
   }
-  const token = (event.target instanceof Element ? event.target.closest(".romaji-token") : null)
-    || lastTappedRomajiToken;
+  const clickedToken = event.target instanceof Element ? event.target.closest(".romaji-token") : null;
+  const token = clickedToken || lastTappedRomajiToken;
   lastTappedRomajiToken = null;
   window.clearTimeout(lastTappedRomajiTokenTimeout);
+  if (wordPopupBlocksCardAdvance && !token) {
+    wordPopupBlocksCardAdvance = false;
+    hideWordTranslationPopup();
+    event.preventDefault();
+    event.stopPropagation();
+    return;
+  }
   if (token && (answerRevealed || reviewIndex !== null)) {
     event.preventDefault();
     event.stopPropagation();
     const mode = lastPointerType === "mouse" ? "hover" : "anchor";
+    wordPopupBlocksCardAdvance = mode === "anchor";
     showWordTranslation(token, mode, event.clientX, event.clientY);
     return;
   }
@@ -918,12 +1021,19 @@ document.addEventListener("pointermove", (event) => {
 document.addEventListener("pointerdown", (event) => {
   lastPointerType = event.pointerType;
   const token = event.target instanceof Element ? event.target.closest(".romaji-token") : null;
-  if (event.pointerType !== "mouse" && !token) hideWordTranslationPopup();
+  const popup = event.target instanceof Element ? event.target.closest(".word-translation-popup") : null;
+  if (event.pointerType !== "mouse" && !token && !popup) {
+    if (!flashcard.contains(event.target)) wordPopupBlocksCardAdvance = false;
+    hideWordTranslationPopup();
+  }
 });
 
 document.addEventListener("click", (event) => {
   const token = event.target instanceof Element ? event.target.closest(".romaji-token") : null;
-  if (!token) hideWordTranslationPopup();
+  if (!token) {
+    wordPopupBlocksCardAdvance = false;
+    hideWordTranslationPopup();
+  }
 });
 
 startButton.addEventListener("click", startPractice);
@@ -1360,3 +1470,4 @@ document.querySelector("#add-back-button").addEventListener("click", cancelCardF
 cancelEditButton.addEventListener("click", cancelCardForm);
 
 updateDictionaryCount();
+void restoreContextMeaningsForSavedCards();

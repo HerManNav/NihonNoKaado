@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#f7f6f2" />
     <title>Japanese Cards</title>
     <link rel="stylesheet" href="styles.css" />
@@ -11,8 +11,54 @@
     <script src="app.js" defer></script>
   </head>
   <body>
-    <main class="app-shell">
+    <section id="language-gate" class="language-gate" aria-label="Choose a language">
+      <div class="language-panel">
+        <div class="language-mark" aria-hidden="true">文</div>
+        <p class="eyebrow">JAPANESE CARDS</p>
+        <p class="language-intro">Choose your language to get started.</p>
+        <div class="language-options" role="group" aria-label="Choose your language">
+          <button class="language-option" type="button" data-language="en">
+            <span class="language-flag" aria-hidden="true">
+              <svg viewBox="0 0 60 40" focusable="false">
+                <rect width="60" height="40" fill="#23406f" />
+                <path d="M0 0 60 40M60 0 0 40" stroke="#fff" stroke-width="10" />
+                <path d="M0 0 60 40M60 0 0 40" stroke="#c73543" stroke-width="4" />
+                <path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="14" />
+                <path d="M30 0v40M0 20h60" stroke="#c73543" stroke-width="7" />
+              </svg>
+            </span>
+            <span class="language-option-copy"><strong>English</strong><small>Continue in English</small></span>
+            <span class="language-arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="language-option" type="button" data-language="es">
+            <span class="language-flag" aria-hidden="true">
+              <svg viewBox="0 0 60 40" focusable="false">
+                <rect width="60" height="40" fill="#aa2635" />
+                <rect y="10" width="60" height="20" fill="#f4c944" />
+              </svg>
+            </span>
+            <span class="language-option-copy"><strong>Español</strong><small>Continuar en español</small></span>
+            <span class="language-arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+        <div class="language-loading" aria-live="polite" hidden>
+          <div class="loading-copy"><span data-loading-label>Getting things ready</span><span data-loading-percent>0%</span></div>
+          <div class="loading-track" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="loading-fill"></span></div>
+          <p class="loading-footnote" data-loading-footnote>Preparing your study space</p>
+        </div>
+      </div>
+      <div class="language-decoration language-decoration-one" aria-hidden="true">あ</div>
+      <div class="language-decoration language-decoration-two" aria-hidden="true">学</div>
+    </section>
+    <main class="app-shell" hidden>
       <section id="home-screen" class="screen home-screen" aria-labelledby="app-title">
+        <button id="language-back-button" class="language-back-button" type="button" aria-label="Choose language" title="Choose language">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3.5 12h17M12 3c2.2 2.4 3.2 5.4 3.2 9s-1 6.6-3.2 9c-2.2-2.4-3.2-5.4-3.2-9s1-6.6 3.2-9Z" />
+          </svg>
+          <span>Language</span>
+        </button>
         <div class="home-content">
           <h1 id="app-title">Japanese Cards</h1>
 
@@ -161,5 +207,6 @@
       </section>
     </main>
     <div id="word-translation-popup" class="word-translation-popup" role="status" aria-live="polite" hidden></div>
+    <script src="language.js" defer></script>
   </body>
 </html>
