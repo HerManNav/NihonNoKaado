@@ -98,13 +98,13 @@
             },
             {
               "romaji": "futte",
-              "meaning": "-te form of furu (fall as rain)",
+              "meaning": "-te form of furu (fall as rain) — continuing action or state (futte + iru: -te form + iru)",
               "entryId": "00839_furu",
               "senseNumber": 1
             },
             {
               "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
+              "meaning": "-te form of furu (fall as rain) — continuing action or state (futte + iru: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -135,7 +135,7 @@
             },
             {
               "romaji": "benkyoushimasu",
-              "meaning": "present polite of benkyousuru (study)",
+              "meaning": "present polite of benkyousuru (study) (compound verb: benkyou + shimasu, polite of benkyousuru)",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
             }
@@ -185,13 +185,13 @@
             },
             {
               "romaji": "ii",
-              "meaning": "good",
+              "meaning": "good (i-adjective + polite desu)",
               "entryId": "00118_ii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "good (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -874,13 +874,13 @@
             },
             {
               "romaji": "kirei",
-              "meaning": "beautiful",
+              "meaning": "beautiful (na-adjective + plain copula, forming a predicate)",
               "entryId": "00717_kirei",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "beautiful (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -950,13 +950,13 @@
             },
             {
               "romaji": "mashi",
-              "meaning": "better",
+              "meaning": "better (na-adjective + plain copula, forming a predicate)",
               "entryId": "11145_mashi",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "better (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -988,7 +988,7 @@
             },
             {
               "romaji": "okiteimashita",
-              "meaning": "past progressive of okiru (stay awake)",
+              "meaning": "past progressive of okiru (stay awake) (okite + imashita: -te form + iru, polite past continuing action or state)",
               "entryId": "00521_okiru"
             }
           ]
@@ -1144,7 +1144,7 @@
             },
             {
               "romaji": "sundeimasu",
-              "meaning": "progressive of sumu (live)",
+              "meaning": "progressive of sumu (live) (sunde + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00673_sumu",
               "senseNumber": 1
             }
@@ -1220,13 +1220,13 @@
             },
             {
               "romaji": "omoshiroi",
-              "meaning": "interesting",
+              "meaning": "interesting (i-adjective + polite desu)",
               "entryId": "00589_omoshiroi",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "interesting (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -1473,12 +1473,12 @@
             },
             {
               "romaji": "hayai",
-              "meaning": "fast",
+              "meaning": "fast (i-adjective + polite desu)",
               "entryId": "00514_hayai"
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "fast (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -1554,7 +1554,7 @@
             },
             {
               "romaji": "sankashita",
-              "meaning": "past of sankasuru (participate)",
+              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru)",
               "entryId": "25408_sankasuru",
               "senseNumber": 1
             }
@@ -1636,13 +1636,13 @@
             },
             {
               "romaji": "shizuka",
-              "meaning": "quiet",
+              "meaning": "quiet (na-adjective + polite copula, forming a predicate)",
               "entryId": "00755_shizuka",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "quiet (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -2076,13 +2076,13 @@
             },
             {
               "romaji": "ookii",
-              "meaning": "big",
+              "meaning": "big (i-adjective + polite desu)",
               "entryId": "00335_ookii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "big (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -2126,13 +2126,13 @@
             },
             {
               "romaji": "anzen",
-              "meaning": "safe",
+              "meaning": "safe (na-adjective + plain copula, forming a predicate)",
               "entryId": "01131_anzen",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "safe (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -2252,7 +2252,7 @@
             },
             {
               "romaji": "hataraiteimasu",
-              "meaning": "progressive of hataraku (work)",
+              "meaning": "progressive of hataraku (work) (hataraite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00503_hataraku",
               "senseNumber": 1
             }
@@ -2372,7 +2372,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of seichou suru (growth) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -2536,13 +2536,13 @@
             },
             {
               "romaji": "shutsujou",
-              "meaning": "participation",
+              "meaning": "to participate (compound verb: shutsujou + shita, past of shutsujousuru)",
               "entryId": "03223_shutsujou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to participate (compound verb: shutsujou + shita, past of shutsujousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -2624,21 +2624,17 @@
             },
             {
               "romaji": "ga",
-              "meaning": "object marker",
+              "meaning": "subject marker",
               "entryId": "00051_ga",
-              "senseNumber": 2
+              "senseNumber": 1
             },
             {
               "romaji": "suki",
-              "meaning": "like",
-              "entryId": "02355_suki",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             },
             {
               "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             }
           ]
         }
@@ -2680,7 +2676,7 @@
             },
             {
               "romaji": "sankashita",
-              "meaning": "past of sankasuru (participate)",
+              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru)",
               "entryId": "25408_sankasuru",
               "senseNumber": 1
             }
@@ -2724,7 +2720,7 @@
             },
             {
               "romaji": "benkyousuru",
-              "meaning": "to study",
+              "meaning": "to study (compound verb: benkyou + suru, dictionary form of benkyousuru)",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
             }
@@ -2798,7 +2794,7 @@
             },
             {
               "romaji": "futteiru",
-              "meaning": "progressive of furu (fall as rain)",
+              "meaning": "progressive of furu (fall as rain) (futte + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00839_furu",
               "senseNumber": 1
             },
@@ -2842,13 +2838,13 @@
             },
             {
               "romaji": "happyou",
-              "meaning": "announcement",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
               "entryId": "03562_happyou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -2880,13 +2876,13 @@
             },
             {
               "romaji": "sanka",
-              "meaning": "participation",
+              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru)",
               "entryId": "02498_sanka",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -2918,13 +2914,13 @@
             },
             {
               "romaji": "hitsuyou",
-              "meaning": "necessary",
+              "meaning": "necessary (na-adjective + polite copula, forming a predicate)",
               "entryId": "00846_hitsuyou",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "necessary (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -2968,7 +2964,7 @@
             },
             {
               "romaji": "hirogatteiru",
-              "meaning": "progressive of hirogaru (spread)",
+              "meaning": "progressive of hirogaru (spread) (hirogatte + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01980_hirogaru",
               "senseNumber": 1
             }
@@ -2999,7 +2995,7 @@
             },
             {
               "romaji": "hanbaisareteiru",
-              "meaning": "sale",
+              "meaning": "being sold (passive continuing form of hanbai suru) (hanbaisarete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "03573_hanbai",
               "senseNumber": 1
             }
@@ -3037,13 +3033,13 @@
             },
             {
               "romaji": "heiki",
-              "meaning": "fine",
+              "meaning": "fine (na-adjective + plain copula, forming a predicate)",
               "entryId": "00095_heiki",
               "senseNumber": 2
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "fine (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -3426,7 +3422,7 @@
             },
             {
               "romaji": "aiteimasu",
-              "meaning": "progressive of aku (open)",
+              "meaning": "progressive of aku (open) (aite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00689_aku",
               "senseNumber": 1
             },
@@ -3519,12 +3515,12 @@
             },
             {
               "romaji": "happyou",
-              "meaning": "announcement",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
               "entryId": "03562_happyou"
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -3755,13 +3751,13 @@
             },
             {
               "romaji": "dame",
-              "meaning": "no good",
+              "meaning": "no good (na-adjective + plain past copula, forming a predicate)",
               "entryId": "00693_dame",
               "senseNumber": 1
             },
             {
               "romaji": "datta",
-              "meaning": "is",
+              "meaning": "no good (na-adjective + plain past copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -3837,13 +3833,13 @@
             },
             {
               "romaji": "kanou",
-              "meaning": "possible",
+              "meaning": "possible (na-adjective + polite copula, forming a predicate)",
               "entryId": "00175_kanou",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "possible (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -3881,7 +3877,7 @@
             },
             {
               "romaji": "notteita",
-              "meaning": "to appear in print",
+              "meaning": "to appear in print (notte + ita: -te form + iru, past continuing action or state)",
               "entryId": "27882_noru",
               "senseNumber": 1
             }
@@ -3962,7 +3958,7 @@
             },
             {
               "romaji": "sankasuru",
-              "meaning": "participation",
+              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru)",
               "entryId": "02498_sanka",
               "senseNumber": 1
             }
@@ -4000,13 +3996,13 @@
             },
             {
               "romaji": "shuppan",
-              "meaning": "publication",
+              "meaning": "publication (compound verb: shuppan + shita, past of shuppansuru)",
               "entryId": "03222_shuppan",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "publication (compound verb: shuppan + shita, past of shuppansuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -4331,13 +4327,13 @@
             },
             {
               "romaji": "ryuugaku",
-              "meaning": "studying abroad",
+              "meaning": "studying abroad (compound verb: ryuugaku + shita, past of ryuugakusuru)",
               "entryId": "03677_ryuugaku",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "studying abroad (compound verb: ryuugaku + shita, past of ryuugakusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -4375,7 +4371,7 @@
             },
             {
               "romaji": "sankashita",
-              "meaning": "participation",
+              "meaning": "to participate (compound verb: sanka + shita, past of sankasuru)",
               "entryId": "02498_sanka",
               "senseNumber": 1
             }
@@ -4475,13 +4471,13 @@
             },
             {
               "romaji": "ii",
-              "meaning": "okay",
+              "meaning": "okay (i-adjective + polite desu)",
               "entryId": "00118_ii",
               "senseNumber": 2
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "okay (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -4563,13 +4559,13 @@
             },
             {
               "romaji": "kaisai",
-              "meaning": "holding",
+              "meaning": "is held (passive of kaisai suru: kaisai + sareru)",
               "entryId": "10457_kaisai",
               "senseNumber": 1
             },
             {
               "romaji": "sareru",
-              "meaning": "passive of suru (do)",
+              "meaning": "is held (passive of kaisai suru: kaisai + sareru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -4601,13 +4597,13 @@
             },
             {
               "romaji": "chousa",
-              "meaning": "investigation",
+              "meaning": "investigation (compound verb: chousa + suru, dictionary form of chousasuru)",
               "entryId": "03489_chousa",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "investigation (compound verb: chousa + suru, dictionary form of chousasuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -4689,13 +4685,13 @@
             },
             {
               "romaji": "isogashii",
-              "meaning": "busy",
+              "meaning": "busy (i-adjective + polite desu)",
               "entryId": "00591_isogashii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "busy (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -4795,7 +4791,7 @@
             },
             {
               "romaji": "shiteimasu",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of riyou suru (use) (shite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -4926,7 +4922,7 @@
             },
             {
               "romaji": "sareteiru",
-              "meaning": "to do",
+              "meaning": "being sold (passive continuing form of hanbai suru) (sarete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -4996,21 +4992,17 @@
             },
             {
               "romaji": "ga",
-              "meaning": "object marker",
+              "meaning": "subject marker",
               "entryId": "00051_ga",
-              "senseNumber": 2
+              "senseNumber": 1
             },
             {
               "romaji": "suki",
-              "meaning": "like",
-              "entryId": "02355_suki",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             },
             {
               "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             }
           ]
         }
@@ -5122,13 +5114,13 @@
             },
             {
               "romaji": "juuyou",
-              "meaning": "important",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "01575_juuyou",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -5266,7 +5258,7 @@
             },
             {
               "romaji": "riyousuru",
-              "meaning": "use",
+              "meaning": "to use (compound verb: riyou + suru, dictionary form of riyousuru)",
               "entryId": "01752_riyou",
               "senseNumber": 1
             }
@@ -5297,7 +5289,7 @@
             },
             {
               "romaji": "nyuugakushimashita",
-              "meaning": "polite past of nyuugaku (entering school)",
+              "meaning": "to enroll in school (compound verb: nyuugaku + shimashita, polite past of nyuugakusuru)",
               "entryId": "02092_nyuugaku",
               "senseNumber": 1
             }
@@ -5744,7 +5736,7 @@
             },
             {
               "romaji": "torikundeiru",
-              "meaning": "progressive of torikumu (work on)",
+              "meaning": "progressive of torikumu (work on) (torikunde + iru: -te form + iru, plain continuing action or state)",
               "entryId": "04225_torikumu",
               "senseNumber": 1
             }
@@ -5787,13 +5779,13 @@
             },
             {
               "romaji": "hatten",
-              "meaning": "development",
+              "meaning": "to develop (compound verb: hatten + shita, past of hattensuru)",
               "entryId": "03561_hatten",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to develop (compound verb: hatten + shita, past of hattensuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -6178,7 +6170,7 @@
             },
             {
               "romaji": "sundeiru",
-              "meaning": "progressive of sumu (live)",
+              "meaning": "progressive of sumu (live) (sunde + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00673_sumu",
               "senseNumber": 1
             }
@@ -6273,15 +6265,11 @@
             },
             {
               "romaji": "taisetsu",
-              "meaning": "important",
-              "entryId": "01456_taisetsu",
-              "senseNumber": 1
+              "meaning": "is important (na-adjective + polite copula, forming a predicate)"
             },
             {
               "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
+              "meaning": "is important (na-adjective + polite copula, forming a predicate)"
             }
           ]
         }
@@ -6563,13 +6551,13 @@
             },
             {
               "romaji": "jisshi",
-              "meaning": "implementation",
+              "meaning": "to implement (compound verb: jisshi + suru, dictionary form of jisshisuru)",
               "entryId": "03275_jisshi",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to implement (compound verb: jisshi + suru, dictionary form of jisshisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -6707,13 +6695,13 @@
             },
             {
               "romaji": "rainichi",
-              "meaning": "coming to Japan",
+              "meaning": "coming to Japan (compound verb: rainichi + shita, past of rainichisuru)",
               "entryId": "13060_rainichi",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "coming to Japan (compound verb: rainichi + shita, past of rainichisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -6841,21 +6829,17 @@
             },
             {
               "romaji": "ga",
-              "meaning": "object marker",
+              "meaning": "subject marker",
               "entryId": "00051_ga",
-              "senseNumber": 2
+              "senseNumber": 1
             },
             {
               "romaji": "suki",
-              "meaning": "like",
-              "entryId": "02355_suki",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             },
             {
               "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             }
           ]
         }
@@ -6935,7 +6919,7 @@
             },
             {
               "romaji": "sundeimashita",
-              "meaning": "past progressive of sumu (live)",
+              "meaning": "past progressive of sumu (live) (sunde + imashita: -te form + iru, polite past continuing action or state)",
               "entryId": "00673_sumu",
               "senseNumber": 1
             }
@@ -6967,13 +6951,13 @@
             },
             {
               "romaji": "shutsujou",
-              "meaning": "participation",
+              "meaning": "to participate (compound verb: shutsujou + suru, dictionary form of shutsujousuru)",
               "entryId": "03223_shutsujou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to participate (compound verb: shutsujou + suru, dictionary form of shutsujousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -7166,7 +7150,7 @@
             },
             {
               "romaji": "erabareta",
-              "meaning": "to choose",
+              "meaning": "was elected (past passive of erabu)",
               "entryId": "00835_erabu",
               "senseNumber": 1
             }
@@ -7204,13 +7188,13 @@
             },
             {
               "romaji": "shizuka",
-              "meaning": "quiet",
+              "meaning": "quiet (na-adjective + plain copula, forming a predicate)",
               "entryId": "00755_shizuka",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "quiet (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -7280,13 +7264,13 @@
             },
             {
               "romaji": "tettai",
-              "meaning": "retreat",
+              "meaning": "to withdraw (compound verb: tettai + shita, past of tettaisuru)",
               "entryId": "12822_tettai",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to withdraw (compound verb: tettai + shita, past of tettaisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -7462,13 +7446,13 @@
             },
             {
               "romaji": "anzen",
-              "meaning": "safe",
+              "meaning": "safe (na-adjective + polite copula, forming a predicate)",
               "entryId": "01131_anzen",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "safe (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -7574,13 +7558,13 @@
             },
             {
               "romaji": "suki",
-              "meaning": "like",
+              "meaning": "like (na-adjective + plain copula, forming a predicate)",
               "entryId": "02355_suki",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "like (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -7699,7 +7683,7 @@
             },
             {
               "romaji": "erabareta",
-              "meaning": "to choose",
+              "meaning": "was elected (past passive of erabu)",
               "entryId": "00835_erabu",
               "senseNumber": 1
             }
@@ -7743,7 +7727,7 @@
             },
             {
               "romaji": "benkyoushiteimasu",
-              "meaning": "progressive of benkyousuru (study)",
+              "meaning": "progressive of benkyousuru (study) (benkyoushite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
             },
@@ -7781,13 +7765,13 @@
             },
             {
               "romaji": "teikyou",
-              "meaning": "provision",
+              "meaning": "to offer (compound verb: teikyou + suru, dictionary form of teikyousuru)",
               "entryId": "12909_teikyou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to offer (compound verb: teikyou + suru, dictionary form of teikyousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -7857,13 +7841,13 @@
             },
             {
               "romaji": "yuushou",
-              "meaning": "championship",
+              "meaning": "to win a championship (compound verb: yuushou + shita, past of yuushousuru)",
               "entryId": "03647_yuushou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to win a championship (compound verb: yuushou + shita, past of yuushousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -7895,13 +7879,13 @@
             },
             {
               "romaji": "suki",
-              "meaning": "like",
+              "meaning": "like (na-adjective + plain copula, forming a predicate)",
               "entryId": "02355_suki",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "like (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -8075,13 +8059,13 @@
             },
             {
               "romaji": "kanri",
-              "meaning": "management",
+              "meaning": "to manage (compound verb: kanri + suru, dictionary form of kanrisuru)",
               "entryId": "00178_kanri",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to manage (compound verb: kanri + suru, dictionary form of kanrisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -8201,7 +8185,7 @@
             },
             {
               "romaji": "futteiru",
-              "meaning": "progressive of furu (fall as rain)",
+              "meaning": "progressive of furu (fall as rain) (futte + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00839_furu",
               "senseNumber": 1
             },
@@ -8412,7 +8396,7 @@
             },
             {
               "romaji": "motteiru",
-              "meaning": "have (continuing state of motsu)"
+              "meaning": "have (continuing state of motsu) (motte + iru: -te form + iru, plain continuing action or state)"
             }
           ]
         }
@@ -8635,13 +8619,13 @@
             },
             {
               "romaji": "shoukai",
-              "meaning": "introduction",
+              "meaning": "to introduce (compound verb: shoukai + shimasu, polite of shoukaisuru)",
               "entryId": "01432_shoukai",
               "senseNumber": 1
             },
             {
               "romaji": "shimasu",
-              "meaning": "present polite of suru (do)",
+              "meaning": "to introduce (compound verb: shoukai + shimasu, polite of shoukaisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -8749,13 +8733,13 @@
             },
             {
               "romaji": "tsuyoi",
-              "meaning": "strong",
+              "meaning": "strong (i-adjective + polite desu)",
               "entryId": "00820_tsuyoi",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "strong (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -8913,7 +8897,7 @@
             },
             {
               "romaji": "rikkouhosuru",
-              "meaning": "candidacy",
+              "meaning": "run for election (compound verb: rikkouho + suru, dictionary form of rikkouhosuru)",
               "entryId": "13778_rikkouho",
               "senseNumber": 1
             }
@@ -8945,7 +8929,7 @@
             },
             {
               "romaji": "benkyousuru",
-              "meaning": "to study",
+              "meaning": "to study (compound verb: benkyou + suru, dictionary form of benkyousuru)",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
             }
@@ -9326,7 +9310,7 @@
             },
             {
               "romaji": "egakareta",
-              "meaning": "to paint",
+              "meaning": "was painted (past passive of egaku)",
               "entryId": "02013_egaku",
               "senseNumber": 1
             }
@@ -9364,13 +9348,13 @@
             },
             {
               "romaji": "shuunin",
-              "meaning": "taking office",
+              "meaning": "taking office (compound verb: shuunin + shita, past of shuuninsuru)",
               "entryId": "12368_shuunin",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "taking office (compound verb: shuunin + shita, past of shuuninsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -9501,13 +9485,13 @@
             },
             {
               "romaji": "kakunin",
-              "meaning": "confirmation",
+              "meaning": "to confirm (compound verb: kakunin + shimasu, polite of kakuninsuru)",
               "entryId": "00158_kakunin",
               "senseNumber": 1
             },
             {
               "romaji": "shimasu",
-              "meaning": "present polite of suru (do)",
+              "meaning": "to confirm (compound verb: kakunin + shimasu, polite of kakuninsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -9639,13 +9623,13 @@
             },
             {
               "romaji": "takai",
-              "meaning": "tall",
+              "meaning": "tall (i-adjective + polite desu)",
               "entryId": "00500_takai",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "tall (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -9782,7 +9766,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of sanka suru (participation) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -9832,7 +9816,7 @@
             },
             {
               "romaji": "hirakareteiru",
-              "meaning": "being held (passive progressive of hiraku)"
+              "meaning": "being held (passive progressive of hiraku) (hirakarete + iru: -te form + iru, plain continuing action or state)"
             }
           ]
         }
@@ -10069,13 +10053,13 @@
             },
             {
               "romaji": "koutai",
-              "meaning": "replacement",
+              "meaning": "to retreat (compound verb: koutai + shita, past of koutaisuru)",
               "entryId": "14943_koutai",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to retreat (compound verb: koutai + shita, past of koutaisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -10315,7 +10299,7 @@
             },
             {
               "romaji": "deshita",
-              "meaning": "is",
+              "meaning": "was (polite past of desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -10379,7 +10363,7 @@
             },
             {
               "romaji": "chuumonshita",
-              "meaning": "past of chuumon (order)",
+              "meaning": "order (compound verb: chuumon + shita, past of chuumonsuru)",
               "entryId": "03485_chuumon",
               "senseNumber": 1
             }
@@ -10604,13 +10588,13 @@
             },
             {
               "romaji": "kyouka",
-              "meaning": "strengthening",
+              "meaning": "to strengthen (compound verb: kyouka + suru, dictionary form of kyoukasuru)",
               "entryId": "00260_kyouka",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to strengthen (compound verb: kyouka + suru, dictionary form of kyoukasuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -10778,13 +10762,13 @@
             },
             {
               "romaji": "keiyaku",
-              "meaning": "contract",
+              "meaning": "contract (compound verb: keiyaku + shita, past of keiyakusuru)",
               "entryId": "02698_keiyaku",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "contract (compound verb: keiyaku + shita, past of keiyakusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -10871,13 +10855,13 @@
             },
             {
               "romaji": "juuyou",
-              "meaning": "important",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "01575_juuyou",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -10951,13 +10935,13 @@
             },
             {
               "romaji": "hogo",
-              "meaning": "protection",
+              "meaning": "to protect (compound verb: hogo + suru, dictionary form of hogosuru)",
               "entryId": "03625_hogo",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to protect (compound verb: hogo + suru, dictionary form of hogosuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -10975,13 +10959,13 @@
             },
             {
               "romaji": "taisetsu",
-              "meaning": "important",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "01456_taisetsu",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -11151,13 +11135,13 @@
             },
             {
               "romaji": "akiraka",
-              "meaning": "obvious",
+              "meaning": "obvious (na-adjective + plain copula, forming a predicate)",
               "entryId": "02351_akiraka",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "obvious (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -11367,7 +11351,7 @@
       "english": "state, province",
       "examples": [
         {
-          "romaji": "kariforunia shuu ni sun de iru.",
+          "romaji": "kariforunia shuu ni sundeiru.",
           "hiragana": "かりふぉるにあしゅうにすんでいる。",
           "english": "I live in California.",
           "wordMeanings": [
@@ -11388,21 +11372,9 @@
               "senseNumber": 2
             },
             {
-              "romaji": "sun",
-              "meaning": "to live",
-              "entryId": "00673_sumu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "de",
-              "meaning": "at",
-              "entryId": "00502_de",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
-              "entryId": "00495_iru"
+              "romaji": "sundeiru",
+              "meaning": "live (sunde + iru: -te form of sumu + iru, continuing state)",
+              "entryId": "00673_sumu"
             }
           ]
         }
@@ -11524,13 +11496,13 @@
             },
             {
               "romaji": "toushi",
-              "meaning": "investment",
+              "meaning": "investment (compound verb: toushi + suru, dictionary form of toushisuru)",
               "entryId": "04711_toushi",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "investment (compound verb: toushi + suru, dictionary form of toushisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -11697,13 +11669,13 @@
           "wordMeanings": [
             {
               "romaji": "matomegai",
-              "meaning": "bulk buying",
+              "meaning": "bulk buying (compound verb: matomegai + shita, past of matomegaisuru)",
               "entryId": "08046_matomegai",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "bulk buying (compound verb: matomegai + shita, past of matomegaisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -11719,13 +11691,13 @@
             },
             {
               "romaji": "toku",
-              "meaning": "good deal",
+              "meaning": "good deal (na-adjective + plain copula, forming a predicate)",
               "entryId": "12563_toku",
               "senseNumber": 2
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "good deal (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -11900,7 +11872,7 @@
             },
             {
               "romaji": "tourokushita",
-              "meaning": "past of tourokusuru (register)",
+              "meaning": "past of tourokusuru (register) (compound verb: touroku + shita, past of tourokusuru)",
               "entryId": "25227_tourokusuru",
               "senseNumber": 1
             }
@@ -12190,13 +12162,13 @@
             },
             {
               "romaji": "dounyuu",
-              "meaning": "introduction",
+              "meaning": "was introduced (past passive of dounyuu suru: dounyuu + sareta)",
               "entryId": "10127_dounyuu",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was introduced (past passive of dounyuu suru: dounyuu + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -12384,7 +12356,7 @@
             },
             {
               "romaji": "handansuru",
-              "meaning": "to judge",
+              "meaning": "to judge (compound verb: handan + suru, dictionary form of handansuru)",
               "entryId": "06062_handansuru",
               "senseNumber": 1
             }
@@ -12491,11 +12463,11 @@
             },
             {
               "romaji": "yoserarete",
-              "meaning": "being expressed (passive -te form of yoseru)"
+              "meaning": "being expressed (passive -te form of yoseru) — continuing action or state (yoserarete + iru: -te form + iru)"
             },
             {
               "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
+              "meaning": "being expressed (passive -te form of yoseru) — continuing action or state (yoserarete + iru: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -12582,7 +12554,7 @@
       "english": "most, the most",
       "examples": [
         {
-          "romaji": "kore ga mottomo taisetsudesu.",
+          "romaji": "kore ga mottomo taisetsu desu.",
           "hiragana": "これがもっともたいせつです。",
           "english": "This is the most important.",
           "wordMeanings": [
@@ -12605,10 +12577,12 @@
               "senseNumber": 1
             },
             {
-              "romaji": "taisetsudesu",
-              "meaning": "important",
-              "entryId": "01456_taisetsu",
-              "senseNumber": 1
+              "romaji": "taisetsu",
+              "meaning": "is important (na-adjective + polite copula, forming a predicate)"
+            },
+            {
+              "romaji": "desu",
+              "meaning": "is important (na-adjective + polite copula, forming a predicate)"
             }
           ]
         }
@@ -12845,13 +12819,13 @@
             },
             {
               "romaji": "shusai",
-              "meaning": "organizing",
+              "meaning": "to host (compound verb: shusai + suru, dictionary form of shusaisuru)",
               "entryId": "11405_shusai",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to host (compound verb: shusai + suru, dictionary form of shusaisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -13261,13 +13235,13 @@
             },
             {
               "romaji": "koukai",
-              "meaning": "release to the public",
+              "meaning": "was released (past passive of koukai suru: koukai + sareta)",
               "entryId": "11665_koukai",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was released (past passive of koukai suru: koukai + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -13529,13 +13503,13 @@
             },
             {
               "romaji": "kyougi",
-              "meaning": "conference",
+              "meaning": "conference (compound verb: kyougi + suru, dictionary form of kyougisuru)",
               "entryId": "02635_kyougi",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "conference (compound verb: kyougi + suru, dictionary form of kyougisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -13676,13 +13650,13 @@
             },
             {
               "romaji": "houdou",
-              "meaning": "news coverage",
+              "meaning": "was reported (past passive of houdou suru: houdou + sareta)",
               "entryId": "04438_houdou",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was reported (past passive of houdou suru: houdou + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -13755,7 +13729,7 @@
             },
             {
               "romaji": "handansuru",
-              "meaning": "judgment",
+              "meaning": "to judge (compound verb: handan + suru, dictionary form of handansuru)",
               "entryId": "03571_handan",
               "senseNumber": 1
             },
@@ -13848,13 +13822,13 @@
             },
             {
               "romaji": "suishin",
-              "meaning": "promotion",
+              "meaning": "to promote (compound verb: suishin + suru, dictionary form of suishinsuru)",
               "entryId": "12908_suishin",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to promote (compound verb: suishin + suru, dictionary form of suishinsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -14037,7 +14011,7 @@
             },
             {
               "romaji": "saiteimasu",
-              "meaning": "progressive of saku (bloom)",
+              "meaning": "progressive of saku (bloom) (saite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "08150_saku",
               "senseNumber": 1
             }
@@ -14145,7 +14119,7 @@
             },
             {
               "romaji": "sundeiru",
-              "meaning": "progressive of sumu (live)",
+              "meaning": "progressive of sumu (live) (sunde + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00673_sumu",
               "senseNumber": 1
             }
@@ -14189,7 +14163,7 @@
             },
             {
               "romaji": "setchisareta",
-              "meaning": "to do",
+              "meaning": "was established (past passive of setchi suru: setchi + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -14553,7 +14527,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of tantou suru (being in charge) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -14602,13 +14576,13 @@
             },
             {
               "romaji": "kaishi",
-              "meaning": "start",
+              "meaning": "to start (compound verb: kaishi + shimasu, polite of kaishisuru)",
               "entryId": "02537_kaishi",
               "senseNumber": 1
             },
             {
               "romaji": "shimasu",
-              "meaning": "present polite of suru (do)",
+              "meaning": "to start (compound verb: kaishi + shimasu, polite of kaishisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -14672,7 +14646,7 @@
             },
             {
               "romaji": "kaishisuru",
-              "meaning": "start",
+              "meaning": "to start (compound verb: kaishi + suru, dictionary form of kaishisuru)",
               "entryId": "02537_kaishi",
               "senseNumber": 1
             }
@@ -14704,13 +14678,13 @@
             },
             {
               "romaji": "kentou",
-              "meaning": "examination",
+              "meaning": "to consider (compound verb: kentou + suru, dictionary form of kentousuru)",
               "entryId": "02710_kentou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to consider (compound verb: kentou + suru, dictionary form of kentousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -14798,7 +14772,7 @@
             },
             {
               "romaji": "hataraiteiru",
-              "meaning": "progressive of hataraku (work)",
+              "meaning": "progressive of hataraku (work) (hataraite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00503_hataraku",
               "senseNumber": 1
             }
@@ -14830,13 +14804,13 @@
             },
             {
               "romaji": "shuzai",
-              "meaning": "news gathering",
+              "meaning": "news gathering (compound verb: shuzai + suru, dictionary form of shuzaisuru)",
               "entryId": "05227_shuzai",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "news gathering (compound verb: shuzai + suru, dictionary form of shuzaisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -14868,13 +14842,13 @@
             },
             {
               "romaji": "hassei",
-              "meaning": "occurrence",
+              "meaning": "to occur (compound verb: hassei + shita, past of hasseisuru)",
               "entryId": "03133_hassei",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to occur (compound verb: hassei + shita, past of hasseisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -14974,7 +14948,7 @@
             },
             {
               "romaji": "goukakusuru",
-              "meaning": "to pass",
+              "meaning": "to pass (compound verb: goukaku + suru, dictionary form of goukakusuru)",
               "entryId": "27949_goukakusuru",
               "senseNumber": 1
             }
@@ -15094,13 +15068,13 @@
             },
             {
               "romaji": "daiji",
-              "meaning": "important",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "01253_daiji",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -15132,13 +15106,13 @@
             },
             {
               "romaji": "tenji",
-              "meaning": "exhibition",
+              "meaning": "exhibition (compound verb: tenji + suru, dictionary form of tenjisuru)",
               "entryId": "12401_tenji",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "exhibition (compound verb: tenji + suru, dictionary form of tenjisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -15251,13 +15225,13 @@
             },
             {
               "romaji": "hyouka",
-              "meaning": "evaluation",
+              "meaning": "evaluation (compound verb: hyouka + suru, dictionary form of hyoukasuru)",
               "entryId": "03583_hyouka",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "evaluation (compound verb: hyouka + suru, dictionary form of hyoukasuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -15339,7 +15313,7 @@
             },
             {
               "romaji": "kenkyuushiteiru",
-              "meaning": "progressive of kenkyuu (research)",
+              "meaning": "progressive of kenkyuu (research) (kenkyuushite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01396_kenkyuu",
               "senseNumber": 1
             }
@@ -15562,7 +15536,7 @@
             },
             {
               "romaji": "susundeiru",
-              "meaning": "progressive of susumu (progress)",
+              "meaning": "progressive of susumu (progress) (susunde + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01225_susumu",
               "senseNumber": 2
             }
@@ -15902,7 +15876,7 @@
             },
             {
               "romaji": "kaisaisareru",
-              "meaning": "passive of kaisaisuru (hold)",
+              "meaning": "is held (passive of kaisai suru: kaisai + sareru)",
               "entryId": "10441_kaisaisuru",
               "senseNumber": 1
             }
@@ -16140,12 +16114,12 @@
             },
             {
               "romaji": "hassei",
-              "meaning": "occurrence",
+              "meaning": "to occur (compound verb: hassei + shita, past of hasseisuru)",
               "entryId": "03133_hassei"
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to occur (compound verb: hassei + shita, past of hasseisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -16208,13 +16182,13 @@
             },
             {
               "romaji": "housou",
-              "meaning": "broadcast",
+              "meaning": "broadcast (compound verb: housou + suru, dictionary form of housousuru)",
               "entryId": "02093_housou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "broadcast (compound verb: housou + suru, dictionary form of housousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -16246,13 +16220,13 @@
             },
             {
               "romaji": "sutaato",
-              "meaning": "start",
+              "meaning": "start (compound verb: sutaato + shita, past of sutaatosuru)",
               "entryId": "11053_sutaato",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "start (compound verb: sutaato + shita, past of sutaatosuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -16325,7 +16299,7 @@
             },
             {
               "romaji": "anteishiteiru",
-              "meaning": "progressive of antei (stability)",
+              "meaning": "progressive of antei (stability) (anteishite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01703_antei",
               "senseNumber": 1
             }
@@ -16467,7 +16441,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of zouka suru (increase) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -16519,7 +16493,7 @@
       "english": "particularly, especially",
       "examples": [
         {
-          "romaji": "tokuni nihonryouri ga sukidesu.",
+          "romaji": "tokuni nihonryouri ga suki desu.",
           "hiragana": "とくににほんりょうりがすきです。",
           "english": "I especially like Japanese food.",
           "wordMeanings": [
@@ -16542,10 +16516,12 @@
               "senseNumber": 1
             },
             {
-              "romaji": "sukidesu",
-              "meaning": "like",
-              "entryId": "02355_suki",
-              "senseNumber": 1
+              "romaji": "suki",
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
+            },
+            {
+              "romaji": "desu",
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             }
           ]
         }
@@ -16607,7 +16583,7 @@
             },
             {
               "romaji": "shinposhita",
-              "meaning": "past of shinpo (progress)",
+              "meaning": "advance (compound verb: shinpo + shita, past of shinposuru)",
               "entryId": "03265_shinpo",
               "senseNumber": 1
             }
@@ -16677,13 +16653,13 @@
             },
             {
               "romaji": "toujou",
-              "meaning": "appearance on stage",
+              "meaning": "appearance on stage (compound verb: toujou + suru, dictionary form of toujousuru)",
               "entryId": "13625_toujou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "appearance on stage (compound verb: toujou + suru, dictionary form of toujousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -16765,7 +16741,7 @@
             },
             {
               "romaji": "shoukaisuru",
-              "meaning": "introduction",
+              "meaning": "to introduce (compound verb: shoukai + suru, dictionary form of shoukaisuru)",
               "entryId": "01432_shoukai",
               "senseNumber": 1
             }
@@ -16890,13 +16866,13 @@
             },
             {
               "romaji": "hitsuyou",
-              "meaning": "necessary",
+              "meaning": "necessary (na-adjective + plain copula, forming a predicate)",
               "entryId": "00846_hitsuyou",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "necessary (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -17004,7 +16980,7 @@
             },
             {
               "romaji": "bunsekisuru",
-              "meaning": "analysis",
+              "meaning": "to analyze (compound verb: bunseki + suru, dictionary form of bunsekisuru)",
               "entryId": "03610_bunseki",
               "senseNumber": 1
             }
@@ -17052,7 +17028,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of katsuyaku suru (active role) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -17108,13 +17084,13 @@
             },
             {
               "romaji": "hyoumei",
-              "meaning": "declaration",
+              "meaning": "declaration (compound verb: hyoumei + shita, past of hyoumeisuru)",
               "entryId": "14052_hyoumei",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "declaration (compound verb: hyoumei + shita, past of hyoumeisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -17158,13 +17134,13 @@
             },
             {
               "romaji": "kyouchou",
-              "meaning": "emphasis",
+              "meaning": "to emphasize (compound verb: kyouchou + suru, dictionary form of kyouchousuru)",
               "entryId": "02600_kyouchou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to emphasize (compound verb: kyouchou + suru, dictionary form of kyouchousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -17264,13 +17240,13 @@
             },
             {
               "romaji": "kyouka",
-              "meaning": "strengthening",
+              "meaning": "was strengthened (past passive of kyouka suru: kyouka + sareta)",
               "entryId": "00260_kyouka",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was strengthened (past passive of kyouka suru: kyouka + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -17363,7 +17339,7 @@
             },
             {
               "romaji": "hataraiteiru",
-              "meaning": "progressive of hataraku (work)",
+              "meaning": "progressive of hataraku (work) (hataraite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00503_hataraku",
               "senseNumber": 1
             }
@@ -17588,13 +17564,13 @@
             },
             {
               "romaji": "hinan",
-              "meaning": "evacuation",
+              "meaning": "to evacuate (compound verb: hinan + shita, past of hinansuru)",
               "entryId": "07908_hinan",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to evacuate (compound verb: hinan + shita, past of hinansuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -17949,13 +17925,13 @@
             },
             {
               "romaji": "dounyuu",
-              "meaning": "introduction",
+              "meaning": "to introduce (compound verb: dounyuu + shita, past of dounyuusuru)",
               "entryId": "10127_dounyuu",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to introduce (compound verb: dounyuu + shita, past of dounyuusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -18060,7 +18036,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of seizou suru (manufacture) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -18178,13 +18154,13 @@
             },
             {
               "romaji": "benri",
-              "meaning": "useful",
+              "meaning": "useful (na-adjective + plain copula, forming a predicate)",
               "entryId": "00830_benri",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "useful (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -18322,13 +18298,13 @@
             },
             {
               "romaji": "taisetsu",
-              "meaning": "important",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "01456_taisetsu",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -18409,7 +18385,7 @@
             },
             {
               "romaji": "okonawareta",
-              "meaning": "to carry out",
+              "meaning": "was held (past passive of okonau)",
               "entryId": "01238_okonau",
               "senseNumber": 1
             }
@@ -18484,7 +18460,7 @@
             },
             {
               "romaji": "shiteimasu",
-              "meaning": "progressive of suru (do)",
+              "meaning": "progressive of suru (do) (shite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -18520,7 +18496,7 @@
             },
             {
               "romaji": "tsutometeimasu",
-              "meaning": "progressive of tsutomeru (work for)",
+              "meaning": "progressive of tsutomeru (work for) (tsutomete + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00902_tsutomeru",
               "senseNumber": 1
             }
@@ -18763,13 +18739,13 @@
             },
             {
               "romaji": "houmon",
-              "meaning": "visit",
+              "meaning": "to visit (compound verb: houmon + suru, dictionary form of houmonsuru)",
               "entryId": "03622_houmon",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to visit (compound verb: houmon + suru, dictionary form of houmonsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -18810,7 +18786,7 @@
             },
             {
               "romaji": "hasseishita",
-              "meaning": "occurred (past of hasseisuru)",
+              "meaning": "occurred (past of hasseisuru) (compound verb: hassei + shita, past of hasseisuru)",
               "entryId": "25529_hasseisuru"
             }
           ]
@@ -18921,7 +18897,7 @@
             },
             {
               "romaji": "atteinai",
-              "meaning": "negative progressive of au (meet)",
+              "meaning": "negative progressive of au (meet) (atte + inai: -te form + iru, negative continuing action or state)",
               "entryId": "00482_au",
               "senseNumber": 1
             }
@@ -19016,7 +18992,7 @@
             },
             {
               "romaji": "hashitteiru",
-              "meaning": "progressive of hashiru (run)",
+              "meaning": "progressive of hashiru (run) (hashitte + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00519_hashiru",
               "senseNumber": 1
             }
@@ -19439,7 +19415,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of eigyou suru (business) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -19471,13 +19447,13 @@
             },
             {
               "romaji": "kaiketsu",
-              "meaning": "solution",
+              "meaning": "to solve (compound verb: kaiketsu + suru, dictionary form of kaiketsusuru)",
               "entryId": "00136_kaiketsu",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to solve (compound verb: kaiketsu + suru, dictionary form of kaiketsusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -19533,7 +19509,7 @@
             },
             {
               "romaji": "juutaishiteiru",
-              "meaning": "traffic jam",
+              "meaning": "traffic jam (juutaishite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "03279_juutai",
               "senseNumber": 1
             }
@@ -19553,13 +19529,13 @@
           "wordMeanings": [
             {
               "romaji": "doryoku",
-              "meaning": "effort",
+              "meaning": "to make an effort (compound verb: doryoku + shita, past of doryokusuru)",
               "entryId": "03490_doryoku",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to make an effort (compound verb: doryoku + shita, past of doryokusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -19571,13 +19547,13 @@
             },
             {
               "romaji": "seikou",
-              "meaning": "success",
+              "meaning": "did not succeed (compound verb: seikou + shinakatta, negative past of seikousuru)",
               "entryId": "02638_seikou",
               "senseNumber": 1
             },
             {
               "romaji": "shinakatta",
-              "meaning": "negative past of suru (do)",
+              "meaning": "did not succeed (compound verb: seikou + shinakatta, negative past of seikousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -19700,13 +19676,13 @@
             },
             {
               "romaji": "hassha",
-              "meaning": "departure",
+              "meaning": "to fire (compound verb: hassha + shimasu, polite of hasshasuru)",
               "entryId": "03694_hassha",
               "senseNumber": 1
             },
             {
               "romaji": "shimasu",
-              "meaning": "present polite of suru (do)",
+              "meaning": "to fire (compound verb: hassha + shimasu, polite of hasshasuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -19750,13 +19726,13 @@
             },
             {
               "romaji": "kirei",
-              "meaning": "beautiful",
+              "meaning": "beautiful (na-adjective + polite copula, forming a predicate)",
               "entryId": "00717_kirei",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "beautiful (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -19870,13 +19846,13 @@
             },
             {
               "romaji": "hihan",
-              "meaning": "criticism",
+              "meaning": "to criticize (compound verb: hihan + suru, dictionary form of hihansuru)",
               "entryId": "03580_hihan",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to criticize (compound verb: hihan + suru, dictionary form of hihansuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -20147,13 +20123,13 @@
             },
             {
               "romaji": "oopun",
-              "meaning": "open",
+              "meaning": "open (compound verb: oopun + shita, past of oopunsuru)",
               "entryId": "10831_oopun",
               "senseNumber": 2
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "open (compound verb: oopun + shita, past of oopunsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -20185,13 +20161,13 @@
             },
             {
               "romaji": "tanoshimi",
-              "meaning": "pleasure",
+              "meaning": "pleasure (na-adjective + polite copula, forming a predicate)",
               "entryId": "01651_tanoshimi",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "pleasure (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -20223,7 +20199,7 @@
             },
             {
               "romaji": "kiiteimasu",
-              "meaning": "progressive of kiku (listen)",
+              "meaning": "progressive of kiku (listen) (kiite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00483_kiku",
               "senseNumber": 2
             }
@@ -20305,13 +20281,13 @@
             },
             {
               "romaji": "oopun",
-              "meaning": "opening",
+              "meaning": "opening (compound verb: oopun + shita, past of oopunsuru)",
               "entryId": "10831_oopun",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "opening (compound verb: oopun + shita, past of oopunsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -20355,13 +20331,13 @@
             },
             {
               "romaji": "oishii",
-              "meaning": "delicious",
+              "meaning": "delicious (i-adjective + polite desu)",
               "entryId": "00740_oishii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "delicious (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -20399,13 +20375,13 @@
             },
             {
               "romaji": "hoshii",
-              "meaning": "want (something)",
+              "meaning": "want (something) (i-adjective + polite desu)",
               "entryId": "01107_hoshii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "want (something) (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -20455,7 +20431,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "progressive of suru (do) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -20505,7 +20481,7 @@
             },
             {
               "romaji": "youishita",
-              "meaning": "past of youisuru (prepare)",
+              "meaning": "past of youisuru (prepare) (compound verb: youi + shita, past of youisuru)",
               "entryId": "22428_youisuru",
               "senseNumber": 1
             }
@@ -20619,13 +20595,13 @@
             },
             {
               "romaji": "bouei",
-              "meaning": "defense",
+              "meaning": "defense (compound verb: bouei + suru, dictionary form of boueisuru)",
               "entryId": "09783_bouei",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "defense (compound verb: bouei + suru, dictionary form of boueisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -20719,13 +20695,13 @@
             },
             {
               "romaji": "itai",
-              "meaning": "painful",
+              "meaning": "painful (i-adjective + polite desu)",
               "entryId": "01108_itai",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "painful (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -20789,13 +20765,13 @@
             },
             {
               "romaji": "kakuho",
-              "meaning": "securing",
+              "meaning": "securing (compound verb: kakuho + suru, dictionary form of kakuhosuru)",
               "entryId": "13681_kakuho",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "securing (compound verb: kakuho + suru, dictionary form of kakuhosuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -20827,13 +20803,13 @@
             },
             {
               "romaji": "ouen",
-              "meaning": "cheering",
+              "meaning": "to support (compound verb: ouen + suru, dictionary form of ouensuru)",
               "entryId": "01900_ouen",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to support (compound verb: ouen + suru, dictionary form of ouensuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -20915,11 +20891,11 @@
             },
             {
               "romaji": "kawaigararete",
-              "meaning": "being doted on (passive -te form of kawaigaru)"
+              "meaning": "being doted on (passive -te form of kawaigaru) — continuing action or state (kawaigararete + iru: -te form + iru)"
             },
             {
               "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
+              "meaning": "being doted on (passive -te form of kawaigaru) — continuing action or state (kawaigararete + iru: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -21087,13 +21063,13 @@
             },
             {
               "romaji": "kakutoku",
-              "meaning": "acquisition",
+              "meaning": "acquisition (compound verb: kakutoku + shita, past of kakutokusuru)",
               "entryId": "05624_kakutoku",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "acquisition (compound verb: kakutoku + shita, past of kakutokusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -21136,13 +21112,13 @@
             },
             {
               "romaji": "taiho",
-              "meaning": "arrest",
+              "meaning": "was arrested (past passive of taiho suru: taiho + sareta)",
               "entryId": "03397_taiho",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was arrested (past passive of taiho suru: taiho + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -21186,7 +21162,7 @@
             },
             {
               "romaji": "kaketsusareta",
-              "meaning": "passage",
+              "meaning": "was passed (past passive of kaketsu suru: kaketsu + sareta)",
               "entryId": "00148_kaketsu",
               "senseNumber": 1
             }
@@ -21254,13 +21230,13 @@
             },
             {
               "romaji": "shouri",
-              "meaning": "victory",
+              "meaning": "victory (compound verb: shouri + shita, past of shourisuru)",
               "entryId": "11795_shouri",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "victory (compound verb: shouri + shita, past of shourisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -21368,13 +21344,13 @@
             },
             {
               "romaji": "isogashii",
-              "meaning": "busy",
+              "meaning": "busy (i-adjective + polite desu)",
               "entryId": "00591_isogashii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "busy (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -21692,13 +21668,13 @@
             },
             {
               "romaji": "soudan",
-              "meaning": "consultation",
+              "meaning": "to consult (compound verb: soudan + suru, dictionary form of soudansuru)",
               "entryId": "02089_soudan",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to consult (compound verb: soudan + suru, dictionary form of soudansuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -21786,7 +21762,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of teika suru (decline) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -21824,7 +21800,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of antei suru (stability) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -22023,7 +21999,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of genshou suru (decrease) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -22173,7 +22149,7 @@
             },
             {
               "romaji": "erabareta",
-              "meaning": "to choose",
+              "meaning": "was elected (past passive of erabu)",
               "entryId": "00835_erabu",
               "senseNumber": 1
             }
@@ -22303,13 +22279,13 @@
             },
             {
               "romaji": "seikaku",
-              "meaning": "accurate",
+              "meaning": "accurate (na-adjective + plain copula, forming a predicate)",
               "entryId": "03372_seikaku",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "accurate (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -22749,13 +22725,13 @@
             },
             {
               "romaji": "suteki",
-              "meaning": "lovely",
+              "meaning": "lovely (na-adjective + plain copula, forming a predicate)",
               "entryId": "02356_suteki",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "lovely (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -22799,7 +22775,7 @@
             },
             {
               "romaji": "hataraiteimasu",
-              "meaning": "progressive of hataraku (work)",
+              "meaning": "progressive of hataraku (work) (hataraite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00503_hataraku",
               "senseNumber": 1
             }
@@ -22831,13 +22807,13 @@
             },
             {
               "romaji": "shusseki",
-              "meaning": "attendance",
+              "meaning": "to attend (compound verb: shusseki + suru, dictionary form of shussekisuru)",
               "entryId": "02084_shusseki",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to attend (compound verb: shusseki + suru, dictionary form of shussekisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -22954,13 +22930,13 @@
             },
             {
               "romaji": "itaku",
-              "meaning": "entrustment",
+              "meaning": "entrustment (compound verb: itaku + suru, dictionary form of itakusuru)",
               "entryId": "05620_itaku",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "entrustment (compound verb: itaku + suru, dictionary form of itakusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -23085,7 +23061,7 @@
             },
             {
               "romaji": "shiteita",
-              "meaning": "past progressive of suru (do)",
+              "meaning": "past progressive of suru (do) (shite + ita: -te form + iru, past continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -23438,13 +23414,13 @@
             },
             {
               "romaji": "kounyuu",
-              "meaning": "purchase",
+              "meaning": "purchase (compound verb: kounyuu + shita, past of kounyuusuru)",
               "entryId": "03057_kounyuu",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "purchase (compound verb: kounyuu + shita, past of kounyuusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -23482,7 +23458,7 @@
             },
             {
               "romaji": "hataraiteiru",
-              "meaning": "progressive of hataraku (work)",
+              "meaning": "progressive of hataraku (work) (hataraite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00503_hataraku",
               "senseNumber": 1
             }
@@ -23593,7 +23569,7 @@
             },
             {
               "romaji": "gironsuru",
-              "meaning": "discussion",
+              "meaning": "to discuss (compound verb: giron + suru, dictionary form of gironsuru)",
               "entryId": "02650_giron",
               "senseNumber": 1
             }
@@ -23637,13 +23613,13 @@
             },
             {
               "romaji": "kaidan",
-              "meaning": "talks",
+              "meaning": "talks (compound verb: kaidan + shita, past of kaidansuru)",
               "entryId": "11542_kaidan",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "talks (compound verb: kaidan + shita, past of kaidansuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -23891,7 +23867,7 @@
             },
             {
               "romaji": "kakuninsuru",
-              "meaning": "to check",
+              "meaning": "to check (compound verb: kakunin + suru, dictionary form of kakuninsuru)",
               "entryId": "25332_kakuninsuru",
               "senseNumber": 1
             }
@@ -23941,7 +23917,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of tantou suru (being in charge) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -23973,13 +23949,13 @@
             },
             {
               "romaji": "chousei",
-              "meaning": "adjustment",
+              "meaning": "to adjust (compound verb: chousei + suru, dictionary form of chouseisuru)",
               "entryId": "14839_chousei",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to adjust (compound verb: chousei + suru, dictionary form of chouseisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -24011,7 +23987,7 @@
             },
             {
               "romaji": "tsukatteinai",
-              "meaning": "negative progressive of tsukau (use)",
+              "meaning": "negative progressive of tsukau (use) (tsukatte + inai: -te form + iru, negative continuing action or state)",
               "entryId": "00473_tsukau",
               "senseNumber": 1
             }
@@ -24140,13 +24116,13 @@
             },
             {
               "romaji": "yoyaku",
-              "meaning": "reservation",
+              "meaning": "to reserve (compound verb: yoyaku + suru, dictionary form of yoyakusuru)",
               "entryId": "01522_yoyaku",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to reserve (compound verb: yoyaku + suru, dictionary form of yoyakusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -24178,13 +24154,13 @@
             },
             {
               "romaji": "kansei",
-              "meaning": "completion",
+              "meaning": "to complete (compound verb: kansei + shimashita, polite past of kanseisuru)",
               "entryId": "01550_kansei",
               "senseNumber": 1
             },
             {
               "romaji": "shimashita",
-              "meaning": "polite past of suru (do)",
+              "meaning": "to complete (compound verb: kansei + shimashita, polite past of kanseisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -24303,7 +24279,7 @@
             },
             {
               "romaji": "utteiru",
-              "meaning": "progressive of uru (sell)",
+              "meaning": "progressive of uru (sell) (utte + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00906_uru",
               "senseNumber": 1
             }
@@ -24391,7 +24367,7 @@
             },
             {
               "romaji": "riyousuru",
-              "meaning": "to use",
+              "meaning": "to use (compound verb: riyou + suru, dictionary form of riyousuru)",
               "entryId": "21735_riyousuru",
               "senseNumber": 1
             }
@@ -24559,7 +24535,7 @@
             },
             {
               "romaji": "dekiteiru",
-              "meaning": "progressive of dekiru (be made)",
+              "meaning": "progressive of dekiru (be made) (dekite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00557_dekiru",
               "senseNumber": 2
             }
@@ -24597,7 +24573,7 @@
             },
             {
               "romaji": "setsumeishita",
-              "meaning": "past of setsumei (explanation)",
+              "meaning": "to explain (compound verb: setsumei + shita, past of setsumeisuru)",
               "entryId": "01449_setsumei",
               "senseNumber": 1
             }
@@ -24826,7 +24802,7 @@
             },
             {
               "romaji": "hataraiteiru",
-              "meaning": "progressive of hataraku (work)",
+              "meaning": "progressive of hataraku (work) (hataraite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00503_hataraku",
               "senseNumber": 1
             }
@@ -24858,7 +24834,7 @@
             },
             {
               "romaji": "hantaishita",
-              "meaning": "past of hantai (opposition)",
+              "meaning": "to oppose (compound verb: hantai + shita, past of hantaisuru)",
               "entryId": "01497_hantai",
               "senseNumber": 1
             }
@@ -24966,13 +24942,13 @@
             },
             {
               "romaji": "hatsugen",
-              "meaning": "statement",
+              "meaning": "to manifest (compound verb: hatsugen + suru, dictionary form of hatsugensuru)",
               "entryId": "05099_hatsugen",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to manifest (compound verb: hatsugen + suru, dictionary form of hatsugensuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -25022,13 +24998,13 @@
             },
             {
               "romaji": "isogashii",
-              "meaning": "busy",
+              "meaning": "busy (i-adjective + polite desu)",
               "entryId": "00591_isogashii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "busy (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -25066,13 +25042,13 @@
             },
             {
               "romaji": "oishii",
-              "meaning": "delicious",
+              "meaning": "delicious (i-adjective + polite desu)",
               "entryId": "00740_oishii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "delicious (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -25152,13 +25128,13 @@
             },
             {
               "romaji": "chousen",
-              "meaning": "challenge",
+              "meaning": "to challenge (compound verb: chousen + suru, dictionary form of chousensuru)",
               "entryId": "03495_chousen",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to challenge (compound verb: chousen + suru, dictionary form of chousensuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -25228,7 +25204,7 @@
             },
             {
               "romaji": "ketsuretsushita",
-              "meaning": "past of ketsuretsu (breakdown)",
+              "meaning": "break down (compound verb: ketsuretsu + shita, past of ketsuretsusuru)",
               "entryId": "14895_ketsuretsu",
               "senseNumber": 1
             }
@@ -25248,13 +25224,13 @@
           "wordMeanings": [
             {
               "romaji": "shitte",
-              "meaning": "-te form of shiru (know)",
+              "meaning": "-te form of shiru (know) — continuing action or state (shitte + iru: -te form + iru)",
               "entryId": "00458_shiru",
               "senseNumber": 1
             },
             {
               "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
+              "meaning": "-te form of shiru (know) — continuing action or state (shitte + iru: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -25291,7 +25267,7 @@
             },
             {
               "romaji": "okonawareteiru",
-              "meaning": "to carry out",
+              "meaning": "to carry out (okonawarete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01238_okonau",
               "senseNumber": 1
             }
@@ -25334,13 +25310,13 @@
             },
             {
               "romaji": "hyougen",
-              "meaning": "expression",
+              "meaning": "expression (compound verb: hyougen + suru, dictionary form of hyougensuru)",
               "entryId": "03584_hyougen",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "expression (compound verb: hyougen + suru, dictionary form of hyougensuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -25396,13 +25372,13 @@
             },
             {
               "romaji": "shuushoku",
-              "meaning": "getting a job",
+              "meaning": "getting a job (compound verb: shuushoku + suru, dictionary form of shuushokusuru)",
               "entryId": "03209_shuushoku",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "getting a job (compound verb: shuushoku + suru, dictionary form of shuushokusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -25530,7 +25506,7 @@
             },
             {
               "romaji": "shiteimasu",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of kansha suru (gratitude) (shite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -25562,7 +25538,7 @@
             },
             {
               "romaji": "setsuritsushita",
-              "meaning": "past of setsuritsusuru (establish)",
+              "meaning": "past of setsuritsusuru (establish) (compound verb: setsuritsu + shita, past of setsuritsusuru)",
               "entryId": "17473_setsuritsusuru",
               "senseNumber": 1
             }
@@ -25626,7 +25602,7 @@
       "english": "emphasis: it is precisely, it is ~ that",
       "examples": [
         {
-          "romaji": "kochira koso, yoroshikuonegaishimasu.",
+          "romaji": "kochira koso, yoroshiku onegaishimasu.",
           "hiragana": "こちらこそ、よろしくおねがいします。",
           "english": "It's I who should be asking — pleased to meet you too.",
           "wordMeanings": [
@@ -25643,10 +25619,12 @@
               "senseNumber": 1
             },
             {
-              "romaji": "yoroshikuonegaishimasu",
-              "meaning": "pleased to meet you",
-              "entryId": "23566_yoroshikuonegaishimasu",
-              "senseNumber": 1
+              "romaji": "yoroshiku",
+              "meaning": "pleased to meet you"
+            },
+            {
+              "romaji": "onegaishimasu",
+              "meaning": "pleased to meet you"
             }
           ]
         }
@@ -25819,13 +25797,13 @@
             },
             {
               "romaji": "goudou",
-              "meaning": "joint",
+              "meaning": "joint (compound verb: goudou + shita, past of goudousuru)",
               "entryId": "04185_goudou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "joint (compound verb: goudou + shita, past of goudousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -26097,7 +26075,7 @@
       "english": "everyone, all of you, ladies and gentlemen",
       "examples": [
         {
-          "romaji": "mina san, ohayougozaimasu.",
+          "romaji": "mina san, ohayou gozaimasu.",
           "hiragana": "みなさん、おはようございます。",
           "english": "Good morning, everyone.",
           "wordMeanings": [
@@ -26111,10 +26089,12 @@
               "meaning": "polite address suffix"
             },
             {
-              "romaji": "ohayougozaimasu",
-              "meaning": "good morning",
-              "entryId": "05205_ohayou",
-              "senseNumber": 1
+              "romaji": "ohayou",
+              "meaning": "good morning"
+            },
+            {
+              "romaji": "gozaimasu",
+              "meaning": "good morning"
             }
           ]
         }
@@ -26264,13 +26244,13 @@
           "wordMeanings": [
             {
               "romaji": "seikou",
-              "meaning": "success",
+              "meaning": "to succeed (compound verb: seikou + shita, past of seikousuru)",
               "entryId": "02638_seikou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to succeed (compound verb: seikou + shita, past of seikousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -26366,7 +26346,7 @@
             },
             {
               "romaji": "kondeiru",
-              "meaning": "progressive of komu (be congested)",
+              "meaning": "progressive of komu (be congested) (konde + iru: -te form + iru, plain continuing action or state)",
               "entryId": "02574_komu",
               "senseNumber": 1
             }
@@ -26398,13 +26378,13 @@
             },
             {
               "romaji": "joushou",
-              "meaning": "rise",
+              "meaning": "to rise (compound verb: joushou + shita, past of joushousuru)",
               "entryId": "11296_joushou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to rise (compound verb: joushou + shita, past of joushousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -26560,13 +26540,13 @@
             },
             {
               "romaji": "shippai",
-              "meaning": "failure",
+              "meaning": "failure (compound verb: shippai + shita, past of shippaisuru)",
               "entryId": "01636_shippai",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "failure (compound verb: shippai + shita, past of shippaisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -26610,7 +26590,7 @@
             },
             {
               "romaji": "kansatsusuru",
-              "meaning": "to observe",
+              "meaning": "to observe (compound verb: kansatsu + suru, dictionary form of kansatsusuru)",
               "entryId": "21989_kansatsusuru",
               "senseNumber": 1
             }
@@ -26654,21 +26634,17 @@
             },
             {
               "romaji": "ga",
-              "meaning": "object marker",
+              "meaning": "subject marker",
               "entryId": "00051_ga",
-              "senseNumber": 2
+              "senseNumber": 1
             },
             {
               "romaji": "suki",
-              "meaning": "like",
-              "entryId": "02355_suki",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             },
             {
               "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             },
             {
               "romaji": "ka",
@@ -26686,7 +26662,7 @@
       "english": "sake",
       "examples": [
         {
-          "romaji": "nihonshu ga sukidesu.",
+          "romaji": "nihonshu ga suki desu.",
           "hiragana": "にほんしゅがすきです。",
           "english": "I like Japanese sake.",
           "wordMeanings": [
@@ -26703,10 +26679,12 @@
               "senseNumber": 1
             },
             {
-              "romaji": "sukidesu",
-              "meaning": "like",
-              "entryId": "02355_suki",
-              "senseNumber": 1
+              "romaji": "suki",
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
+            },
+            {
+              "romaji": "desu",
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             }
           ]
         }
@@ -27003,13 +26981,13 @@
             },
             {
               "romaji": "shuuryou",
-              "meaning": "end",
+              "meaning": "to end (compound verb: shuuryou + shita, past of shuuryousuru)",
               "entryId": "02563_shuuryou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to end (compound verb: shuuryou + shita, past of shuuryousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -27159,13 +27137,13 @@
             },
             {
               "romaji": "shinkoku",
-              "meaning": "serious",
+              "meaning": "serious (na-adjective + plain copula, forming a predicate)",
               "entryId": "01567_shinkoku",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "serious (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -27240,13 +27218,13 @@
             },
             {
               "romaji": "jushou",
-              "meaning": "winning a prize",
+              "meaning": "winning a prize (compound verb: jushou + shita, past of jushousuru)",
               "entryId": "11867_jushou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "winning a prize (compound verb: jushou + shita, past of jushousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -27282,7 +27260,7 @@
             },
             {
               "romaji": "kyoukasuru",
-              "meaning": "to strengthen",
+              "meaning": "to strengthen (compound verb: kyouka + suru, dictionary form of kyoukasuru)",
               "entryId": "25344_kyoukasuru",
               "senseNumber": 1
             }
@@ -27296,7 +27274,7 @@
       "english": "design",
       "examples": [
         {
-          "romaji": "shinpuruna dezain ga sukidesu.",
+          "romaji": "shinpuruna dezain ga suki desu.",
           "hiragana": "しんぷるなでざいんがすきです。",
           "english": "I like simple designs.",
           "wordMeanings": [
@@ -27319,10 +27297,12 @@
               "senseNumber": 1
             },
             {
-              "romaji": "sukidesu",
-              "meaning": "like",
-              "entryId": "02355_suki",
-              "senseNumber": 1
+              "romaji": "suki",
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
+            },
+            {
+              "romaji": "desu",
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             }
           ]
         }
@@ -27363,7 +27343,7 @@
             },
             {
               "romaji": "shiteimasu",
-              "meaning": "progressive of suru (do)",
+              "meaning": "progressive of suru (do) (shite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -27401,13 +27381,13 @@
             },
             {
               "romaji": "sotsugyou",
-              "meaning": "graduation",
+              "meaning": "graduation (compound verb: sotsugyou + shimasu, polite of sotsugyousuru)",
               "entryId": "01643_sotsugyou",
               "senseNumber": 1
             },
             {
               "romaji": "shimasu",
-              "meaning": "present polite of suru (do)",
+              "meaning": "graduation (compound verb: sotsugyou + shimasu, polite of sotsugyousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -27439,13 +27419,13 @@
             },
             {
               "romaji": "benri",
-              "meaning": "convenient",
+              "meaning": "convenient (na-adjective + plain copula, forming a predicate)",
               "entryId": "00830_benri",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "convenient (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -27477,13 +27457,13 @@
             },
             {
               "romaji": "kaisei",
-              "meaning": "revision",
+              "meaning": "was revised (past passive of kaisei suru: kaisei + sareta)",
               "entryId": "00446_kaisei",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was revised (past passive of kaisei suru: kaisei + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -27538,13 +27518,13 @@
             },
             {
               "romaji": "fuete",
-              "meaning": "-te form of fueru (increase)",
+              "meaning": "-te form of fueru (increase) — continuing action or state (fuete + iru: -te form + iru)",
               "entryId": "01183_fueru",
               "senseNumber": 1
             },
             {
               "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
+              "meaning": "-te form of fueru (increase) — continuing action or state (fuete + iru: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -27575,7 +27555,7 @@
             },
             {
               "romaji": "futteiru",
-              "meaning": "progressive of furu (fall as rain)",
+              "meaning": "progressive of furu (fall as rain) (futte + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00839_furu",
               "senseNumber": 1
             },
@@ -27643,7 +27623,7 @@
             },
             {
               "romaji": "sundeiru",
-              "meaning": "progressive of sumu (live)",
+              "meaning": "progressive of sumu (live) (sunde + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00673_sumu",
               "senseNumber": 1
             }
@@ -27906,13 +27886,13 @@
             },
             {
               "romaji": "muzukashii",
-              "meaning": "difficult",
+              "meaning": "difficult (i-adjective + polite desu)",
               "entryId": "00517_muzukashii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "difficult (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -27982,12 +27962,12 @@
             },
             {
               "romaji": "soushutsu",
-              "meaning": "creation",
+              "meaning": "to create (compound verb: soushutsu + suru, dictionary form of soushutsusuru)",
               "entryId": "31906_soushutsu"
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to create (compound verb: soushutsu + suru, dictionary form of soushutsusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -28387,13 +28367,13 @@
             },
             {
               "romaji": "fuan",
-              "meaning": "anxious",
+              "meaning": "anxious (na-adjective + polite copula, forming a predicate)",
               "entryId": "00836_fuan",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "anxious (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -28512,7 +28492,7 @@
             },
             {
               "romaji": "mitashiteiru",
-              "meaning": "progressive of mitasu (meet)",
+              "meaning": "progressive of mitasu (meet) (mitashite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "09889_mitasu",
               "senseNumber": 1
             }
@@ -28544,13 +28524,13 @@
             },
             {
               "romaji": "genki",
-              "meaning": "well",
+              "meaning": "well (na-adjective + polite copula, forming a predicate)",
               "entryId": "00696_genki",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "well (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -28680,13 +28660,13 @@
             },
             {
               "romaji": "ii",
-              "meaning": "good",
+              "meaning": "good (i-adjective + polite desu)",
               "entryId": "00118_ii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "good (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -28756,7 +28736,7 @@
             },
             {
               "romaji": "uketeiru",
-              "meaning": "progressive of ukeru (receive)",
+              "meaning": "progressive of ukeru (receive) (ukete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01215_ukeru",
               "senseNumber": 1
             }
@@ -28823,13 +28803,13 @@
             },
             {
               "romaji": "bunseki",
-              "meaning": "analysis",
+              "meaning": "to analyze (compound verb: bunseki + suru, dictionary form of bunsekisuru)",
               "entryId": "03610_bunseki",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to analyze (compound verb: bunseki + suru, dictionary form of bunsekisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -28861,13 +28841,13 @@
             },
             {
               "romaji": "hirou",
-              "meaning": "announcement",
+              "meaning": "to announce (compound verb: hirou + shita, past of hirousuru)",
               "entryId": "09683_hirou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to announce (compound verb: hirou + shita, past of hirousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -28917,7 +28897,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of yushutsu suru (export) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -28987,13 +28967,13 @@
             },
             {
               "romaji": "hitsuyou",
-              "meaning": "needed",
+              "meaning": "needed (na-adjective + plain copula, forming a predicate)",
               "entryId": "00846_hitsuyou",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "needed (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -29062,13 +29042,13 @@
             },
             {
               "romaji": "shinshutsu",
-              "meaning": "advance",
+              "meaning": "advance (compound verb: shinshutsu + suru, dictionary form of shinshutsusuru)",
               "entryId": "14387_shinshutsu",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "advance (compound verb: shinshutsu + suru, dictionary form of shinshutsusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -29086,7 +29066,7 @@
             },
             {
               "romaji": "fueteiru",
-              "meaning": "progressive of fueru (increase)",
+              "meaning": "progressive of fueru (increase) (fuete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01183_fueru",
               "senseNumber": 1
             }
@@ -29118,13 +29098,13 @@
             },
             {
               "romaji": "kiken",
-              "meaning": "dangerous",
+              "meaning": "dangerous (na-adjective + polite copula, forming a predicate)",
               "entryId": "01141_kiken",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "dangerous (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -29346,7 +29326,7 @@
           "wordMeanings": [
             {
               "romaji": "aishiteiru",
-              "meaning": "progressive of aisuru (love)",
+              "meaning": "progressive of aisuru (love) (aishite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01811_aisuru",
               "senseNumber": 1
             }
@@ -29390,7 +29370,7 @@
             },
             {
               "romaji": "happyousareru",
-              "meaning": "passive of happyousuru (announce)",
+              "meaning": "is announced (passive of happyou suru: happyou + sareru)",
               "entryId": "25231_happyousuru",
               "senseNumber": 1
             }
@@ -29504,13 +29484,13 @@
             },
             {
               "romaji": "toukou",
-              "meaning": "post",
+              "meaning": "to post (compound verb: toukou + suru, dictionary form of toukousuru)",
               "entryId": "04733_toukou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to post (compound verb: toukou + suru, dictionary form of toukousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -29603,7 +29583,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of fusoku suru (shortage) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -29635,13 +29615,13 @@
             },
             {
               "romaji": "henkou",
-              "meaning": "change",
+              "meaning": "to change (compound verb: henkou + suru, dictionary form of henkousuru)",
               "entryId": "03616_henkou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to change (compound verb: henkou + suru, dictionary form of henkousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -29799,13 +29779,13 @@
             },
             {
               "romaji": "hatsubai",
-              "meaning": "release",
+              "meaning": "is released (passive of hatsubai suru: hatsubai + sareru)",
               "entryId": "04315_hatsubai",
               "senseNumber": 1
             },
             {
               "romaji": "sareru",
-              "meaning": "passive of suru (do)",
+              "meaning": "is released (passive of hatsubai suru: hatsubai + sareru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -29874,13 +29854,13 @@
             },
             {
               "romaji": "hasshin",
-              "meaning": "transmission",
+              "meaning": "to depart (compound verb: hasshin + suru, dictionary form of hasshinsuru)",
               "entryId": "04895_hasshin",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to depart (compound verb: hasshin + suru, dictionary form of hasshinsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -30014,13 +29994,13 @@
             },
             {
               "romaji": "houkoku",
-              "meaning": "report",
+              "meaning": "to report (compound verb: houkoku + shimashita, polite past of houkokusuru)",
               "entryId": "03618_houkoku",
               "senseNumber": 1
             },
             {
               "romaji": "shimashita",
-              "meaning": "polite past of suru (do)",
+              "meaning": "to report (compound verb: houkoku + shimashita, polite past of houkokusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -30262,13 +30242,13 @@
             },
             {
               "romaji": "goukaku",
-              "meaning": "passing",
+              "meaning": "to pass (an exam) (compound verb: goukaku + shita, past of goukakusuru)",
               "entryId": "02816_goukaku",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to pass (an exam) (compound verb: goukaku + shita, past of goukakusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -30365,13 +30345,13 @@
             },
             {
               "romaji": "yoroshii",
-              "meaning": "all right",
+              "meaning": "all right (i-adjective + polite desu)",
               "entryId": "01176_yoroshii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "all right (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -30489,13 +30469,13 @@
             },
             {
               "romaji": "saiyou",
-              "meaning": "hiring",
+              "meaning": "was hired (polite past passive of saiyou suru: saiyou + saremashita)",
               "entryId": "04563_saiyou",
               "senseNumber": 1
             },
             {
               "romaji": "saremashita",
-              "meaning": "to do",
+              "meaning": "was hired (polite past passive of saiyou suru: saiyou + saremashita)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -30559,13 +30539,13 @@
             },
             {
               "romaji": "setsuritsu",
-              "meaning": "establishment",
+              "meaning": "to establish (compound verb: setsuritsu + suru, dictionary form of setsuritsusuru)",
               "entryId": "14171_setsuritsu",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to establish (compound verb: setsuritsu + suru, dictionary form of setsuritsusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -30682,13 +30662,13 @@
             },
             {
               "romaji": "suki",
-              "meaning": "like",
+              "meaning": "like (na-adjective + plain copula, forming a predicate)",
               "entryId": "02355_suki",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "like (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -30894,13 +30874,13 @@
             },
             {
               "romaji": "juubun",
-              "meaning": "enough",
+              "meaning": "enough (na-adjective + polite copula, forming a predicate)",
               "entryId": "01614_juubun",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "enough (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -30932,13 +30912,13 @@
             },
             {
               "romaji": "tassei",
-              "meaning": "achievement",
+              "meaning": "to achieve (compound verb: tassei + shita, past of tasseisuru)",
               "entryId": "04816_tassei",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to achieve (compound verb: tassei + shita, past of tasseisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -31050,13 +31030,13 @@
             },
             {
               "romaji": "renraku",
-              "meaning": "contact",
+              "meaning": "to contact (compound verb: renraku + shimasu, polite of renrakusuru)",
               "entryId": "01524_renraku",
               "senseNumber": 1
             },
             {
               "romaji": "shimasu",
-              "meaning": "present polite of suru (do)",
+              "meaning": "to contact (compound verb: renraku + shimasu, polite of renrakusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -31106,13 +31086,13 @@
             },
             {
               "romaji": "ninshiki",
-              "meaning": "recognition",
+              "meaning": "to recognize (compound verb: ninshiki + suru, dictionary form of ninshikisuru)",
               "entryId": "05090_ninshiki",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to recognize (compound verb: ninshiki + suru, dictionary form of ninshikisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -31168,7 +31148,7 @@
             },
             {
               "romaji": "sundeiru",
-              "meaning": "progressive of sumu (live)",
+              "meaning": "progressive of sumu (live) (sunde + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00673_sumu",
               "senseNumber": 1
             }
@@ -31248,7 +31228,7 @@
             },
             {
               "romaji": "hataraiteiru",
-              "meaning": "progressive of hataraku (work)",
+              "meaning": "progressive of hataraku (work) (hataraite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00503_hataraku",
               "senseNumber": 1
             }
@@ -31312,21 +31292,17 @@
             },
             {
               "romaji": "ga",
-              "meaning": "object marker",
+              "meaning": "subject marker",
               "entryId": "00051_ga",
-              "senseNumber": 2
+              "senseNumber": 1
             },
             {
               "romaji": "suki",
-              "meaning": "like",
-              "entryId": "02355_suki",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             },
             {
               "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             },
             {
               "romaji": "ka",
@@ -31412,13 +31388,13 @@
             },
             {
               "romaji": "hakken",
-              "meaning": "discovery",
+              "meaning": "to discover (compound verb: hakken + suru, dictionary form of hakkensuru)",
               "entryId": "00085_hakken",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to discover (compound verb: hakken + suru, dictionary form of hakkensuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -31456,7 +31432,7 @@
             },
             {
               "romaji": "kanyuusuru",
-              "meaning": "joining",
+              "meaning": "to join (compound verb: kanyuu + suru, dictionary form of kanyuusuru)",
               "entryId": "11915_kanyuu",
               "senseNumber": 1
             }
@@ -31482,13 +31458,13 @@
             },
             {
               "romaji": "kekkon",
-              "meaning": "marriage",
+              "meaning": "marriage (compound verb: kekkon + shimasu, polite of kekkonsuru)",
               "entryId": "02514_kekkon",
               "senseNumber": 1
             },
             {
               "romaji": "shimasu",
-              "meaning": "present polite of suru (do)",
+              "meaning": "marriage (compound verb: kekkon + shimasu, polite of kekkonsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -31520,13 +31496,13 @@
             },
             {
               "romaji": "taiho",
-              "meaning": "arrest",
+              "meaning": "was arrested (past passive of taiho suru: taiho + sareta)",
               "entryId": "03397_taiho",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was arrested (past passive of taiho suru: taiho + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -31558,13 +31534,13 @@
             },
             {
               "romaji": "kensa",
-              "meaning": "inspection",
+              "meaning": "inspection (compound verb: kensa + suru, dictionary form of kensasuru)",
               "entryId": "02707_kensa",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "inspection (compound verb: kensa + suru, dictionary form of kensasuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -31608,7 +31584,7 @@
             },
             {
               "romaji": "kaketsusareta",
-              "meaning": "passage",
+              "meaning": "was passed (past passive of kaketsu suru: kaketsu + sareta)",
               "entryId": "00148_kaketsu",
               "senseNumber": 1
             }
@@ -31719,13 +31695,13 @@
             },
             {
               "romaji": "sokushin",
-              "meaning": "promotion",
+              "meaning": "to promote (compound verb: sokushin + suru, dictionary form of sokushinsuru)",
               "entryId": "05632_sokushin",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to promote (compound verb: sokushin + suru, dictionary form of sokushinsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -32005,7 +31981,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "progressive of suru (do) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -32036,7 +32012,7 @@
             },
             {
               "romaji": "tsukareteiru",
-              "meaning": "progressive of tsukareru (get tired)",
+              "meaning": "progressive of tsukareru (get tired) (tsukarete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00901_tsukareru",
               "senseNumber": 1
             }
@@ -32130,7 +32106,7 @@
             },
             {
               "romaji": "ireteiru",
-              "meaning": "is putting in (progressive of ireru)",
+              "meaning": "is putting in (progressive of ireru) (irete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01098_ireru"
             }
           ]
@@ -32215,13 +32191,13 @@
             },
             {
               "romaji": "kouken",
-              "meaning": "contribution",
+              "meaning": "to contribute (compound verb: kouken + suru, dictionary form of koukensuru)",
               "entryId": "02737_kouken",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to contribute (compound verb: kouken + suru, dictionary form of koukensuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -32365,13 +32341,13 @@
             },
             {
               "romaji": "mukou",
-              "meaning": "invalid",
+              "meaning": "invalid (na-adjective + polite copula, forming a predicate)",
               "entryId": "13385_mukou",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "invalid (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -32429,21 +32405,17 @@
             },
             {
               "romaji": "ga",
-              "meaning": "object marker",
+              "meaning": "subject marker",
               "entryId": "00051_ga",
-              "senseNumber": 2
+              "senseNumber": 1
             },
             {
               "romaji": "suki",
-              "meaning": "like",
-              "entryId": "02355_suki",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             },
             {
               "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
             }
           ]
         }
@@ -32485,13 +32457,13 @@
             },
             {
               "romaji": "keisai",
-              "meaning": "publication",
+              "meaning": "was published (past passive of keisai suru: keisai + sareta)",
               "entryId": "08993_keisai",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was published (past passive of keisai suru: keisai + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -32950,13 +32922,13 @@
             },
             {
               "romaji": "kanzen",
-              "meaning": "perfect",
+              "meaning": "perfect (na-adjective + plain copula, forming a predicate)",
               "entryId": "01552_kanzen",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "perfect (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -32988,7 +32960,7 @@
             },
             {
               "romaji": "ijisuru",
-              "meaning": "to maintain",
+              "meaning": "to maintain (compound verb: iji + suru, dictionary form of ijisuru)",
               "entryId": "01624_iji",
               "senseNumber": 2
             }
@@ -33020,13 +32992,13 @@
             },
             {
               "romaji": "boushi",
-              "meaning": "prevention",
+              "meaning": "to prevent (compound verb: boushi + suru, dictionary form of boushisuru)",
               "entryId": "14571_boushi",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to prevent (compound verb: boushi + suru, dictionary form of boushisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -33058,7 +33030,7 @@
             },
             {
               "romaji": "benkyousuru",
-              "meaning": "to study",
+              "meaning": "to study (compound verb: benkyou + suru, dictionary form of benkyousuru)",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
             }
@@ -33126,7 +33098,7 @@
             },
             {
               "romaji": "sankasuru",
-              "meaning": "to join",
+              "meaning": "to join (compound verb: sanka + suru, dictionary form of sankasuru)",
               "entryId": "25408_sankasuru",
               "senseNumber": 1
             }
@@ -33207,13 +33179,13 @@
             },
             {
               "romaji": "wakai",
-              "meaning": "young",
+              "meaning": "young (i-adjective + polite desu)",
               "entryId": "00823_wakai",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "young (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -33326,13 +33298,13 @@
             },
             {
               "romaji": "kouhyou",
-              "meaning": "public announcement",
+              "meaning": "public announcement (compound verb: kouhyou + suru, dictionary form of kouhyousuru)",
               "entryId": "11640_kouhyou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "public announcement (compound verb: kouhyou + suru, dictionary form of kouhyousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -33450,7 +33422,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of gakushuu suru (study) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -33488,13 +33460,13 @@
             },
             {
               "romaji": "shuunin",
-              "meaning": "taking office",
+              "meaning": "taking office (compound verb: shuunin + shita, past of shuuninsuru)",
               "entryId": "12368_shuunin",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "taking office (compound verb: shuunin + shita, past of shuuninsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -33568,7 +33540,7 @@
             },
             {
               "romaji": "tanoshiminishiteimasu",
-              "meaning": "to look forward to",
+              "meaning": "to look forward to (tanoshiminishite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "26825_tanoshiminisuru",
               "senseNumber": 1
             }
@@ -33618,13 +33590,13 @@
             },
             {
               "romaji": "shite",
-              "meaning": "-te form of suru (do)",
+              "meaning": "-te form of suru (do) — continuing action or state (shite + iru: -te form + iru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
             {
               "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
+              "meaning": "-te form of suru (do) — continuing action or state (shite + iru: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -33661,13 +33633,13 @@
             },
             {
               "romaji": "fuete",
-              "meaning": "-te form of fueru (increase)",
+              "meaning": "-te form of fueru (increase) — continuing action or state (fuete + iru: -te form + iru)",
               "entryId": "01183_fueru",
               "senseNumber": 1
             },
             {
               "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
+              "meaning": "-te form of fueru (increase) — continuing action or state (fuete + iru: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -33754,7 +33726,7 @@
             },
             {
               "romaji": "setsumeisuru",
-              "meaning": "to explain",
+              "meaning": "to explain (compound verb: setsumei + suru, dictionary form of setsumeisuru)",
               "entryId": "05639_setsumeisuru",
               "senseNumber": 1
             }
@@ -33798,7 +33770,7 @@
             },
             {
               "romaji": "utsutteiru",
-              "meaning": "progressive of utsuru (come out)",
+              "meaning": "progressive of utsuru (come out) (utsutte + iru: -te form + iru, plain continuing action or state)",
               "entryId": "11494_utsuru",
               "senseNumber": 1
             }
@@ -34136,13 +34108,13 @@
             },
             {
               "romaji": "kaifuku",
-              "meaning": "recovery",
+              "meaning": "to recover (compound verb: kaifuku + shita, past of kaifukusuru)",
               "entryId": "03812_kaifuku",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to recover (compound verb: kaifuku + shita, past of kaifukusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -34173,7 +34145,7 @@
             },
             {
               "romaji": "kayotteiru",
-              "meaning": "progressive of kayou (attend regularly)",
+              "meaning": "progressive of kayou (attend regularly) (kayotte + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01217_kayou",
               "senseNumber": 2
             }
@@ -34276,7 +34248,7 @@
             },
             {
               "romaji": "motometeiru",
-              "meaning": "is seeking (progressive of motomeru)",
+              "meaning": "is seeking (progressive of motomeru) (motomete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "02316_motomeru"
             }
           ]
@@ -34606,13 +34578,13 @@
             },
             {
               "romaji": "henkou",
-              "meaning": "change",
+              "meaning": "to change (compound verb: henkou + suru, dictionary form of henkousuru)",
               "entryId": "03616_henkou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to change (compound verb: henkou + suru, dictionary form of henkousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -34732,7 +34704,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of shozoku suru (belonging to) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -34776,13 +34748,13 @@
             },
             {
               "romaji": "jinin",
-              "meaning": "resignation",
+              "meaning": "resignation (compound verb: jinin + shita, past of jininsuru)",
               "entryId": "10144_jinin",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "resignation (compound verb: jinin + shita, past of jininsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -35039,13 +35011,13 @@
             },
             {
               "romaji": "yuumei",
-              "meaning": "famous",
+              "meaning": "famous (na-adjective + plain copula, forming a predicate)",
               "entryId": "01106_yuumei",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "famous (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -35076,13 +35048,13 @@
             },
             {
               "romaji": "tousen",
-              "meaning": "winning",
+              "meaning": "winning (compound verb: tousen + shita, past of tousensuru)",
               "entryId": "07074_tousen",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "winning (compound verb: tousen + shita, past of tousensuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -35325,7 +35297,7 @@
             },
             {
               "romaji": "denwashimashita",
-              "meaning": "polite past of denwasuru (make a phone call)",
+              "meaning": "polite past of denwasuru (make a phone call) (compound verb: denwa + shimashita, polite past of denwasuru)",
               "entryId": "05652_denwasuru",
               "senseNumber": 1
             }
@@ -35394,13 +35366,13 @@
             },
             {
               "romaji": "oishii",
-              "meaning": "delicious",
+              "meaning": "delicious (i-adjective + polite desu)",
               "entryId": "00740_oishii",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "delicious (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -35842,7 +35814,7 @@
             },
             {
               "romaji": "sanseishita",
-              "meaning": "past of sansei (approval)",
+              "meaning": "to agree (compound verb: sansei + shita, past of sanseisuru)",
               "entryId": "02829_sansei",
               "senseNumber": 1
             }
@@ -35961,13 +35933,13 @@
             },
             {
               "romaji": "chakunin",
-              "meaning": "taking up a new post",
+              "meaning": "taking up a new post (compound verb: chakunin + shita, past of chakuninsuru)",
               "entryId": "14905_chakunin",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "taking up a new post (compound verb: chakunin + shita, past of chakuninsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -36048,13 +36020,13 @@
             },
             {
               "romaji": "koudou",
-              "meaning": "action",
+              "meaning": "action (compound verb: koudou + suru, dictionary form of koudousuru)",
               "entryId": "02728_koudou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "action (compound verb: koudou + suru, dictionary form of koudousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -36098,13 +36070,13 @@
             },
             {
               "romaji": "sukunai",
-              "meaning": "few",
+              "meaning": "few (i-adjective + polite desu)",
               "entryId": "01136_sukunai",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "few (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -36148,7 +36120,7 @@
             },
             {
               "romaji": "junbishita",
-              "meaning": "past of junbisuru (prepare)",
+              "meaning": "past of junbisuru (prepare) (compound verb: junbi + shita, past of junbisuru)",
               "entryId": "22427_junbisuru",
               "senseNumber": 1
             }
@@ -36306,7 +36278,7 @@
             },
             {
               "romaji": "deshita",
-              "meaning": "is",
+              "meaning": "was (polite past of desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -36455,7 +36427,7 @@
             },
             {
               "romaji": "tsuzuketeiru",
-              "meaning": "progressive of tsuzukeru (continue)",
+              "meaning": "progressive of tsuzukeru (continue) (tsuzukete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01231_tsuzukeru",
               "senseNumber": 1
             }
@@ -36524,13 +36496,13 @@
             },
             {
               "romaji": "rikkouho",
-              "meaning": "candidacy",
+              "meaning": "candidacy (compound verb: rikkouho + suru, dictionary form of rikkouhosuru)",
               "entryId": "13778_rikkouho",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "candidacy (compound verb: rikkouho + suru, dictionary form of rikkouhosuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -36580,13 +36552,13 @@
             },
             {
               "romaji": "juujitsushite",
-              "meaning": "-te form of juujitsu (fulfillment)",
+              "meaning": "-te form of juujitsu (fulfillment) — continuing action or state (juujitsushite + iru: -te form + iru)",
               "entryId": "04845_juujitsu",
               "senseNumber": 1
             },
             {
               "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
+              "meaning": "-te form of juujitsu (fulfillment) — continuing action or state (juujitsushite + iru: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -36641,7 +36613,7 @@
             },
             {
               "romaji": "undoushiteimasu",
-              "meaning": "physical exercise",
+              "meaning": "physical exercise (undoushite + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00821_undou",
               "senseNumber": 1
             }
@@ -36728,7 +36700,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of kansha suru (gratitude) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -36810,13 +36782,13 @@
             },
             {
               "romaji": "anshin",
-              "meaning": "peace of mind",
+              "meaning": "to feel relieved (compound verb: anshin + shita, past of anshinsuru)",
               "entryId": "01288_anshin",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "to feel relieved",
+              "meaning": "to feel relieved (compound verb: anshin + shita, past of anshinsuru)",
               "entryId": "06067_anshinsuru",
               "senseNumber": 1
             }
@@ -36911,7 +36883,7 @@
             },
             {
               "romaji": "ataeteiru",
-              "meaning": "progressive of ataeru (give)",
+              "meaning": "progressive of ataeru (give) (ataete + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01821_ataeru",
               "senseNumber": 1
             }
@@ -36954,13 +36926,13 @@
             },
             {
               "romaji": "katte",
-              "meaning": "-te form of kau (keep)",
+              "meaning": "-te form of kau (keep) — continuing action or state (katte + imasu: -te form + iru)",
               "entryId": "08151_kau",
               "senseNumber": 1
             },
             {
               "romaji": "imasu",
-              "meaning": "present polite of iru (ongoing action (after -te form))",
+              "meaning": "-te form of kau (keep) — continuing action or state (katte + imasu: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -37097,13 +37069,13 @@
             },
             {
               "romaji": "chikai",
-              "meaning": "close",
+              "meaning": "close (i-adjective + polite desu)",
               "entryId": "00530_chikai",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "close (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -37176,13 +37148,13 @@
             },
             {
               "romaji": "kouchiku",
-              "meaning": "construction",
+              "meaning": "construction (compound verb: kouchiku + suru, dictionary form of kouchikusuru)",
               "entryId": "13164_kouchiku",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "construction (compound verb: kouchiku + suru, dictionary form of kouchikusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -37334,13 +37306,13 @@
             },
             {
               "romaji": "ii",
-              "meaning": "okay",
+              "meaning": "okay (i-adjective + polite desu)",
               "entryId": "00118_ii",
               "senseNumber": 2
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "okay (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             },
@@ -37396,13 +37368,13 @@
             },
             {
               "romaji": "iten",
-              "meaning": "moving",
+              "meaning": "to relocate (compound verb: iten + shita, past of itensuru)",
               "entryId": "04000_iten",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to relocate (compound verb: iten + shita, past of itensuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -37582,7 +37554,7 @@
             },
             {
               "romaji": "futteimasu",
-              "meaning": "progressive of furu (fall as rain)",
+              "meaning": "progressive of furu (fall as rain) (futte + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00839_furu",
               "senseNumber": 1
             }
@@ -37614,13 +37586,13 @@
             },
             {
               "romaji": "kanyuushite",
-              "meaning": "-te form of kanyuusuru (join)",
+              "meaning": "-te form of kanyuusuru (join) — continuing action or state (kanyuushite + iru: -te form + iru)",
               "entryId": "22671_kanyuusuru",
               "senseNumber": 1
             },
             {
               "romaji": "iru",
-              "meaning": "ongoing action (after -te form)",
+              "meaning": "-te form of kanyuusuru (join) — continuing action or state (kanyuushite + iru: -te form + iru)",
               "entryId": "00495_iru"
             }
           ]
@@ -37774,7 +37746,7 @@
             },
             {
               "romaji": "chikazuiteiru",
-              "meaning": "progressive of chikazuku (approach)",
+              "meaning": "progressive of chikazuku (approach) (chikazuite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01958_chikazuku",
               "senseNumber": 1
             }
@@ -37806,13 +37778,13 @@
             },
             {
               "romaji": "youkyuu",
-              "meaning": "demand",
+              "meaning": "to demand (compound verb: youkyuu + suru, dictionary form of youkyuusuru)",
               "entryId": "03658_youkyuu",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to demand (compound verb: youkyuu + suru, dictionary form of youkyuusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -37856,13 +37828,13 @@
             },
             {
               "romaji": "shinkou",
-              "meaning": "progression",
+              "meaning": "to progress (compound verb: shinkou + suru, dictionary form of shinkousuru)",
               "entryId": "03686_shinkou",
               "senseNumber": 2
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to progress (compound verb: shinkou + suru, dictionary form of shinkousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -37912,7 +37884,7 @@
             },
             {
               "romaji": "shiteita",
-              "meaning": "past progressive of suru (do)",
+              "meaning": "past progressive of suru (do) (shite + ita: -te form + iru, past continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -37994,7 +37966,7 @@
             },
             {
               "romaji": "susundeiru",
-              "meaning": "progressive of susumu (progress)",
+              "meaning": "progressive of susumu (progress) (susunde + iru: -te form + iru, plain continuing action or state)",
               "entryId": "01225_susumu",
               "senseNumber": 2
             }
@@ -38126,13 +38098,13 @@
             },
             {
               "romaji": "kinshi",
-              "meaning": "ban",
+              "meaning": "to prohibit (compound verb: kinshi + suru, dictionary form of kinshisuru)",
               "entryId": "02643_kinshi",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to prohibit (compound verb: kinshi + suru, dictionary form of kinshisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -38164,13 +38136,13 @@
             },
             {
               "romaji": "boshuu",
-              "meaning": "recruitment",
+              "meaning": "recruitment (compound verb: boshuu + suru, dictionary form of boshuusuru)",
               "entryId": "03035_boshuu",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "recruitment (compound verb: boshuu + suru, dictionary form of boshuusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -38465,13 +38437,13 @@
             },
             {
               "romaji": "tsuuka",
-              "meaning": "passage",
+              "meaning": "to pass through (compound verb: tsuuka + shita, past of tsuukasuru)",
               "entryId": "03506_tsuuka",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to pass through (compound verb: tsuuka + shita, past of tsuukasuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -38597,7 +38569,7 @@
             },
             {
               "romaji": "hataraiteiru",
-              "meaning": "progressive of hataraku (work)",
+              "meaning": "progressive of hataraku (work) (hataraite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00503_hataraku",
               "senseNumber": 1
             }
@@ -38842,7 +38814,7 @@
             },
             {
               "romaji": "sagashiteimashita",
-              "meaning": "past progressive of sagasu (look for)",
+              "meaning": "past progressive of sagasu (look for) (sagashite + imashita: -te form + iru, polite past continuing action or state)",
               "entryId": "00493_sagasu",
               "senseNumber": 1
             }
@@ -38989,7 +38961,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "progressive of suru (do) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -39097,13 +39069,13 @@
             },
             {
               "romaji": "koushin",
-              "meaning": "update",
+              "meaning": "to update (compound verb: koushin + suru, dictionary form of koushinsuru)",
               "entryId": "04765_koushin",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to update (compound verb: koushin + suru, dictionary form of koushinsuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -39167,13 +39139,13 @@
             },
             {
               "romaji": "shutoku",
-              "meaning": "acquisition",
+              "meaning": "to acquire (compound verb: shutoku + suru, dictionary form of shutokusuru)",
               "entryId": "11947_shutoku",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to acquire (compound verb: shutoku + suru, dictionary form of shutokusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -39290,13 +39262,13 @@
             },
             {
               "romaji": "saikai",
-              "meaning": "resumption",
+              "meaning": "to resume (compound verb: saikai + suru, dictionary form of saikaisuru)",
               "entryId": "05219_saikai",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to resume (compound verb: saikai + suru, dictionary form of saikaisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -39498,13 +39470,13 @@
             },
             {
               "romaji": "taisetsu",
-              "meaning": "important",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "01456_taisetsu",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "important (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -39536,13 +39508,13 @@
             },
             {
               "romaji": "kakou",
-              "meaning": "processing",
+              "meaning": "to process (compound verb: kakou + suru, dictionary form of kakousuru)",
               "entryId": "11793_kakou",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to process (compound verb: kakou + suru, dictionary form of kakousuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -39598,7 +39570,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of kaihou suru (throwing open) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -39748,7 +39720,7 @@
             },
             {
               "romaji": "tsuzuiteiru",
-              "meaning": "progressive of tsuzuku (continue)",
+              "meaning": "progressive of tsuzuku (continue) (tsuzuite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00903_tsuzuku",
               "senseNumber": 1
             }
@@ -39873,13 +39845,13 @@
             },
             {
               "romaji": "yousei",
-              "meaning": "request",
+              "meaning": "request (compound verb: yousei + suru, dictionary form of youseisuru)",
               "entryId": "05463_yousei",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "request (compound verb: yousei + suru, dictionary form of youseisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -39979,7 +39951,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "progressive of suru (do)",
+              "meaning": "continuing form of teika suru (decline) (shite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -40011,7 +39983,7 @@
             },
             {
               "romaji": "sundeimasu",
-              "meaning": "present polite of iru (exist)",
+              "meaning": "present polite of iru (exist) (sunde + imasu: -te form + iru, polite continuing action or state)",
               "entryId": "00495_iru",
               "senseNumber": 1
             }
@@ -40075,13 +40047,13 @@
           "wordMeanings": [
             {
               "romaji": "juujitsu",
-              "meaning": "fulfillment",
+              "meaning": "fulfillment (compound verb: juujitsu + shita, past of juujitsusuru)",
               "entryId": "04845_juujitsu",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "fulfillment (compound verb: juujitsu + shita, past of juujitsusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             },
@@ -40210,13 +40182,13 @@
             },
             {
               "romaji": "teishi",
-              "meaning": "stoppage",
+              "meaning": "to stop (compound verb: teishi + shita, past of teishisuru)",
               "entryId": "04067_teishi",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to stop (compound verb: teishi + shita, past of teishisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -40260,13 +40232,13 @@
             },
             {
               "romaji": "sanka",
-              "meaning": "participation",
+              "meaning": "to participate (compound verb: sanka + shita, past of sankasuru)",
               "entryId": "02498_sanka",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to participate (compound verb: sanka + shita, past of sankasuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -40309,7 +40281,7 @@
             },
             {
               "romaji": "chiekkushiteiru",
-              "meaning": "is checking (progressive of chiekkusuru)",
+              "meaning": "is checking (progressive of chiekkusuru) (chiekkushite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "04916_chekkusuru"
             }
           ]
@@ -40358,13 +40330,13 @@
             },
             {
               "romaji": "haken",
-              "meaning": "dispatch",
+              "meaning": "was dispatched (past passive of haken suru: haken + sareta)",
               "entryId": "13273_haken",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was dispatched (past passive of haken suru: haken + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -40492,7 +40464,7 @@
             },
             {
               "romaji": "sundeiru",
-              "meaning": "progressive of sumu (live)",
+              "meaning": "progressive of sumu (live) (sunde + iru: -te form + iru, plain continuing action or state)",
               "entryId": "00673_sumu",
               "senseNumber": 1
             }
@@ -40571,13 +40543,13 @@
             },
             {
               "romaji": "hassha",
-              "meaning": "launch",
+              "meaning": "was launched (past passive of hassha suru: hassha + sareta)",
               "entryId": "03695_hassha",
               "senseNumber": 2
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was launched (past passive of hassha suru: hassha + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -40740,12 +40712,12 @@
             },
             {
               "romaji": "souzoku",
-              "meaning": "inheritance",
+              "meaning": "inheritance (compound verb: souzoku + suru, dictionary form of souzokusuru)",
               "entryId": "03690_souzoku"
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "inheritance (compound verb: souzoku + suru, dictionary form of souzokusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -40853,7 +40825,7 @@
             },
             {
               "romaji": "akkashita",
-              "meaning": "past of akkasuru (worsen)",
+              "meaning": "past of akkasuru (worsen) (compound verb: akka + shita, past of akkasuru)",
               "entryId": "18844_akkasuru",
               "senseNumber": 1
             }
@@ -40959,13 +40931,13 @@
             },
             {
               "romaji": "kaisetsu",
-              "meaning": "establishment",
+              "meaning": "to open (compound verb: kaisetsu + suru, dictionary form of kaisetsusuru)",
               "entryId": "14595_kaisetsu",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "to open (compound verb: kaisetsu + suru, dictionary form of kaisetsusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -40997,13 +40969,13 @@
             },
             {
               "romaji": "shingi",
-              "meaning": "deliberation",
+              "meaning": "deliberation (compound verb: shingi + suru, dictionary form of shingisuru)",
               "entryId": "19112_shingi",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to do",
+              "meaning": "deliberation (compound verb: shingi + suru, dictionary form of shingisuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -41135,13 +41107,13 @@
             },
             {
               "romaji": "haibi",
-              "meaning": "deployment",
+              "meaning": "was deployed (past passive of haibi suru: haibi + sareta)",
               "entryId": "25292_haibi",
               "senseNumber": 1
             },
             {
               "romaji": "sareta",
-              "meaning": "to do",
+              "meaning": "was deployed (past passive of haibi suru: haibi + sareta)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -41266,7 +41238,7 @@
             },
             {
               "romaji": "shoukaishimasu",
-              "meaning": "present polite of shoukai (introduction)",
+              "meaning": "to introduce (compound verb: shoukai + shimasu, polite of shoukaisuru)",
               "entryId": "01432_shoukai",
               "senseNumber": 1
             }
@@ -41322,7 +41294,7 @@
             },
             {
               "romaji": "genshoushiteiru",
-              "meaning": "progressive of genshou (decrease)",
+              "meaning": "progressive of genshou (decrease) (genshoushite + iru: -te form + iru, plain continuing action or state)",
               "entryId": "02719_genshou",
               "senseNumber": 1
             }
@@ -41421,13 +41393,13 @@
             },
             {
               "romaji": "man'in",
-              "meaning": "packed",
+              "meaning": "packed (na-adjective + plain past copula, forming a predicate)",
               "entryId": "07584_manin",
               "senseNumber": 1
             },
             {
               "romaji": "datta",
-              "meaning": "was"
+              "meaning": "packed (na-adjective + plain past copula, forming a predicate)"
             }
           ]
         }
@@ -41538,13 +41510,13 @@
             },
             {
               "romaji": "goukaku",
-              "meaning": "passing",
+              "meaning": "to pass (an exam) (compound verb: goukaku + shita, past of goukakusuru)",
               "entryId": "02816_goukaku",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "past of suru (do)",
+              "meaning": "to pass (an exam) (compound verb: goukaku + shita, past of goukakusuru)",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -41708,7 +41680,7 @@
             },
             {
               "romaji": "hasseishita",
-              "meaning": "occurred (past of hasseisuru)",
+              "meaning": "occurred (past of hasseisuru) (compound verb: hassei + shita, past of hasseisuru)",
               "entryId": "25529_hasseisuru"
             }
           ]

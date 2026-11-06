@@ -142,6 +142,64 @@ const decks = new Map();
 for (const size of DECK_SIZES) {
   decks.set(size, JSON.parse(await readFile(path.join(DICTIONARY_DIRECTORY, `most-common-${size}.json`), "utf8")));
 }
+// Restore canonical source spacing before applying the annotations and their
+// reviewed token positions. The final pass below presents these expressions as
+// separate clickable words with the same contextual meaning.
+const expressions = new Map([
+  ["taisetsudesu", ["taisetsu", "desu"]],
+  ["yoroshikuonegaishimasu", ["yoroshiku", "onegaishimasu"]],
+  ["sukidesu", ["suki", "desu"]],
+  ["samuidesu", ["samui", "desu"]],
+  ["arigatougozaimasu", ["arigatou", "gozaimasu"]],
+  ["arigatougozaimashita", ["arigatou", "gozaimashita"]],
+  ["ohayougozaimasu", ["ohayou", "gozaimasu"]],
+]);
+const expressionSentences = new Map([
+  ["arigatougozaimasu", "Thank you for coming."],
+  ["arigatougozaimashita", "Thank you for the other day."],
+  ["ohayougozaimasu", "Good morning, everyone."],
+]);
+const expressionApplies = (joined, example) => !expressionSentences.has(joined) || expressionSentences.get(joined) === example.english;
+const suruEntries = new Map([...indexById.values()].filter((row) => row.pos_tags?.includes("verb-suru"))
+  .map((row) => [row.id.slice(6).toLowerCase(), row]));
+const nounReadings = new Set([...indexById.values()].filter((row) => row.pos_tags?.includes("noun"))
+  .map((row) => row.id.slice(6).toLowerCase()));
+const suruForms = {
+  suru: "dictionary form", shita: "past", shimasu: "polite", shimashita: "polite past",
+  shinai: "negative", shinakatta: "negative past", shimasen: "polite negative",
+  shimasendeshita: "polite negative past",
+};
+const passiveContinuingGlosses = {
+  hanbai: 'being sold', hakkou: 'being published', rensai: 'being serialized',
+  kinshi: 'being prohibited', chuumoku: 'being watched or receiving attention',
+  shitei: 'being designated', tousai: 'being equipped',
+};
+// Contextual English for passive examples whose noun gloss alone is not a verb.
+const passiveGlosses = {
+  kaketsu: 'was passed', setchi: 'was established', dounyuu: 'was introduced',
+  koukai: 'was released', houdou: 'was reported', kyouka: 'was strengthened',
+  taiho: 'was arrested', kaisei: 'was revised', keisai: 'was published',
+  haken: 'was dispatched', hassha: 'was launched', haibi: 'was deployed',
+  happyou: 'was announced', shikkou: 'was carried out', haishi: 'was discontinued',
+  kaisai: 'was held', shidou: 'was trained', ninmei: 'was appointed',
+  koufu: 'was issued', senshutsu: 'was elected', saitaku: 'was adopted',
+  hatsubai: 'was released', shimei: 'was called on', kaijo: 'was lifted',
+  saiyou: 'was hired', hyouji: 'is displayed', tekiyou: 'is applied',
+};
+const adjectiveFallbacks = { suki: 'na', daisuki: 'na', taisetsu: 'na', samui: 'i' };
+const copulaForms = {
+  da: 'plain copula', desu: 'polite copula', datta: 'plain past copula',
+  deshita: 'polite past copula', janai: 'plain negative copula',
+  janakatta: 'plain past negative copula', dewanai: 'negative copula',
+  dewanakatta: 'past negative copula',
+};
+for (const deck of decks.values()) for (const card of deck.cards) for (const example of card.examples || []) {
+  if (example.english === 'I live in California.') example.romaji = example.romaji.replace(/\bsundeiru\b/, 'sun de iru');
+  for (const [joined, parts] of expressions) {
+    if (!expressionApplies(joined, example)) continue;
+    example.romaji = example.romaji.replace(new RegExp(`\\b${parts.join("\\s+")}\\b`, "g"), joined);
+  }
+}
 const exampleReplacements = JSON.parse(await readFile(EXAMPLE_REPLACEMENTS_FILE, "utf8"));
 const replacementsByOriginal = new Map();
 const replacementsByNew = new Map();
@@ -288,6 +346,7 @@ for (const { card, deckSize, cardIndex } of canonicalCards) {
     }
     for (const review of result?.review || []) {
       const details = typeof review === "object" && review !== null ? review : { issue: String(review) };
+      if (details.type === "multiple links" && expressions.has(details.romaji)) continue;
       reviews.push({ location, exampleRomaji: example.romaji, exampleEnglish: example.english,
         sourceEntryId: selected.sourceEntry.id, ...details,
         selectedMeaning: Number.isInteger(details.index) ? result.wordMeanings?.[details.index]?.meaning : undefined });
@@ -319,9 +378,177 @@ for (const size of DECK_SIZES) {
           issue: "No canonical word annotations for this example" });
         continue;
       }
-      example.wordMeanings = wordMeanings;
+      const words = wordMeanings.map((item) => ({ ...item }));
+      for (const word of words) {
+        if (word.romaji.toLowerCase() === "deshita" && word.entryId === "09485_desu") {
+          word.meaning = "was (polite past of desu)";
+          continue;
+        }
+        if (word.romaji.toLowerCase() === "hashiridashita" && word.entryId === "00519_hashiru") {
+          word.meaning = "started running (past of hashiridasu: hashiri + dasu)";
+          continue;
+        }
+        if (word.romaji === "taisetsunisuru" && word.entryId === "26940_taisetsunisuru") {
+          word.meaning = `${word.meaning} (compound expression: taisetsu ni + suru)`;
+          continue;
+        }
+        if (word.romaji === "saremashita" && example.english === "As a result of the interview, I was hired.") {
+          word.meaning = "was hired (polite past passive of suru, after saiyou)";
+          continue;
+        }
+        if (word.romaji === "saremashita" && example.english === "The principal gave a speech.") {
+          word.meaning = "gave (honorific polite past of suru, in o hanashi wo suru)";
+          continue;
+        }
+        if (word.romaji === "kakusenakatta" && example.english === "I couldn't hide my surprise.") {
+          word.meaning = "could not hide (past negative potential of kakusu)";
+          continue;
+        }
+        const match = /^(.+?)(shimasendeshita|shinakatta|shimashita|shimasen|shimasu|shinai|shita|suru)$/i.exec(word.romaji);
+        if (!match || !word.entryId) continue;
+        const [, stem, ending] = match;
+        const current = indexById.get(word.entryId);
+        const currentName = word.entryId.slice(6).toLowerCase();
+        const compound = suruEntries.get(`${stem.toLowerCase()}suru`);
+        const verbalNoun = jmdict.lemmas?.[stem.toLowerCase()]?.some(([tag]) => tag === "vs");
+        if ((!compound && !verbalNoun) || (!verbalNoun && !nounReadings.has(stem.toLowerCase()))
+          || !current || ![stem.toLowerCase(), `${stem.toLowerCase()}suru`].includes(currentName)) continue;
+        let meaning = word.meaning;
+        if (currentName === stem.toLowerCase() && current.pos_tags?.includes("noun")) {
+          const translations = { rikkouho: "run for election", chuumon: "order", shinpo: "advance", ketsuretsu: "break down", tantou: "be in charge", touchaku: "arrive", kakutoku: "acquire" };
+          meaning = translations[stem.toLowerCase()] || compound?.gloss.split(/[;,]/)[0].trim() || meaning;
+        }
+        const form = suruForms[ending.toLowerCase()];
+        word.meaning = `${meaning} (compound verb: ${stem} + ${ending}, ${form} of ${stem}suru)`;
+      }
+      const spans = [...example.romaji.matchAll(/[A-Za-z]+(?:['’][A-Za-z]+)*/g)];
+      for (let i = 1; i < words.length; i++) {
+        const ending = words[i].romaji.toLowerCase();
+        if (!suruForms[ending]) continue;
+        const separator = example.romaji.slice(spans[i - 1].index + spans[i - 1][0].length, spans[i].index);
+        if (!/^\s+$/.test(separator)) continue;
+        const noun = words[i - 1];
+        const stem = noun.romaji.toLowerCase();
+        const compound = suruEntries.get(`${stem}suru`);
+        const nounEntry = indexById.get(noun.entryId);
+        const verbalNoun = jmdict.lemmas?.[stem]?.some(([tag]) => tag === "vs");
+        if ((!compound && !verbalNoun) || !nounEntry?.pos_tags?.includes("noun") || noun.entryId.slice(6).toLowerCase() !== stem) continue;
+        const form = suruForms[ending];
+        let gloss = compound?.gloss.split(/[;,]/)[0].trim() || noun.meaning;
+        if (ending === "shinakatta" || ending === "shimasendeshita") {
+          if (/^to be /i.test(gloss)) gloss = `was not ${gloss.slice(6)}`;
+          else if (/^to /i.test(gloss)) gloss = `did not ${gloss.slice(3)}`;
+          else if (stem === "genkyuu") gloss = "did not mention";
+        }
+        const meaning = `${gloss} (compound verb: ${stem} + ${ending}, ${form} of ${stem}suru)`;
+        noun.meaning = meaning;
+        words[i].meaning = meaning;
+      }
+      for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        const form = /^(.+(?:te|de))(imasendeshita|imashita|inakatta|imasen|imasu|inai|ita|iru)$/i.exec(word.romaji);
+        if (!form) continue;
+        const [, teForm, auxiliary] = form;
+        const auxiliaryDescription = {
+          iru: 'plain', imasu: 'polite', ita: 'past', imashita: 'polite past',
+          inai: 'negative', imasen: 'polite negative', inakatta: 'past negative', imasendeshita: 'polite past negative',
+        }[auxiliary.toLowerCase()];
+        const joinedPassive = /^(.+)sarete$/i.exec(teForm);
+        if (joinedPassive && passiveContinuingGlosses[joinedPassive[1].toLowerCase()]) {
+          const noun = joinedPassive[1].toLowerCase();
+          word.meaning = `${passiveContinuingGlosses[noun]} (passive continuing form of ${noun} suru)`;
+        }
+        if (/^(?:sarete|shite)$/i.test(teForm)) {
+          const previous = words[i - 1];
+          const previousEntry = previous && indexById.get(previous.entryId);
+          if (previousEntry?.pos_tags?.includes('noun') && jmdict.lemmas?.[previous.romaji.toLowerCase()]?.some(([tag]) => tag === 'vs')) {
+            const voice = /^sarete$/i.test(teForm) ? 'passive continuing form' : 'continuing form';
+            const contextual = /^sarete$/i.test(teForm) && passiveContinuingGlosses[previous.romaji.toLowerCase()];
+            word.meaning = contextual ? `${contextual} (${voice} of ${previous.romaji} suru)`
+              : `${voice} of ${previous.romaji} suru (${previous.meaning})`;
+          } else if (/^sarete$/i.test(teForm)) word.meaning = 'passive continuing form of suru (be done)';
+        }
+        word.meaning += ` (${teForm} + ${auxiliary}: -te form + iru, ${auxiliaryDescription} continuing action or state)`;
+      }
+      for (let i = 1; i < words.length; i++) {
+        if (!/^(?:iru|imasu|ita|imashita|inai|imasen|inakatta|imasendeshita)$/i.test(words[i].romaji)) continue;
+        const previous = words[i - 1];
+        if (!/(?:te|de)$/i.test(previous.romaji) || !/te.form|continuing/i.test(previous.meaning)) continue;
+        const combined = `${previous.meaning} — continuing action or state (${previous.romaji} + ${words[i].romaji}: -te form + iru)`;
+        previous.meaning = combined;
+        words[i].meaning = combined;
+      }
+      let romaji = example.romaji;
+      if (example.english === 'I live in California.' && romaji.includes('sun de iru')) {
+        const at = words.findIndex((word, index) => word.romaji === 'sun' && words[index + 1]?.romaji === 'de' && words[index + 2]?.romaji === 'iru');
+        if (at < 0) throw new Error('California example has unexpected continuous-form tokens');
+        words.splice(at, 3, { romaji: 'sundeiru', meaning: 'live (sunde + iru: -te form of sumu + iru, continuing state)', entryId: '00673_sumu' });
+        romaji = romaji.replace('sun de iru', 'sundeiru');
+      }
+      for (const [joined, parts] of expressions) {
+        if (!expressionApplies(joined, example)) continue;
+        const index = words.findIndex((word) => word.romaji === joined);
+        if (index < 0) continue;
+        const meaning = joined === "taisetsudesu" ? "is important" : joined === "samuidesu" ? "is cold"
+          : joined === "arigatougozaimashita" ? "thank you (gozaimashita is the polite past of gozaimasu)" : words[index].meaning;
+        words.splice(index, 1, ...parts.map((part) => ({ romaji: part, meaning })));
+        romaji = romaji.replace(new RegExp(`\\b${joined}\\b`), parts.join(" "));
+      }
+      // A noun + passive suru can be written as one token or as two. Both
+      // clickable pieces of a separated construction explain the same use.
+      for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        const contextualPassive = {
+          erabareta: ['00835_erabu', 'erabu', /elected/i.test(example.english) ? 'was elected' : 'was chosen'],
+          egakareta: ['02013_egaku', 'egaku', 'was painted'],
+          okonawareta: ['01238_okonau', 'okonau', /meeting was held/i.test(example.english) ? 'was held' : 'was carried out'],
+          tsukurareta: ['00481_tsukuru', 'tsukuru', 'was created'],
+        }[word.romaji.toLowerCase()];
+        if (contextualPassive && word.entryId === contextualPassive[0]) {
+          word.meaning = `${contextualPassive[2]} (past passive of ${contextualPassive[1]})`;
+        }
+        const attached = /^(.+?)(saremashita|sareta|saremasen|sarenakatta|sarenai|saremasu|sareru)$/i.exec(word.romaji);
+        const splitForm = /^(saremashita|sareta|saremasen|sarenakatta|sarenai|saremasu|sareru)$/i.test(word.romaji);
+        const noun = splitForm ? words[i - 1] : null;
+        const stem = attached ? attached[1].toLowerCase() : noun?.romaji.toLowerCase();
+        const ending = attached ? attached[2].toLowerCase() : splitForm ? word.romaji.toLowerCase() : null;
+        if (!stem || !ending || !passiveGlosses[stem]) continue;
+        const entry = indexById.get(attached ? word.entryId : noun?.entryId);
+        const sourceSuru = attached && entry?.id === '00392_suru'
+          && jmdict.lemmas?.[stem]?.some(([tag]) => tag === 'vs');
+        if (!entry?.pos_tags?.includes('noun') && !entry?.pos_tags?.includes('verb-suru') && !sourceSuru) continue;
+        const form = /mashita$/.test(ending) ? 'polite past passive' : /nakatta$/.test(ending) ? 'negative past passive'
+          : /ta$/.test(ending) ? 'past passive' : /masen$/.test(ending) ? 'polite negative passive'
+            : /nai$/.test(ending) ? 'negative passive' : /masu$/.test(ending) ? 'polite passive' : 'passive';
+        const base = passiveGlosses[stem];
+        const gloss = base.replace(/^(?:was|is) /, `${/past/.test(form) ? 'was' : 'is'} ${/negative/.test(form) ? 'not ' : ''}`);
+        const meaning = `${gloss} (${form} of ${stem} suru: ${stem} + ${ending})`;
+        word.meaning = meaning;
+        if (noun) noun.meaning = meaning;
+      }
+      // The copula makes a na-adjective a predicate; it does not turn the
+      // adjective into a lexical verb. Keep both popup targets in sync.
+      const positioned = [...romaji.matchAll(/[A-Za-z]+(?:['’][A-Za-z]+)*/g)];
+      for (let i = 0; i + 1 < words.length; i++) {
+        const adjective = words[i], copula = words[i + 1];
+        const description = copulaForms[copula.romaji.toLowerCase()];
+        if (!description || !/^\s+$/.test(romaji.slice(positioned[i].index + positioned[i][0].length, positioned[i + 1].index))) continue;
+        const entry = indexById.get(adjective.entryId);
+        const fallback = adjectiveFallbacks[adjective.romaji.toLowerCase()];
+        const na = entry?.pos_tags?.includes('adjective-na') || fallback === 'na';
+        const iAdjective = entry?.pos_tags?.includes('adjective-i') || fallback === 'i';
+        if (!na && !iAdjective) continue;
+        if (!na && !['desu'].includes(copula.romaji.toLowerCase())) continue;
+        const grammar = na ? `na-adjective + ${description}, forming a predicate`
+          : `i-adjective + polite desu`;
+        const meaning = `${adjective.meaning} (${grammar})`;
+        adjective.meaning = meaning;
+        copula.meaning = meaning;
+      }
+      example.romaji = romaji;
+      example.wordMeanings = words;
       assignedExamples += 1;
-      assignedTokens += wordMeanings.length;
+      assignedTokens += words.length;
     }
   }
 }

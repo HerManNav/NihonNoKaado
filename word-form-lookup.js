@@ -113,7 +113,9 @@
         if (tag !== posTag) continue;
         if (isUnsupportedForm(label, lemma, tag, gloss)) continue;
         const shownLemma = tag === "vs" ? `${lemma} suru` : lemma;
-        addCandidate(candidates, `${label} of ${shownLemma} — ${gloss}`, score);
+        const continuous = /te-iru/.test(label) ? " (te-form + iru: ongoing action or continuing state)" : "";
+        const passive = tag === "vs" && /passive/.test(label) ? ` (compound verb: ${lemma} + suru; passive voice)` : "";
+        addCandidate(candidates, `${label} of ${shownLemma} — ${gloss}${continuous}${passive}`, score);
       }
     }
   }
@@ -173,6 +175,36 @@
     }
   }
 
+  function addAttachedSuru(candidates, key, data) {
+    for (const [suffix, form] of [["shimasendeshita", "polite past negative"], ["shinakatta", "past negative"],
+      ["shimashita", "polite past"], ["shimasen", "polite negative"], ["shimasu", "polite"],
+      ["shinai", "negative"], ["shita", "past"], ["suru", "dictionary form"]]) {
+      if (!key.endsWith(suffix) || key.length === suffix.length) continue;
+      const noun = key.slice(0, -suffix.length);
+      for (const [tag, gloss, score] of data.lemmas?.[noun] || []) {
+        if (tag !== "vs") continue;
+        addCandidate(candidates, `${form} form of ${noun} suru — ${gloss} (compound verb: ${noun} + ${suffix})`, score, 1);
+      }
+    }
+  }
+
+  function addContinuousAuxiliary(candidates, key, data) {
+    for (const [ending, label] of [
+      ['imasendeshita', 'polite past negative'], ['imashita', 'polite past'],
+      ['inakatta', 'past negative'], ['imasen', 'polite negative'], ['inai', 'negative'],
+    ]) {
+      if (!key.endsWith(ending)) continue;
+      const teForm = key.slice(0, -ending.length);
+      if (!/(?:te|de)$/.test(teForm)) continue;
+      for (const meaning of findWordMeanings(teForm, data)) {
+        const match = /^(.*?te-form) of (.+?) — (.+)$/.exec(meaning);
+        if (!match) continue;
+        addCandidate(candidates, `${label} continuing form of ${match[2]} — ${match[3]} (${teForm} + ${ending}: ${match[1]} + iru, continuing action or state)`, 0, 1);
+      }
+      break;
+    }
+  }
+
   function findWordMeanings(key, data, previousKey = "") {
     const word = normalizedKey(key);
     if (!word || !data || typeof data !== "object") return [];
@@ -180,12 +212,17 @@
     const candidates = [];
     const { nouns } = keySets(data);
     addDirectMeanings(candidates, word, data);
+    if (word === "arigatougozaimashita") {
+      addCandidate(candidates, "thank you (gozaimashita is the polite past of gozaimasu)", 0, 1);
+    }
     addParticleSenseHints(candidates, word, data);
     addIrregularForms(candidates, word, data);
     addRuleForms(candidates, word, data);
     addNounCopula(candidates, word, previous, data, nouns);
     addPronounPlural(candidates, word, previous, data);
     addSpacedSuru(candidates, word, previous, data);
+    addAttachedSuru(candidates, word, data);
+    addContinuousAuxiliary(candidates, word, data);
 
     candidates.sort((a, b) => b.priority - a.priority || b.score - a.score);
     const seen = new Set();

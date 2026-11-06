@@ -8,8 +8,8 @@ const specs = [
   { size: 50, visibleTokens: 190 },
   { size: 100, visibleTokens: 383 },
   { size: 500, visibleTokens: 2365 },
-  { size: 1000, visibleTokens: 4696 },
-  { size: 2000, visibleTokens: 9558 },
+  { size: 1000, visibleTokens: 4700 },
+  { size: 2000, visibleTokens: 9565 },
 ];
 // Keep this identical to the romaji token splitter in app.js. Punctuation and
 // whitespace are not popup targets; apostrophes within a word are retained.
@@ -95,7 +95,7 @@ test("reused examples have identical contextual annotations across all decks", (
       } else annotatedBySentence.set(key, example.wordMeanings);
     }
   }
-  assert.equal(tokenOccurrences, 17192, "Review changed total token coverage across all five decks");
+  assert.equal(tokenOccurrences, 17203, "Review changed total token coverage across all five decks");
   assert.equal(uniqueSentences.size, 2027, "Review changed unique example count across all five decks");
 });
 

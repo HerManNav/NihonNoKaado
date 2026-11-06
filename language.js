@@ -261,10 +261,10 @@
     loadingLabel.textContent = language === "es" ? "Preparando todo" : "Getting things ready";
     loadingFootnote.textContent = language === "es" ? "Preparando tu espacio de estudio" : "Preparing your study space";
     const start = performance.now();
-    const duration = 2000;
+    const duration = 1500;
     const stages = [
-      [0, 0], [220, 12], [450, 29], [720, 30], [1000, 52],
-      [1190, 58], [1500, 82], [1730, 83], [2000, 100]
+      [0, 0], [165, 12], [337.5, 29], [540, 30], [750, 52],
+      [892.5, 58], [1125, 82], [1297.5, 83], [1500, 100]
     ];
     const tick = (now) => {
       const elapsed = Math.min(duration, now - start);

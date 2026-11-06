@@ -140,7 +140,7 @@ test("language options show flags and the language button lives only on the home
   assert.doesNotMatch(html, /A little Japanese, every day\.|Small steps\. Stronger memory\./);
 });
 
-test("the staged selector takes two seconds, then fades into the selected language", () => {
+test("the staged selector takes 1.5 seconds, then fades into the selected language", () => {
   const runtime = makeLanguageRuntime();
   runtime.buttons[1].click();
   assert.equal(runtime.options.hidden, true);
@@ -149,7 +149,7 @@ test("the staged selector takes two seconds, then fades into the selected langua
   assert.equal(runtime.loadingLabel.textContent, "Preparando todo");
   assert.equal(runtime.loadingFootnote.textContent, "Preparando tu espacio de estudio");
 
-  runtime.runFrames([0, 220, 450, 720, 1000, 1190, 1500, 1730, 2000]);
+  runtime.runFrames([0, 165, 337.5, 540, 750, 892.5, 1125, 1297.5, 1500]);
   assert.deepEqual(runtime.percentages, [0, 12, 29, 30, 52, 58, 82, 83, 100]);
   assert.equal(runtime.loadingPercent.textContent, "100%");
   assert.equal(runtime.loadingFill.style.width, "100%");
@@ -168,7 +168,7 @@ test("English remains unchanged and the home-page button returns to language cho
   const runtime = makeLanguageRuntime();
   runtime.buttons[0].click();
   assert.equal(runtime.loadingLabel.textContent, "Getting things ready");
-  runtime.runFrames([0, 220, 450, 720, 1000, 1190, 1500, 1730, 2000]);
+  runtime.runFrames([0, 165, 337.5, 540, 750, 892.5, 1125, 1297.5, 1500]);
   runtime.runTimers();
   assert.equal(runtime.document.documentElement.lang, "en");
   assert.deepEqual(runtime.nodes.map((node) => node.nodeValue), ["Start session", "Tap to reveal translation"]);

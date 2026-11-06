@@ -407,13 +407,13 @@
             },
             {
               "romaji": "omoshiroi",
-              "meaning": "interesting",
+              "meaning": "interesting (i-adjective + polite desu)",
               "entryId": "00589_omoshiroi",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "interesting (i-adjective + polite desu)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -1959,13 +1959,13 @@
             },
             {
               "romaji": "hitsuyou",
-              "meaning": "necessary",
+              "meaning": "necessary (na-adjective + polite copula, forming a predicate)",
               "entryId": "00846_hitsuyou",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "necessary (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -2466,13 +2466,13 @@
             },
             {
               "romaji": "meikaku",
-              "meaning": "clear",
+              "meaning": "clear (na-adjective + plain copula, forming a predicate)",
               "entryId": "01664_meikaku",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "clear (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
@@ -2551,7 +2551,7 @@
             },
             {
               "romaji": "tabeteimasen",
-              "meaning": "negative progressive of taberu (eat)",
+              "meaning": "negative progressive of taberu (eat) (tabete + imasen: -te form + iru, polite negative continuing action or state)",
               "entryId": "00396_taberu",
               "senseNumber": 1
             }
@@ -2824,13 +2824,13 @@
           "wordMeanings": [
             {
               "romaji": "daijoubu",
-              "meaning": "fine",
+              "meaning": "fine (na-adjective + polite copula, forming a predicate)",
               "entryId": "00772_daijoubu",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "fine (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
             }
@@ -2924,7 +2924,7 @@
             },
             {
               "romaji": "sagashiteimashita",
-              "meaning": "past progressive of sagasu (look for)",
+              "meaning": "past progressive of sagasu (look for) (sagashite + imashita: -te form + iru, polite past continuing action or state)",
               "entryId": "00493_sagasu",
               "senseNumber": 1
             }
@@ -3235,7 +3235,7 @@
             },
             {
               "romaji": "motteiru",
-              "meaning": "have (continuing state of motsu)"
+              "meaning": "have (continuing state of motsu) (motte + iru: -te form + iru, plain continuing action or state)"
             }
           ]
         }
@@ -3463,13 +3463,13 @@
             },
             {
               "romaji": "mitai",
-              "meaning": "like",
+              "meaning": "like (na-adjective + plain copula, forming a predicate)",
               "entryId": "10755_mitai",
               "senseNumber": 1
             },
             {
               "romaji": "da",
-              "meaning": "is",
+              "meaning": "like (na-adjective + plain copula, forming a predicate)",
               "entryId": "09496_da",
               "senseNumber": 1
             }
