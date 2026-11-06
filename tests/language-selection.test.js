@@ -150,9 +150,9 @@ test("the staged selector takes 1.5 seconds, then fades into the selected langua
   assert.equal(runtime.loadingFootnote.textContent, "Preparando tu espacio de estudio");
 
   runtime.runFrames([0, 165, 337.5, 540, 750, 892.5, 1125, 1297.5, 1500]);
-  assert.deepEqual(runtime.percentages, [0, 12, 29, 30, 52, 58, 82, 83, 100]);
-  assert.equal(runtime.loadingPercent.textContent, "100%");
-  assert.equal(runtime.loadingFill.style.width, "100%");
+  assert.deepEqual(runtime.percentages, [0, 10, 23, 24, 42, 46, 66, 67, 80]);
+  assert.equal(runtime.loadingPercent.textContent, "80%");
+  assert.equal(runtime.loadingFill.style.width, "80%");
   assert.equal(runtime.gate.hidden, false, "the gate stays visible through the progress phase");
   runtime.runTimers();
 
