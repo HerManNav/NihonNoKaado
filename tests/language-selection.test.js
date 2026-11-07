@@ -41,7 +41,7 @@ class FakeTextNode {
   constructor(value) { this.nodeType = 3; this.nodeValue = value; }
 }
 
-function makeLanguageRuntime() {
+function makeLanguageRuntime(savedLanguage = null, previousSessionLanguage = null) {
   const gate = new FakeElement();
   gate.classList.add("is-initial-entry");
   const app = new FakeElement();
@@ -90,8 +90,11 @@ function makeLanguageRuntime() {
   };
   const frames = [];
   const timers = [];
+  const events = [];
   const percentages = [];
   const stored = new Map();
+  if (previousSessionLanguage) stored.set("japanese-cards.current-language", previousSessionLanguage);
+  const persistent = new Map(savedLanguage ? [["japanese-cards.current-language", savedLanguage]] : []);
   const observer = { observe() {}, disconnect() {} };
   class FakeMutationObserver { constructor(callback) { this.callback = callback; } observe() { observer.observe(); } disconnect() { observer.disconnect(); } }
   const window = {
@@ -100,7 +103,7 @@ function makeLanguageRuntime() {
     prompt(message) { return message; },
     location: { reload() {} },
     setTimeout(callback, delay) { timers.push({ callback, delay }); return timers.length; },
-    dispatchEvent() {},
+    dispatchEvent(event) { events.push(event.type); },
   };
   const sessionStorage = {
     getItem(key) { return stored.get(key) ?? null; },
@@ -112,7 +115,10 @@ function makeLanguageRuntime() {
     if (name === "aria-valuenow") percentages.push(Number(value));
   };
   const context = vm.createContext({
-    document, window, sessionStorage, MutationObserver: FakeMutationObserver, Event: class Event { constructor(type) { this.type = type; } },
+    document, window, sessionStorage, localStorage: {
+      getItem(key) { return persistent.get(key) ?? null; },
+      setItem(key, value) { persistent.set(key, value); },
+    }, MutationObserver: FakeMutationObserver, Event: class Event { constructor(type) { this.type = type; } },
     Node: { ELEMENT_NODE: 1, TEXT_NODE: 3 }, NodeFilter: { SHOW_TEXT: 4 },
     performance: { now: () => 0 },
     requestAnimationFrame(callback) { frames.push(callback); },
@@ -120,7 +126,7 @@ function makeLanguageRuntime() {
   vm.runInContext(languageSource, context, { filename: "language.js" });
   return {
     gate, app, options, loading, loadingLabel, loadingFootnote, loadingPercent, loadingTrack,
-    loadingFill, backButton, selectorBack, buttons, nodes, frames, timers, percentages, document, window,
+    loadingFill, backButton, selectorBack, buttons, nodes, frames, timers, percentages, document, window, persistent, stored, events,
     runFrames(times) {
       for (const time of times) {
         const frame = frames.shift();
@@ -141,11 +147,23 @@ test("settings provides language selection and the back arrow", () => {
   assert.match(html, /data-language="es"[\s\S]*?class="language-flag"/);
 });
 
+test("starter dictionary instructions have a Spanish translation", () => {
+  const instruction = "Choose a starter dictionary. Loading one will replace the current one.";
+  assert.ok(html.includes(instruction));
+  const runtime = makeLanguageRuntime();
+  const text = new FakeTextNode(instruction);
+  runtime.nodes.push(text);
+  runtime.buttons[1].click();
+  assert.equal(text.nodeValue, "Elige un diccionario inicial. Al cargarlo, se reemplazará el actual.");
+  assert.ok(!html.includes("Select a dictionary to replace the one saved in this browser."));
+});
+
 test("the initial language selector fades in without repeating its cold-start animation", () => {
   assert.match(html, /class="language-gate is-initial-entry"/);
   assert.match(styles, /\.language-gate\.is-initial-entry\s*\{\s*animation:\s*gate-fade-in\s+420ms/);
   const runtime = makeLanguageRuntime();
   runtime.buttons[0].click();
+  assert.equal(runtime.persistent.get("japanese-cards.current-language"), "en");
   assert.equal(runtime.gate.classList.contains("is-initial-entry"), false);
   runtime.runFrames([0, 165, 337.5, 540, 750, 892.5, 1125, 1297.5, 1500]);
   runtime.runTimers();
@@ -154,7 +172,22 @@ test("the initial language selector fades in without repeating its cold-start an
   assert.equal(runtime.gate.classList.contains("is-returning"), true);
 });
 
-test("system back from the language selector opened by the home page returns to the app", () => {
+test("a saved language skips the selector on later launches", () => {
+  const runtime = makeLanguageRuntime("es");
+  assert.equal(runtime.gate.hidden, true);
+  assert.equal(runtime.app.hidden, false);
+  assert.equal(runtime.document.documentElement.lang, "es");
+  assert.equal(runtime.window.JapaneseCardsLanguageNavigation.isSelectorVisible(), false);
+});
+
+test("a language saved by the previous session-only version is migrated", () => {
+  const runtime = makeLanguageRuntime(null, "en");
+  assert.equal(runtime.gate.hidden, true);
+  assert.equal(runtime.app.hidden, false);
+  assert.equal(runtime.persistent.get("japanese-cards.current-language"), "en");
+});
+
+test("system back from the settings language selector returns to the app", () => {
   const runtime = makeLanguageRuntime();
   const navigation = runtime.window.JapaneseCardsLanguageNavigation;
   assert.equal(navigation.isSelectorVisible(), true);
@@ -200,6 +233,7 @@ test("settings back arrow returns to app and same language skips loading", () =>
 
 test("the staged selector takes 1.5 seconds, then fades into the selected language", () => {
   const runtime = makeLanguageRuntime();
+  runtime.stored.set("japanese-cards.return-to-settings", "true");
   runtime.buttons[1].click();
   assert.equal(runtime.options.hidden, true);
   assert.equal(runtime.loading.hidden, false);
@@ -220,9 +254,11 @@ test("the staged selector takes 1.5 seconds, then fades into the selected langua
   assert.equal(runtime.document.title, "Japanese Cards — Aprende japonés");
   assert.equal(runtime.app.hidden, false);
   assert.deepEqual(runtime.nodes.map((node) => node.nodeValue), ["Empezar sesión", "Toca para ver la traducción"]);
+  assert.deepEqual(runtime.events, [], "changing language returns to Home instead of reopening Settings");
+  assert.equal(runtime.stored.has("japanese-cards.return-to-settings"), false);
 });
 
-test("English remains unchanged and the home-page button returns to language choice", () => {
+test("English stays unchanged and the Settings language option returns to language choice", () => {
   const runtime = makeLanguageRuntime();
   runtime.buttons[0].click();
   assert.equal(runtime.loadingLabel.textContent, "Getting things ready");

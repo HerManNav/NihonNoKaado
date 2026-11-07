@@ -23,11 +23,19 @@ test("default dictionary catalog keeps 50 and 100 and offers 500, 1,000, and 2,0
     ["common-2000", 2000],
   ]);
   assert.equal(existsSync(join(root, "dictionaries", "most-common-10.json")), false);
+  assert.deepEqual(manifest.dictionaries.map(({ name }) => name), [
+    "Most common - 50", "Most common - 100", "Most common - 500", "Most common - 1,000", "Most common - 2,000",
+  ]);
 
   for (const { count, file } of manifest.dictionaries) {
     const source = readDictionary(file);
     assert.equal(source.cards.length, count, `${file} should contain exactly ${count} cards`);
   }
+});
+
+test("Spanish dictionary labels use the localized most-common names", () => {
+  assert.equal(readDictionary("most-common-50-es.json").name, "Más comunes - 50");
+  assert.match(app, /name: `Más comunes - \$\{dictionary\.count\.toLocaleString\("es-ES"\)\}/);
 });
 
 test("each default dataset has unique romaji and a complete sense-matched example per meaning", () => {

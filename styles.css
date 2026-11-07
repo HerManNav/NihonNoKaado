@@ -181,10 +181,11 @@ html:not(.native-app) .add-button::before { content: ""; position: absolute; ins
 .native-app .web-shortcut-hint { display: none; }
 .native-app .dictionary-entry-hints { display: none; }
 .default-dictionaries-source a { color: #485143; font-weight: 650; text-underline-offset: 2px; }
-.default-dictionaries-status { min-height: 20px; margin: 12px 0 0; }
-.default-dictionary-list { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; margin-top: 12px; padding: 2px 8px 20px 2px; }
+.default-dictionaries-status { min-height: 0; margin: 4px 0 0; }
+.default-dictionary-list { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; margin-top: 6px; padding: 2px 8px 20px 2px; }
 .default-dictionary-option { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 70px; padding: 14px 16px; border: 1px solid #e3e2d9; border-radius: 13px; background: #fff; color: #30392f; text-align: left; box-shadow: 0 3px 12px #20211f08; }
-.own-dictionary-option { justify-content: flex-start; font-weight: 650; }
+.own-dictionary-option { justify-content: flex-start; border-color: #c8c9bd; background: #f0f0eb; font-weight: 650; box-shadow: 0 3px 12px #20211f08; }
+.own-dictionary-option:hover:not(:disabled) { background: #e7e8e1; }
 .default-dictionary-option:hover:not(:disabled) { background: #f0f1eb; border-color: #c8c9bd; }
 .default-dictionary-option:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
 .default-dictionary-option:disabled { cursor: progress; opacity: .65; }

@@ -38,7 +38,7 @@
     "Download started. Check your browser downloads.": "Descarga iniciada. Consulta las descargas del navegador.",
     "Show me": "Quiero ver primero",
     "Japanese first": "Japonés primero",
-    "English first": "Inglés primero",
+    "English first": "Traducción primero",
     "Cards per session": "Tarjetas por sesión",
     "Cards per practice session": "Tarjetas por sesión de práctica",
     "Whole dictionary": "Todo el diccionario",
@@ -65,7 +65,7 @@
     "Tab": "Tab",
     "Enter": "Intro",
     "Default dictionaries": "Diccionarios predeterminados",
-    "Choose a starter dictionary. Loading one will replace the dictionary saved in this browser.": "Elige un diccionario inicial. Al cargarlo, se reemplazará el diccionario guardado en este navegador.",
+    "Choose a starter dictionary. Loading one will replace the current one.": "Elige un diccionario inicial. Al cargarlo, se reemplazará el actual.",
     "All sets use the same Japanese news frequency ranking, filtered to unique romaji words with a sense-matched example.": "Todas las listas usan la misma clasificación de frecuencia de noticias japonesas, filtrada para incluir palabras únicas en romaji con ejemplos acordes a su significado.",
     "Meanings and example sentences come from the ": "Los significados y las frases de ejemplo proceden del ",
     ". Its entries include sense-tagged examples and are reviewed as part of the project. TKG data is public domain (CC0).": ". Sus entradas incluyen ejemplos etiquetados por significado y se revisan como parte del proyecto. Los datos de TKG son de dominio público (CC0).",
@@ -80,7 +80,7 @@
     "Japanese (romaji)": "Japonés (romaji)",
     "e.g. ohayou": "p. ej., ohayou",
     "Hiragana": "Hiragana",
-    "English meaning(s)": "Significado(s) en inglés",
+    "English meaning(s)": "Significado(s)",
     "e.g. good morning": "p. ej., buenos días",
     "Example (romaji)": "Ejemplo (romaji)",
     "Example (hiragana)": "Ejemplo (hiragana)",
@@ -98,8 +98,8 @@
     "Add a dictionary entry": "Añadir una entrada al diccionario",
     "New Japanese word in romaji": "Nueva palabra japonesa en romaji",
     "New word in hiragana": "Nueva palabra en hiragana",
-    "English meaning": "Significado en inglés",
-    "New English meaning": "Nuevo significado en inglés",
+    "English meaning": "Significado",
+    "New English meaning": "Nuevo significado",
     "Press Tab for another meaning": "Pulsa Tab para añadir otro significado",
     "Press Enter to add card": "Pulsa Intro para añadir la tarjeta",
     "Press ": "Pulsa ",
@@ -110,7 +110,6 @@
     "New Example (hiragana)": "Nuevo ejemplo (hiragana)",
     "New Example translation": "Nueva traducción del ejemplo",
     "Try again": "Intentar de nuevo",
-    "Select a dictionary to replace the one saved in this browser.": "Selecciona un diccionario para reemplazar el que está guardado en este navegador.",
     "Loading available dictionaries…": "Cargando diccionarios disponibles…",
     "No default dictionaries are available yet.": "Todavía no hay diccionarios predeterminados disponibles.",
     "1 available": "1 disponible",
@@ -203,8 +202,8 @@
     "New Japanese word in romaji": "Nueva palabra japonesa en romaji",
     "Hiragana": "Hiragana",
     "New word in hiragana": "Nueva palabra en hiragana",
-    "English meaning": "Significado en inglés",
-    "New English meaning": "Nuevo significado en inglés",
+    "English meaning": "Significado",
+    "New English meaning": "Nuevo significado",
     "Example in romaji": "Ejemplo en romaji",
     "Example in hiragana": "Ejemplo en hiragana",
     "Example translation": "Traducción del ejemplo"
@@ -273,7 +272,8 @@
   function startSelection(language) {
     if (transitionInProgress) return;
     gate.classList.remove("is-initial-entry");
-    const currentLanguage = sessionStorage.getItem("japanese-cards.current-language");
+    const currentLanguage = localStorage.getItem("japanese-cards.current-language")
+      || sessionStorage.getItem("japanese-cards.current-language");
     if (hasEnteredApp && gateCanReturnToApp && currentLanguage === language) {
       returnToAppFromLanguageSelector();
       return;
@@ -284,6 +284,7 @@
       return;
     }
     transitionInProgress = true;
+    localStorage.setItem("japanese-cards.current-language", language);
     sessionStorage.setItem("japanese-cards.current-language", language);
     if (language === "es") applySpanish();
     else document.documentElement.lang = "en";
@@ -318,10 +319,7 @@
           window.setTimeout(() => app.classList.remove("is-entering-app"), 500);
           hasEnteredApp = true;
           gateCanReturnToApp = false;
-          if (sessionStorage.getItem("japanese-cards.return-to-settings") === "true") {
-            sessionStorage.removeItem("japanese-cards.return-to-settings");
-            window.dispatchEvent(new Event("japanese-cards:show-settings"));
-          }
+          sessionStorage.removeItem("japanese-cards.return-to-settings");
           transitionInProgress = false;
         }, 280);
       }, 80);
@@ -389,7 +387,19 @@
   const pendingLanguage = sessionStorage.getItem("japanese-cards.pending-language");
   if (pendingLanguage === "en" || pendingLanguage === "es") {
     sessionStorage.removeItem("japanese-cards.pending-language");
+    localStorage.setItem("japanese-cards.current-language", pendingLanguage);
     sessionStorage.setItem("japanese-cards.current-language", pendingLanguage);
     startSelection(pendingLanguage);
+  } else {
+    const savedLanguage = localStorage.getItem("japanese-cards.current-language")
+      || sessionStorage.getItem("japanese-cards.current-language");
+    if (savedLanguage === "en" || savedLanguage === "es") {
+      localStorage.setItem("japanese-cards.current-language", savedLanguage);
+      sessionStorage.setItem("japanese-cards.current-language", savedLanguage);
+      if (savedLanguage === "es") applySpanish();
+      gate.hidden = true;
+      app.hidden = false;
+      hasEnteredApp = true;
+    }
   }
 })();

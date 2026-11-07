@@ -1176,14 +1176,20 @@ async function openDefaultDictionaries() {
     if (!Array.isArray(catalog.dictionaries) || catalog.dictionaries.length === 0) {
       throw new Error("No default dictionaries are available yet.");
     }
-    renderDefaultDictionaries(catalog.dictionaries);
+    const spanish = sessionStorage.getItem("japanese-cards.current-language") === "es";
+    const dictionaries = spanish ? catalog.dictionaries.map((dictionary) => ({
+      ...dictionary,
+      name: `Más comunes - ${dictionary.count.toLocaleString("es-ES")}${dictionary.spanishFile ? "" : " (en inglés)"}`,
+      file: dictionary.spanishFile || dictionary.file,
+    })) : catalog.dictionaries;
+    renderDefaultDictionaries(dictionaries);
     const importButton = document.createElement("button");
     importButton.className = "default-dictionary-option own-dictionary-option";
     importButton.type = "button";
     importButton.textContent = "Import my own dictionary";
     importButton.addEventListener("click", () => importFile.click());
     defaultDictionaryList.append(importButton);
-    defaultDictionariesStatus.textContent = "Select a dictionary to replace the one saved in this browser.";
+    defaultDictionariesStatus.textContent = "";
   } catch (error) {
     defaultDictionariesStatus.textContent = defaultDictionaryErrorMessage("dictionaries/manifest.json", error);
     const retryButton = document.createElement("button");

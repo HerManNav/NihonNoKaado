@@ -14,6 +14,7 @@ test('dictionary tools open import, export and clear screens and toggle on touch
   assert.match(app, /querySelector\("#clear-action"\)\.addEventListener\("click", confirmClearDictionary\)/);
   assert.match(app, /dictionaryTools\.classList\.contains\("is-open"\)\) closeDictionaryMenu\(\);\s*else openDictionaryMenu\(\)/);
   assert.match(app, /importButton\.className = "default-dictionary-option own-dictionary-option"/);
+  assert.match(css, /\.own-dictionary-option\s*\{[^}]*background:\s*#f0f0eb/);
 });
 
 test('export screen shows Downloads on Android and uses browser downloads on web', () => {
