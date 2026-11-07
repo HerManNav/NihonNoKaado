@@ -4,7 +4,7 @@ This separate Capacitor project bundles the shared web app files into an Android
 
 ## Shared source
 
-The root project remains the source of truth for `index.html`, `styles.css`, `app.js`, `dictionary-core.js`, and `dictionaries/`. Before syncing or building Android, `npm run copy-web` copies those shared app files and default-dictionary JSON assets into the generated `www/` directory. The generated directory is ignored by Git.
+The root project remains the source of truth for `index.html`, `styles.css`, `app.js`, `dictionary-core.js`, `word-form-lookup.js`, `language.js`, and `dictionaries/`. Before syncing or building Android, `npm run copy-web` copies those shared files, the dictionary manifest, default decks, and romaji lookup into the generated `www/` directory. Maintenance source archives are excluded, and the generated dictionary directory is replaced on each copy to remove stale assets. The generated directory is ignored by Git.
 
 ## Build prerequisites
 

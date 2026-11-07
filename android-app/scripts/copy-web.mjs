@@ -1,4 +1,4 @@
-import { copyFile, cp, mkdir } from "node:fs/promises";
+import { copyFile, mkdir, readdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,6 +13,17 @@ await Promise.all(sharedFiles.map((file) => copyFile(
   path.join(sourceDirectory, file),
   path.join(webDirectory, file),
 )));
-await cp(path.join(sourceDirectory, "dictionaries"), path.join(webDirectory, "dictionaries"), { recursive: true });
+// Source archives are for maintenance only; ship the files the app can fetch.
+const dictionaryDirectory = path.join(sourceDirectory, "dictionaries");
+const runtimeDictionaries = (await readdir(dictionaryDirectory)).filter((file) =>
+  file === "manifest.json" || /^most-common-\d+\.json$/.test(file)
+  || /^romaji-english-.*\.json(?:\.gz)?$/.test(file));
+const bundledDictionaries = path.join(webDirectory, "dictionaries");
+// Clear the generated copy so older builds cannot leave source archives behind.
+await rm(bundledDictionaries, { recursive: true, force: true });
+await mkdir(bundledDictionaries, { recursive: true });
+await Promise.all(runtimeDictionaries.map((file) => copyFile(
+  path.join(dictionaryDirectory, file), path.join(bundledDictionaries, file),
+)));
 
 console.log(`Copied ${sharedFiles.length} shared web app files and default dictionaries into android-app/www.`);

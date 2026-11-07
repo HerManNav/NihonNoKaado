@@ -103,20 +103,6 @@ function findTkgEntry(word, romanizedReading, byHeadword) {
   return null;
 }
 
-async function findRetainedTkgEntry(card, entries, tkgRoot) {
-  const candidates = [];
-  for (const entry of entries.filter((candidate) => candidate.id.endsWith(`_${card.japanese}`))) {
-    const tkgEntry = JSON.parse(await readFile(path.join(tkgRoot, entry.path), "utf8"));
-    candidates.push({
-      entry,
-      tkgEntry,
-      score: Math.max(0, ...(tkgEntry.definitions || []).map((definition) => glossOverlap(card.english, definition.gloss))),
-    });
-  }
-  return candidates.sort((a, b) => b.score - a.score || (b.entry.vocabulary_tier === "basic" ? 1 : 0) - (a.entry.vocabulary_tier === "basic" ? 1 : 0))
-    .find((candidate) => candidate.score > 0) || null;
-}
-
 function splitAlternatives(value) {
   return String(value).split(/\s*;\s*/).map((part) => part.trim()).filter(Boolean);
 }
@@ -125,13 +111,9 @@ function cleanHeadword(value) {
   return value.replace(/^\([^)]*\)\s*/, "").replace(/\s*\([^)]*\)\s*$/, "").trim();
 }
 
-function selectSenseAndExample(entry, preferredGloss = "") {
+function selectSenseAndExample(entry) {
   const definitions = [...(entry.definitions || [])].sort((a, b) => a.sense_number - b.sense_number);
-  const ranked = preferredGloss ? definitions.map((definition) => ({
-    definition,
-    score: glossOverlap(preferredGloss, definition.gloss),
-  })).sort((a, b) => b.score - a.score) : definitions.map((definition) => ({ definition, score: 0 }));
-  for (const { definition } of ranked) {
+  for (const definition of definitions) {
     const example = (entry.examples || []).find((candidate) =>
       Array.isArray(candidate.sense_numbers)
       && candidate.sense_numbers.includes(definition.sense_number)
@@ -139,17 +121,6 @@ function selectSenseAndExample(entry, preferredGloss = "") {
     if (example) return { definition, example };
   }
   return null;
-}
-
-function glossOverlap(left, right) {
-  const ignored = new Set(["a", "an", "the", "to", "of", "for", "in", "on", "as", "and", "or", "be", "is", "used"]);
-  const words = (value) => new Set(String(value).toLowerCase().match(/[a-z]+/g)?.filter((word) => !ignored.has(word)) || []);
-  const a = words(left);
-  const b = words(right);
-  if (!a.size || !b.size) return 0;
-  let common = 0;
-  for (const word of a) if (b.has(word)) common += 1;
-  return common / (a.size + b.size - common);
 }
 
 function isCompleteExample(example) {
