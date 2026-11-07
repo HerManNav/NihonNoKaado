@@ -10,9 +10,17 @@ Learn Japanese with ready-made flashcard decks, or... create your own!
 
 ## Run locally
 
-Serve the repository root with a local HTTP server and open `index.html`. JSON assets need an HTTP origin; opening the file directly is not supported.
+Start your local web server with the repository root as its serving directory, then open [http://127.0.0.1:5500/index.html](http://127.0.0.1:5500/index.html). The app loads its decks and lookup data over HTTP, so opening `index.html` directly from disk will not work.
 
-For Android, install the dependencies in `android-app/`, then run `npm run sync:android` and build/run the Android project.
+For Android, install Node.js, JDK 21, and the Android SDK. From `android-app/`, run `npm install` and `npm run sync:android`. Then build and install the debug APK from PowerShell:
+
+```powershell
+Set-Location android
+.\gradlew.bat assembleDebug
+adb install -r app\build\outputs\apk\debug\app-debug.apk
+```
+
+The APK is written to `android-app/android/app/build/outputs/apk/debug/app-debug.apk`. With ADB configured and a device connected with USB debugging enabled, the last command installs or updates NihonNoKaado on the device.
 
 ## Tests
 

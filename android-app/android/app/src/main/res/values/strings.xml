@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Japanese Cards</string>
-    <string name="title_activity_main">Japanese Cards</string>
+    <string name="app_name">NihonNoKaado</string>
+    <string name="title_activity_main">NihonNoKaado</string>
     <string name="package_name">com.example.japanesecards</string>
     <string name="custom_url_scheme">com.example.japanesecards</string>
 </resources>
