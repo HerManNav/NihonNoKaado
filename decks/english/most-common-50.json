@@ -135,7 +135,7 @@
             },
             {
               "romaji": "benkyoushimasu",
-              "meaning": "present polite of benkyousuru (study) (compound verb: benkyou + shimasu, polite of benkyousuru)",
+              "meaning": "present polite of benkyousuru (study) (compound verb: benkyou + shimasu, polite of benkyousuru) Base compound: benkyou (study) + suru (to do).",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
             }
@@ -1554,7 +1554,7 @@
             },
             {
               "romaji": "sankashita",
-              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru)",
+              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru) Base compound: sanka (participation) + suru (to do).",
               "entryId": "25408_sankasuru",
               "senseNumber": 1
             }

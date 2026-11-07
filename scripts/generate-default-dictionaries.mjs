@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
@@ -58,8 +58,9 @@ if (usableWords.length < 2000) {
 }
 
 const output = path.join(projectRoot, "decks");
+await mkdir(path.join(output, "english"), {recursive:true});
 for (const size of sizes) {
-  const file = path.join(output, `most-common-${size}.json`);
+  const file = path.join(output, `english/most-common-${size}.json`);
   await writeFile(file, `${JSON.stringify({
     format: "japanese-cards-deck",
     version: 3,

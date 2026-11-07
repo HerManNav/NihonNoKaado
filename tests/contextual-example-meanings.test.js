@@ -15,7 +15,7 @@ const decksDirectory = path.join(__dirname, "../decks");
 const sourceIndex = JSON.parse(readFileSync(path.join(sourceDirectory, "tkg-entries-index-32c267cb.json"), "utf8"));
 const sourceIndexById = new Map(sourceIndex.entries.map((entry) => [entry.id, entry]));
 const decks = new Map([50, 100, 2000].map((size) => [size, JSON.parse(
-  readFileSync(path.join(decksDirectory, `most-common-${size}.json`), "utf8"))]));
+  readFileSync(path.join(decksDirectory, `english/most-common-${size}.json`), "utf8"))]));
 const words = (romaji) => String(romaji).match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) || [];
 
 // Each group is a pinned source example. The token number is zero based in the

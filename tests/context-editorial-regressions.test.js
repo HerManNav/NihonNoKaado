@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const deck = require('../decks/most-common-2000.json');
+const deck = require('../decks/english/most-common-2000.json');
 
 // Whole-sentence expectations: these contrast homographs and grammatical uses
 // that a frequency-ranked headword lookup cannot resolve on its own.

@@ -20,7 +20,7 @@ const specs = [
 
 for (const { size, checks } of specs) {
   test(`${size}-word default deck preserves its contextual meanings through import and export`, () => {
-    const source = JSON.parse(fs.readFileSync(path.join(__dirname, `../decks/most-common-${size}.json`), 'utf8'));
+    const source = JSON.parse(fs.readFileSync(path.join(__dirname, `../decks/english/most-common-${size}.json`), 'utf8'));
     const imported = prepareDefaultDeck(source, size, index => String(index));
     const roundTrip = parseImportedDeck(JSON.parse(serializeDeck(imported, 'test')), index => String(index));
     for (const [sentence, token, expected] of checks) {

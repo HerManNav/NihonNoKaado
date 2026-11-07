@@ -2,7 +2,7 @@
   "format": "japanese-cards-deck",
   "version": 3,
   "name": "Más comunes - 50",
-  "source": "Frequency ranks: https://noosflashcards.com/resources/frequency-lists/japanese (Leipzig Corpora Collection news counts; licensed CC BY-SA 4.0). English meanings and sense-tagged examples: https://github.com/tkgally/je-dict-1 (CC0). The list skips duplicate romaji and entries without a complete example tagged to the selected sense. Spanish translations prepared for Japanese Cards.",
+  "source": "Frequency ranks: https://noosflashcards.com/resources/frequency-lists/japanese (Leipzig Corpora Collection news counts; licensed CC BY-SA 4.0). English meanings and sense-tagged examples: https://github.com/tkgally/je-dict-1 (CC0). The list skips duplicate romaji and entries without a complete example tagged to the selected sense. Spanish: OPUS-MT-tc-big-en-es candidates with grammar templates and editorial corrections; see SOURCES.md.",
   "cards": [
     {
       "japanese": "no",
@@ -135,7 +135,7 @@
             },
             {
               "romaji": "benkyoushimasu",
-              "meaning": "presente formal de benkyousuru (estudiar); verbo compuesto benkyou + shimasu",
+              "meaning": "presente formal de benkyousuru (estudiar); verbo compuesto benkyou + shimasu Verbo base: benkyou (estudio) + suru (hacer).",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
             }
@@ -1554,7 +1554,7 @@
             },
             {
               "romaji": "sankashita",
-              "meaning": "pasado de sankasuru (participar); verbo compuesto sanka + shita",
+              "meaning": "pasado de sankasuru (participar); verbo compuesto sanka + shita Verbo base: sanka (participación) + suru (hacer).",
               "entryId": "25408_sankasuru",
               "senseNumber": 1
             }

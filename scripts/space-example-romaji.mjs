@@ -8,7 +8,7 @@ if (!projectRoot || !tkgEntriesRoot || !["--dry-run", "--write"].includes(mode))
   process.exit(2);
 }
 
-const deckDirectory = path.join(projectRoot, "decks");
+const deckDirectory = path.join(projectRoot, "decks", "english");
 const deckFiles = (await readdir(deckDirectory))
   .filter((name) => /^most-common-(50|100|500|1000|2000)\.json$/.test(name))
   .sort((a, b) => Number(a.match(/\d+/)[0]) - Number(b.match(/\d+/)[0]));

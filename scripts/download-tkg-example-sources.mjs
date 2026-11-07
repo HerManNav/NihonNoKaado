@@ -42,7 +42,7 @@ for (const entry of index.entries || []) {
 }
 const cards = [];
 for (const size of SIZES) {
-  const deck = JSON.parse(await readFile(path.join(ROOT, "decks", `most-common-${size}.json`), "utf8"));
+  const deck = JSON.parse(await readFile(path.join(ROOT, "decks", `english/most-common-${size}.json`), "utf8"));
   for (const card of deck.cards || []) cards.push({ size, card });
 }
 const requested = new Map();

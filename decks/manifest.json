@@ -7,32 +7,36 @@
     {
       "id": "common-50",
       "name": "Most common - 50",
-      "file": "most-common-50.json",
-      "spanishFile": "most-common-50-es.json",
+      "file": "english/most-common-50.json",
+      "spanishFile": "spanish/most-common-50-es.json",
       "count": 50
     },
     {
       "id": "common-100",
       "name": "Most common - 100",
-      "file": "most-common-100.json",
+      "file": "english/most-common-100.json",
+      "spanishFile": "spanish/most-common-100-es.json",
       "count": 100
     },
     {
       "id": "common-500",
       "name": "Most common - 500",
-      "file": "most-common-500.json",
+      "file": "english/most-common-500.json",
+      "spanishFile": "spanish/most-common-500-es.json",
       "count": 500
     },
     {
       "id": "common-1000",
       "name": "Most common - 1,000",
-      "file": "most-common-1000.json",
+      "file": "english/most-common-1000.json",
+      "spanishFile": "spanish/most-common-1000-es.json",
       "count": 1000
     },
     {
       "id": "common-2000",
       "name": "Most common - 2,000",
-      "file": "most-common-2000.json",
+      "file": "english/most-common-2000.json",
+      "spanishFile": "spanish/most-common-2000-es.json",
       "count": 2000
     }
   ]

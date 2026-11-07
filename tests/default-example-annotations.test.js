@@ -14,7 +14,7 @@ const specs = [
 // Keep this identical to the romaji token splitter in app.js. Punctuation and
 // whitespace are not popup targets; apostrophes within a word are retained.
 const visibleTokens = (romaji) => String(romaji || "").match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) || [];
-const files = new Map(specs.map(({ size }) => [size, path.join(deckDirectory, `most-common-${size}.json`)]));
+const files = new Map(specs.map(({ size }) => [size, path.join(deckDirectory, `english/most-common-${size}.json`)]));
 const decks = new Map([...files].map(([size, file]) => [size, JSON.parse(readFileSync(file, "utf8"))]));
 const exampleKey = (example) => [example.romaji, example.hiragana, example.english].join("\0");
 

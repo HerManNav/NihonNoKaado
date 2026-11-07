@@ -22,7 +22,7 @@ test("default deck catalog keeps 50 and 100 and offers 500, 1,000, and 2,000 car
     ["common-1000", 1000],
     ["common-2000", 2000],
   ]);
-  assert.equal(existsSync(join(root, "decks", "most-common-10.json")), false);
+  assert.equal(existsSync(join(root, "decks", "english/most-common-10.json")), false);
   assert.deepEqual(manifest.decks.map(({ name }) => name), [
     "Most common - 50", "Most common - 100", "Most common - 500", "Most common - 1,000", "Most common - 2,000",
   ]);
@@ -34,7 +34,7 @@ test("default deck catalog keeps 50 and 100 and offers 500, 1,000, and 2,000 car
 });
 
 test("Spanish deck labels use the localized most-common names", () => {
-  assert.equal(readDeck("most-common-50-es.json").name, "Más comunes - 50");
+  assert.equal(readDeck("spanish/most-common-50-es.json").name, "Más comunes - 50");
   assert.match(app, /name: `Más comunes - \$\{deck\.count\.toLocaleString\("es-ES"\)\}/);
 });
 
@@ -59,16 +59,16 @@ test("default example romaji uses readable word spacing without changing punctua
 });
 
 test("the 50-card set remains the prefix of the 100-card list", () => {
-  const fullList = readDeck("most-common-100.json").cards;
-  assert.deepEqual(readDeck("most-common-50.json").cards, fullList.slice(0, 50));
-  assert.equal(prepareDefaultDeck(readDeck("most-common-100.json"), 50, (index) => String(index)).length, 50);
+  const fullList = readDeck("english/most-common-100.json").cards;
+  assert.deepEqual(readDeck("english/most-common-50.json").cards, fullList.slice(0, 50));
+  assert.equal(prepareDefaultDeck(readDeck("english/most-common-100.json"), 50, (index) => String(index)).length, 50);
 });
 
 test("all decks share an ascending frequency-ranked prefix", () => {
-  const cards500 = readDeck("most-common-500.json").cards;
-  const cards1000 = readDeck("most-common-1000.json").cards;
-  const cards2000 = readDeck("most-common-2000.json").cards;
-  assert.deepEqual(readDeck("most-common-100.json").cards, cards500.slice(0, 100));
+  const cards500 = readDeck("english/most-common-500.json").cards;
+  const cards1000 = readDeck("english/most-common-1000.json").cards;
+  const cards2000 = readDeck("english/most-common-2000.json").cards;
+  assert.deepEqual(readDeck("english/most-common-100.json").cards, cards500.slice(0, 100));
   assert.deepEqual(cards500, cards1000.slice(0, 500));
   assert.deepEqual(cards1000, cards2000.slice(0, 1000));
   assert.equal(manifest.frequencySource, "https://noosflashcards.com/resources/frequency-lists/japanese");
@@ -87,7 +87,7 @@ test("import opens default decks and selection opens confirmation", () => {
 
   const showConfirmationIndex = app.indexOf('showScreen("defaultConfirm");', app.indexOf("function requestDefaultDeckLoad"));
   const loadFunctionIndex = app.indexOf("async function loadDefaultDeck()");
-  const fetchIndex = app.indexOf("const response = await fetch(`decks/${encodeURIComponent(deck.file)}`);");
+  const fetchIndex = app.indexOf('const response = await fetch(`decks/${deck.file.split("/").map(encodeURIComponent).join("/")}`);');
   const saveIndex = app.indexOf("if (!saveCards(importedCards)) throw");
   const replaceIndex = app.indexOf("cards = importedCards;", saveIndex);
   assert.ok(showConfirmationIndex >= 0 && showConfirmationIndex < fetchIndex);

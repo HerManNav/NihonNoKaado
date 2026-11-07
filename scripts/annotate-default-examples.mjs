@@ -4,6 +4,7 @@ import { gunzipSync } from "node:zlib";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { annotateExample } from "./tkg-context-meaning.mjs";
+import { explainSuruComponents } from "./suru-tip-components.mjs";
 
 // Run without --write to inspect full coverage and the sense-review queue.
 // The pinned source JSON is retained in chunked archives under source-data.
@@ -13,6 +14,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DICTIONARY_DIRECTORY = path.join(ROOT, "decks");
 const SOURCE_DIRECTORY = path.join(DICTIONARY_DIRECTORY, "source-data");
 const INDEX_FILE = path.join(SOURCE_DIRECTORY, `tkg-entries-index-${SHORT_COMMIT}.json`);
+const suruComponents = JSON.parse(await readFile(path.join(ROOT, "scripts/suru-components.json"), "utf8"));
 const SPACING_OVERRIDES_FILE = path.join(ROOT, "scripts/default-example-spacing-overrides.json");
 const EXAMPLE_REPLACEMENTS_FILE = path.join(ROOT, "scripts/default-example-replacements.json");
 const MEANING_OVERRIDES_FILE = path.join(ROOT, "scripts/default-example-meaning-overrides.json");
@@ -140,7 +142,7 @@ for (const id of cardSourceIds) {
 
 const decks = new Map();
 for (const size of DECK_SIZES) {
-  decks.set(size, JSON.parse(await readFile(path.join(DICTIONARY_DIRECTORY, `most-common-${size}.json`), "utf8")));
+  decks.set(size, JSON.parse(await readFile(path.join(DICTIONARY_DIRECTORY, `english/most-common-${size}.json`), "utf8")));
 }
 // Restore canonical source spacing before applying the annotations and their
 // reviewed token positions. The final pass below presents these expressions as
@@ -547,6 +549,7 @@ for (const size of DECK_SIZES) {
       }
       example.romaji = romaji;
       example.wordMeanings = words;
+      explainSuruComponents(example, suruComponents);
       assignedExamples += 1;
       assignedTokens += words.length;
     }
@@ -595,7 +598,7 @@ console.log(JSON.stringify({
 if (write || check) {
   if (errors.length || reviews.length) throw new Error(`Refusing to write decks: ${errors.length} errors and ${reviews.length} unresolved reviews`);
   for (const size of [2000, 1000, 500, 100, 50]) {
-    const file = path.join(DICTIONARY_DIRECTORY, `most-common-${size}.json`);
+    const file = path.join(DICTIONARY_DIRECTORY, `english/most-common-${size}.json`);
     const generated = `${JSON.stringify(decks.get(size), null, 2)}\n`;
     if (check && await readFile(file, "utf8") !== generated) throw new Error(`Outdated contextual annotations: ${file}`);
     if (write) await writeFile(file, generated, "utf8");

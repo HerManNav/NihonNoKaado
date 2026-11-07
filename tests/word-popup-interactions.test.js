@@ -139,7 +139,7 @@ function makeSession({ realLookup = false, fetchLookup = false, savedCards = nul
       assert.match(url, /romaji-english-jmdict-2026-11-02\.json\.gz\?v=6$/);
       return new Response(fs.readFileSync(path.join(ROOT, "decks/romaji-english-jmdict-2026-11-02.json.gz")));
     } : contextDeck ? async (url) => {
-      assert.equal(url, "decks/most-common-2000.json");
+      assert.equal(url, "decks/english/most-common-2000.json");
       return { ok: true, json: async () => contextDeck };
     } : undefined,
   });
@@ -313,6 +313,17 @@ test("a revealed single-meaning headword shows its card meaning on one line", as
   await settlePopup();
   assert.deepEqual(popup.children.map((line) => line.textContent), ["did"]);
   assert.equal(vm.runInContext("romajiLookup", context), null);
+});
+
+test("a suru headword uses its example's base-compound explanation", async () => {
+  const { context, flashcard, prompt, popup } = makeSession();
+  context.card.japanese = "sankasuru";
+  context.card.meanings = ["to participate"];
+  context.card.examples[0].wordMeanings = [{romaji:"sankashita", meaning:"participated. Base compound: sanka (participation) + suru (to do)."}];
+  vm.runInContext("renderPracticeCard()", context);
+  flashcard.emit("pointerover", pointer(prompt.children[0].children[0], "mouse", 120, 190));
+  await settlePopup();
+  assert.match(popup.children[0].textContent, /sanka \(participation\) \+ suru \(to do\)/);
 });
 
 test("a revealed card fetches and opens the real lookup for a common particle sense", async () => {

@@ -1,0 +1,1437 @@
+{
+  "ai": {
+    "en": "love",
+    "es": "amor",
+    "entryId": "02370_ai"
+  },
+  "akka": {
+    "en": "deterioration",
+    "es": "deterioro"
+  },
+  "anshin": {
+    "en": "peace of mind",
+    "es": "tranquilidad"
+  },
+  "antei": {
+    "en": "stability",
+    "es": "estabilidad",
+    "entryId": "01703_antei"
+  },
+  "apiiru": {
+    "en": "appeal",
+    "es": "llamamiento"
+  },
+  "appu": {
+    "en": "increase",
+    "es": "aumento"
+  },
+  "baibai": {
+    "en": "buying and selling",
+    "es": "Compra y venta",
+    "entryId": "04336_baibai"
+  },
+  "benkyou": {
+    "en": "study",
+    "es": "estudio",
+    "entryId": "00770_benkyou"
+  },
+  "boshuu": {
+    "en": "recruitment",
+    "es": "reclutamiento",
+    "entryId": "03035_boshuu"
+  },
+  "bouei": {
+    "en": "defense",
+    "es": "defensa",
+    "entryId": "09783_bouei"
+  },
+  "boushi": {
+    "en": "prevention",
+    "es": "prevención",
+    "entryId": "14571_boushi"
+  },
+  "bunseki": {
+    "en": "analysis",
+    "es": "análisis",
+    "entryId": "03610_bunseki"
+  },
+  "burokku": {
+    "en": "block (social media)",
+    "es": "bloqueo (redes sociales)",
+    "entryId": "05902_burokku"
+  },
+  "chakunin": {
+    "en": "taking up a new post",
+    "es": "Asumir un nuevo puesto",
+    "entryId": "14905_chakunin"
+  },
+  "chiekku": {
+    "en": "check",
+    "es": "comprobación"
+  },
+  "chokumen": {
+    "en": "confrontation",
+    "es": "enfrentamiento"
+  },
+  "chouri": {
+    "en": "cooking",
+    "es": "cocina"
+  },
+  "chousa": {
+    "en": "investigation",
+    "es": "investigación",
+    "entryId": "03489_chousa"
+  },
+  "chousei": {
+    "en": "adjustment",
+    "es": "ajuste"
+  },
+  "chousen": {
+    "en": "challenge",
+    "es": "desafío"
+  },
+  "choutatsu": {
+    "en": "procurement",
+    "es": "obtención de suministros"
+  },
+  "chuumoku": {
+    "en": "attention",
+    "es": "atención",
+    "entryId": "03483_chuumoku"
+  },
+  "chuumon": {
+    "en": "order",
+    "es": "pedido"
+  },
+  "chuusha": {
+    "en": "parking",
+    "es": "aparcamiento",
+    "entryId": "01466_chuusha"
+  },
+  "chuushi": {
+    "en": "suspension",
+    "es": "suspensión",
+    "entryId": "03481_chuushi"
+  },
+  "debyuu": {
+    "en": "debut",
+    "es": "debut",
+    "entryId": "11016_debyuu"
+  },
+  "denwa": {
+    "en": "telephone call",
+    "es": "llamada telefónica"
+  },
+  "dokuritsu": {
+    "en": "independence",
+    "es": "independencia",
+    "entryId": "03488_dokuritsu"
+  },
+  "doryoku": {
+    "en": "effort",
+    "es": "esfuerzo",
+    "entryId": "03490_doryoku"
+  },
+  "dounyuu": {
+    "en": "introduction",
+    "es": "introducción"
+  },
+  "eigyou": {
+    "en": "business",
+    "es": "negocios",
+    "entryId": "01878_eigyou"
+  },
+  "enchou": {
+    "en": "extension",
+    "es": "prórroga"
+  },
+  "ensou": {
+    "en": "musical performance",
+    "es": "interpretación musical"
+  },
+  "enzetsu": {
+    "en": "speech",
+    "es": "discurso",
+    "entryId": "01894_enzetsu"
+  },
+  "fujou": {
+    "en": "surfacing",
+    "es": "salida a la superficie"
+  },
+  "fukkatsu": {
+    "en": "revival",
+    "es": "resurgimiento"
+  },
+  "fukki": {
+    "en": "return",
+    "es": "regreso"
+  },
+  "fukkyuu": {
+    "en": "recovery",
+    "es": "recuperación",
+    "entryId": "07521_fukkyuu"
+  },
+  "fukyuu": {
+    "en": "spread",
+    "es": "difusión"
+  },
+  "fushou": {
+    "en": "injury",
+    "es": "daño",
+    "entryId": "15287_fushou"
+  },
+  "fusoku": {
+    "en": "shortage",
+    "es": "escasez"
+  },
+  "gakushuu": {
+    "en": "study",
+    "es": "estudio",
+    "entryId": "02623_gakushuu"
+  },
+  "gappei": {
+    "en": "merger",
+    "es": "fusión",
+    "entryId": "04778_gappei"
+  },
+  "genkyuu": {
+    "en": "mention",
+    "es": "mención"
+  },
+  "genshou": {
+    "en": "decrease",
+    "es": "disminución",
+    "entryId": "02719_genshou"
+  },
+  "gensoku": {
+    "en": "deceleration",
+    "es": "desaceleración"
+  },
+  "geraku": {
+    "en": "decline",
+    "es": "caída"
+  },
+  "giron": {
+    "en": "discussion",
+    "es": "discusión"
+  },
+  "goudou": {
+    "en": "joint",
+    "es": "conjunto",
+    "entryId": "04185_goudou"
+  },
+  "goukaku": {
+    "en": "passing an exam",
+    "es": "aprobación de un examen"
+  },
+  "gyakuten": {
+    "en": "reversal",
+    "es": "reversión",
+    "entryId": "06839_gyakuten"
+  },
+  "haaku": {
+    "en": "comprehension",
+    "es": "comprensión"
+  },
+  "haibi": {
+    "en": "deployment",
+    "es": "despliegue"
+  },
+  "haifu": {
+    "en": "distribution",
+    "es": "distribución"
+  },
+  "haiki": {
+    "en": "disposal",
+    "es": "eliminación",
+    "entryId": "12482_haiki"
+  },
+  "haishi": {
+    "en": "abolition",
+    "es": "abolición",
+    "entryId": "12483_haishi"
+  },
+  "haishin": {
+    "en": "distribution",
+    "es": "distribución"
+  },
+  "haken": {
+    "en": "dispatch",
+    "es": "envío"
+  },
+  "hakken": {
+    "en": "discovery",
+    "es": "descubrimiento"
+  },
+  "hakki": {
+    "en": "demonstration",
+    "es": "manifestación"
+  },
+  "hakkou": {
+    "en": "publication",
+    "es": "publicación",
+    "entryId": "03693_hakkou"
+  },
+  "hanbai": {
+    "en": "sale",
+    "es": "venta",
+    "entryId": "03573_hanbai"
+  },
+  "handan": {
+    "en": "judgment",
+    "es": "juicio"
+  },
+  "hansei": {
+    "en": "reflection",
+    "es": "reflexión",
+    "entryId": "03570_hansei"
+  },
+  "hantai": {
+    "en": "opposition",
+    "es": "Oposición",
+    "entryId": "01497_hantai"
+  },
+  "happyou": {
+    "en": "announcement",
+    "es": "anuncio",
+    "entryId": "03562_happyou"
+  },
+  "hassei": {
+    "en": "occurrence",
+    "es": "aparición"
+  },
+  "hassha": {
+    "en": "launch",
+    "es": "lanzamiento"
+  },
+  "hasshin": {
+    "en": "transmission",
+    "es": "transmisión"
+  },
+  "hatsubai": {
+    "en": "sale",
+    "es": "venta",
+    "entryId": "04315_hatsubai"
+  },
+  "hatsugen": {
+    "en": "manifestation",
+    "es": "manifestación",
+    "entryId": "32190_hatsugen"
+  },
+  "hatten": {
+    "en": "development",
+    "es": "desarrollo",
+    "entryId": "03561_hatten"
+  },
+  "hendou": {
+    "en": "fluctuation",
+    "es": "fluctuación",
+    "entryId": "09936_hendou"
+  },
+  "henkou": {
+    "en": "change",
+    "es": "cambio"
+  },
+  "henshuu": {
+    "en": "editing",
+    "es": "edición",
+    "entryId": "04439_henshuu"
+  },
+  "hibaku": {
+    "en": "being bombed",
+    "es": "sufrimiento de un bombardeo"
+  },
+  "hihan": {
+    "en": "criticism",
+    "es": "crítica"
+  },
+  "hinan": {
+    "en": "evacuation",
+    "es": "Evacuación",
+    "entryId": "07908_hinan"
+  },
+  "hirou": {
+    "en": "unveiling",
+    "es": "presentación al público"
+  },
+  "hitei": {
+    "en": "negation",
+    "es": "negación"
+  },
+  "hitto": {
+    "en": "hit",
+    "es": "éxito"
+  },
+  "hogo": {
+    "en": "protection",
+    "es": "protección"
+  },
+  "hossoku": {
+    "en": "inauguration",
+    "es": "inauguración",
+    "entryId": "13641_hossoku"
+  },
+  "houdou": {
+    "en": "news coverage",
+    "es": "cobertura informativa"
+  },
+  "houkoku": {
+    "en": "report",
+    "es": "informe",
+    "entryId": "03618_houkoku"
+  },
+  "houmon": {
+    "en": "visit",
+    "es": "visita"
+  },
+  "housou": {
+    "en": "broadcasting",
+    "es": "emisión"
+  },
+  "hoyuu": {
+    "en": "possession",
+    "es": "posesión",
+    "entryId": "11615_hoyuu"
+  },
+  "hozon": {
+    "en": "preservation",
+    "es": "conservación",
+    "entryId": "03626_hozon"
+  },
+  "hyougen": {
+    "en": "expression",
+    "es": "expresión",
+    "entryId": "03584_hyougen"
+  },
+  "hyouji": {
+    "en": "display",
+    "es": "visualización"
+  },
+  "hyouka": {
+    "en": "evaluation",
+    "es": "evaluación",
+    "entryId": "03583_hyouka"
+  },
+  "hyoumei": {
+    "en": "declaration",
+    "es": "declaración",
+    "entryId": "14052_hyoumei"
+  },
+  "ichi": {
+    "en": "position",
+    "es": "posición",
+    "entryId": "11554_ichi"
+  },
+  "iji": {
+    "en": "maintenance",
+    "es": "mantenimiento",
+    "entryId": "01624_iji"
+  },
+  "ijuu": {
+    "en": "migration",
+    "es": "migración"
+  },
+  "intabyuu": {
+    "en": "interview",
+    "es": "entrevista",
+    "entryId": "03833_intabyuu"
+  },
+  "intai": {
+    "en": "retirement",
+    "es": "jubilación",
+    "entryId": "01848_intai"
+  },
+  "itaku": {
+    "en": "entrustment",
+    "es": "encomienda",
+    "entryId": "05620_itaku"
+  },
+  "iten": {
+    "en": "relocation",
+    "es": "traslado"
+  },
+  "jinin": {
+    "en": "resignation",
+    "es": "dimisión"
+  },
+  "jissen": {
+    "en": "practice",
+    "es": "práctica",
+    "entryId": "08241_jissen"
+  },
+  "jisshi": {
+    "en": "implementation",
+    "es": "puesta en práctica"
+  },
+  "jizoku": {
+    "en": "continuation",
+    "es": "continuación",
+    "entryId": "12813_jizoku"
+  },
+  "joushou": {
+    "en": "rise",
+    "es": "Subida",
+    "entryId": "11296_joushou"
+  },
+  "junbi": {
+    "en": "preparation",
+    "es": "preparación",
+    "entryId": "01431_junbi"
+  },
+  "jushou": {
+    "en": "winning a prize",
+    "es": "ganar un premio",
+    "entryId": "11867_jushou"
+  },
+  "juujitsu": {
+    "en": "fulfillment",
+    "es": "cumplimiento",
+    "entryId": "04845_juujitsu"
+  },
+  "juushi": {
+    "en": "emphasis",
+    "es": "énfasis",
+    "entryId": "03341_juushi"
+  },
+  "kadou": {
+    "en": "operation",
+    "es": "operación",
+    "entryId": "16938_kadou"
+  },
+  "kaidan": {
+    "en": "conference",
+    "es": "conferencia",
+    "entryId": "11542_kaidan"
+  },
+  "kaifuku": {
+    "en": "recovery",
+    "es": "recuperación",
+    "entryId": "03812_kaifuku"
+  },
+  "kaigyou": {
+    "en": "opening a business",
+    "es": "apertura de un negocio"
+  },
+  "kaihou": {
+    "en": "opening to the public",
+    "es": "apertura al público"
+  },
+  "kaijo": {
+    "en": "cancellation",
+    "es": "cancelación"
+  },
+  "kaiketsu": {
+    "en": "solution",
+    "es": "solución",
+    "entryId": "00136_kaiketsu"
+  },
+  "kaisai": {
+    "en": "holding an event",
+    "es": "celebración de un evento"
+  },
+  "kaisei": {
+    "en": "revision",
+    "es": "revisión"
+  },
+  "kaisetsu": {
+    "en": "opening",
+    "es": "apertura"
+  },
+  "kaishi": {
+    "en": "start",
+    "es": "Inicio",
+    "entryId": "02537_kaishi"
+  },
+  "kaishou": {
+    "en": "elimination",
+    "es": "eliminación"
+  },
+  "kaiten": {
+    "en": "rotation",
+    "es": "rotación",
+    "entryId": "00141_kaiten"
+  },
+  "kaitsuu": {
+    "en": "opening a transport route",
+    "es": "apertura de una vía de transporte"
+  },
+  "kaketsu": {
+    "en": "approval",
+    "es": "aprobación",
+    "entryId": "00148_kaketsu"
+  },
+  "kakou": {
+    "en": "processing",
+    "es": "procesamiento",
+    "entryId": "11793_kakou"
+  },
+  "kakuho": {
+    "en": "securing",
+    "es": "obtención y garantía"
+  },
+  "kakunin": {
+    "en": "confirmation",
+    "es": "confirmación",
+    "entryId": "00158_kakunin"
+  },
+  "kakuritsu": {
+    "en": "establishment",
+    "es": "establecimiento",
+    "entryId": "13758_kakuritsu"
+  },
+  "kakutei": {
+    "en": "determination",
+    "es": "determinación",
+    "entryId": "13707_kakutei"
+  },
+  "kakutoku": {
+    "en": "acquisition",
+    "es": "adquisición",
+    "entryId": "05624_kakutoku"
+  },
+  "kamei": {
+    "en": "joining",
+    "es": "adhesión"
+  },
+  "kandou": {
+    "en": "being moved",
+    "es": "emoción"
+  },
+  "kango": {
+    "en": "nursing",
+    "es": "enfermería",
+    "entryId": "13668_kango"
+  },
+  "kanri": {
+    "en": "management",
+    "es": "gestión"
+  },
+  "kanryou": {
+    "en": "completion",
+    "es": "finalización"
+  },
+  "kansatsu": {
+    "en": "observation",
+    "es": "observación",
+    "entryId": "02558_kansatsu"
+  },
+  "kansei": {
+    "en": "completion",
+    "es": "finalización"
+  },
+  "kansen": {
+    "en": "infection",
+    "es": "infección"
+  },
+  "kansha": {
+    "en": "gratitude",
+    "es": "gratitud",
+    "entryId": "00181_kansha"
+  },
+  "kanshi": {
+    "en": "surveillance",
+    "es": "vigilancia",
+    "entryId": "05521_kanshi"
+  },
+  "kanwa": {
+    "en": "alleviation",
+    "es": "alivio"
+  },
+  "kanyuu": {
+    "en": "joining",
+    "es": "afiliación"
+  },
+  "katsuyaku": {
+    "en": "active role",
+    "es": "papel activo",
+    "entryId": "02541_katsuyaku"
+  },
+  "keigen": {
+    "en": "reduction",
+    "es": "reducción"
+  },
+  "keikai": {
+    "en": "vigilance",
+    "es": "vigilancia",
+    "entryId": "14224_keikai"
+  },
+  "keisai": {
+    "en": "publication",
+    "es": "publicación",
+    "entryId": "08993_keisai"
+  },
+  "keishou": {
+    "en": "succession",
+    "es": "transmisión de un legado"
+  },
+  "keiyaku": {
+    "en": "contract",
+    "es": "contrato",
+    "entryId": "02698_keiyaku"
+  },
+  "kekkon": {
+    "en": "marriage",
+    "es": "matrimonio",
+    "entryId": "02514_kekkon"
+  },
+  "kenkyuu": {
+    "en": "research",
+    "es": "investigación",
+    "entryId": "01396_kenkyuu"
+  },
+  "kensa": {
+    "en": "inspection",
+    "es": "inspección",
+    "entryId": "02707_kensa"
+  },
+  "kensaku": {
+    "en": "search",
+    "es": "búsqueda"
+  },
+  "kensetsu": {
+    "en": "construction",
+    "es": "construcción",
+    "entryId": "02708_kensetsu"
+  },
+  "kentou": {
+    "en": "examination",
+    "es": "examen",
+    "entryId": "02710_kentou"
+  },
+  "kessai": {
+    "en": "settlement",
+    "es": "liquidación",
+    "entryId": "05466_kessai"
+  },
+  "kessei": {
+    "en": "formation",
+    "es": "formación",
+    "entryId": "13809_kessei"
+  },
+  "ketsui": {
+    "en": "determination",
+    "es": "determinación",
+    "entryId": "07167_ketsui"
+  },
+  "ketsuretsu": {
+    "en": "breakdown",
+    "es": "ruptura"
+  },
+  "kifu": {
+    "en": "donation",
+    "es": "donación",
+    "entryId": "02584_kifu"
+  },
+  "kikoku": {
+    "en": "return to one's country",
+    "es": "regreso al país de origen"
+  },
+  "kinchou": {
+    "en": "tension",
+    "es": "tensión"
+  },
+  "kinshi": {
+    "en": "prohibition",
+    "es": "prohibición",
+    "entryId": "02643_kinshi"
+  },
+  "kouchiku": {
+    "en": "construction",
+    "es": "construcción",
+    "entryId": "13164_kouchiku"
+  },
+  "koudou": {
+    "en": "action",
+    "es": "acción",
+    "entryId": "02728_koudou"
+  },
+  "koufu": {
+    "en": "issuance",
+    "es": "expedición"
+  },
+  "kougi": {
+    "en": "protest",
+    "es": "protesta"
+  },
+  "kouhyou": {
+    "en": "public announcement",
+    "es": "anuncio público",
+    "entryId": "11640_kouhyou"
+  },
+  "koujou": {
+    "en": "improvement",
+    "es": "mejora",
+    "entryId": "02731_koujou"
+  },
+  "koukai": {
+    "en": "release to the public",
+    "es": "publicación o estreno"
+  },
+  "koukan": {
+    "en": "exchange",
+    "es": "intercambio",
+    "entryId": "02746_koukan"
+  },
+  "kouken": {
+    "en": "contribution",
+    "es": "contribución",
+    "entryId": "02737_kouken"
+  },
+  "kounyuu": {
+    "en": "purchase",
+    "es": "compra",
+    "entryId": "03057_kounyuu"
+  },
+  "koushin": {
+    "en": "update",
+    "es": "actualización"
+  },
+  "koutai": {
+    "en": "retreat",
+    "es": "retroceso"
+  },
+  "kunrin": {
+    "en": "reigning",
+    "es": "reinado"
+  },
+  "kyohi": {
+    "en": "refusal",
+    "es": "rechazo"
+  },
+  "kyouchou": {
+    "en": "emphasis",
+    "es": "énfasis",
+    "entryId": "02600_kyouchou"
+  },
+  "kyougi": {
+    "en": "conference",
+    "es": "conferencia",
+    "entryId": "02635_kyougi"
+  },
+  "kyouka": {
+    "en": "strengthening",
+    "es": "fortalecimiento"
+  },
+  "kyouyuu": {
+    "en": "sharing",
+    "es": "uso compartido"
+  },
+  "kyouzon": {
+    "en": "coexistence",
+    "es": "coexistencia",
+    "entryId": "11675_kyouzon"
+  },
+  "mansai": {
+    "en": "full load",
+    "es": "carga completa"
+  },
+  "matomegai": {
+    "en": "bulk buying",
+    "es": "compra en grandes cantidades"
+  },
+  "nattoku": {
+    "en": "understanding",
+    "es": "comprensión y aceptación"
+  },
+  "ninmei": {
+    "en": "appointment",
+    "es": "nombramiento"
+  },
+  "ninshiki": {
+    "en": "recognition",
+    "es": "reconocimiento"
+  },
+  "nyuugaku": {
+    "en": "enrollment",
+    "es": "ingreso en un centro educativo"
+  },
+  "nyuuryoku": {
+    "en": "input",
+    "es": "introducción de datos"
+  },
+  "nyuushou": {
+    "en": "winning a prize",
+    "es": "ganar un premio",
+    "entryId": "11670_nyuushou"
+  },
+  "oopun": {
+    "en": "open",
+    "es": "abierto",
+    "entryId": "10831_oopun"
+  },
+  "oubo": {
+    "en": "application",
+    "es": "presentación de una candidatura"
+  },
+  "ouen": {
+    "en": "support",
+    "es": "apoyo",
+    "entryId": "01900_ouen"
+  },
+  "rainichi": {
+    "en": "coming to Japan",
+    "es": "venida a Japón"
+  },
+  "renraku": {
+    "en": "contact",
+    "es": "contacto",
+    "entryId": "01524_renraku"
+  },
+  "rensai": {
+    "en": "serialization",
+    "es": "serialización",
+    "entryId": "14320_rensai"
+  },
+  "ridatsu": {
+    "en": "withdrawal",
+    "es": "retirada",
+    "entryId": "14583_ridatsu"
+  },
+  "riido": {
+    "en": "lead",
+    "es": "ventaja"
+  },
+  "rikkouho": {
+    "en": "candidacy",
+    "es": "candidatura",
+    "entryId": "13778_rikkouho"
+  },
+  "riyou": {
+    "en": "use",
+    "es": "uso",
+    "entryId": "01752_riyou"
+  },
+  "ryuugaku": {
+    "en": "study abroad",
+    "es": "estudios en el extranjero"
+  },
+  "ryuukou": {
+    "en": "trend",
+    "es": "tendencia",
+    "entryId": "03678_ryuukou"
+  },
+  "sadou": {
+    "en": "operation",
+    "es": "operación",
+    "entryId": "11692_sadou"
+  },
+  "saibai": {
+    "en": "cultivation",
+    "es": "cultivo"
+  },
+  "saikai": {
+    "en": "resumption",
+    "es": "reanudación"
+  },
+  "saiken": {
+    "en": "reconstruction",
+    "es": "reconstrucción",
+    "entryId": "11743_saiken"
+  },
+  "saisei": {
+    "en": "playback",
+    "es": "reproducción",
+    "entryId": "04442_saisei"
+  },
+  "saitaku": {
+    "en": "adoption of a resolution",
+    "es": "adopción de una resolución"
+  },
+  "saiyou": {
+    "en": "hiring",
+    "es": "contratación"
+  },
+  "sakugen": {
+    "en": "reduction",
+    "es": "reducción"
+  },
+  "sakusei": {
+    "en": "creation",
+    "es": "creación",
+    "entryId": "04186_sakusei"
+  },
+  "sakutei": {
+    "en": "drawing up a plan",
+    "es": "elaboración de un plan"
+  },
+  "sanka": {
+    "en": "participation",
+    "es": "participación",
+    "entryId": "02498_sanka"
+  },
+  "sannyuu": {
+    "en": "entry into a market",
+    "es": "entrada en un mercado"
+  },
+  "sansei": {
+    "en": "approval",
+    "es": "aprobación",
+    "entryId": "02829_sansei"
+  },
+  "seichou": {
+    "en": "growth",
+    "es": "crecimiento"
+  },
+  "seikou": {
+    "en": "success",
+    "es": "éxito",
+    "entryId": "02638_seikou"
+  },
+  "seikyuu": {
+    "en": "claim",
+    "es": "Reclamación",
+    "entryId": "03374_seikyuu"
+  },
+  "seiri": {
+    "en": "arrangement",
+    "es": "organización"
+  },
+  "seiritsu": {
+    "en": "establishment",
+    "es": "establecimiento",
+    "entryId": "04353_seiritsu"
+  },
+  "seizou": {
+    "en": "manufacture",
+    "es": "fabricación",
+    "entryId": "03289_seizou"
+  },
+  "senden": {
+    "en": "advertisement",
+    "es": "publicidad",
+    "entryId": "03307_senden"
+  },
+  "sengen": {
+    "en": "declaration",
+    "es": "declaración",
+    "entryId": "12284_sengen"
+  },
+  "senshutsu": {
+    "en": "selection",
+    "es": "selección",
+    "entryId": "14448_senshutsu"
+  },
+  "setchi": {
+    "en": "installation",
+    "es": "instalación"
+  },
+  "setsumei": {
+    "en": "explanation",
+    "es": "explicación",
+    "entryId": "01449_setsumei"
+  },
+  "setsuritsu": {
+    "en": "establishment",
+    "es": "establecimiento",
+    "entryId": "14171_setsuritsu"
+  },
+  "shazai": {
+    "en": "apology",
+    "es": "disculpa"
+  },
+  "shidou": {
+    "en": "instruction",
+    "es": "instrucción"
+  },
+  "shien": {
+    "en": "support",
+    "es": "apoyo",
+    "entryId": "07778_shien"
+  },
+  "shihai": {
+    "en": "control",
+    "es": "control",
+    "entryId": "01421_shihai"
+  },
+  "shikkou": {
+    "en": "execution",
+    "es": "ejecución",
+    "entryId": "18996_shikkou"
+  },
+  "shimei": {
+    "en": "nomination",
+    "es": "designación"
+  },
+  "shingi": {
+    "en": "deliberation",
+    "es": "deliberación",
+    "entryId": "19112_shingi"
+  },
+  "shinkou": {
+    "en": "progress",
+    "es": "progreso",
+    "entryId": "03686_shinkou"
+  },
+  "shinpo": {
+    "en": "progress",
+    "es": "progreso",
+    "entryId": "03265_shinpo"
+  },
+  "shinsetsu": {
+    "en": "new establishment",
+    "es": "nuevo establecimiento",
+    "entryId": "13029_shinsetsu"
+  },
+  "shinshutsu": {
+    "en": "advance",
+    "es": "avance",
+    "entryId": "14387_shinshutsu"
+  },
+  "shippai": {
+    "en": "failure",
+    "es": "fracaso",
+    "entryId": "01636_shippai"
+  },
+  "shisatsu": {
+    "en": "inspection",
+    "es": "inspección",
+    "entryId": "16562_shisatsu"
+  },
+  "shitei": {
+    "en": "designation",
+    "es": "designación"
+  },
+  "shobun": {
+    "en": "disposal",
+    "es": "eliminación",
+    "entryId": "05520_shobun"
+  },
+  "shoukai": {
+    "en": "introduction",
+    "es": "presentación"
+  },
+  "shouri": {
+    "en": "victory",
+    "es": "victoria",
+    "entryId": "11795_shouri"
+  },
+  "shoushin": {
+    "en": "promotion at work",
+    "es": "ascenso laboral"
+  },
+  "shoyuu": {
+    "en": "ownership",
+    "es": "propiedad",
+    "entryId": "12752_shoyuu"
+  },
+  "shozoku": {
+    "en": "affiliation",
+    "es": "afiliación"
+  },
+  "shuchou": {
+    "en": "claim",
+    "es": "Reclamación",
+    "entryId": "03220_shuchou"
+  },
+  "shuen": {
+    "en": "starring role",
+    "es": "papel protagonista"
+  },
+  "shukuhaku": {
+    "en": "lodging",
+    "es": "alojamiento"
+  },
+  "shukushou": {
+    "en": "reduction",
+    "es": "reducción"
+  },
+  "shuppan": {
+    "en": "publication",
+    "es": "publicación",
+    "entryId": "03222_shuppan"
+  },
+  "shuppatsu": {
+    "en": "departure",
+    "es": "Salida",
+    "entryId": "02085_shuppatsu"
+  },
+  "shusai": {
+    "en": "hosting",
+    "es": "organización de un evento"
+  },
+  "shussan": {
+    "en": "childbirth",
+    "es": "parto"
+  },
+  "shusseki": {
+    "en": "attendance",
+    "es": "asistencia"
+  },
+  "shutoku": {
+    "en": "acquisition",
+    "es": "adquisición",
+    "entryId": "11947_shutoku"
+  },
+  "shutsuba": {
+    "en": "running for office",
+    "es": "presentación a unas elecciones"
+  },
+  "shutsujou": {
+    "en": "participation",
+    "es": "participación",
+    "entryId": "03223_shutsujou"
+  },
+  "shutten": {
+    "en": "opening a shop",
+    "es": "abrir una tienda",
+    "entryId": "12045_shutten"
+  },
+  "shuunin": {
+    "en": "taking office",
+    "es": "Toma de posesión",
+    "entryId": "12368_shuunin"
+  },
+  "shuuryou": {
+    "en": "end",
+    "es": "fin",
+    "entryId": "02563_shuuryou"
+  },
+  "shuusei": {
+    "en": "correction",
+    "es": "corrección"
+  },
+  "shuushoku": {
+    "en": "finding employment",
+    "es": "obtención de empleo"
+  },
+  "shuushuu": {
+    "en": "collection",
+    "es": "recopilación"
+  },
+  "shuzai": {
+    "en": "news gathering",
+    "es": "recopilación de noticias",
+    "entryId": "05227_shuzai"
+  },
+  "sokushin": {
+    "en": "promotion",
+    "es": "promoción",
+    "entryId": "05632_sokushin"
+  },
+  "sonchou": {
+    "en": "respect",
+    "es": "respeto"
+  },
+  "sotsugyou": {
+    "en": "graduation",
+    "es": "graduación",
+    "entryId": "01643_sotsugyou"
+  },
+  "soudan": {
+    "en": "consultation",
+    "es": "consulta",
+    "entryId": "02089_soudan"
+  },
+  "sougyou": {
+    "en": "founding",
+    "es": "fundación",
+    "entryId": "11792_sougyou"
+  },
+  "sousetsu": {
+    "en": "establishment",
+    "es": "establecimiento",
+    "entryId": "11905_sousetsu"
+  },
+  "soushutsu": {
+    "en": "creation",
+    "es": "creación",
+    "entryId": "31906_soushutsu"
+  },
+  "souzoku": {
+    "en": "inheritance",
+    "es": "herencia"
+  },
+  "suishin": {
+    "en": "promotion",
+    "es": "promoción",
+    "entryId": "12908_suishin"
+  },
+  "sutaato": {
+    "en": "start",
+    "es": "Inicio",
+    "entryId": "11053_sutaato"
+  },
+  "taiho": {
+    "en": "arrest",
+    "es": "detención"
+  },
+  "taikou": {
+    "en": "opposition",
+    "es": "Oposición",
+    "entryId": "12398_taikou"
+  },
+  "taisetsu ni": {
+    "en": "with care; as something important",
+    "es": "con cuidado; como algo importante"
+  },
+  "taishoku": {
+    "en": "retirement",
+    "es": "jubilación",
+    "entryId": "04559_taishoku"
+  },
+  "taizai": {
+    "en": "stay",
+    "es": "estancia"
+  },
+  "tantou": {
+    "en": "being in charge",
+    "es": "responsabilidad sobre una tarea"
+  },
+  "tassei": {
+    "en": "achievement",
+    "es": "consecución"
+  },
+  "teika": {
+    "en": "decline",
+    "es": "declinación",
+    "entryId": "04065_teika"
+  },
+  "teiketsu": {
+    "en": "conclusion of an agreement",
+    "es": "firma de un acuerdo"
+  },
+  "teikyou": {
+    "en": "provision",
+    "es": "suministro"
+  },
+  "teishi": {
+    "en": "stoppage",
+    "es": "parada"
+  },
+  "teishutsu": {
+    "en": "submission",
+    "es": "presentación",
+    "entryId": "03542_teishutsu"
+  },
+  "tekiyou": {
+    "en": "application of a rule",
+    "es": "aplicación de una norma"
+  },
+  "tekkai": {
+    "en": "retraction",
+    "es": "retirada"
+  },
+  "tenji": {
+    "en": "exhibition",
+    "es": "exposición",
+    "entryId": "12401_tenji"
+  },
+  "tenkan": {
+    "en": "conversion",
+    "es": "conversión"
+  },
+  "tettai": {
+    "en": "withdrawal",
+    "es": "retirada",
+    "entryId": "12822_tettai"
+  },
+  "tettei": {
+    "en": "thoroughness",
+    "es": "exhaustividad"
+  },
+  "toppa": {
+    "en": "breakthrough",
+    "es": "superación de una barrera"
+  },
+  "touchaku": {
+    "en": "arrival",
+    "es": "llegada",
+    "entryId": "02526_touchaku"
+  },
+  "tougou": {
+    "en": "integration",
+    "es": "integración",
+    "entryId": "09615_tougou"
+  },
+  "toujou": {
+    "en": "appearance",
+    "es": "aparición"
+  },
+  "toukou": {
+    "en": "post",
+    "es": "publicación en una plataforma"
+  },
+  "touroku": {
+    "en": "registration",
+    "es": "registro",
+    "entryId": "05703_touroku"
+  },
+  "tousai": {
+    "en": "equipping",
+    "es": "equipamiento"
+  },
+  "tousen": {
+    "en": "winning an election or lottery",
+    "es": "victoria electoral o premio de lotería"
+  },
+  "toushi": {
+    "en": "investment",
+    "es": "inversión",
+    "entryId": "04711_toushi"
+  },
+  "tsuikyuu": {
+    "en": "pursuit",
+    "es": "persecusión",
+    "entryId": "14401_tsuikyuu"
+  },
+  "tsuuka": {
+    "en": "passage",
+    "es": "paso"
+  },
+  "tsuukin": {
+    "en": "commuting to work",
+    "es": "Desplazamiento al trabajo",
+    "entryId": "03512_tsuukin"
+  },
+  "unkou": {
+    "en": "transport service",
+    "es": "servicio de transporte"
+  },
+  "yosoku": {
+    "en": "prediction",
+    "es": "predicción"
+  },
+  "youi": {
+    "en": "preparation",
+    "es": "preparación",
+    "entryId": "01746_youi"
+  },
+  "youkyuu": {
+    "en": "demand",
+    "es": "demanda",
+    "entryId": "03658_youkyuu"
+  },
+  "yousei": {
+    "en": "request",
+    "es": "solicitud",
+    "entryId": "05463_yousei"
+  },
+  "yoyaku": {
+    "en": "reservation",
+    "es": "reserva",
+    "entryId": "01522_yoyaku"
+  },
+  "yushutsu": {
+    "en": "export",
+    "es": "exportación",
+    "entryId": "02094_yushutsu"
+  },
+  "yuusen": {
+    "en": "priority",
+    "es": "prioridad",
+    "entryId": "15243_yuusen"
+  },
+  "yuushou": {
+    "en": "victory",
+    "es": "victoria",
+    "entryId": "03647_yuushou"
+  },
+  "zouka": {
+    "en": "increase",
+    "es": "aumento"
+  },
+  "zouzei": {
+    "en": "tax increase",
+    "es": "aumento de impuestos"
+  }
+}

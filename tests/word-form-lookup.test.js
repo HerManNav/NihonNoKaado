@@ -7,6 +7,12 @@ const { findWordMeanings } = require("../word-form-lookup.js");
 
 const deck = JSON.parse(gunzipSync(readFileSync(path.join(__dirname, "../decks/romaji-english-jmdict-2026-11-02.json.gz"))));
 
+test("suru compounds explain the noun and do in dictionary, past, passive and spaced forms", () => {
+  for (const [word, previous] of [["sankasuru", ""], ["sankashita", ""], ["sankasareta", ""], ["shita", "sanka"]]) {
+    assert.match(findWordMeanings(word, deck, previous)[0], /Base compound: sanka \(participation\) \+ suru \(to do\)/);
+  }
+});
+
 test("identifies inflections while retaining direct homograph meanings", () => {
   assert.match(findWordMeanings("shita", deck)[0], /^past form of suru — to do/);
   assert(findWordMeanings("shita", deck).includes("tongue"));

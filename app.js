@@ -275,7 +275,7 @@ async function restoreContextMeaningsForSavedCards() {
   if (localStorage.getItem(CONTEXT_ANNOTATION_MIGRATION_KEY) === signature) return;
 
   try {
-    const response = await fetch("decks/most-common-2000.json", { cache: "no-cache" });
+    const response = await fetch("decks/english/most-common-2000.json", { cache: "no-cache" });
     if (!response.ok) throw new Error(`Context deck request failed (${response.status}).`);
     const source = await response.json();
     const defaultCards = prepareDefaultDeck(source, source.cards?.length || 0, (index) => `context-${index}`);
@@ -739,8 +739,12 @@ function renderJapaneseWord(container, card) {
   romaji.className = "romaji-word";
   const oneWord = /^[A-Za-z]+(?:['’][A-Za-z]+)*$/.test(card.japanese);
   const oneMeaning = Array.isArray(card.meanings) && card.meanings.length === 1 && card.meanings[0];
+  const stem = /^(.*)suru$/i.exec(card.japanese)?.[1];
+  const baseTip = stem && card.examples?.flatMap((example) => example.wordMeanings || [])
+    .map((word) => word.meaning.match(/(?:Base compound|Verbo base): .+$/)?.[0])
+    .find((tip) => tip?.split(": ")[1]?.split(" (")[0].replace(/\s/g, "") === stem);
   appendRomajiTokens(romaji, card.japanese,
-    oneWord && oneMeaning ? [{ romaji: card.japanese, meaning: oneMeaning }] : null);
+    oneWord && oneMeaning ? [{ romaji: card.japanese, meaning: baseTip ? `${oneMeaning} ${baseTip}` : oneMeaning }] : null);
   const hiragana = document.createElement("span");
   hiragana.className = "hiragana-subtext";
   hiragana.textContent = card.hiragana || romajiToHiragana(card.japanese);
@@ -1266,7 +1270,7 @@ async function loadDefaultDeck() {
   confirmDefaultDeckLoadButton.textContent = "Loading…";
   cancelDefaultDeckLoadButton.disabled = true;
   try {
-    const response = await fetch(`decks/${encodeURIComponent(deck.file)}`);
+    const response = await fetch(`decks/${deck.file.split("/").map(encodeURIComponent).join("/")}`);
     if (!response.ok) throw new Error(`Deck request failed (${response.status}).`);
     const source = await response.json();
     const importedCards = prepareDefaultDeck(source, deck.count);

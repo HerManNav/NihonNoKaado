@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const zlib = require('node:zlib');
-const deck = require('../decks/most-common-2000.json');
+const deck = require('../decks/english/most-common-2000.json');
 const { findWordMeanings } = require('../word-form-lookup.js');
 const examples = deck.cards.flatMap(card => card.examples);
 

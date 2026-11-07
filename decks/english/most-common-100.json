@@ -135,7 +135,7 @@
             },
             {
               "romaji": "benkyoushimasu",
-              "meaning": "present polite of benkyousuru (study) (compound verb: benkyou + shimasu, polite of benkyousuru)",
+              "meaning": "present polite of benkyousuru (study) (compound verb: benkyou + shimasu, polite of benkyousuru) Base compound: benkyou (study) + suru (to do).",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
             }
@@ -1554,7 +1554,7 @@
             },
             {
               "romaji": "sankashita",
-              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru)",
+              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru) Base compound: sanka (participation) + suru (to do).",
               "entryId": "25408_sankasuru",
               "senseNumber": 1
             }
@@ -2372,7 +2372,7 @@
             },
             {
               "romaji": "shiteiru",
-              "meaning": "continuing form of seichou suru (growth) (shite + iru: -te form + iru, plain continuing action or state)",
+              "meaning": "continuing form of seichou suru (growth) (shite + iru: -te form + iru, plain continuing action or state) Base compound: seichou (growth) + suru (to do).",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -2536,13 +2536,13 @@
             },
             {
               "romaji": "shutsujou",
-              "meaning": "to participate (compound verb: shutsujou + shita, past of shutsujousuru)",
+              "meaning": "to participate (compound verb: shutsujou + shita, past of shutsujousuru) Base compound: shutsujou (participation) + suru (to do).",
               "entryId": "03223_shutsujou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "to participate (compound verb: shutsujou + shita, past of shutsujousuru)",
+              "meaning": "to participate (compound verb: shutsujou + shita, past of shutsujousuru) Base compound: shutsujou (participation) + suru (to do).",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -2676,7 +2676,7 @@
             },
             {
               "romaji": "sankashita",
-              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru)",
+              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru) Base compound: sanka (participation) + suru (to do).",
               "entryId": "25408_sankasuru",
               "senseNumber": 1
             }
@@ -2720,7 +2720,7 @@
             },
             {
               "romaji": "benkyousuru",
-              "meaning": "to study (compound verb: benkyou + suru, dictionary form of benkyousuru)",
+              "meaning": "to study (compound verb: benkyou + suru, dictionary form of benkyousuru) Base compound: benkyou (study) + suru (to do).",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
             }
@@ -2838,13 +2838,13 @@
             },
             {
               "romaji": "happyou",
-              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru) Base compound: happyou (announcement) + suru (to do).",
               "entryId": "03562_happyou",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru) Base compound: happyou (announcement) + suru (to do).",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -2876,13 +2876,13 @@
             },
             {
               "romaji": "sanka",
-              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru)",
+              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru) Base compound: sanka (participation) + suru (to do).",
               "entryId": "02498_sanka",
               "senseNumber": 1
             },
             {
               "romaji": "suru",
-              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru)",
+              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru) Base compound: sanka (participation) + suru (to do).",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -2995,7 +2995,7 @@
             },
             {
               "romaji": "hanbaisareteiru",
-              "meaning": "being sold (passive continuing form of hanbai suru) (hanbaisarete + iru: -te form + iru, plain continuing action or state)",
+              "meaning": "being sold (passive continuing form of hanbai suru) (hanbaisarete + iru: -te form + iru, plain continuing action or state) Base compound: hanbai (sale) + suru (to do).",
               "entryId": "03573_hanbai",
               "senseNumber": 1
             }
@@ -3515,12 +3515,12 @@
             },
             {
               "romaji": "happyou",
-              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru) Base compound: happyou (announcement) + suru (to do).",
               "entryId": "03562_happyou"
             },
             {
               "romaji": "shita",
-              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru) Base compound: happyou (announcement) + suru (to do).",
               "entryId": "00392_suru",
               "senseNumber": 1
             }
@@ -3958,7 +3958,7 @@
             },
             {
               "romaji": "sankasuru",
-              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru)",
+              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru) Base compound: sanka (participation) + suru (to do).",
               "entryId": "02498_sanka",
               "senseNumber": 1
             }
@@ -3996,13 +3996,13 @@
             },
             {
               "romaji": "shuppan",
-              "meaning": "publication (compound verb: shuppan + shita, past of shuppansuru)",
+              "meaning": "publication (compound verb: shuppan + shita, past of shuppansuru) Base compound: shuppan (publication) + suru (to do).",
               "entryId": "03222_shuppan",
               "senseNumber": 1
             },
             {
               "romaji": "shita",
-              "meaning": "publication (compound verb: shuppan + shita, past of shuppansuru)",
+              "meaning": "publication (compound verb: shuppan + shita, past of shuppansuru) Base compound: shuppan (publication) + suru (to do).",
               "entryId": "00392_suru",
               "senseNumber": 1
             }

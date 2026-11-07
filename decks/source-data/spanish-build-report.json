@@ -1,0 +1,14 @@
+{
+  "sourceHash": "48e07e3446652ab7245e35d37ba5d13deac31ba58944a41ccdaf35924faacf8e",
+  "cards": 2000,
+  "examples": 2000,
+  "annotations": 9565,
+  "sizes": [
+    50,
+    100,
+    500,
+    1000,
+    2000
+  ],
+  "review": "First 100 manually translated; remaining candidates reviewed for lexical errors and structural anomalies. Not independently proofread in full."
+}

@@ -30,7 +30,7 @@ test("contextual annotations cite preserved TKG entries and real definition numb
   let numbered = 0;
   const errors = [];
   for (const size of [50, 100, 500, 1000, 2000]) {
-    const deck = JSON.parse(readFileSync(path.join(deckDirectory, `most-common-${size}.json`), "utf8"));
+    const deck = JSON.parse(readFileSync(path.join(deckDirectory, `english/most-common-${size}.json`), "utf8"));
     for (const [cardIndex, card] of deck.cards.entries()) {
       for (const example of card.examples || []) {
         for (const [tokenIndex, annotation] of (example.wordMeanings || []).entries()) {

@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const zlib = require('node:zlib');
 const { findWordMeanings } = require('../word-form-lookup.js');
-const deck = require('../decks/most-common-2000.json');
+const deck = require('../decks/english/most-common-2000.json');
 const examples = deck.cards.flatMap(card => card.examples);
 const item = (sentence, romaji) => {
   const example = examples.find(row => row.romaji === sentence);

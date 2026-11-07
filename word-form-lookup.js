@@ -77,6 +77,11 @@
     }
   }
 
+  function suruComponentTip(noun, data) {
+    const row = (data.lemmas?.[noun] || []).find(([tag]) => tag === "vs");
+    return row ? ` Base compound: ${noun} (${row[1]}) + suru (to do).` : "";
+  }
+
   function addDirectMeanings(candidates, key, data) {
     const heads = data.heads?.[key];
     if (Array.isArray(heads) && heads.length) {
@@ -115,7 +120,9 @@
         const shownLemma = tag === "vs" ? `${lemma} suru` : lemma;
         const continuous = /te-iru/.test(label) ? " (te-form + iru: ongoing action or continuing state)" : "";
         const passive = tag === "vs" && /passive/.test(label) ? ` (compound verb: ${lemma} + suru; passive voice)` : "";
-        addCandidate(candidates, `${label} of ${shownLemma} — ${gloss}${continuous}${passive}`, score);
+        const components = tag === "vs" ? suruComponentTip(lemma, data)
+          : lemma.endsWith("suru") ? suruComponentTip(lemma.slice(0, -4), data) : "";
+        addCandidate(candidates, `${label} of ${shownLemma} — ${gloss}${continuous}${passive}${components}`, score);
       }
     }
   }
@@ -170,7 +177,7 @@
     for (const [label, formScore] of suruForms) {
       for (const [, gloss, nounScore] of verbalNouns) {
         const score = Math.max(numericScore(formScore), numericScore(nounScore));
-        addCandidate(candidates, `${label} of ${previousKey} suru — ${gloss}`, score, 2);
+        addCandidate(candidates, `${label} of ${previousKey} suru — ${gloss}${suruComponentTip(previousKey, data)}`, score, 2);
       }
     }
   }
@@ -183,7 +190,7 @@
       const noun = key.slice(0, -suffix.length);
       for (const [tag, gloss, score] of data.lemmas?.[noun] || []) {
         if (tag !== "vs") continue;
-        addCandidate(candidates, `${form} form of ${noun} suru — ${gloss} (compound verb: ${noun} + ${suffix})`, score, 1);
+        addCandidate(candidates, `${form} form of ${noun} suru — ${gloss} (compound verb: ${noun} + ${suffix})${suruComponentTip(noun, data)}`, score, 1);
       }
     }
   }
