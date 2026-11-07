@@ -5,14 +5,11 @@ const path = require('node:path');
 const { prepareDefaultDictionary, serializeDictionary, parseImportedDictionary } = require('../dictionary-core.js');
 
 const specs = [
-  { size: 50, checks: [
-    ['kono hon ha omoshiroi desu.', 'omoshiroi', /interesting.*i-adjective.*polite desu/i],
-    ['kare ha"ikitakunai"to iimashita.', 'ikitakunai', /negative.*want to go|do not want to go/i],
-  ] },
-  { size: 100, checks: [
-    ['okane ga hitsuyou desu.', 'hitsuyou', /necessary.*na-adjective.*polite copula/i],
-    ['mada tabeteimasen.', 'tabeteimasen', /negative.*taberu.*tabete \+ imasen/i],
-  ] },
+  ...[50, 100].map(size => ({ size, checks: [
+    ['ame ga futte iru.', 'futte', /furu.*futte \+ iru/i],
+    ['toshokan de benkyoushimasu.', 'benkyoushimasu', /compound verb: benkyou \+ shimasu.*polite/i],
+    ['akai no ga hoshii.', 'no', /nominalizer/i],
+  ] })),
   ...[500, 1000, 2000].map(size => ({ size, checks: [
     ['toshokan de benkyoushimasu.', 'benkyoushimasu', /compound verb: benkyou \+ shimasu.*polite/i],
     ['chiba ken ni sundeimasu.', 'sundeimasu', /sumu.*sunde \+ imasu.*continuing/i],

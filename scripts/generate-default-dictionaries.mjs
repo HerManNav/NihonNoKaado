@@ -12,7 +12,7 @@ if (!projectRoot || !tkgRoot || !tkgIndexPath || !frequencyCsvPath) {
 
 const FREQUENCY_SOURCE = "https://noosflashcards.com/resources/frequency-lists/japanese";
 const EXAMPLE_SOURCE = "https://github.com/tkgally/je-dict-1";
-const sizes = [500, 1000, 2000];
+const sizes = [50, 100, 500, 1000, 2000];
 
 const rows = parseCsv(await readFile(frequencyCsvPath, "utf8"));
 const index = JSON.parse(await readFile(tkgIndexPath, "utf8")).entries;
@@ -69,28 +69,7 @@ for (const size of sizes) {
   }, null, 2)}\n`, "utf8");
 }
 
-for (const size of [50, 100]) {
-  const file = path.join(output, `most-common-${size}.json`);
-  const dictionary = JSON.parse(await readFile(file, "utf8"));
-  for (const card of dictionary.cards) {
-    const match = await findRetainedTkgEntry(card, index, tkgRoot);
-    if (!match) throw new Error(`No learner dictionary entry matching the retained ${size}-word card ${card.japanese}.`);
-    const tkgEntry = match.tkgEntry;
-    const selected = selectSenseAndExample(tkgEntry, card.english);
-    if (!selected) throw new Error(`No complete sense-matched example for retained card ${card.japanese}.`);
-    card.hiragana = kanaOnly(tkgEntry.reading);
-    card.examples = [{
-      romaji: kanaToRomaji(cleanJapanese(selected.example.japanese)),
-      hiragana: cleanJapanese(selected.example.japanese),
-      english: selected.example.english.trim(),
-    }];
-  }
-  dictionary.version = 3;
-  dictionary.source = `${dictionary.source}; sense-tagged example sentences: ${EXAMPLE_SOURCE} (CC0).`;
-  await writeFile(file, `${JSON.stringify(dictionary, null, 2)}\n`, "utf8");
-}
-
-console.log(JSON.stringify({ generatedCounts: sizes, retainedCounts: [50, 100], maximumSourceRank: usableWords.at(-1).rank, rejected, examplesSelectedBySenseTag: true }, null, 2));
+console.log(JSON.stringify({ generatedCounts: sizes, maximumSourceRank: usableWords.at(-1).rank, rejected, examplesSelectedBySenseTag: true }, null, 2));
 
 function parseCsv(text) {
   const matrix = [];

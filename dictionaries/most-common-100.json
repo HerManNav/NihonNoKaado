@@ -2,17 +2,218 @@
   "format": "japanese-cards-dictionary",
   "version": 3,
   "name": "Most common Japanese — 100 words",
-  "source": "Frequency ranks based on Japanese news and online articles; English glosses simplified for learners. https://travelwithlanguages.com/blog/most-common-japanese-words.html; sense-tagged example sentences: https://github.com/tkgally/je-dict-1 (CC0).; sense-tagged example sentences: https://github.com/tkgally/je-dict-1 (CC0).; sense-tagged example sentences: https://github.com/tkgally/je-dict-1 (CC0).",
+  "source": "Frequency ranks: https://noosflashcards.com/resources/frequency-lists/japanese (Leipzig Corpora Collection news counts; licensed CC BY-SA 4.0). English meanings and sense-tagged examples: https://github.com/tkgally/je-dict-1 (CC0). The list skips duplicate romaji and entries without a complete example tagged to the selected sense.",
   "cards": [
     {
-      "japanese": "da",
-      "english": "to be; casual copula",
-      "hiragana": "だ",
+      "japanese": "no",
+      "hiragana": "の",
+      "english": "nominalizer",
       "examples": [
         {
-          "romaji": "watashi ha gakusei da.",
-          "hiragana": "わたしはがくせいだ。",
-          "english": "I am a student.",
+          "romaji": "akai no ga hoshii.",
+          "hiragana": "あかいのがほしい。",
+          "english": "I want the red one.",
+          "wordMeanings": [
+            {
+              "romaji": "akai",
+              "meaning": "red",
+              "entryId": "00585_akai",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "no",
+              "meaning": "nominalizer",
+              "entryId": "09472_no",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "ga",
+              "meaning": "object marker",
+              "entryId": "00051_ga",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "hoshii",
+              "meaning": "want (something)",
+              "entryId": "01107_hoshii",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ni",
+      "hiragana": "に",
+      "english": "destination/direction marker",
+      "examples": [
+        {
+          "romaji": "gakkou ni iku.",
+          "hiragana": "がっこうにいく。",
+          "english": "I go to school.",
+          "wordMeanings": [
+            {
+              "romaji": "gakkou",
+              "meaning": "school",
+              "entryId": "00055_gakkou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "destination",
+              "entryId": "00314_ni",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "iku",
+              "meaning": "to go",
+              "entryId": "00119_iku",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ga",
+      "hiragana": "が",
+      "english": "subject marker",
+      "examples": [
+        {
+          "romaji": "ame ga futte iru.",
+          "hiragana": "あめがふっている。",
+          "english": "It's raining.",
+          "wordMeanings": [
+            {
+              "romaji": "ame",
+              "meaning": "rain",
+              "entryId": "00583_ame",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "futte",
+              "meaning": "-te form of furu (fall as rain) — continuing action or state (futte + iru: -te form + iru)",
+              "entryId": "00839_furu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "iru",
+              "meaning": "-te form of furu (fall as rain) — continuing action or state (futte + iru: -te form + iru)",
+              "entryId": "00495_iru"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "de",
+      "hiragana": "で",
+      "english": "at, in (location of action)",
+      "examples": [
+        {
+          "romaji": "toshokan de benkyoushimasu.",
+          "hiragana": "としょかんでべんきょうします。",
+          "english": "I study at the library.",
+          "wordMeanings": [
+            {
+              "romaji": "toshokan",
+              "meaning": "library",
+              "entryId": "00580_toshokan",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "de",
+              "meaning": "at",
+              "entryId": "00502_de",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "benkyoushimasu",
+              "meaning": "present polite of benkyousuru (study) (compound verb: benkyou + shimasu, polite of benkyousuru)",
+              "entryId": "00527_benkyousuru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "to",
+      "hiragana": "と",
+      "english": "and (connecting nouns)",
+      "examples": [
+        {
+          "romaji": "koohii to koucha, dochira ga ii desu ka.",
+          "hiragana": "こーひーとこうちゃ、どちらがいいですか。",
+          "english": "Which would you like, coffee or tea?",
+          "wordMeanings": [
+            {
+              "romaji": "koohii",
+              "meaning": "coffee",
+              "entryId": "00789_koohii",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "to",
+              "meaning": "and",
+              "entryId": "00512_to",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "koucha",
+              "meaning": "black tea",
+              "entryId": "02878_koucha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "dochira",
+              "meaning": "which one",
+              "entryId": "00927_dochira",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ii",
+              "meaning": "good (i-adjective + polite desu)",
+              "entryId": "00118_ii",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "desu",
+              "meaning": "good (i-adjective + polite desu)",
+              "entryId": "09485_desu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ka",
+              "meaning": "question marker",
+              "entryId": "09473_ka",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "mo",
+      "hiragana": "も",
+      "english": "also, too",
+      "examples": [
+        {
+          "romaji": "watashi mo iku.",
+          "hiragana": "わたしもいく。",
+          "english": "I'll go too.",
           "wordMeanings": [
             {
               "romaji": "watashi",
@@ -21,21 +222,15 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
+              "romaji": "mo",
+              "meaning": "too",
+              "entryId": "00484_mo",
               "senseNumber": 1
             },
             {
-              "romaji": "gakusei",
-              "meaning": "student",
-              "entryId": "00610_gakusei",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "da",
-              "meaning": "is",
-              "entryId": "09496_da",
+              "romaji": "iku",
+              "meaning": "to go",
+              "entryId": "00119_iku",
               "senseNumber": 1
             }
           ]
@@ -44,8 +239,8 @@
     },
     {
       "japanese": "suru",
-      "english": "to do",
       "hiragana": "する",
+      "english": "to do, to perform",
       "examples": [
         {
           "romaji": "nani wo suru?",
@@ -75,47 +270,9 @@
       ]
     },
     {
-      "japanese": "desu",
-      "english": "to be; polite copula",
-      "hiragana": "です",
-      "examples": [
-        {
-          "romaji": "watashi ha gakusei desu.",
-          "hiragana": "わたしはがくせいです。",
-          "english": "I am a student.",
-          "wordMeanings": [
-            {
-              "romaji": "watashi",
-              "meaning": "I",
-              "entryId": "02988_watashi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "gakusei",
-              "meaning": "student",
-              "entryId": "00610_gakusei",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
       "japanese": "iru",
-      "english": "to exist; to be (living things)",
       "hiragana": "いる",
+      "english": "to exist, to be (for living things)",
       "examples": [
         {
           "romaji": "kouen ni tori ga takusan imasu.",
@@ -163,31 +320,69 @@
       ]
     },
     {
-      "japanese": "watashi",
-      "english": "I; me",
-      "hiragana": "わたし",
+      "japanese": "na",
+      "hiragana": "な",
+      "english": "attributive form of copula",
       "examples": [
         {
-          "romaji": "watashi ha gakusei desu.",
-          "hiragana": "わたしはがくせいです。",
-          "english": "I am a student.",
+          "romaji": "shizuka na heya.",
+          "hiragana": "しずかなへや。",
+          "english": "A quiet room.",
           "wordMeanings": [
             {
-              "romaji": "watashi",
-              "meaning": "I",
-              "entryId": "02988_watashi",
+              "romaji": "shizuka",
+              "meaning": "quiet",
+              "entryId": "00755_shizuka",
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
+              "romaji": "na",
+              "meaning": "attributive form of copula",
+              "entryId": "09497_na",
               "senseNumber": 1
             },
             {
-              "romaji": "gakusei",
-              "meaning": "student",
-              "entryId": "00610_gakusei",
+              "romaji": "heya",
+              "meaning": "room",
+              "entryId": "00507_heya",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "kara",
+      "hiragana": "から",
+      "english": "from (starting point)",
+      "examples": [
+        {
+          "romaji": "eki kara aruite juppun desu.",
+          "hiragana": "えきからあるいてじゅっぷんです。",
+          "english": "It's a 10-minute walk from the station.",
+          "wordMeanings": [
+            {
+              "romaji": "eki",
+              "meaning": "station",
+              "entryId": "02180_eki",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kara",
+              "meaning": "from",
+              "entryId": "00504_kara",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "aruite",
+              "meaning": "-te form of aruku (walk)",
+              "entryId": "00538_aruku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "juppun",
+              "meaning": "ten minutes",
+              "entryId": "09572_juppun",
               "senseNumber": 1
             },
             {
@@ -201,31 +396,37 @@
       ]
     },
     {
-      "japanese": "aru",
-      "english": "to exist; to be (things)",
-      "hiragana": "ある",
+      "japanese": "hi",
+      "hiragana": "ひ",
+      "english": "day",
       "examples": [
         {
-          "romaji": "hon ga aru.",
-          "hiragana": "ほんがある。",
-          "english": "There is a book.",
+          "romaji": "ii hi desu ne.",
+          "hiragana": "いいひですね。",
+          "english": "It's a nice day, isn't it?",
           "wordMeanings": [
             {
-              "romaji": "hon",
-              "meaning": "book",
-              "entryId": "00111_hon",
+              "romaji": "ii",
+              "meaning": "nice",
+              "entryId": "00118_ii",
               "senseNumber": 1
             },
             {
-              "romaji": "ga",
-              "meaning": "subject marker",
-              "entryId": "00051_ga",
+              "romaji": "hi",
+              "meaning": "day",
+              "entryId": "02249_hi",
               "senseNumber": 1
             },
             {
-              "romaji": "aru",
-              "meaning": "to exist",
-              "entryId": "00006_aru",
+              "romaji": "desu",
+              "meaning": "is",
+              "entryId": "09485_desu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ne",
+              "meaning": "seeking confirmation",
+              "entryId": "09474_ne",
               "senseNumber": 1
             }
           ]
@@ -234,8 +435,8 @@
     },
     {
       "japanese": "koto",
-      "english": "thing; matter; event",
       "hiragana": "こと",
+      "english": "thing, matter, affair (abstract)",
       "examples": [
         {
           "romaji": "taisetsuna koto wo wasuremashita.",
@@ -271,19 +472,140 @@
       ]
     },
     {
-      "japanese": "nani",
-      "english": "what",
-      "hiragana": "なに",
+      "japanese": "ya",
+      "hiragana": "や",
+      "english": "and, among other things",
       "examples": [
         {
-          "romaji": "kore ha nan desu ka?",
-          "hiragana": "これはなんですか？",
-          "english": "What is this?",
+          "romaji": "atsui toki ha mizu ya ocha ga oishii.",
+          "hiragana": "あついときはみずやおちゃがおいしい。",
+          "english": "When it's hot, water, tea, and other drinks taste good.",
           "wordMeanings": [
             {
-              "romaji": "kore",
-              "meaning": "this",
-              "entryId": "00963_kore",
+              "romaji": "atsui",
+              "meaning": "hot",
+              "entryId": "00619_atsui",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "toki",
+              "meaning": "when",
+              "entryId": "03094_toki"
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "mizu",
+              "meaning": "water",
+              "entryId": "02258_mizu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ya",
+              "meaning": "among other things",
+              "entryId": "10080_ya",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ocha",
+              "meaning": "tea"
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "oishii",
+              "meaning": "tasty"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "nai",
+      "hiragana": "ない",
+      "english": "nonexistent, there is no",
+      "examples": [
+        {
+          "romaji": "mizu ga nai.",
+          "hiragana": "みずがない。",
+          "english": "There is no water.",
+          "wordMeanings": [
+            {
+              "romaji": "mizu",
+              "meaning": "water",
+              "entryId": "02258_mizu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nai",
+              "meaning": "nonexistent",
+              "entryId": "01118_nai",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "hito",
+      "hiragana": "ひと",
+      "english": "person, human being",
+      "examples": [
+        {
+          "romaji": "hito ga iru.",
+          "hiragana": "ひとがいる。",
+          "english": "There is a person.",
+          "wordMeanings": [
+            {
+              "romaji": "hito",
+              "meaning": "person",
+              "entryId": "00476_hito",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "iru",
+              "meaning": "to exist",
+              "entryId": "00495_iru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "toshi",
+      "hiragana": "とし",
+      "english": "year",
+      "examples": [
+        {
+          "romaji": "kotoshi ha isogashii.",
+          "hiragana": "ことしはいそがしい。",
+          "english": "This year is busy.",
+          "wordMeanings": [
+            {
+              "romaji": "kotoshi",
+              "meaning": "this year",
+              "entryId": "00722_kotoshi",
               "senseNumber": 1
             },
             {
@@ -293,21 +615,9 @@
               "senseNumber": 1
             },
             {
-              "romaji": "nan",
-              "meaning": "what",
-              "entryId": "03100_nan",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
+              "romaji": "isogashii",
+              "meaning": "busy",
+              "entryId": "00591_isogashii",
               "senseNumber": 1
             }
           ]
@@ -315,84 +625,15 @@
       ]
     },
     {
-      "japanese": "sore",
-      "english": "that; it",
-      "hiragana": "それ",
+      "japanese": "aru",
+      "hiragana": "ある",
+      "english": "to exist, to be (for inanimate objects)",
       "examples": [
         {
-          "romaji": "sore ha nan?",
-          "hiragana": "それはなん?",
-          "english": "What is that?",
+          "romaji": "hon ga aru.",
+          "hiragana": "ほんがある。",
+          "english": "There is a book.",
           "wordMeanings": [
-            {
-              "romaji": "sore",
-              "meaning": "that",
-              "entryId": "00994_sore",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "nan",
-              "meaning": "what",
-              "entryId": "00498_nani",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "naru",
-      "english": "to become",
-      "hiragana": "なる",
-      "examples": [
-        {
-          "romaji": "haru ni natta.",
-          "hiragana": "はるになった。",
-          "english": "Spring has come.",
-          "wordMeanings": [
-            {
-              "romaji": "haru",
-              "meaning": "spring",
-              "entryId": "00627_haru",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "into (resulting state)",
-              "entryId": "00314_ni"
-            },
-            {
-              "romaji": "natta",
-              "meaning": "past of naru (become)",
-              "entryId": "01970_naru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kono",
-      "english": "this (before a noun)",
-      "hiragana": "この",
-      "examples": [
-        {
-          "romaji": "kono hon ha omoshiroi desu.",
-          "hiragana": "このほんはおもしろいです。",
-          "english": "This book is interesting.",
-          "wordMeanings": [
-            {
-              "romaji": "kono",
-              "meaning": "this",
-              "entryId": "00962_kono",
-              "senseNumber": 1
-            },
             {
               "romaji": "hon",
               "meaning": "book",
@@ -400,21 +641,15 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
               "senseNumber": 1
             },
             {
-              "romaji": "omoshiroi",
-              "meaning": "interesting (i-adjective + polite desu)",
-              "entryId": "00589_omoshiroi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "interesting (i-adjective + polite desu)",
-              "entryId": "09485_desu",
+              "romaji": "aru",
+              "meaning": "to exist",
+              "entryId": "00006_aru",
               "senseNumber": 1
             }
           ]
@@ -422,9 +657,90 @@
       ]
     },
     {
-      "japanese": "kore",
-      "english": "this; this one",
-      "hiragana": "これ",
+      "japanese": "ichi",
+      "hiragana": "いち",
+      "english": "market, fair, bazaar",
+      "examples": [
+        {
+          "romaji": "asaichi de yasai wo katta.",
+          "hiragana": "あさいちでやさいをかった。",
+          "english": "I bought vegetables at the morning market.",
+          "wordMeanings": [
+            {
+              "romaji": "asaichi",
+              "meaning": "morning market",
+              "entryId": "13008_asaichi",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "de",
+              "meaning": "at",
+              "entryId": "00502_de",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "yasai",
+              "meaning": "vegetable",
+              "entryId": "02265_yasai",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "katta",
+              "meaning": "past of kau (buy)",
+              "entryId": "00489_kau",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "mono",
+      "hiragana": "もの",
+      "english": "person, one who",
+      "examples": [
+        {
+          "romaji": "kankei mono nomi nyuushitsu ka.",
+          "hiragana": "かんけいもののみにゅうしつか。",
+          "english": "Authorized persons only.",
+          "wordMeanings": [
+            {
+              "romaji": "kankei",
+              "meaning": "concerned (people)"
+            },
+            {
+              "romaji": "mono",
+              "meaning": "person",
+              "entryId": "12734_mono",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nomi",
+              "meaning": "only"
+            },
+            {
+              "romaji": "nyuushitsu",
+              "meaning": "entering a room",
+              "entryId": "32527_nyuushitsu"
+            },
+            {
+              "romaji": "ka",
+              "meaning": "permitted"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ka",
+      "hiragana": "か",
+      "english": "question marker",
       "examples": [
         {
           "romaji": "kore ha nan desu ka.",
@@ -466,31 +782,30 @@
       ]
     },
     {
-      "japanese": "sou",
-      "english": "so; that way",
-      "hiragana": "そう",
+      "japanese": "mato",
+      "hiragana": "まと",
+      "english": "target; mark; bull's-eye",
       "examples": [
         {
-          "romaji": "sou omoi masu.",
-          "hiragana": "そうおもいます。",
-          "english": "I think so.",
+          "romaji": "mato ni atatta.",
+          "hiragana": "まとにあたった。",
+          "english": "It hit the target.",
           "wordMeanings": [
             {
-              "romaji": "sou",
-              "meaning": "so",
-              "entryId": "01167_sou",
+              "romaji": "mato",
+              "meaning": "target",
+              "entryId": "19356_mato",
               "senseNumber": 1
             },
             {
-              "romaji": "omoi",
-              "meaning": "present polite of omou (think)",
-              "entryId": "00492_omou",
-              "senseNumber": 1
+              "romaji": "ni",
+              "meaning": "target marker",
+              "entryId": "00314_ni"
             },
             {
-              "romaji": "masu",
-              "meaning": "present polite of omou (think)",
-              "entryId": "00492_omou",
+              "romaji": "atatta",
+              "meaning": "past of ataru (hit)",
+              "entryId": "01860_ataru",
               "senseNumber": 1
             }
           ]
@@ -498,63 +813,19 @@
       ]
     },
     {
-      "japanese": "iu",
-      "english": "to say; to tell",
-      "hiragana": "いう",
+      "japanese": "da",
+      "hiragana": "だ",
+      "english": "is, am, are (plain copula)",
       "examples": [
         {
-          "romaji": "kare ha\"ikitakunai\"to iimashita.",
-          "hiragana": "かれは「いきたくない」といいました。",
-          "english": "He said, 'I don't want to go.'",
+          "romaji": "watashi ha gakusei da.",
+          "hiragana": "わたしはがくせいだ。",
+          "english": "I am a student.",
           "wordMeanings": [
             {
-              "romaji": "kare",
-              "meaning": "he",
-              "entryId": "01292_kare",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ikitakunai",
-              "meaning": "do not want to go (negative desiderative of iku)",
-              "entryId": "00119_iku",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "to",
-              "meaning": "quotation marker",
-              "entryId": "00512_to",
-              "senseNumber": 3
-            },
-            {
-              "romaji": "iimashita",
-              "meaning": "polite past of iu (say)",
-              "entryId": "00515_iu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kare",
-      "english": "he; him; boyfriend",
-      "hiragana": "かれ",
-      "examples": [
-        {
-          "romaji": "kare ha gakusei desu.",
-          "hiragana": "かれはがくせいです。",
-          "english": "He is a student.",
-          "wordMeanings": [
-            {
-              "romaji": "kare",
-              "meaning": "he",
-              "entryId": "01292_kare",
+              "romaji": "watashi",
+              "meaning": "I",
+              "entryId": "02988_watashi",
               "senseNumber": 1
             },
             {
@@ -570,94 +841,6 @@
               "senseNumber": 1
             },
             {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "dou",
-      "english": "how; what way",
-      "hiragana": "どう",
-      "examples": [
-        {
-          "romaji": "nihon no seikatsu ha dou desu ka?",
-          "hiragana": "にほんのせいかつはどうですか？",
-          "english": "How is life in Japan?",
-          "wordMeanings": [
-            {
-              "romaji": "nihon",
-              "meaning": "Japan",
-              "entryId": "03876_nihon",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "no",
-              "meaning": "possessive marker",
-              "entryId": "09472_no",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "seikatsu",
-              "meaning": "life",
-              "entryId": "01443_seikatsu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "dou",
-              "meaning": "how",
-              "entryId": "00543_dou",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "ii",
-      "english": "good; fine",
-      "hiragana": "いい",
-      "examples": [
-        {
-          "romaji": "ii tenki da.",
-          "hiragana": "いいてんきだ。",
-          "english": "It's nice weather.",
-          "wordMeanings": [
-            {
-              "romaji": "ii",
-              "meaning": "nice",
-              "entryId": "00118_ii",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "tenki",
-              "meaning": "weather",
-              "entryId": "00582_tenki",
-              "senseNumber": 1
-            },
-            {
               "romaji": "da",
               "meaning": "is",
               "entryId": "09496_da",
@@ -668,19 +851,19 @@
       ]
     },
     {
-      "japanese": "hito",
-      "english": "person",
-      "hiragana": "ひと",
+      "japanese": "tsuki",
+      "hiragana": "つき",
+      "english": "moon",
       "examples": [
         {
-          "romaji": "hito ga iru.",
-          "hiragana": "ひとがいる。",
-          "english": "There is a person.",
+          "romaji": "tsuki ga kirei da.",
+          "hiragana": "つきがきれいだ。",
+          "english": "The moon is beautiful.",
           "wordMeanings": [
             {
-              "romaji": "hito",
-              "meaning": "person",
-              "entryId": "00476_hito",
+              "romaji": "tsuki",
+              "meaning": "moon",
+              "entryId": "02230_tsuki",
               "senseNumber": 1
             },
             {
@@ -690,9 +873,15 @@
               "senseNumber": 1
             },
             {
-              "romaji": "iru",
-              "meaning": "to exist",
-              "entryId": "00495_iru",
+              "romaji": "kirei",
+              "meaning": "beautiful (na-adjective + plain copula, forming a predicate)",
+              "entryId": "00717_kirei",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "da",
+              "meaning": "beautiful (na-adjective + plain copula, forming a predicate)",
+              "entryId": "09496_da",
               "senseNumber": 1
             }
           ]
@@ -700,74 +889,37 @@
       ]
     },
     {
-      "japanese": "anata",
-      "english": "you",
-      "hiragana": "あなた",
+      "japanese": "you",
+      "hiragana": "よう",
+      "english": "appearance, manner, way",
       "examples": [
         {
-          "romaji": "anata no o namae ha?",
-          "hiragana": "あなたのおなまえは？",
-          "english": "What is your name?",
+          "romaji": "ame ga furu you da.",
+          "hiragana": "あめがふるようだ。",
+          "english": "It looks like it's going to rain.",
           "wordMeanings": [
             {
-              "romaji": "anata",
-              "meaning": "you",
-              "entryId": "02565_anata",
+              "romaji": "ame",
+              "meaning": "rain",
+              "entryId": "00583_ame",
               "senseNumber": 1
             },
             {
-              "romaji": "no",
-              "meaning": "possessive marker",
-              "entryId": "09472_no",
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
               "senseNumber": 1
             },
             {
-              "romaji": "o",
-              "meaning": "honorific prefix",
-              "entryId": "03097_o"
-            },
-            {
-              "romaji": "namae",
-              "meaning": "name",
-              "entryId": "02234_namae",
+              "romaji": "furu",
+              "meaning": "to fall",
+              "entryId": "00839_furu",
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "ore",
-      "english": "I; me (very casual, masculine)",
-      "hiragana": "おれ",
-      "examples": [
-        {
-          "romaji": "ore ha gakusei da.",
-          "hiragana": "おれはがくせいだ。",
-          "english": "I'm a student.",
-          "wordMeanings": [
-            {
-              "romaji": "ore",
-              "meaning": "I",
-              "entryId": "02185_ore",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "gakusei",
-              "meaning": "student",
-              "entryId": "00610_gakusei",
+              "romaji": "you",
+              "meaning": "appearance",
+              "entryId": "01114_you",
               "senseNumber": 1
             },
             {
@@ -781,9 +933,433 @@
       ]
     },
     {
+      "japanese": "mashi",
+      "hiragana": "まし",
+      "english": "better, preferable",
+      "examples": [
+        {
+          "romaji": "mada mashi da.",
+          "hiragana": "まだましだ。",
+          "english": "It's still better (than the alternative).",
+          "wordMeanings": [
+            {
+              "romaji": "mada",
+              "meaning": "still",
+              "entryId": "00603_mada",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "mashi",
+              "meaning": "better (na-adjective + plain copula, forming a predicate)",
+              "entryId": "11145_mashi",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "da",
+              "meaning": "better (na-adjective + plain copula, forming a predicate)",
+              "entryId": "09496_da",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "made",
+      "hiragana": "まで",
+      "english": "until, to (time endpoint)",
+      "examples": [
+        {
+          "romaji": "juuniji made okiteimashita.",
+          "hiragana": "じゅうにじまでおきていました。",
+          "english": "I was up until 12 o'clock.",
+          "wordMeanings": [
+            {
+              "romaji": "juuniji",
+              "meaning": "o'clock",
+              "entryId": "09869_ji",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "made",
+              "meaning": "until",
+              "entryId": "00490_made",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "okiteimashita",
+              "meaning": "past progressive of okiru (stay awake) (okite + imashita: -te form + iru, polite past continuing action or state)",
+              "entryId": "00521_okiru"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "toiu",
+      "hiragana": "という",
+      "english": "called, named, known as",
+      "examples": [
+        {
+          "romaji": "tanaka toiu hito kara denwa ga atta.",
+          "hiragana": "たなかというひとからでんわがあった。",
+          "english": "There was a call from someone called Tanaka.",
+          "wordMeanings": [
+            {
+              "romaji": "tanaka",
+              "meaning": "Tanaka",
+              "entryId": "09528_tanaka",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "toiu",
+              "meaning": "called",
+              "entryId": "09577_toiu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hito",
+              "meaning": "someone",
+              "entryId": "00476_hito",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "kara",
+              "meaning": "from",
+              "entryId": "00504_kara",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "denwa",
+              "meaning": "phone call",
+              "entryId": "01471_denwa",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "atta",
+              "meaning": "past of aru (exist)",
+              "entryId": "00006_aru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "he",
+      "hiragana": "へ",
+      "english": "direction/goal marker",
+      "examples": [
+        {
+          "romaji": "toukyou he iku.",
+          "hiragana": "とうきょうへいく。",
+          "english": "To go to Tokyo.",
+          "wordMeanings": [
+            {
+              "romaji": "toukyou",
+              "meaning": "Tokyo",
+              "entryId": "09564_toukyou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "he",
+              "meaning": "direction",
+              "entryId": "02473_he",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "iku",
+              "meaning": "to go",
+              "entryId": "00119_iku",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "toshite",
+      "hiragana": "として",
+      "english": "as, in the capacity of, in the role of",
+      "examples": [
+        {
+          "romaji": "kyoushi toshite hataraku.",
+          "hiragana": "きょうしとしてはたらく。",
+          "english": "To work as a teacher.",
+          "wordMeanings": [
+            {
+              "romaji": "kyoushi",
+              "meaning": "teacher",
+              "entryId": "03029_kyoushi",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "toshite",
+              "meaning": "as",
+              "entryId": "06802_toshite",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hataraku",
+              "meaning": "to work",
+              "entryId": "00503_hataraku",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ken",
+      "hiragana": "けん",
+      "english": "prefecture",
+      "examples": [
+        {
+          "romaji": "chiba ken ni sundeimasu.",
+          "hiragana": "ちばけんにすんでいます。",
+          "english": "I live in Chiba Prefecture.",
+          "wordMeanings": [
+            {
+              "romaji": "chiba",
+              "meaning": "Chiba",
+              "entryId": "31334_chiba"
+            },
+            {
+              "romaji": "ken",
+              "meaning": "prefecture",
+              "entryId": "02151_ken",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "location of existence marker",
+              "entryId": "00314_ni",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "sundeimasu",
+              "meaning": "progressive of sumu (live) (sunde + imasu: -te form + iru, polite continuing action or state)",
+              "entryId": "00673_sumu",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "kai",
+      "hiragana": "かい",
+      "english": "meeting; gathering; party; get-together",
+      "examples": [
+        {
+          "romaji": "kai ha nanji kara?",
+          "hiragana": "かいはなんじから？",
+          "english": "What time does the gathering start?",
+          "wordMeanings": [
+            {
+              "romaji": "kai",
+              "meaning": "gathering",
+              "entryId": "27493_kai",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nanji",
+              "meaning": "what time",
+              "entryId": "00973_nanji",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kara",
+              "meaning": "from",
+              "entryId": "00504_kara",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "kono",
+      "hiragana": "この",
+      "english": "this (modifying a noun)",
+      "examples": [
+        {
+          "romaji": "kono hon ha omoshiroi desu.",
+          "hiragana": "このほんはおもしろいです。",
+          "english": "This book is interesting.",
+          "wordMeanings": [
+            {
+              "romaji": "kono",
+              "meaning": "this",
+              "entryId": "00962_kono",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hon",
+              "meaning": "book",
+              "entryId": "00111_hon",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "omoshiroi",
+              "meaning": "interesting (i-adjective + polite desu)",
+              "entryId": "00589_omoshiroi",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "desu",
+              "meaning": "interesting (i-adjective + polite desu)",
+              "entryId": "09485_desu",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "chuugoku",
+      "hiragana": "ちゅうごく",
+      "english": "China (the country); the People's Republic of China",
+      "examples": [
+        {
+          "romaji": "chuugoku ni itta koto ga aru.",
+          "hiragana": "ちゅうごくにいったことがある。",
+          "english": "I've been to China.",
+          "wordMeanings": [
+            {
+              "romaji": "chuugoku",
+              "meaning": "China",
+              "entryId": "28300_chuugoku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "destination",
+              "entryId": "00314_ni",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "itta",
+              "meaning": "past of iku (go)",
+              "entryId": "00119_iku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "koto",
+              "meaning": "nominalizer",
+              "entryId": "01164_koto"
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "aru",
+              "meaning": "to exist",
+              "entryId": "00006_aru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "naru",
+      "hiragana": "なる",
+      "english": "to become, to turn into",
+      "examples": [
+        {
+          "romaji": "haru ni natta.",
+          "hiragana": "はるになった。",
+          "english": "Spring has come.",
+          "wordMeanings": [
+            {
+              "romaji": "haru",
+              "meaning": "spring",
+              "entryId": "00627_haru",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "into (resulting state)",
+              "entryId": "00314_ni"
+            },
+            {
+              "romaji": "natta",
+              "meaning": "past of naru (become)",
+              "entryId": "01970_naru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "tame",
+      "hiragana": "ため",
+      "english": "for (the sake of), for the purpose of",
+      "examples": [
+        {
+          "romaji": "kodomo no tame ni tsukutta.",
+          "hiragana": "こどものためにつくった。",
+          "english": "I made it for my child.",
+          "wordMeanings": [
+            {
+              "romaji": "kodomo",
+              "meaning": "child",
+              "entryId": "00554_kodomo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "no",
+              "meaning": "possessive marker",
+              "entryId": "09472_no",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "tame",
+              "meaning": "for",
+              "entryId": "01145_tame",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "for the purpose of",
+              "entryId": "00314_ni"
+            },
+            {
+              "romaji": "tsukutta",
+              "meaning": "made (past of tsukuru)",
+              "entryId": "00481_tsukuru"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "japanese": "sono",
-      "english": "that (before a noun)",
       "hiragana": "その",
+      "english": "that (modifying a noun)",
       "examples": [
         {
           "romaji": "sono hon wo kudasai.",
@@ -819,147 +1395,19 @@
       ]
     },
     {
-      "japanese": "kimi",
-      "english": "you (familiar)",
-      "hiragana": "きみ",
+      "japanese": "tai",
+      "hiragana": "たい",
+      "english": "want to (do); would like to (do)",
       "examples": [
         {
-          "romaji": "kimi mo kuru?",
-          "hiragana": "きみもくる？",
-          "english": "Are you coming too?",
+          "romaji": "mizu ga nomi tai.",
+          "hiragana": "みずがのみたい。",
+          "english": "I want to drink some water.",
           "wordMeanings": [
             {
-              "romaji": "kimi",
-              "meaning": "you",
-              "entryId": "01384_kimi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "mo",
-              "meaning": "too",
-              "entryId": "00484_mo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kuru",
-              "meaning": "to come",
-              "entryId": "00254_kuru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "yaru",
-      "english": "to do; to give (casual)",
-      "hiragana": "やる",
-      "examples": [
-        {
-          "romaji": "shukudai wo yaru.",
-          "hiragana": "しゅくだいをやる。",
-          "english": "To do homework.",
-          "wordMeanings": [
-            {
-              "romaji": "shukudai",
-              "meaning": "homework",
-              "entryId": "00812_shukudai",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "yaru",
-              "meaning": "to do",
-              "entryId": "02980_yaru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "miru",
-      "english": "to see; to watch",
-      "hiragana": "みる",
-      "examples": [
-        {
-          "romaji": "terebi wo miru.",
-          "hiragana": "てれびをみる。",
-          "english": "To watch TV.",
-          "wordMeanings": [
-            {
-              "romaji": "terebi",
-              "meaning": "television",
-              "entryId": "01536_terebi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "miru",
-              "meaning": "to watch",
-              "entryId": "00283_miru",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "iku",
-      "english": "to go",
-      "hiragana": "いく",
-      "examples": [
-        {
-          "romaji": "gakkou ni iku.",
-          "hiragana": "がっこうにいく。",
-          "english": "I go to school.",
-          "wordMeanings": [
-            {
-              "romaji": "gakkou",
-              "meaning": "school",
-              "entryId": "00055_gakkou",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "destination",
-              "entryId": "00314_ni",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "iku",
-              "meaning": "to go",
-              "entryId": "00119_iku",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kureru",
-      "english": "to give (to me or my group)",
-      "hiragana": "くれる",
-      "examples": [
-        {
-          "romaji": "tomodachi ga hon wo kuremashita.",
-          "hiragana": "ともだちがほんをくれました。",
-          "english": "My friend gave me a book.",
-          "wordMeanings": [
-            {
-              "romaji": "tomodachi",
-              "meaning": "friend",
-              "entryId": "01478_tomodachi",
+              "romaji": "mizu",
+              "meaning": "water",
+              "entryId": "02258_mizu",
               "senseNumber": 1
             },
             {
@@ -969,21 +1417,15 @@
               "senseNumber": 1
             },
             {
-              "romaji": "hon",
-              "meaning": "book",
-              "entryId": "00111_hon",
+              "romaji": "nomi",
+              "meaning": "to drink",
+              "entryId": "00322_nomu",
               "senseNumber": 1
             },
             {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kuremashita",
-              "meaning": "polite past of kureru (give)",
-              "entryId": "00724_kureru",
+              "romaji": "tai",
+              "meaning": "want to",
+              "entryId": "30375_tai",
               "senseNumber": 1
             }
           ]
@@ -991,548 +1433,59 @@
       ]
     },
     {
-      "japanese": "dekiru",
-      "english": "can; to be able to",
-      "hiragana": "できる",
+      "japanese": "toki",
+      "hiragana": "とき",
+      "english": "time, moment",
       "examples": [
         {
-          "romaji": "nihongo ga dekiru.",
-          "hiragana": "にほんごができる。",
-          "english": "I can speak Japanese.",
+          "romaji": "toki ga tatsu no ha hayai desu ne.",
+          "hiragana": "ときがたつのははやいですね。",
+          "english": "Time passes quickly, doesn't it?",
           "wordMeanings": [
             {
-              "romaji": "nihongo",
-              "meaning": "Japanese language",
-              "entryId": "00614_nihongo",
-              "senseNumber": 1
+              "romaji": "toki",
+              "meaning": "time",
+              "entryId": "02918_toki"
             },
             {
               "romaji": "ga",
-              "meaning": "object marker",
+              "meaning": "subject marker",
               "entryId": "00051_ga",
-              "senseNumber": 2
-            },
-            {
-              "romaji": "dekiru",
-              "meaning": "to be able to",
-              "entryId": "00557_dekiru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "koko",
-      "english": "here",
-      "hiragana": "ここ",
-      "examples": [
-        {
-          "romaji": "koko ni suwatte kudasai.",
-          "hiragana": "ここにすわってください。",
-          "english": "Please sit here.",
-          "wordMeanings": [
-            {
-              "romaji": "koko",
-              "meaning": "here",
-              "entryId": "00961_koko",
               "senseNumber": 1
             },
             {
-              "romaji": "ni",
-              "meaning": "location to sit",
-              "entryId": "00314_ni"
-            },
-            {
-              "romaji": "suwatte",
-              "meaning": "-te form of suwaru (sit down)",
-              "entryId": "00757_suwaru",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kudasai",
-              "meaning": "please",
-              "entryId": "02899_kudasai",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "omae",
-      "english": "you (very casual, can sound rude)",
-      "hiragana": "おまえ",
-      "examples": [
-        {
-          "romaji": "omae, nani yatterunda?",
-          "hiragana": "おまえ、なにやってるんだ？",
-          "english": "Hey, what are you doing?",
-          "wordMeanings": [
-            {
-              "romaji": "omae",
-              "meaning": "you",
-              "entryId": "02533_omae",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "nani",
-              "meaning": "what",
-              "entryId": "00498_nani",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "yatterunda",
-              "meaning": "are doing (colloquial progressive of yaru)"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "shiru",
-      "english": "to know; to find out",
-      "hiragana": "しる",
-      "examples": [
-        {
-          "romaji": "shirimashita.",
-          "hiragana": "しりました。",
-          "english": "I found out.",
-          "wordMeanings": [
-            {
-              "romaji": "shirimashita",
-              "meaning": "polite past of shiru (find out)",
-              "entryId": "00458_shiru",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kuru",
-      "english": "to come",
-      "hiragana": "くる",
-      "examples": [
-        {
-          "romaji": "kotchi ni kite!",
-          "hiragana": "こっちにきて！",
-          "english": "Come here!",
-          "wordMeanings": [
-            {
-              "romaji": "kotchi",
-              "meaning": "here",
-              "entryId": "02903_kocchi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "destination or target marker",
-              "entryId": "00314_ni"
-            },
-            {
-              "romaji": "kite",
-              "meaning": "-te form of kuru (come)",
-              "entryId": "00254_kuru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "mou",
-      "english": "already; anymore",
-      "hiragana": "もう",
-      "examples": [
-        {
-          "romaji": "mou tabemashita ka?",
-          "hiragana": "もうたべましたか？",
-          "english": "Have you already eaten?",
-          "wordMeanings": [
-            {
-              "romaji": "mou",
-              "meaning": "already",
-              "entryId": "00602_mou",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "tabemashita",
-              "meaning": "polite past of taberu (eat)",
-              "entryId": "00396_taberu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "dare",
-      "english": "who",
-      "hiragana": "だれ",
-      "examples": [
-        {
-          "romaji": "ano hito ha dare desu ka?",
-          "hiragana": "あのひとはだれですか？",
-          "english": "Who is that person?",
-          "wordMeanings": [
-            {
-              "romaji": "ano",
-              "meaning": "that",
-              "entryId": "00915_ano"
-            },
-            {
-              "romaji": "hito",
-              "meaning": "person",
-              "entryId": "00476_hito",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "dare",
-              "meaning": "who",
-              "entryId": "00534_dare",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "ima",
-      "english": "now",
-      "hiragana": "いま",
-      "examples": [
-        {
-          "romaji": "ima ikimasu.",
-          "hiragana": "いまいきます。",
-          "english": "I'm coming now. / I'll be right there.",
-          "wordMeanings": [
-            {
-              "romaji": "ima",
-              "meaning": "just now",
-              "entryId": "00945_ima",
-              "senseNumber": 2
-            },
-            {
-              "romaji": "ikimasu",
-              "meaning": "present polite of iku (go)",
-              "entryId": "00119_iku",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "mono",
-      "english": "thing; object; person",
-      "hiragana": "もの",
-      "examples": [
-        {
-          "romaji": "ii mono wo katta.",
-          "hiragana": "いいものをかった。",
-          "english": "I bought something good.",
-          "wordMeanings": [
-            {
-              "romaji": "ii",
-              "meaning": "good",
-              "entryId": "00118_ii",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "mono",
-              "meaning": "thing",
-              "entryId": "02259_mono",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "katta",
-              "meaning": "past of kau (buy)",
-              "entryId": "00489_kau",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kedo",
-      "english": "but; though",
-      "hiragana": "けど",
-      "examples": [
-        {
-          "romaji": "takai kedo, kaitai.",
-          "hiragana": "たかいけど、かいたい。",
-          "english": "It's expensive, but I want to buy it.",
-          "wordMeanings": [
-            {
-              "romaji": "takai",
-              "meaning": "expensive",
-              "entryId": "00500_takai",
-              "senseNumber": 2
-            },
-            {
-              "romaji": "kedo",
-              "meaning": "but",
-              "entryId": "09477_kedo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kaitai",
-              "meaning": "want to buy (desiderative of kau)",
-              "entryId": "00489_kau",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kanojo",
-      "english": "she; her; girlfriend",
-      "hiragana": "かのじょ",
-      "examples": [
-        {
-          "romaji": "kanojo ha gakusei desu.",
-          "hiragana": "かのじょはがくせいです。",
-          "english": "She is a student.",
-          "wordMeanings": [
-            {
-              "romaji": "kanojo",
-              "meaning": "she",
-              "entryId": "01286_kanojo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "gakusei",
-              "meaning": "student",
-              "entryId": "00610_gakusei",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "boku",
-      "english": "I; me (casual, often masculine)",
-      "hiragana": "ぼく",
-      "examples": [
-        {
-          "romaji": "boku ha gakusei desu.",
-          "hiragana": "ぼくはがくせいです。",
-          "english": "I am a student.",
-          "wordMeanings": [
-            {
-              "romaji": "boku",
-              "meaning": "I",
-              "entryId": "01729_boku",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "gakusei",
-              "meaning": "student",
-              "entryId": "00610_gakusei",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "ano",
-      "english": "that (over there); um…",
-      "hiragana": "あの",
-      "examples": [
-        {
-          "romaji": "ano yama ha nan desu ka.",
-          "hiragana": "あのやまはなんですか。",
-          "english": "What is that mountain?",
-          "wordMeanings": [
-            {
-              "romaji": "ano",
-              "meaning": "that",
-              "entryId": "00915_ano",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "yama",
-              "meaning": "mountain",
-              "entryId": "02168_yama",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "nan",
-              "meaning": "what",
-              "entryId": "03100_nan",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "wakaru",
-      "english": "to understand",
-      "hiragana": "わかる",
-      "examples": [
-        {
-          "romaji": "wakatta.",
-          "hiragana": "わかった。",
-          "english": "Got it.",
-          "wordMeanings": [
-            {
-              "romaji": "wakatta",
-              "meaning": "past of wakaru (understand)",
-              "entryId": "00463_wakaru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "toshi",
-      "english": "year; age",
-      "hiragana": "とし",
-      "examples": [
-        {
-          "romaji": "kotoshi ha isogashii.",
-          "hiragana": "ことしはいそがしい。",
-          "english": "This year is busy.",
-          "wordMeanings": [
-            {
-              "romaji": "kotoshi",
-              "meaning": "this year",
-              "entryId": "00722_kotoshi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "isogashii",
-              "meaning": "busy",
-              "entryId": "00591_isogashii",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "naka",
-      "english": "inside; middle",
-      "hiragana": "なか",
-      "examples": [
-        {
-          "romaji": "hako no naka wo miru.",
-          "hiragana": "はこのなかをみる。",
-          "english": "To look inside the box.",
-          "wordMeanings": [
-            {
-              "romaji": "hako",
-              "meaning": "box",
-              "entryId": "02162_hako",
+              "romaji": "tatsu",
+              "meaning": "to elapse",
+              "entryId": "09892_tatsu",
               "senseNumber": 1
             },
             {
               "romaji": "no",
-              "meaning": "possessive marker",
+              "meaning": "nominalizer",
               "entryId": "09472_no",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
               "senseNumber": 1
             },
             {
-              "romaji": "naka",
-              "meaning": "inside",
-              "entryId": "00654_naka",
+              "romaji": "hayai",
+              "meaning": "fast (i-adjective + polite desu)",
+              "entryId": "00514_hayai"
+            },
+            {
+              "romaji": "desu",
+              "meaning": "fast (i-adjective + polite desu)",
+              "entryId": "09485_desu",
               "senseNumber": 1
             },
             {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "miru",
-              "meaning": "to look at",
-              "entryId": "00283_miru",
+              "romaji": "ne",
+              "meaning": "seeking confirmation",
+              "entryId": "09474_ne",
               "senseNumber": 1
             }
           ]
@@ -1541,8 +1494,8 @@
     },
     {
       "japanese": "mae",
-      "english": "front; before; ago",
       "hiragana": "まえ",
+      "english": "front",
       "examples": [
         {
           "romaji": "mae wo mite.",
@@ -1572,160 +1525,37 @@
       ]
     },
     {
-      "japanese": "toki",
-      "english": "time; when",
-      "hiragana": "とき",
+      "japanese": "yaku",
+      "hiragana": "やく",
+      "english": "approximately; about",
       "examples": [
         {
-          "romaji": "nihon ni itta toki, fujisan wo mimashita.",
-          "hiragana": "にほんにいったとき、ふじさんをみました。",
-          "english": "When I went to Japan, I saw Mt. Fuji.",
+          "romaji": "yaku10 nin ga sankashita.",
+          "hiragana": "やく10にんがさんかした。",
+          "english": "About 10 people participated.",
           "wordMeanings": [
             {
-              "romaji": "nihon",
-              "meaning": "Japan",
-              "entryId": "03876_nihon",
+              "romaji": "yaku",
+              "meaning": "about",
+              "entryId": "09563_yaku",
               "senseNumber": 1
             },
             {
-              "romaji": "ni",
-              "meaning": "destination",
-              "entryId": "00314_ni",
+              "romaji": "nin",
+              "meaning": "counter for people",
+              "entryId": "00658_nin",
               "senseNumber": 1
             },
             {
-              "romaji": "itta",
-              "meaning": "past of iku (go)",
-              "entryId": "00119_iku",
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
               "senseNumber": 1
             },
             {
-              "romaji": "toki",
-              "meaning": "when",
-              "entryId": "02918_toki",
-              "senseNumber": 2
-            },
-            {
-              "romaji": "fujisan",
-              "meaning": "Mt. Fuji",
-              "entryId": "09514_fujisan",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "mimashita",
-              "meaning": "saw (polite past of miru)",
-              "entryId": "00283_miru"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kiku",
-      "english": "to listen; to ask",
-      "hiragana": "きく",
-      "examples": [
-        {
-          "romaji": "ongaku wo kiku.",
-          "hiragana": "おんがくをきく。",
-          "english": "I listen to music.",
-          "wordMeanings": [
-            {
-              "romaji": "ongaku",
-              "meaning": "music",
-              "entryId": "00661_ongaku",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kiku",
-              "meaning": "to listen",
-              "entryId": "00483_kiku",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "jibun",
-      "english": "oneself; myself",
-      "hiragana": "じぶん",
-      "examples": [
-        {
-          "romaji": "jibun de yatte mite kudasai.",
-          "hiragana": "じぶんでやってみてください。",
-          "english": "Please try doing it yourself.",
-          "wordMeanings": [
-            {
-              "romaji": "jibun",
-              "meaning": "yourself",
-              "entryId": "02887_jibun",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "de",
-              "meaning": "at/in (location of action)",
-              "entryId": "00502_de"
-            },
-            {
-              "romaji": "yatte",
-              "meaning": "-te form of yaru (do)",
-              "entryId": "02980_yaru"
-            },
-            {
-              "romaji": "mite",
-              "meaning": "-te form of miru (try)",
-              "entryId": "00283_miru",
-              "senseNumber": 3
-            },
-            {
-              "romaji": "kudasai",
-              "meaning": "please",
-              "entryId": "02899_kudasai",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "tsuku",
-      "english": "to arrive; to reach",
-      "hiragana": "つく",
-      "examples": [
-        {
-          "romaji": "eki ni tsukimashita.",
-          "hiragana": "えきにつきました。",
-          "english": "I arrived at the station.",
-          "wordMeanings": [
-            {
-              "romaji": "eki",
-              "meaning": "station",
-              "entryId": "02180_eki",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "location of existence marker",
-              "entryId": "00314_ni",
-              "senseNumber": 2
-            },
-            {
-              "romaji": "tsukimashita",
-              "meaning": "polite past of tsuku (arrive)",
-              "entryId": "00680_tsuku",
+              "romaji": "sankashita",
+              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru)",
+              "entryId": "25408_sankasuru",
               "senseNumber": 1
             }
           ]
@@ -1733,14 +1563,14 @@
       ]
     },
     {
-      "japanese": "motsu",
-      "english": "to have; to hold",
-      "hiragana": "もつ",
+      "japanese": "en",
+      "hiragana": "えん",
+      "english": "yen (Japanese currency)",
       "examples": [
         {
-          "romaji": "kore wo motte.",
-          "hiragana": "これをもって。",
-          "english": "Hold this.",
+          "romaji": "kore ha hyaku en desu.",
+          "hiragana": "これはひゃくえんです。",
+          "english": "This is 100 yen.",
           "wordMeanings": [
             {
               "romaji": "kore",
@@ -1749,47 +1579,21 @@
               "senseNumber": 1
             },
             {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "motte",
-              "meaning": "-te form of motsu (hold)",
-              "entryId": "00478_motsu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "doko",
-      "english": "where",
-      "hiragana": "どこ",
-      "examples": [
-        {
-          "romaji": "toire ha doko desu ka?",
-          "hiragana": "といれはどこですか？",
-          "english": "Where is the restroom?",
-          "wordMeanings": [
-            {
-              "romaji": "toire",
-              "meaning": "restroom",
-              "entryId": "00818_toire",
-              "senseNumber": 1
-            },
-            {
               "romaji": "ha",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
             },
             {
-              "romaji": "doko",
-              "meaning": "where",
-              "entryId": "00539_doko",
+              "romaji": "hyaku",
+              "meaning": "hundred",
+              "entryId": "00780_hyaku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "en",
+              "meaning": "yen",
+              "entryId": "00774_en",
               "senseNumber": 1
             },
             {
@@ -1797,341 +1601,31 @@
               "meaning": "is",
               "entryId": "09485_desu",
               "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
-              "senseNumber": 1
             }
           ]
         }
       ]
     },
     {
-      "japanese": "soshite",
-      "english": "and; and then",
-      "hiragana": "そして",
+      "japanese": "machi",
+      "hiragana": "まち",
+      "english": "town, city",
       "examples": [
         {
-          "romaji": "soshite kaetta.",
-          "hiragana": "そしてかえった。",
-          "english": "And then I went home.",
+          "romaji": "kono machi ha shizuka desu.",
+          "hiragana": "このまちはしずかです。",
+          "english": "This town is quiet.",
           "wordMeanings": [
             {
-              "romaji": "soshite",
-              "meaning": "and then",
-              "entryId": "00997_soshite",
+              "romaji": "kono",
+              "meaning": "this",
+              "entryId": "00962_kono",
               "senseNumber": 1
             },
             {
-              "romaji": "kaetta",
-              "meaning": "past of kaeru (return home)",
-              "entryId": "00508_kaeru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "hanashi",
-      "english": "story; talk; conversation",
-      "hiragana": "はなし",
-      "examples": [
-        {
-          "romaji": "omoshiroi hanashi wo kiita.",
-          "hiragana": "おもしろいはなしをきいた。",
-          "english": "I heard an interesting story.",
-          "wordMeanings": [
-            {
-              "romaji": "omoshiroi",
-              "meaning": "interesting",
-              "entryId": "00589_omoshiroi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "hanashi",
-              "meaning": "story",
-              "entryId": "01496_hanashi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kiita",
-              "meaning": "heard (past of kiku)",
-              "entryId": "00483_kiku"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "sonna",
-      "english": "that kind of; such",
-      "hiragana": "そんな",
-      "examples": [
-        {
-          "romaji": "sonna koto iwanaide.",
-          "hiragana": "そんなこといわないで。",
-          "english": "Don't say such things.",
-          "wordMeanings": [
-            {
-              "romaji": "sonna",
-              "meaning": "such",
-              "entryId": "01645_sonna",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "koto",
-              "meaning": "thing",
-              "entryId": "01164_koto",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "iwanaide",
-              "meaning": "to say",
-              "entryId": "00515_iu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "deru",
-      "english": "to leave; to come out",
-      "hiragana": "でる",
-      "examples": [
-        {
-          "romaji": "kekka ga demashita.",
-          "hiragana": "けっかがでました。",
-          "english": "The results came out.",
-          "wordMeanings": [
-            {
-              "romaji": "kekka",
-              "meaning": "result",
-              "entryId": "02486_kekka",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ga",
-              "meaning": "subject marker",
-              "entryId": "00051_ga",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "demashita",
-              "meaning": "polite past of deru (come out)",
-              "entryId": "00513_deru",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "hitsuyou",
-      "english": "necessary; need",
-      "hiragana": "ひつよう",
-      "examples": [
-        {
-          "romaji": "okane ga hitsuyou desu.",
-          "hiragana": "おかねがひつようです。",
-          "english": "I need money.",
-          "wordMeanings": [
-            {
-              "romaji": "okane",
-              "meaning": "money",
-              "entryId": "00611_okane",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ga",
-              "meaning": "subject marker",
-              "entryId": "00051_ga",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "hitsuyou",
-              "meaning": "necessary (na-adjective + polite copula, forming a predicate)",
-              "entryId": "00846_hitsuyou",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "necessary (na-adjective + polite copula, forming a predicate)",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "nan",
-      "english": "what (short form of nani)",
-      "hiragana": "なん",
-      "examples": [
-        {
-          "romaji": "nan'youbi ni aimashou ka.",
-          "hiragana": "なんようびにあいましょうか。",
-          "english": "What day of the week shall we meet?",
-          "wordMeanings": [
-            {
-              "romaji": "nan'youbi",
-              "meaning": "what day of the week",
-              "entryId": "30346_nanyoubi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "time marker",
-              "entryId": "00314_ni"
-            },
-            {
-              "romaji": "aimashou",
-              "meaning": "volitional polite of au (meet)",
-              "entryId": "00482_au",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "hanasu",
-      "english": "to speak; to talk",
-      "hiragana": "はなす",
-      "examples": [
-        {
-          "romaji": "nihongo wo hanasu.",
-          "hiragana": "にほんごをはなす。",
-          "english": "I speak Japanese.",
-          "wordMeanings": [
-            {
-              "romaji": "nihongo",
-              "meaning": "Japanese language",
-              "entryId": "00614_nihongo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "hanasu",
-              "meaning": "to speak",
-              "entryId": "00467_hanasu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "matsu",
-      "english": "to wait",
-      "hiragana": "まつ",
-      "examples": [
-        {
-          "romaji": "chotto matte.",
-          "hiragana": "ちょっとまって。",
-          "english": "Wait a moment.",
-          "wordMeanings": [
-            {
-              "romaji": "chotto",
-              "meaning": "just a moment",
-              "entryId": "00595_chotto",
-              "senseNumber": 2
-            },
-            {
-              "romaji": "matte",
-              "meaning": "-te form of matsu (wait)",
-              "entryId": "00469_matsu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "dasu",
-      "english": "to take out; to submit",
-      "hiragana": "だす",
-      "examples": [
-        {
-          "romaji": "kaban kara hon wo dashite kudasai.",
-          "hiragana": "かばんからほんをだしてください。",
-          "english": "Please take the book out of the bag.",
-          "wordMeanings": [
-            {
-              "romaji": "kaban",
-              "meaning": "bag",
-              "entryId": "00637_kaban",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kara",
-              "meaning": "from",
-              "entryId": "00504_kara",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "hon",
-              "meaning": "book",
-              "entryId": "00111_hon",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "dashite",
-              "meaning": "-te form of dasu (take out)",
-              "entryId": "01087_dasu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kudasai",
-              "meaning": "please",
-              "entryId": "02899_kudasai",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kata",
-      "english": "person (polite); direction; way",
-      "hiragana": "かた",
-      "examples": [
-        {
-          "romaji": "anokata ha donata desu ka.",
-          "hiragana": "あのかたはどなたですか。",
-          "english": "Who is that person?",
-          "wordMeanings": [
-            {
-              "romaji": "anokata",
-              "meaning": "that person",
-              "entryId": "16618_anokata",
+              "romaji": "machi",
+              "meaning": "town",
+              "entryId": "00613_machi",
               "senseNumber": 1
             },
             {
@@ -2141,697 +1635,47 @@
               "senseNumber": 1
             },
             {
-              "romaji": "donata",
-              "meaning": "who",
-              "entryId": "02923_donata",
+              "romaji": "shizuka",
+              "meaning": "quiet (na-adjective + polite copula, forming a predicate)",
+              "entryId": "00755_shizuka",
               "senseNumber": 1
             },
             {
               "romaji": "desu",
-              "meaning": "is",
+              "meaning": "quiet (na-adjective + polite copula, forming a predicate)",
               "entryId": "09485_desu",
               "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
-              "senseNumber": 1
             }
           ]
         }
       ]
     },
     {
-      "japanese": "ichi",
-      "english": "one",
-      "hiragana": "いち",
+      "japanese": "juu",
+      "hiragana": "じゅう",
+      "english": "ten",
       "examples": [
         {
-          "romaji": "ichi kara juu made kazoete kudasai.",
-          "hiragana": "いちからじゅうまでかぞえてください。",
-          "english": "Please count from one to ten.",
+          "romaji": "juppun de tsukimasu.",
+          "hiragana": "じゅっぷんでつきます。",
+          "english": "I'll arrive in ten minutes.",
           "wordMeanings": [
             {
-              "romaji": "ichi",
-              "meaning": "one",
-              "entryId": "00705_ichi",
+              "romaji": "juppun",
+              "meaning": "minutes",
+              "entryId": "00928_fun",
               "senseNumber": 1
             },
             {
-              "romaji": "kara",
-              "meaning": "from",
-              "entryId": "00504_kara",
+              "romaji": "de",
+              "meaning": "at",
+              "entryId": "00502_de",
               "senseNumber": 1
             },
             {
-              "romaji": "juu",
-              "meaning": "ten",
-              "entryId": "00708_juu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "made",
-              "meaning": "up to"
-            },
-            {
-              "romaji": "kazoete",
-              "meaning": "-te form of kazoeru (count)",
-              "entryId": "01926_kazoeru",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kudasai",
-              "meaning": "please",
-              "entryId": "02899_kudasai",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kangaeru",
-      "english": "to think; to consider",
-      "hiragana": "かんがえる",
-      "examples": [
-        {
-          "romaji": "yoku kangaemasu.",
-          "hiragana": "よくかんがえます。",
-          "english": "I'll think carefully.",
-          "wordMeanings": [
-            {
-              "romaji": "yoku",
-              "meaning": "carefully"
-            },
-            {
-              "romaji": "kangaemasu",
-              "meaning": "thought",
-              "entryId": "00855_kangae",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "ie",
-      "english": "house; home",
-      "hiragana": "いえ",
-      "examples": [
-        {
-          "romaji": "ie ni kaerimasu.",
-          "hiragana": "いえにかえります。",
-          "english": "I'm going home.",
-          "wordMeanings": [
-            {
-              "romaji": "ie",
-              "meaning": "home",
-              "entryId": "00612_ie",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "destination",
-              "entryId": "00314_ni",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kaerimasu",
-              "meaning": "present polite of kaeru (return home)",
-              "entryId": "00508_kaeru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "shinu",
-      "english": "to die",
-      "hiragana": "しぬ",
-      "examples": [
-        {
-          "romaji": "sono inu ha kyonen shinimashita.",
-          "hiragana": "そのいぬはきょねんしにました。",
-          "english": "That dog died last year.",
-          "wordMeanings": [
-            {
-              "romaji": "sono",
-              "meaning": "that",
-              "entryId": "00993_sono",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "inu",
-              "meaning": "dog",
-              "entryId": "00632_inu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kyonen",
-              "meaning": "last year",
-              "entryId": "00727_kyonen",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "shinimashita",
-              "meaning": "polite past of shinu (die)",
-              "entryId": "00669_shinu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "ki",
-      "english": "spirit; mood; attention",
-      "hiragana": "き",
-      "examples": [
-        {
-          "romaji": "ki wo tsukete.",
-          "hiragana": "きをつけて。",
-          "english": "Be careful.",
-          "wordMeanings": [
-            {
-              "romaji": "ki",
-              "meaning": "spirit",
-              "entryId": "02199_ki",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "tsukete",
-              "meaning": "pay attention (-te form of tsukeru, in ki wo tsukeru)"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "jikan",
-      "english": "time; hour",
-      "hiragana": "じかん",
-      "examples": [
-        {
-          "romaji": "jikan ga nai.",
-          "hiragana": "じかんがない。",
-          "english": "I don't have time.",
-          "wordMeanings": [
-            {
-              "romaji": "jikan",
-              "meaning": "time",
-              "entryId": "00468_jikan",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ga",
-              "meaning": "subject marker",
-              "entryId": "00051_ga",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "nai",
-              "meaning": "to not have",
-              "entryId": "01118_nai",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "chotto",
-      "english": "a little; a moment",
-      "hiragana": "ちょっと",
-      "examples": [
-        {
-          "romaji": "chotto takai.",
-          "hiragana": "ちょっとたかい。",
-          "english": "It's a bit expensive.",
-          "wordMeanings": [
-            {
-              "romaji": "chotto",
-              "meaning": "a little",
-              "entryId": "00595_chotto",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "takai",
-              "meaning": "expensive",
-              "entryId": "00500_takai",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "hontou",
-      "english": "truth; really; true",
-      "hiragana": "ほんとう",
-      "examples": [
-        {
-          "romaji": "hontou desu ka.",
-          "hiragana": "ほんとうですか。",
-          "english": "Is that true? / Really?",
-          "wordMeanings": [
-            {
-              "romaji": "hontou",
-              "meaning": "truth",
-              "entryId": "00779_hontou",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "wareware",
-      "english": "we; us (formal)",
-      "hiragana": "われわれ",
-      "examples": [
-        {
-          "romaji": "wareware no mokuhyou ha meikaku da.",
-          "hiragana": "われわれのもくひょうはめいかくだ。",
-          "english": "Our goal is clear.",
-          "wordMeanings": [
-            {
-              "romaji": "wareware",
-              "meaning": "we",
-              "entryId": "03795_wareware",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "no",
-              "meaning": "possessive marker",
-              "entryId": "09472_no",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "mokuhyou",
-              "meaning": "goal",
-              "entryId": "03631_mokuhyou",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "meikaku",
-              "meaning": "clear (na-adjective + plain copula, forming a predicate)",
-              "entryId": "01664_meikaku",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "da",
-              "meaning": "clear (na-adjective + plain copula, forming a predicate)",
-              "entryId": "09496_da",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "hai",
-      "english": "yes; here (in response)",
-      "hiragana": "はい",
-      "examples": [
-        {
-          "romaji": "kaitou sha no 80% ga\"hai\"to kotaeta.",
-          "hiragana": "かいとうしゃの80%が「はい」とこたえた。",
-          "english": "80% of respondents answered 'yes.'",
-          "wordMeanings": [
-            {
-              "romaji": "kaitou",
-              "meaning": "answer",
-              "entryId": "00142_kaitou"
-            },
-            {
-              "romaji": "sha",
-              "meaning": "person (suffix)"
-            },
-            {
-              "romaji": "no",
-              "meaning": "nominalizer",
-              "entryId": "09472_no",
-              "senseNumber": 2
-            },
-            {
-              "romaji": "ga",
-              "meaning": "subject marker",
-              "entryId": "00051_ga",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "hai",
-              "meaning": "yes",
-              "entryId": "09574_hai",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "to",
-              "meaning": "quotation marker",
-              "entryId": "00512_to",
-              "senseNumber": 3
-            },
-            {
-              "romaji": "kotaeta",
-              "meaning": "past of kotaeru (answer)",
-              "entryId": "01099_kotaeru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "mada",
-      "english": "still; not yet",
-      "hiragana": "まだ",
-      "examples": [
-        {
-          "romaji": "mada tabeteimasen.",
-          "hiragana": "まだたべていません。",
-          "english": "I haven't eaten yet.",
-          "wordMeanings": [
-            {
-              "romaji": "mada",
-              "meaning": "not yet",
-              "entryId": "00603_mada",
-              "senseNumber": 2
-            },
-            {
-              "romaji": "tabeteimasen",
-              "meaning": "negative progressive of taberu (eat) (tabete + imasen: -te form + iru, polite negative continuing action or state)",
-              "entryId": "00396_taberu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kudasaru",
-      "english": "to give (respectful)",
-      "hiragana": "くださる",
-      "examples": [
-        {
-          "romaji": "sensei ga hon wo kudasatta.",
-          "hiragana": "せんせいがほんをくださった。",
-          "english": "The teacher gave me a book.",
-          "wordMeanings": [
-            {
-              "romaji": "sensei",
-              "meaning": "teacher",
-              "entryId": "00609_sensei",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ga",
-              "meaning": "subject marker",
-              "entryId": "00051_ga",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "hon",
-              "meaning": "book",
-              "entryId": "00111_hon",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kudasatta",
-              "meaning": "past of kudasaru (give)",
-              "entryId": "01305_kudasaru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "soko",
-      "english": "there; that place",
-      "hiragana": "そこ",
-      "examples": [
-        {
-          "romaji": "soko ni nani ga aru?",
-          "hiragana": "そこになにがある?",
-          "english": "What is there?",
-          "wordMeanings": [
-            {
-              "romaji": "soko",
-              "meaning": "there",
-              "entryId": "00991_soko",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "location of existence marker",
-              "entryId": "00314_ni"
-            },
-            {
-              "romaji": "nani",
-              "meaning": "what",
-              "entryId": "00498_nani",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ga",
-              "meaning": "subject marker",
-              "entryId": "00051_ga",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "aru",
-              "meaning": "to exist",
-              "entryId": "00006_aru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "hi",
-      "english": "day; sun",
-      "hiragana": "ひ",
-      "examples": [
-        {
-          "romaji": "ii hi desu ne.",
-          "hiragana": "いいひですね。",
-          "english": "It's a nice day, isn't it?",
-          "wordMeanings": [
-            {
-              "romaji": "ii",
-              "meaning": "nice",
-              "entryId": "00118_ii",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "hi",
-              "meaning": "day",
-              "entryId": "02249_hi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ne",
-              "meaning": "seeking confirmation",
-              "entryId": "09474_ne",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "sekai",
-      "english": "world",
-      "hiragana": "せかい",
-      "examples": [
-        {
-          "romaji": "sekai ha hiroi.",
-          "hiragana": "せかいはひろい。",
-          "english": "The world is vast.",
-          "wordMeanings": [
-            {
-              "romaji": "sekai",
-              "meaning": "world",
-              "entryId": "01447_sekai",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "hiroi",
-              "meaning": "wide",
-              "entryId": "00704_hiroi",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "yoi",
-      "english": "good; fine",
-      "hiragana": "よい",
-      "examples": [
-        {
-          "romaji": "tenki ga yoi.",
-          "hiragana": "てんきがよい。",
-          "english": "The weather is good.",
-          "wordMeanings": [
-            {
-              "romaji": "tenki",
-              "meaning": "weather",
-              "entryId": "00582_tenki",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ga",
-              "meaning": "subject marker",
-              "entryId": "00051_ga",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "yoi",
-              "meaning": "good",
-              "entryId": "02350_yoi",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "naze",
-      "english": "why",
-      "hiragana": "なぜ",
-      "examples": [
-        {
-          "romaji": "naze konakatta no.",
-          "hiragana": "なぜこなかったの。",
-          "english": "Why didn't you come?",
-          "wordMeanings": [
-            {
-              "romaji": "naze",
-              "meaning": "why",
-              "entryId": "01484_naze",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "konakatta",
-              "meaning": "negative past of kuru (come)",
-              "entryId": "00254_kuru",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "no",
-              "meaning": "possessive marker",
-              "entryId": "09472_no",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "tsukau",
-      "english": "to use",
-      "hiragana": "つかう",
-      "examples": [
-        {
-          "romaji": "hashi wo tsukau.",
-          "hiragana": "はしをつかう。",
-          "english": "I use chopsticks.",
-          "wordMeanings": [
-            {
-              "romaji": "hashi",
-              "meaning": "chopsticks",
-              "entryId": "01026_hashi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "tsukau",
-              "meaning": "to use",
-              "entryId": "00473_tsukau",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "daijoubu",
-      "english": "okay; all right",
-      "hiragana": "だいじょうぶ",
-      "examples": [
-        {
-          "romaji": "daijoubu desu.",
-          "hiragana": "だいじょうぶです。",
-          "english": "I'm fine.",
-          "wordMeanings": [
-            {
-              "romaji": "daijoubu",
-              "meaning": "fine (na-adjective + polite copula, forming a predicate)",
-              "entryId": "00772_daijoubu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "fine (na-adjective + polite copula, forming a predicate)",
-              "entryId": "09485_desu",
+              "romaji": "tsukimasu",
+              "meaning": "present polite of tsuku (arrive)",
+              "entryId": "00680_tsuku",
               "senseNumber": 1
             }
           ]
@@ -2840,8 +1684,8 @@
     },
     {
       "japanese": "ato",
-      "english": "after; later; remaining",
       "hiragana": "あと",
+      "english": "after, later",
       "examples": [
         {
           "romaji": "chuushoku no ato, sukoshi hirune wo shita.",
@@ -2895,37 +1739,31 @@
       ]
     },
     {
-      "japanese": "konna",
-      "english": "this kind of; like this",
-      "hiragana": "こんな",
+      "japanese": "sekai",
+      "hiragana": "せかい",
+      "english": "world, earth",
       "examples": [
         {
-          "romaji": "konna hon wo sagashiteimashita.",
-          "hiragana": "こんなほんをさがしていました。",
-          "english": "I was looking for a book like this.",
+          "romaji": "sekai ha hiroi.",
+          "hiragana": "せかいはひろい。",
+          "english": "The world is vast.",
           "wordMeanings": [
             {
-              "romaji": "konna",
-              "meaning": "like this",
-              "entryId": "02881_konna",
+              "romaji": "sekai",
+              "meaning": "world",
+              "entryId": "01447_sekai",
               "senseNumber": 1
             },
             {
-              "romaji": "hon",
-              "meaning": "book",
-              "entryId": "00111_hon",
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
               "senseNumber": 1
             },
             {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "sagashiteimashita",
-              "meaning": "past progressive of sagasu (look for) (sagashite + imashita: -te form + iru, polite past continuing action or state)",
-              "entryId": "00493_sagasu",
+              "romaji": "hiroi",
+              "meaning": "wide",
+              "entryId": "00704_hiroi",
               "senseNumber": 1
             }
           ]
@@ -2933,24 +1771,88 @@
       ]
     },
     {
-      "japanese": "otoko",
-      "english": "man; male",
-      "hiragana": "おとこ",
+      "japanese": "dekiru",
+      "hiragana": "できる",
+      "english": "to be able to, can",
       "examples": [
         {
-          "romaji": "ano otoko no hito ha tanaka san desu.",
-          "hiragana": "あのおとこのひとはたなかさんです。",
-          "english": "That man is Mr. Tanaka.",
+          "romaji": "nihongo ga dekiru.",
+          "hiragana": "にほんごができる。",
+          "english": "I can speak Japanese.",
           "wordMeanings": [
             {
-              "romaji": "ano",
-              "meaning": "that",
-              "entryId": "00915_ano"
+              "romaji": "nihongo",
+              "meaning": "Japanese language",
+              "entryId": "00614_nihongo",
+              "senseNumber": 1
             },
             {
-              "romaji": "otoko",
-              "meaning": "man",
-              "entryId": "00561_otoko",
+              "romaji": "ga",
+              "meaning": "object marker",
+              "entryId": "00051_ga",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "dekiru",
+              "meaning": "to be able to",
+              "entryId": "00557_dekiru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "sei",
+      "hiragana": "せい",
+      "english": "-ness; -ity; nature; quality",
+      "examples": [
+        {
+          "romaji": "kanrensei ga takai.",
+          "hiragana": "かんれんせいがたかい。",
+          "english": "The relevance is high.",
+          "wordMeanings": [
+            {
+              "romaji": "kanrensei",
+              "meaning": "relevance",
+              "entryId": "24718_kanrensei",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "takai",
+              "meaning": "high",
+              "entryId": "00500_takai"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "taikai",
+      "hiragana": "たいかい",
+      "english": "tournament, competition, meet",
+      "examples": [
+        {
+          "romaji": "raigetsu, tenisu no taikai ni deru.",
+          "hiragana": "らいげつ、てにすのたいかいにでる。",
+          "english": "I'm participating in a tennis tournament next month.",
+          "wordMeanings": [
+            {
+              "romaji": "raigetsu",
+              "meaning": "next month",
+              "entryId": "00744_raigetsu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "tenisu",
+              "meaning": "tennis",
+              "entryId": "01784_tenisu",
               "senseNumber": 1
             },
             {
@@ -2960,133 +1862,41 @@
               "senseNumber": 1
             },
             {
-              "romaji": "hito",
-              "meaning": "person",
-              "entryId": "00476_hito"
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "tanaka",
-              "meaning": "Tanaka",
-              "entryId": "09528_tanaka",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "san",
-              "meaning": "Mr.",
-              "entryId": "09848_san",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "hoka",
-      "english": "other; another",
-      "hiragana": "ほか",
-      "examples": [
-        {
-          "romaji": "hoka ni shitsumon ha arimasu ka.",
-          "hiragana": "ほかにしつもんはありますか。",
-          "english": "Are there any other questions?",
-          "wordMeanings": [
-            {
-              "romaji": "hoka",
-              "meaning": "other",
-              "entryId": "04129_hoka",
+              "romaji": "taikai",
+              "meaning": "tournament",
+              "entryId": "03386_taikai",
               "senseNumber": 1
             },
             {
               "romaji": "ni",
-              "meaning": "in addition",
-              "entryId": "00314_ni"
+              "meaning": "location of existence marker",
+              "entryId": "00314_ni",
+              "senseNumber": 2
             },
             {
-              "romaji": "shitsumon",
-              "meaning": "question",
-              "entryId": "00888_shitsumon",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ha",
-              "meaning": "topic marker",
-              "entryId": "00079_ha",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "arimasu",
-              "meaning": "present polite of aru (exist)",
-              "entryId": "00006_aru",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ka",
-              "meaning": "question marker",
-              "entryId": "09473_ka",
-              "senseNumber": 1
+              "romaji": "deru",
+              "meaning": "to participate",
+              "entryId": "00513_deru",
+              "senseNumber": 3
             }
           ]
         }
       ]
     },
     {
-      "japanese": "te",
-      "english": "hand",
-      "hiragana": "て",
+      "japanese": "kore",
+      "hiragana": "これ",
+      "english": "this (thing)",
       "examples": [
         {
-          "romaji": "te wo arau.",
-          "hiragana": "てをあらう。",
-          "english": "To wash one's hands.",
+          "romaji": "kore ha nan desu ka.",
+          "hiragana": "これはなんですか。",
+          "english": "What is this?",
           "wordMeanings": [
             {
-              "romaji": "te",
-              "meaning": "hand",
-              "entryId": "00569_te",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "arau",
-              "meaning": "to wash",
-              "entryId": "00827_arau",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "shigoto",
-      "english": "work; job",
-      "hiragana": "しごと",
-      "examples": [
-        {
-          "romaji": "shigoto ha nan desu ka.",
-          "hiragana": "しごとはなんですか。",
-          "english": "What is your job?",
-          "wordMeanings": [
-            {
-              "romaji": "shigoto",
-              "meaning": "job",
-              "entryId": "00480_shigoto",
+              "romaji": "kore",
+              "meaning": "this",
+              "entryId": "00963_kore",
               "senseNumber": 1
             },
             {
@@ -3118,9 +1928,72 @@
       ]
     },
     {
+      "japanese": "a",
+      "hiragana": "あっ",
+      "english": "ah!; oh!; oops!",
+      "examples": [
+        {
+          "romaji": "a, abunai!",
+          "hiragana": "あっ、あぶない！",
+          "english": "Ah, watch out!",
+          "wordMeanings": [
+            {
+              "romaji": "a",
+              "meaning": "ah!",
+              "entryId": "28143_a",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "abunai",
+              "meaning": "dangerous",
+              "entryId": "00768_abunai"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "nari",
+      "hiragana": "なり",
+      "english": "is (classical/literary copula)",
+      "examples": [
+        {
+          "romaji": "keizoku ha chikara nari.",
+          "hiragana": "けいぞくはちからなり。",
+          "english": "Persistence is power. (Continuity is strength.)",
+          "wordMeanings": [
+            {
+              "romaji": "keizoku",
+              "meaning": "continuation",
+              "entryId": "00213_keizoku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "chikara",
+              "meaning": "power",
+              "entryId": "01661_chikara",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nari",
+              "meaning": "is",
+              "entryId": "09883_nari",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
       "japanese": "mondai",
-      "english": "problem; question",
       "hiragana": "もんだい",
+      "english": "question, problem (on a test)",
       "examples": [
         {
           "romaji": "kono mondai no kotae ha nan desu ka.",
@@ -3180,9 +2053,261 @@
       ]
     },
     {
+      "japanese": "me",
+      "hiragana": "め",
+      "english": "eye",
+      "examples": [
+        {
+          "romaji": "me ga ookii desu ne.",
+          "hiragana": "めがおおきいですね。",
+          "english": "You have big eyes.",
+          "wordMeanings": [
+            {
+              "romaji": "me",
+              "meaning": "eye",
+              "entryId": "00525_me",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ookii",
+              "meaning": "big (i-adjective + polite desu)",
+              "entryId": "00335_ookii",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "desu",
+              "meaning": "big (i-adjective + polite desu)",
+              "entryId": "09485_desu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ne",
+              "meaning": "softening statements",
+              "entryId": "09474_ne",
+              "senseNumber": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "chiiki",
+      "hiragana": "ちいき",
+      "english": "region, area, district",
+      "examples": [
+        {
+          "romaji": "kono chiiki ha anzen da.",
+          "hiragana": "このちいきはあんぜんだ。",
+          "english": "This area is safe.",
+          "wordMeanings": [
+            {
+              "romaji": "kono",
+              "meaning": "this",
+              "entryId": "00962_kono",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "chiiki",
+              "meaning": "area",
+              "entryId": "01461_chiiki",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "anzen",
+              "meaning": "safe (na-adjective + plain copula, forming a predicate)",
+              "entryId": "01131_anzen",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "da",
+              "meaning": "safe (na-adjective + plain copula, forming a predicate)",
+              "entryId": "09496_da",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "san",
+      "hiragana": "さん",
+      "english": "three",
+      "examples": [
+        {
+          "romaji": "san ji ni aimashou.",
+          "hiragana": "さんじにあいましょう。",
+          "english": "Let's meet at three o'clock.",
+          "wordMeanings": [
+            {
+              "romaji": "san",
+              "meaning": "three",
+              "entryId": "00749_san",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ji",
+              "meaning": "o'clock",
+              "entryId": "09869_ji",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "time marker",
+              "entryId": "00314_ni",
+              "senseNumber": 3
+            },
+            {
+              "romaji": "aimashou",
+              "meaning": "volitional polite of au (meet)",
+              "entryId": "00482_au",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "senshu",
+      "hiragana": "せんしゅ",
+      "english": "player, athlete, competitor",
+      "examples": [
+        {
+          "romaji": "kare ha yakyuu senshu da.",
+          "hiragana": "かれはやきゅうせんしゅだ。",
+          "english": "He is a baseball player.",
+          "wordMeanings": [
+            {
+              "romaji": "kare",
+              "meaning": "he",
+              "entryId": "01292_kare",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "yakyuu",
+              "meaning": "baseball",
+              "entryId": "04727_yakyuu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "senshu",
+              "meaning": "player",
+              "entryId": "03823_senshu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "da",
+              "meaning": "is",
+              "entryId": "09496_da",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "kigyou",
+      "hiragana": "きぎょう",
+      "english": "company, enterprise, business",
+      "examples": [
+        {
+          "romaji": "ookina kigyou de hataraiteimasu.",
+          "hiragana": "おおきなきぎょうではたらいています。",
+          "english": "I work at a large company.",
+          "wordMeanings": [
+            {
+              "romaji": "ookina",
+              "meaning": "large",
+              "entryId": "02849_ookina",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kigyou",
+              "meaning": "company",
+              "entryId": "00225_kigyou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "de",
+              "meaning": "at",
+              "entryId": "00502_de",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hataraiteimasu",
+              "meaning": "progressive of hataraku (work) (hataraite + imasu: -te form + iru, polite continuing action or state)",
+              "entryId": "00503_hataraku",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "kankei",
+      "hiragana": "かんけい",
+      "english": "relationship, connection",
+      "examples": [
+        {
+          "romaji": "futari no kankei ha yoi.",
+          "hiragana": "ふたりのかんけいはよい。",
+          "english": "The relationship between the two is good.",
+          "wordMeanings": [
+            {
+              "romaji": "futari",
+              "meaning": "two people",
+              "entryId": "00622_futari",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "no",
+              "meaning": "possessive marker",
+              "entryId": "09472_no",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kankei",
+              "meaning": "relationship",
+              "entryId": "01298_kankei",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "yoi",
+              "meaning": "good",
+              "entryId": "02350_yoi",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
       "japanese": "mata",
-      "english": "again; also; another time",
       "hiragana": "また",
+      "english": "again",
       "examples": [
         {
           "romaji": "mata aimashou.",
@@ -3206,186 +2331,20 @@
       ]
     },
     {
-      "japanese": "onaji",
-      "english": "same",
-      "hiragana": "おなじ",
+      "japanese": "keizai",
+      "hiragana": "けいざい",
+      "english": "economy, economics",
       "examples": [
         {
-          "romaji": "onaji hon wo motteiru.",
-          "hiragana": "おなじほんをもっている。",
-          "english": "I have the same book.",
+          "romaji": "nihon no keizai ha seichou shiteiru.",
+          "hiragana": "にほんのけいざいはせいちょうしている。",
+          "english": "Japan's economy is growing.",
           "wordMeanings": [
             {
-              "romaji": "onaji",
-              "meaning": "same",
-              "entryId": "02857_onaji",
+              "romaji": "nihon",
+              "meaning": "Japan",
+              "entryId": "03876_nihon",
               "senseNumber": 1
-            },
-            {
-              "romaji": "hon",
-              "meaning": "book",
-              "entryId": "00111_hon",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "motteiru",
-              "meaning": "have (continuing state of motsu) (motte + iru: -te form + iru, plain continuing action or state)"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "hairu",
-      "english": "to enter; to go in",
-      "hiragana": "はいる",
-      "examples": [
-        {
-          "romaji": "heya ni haitte kudasai.",
-          "hiragana": "へやにはいってください。",
-          "english": "Please enter the room.",
-          "wordMeanings": [
-            {
-              "romaji": "heya",
-              "meaning": "room",
-              "entryId": "00507_heya",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "destination marker",
-              "entryId": "00314_ni"
-            },
-            {
-              "romaji": "haitte",
-              "meaning": "-te form of hairu (enter)",
-              "entryId": "00494_hairu",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "kudasai",
-              "meaning": "please",
-              "entryId": "02899_kudasai",
-              "senseNumber": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "chigau",
-      "english": "to differ; to be wrong",
-      "hiragana": "ちがう",
-      "examples": [
-        {
-          "romaji": "kangae ga chigau.",
-          "hiragana": "かんがえがちがう。",
-          "english": "We think differently.",
-          "wordMeanings": [
-            {
-              "romaji": "kangae",
-              "meaning": "thought",
-              "entryId": "00855_kangae",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ga",
-              "meaning": "subject marker",
-              "entryId": "00051_ga",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "chigau",
-              "meaning": "to be different",
-              "entryId": "01957_chigau",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "issho",
-      "english": "together; same",
-      "hiragana": "いっしょ",
-      "examples": [
-        {
-          "romaji": "issho ni ikimashou.",
-          "hiragana": "いっしょにいきましょう。",
-          "english": "Let's go together.",
-          "wordMeanings": [
-            {
-              "romaji": "issho",
-              "meaning": "together",
-              "entryId": "02848_issho",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "together (with issho)",
-              "entryId": "00314_ni"
-            },
-            {
-              "romaji": "ikimashou",
-              "meaning": "volitional polite of iku (go)",
-              "entryId": "00119_iku",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "au",
-      "english": "to meet",
-      "hiragana": "あう",
-      "examples": [
-        {
-          "romaji": "tomodachi ni au.",
-          "hiragana": "ともだちにあう。",
-          "english": "I meet my friend.",
-          "wordMeanings": [
-            {
-              "romaji": "tomodachi",
-              "meaning": "friend",
-              "entryId": "01478_tomodachi",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "ni",
-              "meaning": "person met",
-              "entryId": "00314_ni"
-            },
-            {
-              "romaji": "au",
-              "meaning": "to meet",
-              "entryId": "00482_au",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "youna",
-      "english": "like; such as",
-      "hiragana": "ような",
-      "examples": [
-        {
-          "romaji": "yume no youna hanashi da.",
-          "hiragana": "ゆめのようなはなしだ。",
-          "english": "It sounds like a dream come true.",
-          "wordMeanings": [
-            {
-              "romaji": "yume",
-              "meaning": "dream",
-              "entryId": "01519_yume"
             },
             {
               "romaji": "no",
@@ -3394,128 +2353,9 @@
               "senseNumber": 1
             },
             {
-              "romaji": "youna",
-              "meaning": "like",
-              "entryId": "30292_youna",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "hanashi",
-              "meaning": "story"
-            },
-            {
-              "romaji": "da",
-              "meaning": "is",
-              "entryId": "09496_da",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "tsukuru",
-      "english": "to make; to create",
-      "hiragana": "つくる",
-      "examples": [
-        {
-          "romaji": "gohan wo tsukuru.",
-          "hiragana": "ごはんをつくる。",
-          "english": "I make a meal.",
-          "wordMeanings": [
-            {
-              "romaji": "gohan",
-              "meaning": "meal",
-              "entryId": "00776_gohan",
-              "senseNumber": 2
-            },
-            {
-              "romaji": "wo",
-              "meaning": "direct object marker",
-              "entryId": "00422_wo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "tsukuru",
-              "meaning": "to make",
-              "entryId": "00481_tsukuru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "mitai",
-      "english": "like; seem; want to see (context dependent)",
-      "hiragana": "みたい",
-      "examples": [
-        {
-          "romaji": "kodomo mitai da.",
-          "hiragana": "こどもみたいだ。",
-          "english": "It's like a child. / How childish.",
-          "wordMeanings": [
-            {
-              "romaji": "kodomo",
-              "meaning": "child",
-              "entryId": "00554_kodomo",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "mitai",
-              "meaning": "like (na-adjective + plain copula, forming a predicate)",
-              "entryId": "10755_mitai",
-              "senseNumber": 1
-            },
-            {
-              "romaji": "da",
-              "meaning": "like (na-adjective + plain copula, forming a predicate)",
-              "entryId": "09496_da",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "modoru",
-      "english": "to return; to go back",
-      "hiragana": "もどる",
-      "examples": [
-        {
-          "romaji": "sugu modoru.",
-          "hiragana": "すぐもどる。",
-          "english": "I'll be right back.",
-          "wordMeanings": [
-            {
-              "romaji": "sugu",
-              "meaning": "right away",
-              "entryId": "00814_sugu"
-            },
-            {
-              "romaji": "modoru",
-              "meaning": "to go back",
-              "entryId": "01117_modoru",
-              "senseNumber": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "japanese": "kyou",
-      "english": "today",
-      "hiragana": "きょう",
-      "examples": [
-        {
-          "romaji": "kyou ha nan'youbi desu ka.",
-          "hiragana": "きょうはなんようびですか。",
-          "english": "What day of the week is today?",
-          "wordMeanings": [
-            {
-              "romaji": "kyou",
-              "meaning": "today",
-              "entryId": "00496_kyou",
+              "romaji": "keizai",
+              "meaning": "economy",
+              "entryId": "01394_keizai",
               "senseNumber": 1
             },
             {
@@ -3525,9 +2365,41 @@
               "senseNumber": 1
             },
             {
-              "romaji": "nan'youbi",
-              "meaning": "day of the week",
-              "entryId": "03877_youbi",
+              "romaji": "seichou",
+              "meaning": "growth",
+              "entryId": "03290_seichou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "shiteiru",
+              "meaning": "continuing form of seichou suru (growth) (shite + iru: -te form + iru, plain continuing action or state)",
+              "entryId": "00392_suru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ima",
+      "hiragana": "いま",
+      "english": "now, at this moment",
+      "examples": [
+        {
+          "romaji": "ima nanji desu ka.",
+          "hiragana": "いまなんじですか。",
+          "english": "What time is it now?",
+          "wordMeanings": [
+            {
+              "romaji": "ima",
+              "meaning": "now",
+              "entryId": "00945_ima",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nanji",
+              "meaning": "what time",
+              "entryId": "00973_nanji",
               "senseNumber": 1
             },
             {
@@ -3547,25 +2419,43 @@
       ]
     },
     {
-      "japanese": "warui",
-      "english": "bad; sorry",
-      "hiragana": "わるい",
+      "japanese": "iin",
+      "hiragana": "いいん",
+      "english": "committee member",
       "examples": [
         {
-          "romaji": "warui, okureta.",
-          "hiragana": "わるい、おくれた。",
-          "english": "Sorry, I'm late.",
+          "romaji": "kanojo ha gakkyuu iin desu.",
+          "hiragana": "かのじょはがっきゅういいんです。",
+          "english": "She is the class representative.",
           "wordMeanings": [
             {
-              "romaji": "warui",
-              "meaning": "sorry",
-              "entryId": "00908_warui",
-              "senseNumber": 2
+              "romaji": "kanojo",
+              "meaning": "she",
+              "entryId": "01286_kanojo",
+              "senseNumber": 1
             },
             {
-              "romaji": "okureta",
-              "meaning": "past of okureru (be late)",
-              "entryId": "00741_okureru",
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "gakkyuu",
+              "meaning": "class",
+              "entryId": "12253_gakkyuu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "iin",
+              "meaning": "committee member",
+              "entryId": "01708_iin",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "desu",
+              "meaning": "is",
+              "entryId": "09485_desu",
               "senseNumber": 1
             }
           ]
@@ -3573,19 +2463,242 @@
       ]
     },
     {
-      "japanese": "mitsukeru",
-      "english": "to find; to discover",
-      "hiragana": "みつける",
+      "japanese": "jikan",
+      "hiragana": "じかん",
+      "english": "time",
       "examples": [
         {
-          "romaji": "kagi wo mitsuketa.",
-          "hiragana": "かぎをみつけた。",
-          "english": "I found the key.",
+          "romaji": "jikan ga nai.",
+          "hiragana": "じかんがない。",
+          "english": "I don't have time.",
           "wordMeanings": [
             {
-              "romaji": "kagi",
-              "meaning": "key",
-              "entryId": "02189_kagi"
+              "romaji": "jikan",
+              "meaning": "time",
+              "entryId": "00468_jikan",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nai",
+              "meaning": "to not have",
+              "entryId": "01118_nai",
+              "senseNumber": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "daihyou",
+      "hiragana": "だいひょう",
+      "english": "representative, delegate",
+      "examples": [
+        {
+          "romaji": "kare ha nihon daihyou toshite shutsujou shita.",
+          "hiragana": "かれはにほんだいひょうとしてしゅつじょうした。",
+          "english": "He participated as a representative of Japan.",
+          "wordMeanings": [
+            {
+              "romaji": "kare",
+              "meaning": "he",
+              "entryId": "01292_kare",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nihon",
+              "meaning": "Japan",
+              "entryId": "03876_nihon",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "daihyou",
+              "meaning": "representative",
+              "entryId": "03419_daihyou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "toshite",
+              "meaning": "as",
+              "entryId": "06802_toshite",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "shutsujou",
+              "meaning": "to participate (compound verb: shutsujou + shita, past of shutsujousuru)",
+              "entryId": "03223_shutsujou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "shita",
+              "meaning": "to participate (compound verb: shutsujou + shita, past of shutsujousuru)",
+              "entryId": "00392_suru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "kuni",
+      "hiragana": "くに",
+      "english": "country, nation",
+      "examples": [
+        {
+          "romaji": "dono kuni kara kimashita ka.",
+          "hiragana": "どのくにからきましたか。",
+          "english": "Which country are you from?",
+          "wordMeanings": [
+            {
+              "romaji": "dono",
+              "meaning": "which",
+              "entryId": "00551_dono",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kuni",
+              "meaning": "country",
+              "entryId": "02204_kuni",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kara",
+              "meaning": "from",
+              "entryId": "00504_kara",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kimashita",
+              "meaning": "polite past of kuru (come)",
+              "entryId": "00254_kuru",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ka",
+              "meaning": "question marker",
+              "entryId": "09473_ka",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "yori",
+      "hiragana": "より",
+      "english": "than (comparison)",
+      "examples": [
+        {
+          "romaji": "natsu yori fuyu ga suki desu.",
+          "hiragana": "なつよりふゆがすきです。",
+          "english": "I like winter more than summer.",
+          "wordMeanings": [
+            {
+              "romaji": "natsu",
+              "meaning": "summer",
+              "entryId": "02236_natsu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "yori",
+              "meaning": "than",
+              "entryId": "09476_yori",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "fuyu",
+              "meaning": "winter",
+              "entryId": "00623_fuyu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "suki",
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
+            },
+            {
+              "romaji": "desu",
+              "meaning": "like (na-adjective + polite copula, forming a predicate)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ooku",
+      "hiragana": "おおく",
+      "english": "many; much; a large number; the majority",
+      "examples": [
+        {
+          "romaji": "ooku no hito ga sankashita.",
+          "hiragana": "おおくのひとがさんかした。",
+          "english": "Many people participated.",
+          "wordMeanings": [
+            {
+              "romaji": "ooku",
+              "meaning": "many",
+              "entryId": "18752_ooku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "no",
+              "meaning": "possessive marker",
+              "entryId": "09472_no",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hito",
+              "meaning": "other people",
+              "entryId": "00476_hito",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "sankashita",
+              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru)",
+              "entryId": "25408_sankasuru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "nagara",
+      "hiragana": "ながら",
+      "english": "while (doing)",
+      "examples": [
+        {
+          "romaji": "ongaku wo kiki nagara benkyousuru.",
+          "hiragana": "おんがくをききながらべんきょうする。",
+          "english": "I study while listening to music.",
+          "wordMeanings": [
+            {
+              "romaji": "ongaku",
+              "meaning": "music",
+              "entryId": "00661_ongaku",
+              "senseNumber": 1
             },
             {
               "romaji": "wo",
@@ -3594,9 +2707,21 @@
               "senseNumber": 1
             },
             {
-              "romaji": "mitsuketa",
-              "meaning": "past of mitsukeru (find)",
-              "entryId": "01180_mitsukeru",
+              "romaji": "kiki",
+              "meaning": "to listen",
+              "entryId": "00483_kiku",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "nagara",
+              "meaning": "while",
+              "entryId": "10530_nagara",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "benkyousuru",
+              "meaning": "to study (compound verb: benkyou + suru, dictionary form of benkyousuru)",
+              "entryId": "00527_benkyousuru",
               "senseNumber": 1
             }
           ]
@@ -3604,37 +2729,41 @@
       ]
     },
     {
-      "japanese": "ko",
-      "english": "child; young one",
-      "hiragana": "こ",
+      "japanese": "jibun",
+      "hiragana": "じぶん",
+      "english": "oneself, myself, yourself",
       "examples": [
         {
-          "romaji": "kashikoi ko desu ne.",
-          "hiragana": "かしこいこですね。",
-          "english": "What a smart child.",
+          "romaji": "jibun de yatte mite kudasai.",
+          "hiragana": "じぶんでやってみてください。",
+          "english": "Please try doing it yourself.",
           "wordMeanings": [
             {
-              "romaji": "kashikoi",
-              "meaning": "clever",
-              "entryId": "00192_kashikoi",
+              "romaji": "jibun",
+              "meaning": "yourself",
+              "entryId": "02887_jibun",
               "senseNumber": 1
             },
             {
-              "romaji": "ko",
-              "meaning": "child",
-              "entryId": "09851_ko",
-              "senseNumber": 1
+              "romaji": "de",
+              "meaning": "at/in (location of action)",
+              "entryId": "00502_de"
             },
             {
-              "romaji": "desu",
-              "meaning": "is",
-              "entryId": "09485_desu",
-              "senseNumber": 1
+              "romaji": "yatte",
+              "meaning": "-te form of yaru (do)",
+              "entryId": "02980_yaru"
             },
             {
-              "romaji": "ne",
-              "meaning": "softening statements",
-              "entryId": "09474_ne",
+              "romaji": "mite",
+              "meaning": "-te form of miru (try)",
+              "entryId": "00283_miru",
+              "senseNumber": 3
+            },
+            {
+              "romaji": "kudasai",
+              "meaning": "please",
+              "entryId": "02899_kudasai",
               "senseNumber": 2
             }
           ]
@@ -3642,26 +2771,1308 @@
       ]
     },
     {
-      "japanese": "anta",
-      "english": "you (very casual)",
-      "hiragana": "あんた",
+      "japanese": "node",
+      "hiragana": "ので",
+      "english": "because, since, so",
       "examples": [
         {
-          "romaji": "anta, dare?",
-          "hiragana": "あんた、だれ？",
-          "english": "Who are you?",
+          "romaji": "ame ga futteiru node, dekakenai.",
+          "hiragana": "あめがふっているので、でかけない。",
+          "english": "Since it's raining, I won't go out.",
           "wordMeanings": [
             {
-              "romaji": "anta",
-              "meaning": "you",
-              "entryId": "27721_anta",
+              "romaji": "ame",
+              "meaning": "rain",
+              "entryId": "00583_ame",
               "senseNumber": 1
             },
             {
-              "romaji": "dare",
-              "meaning": "who",
-              "entryId": "00534_dare",
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
               "senseNumber": 1
+            },
+            {
+              "romaji": "futteiru",
+              "meaning": "progressive of furu (fall as rain) (futte + iru: -te form + iru, plain continuing action or state)",
+              "entryId": "00839_furu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "node",
+              "meaning": "since",
+              "entryId": "09501_node",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "dekakenai",
+              "meaning": "not go out (negative of dekakeru)",
+              "entryId": "00833_dekakeru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "happyou",
+      "hiragana": "はっぴょう",
+      "english": "announcement, publication",
+      "examples": [
+        {
+          "romaji": "shinseihin wo happyou shita.",
+          "hiragana": "しんせいひんをはっぴょうした。",
+          "english": "We announced the new product.",
+          "wordMeanings": [
+            {
+              "romaji": "shinseihin",
+              "meaning": "new product",
+              "entryId": "18629_shinseihin",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "happyou",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
+              "entryId": "03562_happyou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "shita",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
+              "entryId": "00392_suru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "sanka",
+      "hiragana": "さんか",
+      "english": "participation, joining",
+      "examples": [
+        {
+          "romaji": "kaigi ni sanka suru.",
+          "hiragana": "かいぎにさんかする。",
+          "english": "I'll participate in the meeting.",
+          "wordMeanings": [
+            {
+              "romaji": "kaigi",
+              "meaning": "meeting",
+              "entryId": "00710_kaigi",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "location of existence marker",
+              "entryId": "00314_ni",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "sanka",
+              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru)",
+              "entryId": "02498_sanka",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "suru",
+              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru)",
+              "entryId": "00392_suru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "hitsuyou",
+      "hiragana": "ひつよう",
+      "english": "necessary, needed, required",
+      "examples": [
+        {
+          "romaji": "okane ga hitsuyou desu.",
+          "hiragana": "おかねがひつようです。",
+          "english": "I need money.",
+          "wordMeanings": [
+            {
+              "romaji": "okane",
+              "meaning": "money",
+              "entryId": "00611_okane",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hitsuyou",
+              "meaning": "necessary (na-adjective + polite copula, forming a predicate)",
+              "entryId": "00846_hitsuyou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "desu",
+              "meaning": "necessary (na-adjective + polite copula, forming a predicate)",
+              "entryId": "09485_desu",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "niyoru",
+      "hiragana": "による",
+      "english": "due to; caused by; resulting from",
+      "examples": [
+        {
+          "romaji": "jishin niyoru higai ga hirogatteiru.",
+          "hiragana": "じしんによるひがいがひろがっている。",
+          "english": "Damage from the earthquake is spreading.",
+          "wordMeanings": [
+            {
+              "romaji": "jishin",
+              "meaning": "earthquake",
+              "entryId": "01608_jishin",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "niyoru",
+              "meaning": "due to",
+              "entryId": "28349_niyoru",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "higai",
+              "meaning": "damage",
+              "entryId": "02572_higai",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hirogatteiru",
+              "meaning": "progressive of hirogaru (spread) (hirogatte + iru: -te form + iru, plain continuing action or state)",
+              "entryId": "01980_hirogaru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "zenkoku",
+      "hiragana": "ぜんこく",
+      "english": "the whole country, nationwide",
+      "examples": [
+        {
+          "romaji": "zenkoku de hanbaisareteiru.",
+          "hiragana": "ぜんこくではんばいされている。",
+          "english": "It's sold nationwide.",
+          "wordMeanings": [
+            {
+              "romaji": "zenkoku",
+              "meaning": "nationwide",
+              "entryId": "03311_zenkoku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "de",
+              "meaning": "at/in (location of action)",
+              "entryId": "00502_de"
+            },
+            {
+              "romaji": "hanbaisareteiru",
+              "meaning": "being sold (passive continuing form of hanbai suru) (hanbaisarete + iru: -te form + iru, plain continuing action or state)",
+              "entryId": "03573_hanbai",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "nara",
+      "hiragana": "なら",
+      "english": "if, in the case of",
+      "examples": [
+        {
+          "romaji": "kono teido nara heiki da.",
+          "hiragana": "このていどならへいきだ。",
+          "english": "If it's to this extent, it's fine.",
+          "wordMeanings": [
+            {
+              "romaji": "kono",
+              "meaning": "this",
+              "entryId": "00962_kono",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "teido",
+              "meaning": "extent",
+              "entryId": "01468_teido",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nara",
+              "meaning": "if",
+              "entryId": "09575_nara",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "heiki",
+              "meaning": "fine (na-adjective + plain copula, forming a predicate)",
+              "entryId": "00095_heiki",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "da",
+              "meaning": "fine (na-adjective + plain copula, forming a predicate)",
+              "entryId": "09496_da",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "jouhou",
+      "hiragana": "じょうほう",
+      "english": "information, data, news",
+      "examples": [
+        {
+          "romaji": "saishin no jouhou wo otodokeshimasu.",
+          "hiragana": "さいしんのじょうほうをおとどけします。",
+          "english": "We will deliver the latest information to you.",
+          "wordMeanings": [
+            {
+              "romaji": "saishin",
+              "meaning": "latest",
+              "entryId": "04831_saishin",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "no",
+              "meaning": "possessive marker",
+              "entryId": "09472_no",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "jouhou",
+              "meaning": "information",
+              "entryId": "03348_jouhou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "otodokeshimasu",
+              "meaning": "to deliver",
+              "entryId": "01248_todokeru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "sore",
+      "hiragana": "それ",
+      "english": "that (thing)",
+      "examples": [
+        {
+          "romaji": "sore ha nan?",
+          "hiragana": "それはなん?",
+          "english": "What is that?",
+          "wordMeanings": [
+            {
+              "romaji": "sore",
+              "meaning": "that",
+              "entryId": "00994_sore",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nan",
+              "meaning": "what",
+              "entryId": "00498_nani",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ie",
+      "hiragana": "いえ",
+      "english": "house, home",
+      "examples": [
+        {
+          "romaji": "ie ni kaerimasu.",
+          "hiragana": "いえにかえります。",
+          "english": "I'm going home.",
+          "wordMeanings": [
+            {
+              "romaji": "ie",
+              "meaning": "home",
+              "entryId": "00612_ie",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "destination",
+              "entryId": "00314_ni",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kaerimasu",
+              "meaning": "present polite of kaeru (return home)",
+              "entryId": "00508_kaeru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "shakai",
+      "hiragana": "しゃかい",
+      "english": "society, community",
+      "examples": [
+        {
+          "romaji": "shakai no ruuru wo mamoru.",
+          "hiragana": "しゃかいのるーるをまもる。",
+          "english": "I follow society's rules.",
+          "wordMeanings": [
+            {
+              "romaji": "shakai",
+              "meaning": "society",
+              "entryId": "01427_shakai",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "no",
+              "meaning": "possessive marker",
+              "entryId": "09472_no",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ruuru",
+              "meaning": "rule",
+              "entryId": "00354_ruuru",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "mamoru",
+              "meaning": "to obey",
+              "entryId": "01986_mamoru"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "jigyou",
+      "hiragana": "じぎょう",
+      "english": "business, enterprise, undertaking",
+      "examples": [
+        {
+          "romaji": "atarashii jigyou wo hajimeru.",
+          "hiragana": "あたらしいじぎょうをはじめる。",
+          "english": "To start a new business.",
+          "wordMeanings": [
+            {
+              "romaji": "atarashii",
+              "meaning": "new",
+              "entryId": "00506_atarashii",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "jigyou",
+              "meaning": "business",
+              "entryId": "11421_jigyou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hajimeru",
+              "meaning": "to start",
+              "entryId": "00531_hajimeru"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ijou",
+      "hiragana": "いじょう",
+      "english": "above, more than or equal to",
+      "examples": [
+        {
+          "romaji": "hatachi ijou no kata nomi nyuujou dekimasu.",
+          "hiragana": "はたちいじょうのかたのみにゅうじょうできます。",
+          "english": "Only those 20 and older may enter.",
+          "wordMeanings": [
+            {
+              "romaji": "hatachi",
+              "meaning": "twenty years old",
+              "entryId": "02933_hatachi",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ijou",
+              "meaning": "above",
+              "entryId": "01308_ijou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "no",
+              "meaning": "possessive marker",
+              "entryId": "09472_no",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kata",
+              "meaning": "person (polite)"
+            },
+            {
+              "romaji": "nomi",
+              "meaning": "only"
+            },
+            {
+              "romaji": "nyuujou",
+              "meaning": "entrance",
+              "entryId": "03521_nyuujou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "dekimasu",
+              "meaning": "present polite of dekiru (be able to)",
+              "entryId": "00557_dekiru"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "tsukihi",
+      "hiragana": "つきひ",
+      "english": "time, passage of time, months and days",
+      "examples": [
+        {
+          "romaji": "tsukihi ga tatsu no ha hayai.",
+          "hiragana": "つきひがたつのははやい。",
+          "english": "Time passes quickly.",
+          "wordMeanings": [
+            {
+              "romaji": "tsukihi",
+              "meaning": "time",
+              "entryId": "04063_tsukihi",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "tatsu",
+              "meaning": "to elapse",
+              "entryId": "09892_tatsu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "no",
+              "meaning": "nominalizer",
+              "entryId": "09472_no",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hayai",
+              "meaning": "early",
+              "entryId": "00514_hayai",
+              "senseNumber": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "omoi",
+      "hiragana": "おもい",
+      "english": "thought, feeling, emotion",
+      "examples": [
+        {
+          "romaji": "omoi wo kotoba ni suru.",
+          "hiragana": "おもいをことばにする。",
+          "english": "To put one's feelings into words.",
+          "wordMeanings": [
+            {
+              "romaji": "omoi",
+              "meaning": "feeling",
+              "entryId": "10248_omoi",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kotoba",
+              "meaning": "word",
+              "entryId": "02880_kotoba",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "destination",
+              "entryId": "00314_ni",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "suru",
+              "meaning": "to make",
+              "entryId": "00392_suru",
+              "senseNumber": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "mise",
+      "hiragana": "みせ",
+      "english": "store, shop",
+      "examples": [
+        {
+          "romaji": "kono mise ha nanji made aiteimasu ka?",
+          "hiragana": "このみせはなんじまであいていますか？",
+          "english": "Until what time is this store open?",
+          "wordMeanings": [
+            {
+              "romaji": "kono",
+              "meaning": "this",
+              "entryId": "00962_kono",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "mise",
+              "meaning": "store",
+              "entryId": "00497_mise",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nanji",
+              "meaning": "what time",
+              "entryId": "00973_nanji",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "made",
+              "meaning": "until",
+              "entryId": "00490_made",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "aiteimasu",
+              "meaning": "progressive of aku (open) (aite + imasu: -te form + iru, polite continuing action or state)",
+              "entryId": "00689_aku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ka",
+              "meaning": "question marker",
+              "entryId": "09473_ka",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "toshitsuki",
+      "hiragana": "としつき",
+      "english": "years, the passage of time",
+      "examples": [
+        {
+          "romaji": "nagai toshitsuki ga tatta.",
+          "hiragana": "ながいとしつきがたった。",
+          "english": "Many years have passed.",
+          "wordMeanings": [
+            {
+              "romaji": "nagai",
+              "meaning": "long",
+              "entryId": "00491_nagai"
+            },
+            {
+              "romaji": "toshitsuki",
+              "meaning": "years",
+              "entryId": "03458_toshitsuki",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "tatta",
+              "meaning": "past of tatsu (pass)",
+              "entryId": "09892_tatsu",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "seifu",
+      "hiragana": "せいふ",
+      "english": "government, administration",
+      "examples": [
+        {
+          "romaji": "seifu ha atarashii seisaku wo happyou shita.",
+          "hiragana": "せいふはあたらしいせいさくをはっぴょうした。",
+          "english": "The government announced a new policy.",
+          "wordMeanings": [
+            {
+              "romaji": "seifu",
+              "meaning": "government",
+              "entryId": "03294_seifu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "atarashii",
+              "meaning": "new",
+              "entryId": "00506_atarashii",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "seisaku",
+              "meaning": "policy",
+              "entryId": "10070_seisaku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "happyou",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
+              "entryId": "03562_happyou"
+            },
+            {
+              "romaji": "shita",
+              "meaning": "to announce (compound verb: happyou + shita, past of happyousuru)",
+              "entryId": "00392_suru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "oku",
+      "hiragana": "おく",
+      "english": "one hundred million; 100,000,000",
+      "examples": [
+        {
+          "romaji": "sekai no jinkou ha 80oku nin wo koeta.",
+          "hiragana": "せかいのじんこうは80おくにんをこえた。",
+          "english": "The world population has exceeded 8 billion.",
+          "wordMeanings": [
+            {
+              "romaji": "sekai",
+              "meaning": "world",
+              "entryId": "01447_sekai"
+            },
+            {
+              "romaji": "no",
+              "meaning": "possessive marker",
+              "entryId": "09472_no",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "jinkou",
+              "meaning": "population",
+              "entryId": "01618_jinkou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "oku",
+              "meaning": "one hundred million",
+              "entryId": "17935_oku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "nin",
+              "meaning": "counter for people",
+              "entryId": "00658_nin",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "koeta",
+              "meaning": "past of koeru (exceed)",
+              "entryId": "01942_koeru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ue",
+      "hiragana": "うえ",
+      "english": "above, on top, upper part",
+      "examples": [
+        {
+          "romaji": "hon ha tsukue no ue ni arimasu.",
+          "hiragana": "ほんはつくえのうえにあります。",
+          "english": "The book is on the desk.",
+          "wordMeanings": [
+            {
+              "romaji": "hon",
+              "meaning": "book",
+              "entryId": "00111_hon",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "tsukue",
+              "meaning": "desk",
+              "entryId": "00762_tsukue",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "no",
+              "meaning": "possessive marker",
+              "entryId": "09472_no",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ue",
+              "meaning": "above",
+              "entryId": "00682_ue",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "location of existence marker",
+              "entryId": "00314_ni",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "arimasu",
+              "meaning": "present polite of aru (exist)",
+              "entryId": "00006_aru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "muke",
+      "hiragana": "むけ",
+      "english": "aimed at; intended for; for ~",
+      "examples": [
+        {
+          "romaji": "kono hon ha kodomo muke da.",
+          "hiragana": "このほんはこどもむけだ。",
+          "english": "This book is intended for children.",
+          "wordMeanings": [
+            {
+              "romaji": "kono",
+              "meaning": "this",
+              "entryId": "00962_kono",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hon",
+              "meaning": "book",
+              "entryId": "00111_hon",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kodomo",
+              "meaning": "children",
+              "entryId": "00554_kodomo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "muke",
+              "meaning": "intended for",
+              "entryId": "11011_muke",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "da",
+              "meaning": "is",
+              "entryId": "09496_da",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "hanasu",
+      "hiragana": "はなす",
+      "english": "to speak, to talk",
+      "examples": [
+        {
+          "romaji": "nihongo wo hanasu.",
+          "hiragana": "にほんごをはなす。",
+          "english": "I speak Japanese.",
+          "wordMeanings": [
+            {
+              "romaji": "nihongo",
+              "meaning": "Japanese language",
+              "entryId": "00614_nihongo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "hanasu",
+              "meaning": "to speak",
+              "entryId": "00467_hanasu",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "konkai",
+      "hiragana": "こんかい",
+      "english": "this time, now",
+      "examples": [
+        {
+          "romaji": "konkai ha dame datta.",
+          "hiragana": "こんかいはだめだった。",
+          "english": "It was no good this time.",
+          "wordMeanings": [
+            {
+              "romaji": "konkai",
+              "meaning": "this time",
+              "entryId": "01409_konkai",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "dame",
+              "meaning": "no good (na-adjective + plain past copula, forming a predicate)",
+              "entryId": "00693_dame",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "datta",
+              "meaning": "no good (na-adjective + plain past copula, forming a predicate)",
+              "entryId": "09496_da",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "josei",
+      "hiragana": "じょせい",
+      "english": "woman, female",
+      "examples": [
+        {
+          "romaji": "josei sen'you sharyou ni norimashita.",
+          "hiragana": "じょせいせんようしゃりょうにのりました。",
+          "english": "I rode in the women-only car.",
+          "wordMeanings": [
+            {
+              "romaji": "josei",
+              "meaning": "woman",
+              "entryId": "01617_josei",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "sen'you",
+              "meaning": "exclusive use",
+              "entryId": "12385_senyou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "sharyou",
+              "meaning": "train car",
+              "entryId": "05297_sharyou",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "ni",
+              "meaning": "location of existence marker",
+              "entryId": "00314_ni",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "norimashita",
+              "meaning": "polite past of noru (ride)",
+              "entryId": "00511_noru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "kanou",
+      "hiragana": "かのう",
+      "english": "possible, feasible, practicable",
+      "examples": [
+        {
+          "romaji": "sore ha kanou desu ka.",
+          "hiragana": "それはかのうですか。",
+          "english": "Is that possible?",
+          "wordMeanings": [
+            {
+              "romaji": "sore",
+              "meaning": "that",
+              "entryId": "00994_sore",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ha",
+              "meaning": "topic marker",
+              "entryId": "00079_ha",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kanou",
+              "meaning": "possible (na-adjective + polite copula, forming a predicate)",
+              "entryId": "00175_kanou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "desu",
+              "meaning": "possible (na-adjective + polite copula, forming a predicate)",
+              "entryId": "09485_desu",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ka",
+              "meaning": "question marker",
+              "entryId": "09473_ka",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "shinbun",
+      "hiragana": "しんぶん",
+      "english": "newspaper",
+      "examples": [
+        {
+          "romaji": "shinbun ni notteita.",
+          "hiragana": "しんぶんにのっていた。",
+          "english": "It was in the newspaper.",
+          "wordMeanings": [
+            {
+              "romaji": "shinbun",
+              "meaning": "newspaper",
+              "entryId": "01440_shinbun",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "location of existence marker",
+              "entryId": "00314_ni",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "notteita",
+              "meaning": "to appear in print (notte + ita: -te form + iru, past continuing action or state)",
+              "entryId": "27882_noru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "kankou",
+      "hiragana": "かんこう",
+      "english": "sightseeing, tourism",
+      "examples": [
+        {
+          "romaji": "kyouto ni kankou ni ikimashita.",
+          "hiragana": "きょうとにかんこうにいきました。",
+          "english": "I went sightseeing in Kyoto.",
+          "wordMeanings": [
+            {
+              "romaji": "kyouto",
+              "meaning": "Kyoto",
+              "entryId": "09484_kyouto",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "location of existence marker",
+              "entryId": "00314_ni",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "kankou",
+              "meaning": "sightseeing",
+              "entryId": "00173_kankou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "location of existence marker",
+              "entryId": "00314_ni",
+              "senseNumber": 2
+            },
+            {
+              "romaji": "ikimashita",
+              "meaning": "polite past of iku (go)",
+              "entryId": "00119_iku",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "katsudou",
+      "hiragana": "かつどう",
+      "english": "activity, action",
+      "examples": [
+        {
+          "romaji": "boranteia katsudou ni sankasuru.",
+          "hiragana": "ぼらんてぃあかつどうにさんかする。",
+          "english": "To participate in volunteer activities.",
+          "wordMeanings": [
+            {
+              "romaji": "boranteia",
+              "meaning": "volunteer",
+              "entryId": "04834_borantia"
+            },
+            {
+              "romaji": "katsudou",
+              "meaning": "activity",
+              "entryId": "00201_katsudou",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ni",
+              "meaning": "destination",
+              "entryId": "00314_ni",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "sankasuru",
+              "meaning": "to participate (compound verb: sanka + suru, dictionary form of sankasuru)",
+              "entryId": "02498_sanka",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "sen",
+      "hiragana": "せん",
+      "english": "selection; anthology",
+      "examples": [
+        {
+          "romaji": "kessaku sen wo shuppan shita.",
+          "hiragana": "けっさくせんをしゅっぱんした。",
+          "english": "They published a selection of masterpieces.",
+          "wordMeanings": [
+            {
+              "romaji": "kessaku",
+              "meaning": "masterpiece",
+              "entryId": "00217_kessaku",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "sen",
+              "meaning": "selection",
+              "entryId": "09879_sen",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "shuppan",
+              "meaning": "publication (compound verb: shuppan + shita, past of shuppansuru)",
+              "entryId": "03222_shuppan",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "shita",
+              "meaning": "publication (compound verb: shuppan + shita, past of shuppansuru)",
+              "entryId": "00392_suru",
+              "senseNumber": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "ten",
+      "hiragana": "てん",
+      "english": "point, score",
+      "examples": [
+        {
+          "romaji": "100ten wo totta.",
+          "hiragana": "100てんをとった。",
+          "english": "I got 100 points.",
+          "wordMeanings": [
+            {
+              "romaji": "ten",
+              "meaning": "point",
+              "entryId": "01553_ten",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "wo",
+              "meaning": "direct object marker",
+              "entryId": "00422_wo",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "totta",
+              "meaning": "got (past of toru)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "japanese": "kangae",
+      "hiragana": "かんがえ",
+      "english": "thought, idea, opinion",
+      "examples": [
+        {
+          "romaji": "ii kangae ga arimasu.",
+          "hiragana": "いいかんがえがあります。",
+          "english": "I have a good idea.",
+          "wordMeanings": [
+            {
+              "romaji": "ii",
+              "meaning": "good",
+              "entryId": "00118_ii",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "kangae",
+              "meaning": "idea",
+              "entryId": "00855_kangae",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "ga",
+              "meaning": "subject marker",
+              "entryId": "00051_ga",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "arimasu",
+              "meaning": "present polite of aru (have)",
+              "entryId": "00006_aru",
+              "senseNumber": 2
             }
           ]
         }

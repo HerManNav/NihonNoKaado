@@ -5,8 +5,8 @@ const path = require("node:path");
 
 const dictionaryDirectory = path.join(__dirname, "../dictionaries");
 const specs = [
-  { size: 50, visibleTokens: 190 },
-  { size: 100, visibleTokens: 383 },
+  { size: 50, visibleTokens: 212 },
+  { size: 100, visibleTokens: 453 },
   { size: 500, visibleTokens: 2365 },
   { size: 1000, visibleTokens: 4700 },
   { size: 2000, visibleTokens: 9565 },
@@ -95,8 +95,8 @@ test("reused examples have identical contextual annotations across all decks", (
       } else annotatedBySentence.set(key, example.wordMeanings);
     }
   }
-  assert.equal(tokenOccurrences, 17203, "Review changed total token coverage across all five decks");
-  assert.equal(uniqueSentences.size, 2027, "Review changed unique example count across all five decks");
+  assert.equal(tokenOccurrences, 17295, "Review changed total token coverage across all five decks");
+  assert.equal(uniqueSentences.size, 1992, "Review changed unique example count across all five decks");
 });
 
 test("every annotated default dictionary stays below the 25 MB per-file limit", () => {

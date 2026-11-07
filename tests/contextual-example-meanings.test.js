@@ -204,54 +204,17 @@ const cases = [
     owner: "03449_denshi", exampleId: "03449_denshi_ex3", sense: 1,
     tokens: [[7, "kara", "00504_kara", /(?:made (?:of|from)|material)/i]],
   },
-  // These examples belong to the retained 50/100 deck and are absent from
-  // the newer 2,000-card frequency-ranked deck. They must be annotated too.
-  {
-    deck: 50, card: "iu", english: "He said, 'I don't want to go.'",
-    owner: "00515_iu", exampleId: "00515_iu_ex1", sense: 1,
-    tokens: [
-      [2, "ikitakunai", "00119_iku", /(?:not want to go|do not want to go|negative.*want.*go)/i, /iku/i],
-      [3, "to", "00512_to", /(?:quot|said|speech)/i],
-      [4, "iimashita", "00515_iu", /(?:said|past.*say|say.*past)/i, /iu/i],
-    ],
-  },
-  {
-    deck: 50, card: "wakaru", english: "Got it.",
-    owner: "00463_wakaru", exampleId: "00463_wakaru_ex1", sense: 1,
-    tokens: [[0, "wakatta", "00463_wakaru", /(?:understood|got it|past.*understand|understand.*past)/i, /wakaru/i]],
-  },
-  {
-    deck: 50, card: "kedo", english: "It's expensive, but I want to buy it.",
-    owner: "09477_kedo", exampleId: "09477_kedo_ex1", sense: 1,
-    tokens: [
-      [1, "kedo", "09477_kedo", /\bbut\b|although/i],
-      [2, "kaitai", "00489_kau", /(?:want to buy|desire.*buy|buy.*desire)/i, /kau/i],
-    ],
-  },
-  {
-    deck: 100, card: "matsu", english: "Wait a moment.",
-    owner: "00469_matsu", exampleId: "00469_matsu_ex1", sense: 1,
-    tokens: [[1, "matte", "00469_matsu", /(?:te.form.*wait|wait.*te.form|wait)/i, /matsu/i]],
-  },
-  {
-    deck: 100, card: "mada", english: "I haven't eaten yet.",
-    owner: "00603_mada", exampleId: "00603_mada_ex6", sense: 2,
-    tokens: [
-      [0, "mada", "00603_mada", /not yet|yet/i],
-      [1, "tabeteimasen", "00396_taberu", /(?:not.*eat|haven.t eaten|have not eaten|negative.*eat)/i, /taberu/i],
-    ],
-  },
-  {
-    deck: 100, card: "kudasaru", english: "The teacher gave me a book.",
-    owner: "01305_kudasaru", exampleId: "01305_kudasaru_ex1", sense: 1,
-    tokens: [[4, "kudasatta", "01305_kudasaru", /(?:gave|past.*give|give.*past)/i, /kudasaru/i]],
-  },
-  {
-    deck: 100, card: "youna", english: "It sounds like a dream come true.",
-    owner: "30292_youna", exampleId: "30292_youna_ex1", sense: 1,
-    tokens: [[2, "youna", "30292_youna", /(?:like|similar|such as)/i]],
-  },
+
 ];
+
+// Exercise the same independently sourced cases in each smaller deck where present.
+for (const size of [50, 100]) {
+  for (const fixture of [...cases]) {
+    if (fixture.deck === 2000 && decks.get(size).cards.some(card => card.japanese === fixture.card && card.examples?.some(example => example.english === fixture.english))) {
+      cases.push({ ...fixture, deck: size });
+    }
+  }
+}
 
 function sourceUrl(entryId) {
   const entry = sourceIndexById.get(entryId);

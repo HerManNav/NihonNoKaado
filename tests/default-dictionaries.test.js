@@ -50,16 +50,17 @@ test("default example romaji uses readable word spacing without changing punctua
   assert.ok(examples.every(({ romaji }) => !/\s{2}|\s+[.,!?;:]/.test(romaji)), "Spacing should not create doubled spaces or split punctuation");
 });
 
-test("the retained 50-card set remains the prefix of the retained 100-card list", () => {
+test("the 50-card set remains the prefix of the 100-card list", () => {
   const fullList = readDictionary("most-common-100.json").cards;
   assert.deepEqual(readDictionary("most-common-50.json").cards, fullList.slice(0, 50));
   assert.equal(prepareDefaultDictionary(readDictionary("most-common-100.json"), 50, (index) => String(index)).length, 50);
 });
 
-test("500, 1,000, and 2,000-word decks share an ascending frequency-ranked prefix", () => {
+test("all decks share an ascending frequency-ranked prefix", () => {
   const cards500 = readDictionary("most-common-500.json").cards;
   const cards1000 = readDictionary("most-common-1000.json").cards;
   const cards2000 = readDictionary("most-common-2000.json").cards;
+  assert.deepEqual(readDictionary("most-common-100.json").cards, cards500.slice(0, 100));
   assert.deepEqual(cards500, cards1000.slice(0, 500));
   assert.deepEqual(cards1000, cards2000.slice(0, 1000));
   assert.equal(manifest.frequencySource, "https://noosflashcards.com/resources/frequency-lists/japanese");
@@ -98,7 +99,6 @@ test("cancel and Escape return to the list without loading the selected dictiona
 test("source attributions are separated below the loading instructions", () => {
   assert.match(html, /<p class="default-dictionaries-description">[\s\S]*?<\/p>\s*<p class="default-dictionaries-source">[\s\S]*?<\/p>\s*<p class="default-dictionaries-source">[\s\S]*?href="https:\/\/www\.tkgje\.jp/);
   assert.match(html, /href="https:\/\/noosflashcards\.com\/resources\/frequency-lists\/japanese"/);
-  assert.match(html, /href="https:\/\/travelwithlanguages\.com\/blog\/most-common-japanese-words\.html"/);
   assert.match(styles, /\.default-dictionaries-source\s*\{[^}]*margin:\s*16px\s+0\s+0/s);
 });
 

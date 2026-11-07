@@ -11,8 +11,7 @@
 
 ## Sets
 
-- The 50- and 100-word sets retain their existing word order and English glosses from [Travel with Languages](https://travelwithlanguages.com/blog/most-common-japanese-words.html). Their hiragana and example sentences are matched to the closest English sense in the TKG learner dictionary.
-- The 500-, 1,000-, and 2,000-word sets follow the frequency order in [Noos's Japanese frequency list](https://noosflashcards.com/resources/frequency-lists/japanese), based on Leipzig Corpora Collection news counts. They skip duplicate romaji and entries that have no corresponding TKG entry with a complete, sense-tagged example. The published sets are prefixes of the same filtered order; the 2,000-word set reaches source rank 2,426 after filtering.
+- All five sets follow the frequency order in [Noos's Japanese frequency list](https://noosflashcards.com/resources/frequency-lists/japanese), based on Leipzig Corpora Collection news counts. They skip duplicate romaji and entries that have no corresponding TKG entry with a complete, sense-tagged example. The published sets are prefixes of the same filtered order; the 2,000-word set reaches source rank 2,426 after filtering.
 - English glosses and example sentences for all sets come from the [TKG Japanese-English Learner's Dictionary](https://www.tkgje.jp/) and its [public data repository](https://github.com/tkgally/je-dict-1). Each chosen example is tagged to the definition used for that card. The example source is converted to kana and romaji for this app.
 
 ## Contextual example translations
@@ -29,15 +28,14 @@ The annotations come from the [TKG public data repository](https://github.com/tk
 
 The source example's sense tag identifies the card word's meaning. Inline links identify other words' dictionary entries; those links generally identify a word rather than its particular sense. The annotation script uses the linked entry's definitions and the sentence context to choose one English explanation. A lexical match alone can be misleading for particles, auxiliary verbs, and homographs, so `tests/contextual-example-meanings.test.js` checks representative cases against the preserved source entries.
 
-There are 9,565 annotated word targets in the 2,000-card deck, and 17,203 occurrences across all five decks. The 500/1,000 decks remain exact prefixes of 2,000. The retained 100-card list contains 35 additional distinct examples, which were annotated separately; 50 remains its prefix. In total, 2,027 distinct sentences are covered. Two ambiguous examples were replaced with examples carrying a single source sense, and 131 exact romaji spacing corrections separate previously fused words.
+There are 9,565 annotated word targets in the 2,000-card deck, and 17,295 occurrences across all five decks. All five decks are exact prefixes of the 2,000-card deck. Two ambiguous examples were replaced with examples carrying a single source sense, and 131 exact romaji spacing corrections separate previously fused words.
 
-`scripts/default-example-meaning-overrides.json` preserves 687 sentence-specific editorial decisions, including reviewed ambiguous choices and corrections. The original review queue is retained as `source-data/tkg-context-editorial-input-32c267cb.json`, alongside its correction decisions in `scripts/context-review-decisions.json`. Unflagged choices use source sense tags, grammar rules, or English-context scoring. Complete coverage and zero pending review flags do not prove that every semantic choice is correct; the independent regression sentences check selected difficult cases, and future corrections can be added without rebuilding the general dictionary. Index-only TKG citations have no numbered sense; JMdict and editorial glosses omit a TKG citation when it would identify a different word.
+`scripts/default-example-meaning-overrides.json` preserves 676 sentence-specific editorial decisions, including reviewed ambiguous choices and corrections. The original review queue is retained as `source-data/tkg-context-editorial-input-32c267cb.json`, alongside its correction decisions in `scripts/context-review-decisions.json`. Unflagged choices use source sense tags, grammar rules, or English-context scoring. Complete coverage and zero pending review flags do not prove that every semantic choice is correct; the independent regression sentences check selected difficult cases, and future corrections can be added without rebuilding the general dictionary. Index-only TKG citations have no numbered sense; JMdict and editorial glosses omit a TKG citation when it would identify a different word.
 
 ## Licenses
 
 - The TKG dictionary data is dedicated to the public domain under CC0 1.0.
-- Noos states that its frequency list is shared under CC BY-SA 4.0. These derived 500-, 1,000-, and 2,000-word sets retain that attribution and share-alike notice.
-- The original attribution for the retained 50- and 100-word lists remains in each JSON file and in the dictionary browser.
+- Noos states that its frequency list is shared under CC BY-SA 4.0. These derived sets retain that attribution and share-alike notice.
 
 ## Example selection and limits
 
