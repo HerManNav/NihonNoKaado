@@ -147,15 +147,15 @@ test("settings provides language selection and the back arrow", () => {
   assert.match(html, /data-language="es"[\s\S]*?class="language-flag"/);
 });
 
-test("starter dictionary instructions have a Spanish translation", () => {
-  const instruction = "Choose a starter dictionary. Loading one will replace the current one.";
+test("starter deck instructions have a Spanish translation", () => {
+  const instruction = "Choose a starter deck. Loading one will replace the current one.";
   assert.ok(html.includes(instruction));
   const runtime = makeLanguageRuntime();
   const text = new FakeTextNode(instruction);
   runtime.nodes.push(text);
   runtime.buttons[1].click();
-  assert.equal(text.nodeValue, "Elige un diccionario inicial. Al cargarlo, se reemplazará el actual.");
-  assert.ok(!html.includes("Select a dictionary to replace the one saved in this browser."));
+  assert.equal(text.nodeValue, "Elige un mazo inicial. Al cargarlo, se reemplazará el actual.");
+  assert.ok(!html.includes("Select a deck to replace the one saved in this browser."));
 });
 
 test("the initial language selector fades in without repeating its cold-start animation", () => {

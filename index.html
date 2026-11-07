@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f7f6f2" />
     <title>Japanese Cards</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="dictionary-core.js" defer></script>
+    <script src="deck-core.js" defer></script>
     <script src="word-form-lookup.js" defer></script>
     <script src="export-storage.js" defer></script>
     <script src="app.js" defer></script>
@@ -75,24 +75,24 @@
             <button class="session-option is-selected" type="button" data-session-size="5" aria-pressed="true">5</button>
             <button class="session-option" type="button" data-session-size="10" aria-pressed="false">10</button>
             <button class="session-option" type="button" data-session-size="20" aria-pressed="false">20</button>
-            <button class="session-option session-option-wide" type="button" data-session-size="all" aria-pressed="false">Whole dictionary</button>
+            <button class="session-option session-option-wide" type="button" data-session-size="all" aria-pressed="false">Whole deck</button>
           </div>
           <button id="start-button" class="primary-button" type="button">Start session</button>
-          <p id="dictionary-count" class="subtle-text" aria-live="polite"></p>
+          <p id="deck-count" class="subtle-text" aria-live="polite"></p>
         </div>
-        <div id="dictionary-actions" class="dictionary-actions">
-          <button id="add-button" class="add-button" type="button" aria-label="View dictionary" title="View dictionary">+</button>
-          <div id="dictionary-tools" class="dictionary-tools">
-            <button id="dictionary-tools-button" class="dictionary-tools-button" type="button" aria-label="Dictionary tools" aria-controls="dictionary-action-menu" aria-expanded="false" title="Dictionary tools">
+        <div id="deck-actions" class="deck-actions">
+          <button id="add-button" class="add-button" type="button" aria-label="View deck" title="View deck">+</button>
+          <div id="deck-tools" class="deck-tools">
+            <button id="deck-tools-button" class="deck-tools-button" type="button" aria-label="Deck tools" aria-controls="deck-action-menu" aria-expanded="false" title="Deck tools">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z" />
                 <path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h8" />
               </svg>
             </button>
-            <div id="dictionary-action-menu" class="dictionary-action-menu" aria-label="Dictionary tools">
-              <button id="clear-action" class="dictionary-action" type="button">Clear dictionary</button>
-              <button id="import-action" class="dictionary-action" type="button">Import dictionary</button>
-              <button id="export-action" class="dictionary-action" type="button">Export dictionary</button>
+            <div id="deck-action-menu" class="deck-action-menu" aria-label="Deck tools">
+              <button id="clear-action" class="deck-action" type="button">Clear deck</button>
+              <button id="import-action" class="deck-action" type="button">Import deck</button>
+              <button id="export-action" class="deck-action" type="button">Export deck</button>
             </div>
           </div>
           <input id="import-file" type="file" accept=".json,application/json" hidden />
@@ -121,44 +121,44 @@
             <p id="cards-remaining" class="cards-remaining" aria-live="polite"></p>
           </div>
         </div>
-        <p class="subtle-text dictionary-credit practice-credit">Romaji meanings use <a href="https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project" target="_blank" rel="noreferrer">JMdict</a> by James William Breen and EDRDG. Ranking uses <a href="https://github.com/hermitdave/FrequencyWords" target="_blank" rel="noreferrer">FrequencyWords</a>. Data is <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
+        <p class="subtle-text deck-credit practice-credit">Romaji meanings use <a href="https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project" target="_blank" rel="noreferrer">JMdict</a> by James William Breen and EDRDG. Ranking uses <a href="https://github.com/hermitdave/FrequencyWords" target="_blank" rel="noreferrer">FrequencyWords</a>. Data is <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
       </section>
 
-      <section id="dictionary-screen" class="screen dictionary-screen" aria-labelledby="dictionary-title" hidden>
+      <section id="deck-screen" class="screen deck-screen" aria-labelledby="deck-title" hidden>
         <header class="screen-header">
           <button class="text-button" data-go-home type="button">← Back</button>
-          <p id="dictionary-list-count" class="subtle-text"></p>
+          <p id="deck-list-count" class="subtle-text"></p>
         </header>
-        <div class="dictionary-list-content">
-          <h1 id="dictionary-title">Current dictionary</h1>
-          <h2 class="dictionary-add-heading">Add words to the current dictionary</h2>
+        <div class="deck-list-content">
+          <h1 id="deck-title">Current deck</h1>
+          <h2 class="deck-add-heading">Add words to the current deck</h2>
           <div id="word-list" class="word-list" aria-live="polite"></div>
         </div>
       </section>
 
-      <section id="default-dictionaries-screen" class="screen dictionary-screen" aria-labelledby="default-dictionaries-title" hidden>
+      <section id="default-decks-screen" class="screen deck-screen" aria-labelledby="default-decks-title" hidden>
         <header class="screen-header">
           <button class="text-button" data-go-home type="button">← Back</button>
-          <p id="default-dictionaries-count" class="subtle-text"></p>
+          <p id="default-decks-count" class="subtle-text"></p>
         </header>
-        <div class="dictionary-list-content">
-          <h1 id="default-dictionaries-title">Default dictionaries</h1>
-          <p class="default-dictionaries-description">Choose a starter dictionary. Loading one will replace the current one.</p>
-          <p id="default-dictionaries-status" class="subtle-text default-dictionaries-status" role="status" aria-live="polite"></p>
-          <div id="default-dictionary-list" class="default-dictionary-list"></div>
+        <div class="deck-list-content">
+          <h1 id="default-decks-title">Default decks</h1>
+          <p class="default-decks-description">Choose a starter deck. Loading one will replace the current one.</p>
+          <p id="default-decks-status" class="subtle-text default-decks-status" role="status" aria-live="polite"></p>
+          <div id="default-deck-list" class="default-deck-list"></div>
         </div>
       </section>
 
-      <section id="default-dictionary-confirm-screen" class="screen clear-screen" aria-labelledby="default-dictionary-confirm-title" hidden>
-        <div class="clear-confirmation default-dictionary-confirmation">
-          <p class="eyebrow">DEFAULT DICTIONARY</p>
-          <h1 id="default-dictionary-confirm-title">Replace your dictionary?</h1>
-          <p id="default-dictionary-confirm-description" class="clear-description"></p>
-          <p id="default-dictionary-confirm-warning" class="clear-warning"></p>
-          <p id="default-dictionary-confirm-status" class="default-dictionary-confirm-status" role="status" aria-live="polite"></p>
-          <div class="default-dictionary-confirm-actions">
-            <button id="cancel-default-dictionary-load" class="secondary-button" type="button">Cancel</button>
-            <button id="confirm-default-dictionary-load" class="primary-button" type="button">Replace and load</button>
+      <section id="default-deck-confirm-screen" class="screen clear-screen" aria-labelledby="default-deck-confirm-title" hidden>
+        <div class="clear-confirmation default-deck-confirmation">
+          <p class="eyebrow">DEFAULT DECK</p>
+          <h1 id="default-deck-confirm-title">Replace your deck?</h1>
+          <p id="default-deck-confirm-description" class="clear-description"></p>
+          <p id="default-deck-confirm-warning" class="clear-warning"></p>
+          <p id="default-deck-confirm-status" class="default-deck-confirm-status" role="status" aria-live="polite"></p>
+          <div class="default-deck-confirm-actions">
+            <button id="cancel-default-deck-load" class="secondary-button" type="button">Cancel</button>
+            <button id="confirm-default-deck-load" class="primary-button" type="button">Replace and load</button>
           </div>
         </div>
       </section>
@@ -195,9 +195,9 @@
         </form>
       </section>
 
-      <section id="settings-screen" class="screen dictionary-screen" aria-labelledby="settings-title" hidden>
+      <section id="settings-screen" class="screen deck-screen" aria-labelledby="settings-title" hidden>
         <header class="screen-header"><button class="text-button" data-go-home type="button">← Back</button></header>
-        <div class="dictionary-list-content">
+        <div class="deck-list-content">
           <h1 id="settings-title">Settings</h1>
           <div class="settings-options">
             <button id="language-back-button" class="settings-option" type="button"><span>Language</span><span aria-hidden="true">›</span></button>
@@ -205,34 +205,34 @@
           </div>
         </div>
       </section>
-      <section id="about-screen" class="screen dictionary-screen" aria-labelledby="about-title" hidden>
+      <section id="about-screen" class="screen deck-screen" aria-labelledby="about-title" hidden>
         <header class="screen-header"><button class="text-button" data-go-settings type="button">← Back</button></header>
-        <div id="about-content" class="dictionary-list-content about-content"><h1 id="about-title">About</h1>
-          <h2>Default dictionaries</h2>
-          <p class="default-dictionaries-source">All sets use the same Japanese news frequency ranking, filtered to unique romaji words with a sense-matched example.</p>
-          <p class="default-dictionaries-source">Meanings and example sentences come from the <a href="https://www.tkgje.jp/" target="_blank" rel="noreferrer">TKG Japanese-English Learner’s Dictionary</a>. Its entries include sense-tagged examples and are reviewed as part of the project. TKG data is public domain (CC0).</p>
-          <p class="default-dictionaries-source">The frequency ranking comes from <a href="https://noosflashcards.com/resources/frequency-lists/japanese" target="_blank" rel="noreferrer">Noos’s Japanese list</a>, based on Leipzig Corpora Collection news counts. The list is CC BY-SA 4.0.</p>
+        <div id="about-content" class="deck-list-content about-content"><h1 id="about-title">About</h1>
+          <h2>Default decks</h2>
+          <p class="default-decks-source">All sets use the same Japanese news frequency ranking, filtered to unique romaji words with a sense-matched example.</p>
+          <p class="default-decks-source">Meanings and example sentences come from the <a href="https://www.tkgje.jp/" target="_blank" rel="noreferrer">TKG Japanese-English Learner’s Dictionary</a>. Its entries include sense-tagged examples and are reviewed as part of the project. TKG data is public domain (CC0).</p>
+          <p class="default-decks-source">The frequency ranking comes from <a href="https://noosflashcards.com/resources/frequency-lists/japanese" target="_blank" rel="noreferrer">Noos’s Japanese list</a>, based on Leipzig Corpora Collection news counts. The list is CC BY-SA 4.0.</p>
           <h2>Romaji meanings</h2>
           <p class="subtle-text">Romaji meanings use <a href="https://www.edrdg.org/" target="_blank" rel="noreferrer">JMdict</a> by James William Breen and EDRDG. Ranking uses <a href="https://github.com/hermitdave/FrequencyWords" target="_blank" rel="noreferrer">FrequencyWords</a>. Data is <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
         </div>
       </section>
       <section id="export-screen" class="screen clear-screen" aria-labelledby="export-title" hidden>
         <form id="export-form" class="clear-confirmation export-confirmation">
-          <h1 id="export-title">Export dictionary</h1>
-          <label class="field-label" for="export-name">Dictionary name</label>
+          <h1 id="export-title">Export deck</h1>
+          <label class="field-label" for="export-name">Deck name</label>
           <input id="export-name" type="text" maxlength="120" required autocomplete="off" />
           <div id="export-destination-info" hidden>
             <p class="field-label export-destination-label">Destination directory</p>
             <p id="export-destination" class="export-destination"></p>
           </div>
           <p id="export-status" class="subtle-text" role="status" aria-live="polite"></p>
-          <button id="confirm-export" class="primary-button" type="submit">Save dictionary</button>
+          <button id="confirm-export" class="primary-button" type="submit">Save deck</button>
           <button id="cancel-export" class="text-button cancel-clear" type="button">Cancel</button>
         </form>
       </section>
       <section id="clear-screen" class="screen clear-screen" aria-labelledby="clear-title" hidden>
         <div class="clear-confirmation">
-          <h1 id="clear-title">Clear your dictionary?</h1>
+          <h1 id="clear-title">Clear your deck?</h1>
           <p id="clear-description" class="clear-description"></p>
           <p class="clear-warning">This cannot be undone.</p>
           <button id="confirm-clear" class="danger-button" type="button">Delete all cards</button>

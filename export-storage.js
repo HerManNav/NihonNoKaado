@@ -1,5 +1,5 @@
 (() => {
-  const native = window.Capacitor?.Plugins?.DictionaryExport;
+  const native = window.Capacitor?.Plugins?.DeckExport;
   // Forget folder handles saved by the earlier directory-selection feature.
   try { window.indexedDB?.deleteDatabase("japanese-cards-settings"); } catch { }
 

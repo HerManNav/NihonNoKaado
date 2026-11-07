@@ -1,9 +1,9 @@
-(function exposeDictionaryCore(root, factory) {
+(function exposeDeckCore(root, factory) {
   const api = factory();
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.JapaneseCardsCore = api;
-})(globalThis, function createDictionaryCore() {
-  const EXPORT_FORMAT = "japanese-cards-dictionary";
+})(globalThis, function createDeckCore() {
+  const EXPORT_FORMAT = "japanese-cards-deck";
   const ROMAJI_SYLLABLES = {
     kya: "きゃ", kyu: "きゅ", kyo: "きょ", gya: "ぎゃ", gyu: "ぎゅ", gyo: "ぎょ",
     sha: "しゃ", shu: "しゅ", sho: "しょ", ja: "じゃ", ju: "じゅ", jo: "じょ",
@@ -91,7 +91,7 @@
     return !manuallyEdited || !String(currentHiragana ?? "").trim();
   }
 
-  function getDictionaryEntryKeyAction(key, shiftKey, field, fieldIndex = 0, fieldCount = 1) {
+  function getDeckEntryKeyAction(key, shiftKey, field, fieldIndex = 0, fieldCount = 1) {
     if (shiftKey) return null;
     if (key === "Tab" && field === "japanese") return "focus-meaning";
     if (field !== "meaning") return null;
@@ -123,14 +123,15 @@
     return normalized;
   }
 
-  function parseImportedDictionary(data, makeId = createId) {
+  function parseImportedDeck(data, makeId = createId) {
     const imported = Array.isArray(data) ? data : data?.cards;
-    if (!Array.isArray(imported)) throw new Error("This file does not contain a Japanese Cards dictionary.");
-    if (data && !Array.isArray(data) && data.format && data.format !== EXPORT_FORMAT) {
-      throw new Error("This file is for a different dictionary format.");
+    if (!Array.isArray(imported)) throw new Error("This file does not contain a Japanese Cards deck.");
+    if (data && !Array.isArray(data) && data.format
+      && data.format !== EXPORT_FORMAT && data.format !== "japanese-cards-dictionary") {
+      throw new Error("This file is for a different deck format.");
     }
     if (data && !Array.isArray(data) && data.version && ![1, 2, 3].includes(data.version)) {
-      throw new Error("This dictionary version is not supported.");
+      throw new Error("This deck version is not supported.");
     }
     return imported.map((card, index) => {
       const japanese = typeof card?.japanese === "string" ? card.japanese.trim() : "";
@@ -157,14 +158,14 @@
     });
   }
 
-  function prepareDefaultDictionary(data, count, makeId = createId) {
-    if (!Number.isInteger(count) || count < 1) throw new RangeError("Default dictionary size must be a positive integer.");
-    const cards = parseImportedDictionary(data, makeId);
-    if (cards.length < count) throw new Error("The dictionary has fewer cards than its catalog entry specifies.");
+  function prepareDefaultDeck(data, count, makeId = createId) {
+    if (!Number.isInteger(count) || count < 1) throw new RangeError("Default deck size must be a positive integer.");
+    const cards = parseImportedDeck(data, makeId);
+    if (cards.length < count) throw new Error("The deck has fewer cards than its catalog entry specifies.");
     return cards.slice(0, count);
   }
 
-  function serializeDictionary(cards, name, exportedAt = new Date().toISOString()) {
+  function serializeDeck(cards, name, exportedAt = new Date().toISOString()) {
     if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
     return JSON.stringify({
       format: EXPORT_FORMAT,
@@ -212,7 +213,7 @@
   function createPracticeDeck(cards, size, random = Math.random) {
     if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
     if (!Number.isInteger(size) || size < 0) throw new RangeError("Session size must be a non-negative integer.");
-    if (size > 0 && cards.length === 0) throw new RangeError("Cannot practice an empty dictionary.");
+    if (size > 0 && cards.length === 0) throw new RangeError("Cannot practice an empty deck.");
 
     const deck = [];
     while (deck.length < size) {
@@ -282,7 +283,7 @@
   }
 
   function createMeaningPracticeRun(cards, random = Math.random) {
-    if (!Array.isArray(cards) || cards.length === 0) throw new RangeError("Cannot practice an empty dictionary.");
+    if (!Array.isArray(cards) || cards.length === 0) throw new RangeError("Cannot practice an empty deck.");
     if (cards.some((card) => !Array.isArray(card.meanings) || card.meanings.length === 0)) {
       throw new TypeError("Every practice card must have at least one English meaning.");
     }
@@ -322,5 +323,5 @@
     return cards.map((card, cardIndex) => cardIndex === index ? { ...card, ...updates } : card);
   }
 
-  return { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDictionaryEntryKeyAction, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
+  return { parseImportedDeck, prepareDefaultDeck, serializeDeck, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDeckEntryKeyAction, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
 });

@@ -2,10 +2,10 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const { readFileSync } = require("node:fs");
 const { join } = require("node:path");
-const { prepareDefaultDictionary, serializeDictionary, parseImportedDictionary } = require("../dictionary-core.js");
+const { prepareDefaultDeck, serializeDeck, parseImportedDeck } = require("../deck-core.js");
 
 const root = join(__dirname, "..");
-const read = (file) => JSON.parse(readFileSync(join(root, "dictionaries", file), "utf8"));
+const read = (file) => JSON.parse(readFileSync(join(root, "decks", file), "utf8"));
 
 test("Spanish starter preserves Japanese text and translates every card, example and annotation", () => {
   const english = read("most-common-50.json");
@@ -27,15 +27,15 @@ test("Spanish starter preserves Japanese text and translates every card, example
       assert.ok(word.meaning.trim());
     });
   }
-  const cards = prepareDefaultDictionary(spanish, 50, (i) => String(i));
-  const imported = parseImportedDictionary(JSON.parse(serializeDictionary(cards, "Spanish")), (i) => String(i));
+  const cards = prepareDefaultDeck(spanish, 50, (i) => String(i));
+  const imported = parseImportedDeck(JSON.parse(serializeDeck(cards, "Spanish")), (i) => String(i));
   assert.equal(imported[0].meanings[0], "nominalizador");
   assert.equal(imported[0].examples[0].english, "Quiero el rojo.");
   assert.equal(imported[0].examples[0].wordMeanings[0].meaning, "rojo");
 });
 
 test("only the translated starter declares a Spanish file", () => {
-  const entries = read("manifest.json").dictionaries;
+  const entries = read("manifest.json").decks;
   assert.equal(entries[0].spanishFile, "most-common-50-es.json");
   assert.ok(entries.slice(1).every((entry) => !entry.spanishFile));
 });

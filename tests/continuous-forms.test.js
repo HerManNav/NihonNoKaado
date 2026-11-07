@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const zlib = require('node:zlib');
-const deck = require('../dictionaries/most-common-2000.json');
+const deck = require('../decks/most-common-2000.json');
 const { findWordMeanings } = require('../word-form-lookup.js');
 const examples = deck.cards.flatMap(card => card.examples);
 
@@ -42,7 +42,7 @@ test('spaced te-form and iru show the same contextual expression', () => {
 });
 
 test('general lookup explains the te-iru construction without inventing a different lemma', () => {
-  const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(require.resolve('../dictionaries/romaji-english-jmdict-2026-11-02.json.gz'))));
+  const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(require.resolve('../decks/romaji-english-jmdict-2026-11-02.json.gz'))));
   assert(findWordMeanings('sundeimasu', data).some(value => /sumu.*live.*te-form \+ iru/i.test(value)));
   for (const [word, label] of [['sundeinai', 'negative'], ['sundeimasen', 'polite negative'],
     ['sundeinakatta', 'past negative'], ['sundeimashita', 'polite past'], ['sundeimasendeshita', 'polite past negative']]) {

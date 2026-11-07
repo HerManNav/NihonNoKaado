@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+android-app/www/
+android-app/android/.gradle/
+android-app/android/local.properties
+android-app/android/**/build/
+*.jks
+*.keystore

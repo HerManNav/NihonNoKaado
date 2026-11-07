@@ -8,13 +8,13 @@ const app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
 const manifest = fs.readFileSync(path.join(root, 'android-app/android/app/src/main/AndroidManifest.xml'), 'utf8');
 
-test('dictionary tools open import, export and clear screens and toggle on touch', () => {
-  assert.match(app, /querySelector\("#import-action"\)\.addEventListener\("click", openDefaultDictionaries\)/);
-  assert.match(app, /querySelector\("#export-action"\)\.addEventListener\("click", exportDictionary\)/);
-  assert.match(app, /querySelector\("#clear-action"\)\.addEventListener\("click", confirmClearDictionary\)/);
-  assert.match(app, /dictionaryTools\.classList\.contains\("is-open"\)\) closeDictionaryMenu\(\);\s*else openDictionaryMenu\(\)/);
-  assert.match(app, /importButton\.className = "default-dictionary-option own-dictionary-option"/);
-  assert.match(css, /\.own-dictionary-option\s*\{[^}]*background:\s*#f0f0eb/);
+test('deck tools open import, export and clear screens and toggle on touch', () => {
+  assert.match(app, /querySelector\("#import-action"\)\.addEventListener\("click", openDefaultDecks\)/);
+  assert.match(app, /querySelector\("#export-action"\)\.addEventListener\("click", exportDeck\)/);
+  assert.match(app, /querySelector\("#clear-action"\)\.addEventListener\("click", confirmClearDeck\)/);
+  assert.match(app, /deckTools\.classList\.contains\("is-open"\)\) closeDeckMenu\(\);\s*else openDeckMenu\(\)/);
+  assert.match(app, /importButton\.className = "default-deck-option own-deck-option"/);
+  assert.match(css, /\.own-deck-option\s*\{[^}]*background:\s*#f0f0eb/);
 });
 
 test('export screen shows Downloads on Android and uses browser downloads on web', () => {
@@ -28,7 +28,7 @@ test('export screen shows Downloads on Android and uses browser downloads on web
 
 test('entry controls and web plus use neutral centered styling', () => {
   assert.match(app, /addMeaningButton\.addEventListener\("click"/);
-  assert.match(app, /addCardButton\.addEventListener\("click", addDictionaryEntry\)/);
-  assert.match(css, /\.dictionary-entry-actions \.dictionary-add-meaning\s*\{[^}]*background:\s*#f4f4f0/);
+  assert.match(app, /addCardButton\.addEventListener\("click", addDeckEntry\)/);
+  assert.match(css, /\.deck-entry-actions \.deck-add-meaning\s*\{[^}]*background:\s*#f4f4f0/);
   assert.match(css, /\.add-button::before\s*\{[^}]*position:\s*absolute;\s*inset:\s*0;\s*margin:\s*auto/);
 });

@@ -8,8 +8,8 @@ if (!projectRoot || !tkgEntriesRoot || !["--dry-run", "--write"].includes(mode))
   process.exit(2);
 }
 
-const dictionaryDirectory = path.join(projectRoot, "dictionaries");
-const dictionaryFiles = (await readdir(dictionaryDirectory))
+const deckDirectory = path.join(projectRoot, "decks");
+const deckFiles = (await readdir(deckDirectory))
   .filter((name) => /^most-common-(50|100|500|1000|2000)\.json$/.test(name))
   .sort((a, b) => Number(a.match(/\d+/)[0]) - Number(b.match(/\d+/)[0]));
 
@@ -33,10 +33,10 @@ for (const file of await findJsonFiles(tkgEntriesRoot)) {
 const changes = [];
 const missing = [];
 let unchanged = 0;
-for (const filename of dictionaryFiles) {
-  const file = path.join(dictionaryDirectory, filename);
-  const dictionary = JSON.parse(await readFile(file, "utf8"));
-  for (const [cardIndex, card] of dictionary.cards.entries()) {
+for (const filename of deckFiles) {
+  const file = path.join(deckDirectory, filename);
+  const deck = JSON.parse(await readFile(file, "utf8"));
+  for (const [cardIndex, card] of deck.cards.entries()) {
     for (const [exampleIndex, example] of (card.examples || []).entries()) {
       const exactMatches = examplesByKey.get(exampleKey(example.hiragana, example.english)) || [];
       const matches = exactMatches.length ? exactMatches : examplesByHiragana.get(String(example.hiragana).replace(/\s+/g, "").trim()) || [];
@@ -53,13 +53,13 @@ for (const filename of dictionaryFiles) {
     }
   }
   if (mode === "--write" && !missing.some((item) => item.location.startsWith(`${filename} `))) {
-    await writeFile(file, `${JSON.stringify(dictionary, null, 2)}\n`, "utf8");
+    await writeFile(file, `${JSON.stringify(deck, null, 2)}\n`, "utf8");
   }
 }
 
 console.log(JSON.stringify({
   mode,
-  dictionaries: dictionaryFiles.length,
+  decks: deckFiles.length,
   examplesChanged: changes.length,
   examplesAlreadySpaced: unchanged,
   unmatchedExamples: missing.length,

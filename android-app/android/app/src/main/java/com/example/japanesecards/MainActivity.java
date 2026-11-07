@@ -18,7 +18,7 @@ public class MainActivity extends BridgeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.installSplashScreen(this);
-        registerPlugin(DictionaryExportPlugin.class);
+        registerPlugin(DeckExportPlugin.class);
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawable(new ColorDrawable(APP_BACKGROUND));
         if (getBridge() != null && getBridge().getWebView() != null) {

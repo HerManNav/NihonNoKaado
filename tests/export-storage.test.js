@@ -7,7 +7,7 @@ const source = fs.readFileSync(require('node:path').join(__dirname, '..', 'expor
 function runtime(plugin) {
   const calls = [];
   const link = { click() { calls.push(['click', this.download, this.href]); }, remove() { calls.push(['remove']); } };
-  const window = { Capacitor: plugin ? { Plugins: { DictionaryExport: plugin } } : undefined,
+  const window = { Capacitor: plugin ? { Plugins: { DeckExport: plugin } } : undefined,
     indexedDB: { deleteDatabase(name) { calls.push(['forget', name]); } },
     setTimeout(fn, delay) { calls.push(['timer', delay]); this.pending = fn; } };
   const document = { createElement: () => link, body: { append: () => calls.push(['append']) } };

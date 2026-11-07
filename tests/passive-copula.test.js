@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const zlib = require('node:zlib');
 const { findWordMeanings } = require('../word-form-lookup.js');
-const deck = require('../dictionaries/most-common-2000.json');
+const deck = require('../decks/most-common-2000.json');
 const examples = deck.cards.flatMap(card => card.examples);
 const getExample = sentence => {
   const example = examples.find(item => item.romaji === sentence);
@@ -57,6 +57,6 @@ test('attributive na and ordinary nouns are not reinterpreted as adjective predi
 });
 
 test('general lookup describes suru passive without losing its original form explanation', () => {
-  const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(require.resolve('../dictionaries/romaji-english-jmdict-2026-11-02.json.gz'))));
+  const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(require.resolve('../decks/romaji-english-jmdict-2026-11-02.json.gz'))));
   assert(findWordMeanings('kaketsusareta', data).some(value => /past passive.*kaketsu suru.*compound verb.*passive voice/i.test(value)));
 });

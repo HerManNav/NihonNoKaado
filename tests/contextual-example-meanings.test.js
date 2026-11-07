@@ -8,14 +8,14 @@ const { gunzipSync } = require("node:zlib");
 // linked headword is from the retained TKG JSON at this exact revision:
 // https://github.com/tkgally/je-dict-1/tree/32c267cbfa7756a2e3542657772759d92d4e2420
 // The English expectations below were chosen for the whole sentence, not
-// inferred from the annotation generator or the first dictionary gloss.
+// inferred from the annotation generator or the first deck gloss.
 const SOURCE_COMMIT = "32c267cbfa7756a2e3542657772759d92d4e2420";
-const sourceDirectory = path.join(__dirname, "../dictionaries/source-data");
-const dictionariesDirectory = path.join(__dirname, "../dictionaries");
+const sourceDirectory = path.join(__dirname, "../decks/source-data");
+const decksDirectory = path.join(__dirname, "../decks");
 const sourceIndex = JSON.parse(readFileSync(path.join(sourceDirectory, "tkg-entries-index-32c267cb.json"), "utf8"));
 const sourceIndexById = new Map(sourceIndex.entries.map((entry) => [entry.id, entry]));
 const decks = new Map([50, 100, 2000].map((size) => [size, JSON.parse(
-  readFileSync(path.join(dictionariesDirectory, `most-common-${size}.json`), "utf8"))]));
+  readFileSync(path.join(decksDirectory, `most-common-${size}.json`), "utf8"))]));
 const words = (romaji) => String(romaji).match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) || [];
 
 // Each group is a pinned source example. The token number is zero based in the

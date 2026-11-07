@@ -6,11 +6,11 @@ const path = require("node:path");
 const { findWordMeanings } = require("../word-form-lookup.js");
 
 const root = path.resolve(__dirname, "..");
-const dictionary = JSON.parse(gunzipSync(readFileSync(path.join(
-  root, "dictionaries/romaji-english-jmdict-2026-11-02.json.gz",
+const deck = JSON.parse(gunzipSync(readFileSync(path.join(
+  root, "decks/romaji-english-jmdict-2026-11-02.json.gz",
 ))));
 const learnerIndex = JSON.parse(readFileSync(path.join(
-  root, "dictionaries/source-data/tkg-entries-index-32c267cb.json",
+  root, "decks/source-data/tkg-entries-index-32c267cb.json",
 ), "utf8"));
 const learnerEntries = new Map(learnerIndex.entries.map((entry) => [entry.id, entry]));
 
@@ -38,7 +38,7 @@ const commonInflections = [
 for (const [form, id, reading, gloss, tier, expected] of commonInflections) {
   test(`${form} leads with its common inflection`, () => {
     const url = source(id, reading, gloss, tier);
-    const meanings = findWordMeanings(form, dictionary);
+    const meanings = findWordMeanings(form, deck);
     assert.match(meanings[0] || "", expected,
       `${form} should lead with its common inflection; got ${JSON.stringify(meanings)}; reference: ${url}`);
   });
@@ -47,7 +47,7 @@ for (const [form, id, reading, gloss, tier, expected] of commonInflections) {
 test("hashi favors its core bridge and chopsticks meanings", () => {
   const bridge = source("02163_hashi", "はし", /^bridge$/i, "core");
   const chopsticks = source("01026_hashi", "はし", /^chopsticks$/i, "core");
-  const meanings = findWordMeanings("hashi", dictionary);
+  const meanings = findWordMeanings("hashi", deck);
   const bridgeAt = position(meanings, /^bridge$/i);
   const chopsticksAt = position(meanings, /^chopsticks$/i);
   const lovelyAt = position(meanings, /^lovely$/i);
@@ -63,7 +63,7 @@ test("ame favors basic rain and candy over the imperative of knit", () => {
   const rain = source("00583_ame", "あめ", /^rain$/i, "basic");
   const candy = source("00687_ame", "あめ", /^candy$/i, "basic");
   const knit = source("00002_amu", "あむ", /to knit/i, "general");
-  const meanings = findWordMeanings("ame", dictionary);
+  const meanings = findWordMeanings("ame", deck);
   const rainAt = position(meanings, /^rain$/i);
   const candyAt = position(meanings, /^(?:candy|\(hard\) candy)$/i);
   const knitAt = position(meanings, /^imperative form of amu — to knit\b/i);
@@ -77,7 +77,7 @@ test("ha leads with the topic marker and retains basic tooth and leaf", () => {
   const topic = source("00079_ha", "は", /^topic marker$/i, "basic");
   const tooth = source("00778_ha", "は", /^tooth, teeth$/i, "basic");
   const leaf = source("02241_ha", "は", /^leaf, leaves$/i, "basic");
-  const meanings = findWordMeanings("ha", dictionary);
+  const meanings = findWordMeanings("ha", deck);
   assert.match(meanings[0] || "", /topic/i,
     `The topic marker should lead; got ${JSON.stringify(meanings)}; reference: ${topic}`);
   assert(position(meanings, /^tooth$/i) > 0 && position(meanings, /^leaf$/i) > 0,

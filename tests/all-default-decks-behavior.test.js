@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { prepareDefaultDictionary, serializeDictionary, parseImportedDictionary } = require('../dictionary-core.js');
+const { prepareDefaultDeck, serializeDeck, parseImportedDeck } = require('../deck-core.js');
 
 const specs = [
   ...[50, 100].map(size => ({ size, checks: [
@@ -20,9 +20,9 @@ const specs = [
 
 for (const { size, checks } of specs) {
   test(`${size}-word default deck preserves its contextual meanings through import and export`, () => {
-    const source = JSON.parse(fs.readFileSync(path.join(__dirname, `../dictionaries/most-common-${size}.json`), 'utf8'));
-    const imported = prepareDefaultDictionary(source, size, index => String(index));
-    const roundTrip = parseImportedDictionary(JSON.parse(serializeDictionary(imported, 'test')), index => String(index));
+    const source = JSON.parse(fs.readFileSync(path.join(__dirname, `../decks/most-common-${size}.json`), 'utf8'));
+    const imported = prepareDefaultDeck(source, size, index => String(index));
+    const roundTrip = parseImportedDeck(JSON.parse(serializeDeck(imported, 'test')), index => String(index));
     for (const [sentence, token, expected] of checks) {
       const example = roundTrip.flatMap(card => card.examples).find(row => row.romaji === sentence);
       assert(example, `${size}: missing ${sentence}`);

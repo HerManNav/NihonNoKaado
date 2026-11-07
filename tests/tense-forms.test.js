@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const zlib = require('node:zlib');
 const { findWordMeanings } = require('../word-form-lookup.js');
-const deck = require('../dictionaries/most-common-2000.json');
+const deck = require('../decks/most-common-2000.json');
 const examples = deck.cards.flatMap(card => card.examples);
 const item = (sentence, romaji) => {
   const example = examples.find(row => row.romaji === sentence);
@@ -41,7 +41,7 @@ test('similar-looking words do not acquire an unrelated suru tense', () => {
 });
 
 test('general lookup distinguishes past, negative, polite and expression forms', () => {
-  const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(require.resolve('../dictionaries/romaji-english-jmdict-2026-11-02.json.gz'))));
+  const data = JSON.parse(zlib.gunzipSync(fs.readFileSync(require.resolve('../decks/romaji-english-jmdict-2026-11-02.json.gz'))));
   for (const [word, pattern] of [
     ['shita', /past.*suru/i], ['shinai', /negative.*suru/i], ['shinakatta', /past negative.*suru/i],
     ['shimasendeshita', /polite past negative.*suru/i], ['seikoushinakatta', /past negative.*seikou suru.*compound/i],

@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Japanese Cards",
   "short_name": "Japanese Cards",
-  "description": "A simple Japanese and English flashcard dictionary.",
+  "description": "A simple Japanese and English flashcard deck.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

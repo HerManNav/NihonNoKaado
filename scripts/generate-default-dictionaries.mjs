@@ -6,7 +6,7 @@ const [projectRoot, tkgRoot, tkgIndexPath, frequencyCsvPath] = process.argv.slic
   ? process.argv.slice(process.argv.indexOf("--") + 1)
   : process.argv.slice(2);
 if (!projectRoot || !tkgRoot || !tkgIndexPath || !frequencyCsvPath) {
-  console.error("Usage: node scripts/generate-default-dictionaries.mjs -- <project-root> <tkg-repo-root> <tkg-entries-index.json> <noos-frequency.csv>");
+  console.error("Usage: node scripts/generate-default-decks.mjs -- <project-root> <tkg-repo-root> <tkg-entries-index.json> <noos-frequency.csv>");
   process.exit(2);
 }
 
@@ -57,11 +57,11 @@ if (usableWords.length < 2000) {
   throw new Error(`Only ${usableWords.length} unique, sourced entries passed the example checks; 2,000 required. Rejections: ${JSON.stringify(rejected)}`);
 }
 
-const output = path.join(projectRoot, "dictionaries");
+const output = path.join(projectRoot, "decks");
 for (const size of sizes) {
   const file = path.join(output, `most-common-${size}.json`);
   await writeFile(file, `${JSON.stringify({
-    format: "japanese-cards-dictionary",
+    format: "japanese-cards-deck",
     version: 3,
     name: `Most common Japanese — ${size} words`,
     source: `Frequency ranks: ${FREQUENCY_SOURCE} (Leipzig Corpora Collection news counts; licensed CC BY-SA 4.0). English meanings and sense-tagged examples: ${EXAMPLE_SOURCE} (CC0). The list skips duplicate romaji and entries without a complete example tagged to the selected sense.`,

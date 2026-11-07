@@ -55,7 +55,7 @@ const translations = [
   ["¡ah!, ¡oh!, ¡uy!", "¡Ah, cuidado!", ["¡ah!", "peligroso"]],
 ];
 
-const source = JSON.parse(readFileSync(new URL("../dictionaries/most-common-50.json", import.meta.url), "utf8"));
+const source = JSON.parse(readFileSync(new URL("../decks/most-common-50.json", import.meta.url), "utf8"));
 if (translations.length !== source.cards.length) throw new Error("Translation count does not match the source deck.");
 source.name = "Japonés más frecuente — 50 palabras (español)";
 source.source += " Spanish translations prepared for Japanese Cards.";
@@ -67,4 +67,4 @@ for (const [index, card] of source.cards.entries()) {
   example.english = sentence;
   example.wordMeanings.forEach((word, wordIndex) => { word.meaning = words[wordIndex]; });
 }
-writeFileSync(new URL("../dictionaries/most-common-50-es.json", import.meta.url), `${JSON.stringify(source, null, 2)}\n`);
+writeFileSync(new URL("../decks/most-common-50-es.json", import.meta.url), `${JSON.stringify(source, null, 2)}\n`);

@@ -1,15 +1,16 @@
-const STORAGE_KEY = "japanese-cards.dictionary.v1";
+const STORAGE_KEY = "japanese-cards.deck.v1";
+const LEGACY_STORAGE_KEY = "japanese-cards.dictionary.v1";
 const CONTEXT_ANNOTATION_MIGRATION_KEY = "japanese-cards.context-annotation-migration.v1";
-const { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { parseImportedDeck, prepareDefaultDeck, serializeDeck, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 const { findWordMeanings } = window.JapaneseWordFormLookup;
 document.documentElement.classList.toggle("native-app", Boolean(window.Capacitor?.isNativePlatform?.()));
 
 const screens = {
   home: document.querySelector("#home-screen"),
   practice: document.querySelector("#practice-screen"),
-  dictionary: document.querySelector("#dictionary-screen"),
-  defaults: document.querySelector("#default-dictionaries-screen"),
-  defaultConfirm: document.querySelector("#default-dictionary-confirm-screen"),
+  deck: document.querySelector("#deck-screen"),
+  defaults: document.querySelector("#default-decks-screen"),
+  defaultConfirm: document.querySelector("#default-deck-confirm-screen"),
   add: document.querySelector("#add-screen"),
   clear: document.querySelector("#clear-screen"),
   settings: document.querySelector("#settings-screen"),
@@ -19,8 +20,8 @@ const screens = {
 
 const startButton = document.querySelector("#start-button");
 const originLanguage = document.querySelector("#origin-language");
-const dictionaryCount = document.querySelector("#dictionary-count");
-const dictionaryListCount = document.querySelector("#dictionary-list-count");
+const deckCount = document.querySelector("#deck-count");
+const deckListCount = document.querySelector("#deck-list-count");
 const wordList = document.querySelector("#word-list");
 const cardForm = document.querySelector("#card-form");
 const japaneseInput = document.querySelector("#japanese-word");
@@ -45,27 +46,27 @@ const progressFill = document.querySelector("#progress-fill");
 const progressReviewFill = document.querySelector("#progress-review-fill");
 const progressPoints = document.querySelector("#progress-points");
 const cardsRemaining = document.querySelector("#cards-remaining");
-const dictionaryTools = document.querySelector("#dictionary-tools");
-const dictionaryToolsButton = document.querySelector("#dictionary-tools-button");
+const deckTools = document.querySelector("#deck-tools");
+const deckToolsButton = document.querySelector("#deck-tools-button");
 const addButton = document.querySelector("#add-button");
-const defaultDictionaryList = document.querySelector("#default-dictionary-list");
-const defaultDictionariesCount = document.querySelector("#default-dictionaries-count");
-const defaultDictionariesStatus = document.querySelector("#default-dictionaries-status");
-const defaultDictionaryConfirmTitle = document.querySelector("#default-dictionary-confirm-title");
-const defaultDictionaryConfirmDescription = document.querySelector("#default-dictionary-confirm-description");
-const defaultDictionaryConfirmWarning = document.querySelector("#default-dictionary-confirm-warning");
-const defaultDictionaryConfirmStatus = document.querySelector("#default-dictionary-confirm-status");
-const cancelDefaultDictionaryLoadButton = document.querySelector("#cancel-default-dictionary-load");
-const confirmDefaultDictionaryLoadButton = document.querySelector("#confirm-default-dictionary-load");
+const defaultDeckList = document.querySelector("#default-deck-list");
+const defaultDecksCount = document.querySelector("#default-decks-count");
+const defaultDecksStatus = document.querySelector("#default-decks-status");
+const defaultDeckConfirmTitle = document.querySelector("#default-deck-confirm-title");
+const defaultDeckConfirmDescription = document.querySelector("#default-deck-confirm-description");
+const defaultDeckConfirmWarning = document.querySelector("#default-deck-confirm-warning");
+const defaultDeckConfirmStatus = document.querySelector("#default-deck-confirm-status");
+const cancelDefaultDeckLoadButton = document.querySelector("#cancel-default-deck-load");
+const confirmDefaultDeckLoadButton = document.querySelector("#confirm-default-deck-load");
 const importFile = document.querySelector("#import-file");
 let storageWarning = "";
 let editingCardIndex = null;
 let formReturnScreen = "home";
 let hiraganaManuallyEdited = false;
 let addFeedbackTimeout = null;
-let pendingDefaultDictionary = null;
-let pendingDefaultDictionaryTrigger = null;
-let defaultDictionaryLoadInProgress = false;
+let pendingDefaultDeck = null;
+let pendingDefaultDeckTrigger = null;
+let defaultDeckLoadInProgress = false;
 
 let cards = loadCards();
 let practiceDeck = [];
@@ -106,8 +107,8 @@ async function getRomajiLookup() {
   if (!romajiLookupPromise) {
     romajiLookupPromise = (async () => {
       try {
-        const dictionaryPath = "dictionaries/romaji-english-jmdict-2026-11-02";
-        const response = await fetch(`${dictionaryPath}.json.gz?v=6`, { cache: "no-cache" });
+        const deckPath = "decks/romaji-english-jmdict-2026-11-02";
+        const response = await fetch(`${deckPath}.json.gz?v=6`, { cache: "no-cache" });
         let payload = null;
         if (response.ok && typeof DecompressionStream === "function") {
           try {
@@ -119,11 +120,11 @@ async function getRomajiLookup() {
           }
         }
         if (!payload) {
-          const fallbackResponse = await fetch(`${dictionaryPath}.json?v=6`, { cache: "no-cache" });
-          if (!fallbackResponse.ok) throw new Error(`Dictionary request failed (${response.status}; fallback ${fallbackResponse.status}).`);
+          const fallbackResponse = await fetch(`${deckPath}.json?v=6`, { cache: "no-cache" });
+          if (!fallbackResponse.ok) throw new Error(`Deck request failed (${response.status}; fallback ${fallbackResponse.status}).`);
           payload = await fallbackResponse.json();
         }
-        if (payload.format !== 5) throw new Error("The lookup dictionary needs a refresh.");
+        if (payload.format !== 5) throw new Error("The lookup deck needs a refresh.");
         romajiLookup = payload;
         return romajiLookup;
       } catch (error) {
@@ -202,7 +203,15 @@ function appendRomajiTokens(element, value, wordMeanings = null) {
 
 function loadCards() {
   try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    let stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === null) {
+      stored = localStorage.getItem(LEGACY_STORAGE_KEY);
+      if (stored !== null) {
+        localStorage.setItem(STORAGE_KEY, stored);
+        localStorage.removeItem(LEGACY_STORAGE_KEY);
+      }
+    }
+    const saved = JSON.parse(stored || "[]");
     return Array.isArray(saved)
       ? saved.filter((card) => typeof card?.japanese === "string" && (typeof card?.english === "string" || Array.isArray(card?.meanings)))
         .map((card) => {
@@ -222,7 +231,7 @@ function loadCards() {
         }).filter((card) => card.meanings.length > 0)
       : [];
   } catch {
-    storageWarning = "Saved dictionary could not be read. Export a backup after restoring it.";
+    storageWarning = "Saved deck could not be read. Export a backup after restoring it.";
     return [];
   }
 }
@@ -234,7 +243,7 @@ function saveCards(nextCards) {
     return true;
   } catch {
     storageWarning = "Browser storage is unavailable. Export a backup before closing this page.";
-    updateDictionaryCount();
+    updateDeckCount();
     return false;
   }
 }
@@ -244,7 +253,7 @@ function contextualExampleKey(example) {
   return JSON.stringify([normalize(example?.romaji), normalize(example?.hiragana), normalize(example?.english)]);
 }
 
-function savedDictionaryContentSignature(savedCards) {
+function savedDeckContentSignature(savedCards) {
   const normalize = (value) => String(value || "").trim();
   const content = JSON.stringify(savedCards.map((card) => [
     normalize(card.japanese),
@@ -262,14 +271,14 @@ function savedDictionaryContentSignature(savedCards) {
 
 async function restoreContextMeaningsForSavedCards() {
   if (!cards.length || !cards.some((card) => card.examples.some((example) => !example.wordMeanings?.length))) return;
-  const signature = savedDictionaryContentSignature(cards);
+  const signature = savedDeckContentSignature(cards);
   if (localStorage.getItem(CONTEXT_ANNOTATION_MIGRATION_KEY) === signature) return;
 
   try {
-    const response = await fetch("dictionaries/most-common-2000.json", { cache: "no-cache" });
-    if (!response.ok) throw new Error(`Context dictionary request failed (${response.status}).`);
+    const response = await fetch("decks/most-common-2000.json", { cache: "no-cache" });
+    if (!response.ok) throw new Error(`Context deck request failed (${response.status}).`);
     const source = await response.json();
-    const defaultCards = prepareDefaultDictionary(source, source.cards?.length || 0, (index) => `context-${index}`);
+    const defaultCards = prepareDefaultDeck(source, source.cards?.length || 0, (index) => `context-${index}`);
     const annotationsByExample = new Map();
     defaultCards.forEach((card) => card.examples.forEach((example) => {
       const key = contextualExampleKey(example);
@@ -299,7 +308,7 @@ async function restoreContextMeaningsForSavedCards() {
     }
     localStorage.setItem(CONTEXT_ANNOTATION_MIGRATION_KEY, signature);
   } catch (error) {
-    console.warn("Could not restore contextual word meanings for the saved dictionary.", error);
+    console.warn("Could not restore contextual word meanings for the saved deck.", error);
   }
 }
 
@@ -309,7 +318,7 @@ function showScreen(name) {
     hideWordTranslationPopup();
   }
   Object.entries(screens).forEach(([key, screen]) => { screen.hidden = key !== name; });
-  if (name === "home") updateDictionaryCount();
+  if (name === "home") updateDeckCount();
 }
 
 // Called by Android's system Back gesture. Return false only at the root so
@@ -323,12 +332,12 @@ window.JapaneseCardsHandleBack = function handleSystemBack() {
     hideWordTranslationPopup();
     return true;
   }
-  if (dictionaryTools.classList.contains("is-open")) {
-    closeDictionaryMenu();
+  if (deckTools.classList.contains("is-open")) {
+    closeDeckMenu();
     return true;
   }
   if (!screens.defaultConfirm.hidden) {
-    if (!defaultDictionaryLoadInProgress) cancelDefaultDictionaryLoad();
+    if (!defaultDeckLoadInProgress) cancelDefaultDeckLoad();
     return true;
   }
   if (!screens.add.hidden) {
@@ -337,25 +346,25 @@ window.JapaneseCardsHandleBack = function handleSystemBack() {
   }
   if (!screens.export.hidden && exportInProgress) return true;
   if (!screens.about.hidden) { openSettings(); return true; }
-  if (!screens.settings.hidden || !screens.export.hidden || !screens.practice.hidden || !screens.dictionary.hidden || !screens.defaults.hidden || !screens.clear.hidden) {
+  if (!screens.settings.hidden || !screens.export.hidden || !screens.practice.hidden || !screens.deck.hidden || !screens.defaults.hidden || !screens.clear.hidden) {
     showScreen("home");
     return true;
   }
   return language?.backFromHome() || false;
 };
 
-function updateDictionaryCount() {
+function updateDeckCount() {
   const count = cards.length;
-  dictionaryCount.classList.remove("is-empty-prompt");
-  dictionaryCount.textContent = count === 1 ? "1 word in your dictionary" : `${count} Cards in your dictionary`;
-  if (storageWarning) dictionaryCount.textContent += ` · ${storageWarning}`;
+  deckCount.classList.remove("is-empty-prompt");
+  deckCount.textContent = count === 1 ? "1 word in your deck" : `${count} Cards in your deck`;
+  if (storageWarning) deckCount.textContent += ` · ${storageWarning}`;
 }
 
-function renderDictionaryList(highlightIndex = -1) {
+function renderDeckList(highlightIndex = -1) {
   const count = cards.length;
-  dictionaryListCount.textContent = count === 1 ? "1 word" : `${count} words`;
+  deckListCount.textContent = count === 1 ? "1 word" : `${count} words`;
   wordList.replaceChildren();
-  wordList.append(createDictionaryEntryRow());
+  wordList.append(createDeckEntryRow());
 
   cards.forEach((card, index) => {
     const row = document.createElement("article");
@@ -371,7 +380,7 @@ function renderDictionaryList(highlightIndex = -1) {
     removeButton.textContent = "×";
     removeButton.setAttribute("aria-label", `Remove ${card.japanese}`);
     removeButton.title = "Remove this word";
-    removeButton.addEventListener("click", () => removeDictionaryCard(index));
+    removeButton.addEventListener("click", () => removeDeckCard(index));
 
     const editButton = document.createElement("button");
     editButton.className = "edit-word-button";
@@ -398,93 +407,93 @@ function renderDictionaryList(highlightIndex = -1) {
   });
 }
 
-function createDictionaryEntryRow() {
+function createDeckEntryRow() {
   const row = document.createElement("article");
-  row.className = "word-row dictionary-entry-row";
-  row.setAttribute("aria-label", "Add a dictionary entry");
+  row.className = "word-row deck-entry-row";
+  row.setAttribute("aria-label", "Add a deck entry");
 
   const spacer = document.createElement("span");
-  spacer.className = "dictionary-entry-spacer";
+  spacer.className = "deck-entry-spacer";
   spacer.setAttribute("aria-hidden", "true");
 
   const details = document.createElement("div");
-  details.className = "word-details dictionary-entry-fields";
+  details.className = "word-details deck-entry-fields";
   const addMeaningButton = document.createElement("button");
-  addMeaningButton.className = "secondary-button dictionary-add-meaning";
+  addMeaningButton.className = "secondary-button deck-add-meaning";
   addMeaningButton.type = "button";
   addMeaningButton.textContent = "Add another meaning";
   addMeaningButton.addEventListener("click", () => {
-    const next = createDictionaryMeaningInput();
+    const next = createDeckMeaningInput();
     meanings.append(next);
-    showDictionaryMeaningHints(row, next);
+    showDeckMeaningHints(row, next);
     next.querySelector(".meaning-translation").focus();
   });
   const addCardButton = document.createElement("button");
-  addCardButton.className = "primary-button dictionary-add-card";
+  addCardButton.className = "primary-button deck-add-card";
   addCardButton.type = "button";
-  addCardButton.textContent = "Add card to dictionary";
-  addCardButton.addEventListener("click", addDictionaryEntry);
+  addCardButton.textContent = "Add card to deck";
+  addCardButton.addEventListener("click", addDeckEntry);
   const actions = document.createElement("div");
-  actions.className = "dictionary-entry-actions";
+  actions.className = "deck-entry-actions";
   const addMeaningAction = document.createElement("div");
-  addMeaningAction.className = "dictionary-entry-action-group";
+  addMeaningAction.className = "deck-entry-action-group";
   const addMeaningHint = document.createElement("span");
-  addMeaningHint.className = "dictionary-action-hint web-shortcut-hint";
+  addMeaningHint.className = "deck-action-hint web-shortcut-hint";
   addMeaningHint.textContent = "Tab";
   addMeaningAction.append(addMeaningHint, addMeaningButton);
   const addCardAction = document.createElement("div");
-  addCardAction.className = "dictionary-entry-action-group";
+  addCardAction.className = "deck-entry-action-group";
   const addCardHint = document.createElement("span");
-  addCardHint.className = "dictionary-action-hint web-shortcut-hint";
+  addCardHint.className = "deck-action-hint web-shortcut-hint";
   addCardHint.textContent = "Enter";
   addCardAction.append(addCardHint, addCardButton);
   actions.append(addMeaningAction, addCardAction);
   const japanese = document.createElement("input");
   japanese.type = "text";
-  japanese.className = "dictionary-entry-japanese";
+  japanese.className = "deck-entry-japanese";
   japanese.placeholder = "Japanese (romaji)";
   japanese.setAttribute("aria-label", "New Japanese word in romaji");
   japanese.autocomplete = "off";
 
   const hiragana = document.createElement("input");
   hiragana.type = "text";
-  hiragana.className = "dictionary-entry-hiragana";
+  hiragana.className = "deck-entry-hiragana";
   hiragana.placeholder = "Hiragana";
   hiragana.setAttribute("aria-label", "New word in hiragana");
   hiragana.autocomplete = "off";
   hiragana.dataset.manuallyEdited = "false";
 
   const meanings = document.createElement("div");
-  meanings.className = "dictionary-entry-meanings";
-  const firstMeaning = createDictionaryMeaningInput();
+  meanings.className = "deck-entry-meanings";
+  const firstMeaning = createDeckMeaningInput();
   meanings.append(firstMeaning);
 
   const meaningRow = document.createElement("div");
-  meaningRow.className = "dictionary-entry-meaning-row";
+  meaningRow.className = "deck-entry-meaning-row";
   meaningRow.append(meanings);
   details.append(japanese, hiragana, meaningRow, actions);
 
   const buttonSpacer = document.createElement("span");
-  buttonSpacer.className = "dictionary-entry-spacer";
+  buttonSpacer.className = "deck-entry-spacer";
   buttonSpacer.setAttribute("aria-hidden", "true");
   row.append(spacer, details, buttonSpacer);
   return row;
 }
 
-function createDictionaryMeaningInput(value = "") {
+function createDeckMeaningInput(value = "") {
   const group = document.createElement("div");
-  group.className = "dictionary-entry-meaning-group";
+  group.className = "deck-entry-meaning-group";
   const input = document.createElement("input");
   input.type = "text";
-  input.className = "dictionary-entry-meaning meaning-translation";
+  input.className = "deck-entry-meaning meaning-translation";
   input.placeholder = "English meaning";
   input.setAttribute("aria-label", "New English meaning");
   input.value = value;
   const control = document.createElement("div");
-  control.className = "dictionary-entry-meaning-control";
+  control.className = "deck-entry-meaning-control";
   control.append(input);
   const exampleFields = document.createElement("div");
-  exampleFields.className = "dictionary-entry-example-fields";
+  exampleFields.className = "deck-entry-example-fields";
   exampleFields.append(
     createEntryExampleInput("romaji", "Example (romaji)"),
     createEntryExampleInput("hiragana", "Example (hiragana)"),
@@ -494,9 +503,9 @@ function createDictionaryMeaningInput(value = "") {
   return group;
 }
 
-function showDictionaryMeaningHints(row, activeGroup) {
-  row.querySelectorAll(".dictionary-entry-meaning-group").forEach((group) => {
-    const hints = group.querySelector(".dictionary-entry-hints");
+function showDeckMeaningHints(row, activeGroup) {
+  row.querySelectorAll(".deck-entry-meaning-group").forEach((group) => {
+    const hints = group.querySelector(".deck-entry-hints");
     if (hints) hints.hidden = group !== activeGroup;
   });
 }
@@ -504,7 +513,7 @@ function showDictionaryMeaningHints(row, activeGroup) {
 function createEntryExampleInput(field, placeholder) {
   const input = document.createElement("input");
   input.type = "text";
-  input.className = `dictionary-entry-example-${field}`;
+  input.className = `deck-entry-example-${field}`;
   input.placeholder = placeholder;
   input.setAttribute("aria-label", `New ${placeholder.toLowerCase()}`);
   input.autocomplete = "off";
@@ -512,21 +521,21 @@ function createEntryExampleInput(field, placeholder) {
   return input;
 }
 
-function addDictionaryEntry() {
-  const row = wordList.querySelector(".dictionary-entry-row");
+function addDeckEntry() {
+  const row = wordList.querySelector(".deck-entry-row");
   if (!row) return;
-  const japanese = row.querySelector(".dictionary-entry-japanese").value.trim();
-  const hiragana = row.querySelector(".dictionary-entry-hiragana").value.trim() || romajiToHiragana(japanese);
-  const groups = [...row.querySelectorAll(".dictionary-entry-meaning-group")];
+  const japanese = row.querySelector(".deck-entry-japanese").value.trim();
+  const hiragana = row.querySelector(".deck-entry-hiragana").value.trim() || romajiToHiragana(japanese);
+  const groups = [...row.querySelectorAll(".deck-entry-meaning-group")];
   const meaningEntries = groups.map((group) => {
-    const romaji = group.querySelector(".dictionary-entry-example-romaji").value.trim();
-    const customHiragana = group.querySelector(".dictionary-entry-example-hiragana").value.trim();
+    const romaji = group.querySelector(".deck-entry-example-romaji").value.trim();
+    const customHiragana = group.querySelector(".deck-entry-example-hiragana").value.trim();
     return {
       meaning: group.querySelector(".meaning-translation").value.trim(),
       example: {
         romaji,
         hiragana: customHiragana || romajiToHiragana(romaji),
-        english: group.querySelector(".dictionary-entry-example-english").value.trim(),
+        english: group.querySelector(".deck-entry-example-english").value.trim(),
       },
     };
   }).filter((entry) => entry.meaning);
@@ -541,41 +550,41 @@ function addDictionaryEntry() {
     return;
   }
   cards = nextCards;
-  renderDictionaryList(0);
+  renderDeckList(0);
   wordList.scrollTop = 0;
-  wordList.querySelector(".dictionary-entry-japanese")?.focus({ preventScroll: true });
+  wordList.querySelector(".deck-entry-japanese")?.focus({ preventScroll: true });
 }
 
-function removeDictionaryCard(index) {
+function removeDeckCard(index) {
   const nextCards = removeCardAt(cards, index);
   if (!saveCards(nextCards)) {
     window.alert("The word could not be removed from browser storage.");
     return;
   }
   cards = nextCards;
-  renderDictionaryList();
+  renderDeckList();
 }
 
-function closeDictionaryMenu() {
-  dictionaryTools.classList.remove("is-open");
-  dictionaryToolsButton.setAttribute("aria-expanded", "false");
+function closeDeckMenu() {
+  deckTools.classList.remove("is-open");
+  deckToolsButton.setAttribute("aria-expanded", "false");
 }
 
-function openDictionaryMenu() {
-  dictionaryTools.classList.add("is-open");
-  dictionaryToolsButton.setAttribute("aria-expanded", "true");
+function openDeckMenu() {
+  deckTools.classList.add("is-open");
+  deckToolsButton.setAttribute("aria-expanded", "true");
 }
 
 let exportInProgress = false;
 let exportToastTimeout = null;
 
 function openSettings() {
-  closeDictionaryMenu();
+  closeDeckMenu();
   showScreen("settings");
 }
 
-function exportDictionary() {
-  closeDictionaryMenu();
+function exportDeck() {
+  closeDeckMenu();
   window.clearTimeout(exportToastTimeout);
   document.querySelector("#export-toast").hidden = true;
   document.querySelector("#export-name").value = `my_japan_dict_${new Date().toISOString().slice(0, 10).replace(/-/g, "_")}`;
@@ -587,10 +596,10 @@ function exportDictionary() {
   document.querySelector("#export-name").focus();
 }
 
-async function finishDictionaryExport(downloaded) {
+async function finishDeckExport(downloaded) {
   const toast = document.querySelector("#export-toast");
   document.querySelector("#export-toast-message").textContent = downloaded
-    ? "" : "Dictionary saved to Downloads.";
+    ? "" : "Deck saved to Downloads.";
   document.querySelector("#export-status").textContent = "";
   toast.hidden = false;
   exportToastTimeout = window.setTimeout(() => { toast.hidden = true; }, 5000);
@@ -611,7 +620,7 @@ async function finishDictionaryExport(downloaded) {
   }
 }
 
-async function saveDictionaryExport(event) {
+async function saveDeckExport(event) {
   event.preventDefault();
   if (exportInProgress) return;
   const name = document.querySelector("#export-name").value.trim();
@@ -620,53 +629,53 @@ async function saveDictionaryExport(event) {
   const controls = ["#confirm-export", "#export-name", "#cancel-export"];
   controls.forEach(selector => { document.querySelector(selector).disabled = true; });
   const status = document.querySelector("#export-status");
-  status.textContent = "Saving dictionary…";
+  status.textContent = "Saving deck…";
   try {
-    const result = await window.JapaneseCardsExport.save(getSafeDictionaryFilename(name), createDictionaryJson(name));
-    await finishDictionaryExport(Boolean(result?.downloaded));
+    const result = await window.JapaneseCardsExport.save(getSafeDeckFilename(name), createDeckJson(name));
+    await finishDeckExport(Boolean(result?.downloaded));
   } catch (error) {
-    status.textContent = error.message || "The dictionary could not be exported. Check available space and try again.";
+    status.textContent = error.message || "The deck could not be exported. Check available space and try again.";
   } finally {
     exportInProgress = false;
     controls.forEach(selector => { document.querySelector(selector).disabled = false; });
   }
 }
 
-function createDictionaryJson(dictionaryName) {
-  return serializeDictionary(cards, dictionaryName);
+function createDeckJson(deckName) {
+  return serializeDeck(cards, deckName);
 }
 
-function getSafeDictionaryFilename(dictionaryName) {
-  const safeName = dictionaryName.replace(/[<>:"/\\|?*\u0000-\u001F]/g, "").replace(/\s+/g, "-") || "japanese-dictionary";
+function getSafeDeckFilename(deckName) {
+  const safeName = deckName.replace(/[<>:"/\\|?*\u0000-\u001F]/g, "").replace(/\s+/g, "-") || "japanese-deck";
   return `${safeName}.json`;
 }
 
-async function importDictionary(file) {
+async function importDeck(file) {
   if (!file) return;
   try {
-    const importedCards = parseImportedDictionary(JSON.parse(await file.text()));
-    if (cards.length > 0 && !window.confirm(`Replace your current dictionary of ${cards.length} cards with ${importedCards.length} imported cards?`)) return;
+    const importedCards = parseImportedDeck(JSON.parse(await file.text()));
+    if (cards.length > 0 && !window.confirm(`Replace your current deck of ${cards.length} cards with ${importedCards.length} imported cards?`)) return;
     if (!saveCards(importedCards)) {
-      window.alert("The dictionary could not be saved in this browser. Export a backup before closing this page.");
+      window.alert("The deck could not be saved in this browser. Export a backup before closing this page.");
       return;
     }
     cards = importedCards;
-    updateDictionaryCount();
-    dictionaryCount.textContent += ` · Imported ${cards.length} ${cards.length === 1 ? "card" : "cards"}.`;
+    updateDeckCount();
+    deckCount.textContent += ` · Imported ${cards.length} ${cards.length === 1 ? "card" : "cards"}.`;
   } catch (error) {
-    window.alert(error instanceof Error ? error.message : "The dictionary could not be imported.");
+    window.alert(error instanceof Error ? error.message : "The deck could not be imported.");
   } finally {
     importFile.value = "";
-    closeDictionaryMenu();
+    closeDeckMenu();
   }
 }
 
 function startPractice() {
   if (cards.length === 0) {
-    document.querySelector("#dictionary-count").textContent = "Add your first word to start practicing or import a dictionary.";
-    dictionaryCount.classList.remove("is-empty-prompt");
-    void dictionaryCount.offsetWidth;
-    dictionaryCount.classList.add("is-empty-prompt");
+    document.querySelector("#deck-count").textContent = "Add your first word to start practicing or import a deck.";
+    deckCount.classList.remove("is-empty-prompt");
+    void deckCount.offsetWidth;
+    deckCount.classList.add("is-empty-prompt");
     return;
   }
   const fromEnglish = originLanguage.value === "english";
@@ -1158,132 +1167,132 @@ function startAddingWord() {
   cancelEditButton.hidden = true;
   backToLearningButton.hidden = false;
   enterHint.hidden = false;
-  closeDictionaryMenu();
+  closeDeckMenu();
   showScreen("add");
   japaneseInput.focus();
 }
 
-async function openDefaultDictionaries() {
-  closeDictionaryMenu();
+async function openDefaultDecks() {
+  closeDeckMenu();
   showScreen("defaults");
-  defaultDictionaryList.replaceChildren();
-  defaultDictionariesCount.textContent = "";
-  defaultDictionariesStatus.textContent = "Loading available dictionaries…";
+  defaultDeckList.replaceChildren();
+  defaultDecksCount.textContent = "";
+  defaultDecksStatus.textContent = "Loading available decks…";
   try {
-    const response = await fetch("dictionaries/manifest.json", { cache: "no-cache" });
-    if (!response.ok) throw new Error(`Dictionary catalog request failed (${response.status}).`);
+    const response = await fetch("decks/manifest.json", { cache: "no-cache" });
+    if (!response.ok) throw new Error(`Deck catalog request failed (${response.status}).`);
     const catalog = await response.json();
-    if (!Array.isArray(catalog.dictionaries) || catalog.dictionaries.length === 0) {
-      throw new Error("No default dictionaries are available yet.");
+    if (!Array.isArray(catalog.decks) || catalog.decks.length === 0) {
+      throw new Error("No default decks are available yet.");
     }
     const spanish = sessionStorage.getItem("japanese-cards.current-language") === "es";
-    const dictionaries = spanish ? catalog.dictionaries.map((dictionary) => ({
-      ...dictionary,
-      name: `Más comunes - ${dictionary.count.toLocaleString("es-ES")}${dictionary.spanishFile ? "" : " (en inglés)"}`,
-      file: dictionary.spanishFile || dictionary.file,
-    })) : catalog.dictionaries;
-    renderDefaultDictionaries(dictionaries);
+    const decks = spanish ? catalog.decks.map((deck) => ({
+      ...deck,
+      name: `Más comunes - ${deck.count.toLocaleString("es-ES")}${deck.spanishFile ? "" : " (en inglés)"}`,
+      file: deck.spanishFile || deck.file,
+    })) : catalog.decks;
+    renderDefaultDecks(decks);
     const importButton = document.createElement("button");
-    importButton.className = "default-dictionary-option own-dictionary-option";
+    importButton.className = "default-deck-option own-deck-option";
     importButton.type = "button";
-    importButton.textContent = "Import my own dictionary";
+    importButton.textContent = "Import my own deck";
     importButton.addEventListener("click", () => importFile.click());
-    defaultDictionaryList.append(importButton);
-    defaultDictionariesStatus.textContent = "";
+    defaultDeckList.append(importButton);
+    defaultDecksStatus.textContent = "";
   } catch (error) {
-    defaultDictionariesStatus.textContent = defaultDictionaryErrorMessage("dictionaries/manifest.json", error);
+    defaultDecksStatus.textContent = defaultDeckErrorMessage("decks/manifest.json", error);
     const retryButton = document.createElement("button");
-    retryButton.className = "secondary-button default-dictionary-retry";
+    retryButton.className = "secondary-button default-deck-retry";
     retryButton.type = "button";
     retryButton.textContent = "Try again";
-    retryButton.addEventListener("click", openDefaultDictionaries, { once: true });
-    defaultDictionaryList.replaceChildren(retryButton);
-    console.error("Unable to load default dictionary catalog:", error);
+    retryButton.addEventListener("click", openDefaultDecks, { once: true });
+    defaultDeckList.replaceChildren(retryButton);
+    console.error("Unable to load default deck catalog:", error);
   }
 }
 
-function renderDefaultDictionaries(dictionaries) {
-  defaultDictionariesCount.textContent = dictionaries.length === 1 ? "1 available" : `${dictionaries.length} available`;
+function renderDefaultDecks(decks) {
+  defaultDecksCount.textContent = decks.length === 1 ? "1 available" : `${decks.length} available`;
   const fragment = document.createDocumentFragment();
-  dictionaries.forEach((dictionary) => {
-    if (typeof dictionary.id !== "string" || typeof dictionary.name !== "string" || typeof dictionary.file !== "string" || !Number.isInteger(dictionary.count) || dictionary.count < 1) return;
+  decks.forEach((deck) => {
+    if (typeof deck.id !== "string" || typeof deck.name !== "string" || typeof deck.file !== "string" || !Number.isInteger(deck.count) || deck.count < 1) return;
     const button = document.createElement("button");
-    button.className = "default-dictionary-option";
+    button.className = "default-deck-option";
     button.type = "button";
     const name = document.createElement("strong");
-    name.textContent = dictionary.name;
+    name.textContent = deck.name;
     const description = document.createElement("span");
-    description.textContent = `${dictionary.count} ${dictionary.count === 1 ? "card" : "cards"}`;
+    description.textContent = `${deck.count} ${deck.count === 1 ? "card" : "cards"}`;
     button.append(name, description);
-    button.addEventListener("click", () => requestDefaultDictionaryLoad(dictionary, button));
+    button.addEventListener("click", () => requestDefaultDeckLoad(deck, button));
     fragment.append(button);
   });
-  defaultDictionaryList.replaceChildren(fragment);
+  defaultDeckList.replaceChildren(fragment);
 }
 
-function requestDefaultDictionaryLoad(dictionary, trigger) {
-  pendingDefaultDictionary = dictionary;
-  pendingDefaultDictionaryTrigger = trigger;
-  defaultDictionaryConfirmTitle.textContent = cards.length ? "Replace your dictionary?" : "Load this dictionary?";
-  defaultDictionaryConfirmDescription.textContent = cards.length
-    ? `“${dictionary.name}” contains ${dictionary.count} cards. It will replace your current dictionary of ${cards.length} ${cards.length === 1 ? "card" : "cards"}.`
-    : `Load “${dictionary.name}” with ${dictionary.count} cards?`;
-  defaultDictionaryConfirmWarning.textContent = cards.length
+function requestDefaultDeckLoad(deck, trigger) {
+  pendingDefaultDeck = deck;
+  pendingDefaultDeckTrigger = trigger;
+  defaultDeckConfirmTitle.textContent = cards.length ? "Replace your deck?" : "Load this deck?";
+  defaultDeckConfirmDescription.textContent = cards.length
+    ? `“${deck.name}” contains ${deck.count} cards. It will replace your current deck of ${cards.length} ${cards.length === 1 ? "card" : "cards"}.`
+    : `Load “${deck.name}” with ${deck.count} cards?`;
+  defaultDeckConfirmWarning.textContent = cards.length
     ? "This cannot be undone. Export a backup first if you want to keep your current cards."
     : "The cards will be saved in this browser.";
-  defaultDictionaryConfirmStatus.textContent = "";
-  confirmDefaultDictionaryLoadButton.textContent = cards.length ? "Replace and load" : "Load dictionary";
-  confirmDefaultDictionaryLoadButton.disabled = false;
-  cancelDefaultDictionaryLoadButton.disabled = false;
+  defaultDeckConfirmStatus.textContent = "";
+  confirmDefaultDeckLoadButton.textContent = cards.length ? "Replace and load" : "Load deck";
+  confirmDefaultDeckLoadButton.disabled = false;
+  cancelDefaultDeckLoadButton.disabled = false;
   showScreen("defaultConfirm");
-  cancelDefaultDictionaryLoadButton.focus();
+  cancelDefaultDeckLoadButton.focus();
 }
 
-function cancelDefaultDictionaryLoad() {
-  if (defaultDictionaryLoadInProgress) return;
-  const trigger = pendingDefaultDictionaryTrigger;
-  pendingDefaultDictionary = null;
-  pendingDefaultDictionaryTrigger = null;
+function cancelDefaultDeckLoad() {
+  if (defaultDeckLoadInProgress) return;
+  const trigger = pendingDefaultDeckTrigger;
+  pendingDefaultDeck = null;
+  pendingDefaultDeckTrigger = null;
   showScreen("defaults");
   trigger?.focus();
 }
 
-async function loadDefaultDictionary() {
-  const dictionary = pendingDefaultDictionary;
-  if (!dictionary || defaultDictionaryLoadInProgress) return;
-  defaultDictionaryLoadInProgress = true;
-  defaultDictionaryConfirmStatus.textContent = `Loading “${dictionary.name}”…`;
-  confirmDefaultDictionaryLoadButton.disabled = true;
-  confirmDefaultDictionaryLoadButton.textContent = "Loading…";
-  cancelDefaultDictionaryLoadButton.disabled = true;
+async function loadDefaultDeck() {
+  const deck = pendingDefaultDeck;
+  if (!deck || defaultDeckLoadInProgress) return;
+  defaultDeckLoadInProgress = true;
+  defaultDeckConfirmStatus.textContent = `Loading “${deck.name}”…`;
+  confirmDefaultDeckLoadButton.disabled = true;
+  confirmDefaultDeckLoadButton.textContent = "Loading…";
+  cancelDefaultDeckLoadButton.disabled = true;
   try {
-    const response = await fetch(`dictionaries/${encodeURIComponent(dictionary.file)}`);
-    if (!response.ok) throw new Error(`Dictionary request failed (${response.status}).`);
+    const response = await fetch(`decks/${encodeURIComponent(deck.file)}`);
+    if (!response.ok) throw new Error(`Deck request failed (${response.status}).`);
     const source = await response.json();
-    const importedCards = prepareDefaultDictionary(source, dictionary.count);
-    if (!saveCards(importedCards)) throw new Error("The new dictionary could not be saved in this browser.");
+    const importedCards = prepareDefaultDeck(source, deck.count);
+    if (!saveCards(importedCards)) throw new Error("The new deck could not be saved in this browser.");
     cards = importedCards;
-    pendingDefaultDictionary = null;
-    pendingDefaultDictionaryTrigger = null;
+    pendingDefaultDeck = null;
+    pendingDefaultDeckTrigger = null;
     showScreen("home");
   } catch (error) {
-    defaultDictionaryConfirmStatus.textContent = `${defaultDictionaryErrorMessage(`dictionaries/${dictionary.file}`, error)} Your current dictionary is unchanged; try again.`;
-    confirmDefaultDictionaryLoadButton.disabled = false;
-    confirmDefaultDictionaryLoadButton.textContent = cards.length ? "Replace and load" : "Load dictionary";
-    cancelDefaultDictionaryLoadButton.disabled = false;
-    console.error("Unable to load default dictionary:", error);
+    defaultDeckConfirmStatus.textContent = `${defaultDeckErrorMessage(`decks/${deck.file}`, error)} Your current deck is unchanged; try again.`;
+    confirmDefaultDeckLoadButton.disabled = false;
+    confirmDefaultDeckLoadButton.textContent = cards.length ? "Replace and load" : "Load deck";
+    cancelDefaultDeckLoadButton.disabled = false;
+    console.error("Unable to load default deck:", error);
   } finally {
-    defaultDictionaryLoadInProgress = false;
+    defaultDeckLoadInProgress = false;
   }
 }
 
-function defaultDictionaryErrorMessage(resource, error) {
+function defaultDeckErrorMessage(resource, error) {
   if (window.location.protocol === "file:") {
-    return "This page was opened directly from disk. Open Japanese Cards through a website or local web server to load its JSON dictionaries.";
+    return "This page was opened directly from disk. Open Japanese Cards through a website or local web server to load its JSON decks.";
   }
   const url = new URL(resource, document.baseURI);
   const statusMatch = String(error?.message || "").match(/\((\d{3})\)/);
-  if (statusMatch) return `The dictionary file at ${url.pathname} returned HTTP ${statusMatch[1]}.`;
+  if (statusMatch) return `The deck file at ${url.pathname} returned HTTP ${statusMatch[1]}.`;
   return `Could not load ${url.pathname}. Check the connection and try again.`;
 }
 
@@ -1291,7 +1300,7 @@ function startEditingCard(index) {
   const card = cards[index];
   if (!card) return;
   editingCardIndex = index;
-  formReturnScreen = "dictionary";
+  formReturnScreen = "deck";
   hiraganaManuallyEdited = false;
   japaneseInput.value = card.japanese;
   hiraganaInput.value = card.hiragana || romajiToHiragana(card.japanese);
@@ -1313,7 +1322,7 @@ function cancelCardForm() {
 
 function showAddFeedback(japanese) {
   window.clearTimeout(addFeedbackTimeout);
-  addFeedback.textContent = `Added “${japanese}” to your dictionary.`;
+  addFeedback.textContent = `Added “${japanese}” to your deck.`;
   addFeedback.hidden = false;
   addFeedback.classList.remove("is-visible");
   void addFeedback.offsetWidth;
@@ -1324,19 +1333,19 @@ function showAddFeedback(japanese) {
   }, 2600);
 }
 
-function confirmClearDictionary() {
+function confirmClearDeck() {
   document.querySelector("#clear-description").textContent = cards.length === 1
     ? "This will delete the 1 card saved in this browser."
     : `This will delete all ${cards.length} cards saved in this browser.`;
-  closeDictionaryMenu();
+  closeDeckMenu();
   showScreen("clear");
 }
 
-function clearDictionary() {
+function clearDeck() {
   try {
     localStorage.removeItem(STORAGE_KEY);
   } catch {
-    window.alert("The saved dictionary could not be deleted from this browser.");
+    window.alert("The saved deck could not be deleted from this browser.");
     return;
   }
   cards = [];
@@ -1345,81 +1354,81 @@ function clearDictionary() {
 }
 
 addButton.addEventListener("click", () => {
-  renderDictionaryList();
-  showScreen("dictionary");
+  renderDeckList();
+  showScreen("deck");
 });
-dictionaryToolsButton.addEventListener("click", (event) => {
+deckToolsButton.addEventListener("click", (event) => {
   if (event.detail === 0 || lastPointerType !== "mouse" || window.matchMedia("(hover: none)").matches) {
-    if (dictionaryTools.classList.contains("is-open")) closeDictionaryMenu();
-    else openDictionaryMenu();
+    if (deckTools.classList.contains("is-open")) closeDeckMenu();
+    else openDeckMenu();
   }
 });
-dictionaryTools.addEventListener("pointerenter", (event) => {
-  if (event.pointerType === "mouse") openDictionaryMenu();
+deckTools.addEventListener("pointerenter", (event) => {
+  if (event.pointerType === "mouse") openDeckMenu();
 });
-dictionaryTools.addEventListener("pointerleave", (event) => {
-  if (event.pointerType === "mouse") closeDictionaryMenu();
+deckTools.addEventListener("pointerleave", (event) => {
+  if (event.pointerType === "mouse") closeDeckMenu();
 });
-dictionaryTools.addEventListener("focusin", () => {
-  if (keyboardNavigation) openDictionaryMenu();
+deckTools.addEventListener("focusin", () => {
+  if (keyboardNavigation) openDeckMenu();
 });
-dictionaryTools.addEventListener("focusout", (event) => {
-  if (!dictionaryTools.contains(event.relatedTarget)) closeDictionaryMenu();
+deckTools.addEventListener("focusout", (event) => {
+  if (!deckTools.contains(event.relatedTarget)) closeDeckMenu();
 });
 document.addEventListener("keydown", (event) => {
   if (event.key === "Tab") keyboardNavigation = true;
 });
 document.addEventListener("pointerdown", (event) => {
   keyboardNavigation = false;
-  if (!dictionaryTools.contains(event.target)) closeDictionaryMenu();
+  if (!deckTools.contains(event.target)) closeDeckMenu();
 });
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && dictionaryTools.classList.contains("is-open")) {
-    closeDictionaryMenu();
+  if (event.key === "Escape" && deckTools.classList.contains("is-open")) {
+    closeDeckMenu();
     keyboardNavigation = false;
-    dictionaryToolsButton.focus();
+    deckToolsButton.focus();
   }
 });
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !screens.defaultConfirm.hidden && !defaultDictionaryLoadInProgress) {
-    cancelDefaultDictionaryLoad();
+  if (event.key === "Escape" && !screens.defaultConfirm.hidden && !defaultDeckLoadInProgress) {
+    cancelDefaultDeckLoad();
   }
 });
-document.querySelector("#export-action").addEventListener("click", exportDictionary);
+document.querySelector("#export-action").addEventListener("click", exportDeck);
 document.querySelector("#settings-button").addEventListener("click", openSettings);
 window.addEventListener("japanese-cards:show-settings", openSettings);
 document.querySelectorAll("[data-go-settings]").forEach(button => button.addEventListener("click", openSettings));
 document.querySelector("#about-button").addEventListener("click", () => showScreen("about"));
-document.querySelector("#export-form").addEventListener("submit", saveDictionaryExport);
+document.querySelector("#export-form").addEventListener("submit", saveDeckExport);
 document.querySelector("#cancel-export").addEventListener("click", () => { if (!exportInProgress) showScreen("home"); });
-document.querySelector("#import-action").addEventListener("click", openDefaultDictionaries);
-document.querySelector("#clear-action").addEventListener("click", confirmClearDictionary);
-document.querySelector("#confirm-clear").addEventListener("click", clearDictionary);
-cancelDefaultDictionaryLoadButton.addEventListener("click", cancelDefaultDictionaryLoad);
-confirmDefaultDictionaryLoadButton.addEventListener("click", loadDefaultDictionary);
-importFile.addEventListener("change", () => importDictionary(importFile.files?.[0]));
+document.querySelector("#import-action").addEventListener("click", openDefaultDecks);
+document.querySelector("#clear-action").addEventListener("click", confirmClearDeck);
+document.querySelector("#confirm-clear").addEventListener("click", clearDeck);
+cancelDefaultDeckLoadButton.addEventListener("click", cancelDefaultDeckLoad);
+confirmDefaultDeckLoadButton.addEventListener("click", loadDefaultDeck);
+importFile.addEventListener("change", () => importDeck(importFile.files?.[0]));
 backToLearningButton.addEventListener("click", cancelCardForm);
 
 wordList.addEventListener("input", (event) => {
   if (!(event.target instanceof HTMLInputElement)) return;
-  if (event.target.matches(".dictionary-entry-example-hiragana")) {
+  if (event.target.matches(".deck-entry-example-hiragana")) {
     event.target.dataset.manuallyEdited = "true";
     return;
   }
-  if (event.target.matches(".dictionary-entry-example-romaji")) {
-    const hiragana = event.target.closest(".dictionary-entry-meaning-group")?.querySelector(".dictionary-entry-example-hiragana");
+  if (event.target.matches(".deck-entry-example-romaji")) {
+    const hiragana = event.target.closest(".deck-entry-meaning-group")?.querySelector(".deck-entry-example-hiragana");
     if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
       hiragana.value = romajiToHiragana(event.target.value.trim());
       hiragana.dataset.manuallyEdited = "false";
     }
     return;
   }
-  if (event.target.matches(".dictionary-entry-hiragana")) {
+  if (event.target.matches(".deck-entry-hiragana")) {
     event.target.dataset.manuallyEdited = "true";
     return;
   }
-  if (!event.target.matches(".dictionary-entry-japanese")) return;
-  const hiragana = event.target.closest(".dictionary-entry-row")?.querySelector(".dictionary-entry-hiragana");
+  if (!event.target.matches(".deck-entry-japanese")) return;
+  const hiragana = event.target.closest(".deck-entry-row")?.querySelector(".deck-entry-hiragana");
   if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
     hiragana.value = romajiToHiragana(event.target.value.trim());
     hiragana.dataset.manuallyEdited = "false";
@@ -1428,40 +1437,40 @@ wordList.addEventListener("input", (event) => {
 
 wordList.addEventListener("focusin", (event) => {
   if (!(event.target instanceof HTMLInputElement)) return;
-  const row = event.target.closest(".dictionary-entry-row");
-  const group = event.target.closest(".dictionary-entry-meaning-group");
-  if (row && group) showDictionaryMeaningHints(row, group);
+  const row = event.target.closest(".deck-entry-row");
+  const group = event.target.closest(".deck-entry-meaning-group");
+  if (row && group) showDeckMeaningHints(row, group);
 });
 
 wordList.addEventListener("keydown", (event) => {
   if (!(event.target instanceof HTMLInputElement)) return;
-  const row = event.target.closest(".dictionary-entry-row");
+  const row = event.target.closest(".deck-entry-row");
   if (!row) return;
-  const isJapaneseField = event.target.matches(".dictionary-entry-japanese");
-  const isMeaningField = event.target.matches(".dictionary-entry-meaning");
-  const isExampleRomajiField = event.target.matches(".dictionary-entry-example-romaji");
-  const isExampleEndField = event.target.matches(".dictionary-entry-example-english");
+  const isJapaneseField = event.target.matches(".deck-entry-japanese");
+  const isMeaningField = event.target.matches(".deck-entry-meaning");
+  const isExampleRomajiField = event.target.matches(".deck-entry-example-romaji");
+  const isExampleEndField = event.target.matches(".deck-entry-example-english");
   if (!isJapaneseField && !isMeaningField && !isExampleRomajiField && !isExampleEndField) return;
-  const meaningInputs = [...row.querySelectorAll(".dictionary-entry-meaning")];
-  const meaningIndex = meaningInputs.indexOf(event.target.closest(".dictionary-entry-meaning-group")?.querySelector(".dictionary-entry-meaning"));
+  const meaningInputs = [...row.querySelectorAll(".deck-entry-meaning")];
+  const meaningIndex = meaningInputs.indexOf(event.target.closest(".deck-entry-meaning-group")?.querySelector(".deck-entry-meaning"));
   const isLastGroup = meaningIndex === meaningInputs.length - 1;
   if (event.key === "Tab" && !event.shiftKey && isJapaneseField) {
     event.preventDefault();
     meaningInputs[0]?.focus();
   } else if (event.key === "Tab" && !event.shiftKey && isExampleRomajiField) {
     event.preventDefault();
-    event.target.closest(".dictionary-entry-meaning-group")?.querySelector(".dictionary-entry-example-english")?.focus();
+    event.target.closest(".deck-entry-meaning-group")?.querySelector(".deck-entry-example-english")?.focus();
   } else if (event.key === "Tab" && !event.shiftKey && isExampleEndField && isLastGroup) {
     event.preventDefault();
-    const nextGroup = createDictionaryMeaningInput();
-    row.querySelector(".dictionary-entry-meanings").append(nextGroup);
-    nextGroup.querySelector(".dictionary-entry-meaning").focus();
+    const nextGroup = createDeckMeaningInput();
+    row.querySelector(".deck-entry-meanings").append(nextGroup);
+    nextGroup.querySelector(".deck-entry-meaning").focus();
   } else if (event.key === "Enter" && isExampleEndField && isLastGroup) {
     event.preventDefault();
-    addDictionaryEntry();
+    addDeckEntry();
   } else if (event.key === "Enter" && (isMeaningField || isExampleEndField)) {
     event.preventDefault();
-    addDictionaryEntry();
+    addDeckEntry();
   }
 });
 
@@ -1512,8 +1521,8 @@ cardForm.addEventListener("submit", (event) => {
   const editedIndex = editingCardIndex;
   editingCardIndex = null;
   showScreen(returnScreen);
-  if (returnScreen === "dictionary") {
-    renderDictionaryList(editedIndex);
+  if (returnScreen === "deck") {
+    renderDeckList(editedIndex);
     wordList.children[editedIndex]?.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }
 });
@@ -1586,5 +1595,5 @@ document.querySelectorAll("[data-go-home]").forEach((button) => button.addEventL
 document.querySelector("#add-back-button").addEventListener("click", cancelCardForm);
 cancelEditButton.addEventListener("click", cancelCardForm);
 
-updateDictionaryCount();
+updateDeckCount();
 void restoreContextMeaningsForSavedCards();

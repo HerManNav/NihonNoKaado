@@ -1,4 +1,4 @@
-const CACHE_NAME = "japanese-cards-pwa-v50";
+const CACHE_NAME = "japanese-cards-pwa-v51";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -9,13 +9,13 @@ const APP_FILES = [
   "../styles.css",
   "../app.js",
   "../export-storage.js",
-  "../dictionary-core.js",
+  "../deck-core.js",
   "../word-form-lookup.js",
   "../language.js",
-  "../dictionaries/manifest.json",
-  "../dictionaries/most-common-50.json",
-  "../dictionaries/most-common-50-es.json",
-  "../dictionaries/most-common-100.json",
+  "../decks/manifest.json",
+  "../decks/most-common-50.json",
+  "../decks/most-common-50-es.json",
+  "../decks/most-common-100.json",
 ];
 
 self.addEventListener("install", (event) => {

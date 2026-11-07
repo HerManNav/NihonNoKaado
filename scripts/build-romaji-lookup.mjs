@@ -6,10 +6,10 @@ import { generateInflections } from "./japanese-inflections.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const projectDirectory = path.resolve(scriptDirectory, "..");
-const sourceFile = process.argv[2] || path.join(projectDirectory, "dictionaries", "source-data", "jmdict-eng-3.6.2+20261102210542.json.tgz");
-const outputFile = process.argv[3] || path.join(projectDirectory, "dictionaries", "romaji-english-jmdict-2026-11-02.json.gz");
-const frequencyFile = path.join(projectDirectory, "dictionaries", "source-data", "ja_full-OpenSubtitles2018.txt");
-const learnerIndexFile = path.join(projectDirectory, "dictionaries", "source-data", "tkg-entries-index-32c267cb.json");
+const sourceFile = process.argv[2] || path.join(projectDirectory, "decks", "source-data", "jmdict-eng-3.6.2+20261102210542.json.tgz");
+const outputFile = process.argv[3] || path.join(projectDirectory, "decks", "romaji-english-jmdict-2026-11-02.json.gz");
+const frequencyFile = path.join(projectDirectory, "decks", "source-data", "ja_full-OpenSubtitles2018.txt");
+const learnerIndexFile = path.join(projectDirectory, "decks", "source-data", "tkg-entries-index-32c267cb.json");
 
 const kanaToRomaji = {
   きゃ: "kya", きゅ: "kyu", きょ: "kyo", ぎゃ: "gya", ぎゅ: "gyu", ぎょ: "gyo",
@@ -78,7 +78,7 @@ async function readJmdict(filePath) {
     if (name.endsWith(".json")) return JSON.parse(archive.toString("utf8", dataOffset, dataOffset + size));
     offset = dataOffset + Math.ceil(size / 512) * 512;
   }
-  throw new Error(`No JSON dictionary found in ${filePath}`);
+  throw new Error(`No JSON deck found in ${filePath}`);
 }
 
 function frequencyRank(tags) {
@@ -247,7 +247,7 @@ for (const lemma of ["ii", "aru", "gozaru", "da", "desu"]) {
 const payload = JSON.stringify({
   source: "JMdict (EDRDG), distributed as jmdict-simplified 3.6.2",
   frequencySource: "FrequencyWords Japanese OpenSubtitles 2018",
-  learnerTierSource: "TKG Japanese-English Learner's Dictionary basic/core tiers (commit 32c267cbfa7756a2e3542657772759d92d4e2420)",
+  learnerTierSource: "TKG Japanese-English Learner's Deck basic/core tiers (commit 32c267cbfa7756a2e3542657772759d92d4e2420)",
   dictDate: source.dictDate,
   format: 5,
   lookup,

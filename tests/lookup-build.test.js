@@ -8,10 +8,10 @@ const { execFileSync } = require("node:child_process");
 const { gunzipSync } = require("node:zlib");
 
 const root = path.join(__dirname, "..");
-const source = path.join(root, "dictionaries/source-data/jmdict-eng-3.6.2+20261102210542.json.tgz");
-const frequency = path.join(root, "dictionaries/source-data/ja_full-OpenSubtitles2018.txt");
-const learnerIndex = path.join(root, "dictionaries/source-data/tkg-entries-index-32c267cb.json");
-const published = path.join(root, "dictionaries/romaji-english-jmdict-2026-11-02.json.gz");
+const source = path.join(root, "decks/source-data/jmdict-eng-3.6.2+20261102210542.json.tgz");
+const frequency = path.join(root, "decks/source-data/ja_full-OpenSubtitles2018.txt");
+const learnerIndex = path.join(root, "decks/source-data/tkg-entries-index-32c267cb.json");
+const published = path.join(root, "decks/romaji-english-jmdict-2026-11-02.json.gz");
 const builder = path.join(root, "scripts/build-romaji-lookup.mjs");
 const sha256 = (data) => createHash("sha256").update(data).digest("hex");
 

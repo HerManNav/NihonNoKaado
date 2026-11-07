@@ -21,10 +21,10 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-@CapacitorPlugin(name = "DictionaryExport", permissions = {
+@CapacitorPlugin(name = "DeckExport", permissions = {
     @Permission(alias = "storage", strings = { Manifest.permission.WRITE_EXTERNAL_STORAGE })
 })
-public class DictionaryExportPlugin extends Plugin {
+public class DeckExportPlugin extends Plugin {
     @Override
     public void load() {
         // Forget the previous directory selection and release its retained access.
@@ -41,10 +41,10 @@ public class DictionaryExportPlugin extends Plugin {
 
     @PluginMethod
     public void save(PluginCall call) {
-        String filename = call.getString("filename", "dictionary.json");
+        String filename = call.getString("filename", "deck.json");
         String contents = call.getString("contents");
         if (contents == null || !filename.endsWith(".json") || filename.contains("/") || filename.contains("\\")) {
-            call.reject("Invalid dictionary export.");
+            call.reject("Invalid deck export.");
             return;
         }
         if (Build.VERSION.SDK_INT < 29 && getPermissionState("storage") != PermissionState.GRANTED) {
@@ -57,7 +57,7 @@ public class DictionaryExportPlugin extends Plugin {
     @PermissionCallback
     private void storageGranted(PluginCall call) {
         if (getPermissionState("storage") == PermissionState.GRANTED) save(call);
-        else call.reject("Allow storage access to save the dictionary in Downloads.");
+        else call.reject("Allow storage access to save the deck in Downloads.");
     }
 
     private void writeDownloads(PluginCall call, String filename, String contents) {

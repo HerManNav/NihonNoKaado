@@ -4,8 +4,8 @@ const { readFileSync } = require("node:fs");
 const { gunzipSync } = require("node:zlib");
 const path = require("node:path");
 
-const sourceDirectory = path.join(__dirname, "../dictionaries/source-data");
-const dictionaryDirectory = path.join(__dirname, "../dictionaries");
+const sourceDirectory = path.join(__dirname, "../decks/source-data");
+const deckDirectory = path.join(__dirname, "../decks");
 const commit = "32c267cb";
 const entries = new Map();
 const indexEntries = new Map(JSON.parse(readFileSync(path.join(sourceDirectory,
@@ -30,7 +30,7 @@ test("contextual annotations cite preserved TKG entries and real definition numb
   let numbered = 0;
   const errors = [];
   for (const size of [50, 100, 500, 1000, 2000]) {
-    const deck = JSON.parse(readFileSync(path.join(dictionaryDirectory, `most-common-${size}.json`), "utf8"));
+    const deck = JSON.parse(readFileSync(path.join(deckDirectory, `most-common-${size}.json`), "utf8"));
     for (const [cardIndex, card] of deck.cards.entries()) {
       for (const example of card.examples || []) {
         for (const [tokenIndex, annotation] of (example.wordMeanings || []).entries()) {

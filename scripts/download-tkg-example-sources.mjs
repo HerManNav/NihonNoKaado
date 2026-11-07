@@ -11,7 +11,7 @@ const COMMIT = "32c267cbfa7756a2e3542657772759d92d4e2420";
 const SHORT_COMMIT = COMMIT.slice(0, 8);
 const CHUNK_SIZE = 100;
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SOURCE_DIRECTORY = path.join(ROOT, "dictionaries", "source-data");
+const SOURCE_DIRECTORY = path.join(ROOT, "decks", "source-data");
 const INDEX_PATH = path.join(SOURCE_DIRECTORY, `tkg-entries-index-${SHORT_COMMIT}.json`);
 const BASE_URL = `https://raw.githubusercontent.com/tkgally/je-dict-1/${COMMIT}/`;
 const SIZES = [50, 100, 500, 1000, 2000];
@@ -42,8 +42,8 @@ for (const entry of index.entries || []) {
 }
 const cards = [];
 for (const size of SIZES) {
-  const dictionary = JSON.parse(await readFile(path.join(ROOT, "dictionaries", `most-common-${size}.json`), "utf8"));
-  for (const card of dictionary.cards || []) cards.push({ size, card });
+  const deck = JSON.parse(await readFile(path.join(ROOT, "decks", `most-common-${size}.json`), "utf8"));
+  for (const card of deck.cards || []) cards.push({ size, card });
 }
 const requested = new Map();
 const missingReadings = [];

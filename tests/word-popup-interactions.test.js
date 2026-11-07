@@ -7,7 +7,7 @@ const { gunzipSync } = require("node:zlib");
 
 const ROOT = path.resolve(__dirname, "..");
 const appSource = fs.readFileSync(path.join(ROOT, "app.js"), "utf8");
-const core = require("../dictionary-core.js");
+const core = require("../deck-core.js");
 
 class TextNode {
   constructor(text) { this.nodeType = 3; this.textContent = text; this.parentElement = null; }
@@ -108,7 +108,7 @@ function pointer(target, pointerType, x, y) {
   };
 }
 
-function makeSession({ realLookup = false, fetchLookup = false, savedCards = null, contextDictionary = null } = {}) {
+function makeSession({ realLookup = false, fetchLookup = false, savedCards = null, legacySavedCards = null, contextDeck = null } = {}) {
   const document = new Document();
   const flashcard = document.querySelector("#flashcard");
   const prompt = document.querySelector("#prompt-word");
@@ -125,25 +125,27 @@ function makeSession({ realLookup = false, fetchLookup = false, savedCards = nul
     addEventListener() {},
   };
   const persistedValues = new Map();
-  if (savedCards) persistedValues.set("japanese-cards.dictionary.v1", JSON.stringify(savedCards));
+  if (savedCards) persistedValues.set("japanese-cards.deck.v1", JSON.stringify(savedCards));
+  if (legacySavedCards) persistedValues.set("japanese-cards.dictionary.v1", JSON.stringify(legacySavedCards));
   const context = vm.createContext({
     document, window, Element, Set, Node: { TEXT_NODE: 3 }, HTMLInputElement: Element,
     localStorage: {
       getItem: (key) => persistedValues.get(key) ?? null,
       setItem: (key, value) => persistedValues.set(key, value),
+      removeItem: (key) => persistedValues.delete(key),
     }, console,
     Blob, Response, DecompressionStream,
     fetch: fetchLookup ? async (url) => {
       assert.match(url, /romaji-english-jmdict-2026-11-02\.json\.gz\?v=6$/);
-      return new Response(fs.readFileSync(path.join(ROOT, "dictionaries/romaji-english-jmdict-2026-11-02.json.gz")));
-    } : contextDictionary ? async (url) => {
-      assert.equal(url, "dictionaries/most-common-2000.json");
-      return { ok: true, json: async () => contextDictionary };
+      return new Response(fs.readFileSync(path.join(ROOT, "decks/romaji-english-jmdict-2026-11-02.json.gz")));
+    } : contextDeck ? async (url) => {
+      assert.equal(url, "decks/most-common-2000.json");
+      return { ok: true, json: async () => contextDeck };
     } : undefined,
   });
   vm.runInContext(appSource, context, { filename: "app.js" });
   context.lookupData = fetchLookup ? null : realLookup
-    ? JSON.parse(gunzipSync(fs.readFileSync(path.join(ROOT, "dictionaries/romaji-english-jmdict-2026-11-02.json.gz"))))
+    ? JSON.parse(gunzipSync(fs.readFileSync(path.join(ROOT, "decks/romaji-english-jmdict-2026-11-02.json.gz"))))
     : { format: 5 };
   vm.runInContext("romajiLookup = lookupData; practiceTarget = 1; practiceIndex = 0; answerRevealed = true", context);
   const card = {
@@ -157,21 +159,28 @@ function makeSession({ realLookup = false, fetchLookup = false, savedCards = nul
 
 async function settlePopup() { await Promise.resolve(); await Promise.resolve(); }
 
+test("saved dictionaries migrate to the deck storage key without losing cards", () => {
+  const { context, persistedValues } = makeSession({ legacySavedCards: [{ japanese: "neko", english: "cat" }] });
+  assert.equal(vm.runInContext("cards[0].japanese", context), "neko");
+  assert.equal(JSON.parse(persistedValues.get("japanese-cards.deck.v1"))[0].japanese, "neko");
+  assert.equal(persistedValues.has("japanese-cards.dictionary.v1"), false);
+});
+
 test("system back follows the active screen and cancels confirmations and forms", () => {
   const { context, window } = makeSession();
   const back = () => window.JapaneseCardsHandleBack();
   vm.runInContext('showScreen("defaults")', context);
   assert.equal(back(), true);
   assert.equal(vm.runInContext('screens.home.hidden', context), false);
-  vm.runInContext('showScreen("defaultConfirm"); defaultDictionaryLoadInProgress = true', context);
+  vm.runInContext('showScreen("defaultConfirm"); defaultDeckLoadInProgress = true', context);
   assert.equal(back(), true);
   assert.equal(vm.runInContext('screens.defaultConfirm.hidden', context), false);
-  vm.runInContext('defaultDictionaryLoadInProgress = false', context);
+  vm.runInContext('defaultDeckLoadInProgress = false', context);
   assert.equal(back(), true);
   assert.equal(vm.runInContext('screens.defaults.hidden', context), false);
-  vm.runInContext('formReturnScreen = "dictionary"; showScreen("add")', context);
+  vm.runInContext('formReturnScreen = "deck"; showScreen("add")', context);
   assert.equal(back(), true);
-  assert.equal(vm.runInContext('screens.dictionary.hidden', context), false);
+  assert.equal(vm.runInContext('screens.deck.hidden', context), false);
   assert.equal(back(), true);
   assert.equal(vm.runInContext('screens.home.hidden', context), false);
   assert.equal(back(), false);
@@ -222,7 +231,7 @@ test("annotated example words show one context meaning without loading the globa
     { romaji: "shita", meaning: "did" },
   ];
   vm.runInContext("romajiLookup = null; renderPracticeCard()", context);
-  context.fetch = () => { throw new Error("The annotated popup should not fetch the global dictionary"); };
+  context.fetch = () => { throw new Error("The annotated popup should not fetch the global deck"); };
   const tokens = answer.children[0].children[1].children[0].children;
   flashcard.emit("pointerover", pointer(tokens[0], "mouse", 120, 190));
   await settlePopup();
@@ -263,7 +272,7 @@ test("a stale annotation falls back to the ordinary lookup", async () => {
   assert.equal(popup.textContent, "benkyou:none");
 });
 
-test("context meanings survive a saved dictionary reload", () => {
+test("context meanings survive a saved deck reload", () => {
   const wordMeanings = [
     { romaji: "benkyou", meaning: "study", entryId: "00527_benkyousuru" },
     { romaji: "shita", meaning: "did" },
@@ -276,21 +285,21 @@ test("context meanings survive a saved dictionary reload", () => {
   assert.deepEqual(JSON.parse(JSON.stringify(vm.runInContext("cards[0].examples[0].wordMeanings", context))), wordMeanings);
 });
 
-test("legacy saved examples restore contextual meanings from the default dictionary", async () => {
+test("legacy saved examples restore contextual meanings from the default deck", async () => {
   const wordMeanings = [
     { romaji: "benkyou", meaning: "study", entryId: "00527_benkyousuru" },
     { romaji: "shita", meaning: "did" },
   ];
   const example = { romaji: "benkyou shita.", hiragana: "べんきょうした。", english: "I studied." };
   const savedCards = [{ japanese: "shita", hiragana: "した", english: "did", examples: [example] }];
-  const contextDictionary = {
+  const contextDeck = {
     cards: [{ japanese: "shita", hiragana: "した", english: "did", examples: [{ ...example, wordMeanings }] }],
   };
-  const { context, persistedValues } = makeSession({ savedCards, contextDictionary });
+  const { context, persistedValues } = makeSession({ savedCards, contextDeck });
   await vm.runInContext("restoreContextMeaningsForSavedCards()", context);
 
   const restored = JSON.parse(JSON.stringify(vm.runInContext("cards[0].examples[0].wordMeanings", context)));
-  const savedAgain = JSON.parse(persistedValues.get("japanese-cards.dictionary.v1"));
+  const savedAgain = JSON.parse(persistedValues.get("japanese-cards.deck.v1"));
   assert.deepEqual(restored, wordMeanings);
   assert.deepEqual(savedAgain[0].examples[0].wordMeanings, wordMeanings);
 });
@@ -298,7 +307,7 @@ test("legacy saved examples restore contextual meanings from the default diction
 test("a revealed single-meaning headword shows its card meaning on one line", async () => {
   const { context, flashcard, prompt, popup } = makeSession();
   vm.runInContext("romajiLookup = null", context);
-  context.fetch = () => { throw new Error("A single-meaning headword should not fetch the global dictionary"); };
+  context.fetch = () => { throw new Error("A single-meaning headword should not fetch the global deck"); };
   const token = prompt.children[0].children[0];
   flashcard.emit("pointerover", pointer(token, "mouse", 120, 190));
   await settlePopup();

@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const { readFileSync, statSync } = require("node:fs");
 const path = require("node:path");
 
-const dictionaryDirectory = path.join(__dirname, "../dictionaries");
+const deckDirectory = path.join(__dirname, "../decks");
 const specs = [
   { size: 50, visibleTokens: 212 },
   { size: 100, visibleTokens: 453 },
@@ -14,7 +14,7 @@ const specs = [
 // Keep this identical to the romaji token splitter in app.js. Punctuation and
 // whitespace are not popup targets; apostrophes within a word are retained.
 const visibleTokens = (romaji) => String(romaji || "").match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) || [];
-const files = new Map(specs.map(({ size }) => [size, path.join(dictionaryDirectory, `most-common-${size}.json`)]));
+const files = new Map(specs.map(({ size }) => [size, path.join(deckDirectory, `most-common-${size}.json`)]));
 const decks = new Map([...files].map(([size, file]) => [size, JSON.parse(readFileSync(file, "utf8"))]));
 const exampleKey = (example) => [example.romaji, example.hiragana, example.english].join("\0");
 
@@ -99,7 +99,7 @@ test("reused examples have identical contextual annotations across all decks", (
   assert.equal(uniqueSentences.size, 1992, "Review changed unique example count across all five decks");
 });
 
-test("every annotated default dictionary stays below the 25 MB per-file limit", () => {
+test("every annotated default deck stays below the 25 MB per-file limit", () => {
   for (const [size, file] of files) {
     assert(statSync(file).size < 25_000_000, `${size}-word deck exceeds 25 MB`);
   }

@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const deck = require('../dictionaries/most-common-2000.json');
+const deck = require('../decks/most-common-2000.json');
 const examples = deck.cards.flatMap(card => card.examples);
 
 for (const word of ['benkyousuru', 'sankasuru', 'sankashita', 'tourokushita']) {

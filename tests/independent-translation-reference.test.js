@@ -5,15 +5,15 @@ const { gunzipSync } = require("node:zlib");
 const path = require("node:path");
 const { findWordMeanings } = require("../word-form-lookup.js");
 
-const dictionary = JSON.parse(gunzipSync(readFileSync(path.join(
-  __dirname, "../dictionaries/romaji-english-jmdict-2026-11-02.json.gz",
+const deck = JSON.parse(gunzipSync(readFileSync(path.join(
+  __dirname, "../decks/romaji-english-jmdict-2026-11-02.json.gz",
 ))));
 
 // These expectations were transcribed from the linked TKG entries, Japanese
 // Audio Lessons, Amherst's conjugation guide, and Umeda's linguistic study.
 // None is copied from this app's JMdict source, generated lookup, or output.
 // TKG is independent of the JMdict lookup pipeline, though it is an AI-assisted
-// learner dictionary; agreement is a cross-check, not proof of perfect accuracy.
+// learner deck; agreement is a cross-check, not proof of perfect accuracy.
 const tkg = (bucket, entry) => `https://www.tkgje.jp/entries/${bucket}/${entry}.html`;
 const referenceWords = [
   ["raishuu", "来週", /next week/i, "popup",
@@ -42,7 +42,7 @@ const referenceWords = [
 for (const [romaji, spelling, concept, scope, source] of referenceWords) {
   test(`external lexical reference: ${spelling} (${romaji}) in ${scope}`, () => {
     assert.match(source, /^https:\/\//);
-    const meanings = scope === "popup" ? findWordMeanings(romaji, dictionary) : dictionary.lookup[romaji];
+    const meanings = scope === "popup" ? findWordMeanings(romaji, deck) : deck.lookup[romaji];
     assert(Array.isArray(meanings), `No lookup for ${romaji}; reference: ${source}`);
     assert(meanings.some((meaning) => concept.test(meaning)),
       `${spelling} (${romaji}) should express ${concept}; got ${JSON.stringify(meanings)}; reference: ${source}`);
@@ -82,7 +82,7 @@ const referenceForms = [
 for (const [form, lemma, label, concept, source] of referenceForms) {
   test(`external form reference: ${form} → ${lemma} (${label})`, () => {
     assert.match(source, /^https:\/\//);
-    const meanings = findWordMeanings(form, dictionary);
+    const meanings = findWordMeanings(form, deck);
     const prefix = `${label} of ${lemma} — `;
     assert(meanings.some((meaning) => meaning.startsWith(prefix) && concept.test(meaning.slice(prefix.length))),
       `${form} should include ${prefix}${concept}; got ${JSON.stringify(meanings)}; reference: ${source}`);
@@ -99,7 +99,7 @@ const honorificForms = [
 const honorificSource = "https://wtawa.people.amherst.edu/jvrules/index.php?form=stemmasu";
 for (const [form, lemma] of honorificForms) {
   test(`Amherst honorific ます reference: ${form} → ${lemma}`, () => {
-    const meanings = findWordMeanings(form, dictionary);
+    const meanings = findWordMeanings(form, deck);
     assert(meanings.some((meaning) => meaning.startsWith(`polite form of ${lemma} — `)),
       `${form} should identify ${lemma}; got ${JSON.stringify(meanings)}; reference: ${honorificSource}`);
   });
@@ -116,7 +116,7 @@ const invalidForms = [
 ];
 for (const [form, invalidReading, source] of invalidForms) {
   test(`external negative reference: ${form} is not ${invalidReading}`, () => {
-    const meanings = findWordMeanings(form, dictionary);
+    const meanings = findWordMeanings(form, deck);
     assert(!meanings.some((meaning) => invalidReading.test(meaning)),
       `${form} was overgenerated: ${JSON.stringify(meanings)}; reference: ${source}`);
   });
@@ -124,8 +124,8 @@ for (const [form, invalidReading, source] of invalidForms) {
 
 test("independent references keep common forms ahead of accidental noun-copula parses", () => {
   const source = tkg("00500", "00669_shinu");
-  assert.match(findWordMeanings("shinde", dictionary)[0], /^te-form of shinu — to die/i, source);
-  assert.match(findWordMeanings("shinda", dictionary)[0], /^past form of shinu — to die/i, source);
-  assert.match(findWordMeanings("raishuu", dictionary)[0], /^next week$/i,
+  assert.match(findWordMeanings("shinde", deck)[0], /^te-form of shinu — to die/i, source);
+  assert.match(findWordMeanings("shinda", deck)[0], /^past form of shinu — to die/i, source);
+  assert.match(findWordMeanings("raishuu", deck)[0], /^next week$/i,
     tkg("00500", "00746_raishuu"));
 });

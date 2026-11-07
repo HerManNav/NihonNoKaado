@@ -1,6 +1,6 @@
 # Android PWA entry point
 
-This directory adds an installable Android-friendly PWA entry point without changing the existing web app. The wrapper loads `../index.html` in a full-screen same-origin frame, so it reuses the current app's HTML, JavaScript, CSS, and browser dictionary storage.
+This directory adds an installable Android-friendly PWA entry point without changing the existing web app. The wrapper loads `../index.html` in a full-screen same-origin frame, so it reuses the current app's HTML, JavaScript, CSS, and browser deck storage.
 
 ## Serve it
 
@@ -10,6 +10,6 @@ The service worker caches the PWA shell and shared web app files for offline sta
 
 ## Data
 
-The web app and PWA use the same origin and the same browser dictionary key. This keeps the experience aligned within that browser profile. Local storage does not synchronize between different devices; use the web app's JSON export/import to transfer a dictionary.
+The web app and PWA use the same origin and the same browser deck key. This keeps the experience aligned within that browser profile. Local storage does not synchronize between different devices; use the web app's JSON export/import to transfer a deck.
 
 To list this PWA in Google Play later, package its hosted URL as a Trusted Web Activity and set up Digital Asset Links for the domain.

@@ -12,10 +12,10 @@ function declarationsFor(selector) {
   return rule[1];
 }
 
-test("dictionary menu hover bridge stays behind clickable options", () => {
-  const beforeBridge = declarationsFor(".dictionary-action-menu::before");
-  const afterBridge = declarationsFor(".dictionary-action-menu::after");
-  const actionButton = declarationsFor(".dictionary-action");
+test("deck menu hover bridge stays behind clickable options", () => {
+  const beforeBridge = declarationsFor(".deck-action-menu::before");
+  const afterBridge = declarationsFor(".deck-action-menu::after");
+  const actionButton = declarationsFor(".deck-action");
 
   assert.match(beforeBridge, /z-index:\s*0/);
   assert.match(afterBridge, /z-index:\s*0/);
@@ -23,9 +23,9 @@ test("dictionary menu hover bridge stays behind clickable options", () => {
   assert.match(actionButton, /z-index:\s*1/);
 });
 
-test("dictionary options accept pointer input while the menu is open on hover", () => {
-  const openMenu = declarationsFor(".dictionary-tools.is-open .dictionary-action-menu");
-  const hoverStyle = declarationsFor(".dictionary-action:hover, .dictionary-action:focus-visible");
+test("deck options accept pointer input while the menu is open on hover", () => {
+  const openMenu = declarationsFor(".deck-tools.is-open .deck-action-menu");
+  const hoverStyle = declarationsFor(".deck-action:hover, .deck-action:focus-visible");
 
   assert.match(openMenu, /pointer-events:\s*auto/);
   assert.match(openMenu, /visibility:\s*visible/);

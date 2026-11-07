@@ -75,24 +75,24 @@ h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; line-height: 1.
 .primary-button:active { transform: translateY(1px); }
 .home-content .primary-button { width: 100%; margin-top: 14px; }
 .subtle-text { color: #85867e; font-size: 13px; margin: 16px 0 0; }
-#dictionary-count.is-empty-prompt { color: #b43d36; animation: empty-dictionary-blink 650ms ease-in-out 3 both; }
-@keyframes empty-dictionary-blink { 0%, 100% { color: #b43d36; opacity: 1; } 50% { color: #b43d36; opacity: .2; } }
-.dictionary-actions { position: fixed; z-index: 5; right: 28px; bottom: 28px; display: flex; align-items: flex-end; gap: 10px; }
+#deck-count.is-empty-prompt { color: #b43d36; animation: empty-deck-blink 650ms ease-in-out 3 both; }
+@keyframes empty-deck-blink { 0%, 100% { color: #b43d36; opacity: 1; } 50% { color: #b43d36; opacity: .2; } }
+.deck-actions { position: fixed; z-index: 5; right: 28px; bottom: 28px; display: flex; align-items: flex-end; gap: 10px; }
 .add-button { width: 58px; height: 58px; border: 0; border-radius: 50%; color: #fff; background: #30392f; font-size: 34px; font-weight: 300; line-height: 1; box-shadow: 0 6px 18px #20211f26; }
 html:not(.native-app) .add-button { position: relative; padding: 0; font-size: 0; }
 html:not(.native-app) .add-button::before { content: ""; position: absolute; inset: 0; margin: auto; width: 24px; height: 24px; background: linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat, linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat; }
 .add-button:hover { background: #414b3f; }
-.dictionary-tools { position: relative; }
-.dictionary-tools-button { display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid #deded5; border-radius: 50%; background: #fff; color: #30392f; box-shadow: 0 6px 18px #20211f18; }
-.dictionary-tools-button:hover { background: #f0f1eb; border-color: #c8c9bd; }
-.dictionary-tools-button:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
-.dictionary-tools-button svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
-.dictionary-action-menu { position: absolute; right: 0; bottom: calc(100% + 12px); display: flex; flex-direction: column; align-items: flex-end; gap: 9px; opacity: 0; pointer-events: none; transform: translateY(8px) scale(.98); transform-origin: bottom right; transition: opacity .16s ease, transform .16s ease; visibility: hidden; }
-.dictionary-action-menu::before { content: ""; position: absolute; z-index: 0; inset: -16px -20px; }
-.dictionary-action-menu::after { content: ""; position: absolute; z-index: 0; top: 100%; left: 0; right: 0; height: 12px; }
-.dictionary-tools.is-open .dictionary-action-menu { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); visibility: visible; }
-.dictionary-action { position: relative; z-index: 1; min-height: 42px; padding: 0 17px; border: 1px solid #e1e0d8; border-radius: 999px; background: #fff; color: #30392f; font-size: 14px; font-weight: 650; white-space: nowrap; box-shadow: 0 5px 16px #20211f12; transition: background .14s ease, border-color .14s ease; }
-.dictionary-action:hover, .dictionary-action:focus-visible { background: #d2d8c9; border-color: #9da58f; outline: none; }
+.deck-tools { position: relative; }
+.deck-tools-button { display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid #deded5; border-radius: 50%; background: #fff; color: #30392f; box-shadow: 0 6px 18px #20211f18; }
+.deck-tools-button:hover { background: #f0f1eb; border-color: #c8c9bd; }
+.deck-tools-button:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
+.deck-tools-button svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
+.deck-action-menu { position: absolute; right: 0; bottom: calc(100% + 12px); display: flex; flex-direction: column; align-items: flex-end; gap: 9px; opacity: 0; pointer-events: none; transform: translateY(8px) scale(.98); transform-origin: bottom right; transition: opacity .16s ease, transform .16s ease; visibility: hidden; }
+.deck-action-menu::before { content: ""; position: absolute; z-index: 0; inset: -16px -20px; }
+.deck-action-menu::after { content: ""; position: absolute; z-index: 0; top: 100%; left: 0; right: 0; height: 12px; }
+.deck-tools.is-open .deck-action-menu { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); visibility: visible; }
+.deck-action { position: relative; z-index: 1; min-height: 42px; padding: 0 17px; border: 1px solid #e1e0d8; border-radius: 999px; background: #fff; color: #30392f; font-size: 14px; font-weight: 650; white-space: nowrap; box-shadow: 0 5px 16px #20211f12; transition: background .14s ease, border-color .14s ease; }
+.deck-action:hover, .deck-action:focus-visible { background: #d2d8c9; border-color: #9da58f; outline: none; }
 
 .practice-screen, .form-screen { display: flex; flex-direction: column; }
 .screen-header { display: flex; align-items: center; justify-content: space-between; min-height: 38px; }
@@ -100,7 +100,7 @@ html:not(.native-app) .add-button::before { content: ""; position: absolute; ins
 .text-button { border: 0; background: transparent; padding: 8px 0; color: #55574f; font-weight: 600; }
 .text-button:hover { color: #20211f; }
 .practice-content { flex: 1; width: min(100%, 580px); margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 60px; }
-.dictionary-credit { max-width: 360px; margin: 8px auto 0; font-size: 11px; line-height: 1.45; text-align: center; }
+.deck-credit { max-width: 360px; margin: 8px auto 0; font-size: 11px; line-height: 1.45; text-align: center; }
 .flashcard { position: relative; isolation: isolate; width: 100%; min-height: 280px; padding: 38px 30px; border: 1px solid #e3e2d9; border-radius: 18px; background: #fff; box-shadow: 0 2px 0 #e1e0d8, 0 7px 0 #eeede7, 0 18px 40px #20211f10; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: inherit; white-space: pre-wrap; overflow: hidden; touch-action: pan-y; -webkit-tap-highlight-color: transparent; }
 .flashcard:focus:not(:focus-visible) { outline: none; }
 .flashcard:focus-visible { outline: 3px solid #797d6450; outline-offset: 3px; }
@@ -171,35 +171,35 @@ html:not(.native-app) .add-button::before { content: ""; position: absolute; ins
 .progress-current-marker { position: absolute; top: -8px; z-index: 1; transform: translateX(-50%); color: #30392f; font-size: 10px; font-weight: 750; letter-spacing: .04em; line-height: 1; text-transform: uppercase; white-space: nowrap; pointer-events: none; }
 .cards-remaining { color: #77796f; font-size: 13px; margin: 10px 0 0; text-align: center; }
 
-.dictionary-screen { display: flex; flex-direction: column; }
-.dictionary-list-content { display: flex; flex: 1; flex-direction: column; width: min(100%, 700px); min-height: 0; margin: 0 auto; padding-top: 24px; }
-.dictionary-list-content h1 { font-size: clamp(28px, 5vw, 36px); }
-.default-dictionaries-description { color: #65675f; line-height: 1.55; margin: 12px 0 0; }
-.default-dictionaries-source { color: #77796f; line-height: 1.5; margin: 16px 0 0; }
+.deck-screen { display: flex; flex-direction: column; }
+.deck-list-content { display: flex; flex: 1; flex-direction: column; width: min(100%, 700px); min-height: 0; margin: 0 auto; padding-top: 24px; }
+.deck-list-content h1 { font-size: clamp(28px, 5vw, 36px); }
+.default-decks-description { color: #65675f; line-height: 1.55; margin: 12px 0 0; }
+.default-decks-source { color: #77796f; line-height: 1.5; margin: 16px 0 0; }
 .about-content p { color: #77796f; font-size: 15px; line-height: 1.55; margin: 16px 0 0; }
 .about-content p a { color: #485143; font-weight: 650; text-underline-offset: 2px; }
 .native-app .web-shortcut-hint { display: none; }
-.native-app .dictionary-entry-hints { display: none; }
-.default-dictionaries-source a { color: #485143; font-weight: 650; text-underline-offset: 2px; }
-.default-dictionaries-status { min-height: 0; margin: 4px 0 0; }
-.default-dictionary-list { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; margin-top: 6px; padding: 2px 8px 20px 2px; }
-.default-dictionary-option { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 70px; padding: 14px 16px; border: 1px solid #e3e2d9; border-radius: 13px; background: #fff; color: #30392f; text-align: left; box-shadow: 0 3px 12px #20211f08; }
-.own-dictionary-option { justify-content: flex-start; border-color: #c8c9bd; background: #f0f0eb; font-weight: 650; box-shadow: 0 3px 12px #20211f08; }
-.own-dictionary-option:hover:not(:disabled) { background: #e7e8e1; }
-.default-dictionary-option:hover:not(:disabled) { background: #f0f1eb; border-color: #c8c9bd; }
-.default-dictionary-option:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
-.default-dictionary-option:disabled { cursor: progress; opacity: .65; }
-.default-dictionary-option strong { font-size: 15px; }
-.default-dictionary-option span { color: #77796f; font-size: 13px; white-space: nowrap; }
-.default-dictionary-list .default-dictionary-retry { align-self: flex-start; flex: 0 0 auto; width: max-content; min-width: 120px; min-height: 44px; border-color: #deded5; background: #fff; color: #485143; white-space: nowrap; }
-.default-dictionary-list .default-dictionary-retry:hover { border-color: #c8c9bd; background: #f0f1eb; }
-.default-dictionary-confirmation { width: min(100%, 460px); }
-.default-dictionary-confirm-actions { display: flex; gap: 10px; margin-top: 22px; }
-.default-dictionary-confirm-actions > button { flex: 1; min-width: 0; }
-.default-dictionary-confirm-actions > button:disabled { cursor: wait; opacity: .65; }
-.default-dictionary-confirm-status { min-height: 20px; margin: 12px 0 0; color: #77796f; font-size: 13px; line-height: 1.5; }
+.native-app .deck-entry-hints { display: none; }
+.default-decks-source a { color: #485143; font-weight: 650; text-underline-offset: 2px; }
+.default-decks-status { min-height: 0; margin: 4px 0 0; }
+.default-deck-list { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; margin-top: 6px; padding: 2px 8px 20px 2px; }
+.default-deck-option { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 70px; padding: 14px 16px; border: 1px solid #e3e2d9; border-radius: 13px; background: #fff; color: #30392f; text-align: left; box-shadow: 0 3px 12px #20211f08; }
+.own-deck-option { justify-content: flex-start; border-color: #c8c9bd; background: #f0f0eb; font-weight: 650; box-shadow: 0 3px 12px #20211f08; }
+.own-deck-option:hover:not(:disabled) { background: #e7e8e1; }
+.default-deck-option:hover:not(:disabled) { background: #f0f1eb; border-color: #c8c9bd; }
+.default-deck-option:focus-visible { outline: 3px solid #797d6450; outline-offset: 2px; }
+.default-deck-option:disabled { cursor: progress; opacity: .65; }
+.default-deck-option strong { font-size: 15px; }
+.default-deck-option span { color: #77796f; font-size: 13px; white-space: nowrap; }
+.default-deck-list .default-deck-retry { align-self: flex-start; flex: 0 0 auto; width: max-content; min-width: 120px; min-height: 44px; border-color: #deded5; background: #fff; color: #485143; white-space: nowrap; }
+.default-deck-list .default-deck-retry:hover { border-color: #c8c9bd; background: #f0f1eb; }
+.default-deck-confirmation { width: min(100%, 460px); }
+.default-deck-confirm-actions { display: flex; gap: 10px; margin-top: 22px; }
+.default-deck-confirm-actions > button { flex: 1; min-width: 0; }
+.default-deck-confirm-actions > button:disabled { cursor: wait; opacity: .65; }
+.default-deck-confirm-status { min-height: 20px; margin: 12px 0 0; color: #77796f; font-size: 13px; line-height: 1.5; }
 .word-list { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; margin-top: 22px; padding: 2px 8px 20px 2px; }
-.dictionary-add-heading { margin: 24px 0 -10px; color: #485143; font-size: 17px; }
+.deck-add-heading { margin: 24px 0 -10px; color: #485143; font-size: 17px; }
 .word-row { display: grid; flex: 0 0 auto; grid-template-columns: 42px minmax(0, 1fr) auto; align-items: stretch; gap: 12px; border: 1px solid #e3e2d9; border-radius: 13px; background: #fff; padding: 12px; }
 .word-row.is-updated { animation: edited-entry-blip 2s ease-in both; }
 @supports (animation-timing-function: linear(0, 1)) {
@@ -216,27 +216,27 @@ html:not(.native-app) .add-button::before { content: ""; position: absolute; ins
 .word-details strong { display: block; color: #30392f; font-size: 16px; overflow-wrap: anywhere; }
 .word-details .hiragana-subtext { font-size: 14px; margin-top: 2px; }
 .word-details p { color: #65675f; font-size: 14px; line-height: 1.5; margin: 5px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
-.dictionary-entry-fields { display: flex; flex-direction: column; gap: 8px; }
-.dictionary-entry-fields input { min-width: 0; padding: 9px 11px; }
-.dictionary-entry-meanings { display: flex; flex-direction: column; gap: 12px; }
-.dictionary-entry-meaning-group { display: flex; flex-direction: column; gap: 7px; }
-.dictionary-entry-meaning-control { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 12px; }
-.dictionary-entry-example-fields { display: flex; flex-direction: column; gap: 6px; padding-left: 12px; border-left: 2px solid #e8e9e1; }
-.dictionary-entry-example-fields input { padding: 8px 10px; font-size: 13px; }
-.dictionary-entry-spacer { width: 34px; }
-.dictionary-entry-row { grid-template-columns: 34px minmax(0, 1fr) 34px; align-items: center; border-style: dashed; border-color: #d8ddcf; background: #fbfcf9; }
-.dictionary-entry-meaning-row { display: block; }
-.dictionary-entry-actions { display: flex; gap: 8px; }
-.dictionary-entry-action-group { display: flex; flex: 1; min-width: 0; flex-direction: column; align-items: stretch; gap: 5px; }
-.dictionary-entry-actions button { width: 100%; min-width: 0; min-height: 42px; padding: 10px 12px; font-size: 13px; }
-.dictionary-entry-actions .dictionary-add-meaning { border-color: #deded8; background: #f4f4f0; color: #65665f; }
-.dictionary-entry-actions .dictionary-add-meaning:hover { border-color: #d2d2ca; background: #ecece6; }
-.dictionary-add-card { width: auto; }
-.dictionary-action-hint { color: #85867e; font-size: 11px; line-height: 1.35; text-align: center; }
-.dictionary-entry-hints { display: flex; flex-direction: column; align-self: start; gap: 5px; color: #77796f; font-size: 11px; line-height: 1.3; }
-.dictionary-entry-hints[hidden] { display: none; }
-.dictionary-entry-hints span { white-space: nowrap; }
-.dictionary-entry-hints kbd { display: inline-block; min-width: 39px; margin-right: 4px; padding: 2px 5px; border: 1px solid #deded5; border-radius: 5px; background: #fff; color: #53554e; font: inherit; font-weight: 650; text-align: center; }
+.deck-entry-fields { display: flex; flex-direction: column; gap: 8px; }
+.deck-entry-fields input { min-width: 0; padding: 9px 11px; }
+.deck-entry-meanings { display: flex; flex-direction: column; gap: 12px; }
+.deck-entry-meaning-group { display: flex; flex-direction: column; gap: 7px; }
+.deck-entry-meaning-control { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 12px; }
+.deck-entry-example-fields { display: flex; flex-direction: column; gap: 6px; padding-left: 12px; border-left: 2px solid #e8e9e1; }
+.deck-entry-example-fields input { padding: 8px 10px; font-size: 13px; }
+.deck-entry-spacer { width: 34px; }
+.deck-entry-row { grid-template-columns: 34px minmax(0, 1fr) 34px; align-items: center; border-style: dashed; border-color: #d8ddcf; background: #fbfcf9; }
+.deck-entry-meaning-row { display: block; }
+.deck-entry-actions { display: flex; gap: 8px; }
+.deck-entry-action-group { display: flex; flex: 1; min-width: 0; flex-direction: column; align-items: stretch; gap: 5px; }
+.deck-entry-actions button { width: 100%; min-width: 0; min-height: 42px; padding: 10px 12px; font-size: 13px; }
+.deck-entry-actions .deck-add-meaning { border-color: #deded8; background: #f4f4f0; color: #65665f; }
+.deck-entry-actions .deck-add-meaning:hover { border-color: #d2d2ca; background: #ecece6; }
+.deck-add-card { width: auto; }
+.deck-action-hint { color: #85867e; font-size: 11px; line-height: 1.35; text-align: center; }
+.deck-entry-hints { display: flex; flex-direction: column; align-self: start; gap: 5px; color: #77796f; font-size: 11px; line-height: 1.3; }
+.deck-entry-hints[hidden] { display: none; }
+.deck-entry-hints span { white-space: nowrap; }
+.deck-entry-hints kbd { display: inline-block; min-width: 39px; margin-right: 4px; padding: 2px 5px; border: 1px solid #deded5; border-radius: 5px; background: #fff; color: #53554e; font: inherit; font-weight: 650; text-align: center; }
 .empty-word-list { color: #85867e; line-height: 1.5; text-align: center; padding: 35px 15px; }
 
 .card-form { width: min(100%, 460px); margin: auto; display: flex; flex-direction: column; }
@@ -285,15 +285,15 @@ button:disabled { cursor: wait; opacity: .6; }
   .language-decoration-one { top: 4%; left: -10%; }
   .language-decoration-two { right: -9%; bottom: 2%; }
   .screen { padding: 22px max(22px, env(safe-area-inset-right)) 22px max(22px, env(safe-area-inset-left)); }
-  .dictionary-entry-row { grid-template-columns: minmax(0, 1fr); }
-  .dictionary-entry-actions { flex-direction: column; }
-  .dictionary-entry-spacer { display: none; }
-  .dictionary-entry-meaning-control { grid-template-columns: minmax(0, 1fr); gap: 7px; }
-  .dictionary-entry-hints { flex-direction: row; flex-wrap: wrap; gap: 5px 12px; }
-  .dictionary-actions { right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); }
+  .deck-entry-row { grid-template-columns: minmax(0, 1fr); }
+  .deck-entry-actions { flex-direction: column; }
+  .deck-entry-spacer { display: none; }
+  .deck-entry-meaning-control { grid-template-columns: minmax(0, 1fr); gap: 7px; }
+  .deck-entry-hints { flex-direction: row; flex-wrap: wrap; gap: 5px 12px; }
+  .deck-actions { right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); }
   .language-back-button { left: max(20px, env(safe-area-inset-left)); bottom: max(24px, env(safe-area-inset-bottom)); }
-  .add-button, .dictionary-tools-button { width: 54px; height: 54px; }
-  .dictionary-button { bottom: calc(88px + env(safe-area-inset-bottom)); }
+  .add-button, .deck-tools-button { width: 54px; height: 54px; }
+  .deck-button { bottom: calc(88px + env(safe-area-inset-bottom)); }
   .flashcard { min-height: 250px; }
   .progress-point { width: 18px; height: 18px; top: 8px; }
   .progress-point::before { width: 9px; height: 9px; }

@@ -10,7 +10,7 @@ import { annotateExample } from "./tkg-context-meaning.mjs";
 const SOURCE_COMMIT = "32c267cbfa7756a2e3542657772759d92d4e2420";
 const SHORT_COMMIT = SOURCE_COMMIT.slice(0, 8);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const DICTIONARY_DIRECTORY = path.join(ROOT, "dictionaries");
+const DICTIONARY_DIRECTORY = path.join(ROOT, "decks");
 const SOURCE_DIRECTORY = path.join(DICTIONARY_DIRECTORY, "source-data");
 const INDEX_FILE = path.join(SOURCE_DIRECTORY, `tkg-entries-index-${SHORT_COMMIT}.json`);
 const SPACING_OVERRIDES_FILE = path.join(ROOT, "scripts/default-example-spacing-overrides.json");

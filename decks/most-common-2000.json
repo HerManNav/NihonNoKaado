@@ -1,5 +1,5 @@
 {
-  "format": "japanese-cards-dictionary",
+  "format": "japanese-cards-deck",
   "version": 3,
   "name": "Most common Japanese — 2000 words",
   "source": "Frequency ranks: https://noosflashcards.com/resources/frequency-lists/japanese (Leipzig Corpora Collection news counts; licensed CC BY-SA 4.0). English meanings and sense-tagged examples: https://github.com/tkgally/je-dict-1 (CC0). The list skips duplicate romaji and entries without a complete example tagged to the selected sense.",

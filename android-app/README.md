@@ -4,7 +4,7 @@ This separate Capacitor project bundles the shared web app files into an Android
 
 ## Shared source
 
-The root project remains the source of truth for `index.html`, `styles.css`, `app.js`, `dictionary-core.js`, `word-form-lookup.js`, `language.js`, and `dictionaries/`. Before syncing or building Android, `npm run copy-web` copies those shared files, the dictionary manifest, default decks, and romaji lookup into the generated `www/` directory. Maintenance source archives are excluded, and the generated dictionary directory is replaced on each copy to remove stale assets. The generated directory is ignored by Git.
+The root project remains the source of truth for `index.html`, `styles.css`, `app.js`, `deck-core.js`, `word-form-lookup.js`, `language.js`, and `decks/`. Before syncing or building Android, `npm run copy-web` copies those shared files, the deck manifest, default decks, and romaji lookup into the generated `www/` directory. Maintenance source archives are excluded, and the generated deck directory is replaced on each copy to remove stale assets. The generated directory is ignored by Git.
 
 ## Build prerequisites
 
@@ -15,9 +15,9 @@ The initial application ID is a development placeholder (`com.example.japaneseca
 
 ## Android data and files
 
-The packaged Android app stores its dictionary in the app's own WebView storage, separate from desktop and browser-PWA storage. Use dictionary JSON export/import to transfer dictionaries between versions. Import and export need device testing inside the Android WebView before distribution.
+The packaged Android app stores its deck in the app's own WebView storage, separate from desktop and browser-PWA storage. Use deck JSON export/import to transfer decks between versions. Import and export need device testing inside the Android WebView before distribution.
 
-Settings includes Language and About. Exports use an in-app naming form and always save to Downloads. Android 7–9 requests storage permission when exporting; Android 10+ uses MediaStore without broad storage permission. Previous folder selections are discarded. Repeated exports preserve existing files. The native `DictionaryExportPlugin` writes the files, and the app stays in portrait orientation.
+Settings includes Language and About. Exports use an in-app naming form and always save to Downloads. Android 7–9 requests storage permission when exporting; Android 10+ uses MediaStore without broad storage permission. Previous folder selections are discarded. Repeated exports preserve existing files. The native `DeckExportPlugin` writes the files, and the app stays in portrait orientation.
 
 ## Commands
 
