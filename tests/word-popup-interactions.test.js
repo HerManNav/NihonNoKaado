@@ -87,7 +87,7 @@ class Element {
 }
 
 class Document {
-  constructor() { this.elements = new Map(); this.listeners = new Map(); }
+  constructor() { this.elements = new Map(); this.listeners = new Map(); this.documentElement = new Element("html"); }
   querySelector(selector) {
     if (!this.elements.has(selector)) this.elements.set(selector, new Element(selector === "#flashcard" ? "button" : "div"));
     return this.elements.get(selector);
@@ -122,6 +122,7 @@ function makeSession({ realLookup = false, fetchLookup = false, savedCards = nul
     innerWidth: 400,
     setTimeout: () => 1,
     clearTimeout() {},
+    addEventListener() {},
   };
   const persistedValues = new Map();
   if (savedCards) persistedValues.set("japanese-cards.dictionary.v1", JSON.stringify(savedCards));

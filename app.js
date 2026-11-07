@@ -2,6 +2,7 @@ const STORAGE_KEY = "japanese-cards.dictionary.v1";
 const CONTEXT_ANNOTATION_MIGRATION_KEY = "japanese-cards.context-annotation-migration.v1";
 const { parseImportedDictionary, prepareDefaultDictionary, serializeDictionary, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 const { findWordMeanings } = window.JapaneseWordFormLookup;
+document.documentElement.classList.toggle("native-app", Boolean(window.Capacitor?.isNativePlatform?.()));
 
 const screens = {
   home: document.querySelector("#home-screen"),
@@ -11,12 +12,14 @@ const screens = {
   defaultConfirm: document.querySelector("#default-dictionary-confirm-screen"),
   add: document.querySelector("#add-screen"),
   clear: document.querySelector("#clear-screen"),
+  settings: document.querySelector("#settings-screen"),
+  about: document.querySelector("#about-screen"),
+  export: document.querySelector("#export-screen"),
 };
 
 const startButton = document.querySelector("#start-button");
 const originLanguage = document.querySelector("#origin-language");
 const dictionaryCount = document.querySelector("#dictionary-count");
-const dictionaryButton = document.querySelector("#dictionary-button");
 const dictionaryListCount = document.querySelector("#dictionary-list-count");
 const wordList = document.querySelector("#word-list");
 const cardForm = document.querySelector("#card-form");
@@ -332,7 +335,9 @@ window.JapaneseCardsHandleBack = function handleSystemBack() {
     cancelCardForm();
     return true;
   }
-  if (!screens.practice.hidden || !screens.dictionary.hidden || !screens.defaults.hidden || !screens.clear.hidden) {
+  if (!screens.export.hidden && exportInProgress) return true;
+  if (!screens.about.hidden) { openSettings(); return true; }
+  if (!screens.settings.hidden || !screens.export.hidden || !screens.practice.hidden || !screens.dictionary.hidden || !screens.defaults.hidden || !screens.clear.hidden) {
     showScreen("home");
     return true;
   }
@@ -343,7 +348,6 @@ function updateDictionaryCount() {
   const count = cards.length;
   dictionaryCount.classList.remove("is-empty-prompt");
   dictionaryCount.textContent = count === 1 ? "1 word in your dictionary" : `${count} Cards in your dictionary`;
-  dictionaryButton.textContent = `View dictionary (${count})`;
   if (storageWarning) dictionaryCount.textContent += ` · ${storageWarning}`;
 }
 
@@ -405,6 +409,36 @@ function createDictionaryEntryRow() {
 
   const details = document.createElement("div");
   details.className = "word-details dictionary-entry-fields";
+  const addMeaningButton = document.createElement("button");
+  addMeaningButton.className = "secondary-button dictionary-add-meaning";
+  addMeaningButton.type = "button";
+  addMeaningButton.textContent = "Add another meaning";
+  addMeaningButton.addEventListener("click", () => {
+    const next = createDictionaryMeaningInput();
+    meanings.append(next);
+    showDictionaryMeaningHints(row, next);
+    next.querySelector(".meaning-translation").focus();
+  });
+  const addCardButton = document.createElement("button");
+  addCardButton.className = "primary-button dictionary-add-card";
+  addCardButton.type = "button";
+  addCardButton.textContent = "Add card to dictionary";
+  addCardButton.addEventListener("click", addDictionaryEntry);
+  const actions = document.createElement("div");
+  actions.className = "dictionary-entry-actions";
+  const addMeaningAction = document.createElement("div");
+  addMeaningAction.className = "dictionary-entry-action-group";
+  const addMeaningHint = document.createElement("span");
+  addMeaningHint.className = "dictionary-action-hint web-shortcut-hint";
+  addMeaningHint.textContent = "Tab";
+  addMeaningAction.append(addMeaningHint, addMeaningButton);
+  const addCardAction = document.createElement("div");
+  addCardAction.className = "dictionary-entry-action-group";
+  const addCardHint = document.createElement("span");
+  addCardHint.className = "dictionary-action-hint web-shortcut-hint";
+  addCardHint.textContent = "Enter";
+  addCardAction.append(addCardHint, addCardButton);
+  actions.append(addMeaningAction, addCardAction);
   const japanese = document.createElement("input");
   japanese.type = "text";
   japanese.className = "dictionary-entry-japanese";
@@ -428,8 +462,7 @@ function createDictionaryEntryRow() {
   const meaningRow = document.createElement("div");
   meaningRow.className = "dictionary-entry-meaning-row";
   meaningRow.append(meanings);
-  firstMeaning.querySelector(".dictionary-entry-hints").hidden = false;
-  details.append(japanese, hiragana, meaningRow);
+  details.append(japanese, hiragana, meaningRow, actions);
 
   const buttonSpacer = document.createElement("span");
   buttonSpacer.className = "dictionary-entry-spacer";
@@ -449,11 +482,7 @@ function createDictionaryMeaningInput(value = "") {
   input.value = value;
   const control = document.createElement("div");
   control.className = "dictionary-entry-meaning-control";
-  const hints = document.createElement("div");
-  hints.className = "dictionary-entry-hints";
-  hints.hidden = true;
-  hints.innerHTML = '<span>Press <kbd>Tab</kbd> for another meaning</span><span>Press <kbd>Enter</kbd> to add card</span>';
-  control.append(input, hints);
+  control.append(input);
   const exampleFields = document.createElement("div");
   exampleFields.className = "dictionary-entry-example-fields";
   exampleFields.append(
@@ -537,16 +566,70 @@ function openDictionaryMenu() {
   dictionaryToolsButton.setAttribute("aria-expanded", "true");
 }
 
-function exportDictionary() {
-  const defaultName = `my_japan_dict_${new Date().toISOString().slice(0, 10).replace(/-/g, "_")}`;
-  const requestedName = window.prompt("Name this dictionary:", defaultName);
-  if (requestedName === null) return;
-  const dictionaryName = requestedName.trim() || "Japanese dictionary";
-  downloadDictionary(dictionaryName);
+let exportInProgress = false;
+let exportToastTimeout = null;
+
+function openSettings() {
+  closeDictionaryMenu();
+  showScreen("settings");
 }
 
-function createDictionaryExport(dictionaryName) {
-  return new Blob([createDictionaryJson(dictionaryName)], { type: "application/json;charset=utf-8" });
+function exportDictionary() {
+  closeDictionaryMenu();
+  window.clearTimeout(exportToastTimeout);
+  document.querySelector("#export-toast").hidden = true;
+  document.querySelector("#export-name").value = `my_japan_dict_${new Date().toISOString().slice(0, 10).replace(/-/g, "_")}`;
+  document.querySelector("#export-status").textContent = "";
+  document.querySelector("#cancel-export").textContent = "Cancel";
+  showScreen("export");
+  document.querySelector("#export-destination-info").hidden = !window.JapaneseCardsExport.isNative;
+  document.querySelector("#export-destination").textContent = window.JapaneseCardsExport.destination();
+  document.querySelector("#export-name").focus();
+}
+
+async function finishDictionaryExport(downloaded) {
+  const toast = document.querySelector("#export-toast");
+  document.querySelector("#export-toast-message").textContent = downloaded
+    ? "" : "Dictionary saved to Downloads.";
+  document.querySelector("#export-status").textContent = "";
+  toast.hidden = false;
+  exportToastTimeout = window.setTimeout(() => { toast.hidden = true; }, 5000);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pause = (milliseconds) => new Promise(resolve => window.setTimeout(resolve, milliseconds));
+  try {
+    screens.export.classList.add("is-export-success");
+    await pause(reducedMotion ? 250 : 360);
+    screens.export.classList.add("is-export-leaving");
+    await pause(reducedMotion ? 0 : 200);
+    showScreen("home");
+    screens.home.classList.add("is-export-returning");
+    await pause(reducedMotion ? 0 : 240);
+  } finally {
+    screens.export.classList.remove("is-export-success");
+    screens.export.classList.remove("is-export-leaving");
+    screens.home.classList.remove("is-export-returning");
+  }
+}
+
+async function saveDictionaryExport(event) {
+  event.preventDefault();
+  if (exportInProgress) return;
+  const name = document.querySelector("#export-name").value.trim();
+  if (!name) { document.querySelector("#export-name").focus(); return; }
+  exportInProgress = true;
+  const controls = ["#confirm-export", "#export-name", "#cancel-export"];
+  controls.forEach(selector => { document.querySelector(selector).disabled = true; });
+  const status = document.querySelector("#export-status");
+  status.textContent = "Saving dictionary…";
+  try {
+    const result = await window.JapaneseCardsExport.save(getSafeDictionaryFilename(name), createDictionaryJson(name));
+    await finishDictionaryExport(Boolean(result?.downloaded));
+  } catch (error) {
+    status.textContent = error.message || "The dictionary could not be exported. Check available space and try again.";
+  } finally {
+    exportInProgress = false;
+    controls.forEach(selector => { document.querySelector(selector).disabled = false; });
+  }
 }
 
 function createDictionaryJson(dictionaryName) {
@@ -556,19 +639,6 @@ function createDictionaryJson(dictionaryName) {
 function getSafeDictionaryFilename(dictionaryName) {
   const safeName = dictionaryName.replace(/[<>:"/\\|?*\u0000-\u001F]/g, "").replace(/\s+/g, "-") || "japanese-dictionary";
   return `${safeName}.json`;
-}
-
-function downloadDictionary(dictionaryName) {
-  const blob = createDictionaryExport(dictionaryName);
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = getSafeDictionaryFilename(dictionaryName);
-  document.body.append(link);
-  link.click();
-  link.remove();
-  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-  closeDictionaryMenu();
 }
 
 async function importDictionary(file) {
@@ -1107,6 +1177,12 @@ async function openDefaultDictionaries() {
       throw new Error("No default dictionaries are available yet.");
     }
     renderDefaultDictionaries(catalog.dictionaries);
+    const importButton = document.createElement("button");
+    importButton.className = "default-dictionary-option own-dictionary-option";
+    importButton.type = "button";
+    importButton.textContent = "Import my own dictionary";
+    importButton.addEventListener("click", () => importFile.click());
+    defaultDictionaryList.append(importButton);
     defaultDictionariesStatus.textContent = "Select a dictionary to replace the one saved in this browser.";
   } catch (error) {
     defaultDictionariesStatus.textContent = defaultDictionaryErrorMessage("dictionaries/manifest.json", error);
@@ -1262,9 +1338,12 @@ function clearDictionary() {
   showScreen("home");
 }
 
-addButton.addEventListener("click", openDefaultDictionaries);
+addButton.addEventListener("click", () => {
+  renderDictionaryList();
+  showScreen("dictionary");
+});
 dictionaryToolsButton.addEventListener("click", (event) => {
-  if (event.detail === 0 || window.matchMedia("(hover: none)").matches) {
+  if (event.detail === 0 || lastPointerType !== "mouse" || window.matchMedia("(hover: none)").matches) {
     if (dictionaryTools.classList.contains("is-open")) closeDictionaryMenu();
     else openDictionaryMenu();
   }
@@ -1301,17 +1380,19 @@ document.addEventListener("keydown", (event) => {
   }
 });
 document.querySelector("#export-action").addEventListener("click", exportDictionary);
-document.querySelector("#import-action").addEventListener("click", () => importFile.click());
+document.querySelector("#settings-button").addEventListener("click", openSettings);
+window.addEventListener("japanese-cards:show-settings", openSettings);
+document.querySelectorAll("[data-go-settings]").forEach(button => button.addEventListener("click", openSettings));
+document.querySelector("#about-button").addEventListener("click", () => showScreen("about"));
+document.querySelector("#export-form").addEventListener("submit", saveDictionaryExport);
+document.querySelector("#cancel-export").addEventListener("click", () => { if (!exportInProgress) showScreen("home"); });
+document.querySelector("#import-action").addEventListener("click", openDefaultDictionaries);
 document.querySelector("#clear-action").addEventListener("click", confirmClearDictionary);
 document.querySelector("#confirm-clear").addEventListener("click", clearDictionary);
 cancelDefaultDictionaryLoadButton.addEventListener("click", cancelDefaultDictionaryLoad);
 confirmDefaultDictionaryLoadButton.addEventListener("click", loadDefaultDictionary);
 importFile.addEventListener("change", () => importDictionary(importFile.files?.[0]));
 backToLearningButton.addEventListener("click", cancelCardForm);
-dictionaryButton.addEventListener("click", () => {
-  renderDictionaryList();
-  showScreen("dictionary");
-});
 
 wordList.addEventListener("input", (event) => {
   if (!(event.target instanceof HTMLInputElement)) return;

@@ -2,6 +2,7 @@
   const gate = document.querySelector("#language-gate");
   const app = document.querySelector(".app-shell");
   const languageOptions = gate.querySelector(".language-options");
+  const languageSelectorBack = document.querySelector("#language-selector-back");
   const loading = gate.querySelector(".language-loading");
   const loadingLabel = gate.querySelector("[data-loading-label]");
   const loadingFootnote = gate.querySelector("[data-loading-footnote]");
@@ -17,6 +18,24 @@
   let hasEnteredApp = false;
 
   const translations = new Map(Object.entries({
+    "Settings": "Ajustes",
+    "Language": "Idioma",
+    "Back to settings": "Volver a ajustes",
+    "About": "Acerca de",
+    "Dictionary name": "Nombre del diccionario",
+    "Destination directory": "Carpeta de destino",
+    "Downloads folder (internal storage / Download)": "Carpeta Descargas (almacenamiento interno / Download)",
+    "Your browser’s default download location. Check your browser’s download settings for the exact folder.": "La ubicación de descargas predeterminada del navegador. Consulta sus ajustes de descargas para conocer la carpeta exacta.",
+    "The dictionary could not be exported. Check available space and try again.": "No se pudo exportar el diccionario. Comprueba el espacio disponible e inténtalo de nuevo.",
+    "Export failed. Check available space and try again.": "La exportación ha fallado. Comprueba el espacio disponible e inténtalo de nuevo.",
+    "Allow storage access to save the dictionary in Downloads.": "Permite el acceso al almacenamiento para guardar el diccionario en Descargas.",
+    "Save dictionary": "Guardar diccionario",
+    "Saving dictionary…": "Guardando diccionario…",
+    "Dictionary saved.": "Diccionario guardado.",
+    "Done": "Listo",
+    "Successfully exported": "Exportado correctamente",
+    "Dictionary saved to Downloads.": "Diccionario guardado en Descargas.",
+    "Download started. Check your browser downloads.": "Descarga iniciada. Consulta las descargas del navegador.",
     "Show me": "Quiero ver primero",
     "Japanese first": "Japonés primero",
     "English first": "Inglés primero",
@@ -40,6 +59,11 @@
     "Tap to reveal translation": "Toca para ver la traducción",
     "Session progress. Click a shown dot to review that card.": "Progreso de la sesión. Pulsa un punto visible para repasar esa tarjeta.",
     "Current dictionary": "Diccionario actual",
+    "Add words to the current dictionary": "Añadir palabras al diccionario actual",
+    "Add another meaning": "Añadir otro significado",
+    "Add card to dictionary": "Añadir tarjeta al diccionario",
+    "Tab": "Tab",
+    "Enter": "Intro",
     "Default dictionaries": "Diccionarios predeterminados",
     "Choose a starter dictionary. Loading one will replace the dictionary saved in this browser.": "Elige un diccionario inicial. Al cargarlo, se reemplazará el diccionario guardado en este navegador.",
     "All sets use the same Japanese news frequency ranking, filtered to unique romaji words with a sense-matched example.": "Todas las listas usan la misma clasificación de frecuencia de noticias japonesas, filtrada para incluir palabras únicas en romaji con ejemplos acordes a su significado.",
@@ -250,6 +274,10 @@
     if (transitionInProgress) return;
     gate.classList.remove("is-initial-entry");
     const currentLanguage = sessionStorage.getItem("japanese-cards.current-language");
+    if (hasEnteredApp && gateCanReturnToApp && currentLanguage === language) {
+      returnToAppFromLanguageSelector();
+      return;
+    }
     if (currentLanguage && currentLanguage !== language) {
       sessionStorage.setItem("japanese-cards.pending-language", language);
       window.location.reload();
@@ -290,6 +318,10 @@
           window.setTimeout(() => app.classList.remove("is-entering-app"), 500);
           hasEnteredApp = true;
           gateCanReturnToApp = false;
+          if (sessionStorage.getItem("japanese-cards.return-to-settings") === "true") {
+            sessionStorage.removeItem("japanese-cards.return-to-settings");
+            window.dispatchEvent(new Event("japanese-cards:show-settings"));
+          }
           transitionInProgress = false;
         }, 280);
       }, 80);
@@ -301,6 +333,7 @@
   function showLanguageSelector(canReturnToApp) {
     if (transitionInProgress) return;
     gateCanReturnToApp = canReturnToApp;
+    languageSelectorBack.hidden = !canReturnToApp;
     transitionInProgress = true;
     languageOptions.hidden = false;
     loading.hidden = true;
@@ -328,6 +361,10 @@
     gate.classList.remove("is-leaving", "is-returning");
     app.hidden = false;
     app.classList.remove("is-leaving-app");
+    if (sessionStorage.getItem("japanese-cards.return-to-settings") === "true") {
+      sessionStorage.removeItem("japanese-cards.return-to-settings");
+      window.dispatchEvent(new Event("japanese-cards:show-settings"));
+    }
     return true;
   }
 
@@ -336,12 +373,18 @@
     backFromSelector: returnToAppFromLanguageSelector,
     backFromHome() {
       if (transitionInProgress) return true;
-      if (!hasEnteredApp) return false;
-      showLanguageSelector(false);
-      return true;
+      return false;
+    },
+    chooseFromSettings() {
+      sessionStorage.setItem("japanese-cards.return-to-settings", "true");
+      showLanguageSelector(true);
     },
   };
-  document.querySelector("#language-back-button").addEventListener("click", () => showLanguageSelector(true));
+  document.querySelector("#language-back-button").addEventListener("click", () => {
+    sessionStorage.setItem("japanese-cards.return-to-settings", "true");
+    showLanguageSelector(true);
+  });
+  languageSelectorBack.addEventListener("click", returnToAppFromLanguageSelector);
 
   const pendingLanguage = sessionStorage.getItem("japanese-cards.pending-language");
   if (pendingLanguage === "en" || pendingLanguage === "es") {

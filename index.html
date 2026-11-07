@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="dictionary-core.js" defer></script>
     <script src="word-form-lookup.js" defer></script>
+    <script src="export-storage.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
     <section id="language-gate" class="language-gate is-initial-entry" aria-label="Choose a language">
+      <button id="language-selector-back" class="language-selector-back text-button" type="button" hidden>
+        ← Back
+      </button>
       <div class="language-panel">
         <div class="language-mark" aria-hidden="true">文</div>
         <p class="eyebrow">JAPANESE CARDS</p>
@@ -52,12 +56,11 @@
     </section>
     <main class="app-shell" hidden>
       <section id="home-screen" class="screen home-screen" aria-labelledby="app-title">
-        <button id="language-back-button" class="language-back-button" type="button" aria-label="Choose language" title="Choose language">
+        <button id="settings-button" class="language-back-button" type="button" aria-label="Settings" title="Settings">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <circle cx="12" cy="12" r="9" />
-            <path d="M3.5 12h17M12 3c2.2 2.4 3.2 5.4 3.2 9s-1 6.6-3.2 9c-2.2-2.4-3.2-5.4-3.2-9s1-6.6 3.2-9Z" />
+            <path d="m10 3-.6 2.4-2 .9-2.2-.7-2 3.4 1.7 1.7v2.6L3.2 15l2 3.4 2.2-.7 2 .9L10 21h4l.6-2.4 2-.9 2.2.7 2-3.4-1.7-1.7v-2.6L20.8 9l-2-3.4-2.2.7-2-.9L14 3Z" />
+            <circle cx="12" cy="12" r="3" />
           </svg>
-          <span>Language</span>
         </button>
         <div class="home-content">
           <h1 id="app-title">Japanese Cards</h1>
@@ -76,10 +79,9 @@
           </div>
           <button id="start-button" class="primary-button" type="button">Start session</button>
           <p id="dictionary-count" class="subtle-text" aria-live="polite"></p>
-          <p class="subtle-text dictionary-credit">Romaji meanings use <a href="https://www.edrdg.org/" target="_blank" rel="noreferrer">JMdict</a> by James William Breen and EDRDG. Ranking uses <a href="https://github.com/hermitdave/FrequencyWords" target="_blank" rel="noreferrer">FrequencyWords</a>. Data is <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
         </div>
         <div id="dictionary-actions" class="dictionary-actions">
-          <button id="add-button" class="add-button" type="button" aria-label="Browse default dictionaries" title="Browse default dictionaries">+</button>
+          <button id="add-button" class="add-button" type="button" aria-label="View dictionary" title="View dictionary">+</button>
           <div id="dictionary-tools" class="dictionary-tools">
             <button id="dictionary-tools-button" class="dictionary-tools-button" type="button" aria-label="Dictionary tools" aria-controls="dictionary-action-menu" aria-expanded="false" title="Dictionary tools">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -95,7 +97,6 @@
           </div>
           <input id="import-file" type="file" accept=".json,application/json" hidden />
         </div>
-        <button id="dictionary-button" class="dictionary-button" type="button">View dictionary (0)</button>
       </section>
 
       <section id="practice-screen" class="screen practice-screen" aria-label="Practice" hidden>
@@ -130,6 +131,7 @@
         </header>
         <div class="dictionary-list-content">
           <h1 id="dictionary-title">Current dictionary</h1>
+          <h2 class="dictionary-add-heading">Add words to the current dictionary</h2>
           <div id="word-list" class="word-list" aria-live="polite"></div>
         </div>
       </section>
@@ -142,9 +144,6 @@
         <div class="dictionary-list-content">
           <h1 id="default-dictionaries-title">Default dictionaries</h1>
           <p class="default-dictionaries-description">Choose a starter dictionary. Loading one will replace the dictionary saved in this browser.</p>
-          <p class="default-dictionaries-source">All sets use the same Japanese news frequency ranking, filtered to unique romaji words with a sense-matched example.</p>
-          <p class="default-dictionaries-source">Meanings and example sentences come from the <a href="https://www.tkgje.jp/" target="_blank" rel="noreferrer">TKG Japanese-English Learner’s Dictionary</a>. Its entries include sense-tagged examples and are reviewed as part of the project. TKG data is public domain (CC0).</p>
-          <p class="default-dictionaries-source">The frequency ranking comes from <a href="https://noosflashcards.com/resources/frequency-lists/japanese" target="_blank" rel="noreferrer">Noos’s Japanese list</a>, based on Leipzig Corpora Collection news counts. The list is CC BY-SA 4.0.</p>
           <p id="default-dictionaries-status" class="subtle-text default-dictionaries-status" role="status" aria-live="polite"></p>
           <div id="default-dictionary-list" class="default-dictionary-list"></div>
         </div>
@@ -186,8 +185,8 @@
               </div>
             </div>
           </div>
-          <p class="meaning-tab-hint">Press Tab after an example translation to add another meaning</p>
-          <p id="enter-hint" class="enter-hint">Press Enter to add</p>
+          <p class="meaning-tab-hint web-shortcut-hint">Web: Press Tab after an example translation to add another meaning.</p>
+          <p id="enter-hint" class="enter-hint web-shortcut-hint">Web: Press Enter to add the card.</p>
           <div class="form-actions">
             <button id="cancel-edit-button" class="secondary-button" type="button" hidden>Cancel</button>
             <button class="primary-button" type="submit">Add</button>
@@ -196,6 +195,41 @@
         </form>
       </section>
 
+      <section id="settings-screen" class="screen dictionary-screen" aria-labelledby="settings-title" hidden>
+        <header class="screen-header"><button class="text-button" data-go-home type="button">← Back</button></header>
+        <div class="dictionary-list-content">
+          <h1 id="settings-title">Settings</h1>
+          <div class="settings-options">
+            <button id="language-back-button" class="settings-option" type="button"><span>Language</span><span aria-hidden="true">›</span></button>
+            <button id="about-button" class="settings-option" type="button"><span>About</span><span aria-hidden="true">›</span></button>
+          </div>
+        </div>
+      </section>
+      <section id="about-screen" class="screen dictionary-screen" aria-labelledby="about-title" hidden>
+        <header class="screen-header"><button class="text-button" data-go-settings type="button">← Back</button></header>
+        <div id="about-content" class="dictionary-list-content about-content"><h1 id="about-title">About</h1>
+          <h2>Default dictionaries</h2>
+          <p class="default-dictionaries-source">All sets use the same Japanese news frequency ranking, filtered to unique romaji words with a sense-matched example.</p>
+          <p class="default-dictionaries-source">Meanings and example sentences come from the <a href="https://www.tkgje.jp/" target="_blank" rel="noreferrer">TKG Japanese-English Learner’s Dictionary</a>. Its entries include sense-tagged examples and are reviewed as part of the project. TKG data is public domain (CC0).</p>
+          <p class="default-dictionaries-source">The frequency ranking comes from <a href="https://noosflashcards.com/resources/frequency-lists/japanese" target="_blank" rel="noreferrer">Noos’s Japanese list</a>, based on Leipzig Corpora Collection news counts. The list is CC BY-SA 4.0.</p>
+          <h2>Romaji meanings</h2>
+          <p class="subtle-text">Romaji meanings use <a href="https://www.edrdg.org/" target="_blank" rel="noreferrer">JMdict</a> by James William Breen and EDRDG. Ranking uses <a href="https://github.com/hermitdave/FrequencyWords" target="_blank" rel="noreferrer">FrequencyWords</a>. Data is <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
+        </div>
+      </section>
+      <section id="export-screen" class="screen clear-screen" aria-labelledby="export-title" hidden>
+        <form id="export-form" class="clear-confirmation export-confirmation">
+          <h1 id="export-title">Export dictionary</h1>
+          <label class="field-label" for="export-name">Dictionary name</label>
+          <input id="export-name" type="text" maxlength="120" required autocomplete="off" />
+          <div id="export-destination-info" hidden>
+            <p class="field-label export-destination-label">Destination directory</p>
+            <p id="export-destination" class="export-destination"></p>
+          </div>
+          <p id="export-status" class="subtle-text" role="status" aria-live="polite"></p>
+          <button id="confirm-export" class="primary-button" type="submit">Save dictionary</button>
+          <button id="cancel-export" class="text-button cancel-clear" type="button">Cancel</button>
+        </form>
+      </section>
       <section id="clear-screen" class="screen clear-screen" aria-labelledby="clear-title" hidden>
         <div class="clear-confirmation">
           <h1 id="clear-title">Clear your dictionary?</h1>
@@ -206,6 +240,10 @@
         </div>
       </section>
     </main>
+    <div id="export-toast" class="export-toast" role="status" aria-live="polite" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 4 4L19 6" /></svg>
+      <div><strong>Successfully exported</strong><p id="export-toast-message"></p></div>
+    </div>
     <div id="word-translation-popup" class="word-translation-popup" role="status" aria-live="polite" hidden></div>
     <script src="language.js" defer></script>
   </body>

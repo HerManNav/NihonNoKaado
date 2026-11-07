@@ -17,6 +17,8 @@ The initial application ID is a development placeholder (`com.example.japaneseca
 
 The packaged Android app stores its dictionary in the app's own WebView storage, separate from desktop and browser-PWA storage. Use dictionary JSON export/import to transfer dictionaries between versions. Import and export need device testing inside the Android WebView before distribution.
 
+Settings includes Language and About. Exports use an in-app naming form and always save to Downloads. Android 7–9 requests storage permission when exporting; Android 10+ uses MediaStore without broad storage permission. Previous folder selections are discarded. Repeated exports preserve existing files. The native `DictionaryExportPlugin` writes the files, and the app stays in portrait orientation.
+
 ## Commands
 
 ```sh

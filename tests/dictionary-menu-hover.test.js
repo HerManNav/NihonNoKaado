@@ -24,7 +24,7 @@ test("dictionary menu hover bridge stays behind clickable options", () => {
 });
 
 test("dictionary options accept pointer input while the menu is open on hover", () => {
-  const openMenu = declarationsFor(".dictionary-tools:hover .dictionary-action-menu, \.dictionary-tools\.is-open .dictionary-action-menu");
+  const openMenu = declarationsFor(".dictionary-tools.is-open .dictionary-action-menu");
   const hoverStyle = declarationsFor(".dictionary-action:hover, .dictionary-action:focus-visible");
 
   assert.match(openMenu, /pointer-events:\s*auto/);

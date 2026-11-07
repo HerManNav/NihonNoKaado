@@ -67,9 +67,9 @@ test("all decks share an ascending frequency-ranked prefix", () => {
   assert.equal(manifest.meaningAndExampleSource, "https://www.tkgje.jp/");
 });
 
-test("the + button opens a native-looking page and selecting a set opens the in-app confirmation", () => {
-  assert.match(html, /id="add-button"[^>]*aria-label="Browse default dictionaries"/);
-  assert.match(app, /addButton\.addEventListener\("click", openDefaultDictionaries\)/);
+test("import opens default dictionaries and selection opens confirmation", () => {
+  assert.match(html, /id="add-button"[^>]*aria-label="View dictionary"/);
+  assert.match(app, /querySelector\("#import-action"\)\.addEventListener\("click", openDefaultDictionaries\)/);
   assert.match(app, /fetch\("dictionaries\/manifest\.json"/);
   assert.match(html, /id="default-dictionary-confirm-screen"[^>]*aria-labelledby="default-dictionary-confirm-title"/);
   assert.match(html, /id="default-dictionary-confirm-status"[^>]*role="status"[^>]*aria-live="polite"/);
@@ -96,10 +96,11 @@ test("cancel and Escape return to the list without loading the selected dictiona
   assert.match(app, /event\.key === "Escape" && !screens\.defaultConfirm\.hidden && !defaultDictionaryLoadInProgress\)[\s\S]*?cancelDefaultDictionaryLoad\(\)/);
 });
 
-test("source attributions are separated below the loading instructions", () => {
-  assert.match(html, /<p class="default-dictionaries-description">[\s\S]*?<\/p>\s*<p class="default-dictionaries-source">[\s\S]*?<\/p>\s*<p class="default-dictionaries-source">[\s\S]*?href="https:\/\/www\.tkgje\.jp/);
-  assert.match(html, /href="https:\/\/noosflashcards\.com\/resources\/frequency-lists\/japanese"/);
-  assert.match(styles, /\.default-dictionaries-source\s*\{[^}]*margin:\s*16px\s+0\s+0/s);
+test("source attributions appear in About", () => {
+  const about = html.slice(html.indexOf('id="about-screen"'), html.indexOf('id="export-screen"'));
+  assert.ok(about.includes('https://www.tkgje.jp/'));
+  assert.ok(about.includes('https://noosflashcards.com/resources/frequency-lists/japanese'));
+  assert.ok(about.includes('Romaji meanings use'));
 });
 
 test("retry button stays compact and neutral in the dictionary list", () => {

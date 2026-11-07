@@ -40,21 +40,13 @@ test("inline entry prepends each saved card below the form and keeps focus at th
   assert.match(app, /event\.key === "Enter" && \(isMeaningField \|\| isExampleEndField\)[\s\S]*?addDictionaryEntry\(\)/);
 });
 
-test("inline hints are attached to each English field and follow the focused meaning", () => {
-  const createMeaning = app.slice(app.indexOf("function createDictionaryMeaningInput"), app.indexOf("function createEntryExampleInput"));
-  const activateHints = app.slice(app.indexOf("function showDictionaryMeaningHints"), app.indexOf("function addDictionaryEntry"));
-  assert.ok(createMeaning.includes("dictionary-entry-hints"));
-  assert.ok(createMeaning.includes("hints.hidden = true"));
-  assert.match(activateHints, /group !== activeGroup/);
-  assert.match(app, /wordList\.addEventListener\("focusin"[\s\S]*?showDictionaryMeaningHints\(row, group\)/);
-  assert.ok(app.includes("Press <kbd>Tab</kbd> for another meaning"));
-  assert.ok(app.includes("Press <kbd>Enter</kbd> to add card"));
-  const meaningControl = declarationsFor(".dictionary-entry-meaning-control");
-  const narrowEntry = styles.match(/@media \(max-width: 520px\)\s*\{([\s\S]*?)\n\}/)?.[1] || "";
-
-  assert.match(meaningControl, /grid-template-columns:[^;]*minmax\(128px, \.55fr\)/);
-  assert.match(narrowEntry, /\.dictionary-entry-meaning-control\s*\{\s*grid-template-columns:\s*minmax\(0, 1fr\)/);
-  assert.match(narrowEntry, /\.dictionary-entry-hints\s*\{\s*flex-direction:\s*row/);
+test("web shortcut labels appear above their corresponding buttons", () => {
+  assert.ok(app.includes('addMeaningHint.textContent = "Tab"'));
+  assert.ok(app.includes('addCardHint.textContent = "Enter"'));
+  assert.ok(app.includes('addMeaningAction.append(addMeaningHint, addMeaningButton)'));
+  assert.ok(app.includes('addCardAction.append(addCardHint, addCardButton)'));
+  assert.match(styles, /\.native-app \.web-shortcut-hint\s*\{\s*display:\s*none/);
+  assert.match(declarationsFor(".dictionary-entry-meaning-control"), /grid-template-columns:\s*minmax\(0, 1fr\)/);
 });
 
 test("Tab from example romaji skips the editable hiragana input in both add surfaces", () => {

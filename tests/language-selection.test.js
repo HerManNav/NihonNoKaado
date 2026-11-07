@@ -55,6 +55,8 @@ function makeLanguageRuntime() {
   const loadingTrack = new FakeElement();
   const loadingFill = new FakeElement();
   const backButton = new FakeElement();
+  const selectorBack = new FakeElement();
+  selectorBack.hidden = true;
   const gateChildren = new Map([
     [".language-options", options],
     [".language-loading", loading],
@@ -77,6 +79,7 @@ function makeLanguageRuntime() {
         ["#language-gate", gate],
         [".app-shell", app],
         ["#language-back-button", backButton],
+        ["#language-selector-back", selectorBack],
       ]).get(selector);
     },
     querySelectorAll(selector) { return selector === "[data-language]" ? buttons : []; },
@@ -97,6 +100,7 @@ function makeLanguageRuntime() {
     prompt(message) { return message; },
     location: { reload() {} },
     setTimeout(callback, delay) { timers.push({ callback, delay }); return timers.length; },
+    dispatchEvent() {},
   };
   const sessionStorage = {
     getItem(key) { return stored.get(key) ?? null; },
@@ -108,7 +112,7 @@ function makeLanguageRuntime() {
     if (name === "aria-valuenow") percentages.push(Number(value));
   };
   const context = vm.createContext({
-    document, window, sessionStorage, MutationObserver: FakeMutationObserver,
+    document, window, sessionStorage, MutationObserver: FakeMutationObserver, Event: class Event { constructor(type) { this.type = type; } },
     Node: { ELEMENT_NODE: 1, TEXT_NODE: 3 }, NodeFilter: { SHOW_TEXT: 4 },
     performance: { now: () => 0 },
     requestAnimationFrame(callback) { frames.push(callback); },
@@ -116,7 +120,7 @@ function makeLanguageRuntime() {
   vm.runInContext(languageSource, context, { filename: "language.js" });
   return {
     gate, app, options, loading, loadingLabel, loadingFootnote, loadingPercent, loadingTrack,
-    loadingFill, backButton, buttons, nodes, frames, timers, percentages, document, window,
+    loadingFill, backButton, selectorBack, buttons, nodes, frames, timers, percentages, document, window,
     runFrames(times) {
       for (const time of times) {
         const frame = frames.shift();
@@ -130,16 +134,11 @@ function makeLanguageRuntime() {
   };
 }
 
-test("language options show flags and the language button lives only on the home screen", () => {
-  const homeStart = html.indexOf('<section id="home-screen"');
-  const homeEnd = html.indexOf("</section>", homeStart);
-  const languageButton = html.indexOf('id="language-back-button"');
-  const practiceStart = html.indexOf('<section id="practice-screen"');
-  assert(homeStart >= 0 && languageButton > homeStart && languageButton < homeEnd);
-  assert(practiceStart > homeEnd && !html.slice(practiceStart).includes('id="language-back-button"'));
-  assert.match(html, /data-language="en"[\s\S]*?class="language-flag"[\s\S]*?<svg/);
-  assert.match(html, /data-language="es"[\s\S]*?class="language-flag"[\s\S]*?<svg/);
-  assert.doesNotMatch(html, /A little Japanese, every day\.|Small steps\. Stronger memory\./);
+test("settings provides language selection and the back arrow", () => {
+  assert.match(html, /id="settings-screen"[\s\S]*?id="language-back-button"/);
+  assert.match(html, /id="language-selector-back"[^>]*hidden/);
+  assert.match(html, /data-language="en"[\s\S]*?class="language-flag"/);
+  assert.match(html, /data-language="es"[\s\S]*?class="language-flag"/);
 });
 
 test("the initial language selector fades in without repeating its cold-start animation", () => {
@@ -173,19 +172,30 @@ test("system back from the language selector opened by the home page returns to 
   assert.equal(runtime.document.documentElement.lang, "en");
 });
 
-test("system back from home returns to the original selector, then reaches the root", () => {
+test("home back stays at the root", () => {
   const runtime = makeLanguageRuntime();
-  const navigation = runtime.window.JapaneseCardsLanguageNavigation;
   runtime.buttons[0].click();
   runtime.runFrames([0, 165, 337.5, 540, 750, 892.5, 1125, 1297.5, 1500]);
   runtime.runTimers();
-  assert.equal(navigation.backFromHome(), true);
-  assert.equal(runtime.gate.hidden, false);
-  assert.equal(runtime.options.hidden, false, "language choices appear immediately");
-  assert.equal(runtime.loading.hidden, true, "the loading screen stays hidden during the return transition");
+  assert.equal(runtime.window.JapaneseCardsLanguageNavigation.backFromHome(), false);
+  assert.equal(runtime.gate.hidden, true);
+});
+
+test("settings back arrow returns to app and same language skips loading", () => {
+  const runtime = makeLanguageRuntime();
+  assert.equal(runtime.selectorBack.hidden, true);
+  runtime.buttons[0].click();
+  runtime.runFrames([0, 165, 337.5, 540, 750, 892.5, 1125, 1297.5, 1500]);
   runtime.runTimers();
-  assert.equal(navigation.isSelectorVisible(), true);
-  assert.equal(navigation.backFromSelector(), false);
+  runtime.backButton.click(); runtime.runTimers();
+  assert.equal(runtime.selectorBack.hidden, false);
+  runtime.selectorBack.click();
+  assert.equal(runtime.gate.hidden, true);
+  runtime.backButton.click(); runtime.runTimers();
+  runtime.buttons[0].click();
+  assert.equal(runtime.gate.hidden, true);
+  assert.equal(runtime.loading.hidden, true);
+  assert.equal(runtime.frames.length, 0);
 });
 
 test("the staged selector takes 1.5 seconds, then fades into the selected language", () => {
