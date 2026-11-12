@@ -33,6 +33,57 @@ const cancelEditButton = document.querySelector("#cancel-edit-button");
 const backToLearningButton = document.querySelector("#back-to-learning-button");
 const addFeedback = document.querySelector("#add-feedback");
 const enterHint = document.querySelector("#enter-hint");
+const overwriteDialog = document.querySelector("#overwrite-dialog");
+let pendingOverwrite = null;
+
+function normalizeDeckWord(value) {
+  return String(value).trim().toLowerCase();
+}
+
+function requestCardOverwrite(japanese, save) {
+  if (overwriteDialog.open) return;
+  const index = cards.findIndex((card) => normalizeDeckWord(card.japanese) === normalizeDeckWord(japanese));
+  if (index === -1) { save(-1); return; }
+  document.querySelector("#overwrite-word").textContent = cards[index].japanese;
+  overwriteDialog.returnValue = "cancel";
+  pendingOverwrite = () => save(index);
+  overwriteDialog.showModal();
+}
+
+overwriteDialog.addEventListener("close", () => {
+  const save = pendingOverwrite;
+  pendingOverwrite = null;
+  if (overwriteDialog.returnValue === "overwrite") save?.();
+});
+
+function filterDeckList(value) {
+  const query = normalizeDeckWord(value);
+  let count = 0;
+  wordList.querySelectorAll(".word-row[data-card-index]").forEach((row) => {
+    row.hidden = !normalizeDeckWord(cards[Number(row.dataset.cardIndex)].japanese).includes(query);
+    if (!row.hidden) count++;
+  });
+  deckListCount.textContent = query ? `${count} / ${cards.length}` : (count === 1 ? "1 word" : `${count} words`);
+  wordList.querySelector(".deck-search-empty").hidden = count > 0;
+}
+
+function renderAddDeckMatches() {
+  const list = document.querySelector("#add-deck-matches");
+  list.replaceChildren();
+  const query = normalizeDeckWord(japaneseInput.value);
+  cards.filter((card) => normalizeDeckWord(card.japanese).includes(query)).forEach((card) => {
+    const row = document.createElement("article");
+    row.className = "word-details add-deck-match";
+    const word = document.createElement("strong");
+    word.textContent = card.japanese;
+    const meaning = document.createElement("p");
+    meaning.textContent = card.meanings.join(" · ");
+    row.append(word, meaning);
+    list.append(row);
+  });
+  document.querySelector("#add-deck-empty").hidden = list.childElementCount > 0;
+  document.querySelector("#add-deck-search").hidden = editingCardIndex !== null;
+}
 const flashcard = document.querySelector("#flashcard");
 const wordTranslationPopup = document.querySelector("#word-translation-popup");
 const promptWord = document.querySelector("#prompt-word");
@@ -322,12 +373,14 @@ function showScreen(name) {
   }
   Object.entries(screens).forEach(([key, screen]) => { screen.hidden = key !== name; });
   if (name === "home") updateDeckCount();
+  if (name === "add") renderAddDeckMatches();
 }
 
 // Called by Android's system Back gesture. Return false only at the root so
 // Android can apply its normal behavior; all in-app screens use their existing
 // cancellation paths, including their loading and form guards.
 window.JapaneseCardsHandleBack = function handleSystemBack() {
+  if (overwriteDialog.open) { overwriteDialog.close("cancel"); return true; }
   const language = window.JapaneseCardsLanguageNavigation;
   if (language?.isSelectorVisible()) return language.backFromSelector();
   if (!wordTranslationPopup.hidden) {
@@ -372,6 +425,7 @@ function renderDeckList(highlightIndex = -1) {
   cards.forEach((card, index) => {
     const row = document.createElement("article");
     row.className = "word-row";
+    row.dataset.cardIndex = index;
     if (index === highlightIndex) {
       row.classList.add("is-updated");
       row.addEventListener("animationend", () => row.classList.remove("is-updated"), { once: true });
@@ -408,6 +462,11 @@ function renderDeckList(highlightIndex = -1) {
     row.append(removeButton, details, editButton);
     wordList.append(row);
   });
+  const empty = document.createElement("p");
+  empty.className = "empty-word-list deck-search-empty";
+  empty.textContent = "No matching words in this deck.";
+  wordList.append(empty);
+  filterDeckList("");
 }
 
 function createDeckEntryRow() {
@@ -547,15 +606,20 @@ function addDeckEntry() {
   if (!japanese || meanings.length === 0) return;
 
   const english = meanings[0];
-  const nextCards = [{ id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings, examples }, ...cards];
-  if (!saveCards(nextCards)) {
-    window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
-    return;
-  }
-  cards = nextCards;
-  renderDeckList(0);
-  wordList.scrollTop = 0;
-  wordList.querySelector(".deck-entry-japanese")?.focus({ preventScroll: true });
+  requestCardOverwrite(japanese, (existingIndex) => {
+    const entry = { japanese, hiragana, english, meanings, examples };
+    const nextCards = existingIndex < 0
+      ? [{ id: crypto.randomUUID?.() || String(Date.now()), ...entry }, ...cards]
+      : updateCardAt(cards, existingIndex, entry);
+    if (!saveCards(nextCards)) {
+      window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
+      return;
+    }
+    cards = nextCards;
+    renderDeckList(existingIndex < 0 ? 0 : existingIndex);
+    wordList.scrollTop = 0;
+    wordList.querySelector(".deck-entry-japanese")?.focus({ preventScroll: true });
+  });
 }
 
 function removeDeckCard(index) {
@@ -1456,6 +1520,7 @@ wordList.addEventListener("input", (event) => {
     return;
   }
   if (!event.target.matches(".deck-entry-japanese")) return;
+  filterDeckList(event.target.value);
   const hiragana = event.target.closest(".deck-entry-row")?.querySelector(".deck-entry-hiragana");
   if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
     hiragana.value = compactHiragana(romajiToHiragana(event.target.value.trim()));
@@ -1536,28 +1601,35 @@ cardForm.addEventListener("submit", (event) => {
   if (!japanese || meanings.length === 0) return;
   const english = meanings[0];
   const isEditing = editingCardIndex !== null;
-  const nextCards = !isEditing
-    ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings, examples }]
-    : updateCardAt(cards, editingCardIndex, { japanese, hiragana, english, meanings, examples });
-  if (!saveCards(nextCards)) {
-    window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
-    return;
-  }
-  cards = nextCards;
-  if (!isEditing) {
-    cardForm.reset();
-    resetMeaningInputs();
-    hiraganaManuallyEdited = false;
-    showAddFeedback(japanese);
-    japaneseInput.focus();
-    return;
-  }
-  const returnScreen = formReturnScreen;
-  const editedIndex = editingCardIndex;
-  editingCardIndex = null;
-  showScreen(returnScreen);
-  if (returnScreen === "deck") focusDeckCard(editedIndex);
+  const save = (existingIndex = -1) => {
+    const nextCards = !isEditing && existingIndex < 0
+      ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings, examples }]
+      : updateCardAt(cards, isEditing ? editingCardIndex : existingIndex, { japanese, hiragana, english, meanings, examples });
+    if (!saveCards(nextCards)) {
+      window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
+      return;
+    }
+    cards = nextCards;
+    if (!isEditing) {
+      cardForm.reset();
+      resetMeaningInputs();
+      hiraganaManuallyEdited = false;
+      renderAddDeckMatches();
+      showAddFeedback(japanese);
+      japaneseInput.focus();
+      return;
+    }
+    const returnScreen = formReturnScreen;
+    const editedIndex = editingCardIndex;
+    editingCardIndex = null;
+    showScreen(returnScreen);
+    if (returnScreen === "deck") focusDeckCard(editedIndex);
+  };
+  if (isEditing) save();
+  else requestCardOverwrite(japanese, save);
 });
+
+japaneseInput.addEventListener("input", renderAddDeckMatches);
 
 cardForm.addEventListener("keydown", (event) => {
   if (!(event.target instanceof HTMLInputElement) || !event.target.closest("#english-meanings")) return;

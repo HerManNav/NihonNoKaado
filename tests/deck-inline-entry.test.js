@@ -34,8 +34,8 @@ test("inline entry prepends each saved card below the form and keeps focus at th
 
   assert.match(addDeck, /const groups = \[\.\.\.row\.querySelectorAll\("\.deck-entry-meaning-group"\)\]/);
   assert.match(addDeck, /const examples = meaningEntries\.map\(\(entry\) => entry\.example\)/);
-  assert.match(addDeck, /const nextCards = \[\{ id:[^\n]*, japanese, hiragana, english, meanings, examples \}, \.\.\.cards\]/);
-  assert.match(addDeck, /cards = nextCards;\s*renderDeckList\(0\);\s*wordList\.scrollTop = 0;\s*wordList\.querySelector\("\.deck-entry-japanese"\)\?\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(addDeck, /const nextCards = existingIndex < 0\s*\? \[\{ id:[^\n]*, \.\.\.entry \}, \.\.\.cards\]/);
+  assert.match(addDeck, /cards = nextCards;\s*renderDeckList\(existingIndex < 0 \? 0 : existingIndex\);\s*wordList\.scrollTop = 0;\s*wordList\.querySelector\("\.deck-entry-japanese"\)\?\.focus\(\{ preventScroll: true \}\)/);
   assert.doesNotMatch(addDeck, /scrollIntoView/);
   assert.match(app, /event\.key === "Enter" && \(isMeaningField \|\| isExampleEndField\)[\s\S]*?addDeckEntry\(\)/);
 });

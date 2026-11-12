@@ -193,6 +193,11 @@
           </div>
           <button id="back-to-learning-button" class="text-button back-to-learning-button" type="button">Back to learning</button>
         </form>
+        <div id="add-deck-search" class="add-deck-search">
+          <h2>Current deck</h2>
+          <div id="add-deck-matches" class="add-deck-matches"></div>
+          <p id="add-deck-empty" class="empty-word-list" role="status" hidden>No matching words in this deck.</p>
+        </div>
       </section>
 
       <section id="settings-screen" class="screen deck-screen" aria-labelledby="settings-title" hidden>
@@ -245,6 +250,17 @@
       <div><strong>Successfully exported</strong><p id="export-toast-message"></p></div>
     </div>
     <div id="word-translation-popup" class="word-translation-popup" role="status" aria-live="polite" hidden></div>
+    <dialog id="overwrite-dialog" class="overwrite-dialog" aria-labelledby="overwrite-title" aria-describedby="overwrite-description">
+      <form method="dialog">
+        <h2 id="overwrite-title">Overwrite existing card?</h2>
+        <p id="overwrite-description">This word already exists in your deck. Replace its meanings and examples with this card?</p>
+        <p id="overwrite-word" class="overwrite-word"></p>
+        <div class="form-actions">
+          <button class="secondary-button" value="cancel" autofocus>Cancel</button>
+          <button class="primary-button" value="overwrite">Overwrite</button>
+        </div>
+      </form>
+    </dialog>
     <script src="language.js" defer></script>
   </body>
 </html>
