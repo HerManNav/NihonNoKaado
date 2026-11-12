@@ -61,6 +61,9 @@ const confirmDefaultDeckLoadButton = document.querySelector("#confirm-default-de
 const importFile = document.querySelector("#import-file");
 let storageWarning = "";
 let editingCardIndex = null;
+let editingDeckScrollTop = 0;
+let lastDeckScrollTop = 0;
+let editingPageScrollTop = 0;
 let formReturnScreen = "home";
 let hiraganaManuallyEdited = false;
 let addFeedbackTimeout = null;
@@ -525,7 +528,7 @@ function addDeckEntry() {
   const row = wordList.querySelector(".deck-entry-row");
   if (!row) return;
   const japanese = row.querySelector(".deck-entry-japanese").value.trim();
-  const hiragana = row.querySelector(".deck-entry-hiragana").value.trim() || romajiToHiragana(japanese);
+  const hiragana = compactHiragana(row.querySelector(".deck-entry-hiragana").value.trim() || romajiToHiragana(japanese));
   const groups = [...row.querySelectorAll(".deck-entry-meaning-group")];
   const meaningEntries = groups.map((group) => {
     const romaji = group.querySelector(".deck-entry-example-romaji").value.trim();
@@ -534,7 +537,7 @@ function addDeckEntry() {
       meaning: group.querySelector(".meaning-translation").value.trim(),
       example: {
         romaji,
-        hiragana: customHiragana || romajiToHiragana(romaji),
+        hiragana: compactHiragana(customHiragana || romajiToHiragana(romaji)),
         english: group.querySelector(".deck-entry-example-english").value.trim(),
       },
     };
@@ -1303,6 +1306,8 @@ function defaultDeckErrorMessage(resource, error) {
 function startEditingCard(index) {
   const card = cards[index];
   if (!card) return;
+  editingDeckScrollTop = wordList.scrollTop || lastDeckScrollTop;
+  editingPageScrollTop = window.scrollY;
   editingCardIndex = index;
   formReturnScreen = "deck";
   hiraganaManuallyEdited = false;
@@ -1320,8 +1325,27 @@ function startEditingCard(index) {
 
 function cancelCardForm() {
   const returnScreen = formReturnScreen;
+  const editedIndex = editingCardIndex;
   editingCardIndex = null;
   showScreen(returnScreen);
+  if (returnScreen === "deck" && editedIndex !== null) focusDeckCard(editedIndex, false);
+}
+
+function focusDeckCard(index, highlight = true) {
+  renderDeckList(highlight ? index : -1);
+  const row = wordList.children[index + 1];
+  requestAnimationFrame(() => {
+    wordList.scrollTop = editingDeckScrollTop;
+    lastDeckScrollTop = editingDeckScrollTop;
+    window.scrollTo(0, editingPageScrollTop);
+    row?.querySelector(".edit-word-button")?.focus({ preventScroll: true });
+  });
+}
+
+wordList.addEventListener("scroll", () => { lastDeckScrollTop = wordList.scrollTop; }, { passive: true });
+
+function compactHiragana(value) {
+  return String(value || "").replace(/\s+/g, "");
 }
 
 function showAddFeedback(japanese) {
@@ -1422,7 +1446,7 @@ wordList.addEventListener("input", (event) => {
   if (event.target.matches(".deck-entry-example-romaji")) {
     const hiragana = event.target.closest(".deck-entry-meaning-group")?.querySelector(".deck-entry-example-hiragana");
     if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
-      hiragana.value = romajiToHiragana(event.target.value.trim());
+      hiragana.value = compactHiragana(romajiToHiragana(event.target.value.trim()));
       hiragana.dataset.manuallyEdited = "false";
     }
     return;
@@ -1434,7 +1458,7 @@ wordList.addEventListener("input", (event) => {
   if (!event.target.matches(".deck-entry-japanese")) return;
   const hiragana = event.target.closest(".deck-entry-row")?.querySelector(".deck-entry-hiragana");
   if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
-    hiragana.value = romajiToHiragana(event.target.value.trim());
+    hiragana.value = compactHiragana(romajiToHiragana(event.target.value.trim()));
     hiragana.dataset.manuallyEdited = "false";
   }
 });
@@ -1453,8 +1477,9 @@ wordList.addEventListener("keydown", (event) => {
   const isJapaneseField = event.target.matches(".deck-entry-japanese");
   const isMeaningField = event.target.matches(".deck-entry-meaning");
   const isExampleRomajiField = event.target.matches(".deck-entry-example-romaji");
+  const isExampleHiraganaField = event.target.matches(".deck-entry-example-hiragana");
   const isExampleEndField = event.target.matches(".deck-entry-example-english");
-  if (!isJapaneseField && !isMeaningField && !isExampleRomajiField && !isExampleEndField) return;
+  if (!isJapaneseField && !isMeaningField && !isExampleRomajiField && !isExampleHiraganaField && !isExampleEndField) return;
   const meaningInputs = [...row.querySelectorAll(".deck-entry-meaning")];
   const meaningIndex = meaningInputs.indexOf(event.target.closest(".deck-entry-meaning-group")?.querySelector(".deck-entry-meaning"));
   const isLastGroup = meaningIndex === meaningInputs.length - 1;
@@ -1469,6 +1494,12 @@ wordList.addEventListener("keydown", (event) => {
     const nextGroup = createDeckMeaningInput();
     row.querySelector(".deck-entry-meanings").append(nextGroup);
     nextGroup.querySelector(".deck-entry-meaning").focus();
+  } else if (event.key === "Enter" && isExampleRomajiField) {
+    event.preventDefault();
+    addDeckEntry();
+  } else if (event.key === "Enter" && isExampleHiraganaField) {
+    event.preventDefault();
+    addDeckEntry();
   } else if (event.key === "Enter" && isExampleEndField && isLastGroup) {
     event.preventDefault();
     addDeckEntry();
@@ -1481,12 +1512,12 @@ wordList.addEventListener("keydown", (event) => {
 cardForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const japanese = japaneseInput.value.trim();
-  const hiragana = hiraganaInput.value.trim() || romajiToHiragana(japanese);
+  const hiragana = compactHiragana(hiraganaInput.value.trim() || romajiToHiragana(japanese));
   const meaningEntries = [...englishMeanings.querySelectorAll(".meaning-entry-group")].map((group) => ({
     meaning: group.querySelector(".meaning-translation").value.trim(),
     example: {
       romaji: group.querySelector(".meaning-example-romaji").value.trim(),
-      hiragana: group.querySelector(".meaning-example-hiragana").value.trim() || romajiToHiragana(group.querySelector(".meaning-example-romaji").value.trim()),
+      hiragana: compactHiragana(group.querySelector(".meaning-example-hiragana").value.trim() || romajiToHiragana(group.querySelector(".meaning-example-romaji").value.trim())),
       english: group.querySelector(".meaning-example-english").value.trim(),
     },
   })).filter((entry) => entry.meaning);
@@ -1525,10 +1556,7 @@ cardForm.addEventListener("submit", (event) => {
   const editedIndex = editingCardIndex;
   editingCardIndex = null;
   showScreen(returnScreen);
-  if (returnScreen === "deck") {
-    renderDeckList(editedIndex);
-    wordList.children[editedIndex]?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }
+  if (returnScreen === "deck") focusDeckCard(editedIndex);
 });
 
 cardForm.addEventListener("keydown", (event) => {
@@ -1567,14 +1595,14 @@ englishMeanings.addEventListener("input", (event) => {
   if (!event.target.matches(".meaning-example-romaji")) return;
   const hiragana = event.target.closest(".meaning-entry-group")?.querySelector(".meaning-example-hiragana");
   if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
-    hiragana.value = romajiToHiragana(event.target.value.trim());
+    hiragana.value = compactHiragana(romajiToHiragana(event.target.value.trim()));
     hiragana.dataset.manuallyEdited = "false";
   }
 });
 
 japaneseInput.addEventListener("input", () => {
   if (shouldAutoConvertHiragana(hiraganaManuallyEdited, hiraganaInput.value)) {
-    hiraganaInput.value = romajiToHiragana(japaneseInput.value.trim());
+    hiraganaInput.value = compactHiragana(romajiToHiragana(japaneseInput.value.trim()));
     hiraganaManuallyEdited = false;
   }
 });
