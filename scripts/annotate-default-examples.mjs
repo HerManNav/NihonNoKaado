@@ -5,6 +5,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { annotateExample } from "./tkg-context-meaning.mjs";
 import { explainSuruComponents } from "./suru-tip-components.mjs";
+import { applyLearnerGrammarTips } from "./learner-grammar-tips.mjs";
+import { normalizeTopicParticleRomaji } from "./topic-particle-romaji.mjs";
 
 // Run without --write to inspect full coverage and the sense-review queue.
 // The pinned source JSON is retained in chunked archives under source-data.
@@ -15,6 +17,7 @@ const DICTIONARY_DIRECTORY = path.join(ROOT, "decks");
 const SOURCE_DIRECTORY = path.join(DICTIONARY_DIRECTORY, "source-data");
 const INDEX_FILE = path.join(SOURCE_DIRECTORY, `tkg-entries-index-${SHORT_COMMIT}.json`);
 const suruComponents = JSON.parse(await readFile(path.join(ROOT, "scripts/suru-components.json"), "utf8"));
+const learnerSources = JSON.parse(await readFile(path.join(ROOT, "scripts/default-learner-source-examples.json"), "utf8"));
 const SPACING_OVERRIDES_FILE = path.join(ROOT, "scripts/default-example-spacing-overrides.json");
 const EXAMPLE_REPLACEMENTS_FILE = path.join(ROOT, "scripts/default-example-replacements.json");
 const MEANING_OVERRIDES_FILE = path.join(ROOT, "scripts/default-example-meaning-overrides.json");
@@ -143,6 +146,20 @@ for (const id of cardSourceIds) {
 const decks = new Map();
 for (const size of DECK_SIZES) {
   decks.set(size, JSON.parse(await readFile(path.join(DICTIONARY_DIRECTORY, `english/most-common-${size}.json`), "utf8")));
+  for (const card of decks.get(size).cards) card.examples.forEach((example, index) => {
+    // Restore source spelling before matching canonical spacing and review keys.
+    // The final annotation pass publishes the pronounced spelling wa again.
+    let tokenIndex = 0;
+    example.romaji = example.romaji.replace(/[A-Za-z]+(?:['’][A-Za-z]+)*/g, (token) => {
+      const word = example.wordMeanings?.[tokenIndex++];
+      return token === "wa" && word?.entryId === "00079_ha" ? "ha" : token;
+    });
+    const source = learnerSources[card.japanese]?.[index];
+    if (source && source.romaji.replace(/\s/g,'') === example.romaji.replace(/\s/g,'')) {
+      example.romaji = source.romaji;
+      example.english = source.english;
+    }
+  });
 }
 // Restore canonical source spacing before applying the annotations and their
 // reviewed token positions. The final pass below presents these expressions as
@@ -550,6 +567,8 @@ for (const size of DECK_SIZES) {
       example.romaji = romaji;
       example.wordMeanings = words;
       explainSuruComponents(example, suruComponents);
+      applyLearnerGrammarTips(example, "en", suruComponents);
+      normalizeTopicParticleRomaji(example);
       assignedExamples += 1;
       assignedTokens += words.length;
     }

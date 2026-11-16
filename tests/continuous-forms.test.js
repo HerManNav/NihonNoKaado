@@ -22,7 +22,7 @@ test('living, past, negative and passive examples retain their sentence meaning'
     ['I live in Chiba Prefecture.', 'sundeimasu', /sumu.*live.*sunde \+ imasu/i],
     ['I lived in Japan for three years.', 'sundeimashita', /past.*sumu.*live.*sunde \+ imashita/i],
     ["I haven't seen them since graduation.", 'atteinai', /negative.*au.*atte \+ inai/i],
-    ["It's sold nationwide.", 'hanbaisareteiru', /being sold.*passive.*hanbai suru/i],
+    ["It's sold nationwide.", 'sareteiru', /being sold.*passive.*hanbai suru/i],
     ['I live in California.', 'sundeiru', /live.*sunde \+ iru.*sumu/i],
   ]) {
     const example = examples.find(item => item.english === english);

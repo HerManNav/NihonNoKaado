@@ -5,11 +5,11 @@ const path = require("node:path");
 
 const deckDirectory = path.join(__dirname, "../decks");
 const specs = [
-  { size: 50, visibleTokens: 212 },
-  { size: 100, visibleTokens: 453 },
-  { size: 500, visibleTokens: 2365 },
-  { size: 1000, visibleTokens: 4700 },
-  { size: 2000, visibleTokens: 9565 },
+  { size: 50, visibleTokens: 214 },
+  { size: 100, visibleTokens: 460 },
+  { size: 500, visibleTokens: 2395 },
+  { size: 1000, visibleTokens: 4761 },
+  { size: 2000, visibleTokens: 9685 },
 ];
 // Keep this identical to the romaji token splitter in app.js. Punctuation and
 // whitespace are not popup targets; apostrophes within a word are retained.
@@ -95,7 +95,7 @@ test("reused examples have identical contextual annotations across all decks", (
       } else annotatedBySentence.set(key, example.wordMeanings);
     }
   }
-  assert.equal(tokenOccurrences, 17295, "Review changed total token coverage across all five decks");
+  assert.equal(tokenOccurrences, 17515, "Review changed total token coverage across all five decks");
   assert.equal(uniqueSentences.size, 1992, "Review changed unique example count across all five decks");
 });
 

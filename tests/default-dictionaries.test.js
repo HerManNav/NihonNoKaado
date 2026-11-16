@@ -52,7 +52,7 @@ test("each default dataset has unique romaji and a complete sense-matched exampl
 
 test("default example romaji uses readable word spacing without changing punctuation", () => {
   const examples = manifest.decks.flatMap(({ file }) => readDeck(file).cards.flatMap((card) => card.examples || []));
-  assert.ok(examples.some(({ romaji }) => romaji === "watashi ha gakusei da."));
+  assert.ok(examples.some(({ romaji }) => romaji === "watashi wa gakusei da."));
   assert.ok(examples.some(({ romaji }) => romaji === "nani wo suru?"));
   assert.ok(examples.some(({ romaji }) => /\w\s+\w/.test(romaji)), "Expected segmented romaji words");
   assert.ok(examples.every(({ romaji }) => !/\s{2}|\s+[.,!?;:]/.test(romaji)), "Spacing should not create doubled spaces or split punctuation");

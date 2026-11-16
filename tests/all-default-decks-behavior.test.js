@@ -7,11 +7,11 @@ const { prepareDefaultDeck, serializeDeck, parseImportedDeck } = require('../dec
 const specs = [
   ...[50, 100].map(size => ({ size, checks: [
     ['ame ga futte iru.', 'futte', /furu.*futte \+ iru/i],
-    ['toshokan de benkyoushimasu.', 'benkyoushimasu', /compound verb: benkyou \+ shimasu.*polite/i],
+    ['toshokan de benkyou shimasu.', 'shimasu', /compound verb: benkyou \+ shimasu.*polite/i],
     ['akai no ga hoshii.', 'no', /nominalizer/i],
   ] })),
   ...[500, 1000, 2000].map(size => ({ size, checks: [
-    ['toshokan de benkyoushimasu.', 'benkyoushimasu', /compound verb: benkyou \+ shimasu.*polite/i],
+    ['toshokan de benkyou shimasu.', 'shimasu', /compound verb: benkyou \+ shimasu.*polite/i],
     ['chiba ken ni sundeimasu.', 'sundeimasu', /sumu.*sunde \+ imasu.*continuing/i],
     ['ame ga futte iru.', 'futte', /furu.*futte \+ iru/i],
     ['tsuki ga kirei da.', 'kirei', /beautiful.*na-adjective.*plain copula/i],

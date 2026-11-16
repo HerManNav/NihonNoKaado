@@ -126,6 +126,30 @@ const examples = [
   {romaji: "kono resutoran de tabeyou.", hiragana: "このレストランでたべよう。", english: "Let's eat at this restaurant."},
 ];
 
+test("actual form wiring warns on locked taps and enables focus suggestions only for the ready group", async () => {
+  const ui = setupUiGroups();
+  for (const item of [ui.inlineA,ui.standalone]) {
+    const controller = ui.context.exampleControllers.get(item.group);
+    item.meaning.value='';controller.refresh();
+    const wrapper=item.group.querySelector(item===ui.standalone ? '.meaning-example-fields' : '.deck-entry-example-fields');
+    const fields=[item.romaji,item.hiragana,item.english];
+    assert.ok(fields.every(field=>field.disabled));
+    assert.equal(wrapper.getAttribute('aria-disabled'),'true');
+    wrapper.click();
+    const status=item.group.querySelector('.example-status');
+    assert.equal(status.hidden,false);
+    assert.match(status.textContent,/Fill in Japanese.*hiragana.*meaning/);
+    assert.equal(status.classList.contains('is-warning'),true);
+    assert.ok(fields.every(field=>field.value===''));
+    item.meaning.value='to eat';controller.refresh();
+    assert.ok(fields.every(field=>!field.disabled));
+    assert.equal(wrapper.getAttribute('aria-disabled'),'false');
+    item.romaji.fire('focus');await controller.wait();
+    assert.equal(item.romaji.value,examples[0].romaji);
+    assert.equal(ui.inlineB.romaji.value,'');
+  }
+});
+
 test("focus remains non-overwriting for partial and full examples", async () => {
   for (const index of [0, 1, 2]) {
     let calls = 0;

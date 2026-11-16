@@ -17,8 +17,8 @@ const getMeaning = (example, word) => {
 };
 
 test('kaketsusareta describes a passed bill and the past passive of kaketsu suru', () => {
-  const example = getExample('kokkai de houan ga kaketsusareta.');
-  assert.match(getMeaning(example, 'kaketsusareta'), /was passed.*past passive.*kaketsu suru.*kaketsu \+ sareta/i);
+  const example = getExample('kokkai de houan ga kaketsu sareta.');
+  assert.match(getMeaning(example, 'sareta'), /was passed.*past passive.*kaketsu suru.*kaketsu \+ sareta/i);
 });
 
 test('a separated noun and sareta explain the same contextual passive construction', () => {
@@ -30,9 +30,9 @@ test('a separated noun and sareta explain the same contextual passive constructi
 
 test('other verbs show past passive, while honorific saremashita retains its own use', () => {
   for (const [sentence, word, pattern] of [
-    ['saigai taisaku honbu ga setchisareta.', 'setchisareta', /was established.*past passive.*setchi suru/i],
+    ['saigai taisaku honbu ga setchi sareta.', 'sareta', /was established.*past passive.*setchi suru/i],
     ['atarashii shushou ga erabareta.', 'erabareta', /was elected.*past passive.*erabu/i],
-    ['kono e ha yuumei na gaka niyotte egakareta.', 'egakareta', /was painted.*past passive.*egaku/i],
+    ['kono e wa yuumei na gaka niyotte egakareta.', 'egakareta', /was painted.*past passive.*egaku/i],
     ['kouchou sensei ga o hanashi wo saremashita.', 'saremashita', /gave.*honorific polite past/i],
   ]) assert.match(getMeaning(getExample(sentence), word), pattern);
 });

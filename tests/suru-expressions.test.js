@@ -30,9 +30,9 @@ test('sanka means participation and lexical verbs are not split mechanically', (
   }
 });
 
-for (const word of ['benkyousuru', 'sankasuru', 'sankashita', 'tourokushita']) {
+for (const [stem,word] of [['benkyou','suru'], ['sanka','suru'], ['sanka','shita'], ['touroku','shita']]) {
   test(`${word} explains the compound and its suru form`, () => {
-    const found = examples.flatMap(example => example.wordMeanings).filter(item => item.romaji === word);
+    const found = examples.flatMap(example => example.wordMeanings).filter(item => item.romaji === word && item.meaning.includes(`Base compound: ${stem} (`));
     assert(found.length > 0);
     for (const item of found) assert.match(item.meaning, /compound verb:.*\+.*(?:suru|shita)/);
   });
@@ -40,8 +40,8 @@ for (const word of ['benkyousuru', 'sankasuru', 'sankashita', 'tourokushita']) {
 
 for (const [sentence, parts] of [
   ['kore ga mottomo taisetsu desu.', ['taisetsu', 'desu']],
-  ['kochira koso, yoroshiku onegaishimasu.', ['yoroshiku', 'onegaishimasu']],
-  ['senjitsu ha arigatou gozaimashita.', ['arigatou', 'gozaimashita']],
+  ['kochira koso, yoroshiku onegai shimasu.', ['yoroshiku', 'onegai']],
+  ['senjitsu wa arigatou gozaimashita.', ['arigatou', 'gozaimashita']],
 ]) {
   test(`${sentence} gives both expression words the same meaning`, () => {
     const example = examples.find(item => item.romaji === sentence);

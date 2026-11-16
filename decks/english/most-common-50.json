@@ -117,7 +117,7 @@
       "english": "at, in (location of action)",
       "examples": [
         {
-          "romaji": "toshokan de benkyoushimasu.",
+          "romaji": "toshokan de benkyou shimasu.",
           "hiragana": "としょかんでべんきょうします。",
           "english": "I study at the library.",
           "wordMeanings": [
@@ -134,7 +134,13 @@
               "senseNumber": 1
             },
             {
-              "romaji": "benkyoushimasu",
+              "romaji": "benkyou",
+              "meaning": "present polite of benkyousuru (study) (compound verb: benkyou + shimasu, polite of benkyousuru) Base compound: benkyou (study) + suru (to do).",
+              "entryId": "00527_benkyousuru",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "shimasu",
               "meaning": "present polite of benkyousuru (study) (compound verb: benkyou + shimasu, polite of benkyousuru) Base compound: benkyou (study) + suru (to do).",
               "entryId": "00527_benkyousuru",
               "senseNumber": 1
@@ -311,7 +317,7 @@
             },
             {
               "romaji": "imasu",
-              "meaning": "present polite of iru (exist)",
+              "meaning": "present polite of iru (exist) Formation: iru → i- (stem) + -masu (polite non-past).",
               "entryId": "00495_iru",
               "senseNumber": 1
             }
@@ -463,7 +469,7 @@
             },
             {
               "romaji": "wasuremashita",
-              "meaning": "polite past of wasureru (forget)",
+              "meaning": "polite past of wasureru (forget) Formation: wasureru → wasure- (stem) + -mashita (polite past).",
               "entryId": "00474_wasureru",
               "senseNumber": 1
             }
@@ -477,7 +483,7 @@
       "english": "and, among other things",
       "examples": [
         {
-          "romaji": "atsui toki ha mizu ya ocha ga oishii.",
+          "romaji": "atsui toki wa mizu ya ocha ga oishii.",
           "hiragana": "あついときはみずやおちゃがおいしい。",
           "english": "When it's hot, water, tea, and other drinks taste good.",
           "wordMeanings": [
@@ -493,7 +499,7 @@
               "entryId": "03094_toki"
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -598,7 +604,7 @@
       "english": "year",
       "examples": [
         {
-          "romaji": "kotoshi ha isogashii.",
+          "romaji": "kotoshi wa isogashii.",
           "hiragana": "ことしはいそがしい。",
           "english": "This year is busy.",
           "wordMeanings": [
@@ -609,7 +615,7 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -743,7 +749,7 @@
       "english": "question marker",
       "examples": [
         {
-          "romaji": "kore ha nan desu ka.",
+          "romaji": "kore wa nan desu ka.",
           "hiragana": "これはなんですか。",
           "english": "What is this?",
           "wordMeanings": [
@@ -754,7 +760,7 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -818,7 +824,7 @@
       "english": "is, am, are (plain copula)",
       "examples": [
         {
-          "romaji": "watashi ha gakusei da.",
+          "romaji": "watashi wa gakusei da.",
           "hiragana": "わたしはがくせいだ。",
           "english": "I am a student.",
           "wordMeanings": [
@@ -829,7 +835,7 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -988,7 +994,7 @@
             },
             {
               "romaji": "okiteimashita",
-              "meaning": "past progressive of okiru (stay awake) (okite + imashita: -te form + iru, polite past continuing action or state)",
+              "meaning": "past progressive of okiru (stay awake) (okite + imashita: -te form + iru, polite past continuing action or state) Formation: okiru → okitei- (stem) + -mashita (polite past).",
               "entryId": "00521_okiru"
             }
           ]
@@ -1144,7 +1150,7 @@
             },
             {
               "romaji": "sundeimasu",
-              "meaning": "progressive of sumu (live) (sunde + imasu: -te form + iru, polite continuing action or state)",
+              "meaning": "progressive of sumu (live) (sunde + imasu: -te form + iru, polite continuing action or state) Formation: sumu → sundei- (stem) + -masu (polite non-past).",
               "entryId": "00673_sumu",
               "senseNumber": 1
             }
@@ -1158,7 +1164,7 @@
       "english": "meeting; gathering; party; get-together",
       "examples": [
         {
-          "romaji": "kai ha nanji kara?",
+          "romaji": "kai wa nanji kara?",
           "hiragana": "かいはなんじから？",
           "english": "What time does the gathering start?",
           "wordMeanings": [
@@ -1169,7 +1175,7 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -1196,7 +1202,7 @@
       "english": "this (modifying a noun)",
       "examples": [
         {
-          "romaji": "kono hon ha omoshiroi desu.",
+          "romaji": "kono hon wa omoshiroi desu.",
           "hiragana": "このほんはおもしろいです。",
           "english": "This book is interesting.",
           "wordMeanings": [
@@ -1213,7 +1219,7 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -1438,7 +1444,7 @@
       "english": "time, moment",
       "examples": [
         {
-          "romaji": "toki ga tatsu no ha hayai desu ne.",
+          "romaji": "toki ga tatsu no wa hayai desu ne.",
           "hiragana": "ときがたつのははやいですね。",
           "english": "Time passes quickly, doesn't it?",
           "wordMeanings": [
@@ -1466,7 +1472,7 @@
               "senseNumber": 2
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -1530,7 +1536,7 @@
       "english": "approximately; about",
       "examples": [
         {
-          "romaji": "yaku10 nin ga sankashita.",
+          "romaji": "yaku10 nin ga sanka shita.",
           "hiragana": "やく10にんがさんかした。",
           "english": "About 10 people participated.",
           "wordMeanings": [
@@ -1553,7 +1559,13 @@
               "senseNumber": 1
             },
             {
-              "romaji": "sankashita",
+              "romaji": "sanka",
+              "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru) Base compound: sanka (participation) + suru (to do).",
+              "entryId": "25408_sankasuru",
+              "senseNumber": 1
+            },
+            {
+              "romaji": "shita",
               "meaning": "past of sankasuru (participate) (compound verb: sanka + shita, past of sankasuru) Base compound: sanka (participation) + suru (to do).",
               "entryId": "25408_sankasuru",
               "senseNumber": 1
@@ -1568,7 +1580,7 @@
       "english": "yen (Japanese currency)",
       "examples": [
         {
-          "romaji": "kore ha hyaku en desu.",
+          "romaji": "kore wa hyaku en desu.",
           "hiragana": "これはひゃくえんです。",
           "english": "This is 100 yen.",
           "wordMeanings": [
@@ -1579,7 +1591,7 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -1612,7 +1624,7 @@
       "english": "town, city",
       "examples": [
         {
-          "romaji": "kono machi ha shizuka desu.",
+          "romaji": "kono machi wa shizuka desu.",
           "hiragana": "このまちはしずかです。",
           "english": "This town is quiet.",
           "wordMeanings": [
@@ -1629,7 +1641,7 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -1674,7 +1686,7 @@
             },
             {
               "romaji": "tsukimasu",
-              "meaning": "present polite of tsuku (arrive)",
+              "meaning": "present polite of tsuku (arrive) Formation: tsuku → tsuki- (stem) + -masu (polite non-past).",
               "entryId": "00680_tsuku",
               "senseNumber": 1
             }
@@ -1744,7 +1756,7 @@
       "english": "world, earth",
       "examples": [
         {
-          "romaji": "sekai ha hiroi.",
+          "romaji": "sekai wa hiroi.",
           "hiragana": "せかいはひろい。",
           "english": "The world is vast.",
           "wordMeanings": [
@@ -1755,7 +1767,7 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1
@@ -1889,7 +1901,7 @@
       "english": "this (thing)",
       "examples": [
         {
-          "romaji": "kore ha nan desu ka.",
+          "romaji": "kore wa nan desu ka.",
           "hiragana": "これはなんですか。",
           "english": "What is this?",
           "wordMeanings": [
@@ -1900,7 +1912,7 @@
               "senseNumber": 1
             },
             {
-              "romaji": "ha",
+              "romaji": "wa",
               "meaning": "topic marker",
               "entryId": "00079_ha",
               "senseNumber": 1

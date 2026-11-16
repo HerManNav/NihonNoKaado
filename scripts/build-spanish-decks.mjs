@@ -2,6 +2,8 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { explainSuruComponents } from "./suru-tip-components.mjs";
+import { applyLearnerGrammarTips } from "./learner-grammar-tips.mjs";
+import { normalizeTopicParticleRomaji } from "./topic-particle-romaji.mjs";
 const suruComponents = JSON.parse(readFileSync(new URL("./suru-components.json", import.meta.url), "utf8"));
 const root = new URL("../decks/", import.meta.url);
 const read = (name) => JSON.parse(readFileSync(new URL(name, root), "utf8"));
@@ -20,6 +22,13 @@ for (const [index, card] of draft.cards.entries()) {
   if (!card.english.trim()) throw new Error(`Missing meaning at ${index}.`);
   for (const [j, example] of card.examples.entries()) {
     const before = original.examples[j];
+    normalizeTopicParticleRomaji(example);
+    // Match the source by spelling, since its learner pass may have split tokens.
+    const unsplit = {wordMeanings: example.wordMeanings.map(word=>({meaning:
+      before.wordMeanings.find(w=>w.romaji===word.romaji)?.meaning ||
+      before.wordMeanings.find(w=>w.meaning.includes('Base compound:') && word.romaji.startsWith(w.romaji))?.meaning || ''}))};
+    explainSuruComponents(example, suruComponents, "es", unsplit);
+    applyLearnerGrammarTips(example, "es", suruComponents);
     if (example.romaji !== before.romaji || example.hiragana !== before.hiragana) throw new Error(`Changed example at ${index}.`);
     if (!example.english.trim() || example.wordMeanings.length !== before.wordMeanings.length) throw new Error(`Missing translation at ${index}.`);
     for (const [k, word] of example.wordMeanings.entries()) {
@@ -27,7 +36,6 @@ for (const [index, card] of draft.cards.entries()) {
       if (correction) word.meaning = correction;
       if (!word.meaning.trim() || word.romaji !== before.wordMeanings[k].romaji) throw new Error(`Changed token at ${index}.`);
     }
-    explainSuruComponents(example, suruComponents, "es", before);
   }
 }
 for (const count of [50, 100, 500, 1000, 2000]) {

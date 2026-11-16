@@ -81,7 +81,7 @@ const cases = [
     deck: 2000, card: "hou", english: "The station is in the north direction.",
     owner: "01139_hou", exampleId: "01139_hou_ex1", sense: 1,
     tokens: [
-      [1, "ha", "00079_ha", /topic marker/i],
+      [1, "wa", "00079_ha", /topic marker/i],
       [2, "kita", "00644_kita", /north/i],
     ],
   },
@@ -141,7 +141,7 @@ const cases = [
     tokens: [
       [0, "toki", "02918_toki", /time/i],
       [3, "no", "09472_no", /nominali[sz]er|(?:the fact|that)/i],
-      [4, "ha", "00079_ha", /topic marker/i],
+      [4, "wa", "00079_ha", /topic marker/i],
       [5, "hayai", "00514_hayai", /(?:fast|quick|rapid)/i],
     ],
   },
