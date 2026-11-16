@@ -9,6 +9,12 @@ const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
 const manifest = fs.readFileSync(path.join(root, 'android-app/android/app/src/main/AndroidManifest.xml'), 'utf8');
 
 test('deck tools open import, export and clear screens and toggle on touch', () => {
+  const homeActions = html.match(/<div id="deck-actions"[^>]*>([\s\S]*?)<\/div>\s*<\/section>/)?.[1] || '';
+  const deckScreen = html.match(/<section id="deck-screen"[^>]*>([\s\S]*?)<\/section>/)?.[1] || '';
+  assert.match(homeActions, /id="add-button"/);
+  assert.doesNotMatch(homeActions, /id="deck-tools"/);
+  assert.match(deckScreen, /id="deck-tools"/);
+  assert.match(css, /\.deck-management-actions\s*\{[^}]*position:\s*fixed;[^}]*right:\s*28px;[^}]*bottom:\s*28px/);
   assert.match(app, /querySelector\("#import-action"\)\.addEventListener\("click", openDefaultDecks\)/);
   assert.match(app, /querySelector\("#export-action"\)\.addEventListener\("click", exportDeck\)/);
   assert.match(app, /querySelector\("#clear-action"\)\.addEventListener\("click", confirmClearDeck\)/);

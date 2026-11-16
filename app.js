@@ -654,9 +654,16 @@ function showScreen(name) {
     wordPopupBlocksCardAdvance = false;
     hideWordTranslationPopup();
   }
-  Object.entries(screens).forEach(([key, screen]) => { screen.hidden = key !== name; });
-  if (name === "home") updateDeckCount();
-  if (name === "add") renderAddDeckMatches();
+  const currentScreen = Object.values(screens).find(screen => !screen.hidden);
+  const nextScreen = screens[name];
+  const update = () => {
+    Object.entries(screens).forEach(([key, screen]) => { screen.hidden = key !== name; });
+    if (name === "home") updateDeckCount();
+    if (name === "add") renderAddDeckMatches();
+  };
+  if (currentScreen === nextScreen) { update(); return; }
+  if (typeof document.startViewTransition === "function") document.startViewTransition(update);
+  else update();
 }
 
 // Called by Android's system Back gesture. Return false only at the root so

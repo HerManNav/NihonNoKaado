@@ -84,19 +84,6 @@
         </div>
         <div id="deck-actions" class="deck-actions">
           <button id="add-button" class="add-button" type="button" aria-label="View deck" title="View deck">+</button>
-          <div id="deck-tools" class="deck-tools">
-            <button id="deck-tools-button" class="deck-tools-button" type="button" aria-label="Deck tools" aria-controls="deck-action-menu" aria-expanded="false" title="Deck tools">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z" />
-                <path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h8" />
-              </svg>
-            </button>
-            <div id="deck-action-menu" class="deck-action-menu" aria-label="Deck tools">
-              <button id="clear-action" class="deck-action" type="button">Clear deck</button>
-              <button id="import-action" class="deck-action" type="button">Import deck</button>
-              <button id="export-action" class="deck-action" type="button">Export deck</button>
-            </div>
-          </div>
           <input id="import-file" type="file" accept=".json,application/json" hidden />
         </div>
       </section>
@@ -135,6 +122,19 @@
           <h1 id="deck-title">Current deck</h1>
           <h2 class="deck-add-heading">Add words to the current deck</h2>
           <div id="word-list" class="word-list" aria-live="polite"></div>
+        </div>
+        <div id="deck-tools" class="deck-tools deck-management-actions">
+          <button id="deck-tools-button" class="deck-tools-button" type="button" aria-label="Deck tools" aria-controls="deck-action-menu" aria-expanded="false" title="Deck tools">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z" />
+              <path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h8" />
+            </svg>
+          </button>
+          <div id="deck-action-menu" class="deck-action-menu" aria-label="Deck tools">
+            <button id="clear-action" class="deck-action" type="button">Clear deck</button>
+            <button id="import-action" class="deck-action" type="button">Import deck</button>
+            <button id="export-action" class="deck-action" type="button">Export deck</button>
+          </div>
         </div>
       </section>
 
