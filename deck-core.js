@@ -27,6 +27,77 @@
     "(": "（", ")": "）",
   };
 
+  function normalizeSearchText(value) {
+    const text = String(value ?? "");
+    const units = [];
+    let offset = 0;
+    for (const codePoint of text) {
+      const start = offset;
+      offset += codePoint.length;
+      for (const normalizedPoint of Array.from(codePoint.toLowerCase())) {
+        units.push({ value: normalizedPoint, start, end: offset });
+      }
+    }
+    while (units.length && /^\s$/u.test(units[0].value)) units.shift();
+    while (units.length && /^\s$/u.test(units[units.length - 1].value)) units.pop();
+    return units;
+  }
+
+  function searchDeckCards(cards, value) {
+    const queryUnits = normalizeSearchText(value);
+    const query = queryUnits.map(({ value: point }) => point);
+    if (query.length === 0) {
+      return cards.map((_, index) => ({ index, distance: 0, ranges: [] }));
+    }
+    const threshold = query.length < 3 ? 0 : query.length < 5 ? 1 : 2;
+    const results = [];
+
+    for (let index = 0; index < cards.length; index++) {
+      const source = String(cards[index]?.japanese ?? "");
+      const candidateUnits = normalizeSearchText(source);
+      const candidate = candidateUnits.map(({ value: point }) => point);
+      const ranges = [];
+      let distance = Infinity;
+
+      for (let start = 0; start <= candidate.length - query.length; start++) {
+        let matches = true;
+        for (let offset = 0; offset < query.length; offset++) {
+          if (candidate[start + offset] !== query[offset]) { matches = false; break; }
+        }
+        if (!matches) continue;
+        distance = 0;
+        const range = [candidateUnits[start].start, candidateUnits[start + query.length - 1].end];
+        const previous = ranges[ranges.length - 1];
+        if (previous && range[0] <= previous[1]) previous[1] = Math.max(previous[1], range[1]);
+        else ranges.push(range);
+      }
+
+      if (distance !== 0 && threshold > 0 && Math.abs(candidate.length - query.length) <= threshold) {
+        let previous = Array.from({ length: candidate.length + 1 }, (_, column) => column);
+        for (let row = 1; row <= query.length; row++) {
+          const current = [row];
+          let rowMinimum = row;
+          for (let column = 1; column <= candidate.length; column++) {
+            const cost = query[row - 1] === candidate[column - 1] ? 0 : 1;
+            const cell = Math.min(previous[column] + 1, current[column - 1] + 1, previous[column - 1] + cost);
+            current.push(cell);
+            rowMinimum = Math.min(rowMinimum, cell);
+          }
+          previous = current;
+          if (rowMinimum > threshold) {
+            distance = threshold + 1;
+            break;
+          }
+        }
+        distance = previous[candidate.length];
+      }
+
+      if (distance <= threshold) results.push({ index, distance, ranges });
+    }
+    results.sort((left, right) => left.distance - right.distance || left.index - right.index);
+    return results;
+  }
+
   function romajiToHiragana(value) {
     const input = String(value ?? "").toLowerCase();
     if (ROMAJI_WORDS[input]) return ROMAJI_WORDS[input];
@@ -323,5 +394,5 @@
     return cards.map((card, cardIndex) => cardIndex === index ? { ...card, ...updates } : card);
   }
 
-  return { parseImportedDeck, prepareDefaultDeck, serializeDeck, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDeckEntryKeyAction, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
+  return { parseImportedDeck, prepareDefaultDeck, serializeDeck, normalizeWordMeanings, romajiToHiragana, searchDeckCards, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, getDeckEntryKeyAction, shuffle, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt };
 });

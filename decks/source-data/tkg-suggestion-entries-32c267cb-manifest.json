@@ -1,0 +1,408 @@
+{
+  "format": 1,
+  "source": "https://github.com/tkgally/je-dict-1",
+  "sourceCommit": "32c267cbfa7756a2e3542657772759d92d4e2420",
+  "license": "CC0-1.0",
+  "indexFile": "tkg-entries-index-32c267cb.json",
+  "indexSha256": "991e92a8dfc56ddc9fb94278b57b60e54776f02e2182c965b7a0f5d721fa4f75",
+  "entries": 32600,
+  "examples": 125822,
+  "archives": [
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0000.json.gz",
+      "entries": 500,
+      "bytes": 563072,
+      "sha256": "6994be039dc680cd7f2f42623115235fa4d591b99d1718cbeb97df9cfb04b75a"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0001.json.gz",
+      "entries": 500,
+      "bytes": 563507,
+      "sha256": "e26db77e803cd5a31b928c76c57d6a61a84f54dde1de988ae1e7662c3a2cbb45"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0002.json.gz",
+      "entries": 500,
+      "bytes": 559394,
+      "sha256": "30fc57e01ead22eff9aad68c5c61a48b3a011f4f26a5a0c34b71ba93779cd26a"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0003.json.gz",
+      "entries": 500,
+      "bytes": 544164,
+      "sha256": "207b428741c6179a5cf32a42de90785069a7cbfcb0270179322e4dbdfaf9a679"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0004.json.gz",
+      "entries": 500,
+      "bytes": 576003,
+      "sha256": "2bb9cde401298cf7cdb0ffc590ec94e436d329f0dff0f25f0ea8626aba7276b4"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0005.json.gz",
+      "entries": 500,
+      "bytes": 540624,
+      "sha256": "133ca44a406314f817640967edc0e244ee6f4b98c00bd567e311574725411570"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0006.json.gz",
+      "entries": 500,
+      "bytes": 587513,
+      "sha256": "f1417134a6b8a3cd0fb644bcaded4ee348e815eb706fbcb68ea5c103dd0dd412"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0007.json.gz",
+      "entries": 500,
+      "bytes": 570417,
+      "sha256": "74f4a7503d4f24bfc8a845f7aa542240e0eff1daa4346ab51d69cce983d51726"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0008.json.gz",
+      "entries": 500,
+      "bytes": 564982,
+      "sha256": "ec5572e11691be446310aa90d603b4a7369a9b50e7e6370e8705f5450dcd6b8d"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0009.json.gz",
+      "entries": 500,
+      "bytes": 574946,
+      "sha256": "513e0948ac79ec664436694b49183f2dce4c7187b8951161801993a568fc45ef"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0010.json.gz",
+      "entries": 500,
+      "bytes": 561428,
+      "sha256": "8c4e54eb43716a161299ce0ba19232c3e2168aeb5f0d7285f32e12988095367d"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0011.json.gz",
+      "entries": 500,
+      "bytes": 560786,
+      "sha256": "1b712c9207adb3c39d3bea52a78860b1443d521b1c14a40e79b2ff5eecc4b408"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0012.json.gz",
+      "entries": 500,
+      "bytes": 560120,
+      "sha256": "ac3b09feda0f6d91bdc6c284ca32087bc3cb7f072a4a0656e6933513f483debc"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0013.json.gz",
+      "entries": 500,
+      "bytes": 558227,
+      "sha256": "5142ca3099233cae34ae595ccd37659e889bea44545aa7daaf9db76188791145"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0014.json.gz",
+      "entries": 500,
+      "bytes": 569630,
+      "sha256": "83964a096efb9a64958f2d7fe176b95b68a1ad8a93e5d9e0d062c6af5d59bb7b"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0015.json.gz",
+      "entries": 500,
+      "bytes": 559109,
+      "sha256": "0a44d080e2f62eaae0d2ca8476e40a50f6ecf1d8edf731358222e0d08924f945"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0016.json.gz",
+      "entries": 500,
+      "bytes": 561166,
+      "sha256": "6f11a5e6a82eb130bb70fd2f561b027a29507d0ee70aa69d12cdd087c8436e6a"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0017.json.gz",
+      "entries": 500,
+      "bytes": 561895,
+      "sha256": "9b2a9640edb5ade87fafa080b68fbdbb07cafb5d2600c4d7a5e158105dabb06c"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0018.json.gz",
+      "entries": 500,
+      "bytes": 542454,
+      "sha256": "b4f6a360c7971ad9fecabdb67578616fea82d5c3289845a2cf8f32a36d38e5d9"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0019.json.gz",
+      "entries": 500,
+      "bytes": 559758,
+      "sha256": "08e57cfdfdc521af0eb5e693481feb9a22b24bad0aaa7b12c1387b0b7eadbe11"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0020.json.gz",
+      "entries": 500,
+      "bytes": 571561,
+      "sha256": "d6bfdce438f79b0a3c6aa48c8af40f14b4f4b6bd7db0e922c192bb0a798a19b6"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0021.json.gz",
+      "entries": 500,
+      "bytes": 547103,
+      "sha256": "b86baaab4de08a926741e42f79e0d43c9186078847548c59135649d5e8f6eae3"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0022.json.gz",
+      "entries": 500,
+      "bytes": 569311,
+      "sha256": "2d8b6d8e4932dffa53776f1bf0705f57336bdad6730014add3566f404fc8be51"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0023.json.gz",
+      "entries": 500,
+      "bytes": 550028,
+      "sha256": "b8c6071cc0e6059287d6cf59d7e0fc37b190c3541c9e276a3e73d29ccb47f3eb"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0024.json.gz",
+      "entries": 500,
+      "bytes": 563228,
+      "sha256": "8d702e286d4dd52eccf0f1fa44a0f77e98f1076c74934c9dc42cae5d0647d1ee"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0025.json.gz",
+      "entries": 500,
+      "bytes": 562498,
+      "sha256": "f9d4009792686b1d73cf8e3945b24e5585a47c4374a063397471a8e32d592d0c"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0026.json.gz",
+      "entries": 500,
+      "bytes": 552151,
+      "sha256": "3e137dd81f50b3826e404283e7af4a769a49531afd4963ac19fcbe8a76d485d9"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0027.json.gz",
+      "entries": 500,
+      "bytes": 544743,
+      "sha256": "c8a07c866dbde1c64b4f5071bec5f92f5a391ae690c9a8d73d36acd0286037ce"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0028.json.gz",
+      "entries": 500,
+      "bytes": 557462,
+      "sha256": "aad354e6e898c397e224e46f305d0079fcc13dcc3572d5dac32d3927006af261"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0029.json.gz",
+      "entries": 500,
+      "bytes": 540865,
+      "sha256": "35538e5169fd0ed135c8a07880a3403faca7b67c5a04fd50126afc2d5f71f6bb"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0030.json.gz",
+      "entries": 500,
+      "bytes": 544836,
+      "sha256": "b7592554d386cfc4ef1ba9507176b07b9b30db94899758260e24ea4ee1c20a3d"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0031.json.gz",
+      "entries": 500,
+      "bytes": 559175,
+      "sha256": "c0e76a6f1cf1383a192d06bd864d13374276de1698a3223dc007e779b972e250"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0032.json.gz",
+      "entries": 500,
+      "bytes": 565390,
+      "sha256": "92e9e3fbc66bb76054728d460129b7514ac59a73017e3b8db6d71fbaeb7429f5"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0033.json.gz",
+      "entries": 500,
+      "bytes": 537621,
+      "sha256": "ddbc07e56bd174dd87a584b7aeea2b3e70c8e90bc41115e7df481289845c90ca"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0034.json.gz",
+      "entries": 500,
+      "bytes": 551485,
+      "sha256": "3e837b5f41f8b02478ebba2970fbefb3b1b8012741a6d4513f68b01f61b8040f"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0035.json.gz",
+      "entries": 500,
+      "bytes": 556539,
+      "sha256": "5d08ead4d08219ef84af0258d2f313ce682aa56fa0ad6612fb8d6eae661a839e"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0036.json.gz",
+      "entries": 500,
+      "bytes": 561217,
+      "sha256": "7c6ae27f9894607131da532a219c18a6b19fc8e8d98428bb146b3bc80bd6517f"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0037.json.gz",
+      "entries": 500,
+      "bytes": 562148,
+      "sha256": "8f2935d21af17327fef8a624177604a0d88e2afa018ddbf239da2adc52808f90"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0038.json.gz",
+      "entries": 500,
+      "bytes": 546879,
+      "sha256": "c9b297a1b5712897edf2b916c5050d0f91493cd86a399e273f42987753da1df5"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0039.json.gz",
+      "entries": 500,
+      "bytes": 576594,
+      "sha256": "c86f220e8636c749d4308fc72d2ef367d9a43d2a17906bcc27bce8cfe8e7f42c"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0040.json.gz",
+      "entries": 500,
+      "bytes": 570470,
+      "sha256": "9289b99a29f0aec809df3647b269b7bab590772fe86ef2b48b252d757985dce2"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0041.json.gz",
+      "entries": 500,
+      "bytes": 569852,
+      "sha256": "e75cd7a991b20d8c9328554ba1263db7e9c49c864eb43e076794ecd3f0bf8cd4"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0042.json.gz",
+      "entries": 500,
+      "bytes": 571111,
+      "sha256": "bf6b906c95a37a5b5c54c17d34fbe3c5fcd807b98d8e188820376779b538e14a"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0043.json.gz",
+      "entries": 500,
+      "bytes": 578733,
+      "sha256": "1dbc2708cd72275de492eb13977d8ceb6ddb34afeffcff0675727c31e02ac9d2"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0044.json.gz",
+      "entries": 500,
+      "bytes": 566859,
+      "sha256": "35b937a9f31f7be905f55abda74fc1b8a820cb6d951440bea9d0a3d32ea807d9"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0045.json.gz",
+      "entries": 500,
+      "bytes": 559452,
+      "sha256": "c76433d15a74e39f322fe0bf82944045ac7a33c1e143df91b4fea53fb16691b0"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0046.json.gz",
+      "entries": 500,
+      "bytes": 569776,
+      "sha256": "50a8c79a5a552002c2c7a2a3c12116ebd670dac818068e81a6d924b440ee5252"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0047.json.gz",
+      "entries": 500,
+      "bytes": 589907,
+      "sha256": "ed1ca1a43d5de45d221e5ebc576622ec3377a132ff71370fe947147d9a82dda2"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0048.json.gz",
+      "entries": 500,
+      "bytes": 566218,
+      "sha256": "7fff8d679fd219838bfb5bae11c5d7d70916b603df19691a27ddbb932d258f35"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0049.json.gz",
+      "entries": 500,
+      "bytes": 553392,
+      "sha256": "9bcdf90235bd86e4923a16c8cb02bc15c08ac4e0591f88459589106b86e61f3b"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0050.json.gz",
+      "entries": 500,
+      "bytes": 558629,
+      "sha256": "f8261a4a6beb1a2475968342184d173d9d51041c7eafb22636ee022943abfe6f"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0051.json.gz",
+      "entries": 500,
+      "bytes": 529618,
+      "sha256": "aa51a13b7ff032d845bbcca2d62d671a22cafe50d3ac16802be11aa6918f62e2"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0052.json.gz",
+      "entries": 500,
+      "bytes": 559604,
+      "sha256": "bd39e03364787a0b88d7d19ef16593cffc6e54bcf63e9bd17a96b2f543732ebd"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0053.json.gz",
+      "entries": 500,
+      "bytes": 562642,
+      "sha256": "334bd736036ae4681341a38eb5c27c5758ad62a45ba346b5eca87976f1099874"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0054.json.gz",
+      "entries": 500,
+      "bytes": 548718,
+      "sha256": "27f2a4ff33644a9ecdb863288adccd8716fbd1949ba76d4fbc57ff2f1d2b402d"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0055.json.gz",
+      "entries": 500,
+      "bytes": 555812,
+      "sha256": "e351f3a48ab65166ff9c694cf29da4e0aa7bae74c9b3f7c4d137e40b0ef05922"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0056.json.gz",
+      "entries": 500,
+      "bytes": 577734,
+      "sha256": "4c229ea18bdf1367feba04ee7b9dd2ef7d03ad0eed31fd8a563e8b0ae77655f4"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0057.json.gz",
+      "entries": 500,
+      "bytes": 567155,
+      "sha256": "a0ee385420ee391b1de71c9018ebe44e1618acff7fa41c69d7b12af00107c06c"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0058.json.gz",
+      "entries": 500,
+      "bytes": 559837,
+      "sha256": "fd6a9e23e2d4d580cd87da6b84d21a11a31f956c4c9ea6aedc017b4c2db21fb4"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0059.json.gz",
+      "entries": 500,
+      "bytes": 557727,
+      "sha256": "69b27bc70d1e687a57c67560cb4e268e7c210ad3b47b3781acde90cec6c788eb"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0060.json.gz",
+      "entries": 500,
+      "bytes": 579211,
+      "sha256": "c28e45e04664f04bef6877026b0c6fdf29b4c82af6937fe8616742661c53aa31"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0061.json.gz",
+      "entries": 500,
+      "bytes": 558011,
+      "sha256": "3d108dfe1e4dbe1b2c8c18826f28e755aff7d73869151dff5df1c8a6952863b1"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0062.json.gz",
+      "entries": 500,
+      "bytes": 552914,
+      "sha256": "26463affefa00a14157a23d92205e1afe6a35d2f59c78939ffb9eedbe26837b3"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0063.json.gz",
+      "entries": 500,
+      "bytes": 550117,
+      "sha256": "b4738704dc7edb08d0bbfcea38b179159d78a1e54457b9c580faa80468edaf83"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0064.json.gz",
+      "entries": 500,
+      "bytes": 552264,
+      "sha256": "2b78d206503e356fa38b3db3e3111ac9473722a592c7265f2563d79ecdbbc860"
+    },
+    {
+      "file": "tkg-suggestion-entries-32c267cb-0065.json.gz",
+      "entries": 100,
+      "bytes": 115913,
+      "sha256": "462b25cf1abbe7d4d325f2bf7cb5ae3e8a1fc886057e6e59adda7e96e1a03cc6"
+    }
+  ]
+}

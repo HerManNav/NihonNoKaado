@@ -1,0 +1,23 @@
+{
+  "sourceCommit": "32c267cbfa7756a2e3542657772759d92d4e2420",
+  "sourceEntries": 32600,
+  "sourceExamples": 125812,
+  "records": 116970,
+  "skippedReading": 691,
+  "skippedSense": 75,
+  "skippedAnnotation": 12213,
+  "automaticAnnotations": 72792,
+  "reviewedRecords": 4000,
+  "linkedFallbackRecords": 129,
+  "words": 29556,
+  "uniqueSentences": 114327,
+  "searchKeys": 234410,
+  "parts": 64,
+  "totalPartBytes": 132221465,
+  "largestPartBytes": 2345053,
+  "indexBytes": 5011682,
+  "constructionKeys": 217,
+  "constructionIndexBytes": 7560,
+  "constructionSpellings": 243,
+  "constructionSpellingBytes": 31435
+}

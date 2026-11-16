@@ -30,6 +30,41 @@
     ["to", ["and", "with", "used for quoting (thoughts, speech, etc.)"]],
   ]);
   const NO_POTENTIAL = new Set(["aru", "wakaru", "amegafuru", "kudasaru"]);
+  const CONTINUOUS_ENDINGS = [
+    ['imasendeshita','polite past negative'], ['inakattara','past-negative conditional'],
+    ['inakereba','negative conditional'], ['imashita','polite past'],
+    ['inakatta','past negative'], ['imasen','polite negative'], ['inakute','negative te-form'],
+    ['inasai','instruction'], ['imasu','polite'], ['itara','conditional -tara'],
+    ['ireba','conditional -ba'], ['iyou','volitional'], ['inai','negative'],
+    ['iru','non-past'], ['ita','past'], ['ite','connective te-form'], ['iro','imperative'],
+  ];
+
+  function parseContinuousForm(value, previousKey = "") {
+    const compact = normalizedKey(value).replace(/[\s-]+/g, '');
+    const request = compact.endsWith('kudasai');
+    const core = request ? compact.slice(0, -7) : compact;
+    for (const [ending,label] of CONTINUOUS_ENDINGS) {
+      let teForm = '';
+      if (core === ending && previousKey) teForm = normalizedKey(previousKey).replace(/[\s-]+/g, '');
+      else if (core.endsWith(ending)) teForm = core.slice(0, -ending.length);
+      if (!/^.+(?:te|de)$/.test(teForm)) continue;
+      if (request && ending !== 'ite') continue;
+      return {teForm,ending,label,core:teForm + ending,request};
+    }
+    return null;
+  }
+
+  // Callers must validate the verb te-form before generating auxiliary forms.
+  function continuousForms(teForm) {
+    return CONTINUOUS_ENDINGS.map(([ending]) => teForm + ending);
+  }
+
+  function describeContinuousForm(form, lemma, meaning) {
+    const detail = form.ending === 'ite'
+      ? 'ite is the te-form of iru; connects clauses or combines with kudasai in a request'
+      : `${form.label} form of iru`;
+    return `${form.label} continuing form of ${lemma} — ${meaning} (${form.teForm} + ${form.ending}: te-form + iru, ongoing action or continuing state; ${detail})`;
+  }
 
   function isUnsupportedForm(label, lemma, tag, gloss) {
     if (/potential/.test(label)) {
@@ -195,20 +230,15 @@
     }
   }
 
-  function addContinuousAuxiliary(candidates, key, data) {
-    for (const [ending, label] of [
-      ['imasendeshita', 'polite past negative'], ['imashita', 'polite past'],
-      ['inakatta', 'past negative'], ['imasen', 'polite negative'], ['inai', 'negative'],
-    ]) {
-      if (!key.endsWith(ending)) continue;
-      const teForm = key.slice(0, -ending.length);
-      if (!/(?:te|de)$/.test(teForm)) continue;
-      for (const meaning of findWordMeanings(teForm, data)) {
-        const match = /^(.*?te-form) of (.+?) — (.+)$/.exec(meaning);
-        if (!match) continue;
-        addCandidate(candidates, `${label} continuing form of ${match[2]} — ${match[3]} (${teForm} + ${ending}: ${match[1]} + iru, continuing action or state)`, 0, 1);
-      }
-      break;
+  function addContinuousAuxiliary(candidates, key, previousKey, data) {
+    const form = parseContinuousForm(key, previousKey);
+    if (!form) return;
+    for (const meaning of findWordMeanings(form.teForm, data)) {
+      // Only a validated VERB te-form can take this auxiliary. An adjective,
+      // noun, or an already continuing te-form must not create a fake chain.
+      const match = /^((?:(?:passive|potential|causative) )?te-form) of (.+?) — (.+)$/.exec(meaning);
+      if (!match) continue;
+      addCandidate(candidates, describeContinuousForm(form, match[2], match[3]), 0, previousKey ? 2 : 1);
     }
   }
 
@@ -229,7 +259,7 @@
     addPronounPlural(candidates, word, previous, data);
     addSpacedSuru(candidates, word, previous, data);
     addAttachedSuru(candidates, word, data);
-    addContinuousAuxiliary(candidates, word, data);
+    addContinuousAuxiliary(candidates, word, previous, data);
 
     candidates.sort((a, b) => b.priority - a.priority || b.score - a.score);
     const seen = new Set();
@@ -243,5 +273,5 @@
     return result;
   }
 
-  return { findWordMeanings };
+  return { findWordMeanings, parseContinuousForm, describeContinuousForm, continuousForms };
 });

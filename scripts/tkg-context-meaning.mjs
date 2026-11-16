@@ -63,6 +63,26 @@ function kanaToRomaji(value) {
   return output.join('');
 }
 
+// Preserve source link boundaries when preparing offline suggestion sentences.
+export function romanizeSourceExample(japanese) {
+  const pieces = [];
+  for (const match of String(japanese).matchAll(/⟦(.*?)⟧|([^⟦]+)/gs)) {
+    const text = cleanKana(match[1] === undefined ? match[2] : match[1].split('→')[0]);
+    for (const part of text.match(/[^。、！？：；「」『』]+|[。、！？：；「」『』]/g) || []) {
+      if (pieces.at(-1)?.endsWith('っ')) pieces[pieces.length - 1] += part;
+      else pieces.push(part);
+    }
+  }
+  const punctuation = {'。':'.','、':',','？':'?','！':'!','：':':','；':';','「':'"','」':'"','『':"'",'』':"'"};
+  let romaji = '';
+  for (const piece of pieces) {
+    const part = kanaToRomaji(piece).replace(/[。、！？：；「」『』]/g, char => punctuation[char]);
+    if (romaji && !/^[.,!?;:"']+$/.test(part)) romaji += ' ';
+    romaji += part;
+  }
+  return {romaji, hiragana: pieces.join('').replace(/\s+/g, '')};
+}
+
 function letters(value) { return String(value ?? '').toLowerCase().replace(/[^a-z]/g, ''); }
 function readingRomaji(entry) { return kanaToRomaji(entry?.reading || ''); }
 function getEntry(entriesById, id) { return entriesById instanceof Map ? entriesById.get(id) : entriesById?.[id]; }
@@ -187,12 +207,35 @@ function senseScore(def, sentence) {
   return score;
 }
 
+const sourceSurfaceCache = new WeakMap();
+const sourceSenseCache = new WeakMap();
+function exampleSurface(example) {
+  if (!example || typeof example !== 'object') return '';
+  const cached = sourceSurfaceCache.get(example);
+  if (cached?.japanese === example.japanese) return cached.surface;
+  const surface = sourcePieces(example.japanese).pieces.map(piece => piece.surface).join('').replace(/\s/g,'');
+  sourceSurfaceCache.set(example, {japanese: example.japanese, surface});
+  return surface;
+}
+
 function findMatchingSense(entry, sourceExample) {
   const english = String(sourceExample?.english ?? '').trim();
-  const surface = sourcePieces(sourceExample?.japanese).pieces.map(piece => piece.surface).join('').replace(/\s/g,'');
+  const surface = exampleSurface(sourceExample);
+  // Source entries are immutable during an annotation pass. Build their
+  // sentence index once rather than reparsing every linked word's examples.
+  let cached = sourceSenseCache.get(entry);
+  if (!cached || cached.examples !== entry.examples) {
+    const bySurface = new Map();
+    for (const example of entry.examples || []) {
+      const key = exampleSurface(example);
+      if (!bySurface.has(key)) bySurface.set(key, []);
+      bySurface.get(key).push(example);
+    }
+    cached = {examples: entry.examples, bySurface};
+    sourceSenseCache.set(entry, cached);
+  }
   const japaneseMatches = [];
-  for (const example of entry?.examples || []) {
-    if (sourcePieces(example.japanese).pieces.map(piece => piece.surface).join('').replace(/\s/g,'') !== surface) continue;
+  for (const example of cached.bySurface.get(surface) || []) {
     if (example.sense_numbers?.length === 1) japaneseMatches.push(example);
     if (String(example.english ?? '').trim() === english && example.sense_numbers?.length === 1) {
       return Number(example.sense_numbers[0]);

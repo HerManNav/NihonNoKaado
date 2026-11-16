@@ -1,6 +1,85 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createMeaningPracticeRun, createPracticeDeck, getDeckEntryKeyAction, getSessionProgressState, nextReviewIndex, parseImportedDeck, prepareDefaultDeck, removeCardAt, romajiToHiragana, serializeDeck, shouldAutoConvertHiragana, shouldSkipHiraganaOnTab, shuffle, updateCardAt } = require("../deck-core.js");
+const { createMeaningPracticeRun, createPracticeDeck, getDeckEntryKeyAction, getSessionProgressState, nextReviewIndex, parseImportedDeck, prepareDefaultDeck, removeCardAt, romajiToHiragana, searchDeckCards, serializeDeck, shouldAutoConvertHiragana, shouldSkipHiraganaOnTab, shuffle, updateCardAt } = require("../deck-core.js");
+
+test("deck search returns every overlapping literal range in original UTF-16 offsets", () => {
+  const cards = [{ japanese: "Banana" }, { japanese: "aaaa" }, { japanese: "xxababa" }];
+  assert.deepEqual(searchDeckCards(cards, " ana "), [{ index: 0, distance: 0, ranges: [[1, 6]] }]);
+  assert.deepEqual(searchDeckCards(cards, "AA"), [{ index: 1, distance: 0, ranges: [[0, 4]] }]);
+  assert.deepEqual(searchDeckCards(cards, "aba"), [{ index: 2, distance: 0, ranges: [[2, 7]] }]);
+});
+
+test("deck search applies full word Levenshtein with thresholds and distance ordering", () => {
+  const cards = ["cut", "cat", "at", "cats", "cta", "dog"].map((japanese) => ({ japanese }));
+  assert.deepEqual(searchDeckCards(cards, "cat"), [
+    { index: 1, distance: 0, ranges: [[0, 3]] },
+    { index: 3, distance: 0, ranges: [[0, 3]] },
+    { index: 0, distance: 1, ranges: [] },
+    { index: 2, distance: 1, ranges: [] },
+  ]);
+  assert.deepEqual(searchDeckCards([{ japanese: "abcdef" }, { japanese: "abcedf" }, { japanese: "abcxef" }], "abcdef"), [
+    { index: 0, distance: 0, ranges: [[0, 6]] },
+    { index: 2, distance: 1, ranges: [] },
+    { index: 1, distance: 2, ranges: [] },
+  ]);
+  assert.deepEqual(searchDeckCards([{ japanese: "ab" }, { japanese: "ac" }], "ab"), [
+    { index: 0, distance: 0, ranges: [[0, 2]] },
+  ]);
+  assert.deepEqual(searchDeckCards([{ japanese: "abcde" }, { japanese: "abxde" }], "abcde"), [
+    { index: 0, distance: 0, ranges: [[0, 5]] },
+    { index: 1, distance: 1, ranges: [] },
+  ]);
+  assert.deepEqual(searchDeckCards([
+    { japanese: "abcd" }, { japanese: "xbcd" }, { japanese: "xycd" },
+  ], "abcd"), [
+    { index: 0, distance: 0, ranges: [[0, 4]] },
+    { index: 1, distance: 1, ranges: [] },
+  ]);
+  assert.deepEqual(searchDeckCards([
+    { japanese: "abcde" }, { japanese: "xycde" }, { japanese: "xyzde" },
+  ], "abcde"), [
+    { index: 0, distance: 0, ranges: [[0, 5]] },
+    { index: 1, distance: 2, ranges: [] },
+  ]);
+  assert.deepEqual(searchDeckCards([
+    { japanese: "abcdef" }, { japanese: "xyzdef" },
+  ], "abcdef"), [
+    { index: 0, distance: 0, ranges: [[0, 6]] },
+  ]);
+  assert.deepEqual(searchDeckCards([
+    { japanese: "shitsu" }, { japanese: "hitku" }, { japanese: "hitsu" },
+  ], "hitku"), [
+    { index: 1, distance: 0, ranges: [[0, 5]] },
+    { index: 2, distance: 1, ranges: [] },
+    { index: 0, distance: 2, ranges: [] },
+  ]);
+  assert.deepEqual(searchDeckCards([{ japanese: "abc" }, { japanese: "xbc" }, { japanese: "xyc" }], "abc"), [
+    { index: 0, distance: 0, ranges: [[0, 3]] },
+    { index: 1, distance: 1, ranges: [] },
+  ]);
+});
+
+test("deck search lets long literal matches bypass fuzzy length gaps and preserves source mappings", () => {
+  assert.deepEqual(searchDeckCards([{ japanese: "x".repeat(24) + "Target" }], " target "), [
+    { index: 0, distance: 0, ranges: [[24, 30]] },
+  ]);
+  assert.deepEqual(searchDeckCards([{ japanese: "😀İx" }], "i\u0307"), [
+    { index: 0, distance: 0, ranges: [[2, 3]] },
+  ]);
+  assert.deepEqual(searchDeckCards([{ japanese: "😀猫" }], "猫"), [
+    { index: 0, distance: 0, ranges: [[2, 3]] },
+  ]);
+});
+
+test("empty deck search resets in original order without mutating cards", () => {
+  const cards = [{ japanese: "zebra" }, { japanese: "yak" }];
+  const before = structuredClone(cards);
+  assert.deepEqual(searchDeckCards(cards, "   "), [
+    { index: 0, distance: 0, ranges: [] },
+    { index: 1, distance: 0, ranges: [] },
+  ]);
+  assert.deepEqual(cards, before);
+});
 
 test("imports previously exported dictionary-format JSON during the rename", () => {
   const legacy = { format: "japanese-cards-dictionary", version: 3, cards: [{ japanese: "neko", english: "cat" }] };

@@ -6,7 +6,7 @@ const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const projectDirectory = path.resolve(scriptDirectory, "..");
 const sourceDirectory = path.resolve(projectDirectory, "..");
 const webDirectory = path.join(projectDirectory, "www");
-const sharedFiles = ["index.html", "styles.css", "app.js", "export-storage.js", "deck-core.js", "word-form-lookup.js", "language.js"];
+const sharedFiles = ["index.html", "styles.css", "app.js", "export-storage.js", "deck-core.js", "word-form-lookup.js", "example-search.js", "example-suggestions.js", "language.js"];
 
 await mkdir(webDirectory, { recursive: true });
 await Promise.all(sharedFiles.map((file) => copyFile(
@@ -16,7 +16,8 @@ await Promise.all(sharedFiles.map((file) => copyFile(
 // Source archives are for maintenance only; ship the files the app can fetch.
 const deckDirectory = path.join(sourceDirectory, "decks");
 const catalog = JSON.parse(await readFile(path.join(deckDirectory, "manifest.json"), "utf8"));
-const runtimeDecks = ["manifest.json", ...catalog.decks.flatMap((deck) => [deck.file, deck.spanishFile].filter(Boolean)),
+const examples = JSON.parse(await readFile(path.join(deckDirectory, "example-suggestions.json"), "utf8"));
+const runtimeDecks = ["manifest.json", "example-suggestions.json", ...(examples.parts || []).map(part => part.file), ...catalog.decks.flatMap((deck) => [deck.file, deck.spanishFile].filter(Boolean)),
   ...(await readdir(deckDirectory)).filter((file) => /^romaji-english-.*\.json(?:\.gz)?$/.test(file))];
 const bundledDecks = path.join(webDirectory, "decks");
 // Clear the generated copy so older builds cannot leave source archives behind.

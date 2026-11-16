@@ -1,7 +1,7 @@
 const STORAGE_KEY = "japanese-cards.deck.v1";
 const LEGACY_STORAGE_KEY = "japanese-cards.dictionary.v1";
 const CONTEXT_ANNOTATION_MIGRATION_KEY = "japanese-cards.context-annotation-migration.v1";
-const { parseImportedDeck, prepareDefaultDeck, serializeDeck, normalizeWordMeanings, romajiToHiragana, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
+const { parseImportedDeck, prepareDefaultDeck, serializeDeck, normalizeWordMeanings, romajiToHiragana, searchDeckCards, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 const { findWordMeanings } = window.JapaneseWordFormLookup;
 document.documentElement.classList.toggle("native-app", Boolean(window.Capacitor?.isNativePlatform?.()));
 
@@ -56,26 +56,58 @@ overwriteDialog.addEventListener("close", () => {
   if (overwriteDialog.returnValue === "overwrite") save?.();
 });
 
+function renderDeckSearchWord(element, text, ranges) {
+  element.replaceChildren();
+  let cursor = 0;
+  for (const [start, end] of ranges) {
+    if (start > cursor) element.append(document.createTextNode(text.slice(cursor, start)));
+    const mark = document.createElement("mark");
+    mark.className = "deck-search-match";
+    mark.textContent = text.slice(start, end);
+    element.append(mark);
+    cursor = end;
+  }
+  if (cursor < text.length) element.append(document.createTextNode(text.slice(cursor)));
+}
+
 function filterDeckList(value) {
   const query = normalizeDeckWord(value);
-  let count = 0;
-  wordList.querySelectorAll(".word-row[data-card-index]").forEach((row) => {
-    row.hidden = !normalizeDeckWord(cards[Number(row.dataset.cardIndex)].japanese).includes(query);
-    if (!row.hidden) count++;
-  });
+  const results = searchDeckCards(cards, value);
+  const resultByIndex = new Map(results.map((result) => [result.index, result]));
+  const rows = [...wordList.querySelectorAll(".word-row[data-card-index]")];
+  const rowByIndex = new Map(rows.map((row) => [Number(row.dataset.cardIndex), row]));
+  for (const row of rows) {
+    const index = Number(row.dataset.cardIndex);
+    const result = resultByIndex.get(index);
+    row.hidden = !result;
+    const strong = row.querySelector(".japanese-word-display strong");
+    if (strong) renderDeckSearchWord(strong, cards[index].japanese, result?.ranges || []);
+  }
+  for (const result of results) {
+    const row = rowByIndex.get(result.index);
+    if (row) wordList.insertBefore(row, wordList.querySelector(".deck-search-empty"));
+  }
+  rows.filter((row) => !resultByIndex.has(Number(row.dataset.cardIndex)))
+    .sort((left, right) => Number(left.dataset.cardIndex) - Number(right.dataset.cardIndex))
+    .forEach((row) => wordList.insertBefore(row, wordList.querySelector(".deck-search-empty")));
+  const count = results.length;
   deckListCount.textContent = query ? `${count} / ${cards.length}` : (count === 1 ? "1 word" : `${count} words`);
-  wordList.querySelector(".deck-search-empty").hidden = count > 0;
+  wordList.querySelector(".deck-search-empty").hidden = results.length > 0;
 }
 
 function renderAddDeckMatches() {
+  const suggestions = document.querySelector("#add-spelling-suggestions");
+  suggestions.hidden = true;
+  suggestions.replaceChildren();
   const list = document.querySelector("#add-deck-matches");
   list.replaceChildren();
-  const query = normalizeDeckWord(japaneseInput.value);
-  cards.filter((card) => normalizeDeckWord(card.japanese).includes(query)).forEach((card) => {
+  const results = searchDeckCards(cards, japaneseInput.value);
+  results.forEach((result) => {
+    const card = cards[result.index];
     const row = document.createElement("article");
     row.className = "word-details add-deck-match";
     const word = document.createElement("strong");
-    word.textContent = card.japanese;
+    renderDeckSearchWord(word, card.japanese, result.ranges);
     const meaning = document.createElement("p");
     meaning.textContent = card.meanings.join(" · ");
     row.append(word, meaning);
@@ -147,6 +179,257 @@ let wordPopupBlocksCardAdvance = false;
 let lastTappedRomajiToken = null;
 let lastTappedRomajiTokenTimeout = null;
 let lastPointerType = "mouse";
+
+const exampleService = window.JapaneseExampleSuggestions.createService({
+  async loadCorpus() {
+    const response = await fetch("decks/example-suggestions.json", {cache: "no-cache"});
+    if (!response.ok) throw new Error(`Example request failed (${response.status}).`);
+    return response.json();
+  },
+  async loadPart(part) {
+    if (!/^example-suggestions\/part-\d+\.json$/.test(part.file)) throw new Error("Invalid example part path.");
+    const response = await fetch(`decks/${part.file}?v=${part.sha256}`);
+    if (!response.ok) throw new Error(`Example request failed (${response.status}).`);
+    return response.json();
+  },
+  loadLookup: getRomajiLookup,
+  findWordMeanings,
+  normalizeWordMeanings,
+});
+const exampleControllers = new WeakMap();
+const activeExampleGroups = new WeakMap();
+const exampleGroupSelector = ".meaning-entry-group, .deck-entry-meaning-group";
+let exampleStatusId = 0;
+
+function hasMatchingDeckWord(value) {
+  return searchDeckCards(cards, value).length > 0;
+}
+
+function renderSpellingSuggestions(host, items = [], choose) {
+  const inline = host === wordList;
+  const panel = inline ? wordList.querySelector(".spelling-suggestions") : document.querySelector("#add-spelling-suggestions");
+  const empty = inline ? wordList.querySelector(".deck-search-empty") : document.querySelector("#add-deck-empty");
+  if (!panel || !empty) return;
+  panel.replaceChildren();
+  panel.hidden = items.length === 0;
+  const value = inline ? wordList.querySelector(".deck-entry-japanese")?.value || "" : japaneseInput.value;
+  empty.hidden = items.length > 0 || hasMatchingDeckWord(value);
+  if (!items.length) return;
+  const heading = document.createElement("h3");
+  heading.textContent = "Did you mean…?";
+  const list = document.createElement("ul");
+  for (const item of items) {
+    const row = document.createElement("li");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "spelling-suggestion";
+    const word = document.createElement("strong");
+    word.textContent = item.japanese;
+    const meaning = document.createElement("span");
+    meaning.textContent = item.meaning;
+    button.append(word, meaning);
+    button.addEventListener("click", () => choose(item));
+    row.append(button);
+    list.append(row);
+  }
+  panel.append(heading, list);
+}
+
+function setupExampleFields(group, row = null) {
+  const host = row ? wordList : cardForm;
+  const prefix = row ? "deck-entry" : "meaning";
+  const wrapper = group.querySelector(`.${prefix}-example-fields`);
+  const fields = ["romaji", "hiragana", "english"].map(key => group.querySelector(`.${prefix}-example-${key}`));
+  let romajiControl = fields[0].parentNode?.classList.contains("example-romaji-control") ? fields[0].parentNode : null;
+  let navigation = group.querySelector(".example-navigation");
+  let englishControl = fields[2].parentNode?.classList.contains("example-english-control") ? fields[2].parentNode : null;
+  if (!romajiControl) {
+    romajiControl = document.createElement("div");
+    romajiControl.className = "example-romaji-control";
+    fields[0].before(romajiControl);
+    romajiControl.append(fields[0]);
+  }
+  if (!englishControl) {
+    englishControl = document.createElement("div");
+    englishControl.className = "example-english-control";
+    fields[2].before(englishControl);
+    englishControl.append(fields[2]);
+  }
+  let previousButton = group.querySelector(".example-previous-button");
+  let nextButton = group.querySelector(".example-next-button");
+  let counter = group.querySelector(".example-counter");
+  if (!navigation) {
+    navigation = document.createElement("div");
+    navigation.className = "example-navigation";
+    counter = document.createElement("span");
+    counter.className = "example-counter";
+    counter.setAttribute("aria-live", "polite");
+    counter.textContent = "0/0";
+    const buttons = document.createElement("div");
+    buttons.className = "example-navigation-buttons";
+    previousButton = document.createElement("button");
+    previousButton.type = "button";
+    previousButton.className = "example-previous-button";
+    previousButton.setAttribute("aria-label", "Previous example");
+    previousButton.title = "Previous example";
+    const previousIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    previousIcon.setAttribute("viewBox", "0 0 24 24");
+    previousIcon.setAttribute("width", "18");
+    previousIcon.setAttribute("height", "18");
+    previousIcon.setAttribute("aria-hidden", "true");
+    previousIcon.setAttribute("focusable", "false");
+    const previousPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    previousPath.setAttribute("d", "M19 12H5 M12 19l-7-7 7-7");
+    previousPath.setAttribute("fill", "none");
+    previousPath.setAttribute("stroke", "currentColor");
+    previousPath.setAttribute("stroke-width", "2");
+    previousPath.setAttribute("stroke-linecap", "round");
+    previousPath.setAttribute("stroke-linejoin", "round");
+    previousIcon.append(previousPath);
+    previousButton.append(previousIcon);
+    nextButton = document.createElement("button");
+    nextButton.type = "button";
+    nextButton.className = "example-next-button";
+    nextButton.setAttribute("aria-label", "Next example");
+    nextButton.title = "Next example";
+    const nextIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    nextIcon.setAttribute("viewBox", "0 0 24 24");
+    nextIcon.setAttribute("width", "18");
+    nextIcon.setAttribute("height", "18");
+    nextIcon.setAttribute("aria-hidden", "true");
+    nextIcon.setAttribute("focusable", "false");
+    const nextPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    nextPath.setAttribute("d", "M5 12h14 M12 5l7 7-7 7");
+    nextPath.setAttribute("fill", "none");
+    nextPath.setAttribute("stroke", "currentColor");
+    nextPath.setAttribute("stroke-width", "2");
+    nextPath.setAttribute("stroke-linecap", "round");
+    nextPath.setAttribute("stroke-linejoin", "round");
+    nextIcon.append(nextPath);
+    nextButton.append(nextIcon);
+    buttons.append(previousButton, nextButton);
+    navigation.append(counter, buttons);
+    romajiControl.append(navigation);
+  }
+  let controller;
+  const navigate = direction => {
+    activeExampleGroups.set(host, group);
+    renderSpellingSuggestions(host);
+    void (direction < 0 ? controller.previous() : controller.next());
+  };
+  previousButton.addEventListener("click", () => navigate(-1));
+  nextButton.addEventListener("click", () => navigate(1));
+  const status = document.createElement("p");
+  status.className = "example-status";
+  status.id = `example-status-${++exampleStatusId}`;
+  status.hidden = true;
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  wrapper.before(status);
+  fields.forEach(field => field.setAttribute("aria-describedby", status.id));
+  const context = () => ({
+    japanese: (row ? row.querySelector(".deck-entry-japanese") : japaneseInput).value.trim(),
+    hiragana: (row ? row.querySelector(".deck-entry-hiragana") : hiraganaInput).value.trim(),
+    meaning: group.querySelector(".meaning-translation").value.trim(),
+    language: document.documentElement.lang === "es" ? "es" : "en",
+  });
+  controller = window.JapaneseExampleSuggestions.createController({
+    fields, getContext: context, suggest: (value, excluded) => exampleService.suggest(value, excluded),
+    allSuggestions: exampleService.allSuggestions ? value => exampleService.allSuggestions(value) : undefined,
+    findAlternatives: value => exampleService.alternatives(value),
+    setNavigationState: ({disabled, busy, position, total}) => {
+      previousButton.disabled = disabled;
+      nextButton.disabled = disabled;
+      previousButton.setAttribute("aria-busy", String(busy));
+      nextButton.setAttribute("aria-busy", String(busy));
+      counter.textContent = `${position}/${total}`;
+    },
+    canOfferAlternatives: () => activeExampleGroups.get(host) === group && !hasMatchingDeckWord(context().japanese)
+      && (row || editingCardIndex === null),
+    onAlternatives: items => renderSpellingSuggestions(host, items, item => {
+      const word = row ? row.querySelector(".deck-entry-japanese") : japaneseInput;
+      const reading = row ? row.querySelector(".deck-entry-hiragana") : hiraganaInput;
+      if (!row) hiraganaManuallyEdited = false;
+      word.value = item.japanese;
+      word.dispatchEvent(new Event("input", {bubbles: true}));
+      reading.value = item.hiragana || compactHiragana(romajiToHiragana(item.japanese));
+      reading.dataset.manuallyEdited = "false";
+      refreshExampleFields(host);
+      fields[0].focus();
+    }),
+    isActive: () => group.isConnected && !(row ? screens.deck : screens.add).hidden,
+    setStatus(message, state) {
+      const locked = fields[0].disabled;
+      wrapper.classList.toggle("example-fields-locked", locked);
+      wrapper.setAttribute("aria-disabled", String(locked));
+      wrapper.tabIndex = locked ? 0 : -1;
+      status.textContent = message;
+      status.hidden = !message;
+      status.classList.remove("is-warning");
+      if (state === "warning") {
+        void status.offsetWidth;
+        status.classList.add("is-warning");
+      }
+    },
+  });
+  fields[0].addEventListener("focus", () => {
+    activeExampleGroups.set(host, group);
+    renderSpellingSuggestions(host);
+    void controller.focus();
+  });
+  // Disabled inputs do not dispatch pointer events: their wrapper receives taps.
+  wrapper.addEventListener("click", controller.warn);
+  wrapper.addEventListener("focus", controller.warn);
+  wrapper.addEventListener("keydown", event => {
+    if (event.target === wrapper && fields[0].disabled && (event.key === "Enter" || event.key === " ")) {
+      event.preventDefault(); controller.warn();
+    }
+  });
+  exampleControllers.set(group, controller);
+  controller.refresh();
+}
+
+function refreshExampleFields(host) {
+  host.querySelectorAll(exampleGroupSelector).forEach(group => exampleControllers.get(group)?.refresh());
+}
+
+function clearCardDependentFields(row = null) {
+  const host = row ? wordList : cardForm;
+  activeExampleGroups.delete(host);
+  if (row) {
+    const hiragana = row.querySelector(".deck-entry-hiragana");
+    hiragana.value = "";
+    hiragana.dataset.manuallyEdited = "false";
+    const group = createDeckMeaningInput();
+    row.querySelector(".deck-entry-meanings").replaceChildren(group);
+    setupExampleFields(group, row);
+  } else {
+    hiraganaInput.value = "";
+    hiraganaInput.dataset.manuallyEdited = "false";
+    hiraganaManuallyEdited = false;
+    resetMeaningInputs();
+    window.clearTimeout(addFeedbackTimeout);
+    addFeedbackTimeout = null;
+    addFeedback.hidden = true;
+    addFeedback.textContent = "";
+    addFeedback.classList.remove("is-visible");
+  }
+  renderSpellingSuggestions(host);
+}
+
+async function prepareExampleAnnotations(groups, japanese, examples) {
+  return Promise.all(examples.map((example, index) => exampleService.analyze(example, {
+    japanese, meaning: groups[index].querySelector(".meaning-translation").value.trim(),
+  })));
+}
+
+async function waitForExampleSuggestions(host) {
+  await Promise.all([...host.querySelectorAll(exampleGroupSelector)].map(group => exampleControllers.get(group)?.wait()));
+}
+
+function exampleFormSignature(host) {
+  return JSON.stringify([...host.querySelectorAll("input")].map(input => input.value));
+}
 
 function hideWordTranslationPopup() {
   activeRomajiToken = null;
@@ -465,7 +748,12 @@ function renderDeckList(highlightIndex = -1) {
   const empty = document.createElement("p");
   empty.className = "empty-word-list deck-search-empty";
   empty.textContent = "No matching words in this deck.";
-  wordList.append(empty);
+  const suggestions = document.createElement("section");
+  suggestions.className = "spelling-suggestions";
+  suggestions.hidden = true;
+  suggestions.setAttribute("aria-label", "Spelling suggestions");
+  suggestions.setAttribute("aria-live", "polite");
+  wordList.append(empty, suggestions);
   filterDeckList("");
 }
 
@@ -487,6 +775,7 @@ function createDeckEntryRow() {
   addMeaningButton.addEventListener("click", () => {
     const next = createDeckMeaningInput();
     meanings.append(next);
+    setupExampleFields(next, row);
     showDeckMeaningHints(row, next);
     next.querySelector(".meaning-translation").focus();
   });
@@ -539,6 +828,7 @@ function createDeckEntryRow() {
   buttonSpacer.className = "deck-entry-spacer";
   buttonSpacer.setAttribute("aria-hidden", "true");
   row.append(spacer, details, buttonSpacer);
+  setupExampleFields(firstMeaning, row);
   return row;
 }
 
@@ -583,43 +873,53 @@ function createEntryExampleInput(field, placeholder) {
   return input;
 }
 
-function addDeckEntry() {
+async function addDeckEntry() {
   const row = wordList.querySelector(".deck-entry-row");
-  if (!row) return;
-  const japanese = row.querySelector(".deck-entry-japanese").value.trim();
-  const hiragana = compactHiragana(row.querySelector(".deck-entry-hiragana").value.trim() || romajiToHiragana(japanese));
-  const groups = [...row.querySelectorAll(".deck-entry-meaning-group")];
-  const meaningEntries = groups.map((group) => {
-    const romaji = group.querySelector(".deck-entry-example-romaji").value.trim();
-    const customHiragana = group.querySelector(".deck-entry-example-hiragana").value.trim();
-    return {
-      meaning: group.querySelector(".meaning-translation").value.trim(),
-      example: {
-        romaji,
-        hiragana: compactHiragana(customHiragana || romajiToHiragana(romaji)),
-        english: group.querySelector(".deck-entry-example-english").value.trim(),
-      },
-    };
-  }).filter((entry) => entry.meaning);
-  const meanings = meaningEntries.map((entry) => entry.meaning);
-  const examples = meaningEntries.map((entry) => entry.example);
-  if (!japanese || meanings.length === 0) return;
+  if (!row || row.dataset.saving === "true") return;
+  row.dataset.saving = "true";
+  try {
+    await waitForExampleSuggestions(row);
+    const signature = exampleFormSignature(row);
+    const japanese = row.querySelector(".deck-entry-japanese").value.trim();
+    const hiragana = compactHiragana(row.querySelector(".deck-entry-hiragana").value.trim() || romajiToHiragana(japanese));
+    const groups = [...row.querySelectorAll(".deck-entry-meaning-group")];
+    const meaningEntries = groups.map((group) => {
+      const romaji = group.querySelector(".deck-entry-example-romaji").value.trim();
+      const customHiragana = group.querySelector(".deck-entry-example-hiragana").value.trim();
+      return {
+        meaning: group.querySelector(".meaning-translation").value.trim(),
+        example: {
+          romaji,
+          hiragana: compactHiragana(customHiragana || romajiToHiragana(romaji)),
+          english: group.querySelector(".deck-entry-example-english").value.trim(),
+        },
+      };
+    }).filter((entry) => entry.meaning);
+    const meanings = meaningEntries.map((entry) => entry.meaning);
+    let examples = meaningEntries.map((entry) => entry.example);
+    if (!japanese || meanings.length === 0) return;
 
-  const english = meanings[0];
-  requestCardOverwrite(japanese, (existingIndex) => {
-    const entry = { japanese, hiragana, english, meanings, examples };
-    const nextCards = existingIndex < 0
-      ? [{ id: crypto.randomUUID?.() || String(Date.now()), ...entry }, ...cards]
-      : updateCardAt(cards, existingIndex, entry);
-    if (!saveCards(nextCards)) {
-      window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
-      return;
-    }
-    cards = nextCards;
-    renderDeckList(existingIndex < 0 ? 0 : existingIndex);
-    wordList.scrollTop = 0;
-    wordList.querySelector(".deck-entry-japanese")?.focus({ preventScroll: true });
-  });
+    const filledGroups = groups.filter(group => group.querySelector(".meaning-translation").value.trim());
+    examples = await prepareExampleAnnotations(filledGroups, japanese, examples);
+    if (!row.isConnected || signature !== exampleFormSignature(row)) return;
+
+    const english = meanings[0];
+    requestCardOverwrite(japanese, (existingIndex) => {
+      if (!row.isConnected || signature !== exampleFormSignature(row)) return;
+      const entry = { japanese, hiragana, english, meanings, examples };
+      const nextCards = existingIndex < 0
+        ? [{ id: crypto.randomUUID?.() || String(Date.now()), ...entry }, ...cards]
+        : updateCardAt(cards, existingIndex, entry);
+      if (!saveCards(nextCards)) {
+        window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
+        return;
+      }
+      cards = nextCards;
+      renderDeckList(existingIndex < 0 ? 0 : existingIndex);
+      wordList.scrollTop = 0;
+      wordList.querySelector(".deck-entry-japanese")?.focus({ preventScroll: true });
+    });
+  } finally { row.dataset.saving = "false"; }
 }
 
 function removeDeckCard(index) {
@@ -887,6 +1187,7 @@ function addMeaningInput(value = "", example = {}) {
   });
   group.append(input, exampleFields);
   englishMeanings.append(group);
+  setupExampleFields(group);
   return input;
 }
 
@@ -1520,8 +1821,10 @@ wordList.addEventListener("input", (event) => {
     return;
   }
   if (!event.target.matches(".deck-entry-japanese")) return;
+  const row = event.target.closest(".deck-entry-row");
+  if (event.target.value.trim() === "") clearCardDependentFields(row);
   filterDeckList(event.target.value);
-  const hiragana = event.target.closest(".deck-entry-row")?.querySelector(".deck-entry-hiragana");
+  const hiragana = row?.querySelector(".deck-entry-hiragana");
   if (hiragana && shouldAutoConvertHiragana(hiragana.dataset.manuallyEdited === "true", hiragana.value)) {
     hiragana.value = compactHiragana(romajiToHiragana(event.target.value.trim()));
     hiragana.dataset.manuallyEdited = "false";
@@ -1536,28 +1839,41 @@ wordList.addEventListener("focusin", (event) => {
 });
 
 wordList.addEventListener("keydown", (event) => {
-  if (!(event.target instanceof HTMLInputElement)) return;
+  if (!(event.target instanceof HTMLInputElement) && !event.target.matches(".example-previous-button, .example-next-button")) return;
   const row = event.target.closest(".deck-entry-row");
   if (!row) return;
+  const isPreviousButton = event.target.matches(".example-previous-button");
+  const isNextButton = event.target.matches(".example-next-button");
   const isJapaneseField = event.target.matches(".deck-entry-japanese");
   const isMeaningField = event.target.matches(".deck-entry-meaning");
   const isExampleRomajiField = event.target.matches(".deck-entry-example-romaji");
   const isExampleHiraganaField = event.target.matches(".deck-entry-example-hiragana");
   const isExampleEndField = event.target.matches(".deck-entry-example-english");
-  if (!isJapaneseField && !isMeaningField && !isExampleRomajiField && !isExampleHiraganaField && !isExampleEndField) return;
+  if (!isJapaneseField && !isMeaningField && !isExampleRomajiField && !isExampleHiraganaField && !isExampleEndField && !isPreviousButton && !isNextButton) return;
   const meaningInputs = [...row.querySelectorAll(".deck-entry-meaning")];
   const meaningIndex = meaningInputs.indexOf(event.target.closest(".deck-entry-meaning-group")?.querySelector(".deck-entry-meaning"));
   const isLastGroup = meaningIndex === meaningInputs.length - 1;
+  const group = event.target.closest(".deck-entry-meaning-group");
+  const previousButton = group?.querySelector(".example-previous-button");
+  const nextButton = group?.querySelector(".example-next-button");
   if (event.key === "Tab" && !event.shiftKey && isJapaneseField) {
     event.preventDefault();
     meaningInputs[0]?.focus();
   } else if (event.key === "Tab" && !event.shiftKey && isExampleRomajiField) {
     event.preventDefault();
-    event.target.closest(".deck-entry-meaning-group")?.querySelector(".deck-entry-example-english")?.focus();
+    const target = previousButton && !previousButton.disabled ? previousButton : group?.querySelector(".deck-entry-example-english");
+    target?.focus();
+  } else if (event.key === "Tab" && !event.shiftKey && isPreviousButton) {
+    event.preventDefault();
+    (nextButton && !nextButton.disabled ? nextButton : group?.querySelector(".deck-entry-example-english"))?.focus();
+  } else if (event.key === "Tab" && !event.shiftKey && isNextButton) {
+    event.preventDefault();
+    group?.querySelector(".deck-entry-example-english")?.focus();
   } else if (event.key === "Tab" && !event.shiftKey && isExampleEndField && isLastGroup) {
     event.preventDefault();
     const nextGroup = createDeckMeaningInput();
     row.querySelector(".deck-entry-meanings").append(nextGroup);
+    setupExampleFields(nextGroup, row);
     nextGroup.querySelector(".deck-entry-meaning").focus();
   } else if (event.key === "Enter" && isExampleRomajiField) {
     event.preventDefault();
@@ -1574,71 +1890,98 @@ wordList.addEventListener("keydown", (event) => {
   }
 });
 
-cardForm.addEventListener("submit", (event) => {
+cardForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const japanese = japaneseInput.value.trim();
-  const hiragana = compactHiragana(hiraganaInput.value.trim() || romajiToHiragana(japanese));
-  const meaningEntries = [...englishMeanings.querySelectorAll(".meaning-entry-group")].map((group) => ({
-    meaning: group.querySelector(".meaning-translation").value.trim(),
-    example: {
-      romaji: group.querySelector(".meaning-example-romaji").value.trim(),
-      hiragana: compactHiragana(group.querySelector(".meaning-example-hiragana").value.trim() || romajiToHiragana(group.querySelector(".meaning-example-romaji").value.trim())),
-      english: group.querySelector(".meaning-example-english").value.trim(),
-    },
-  })).filter((entry) => entry.meaning);
-  const meanings = meaningEntries.map((entry) => entry.meaning);
-  const examples = meaningEntries.map((entry, index) => {
-    const previousCard = editingCardIndex !== null ? cards[editingCardIndex] : null;
-    const previous = previousCard?.examples?.[index];
-    const current = entry.example;
-    const unchanged = previous?.romaji === current.romaji && previous?.hiragana === current.hiragana
-      && previous?.english === current.english && previousCard?.japanese === japanese
-      && previousCard?.hiragana === hiragana
-      && (previousCard?.meanings?.[index] || (index === 0 ? previousCard?.english : "")) === entry.meaning;
-    return unchanged && Array.isArray(previous.wordMeanings)
-      ? { ...current, wordMeanings: previous.wordMeanings } : current;
-  });
-  if (!japanese || meanings.length === 0) return;
-  const english = meanings[0];
-  const isEditing = editingCardIndex !== null;
-  const save = (existingIndex = -1) => {
-    const nextCards = !isEditing && existingIndex < 0
-      ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings, examples }]
-      : updateCardAt(cards, isEditing ? editingCardIndex : existingIndex, { japanese, hiragana, english, meanings, examples });
-    if (!saveCards(nextCards)) {
-      window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
-      return;
-    }
-    cards = nextCards;
-    if (!isEditing) {
-      cardForm.reset();
-      resetMeaningInputs();
-      hiraganaManuallyEdited = false;
-      renderAddDeckMatches();
-      showAddFeedback(japanese);
-      japaneseInput.focus();
-      return;
-    }
-    const returnScreen = formReturnScreen;
-    const editedIndex = editingCardIndex;
-    editingCardIndex = null;
-    showScreen(returnScreen);
-    if (returnScreen === "deck") focusDeckCard(editedIndex);
-  };
-  if (isEditing) save();
-  else requestCardOverwrite(japanese, save);
+  if (cardForm.dataset.saving === "true") return;
+  cardForm.dataset.saving = "true";
+  try {
+    await waitForExampleSuggestions(cardForm);
+    const signature = exampleFormSignature(cardForm);
+    const editingIndex = editingCardIndex;
+    const japanese = japaneseInput.value.trim();
+    const hiragana = compactHiragana(hiraganaInput.value.trim() || romajiToHiragana(japanese));
+    const meaningEntries = [...englishMeanings.querySelectorAll(".meaning-entry-group")].map((group) => ({
+      meaning: group.querySelector(".meaning-translation").value.trim(),
+      example: {
+        romaji: group.querySelector(".meaning-example-romaji").value.trim(),
+        hiragana: compactHiragana(group.querySelector(".meaning-example-hiragana").value.trim() || romajiToHiragana(group.querySelector(".meaning-example-romaji").value.trim())),
+        english: group.querySelector(".meaning-example-english").value.trim(),
+      },
+    })).filter((entry) => entry.meaning);
+    const meanings = meaningEntries.map((entry) => entry.meaning);
+    let examples = meaningEntries.map((entry, index) => {
+      const previousCard = editingCardIndex !== null ? cards[editingCardIndex] : null;
+      const previous = previousCard?.examples?.[index];
+      const current = entry.example;
+      const unchanged = previous?.romaji === current.romaji && previous?.hiragana === current.hiragana
+        && previous?.english === current.english && previousCard?.japanese === japanese
+        && previousCard?.hiragana === hiragana
+        && (previousCard?.meanings?.[index] || (index === 0 ? previousCard?.english : "")) === entry.meaning;
+      return unchanged && Array.isArray(previous.wordMeanings)
+        ? { ...current, wordMeanings: previous.wordMeanings } : current;
+    });
+    if (!japanese || meanings.length === 0) return;
+    const filledGroups = [...englishMeanings.querySelectorAll(".meaning-entry-group")]
+      .filter(group => group.querySelector(".meaning-translation").value.trim());
+    examples = await Promise.all(examples.map((example, index) => example.wordMeanings ? example
+      : prepareExampleAnnotations([filledGroups[index]], japanese, [example]).then(items => items[0])));
+    if (screens.add.hidden || signature !== exampleFormSignature(cardForm) || editingIndex !== editingCardIndex) return;
+    const english = meanings[0];
+    const isEditing = editingCardIndex !== null;
+    const save = (existingIndex = -1) => {
+      if (screens.add.hidden || signature !== exampleFormSignature(cardForm) || editingIndex !== editingCardIndex) return;
+      const nextCards = !isEditing && existingIndex < 0
+        ? [...cards, { id: crypto.randomUUID?.() || String(Date.now()), japanese, hiragana, english, meanings, examples }]
+        : updateCardAt(cards, isEditing ? editingCardIndex : existingIndex, { japanese, hiragana, english, meanings, examples });
+      if (!saveCards(nextCards)) {
+        window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
+        return;
+      }
+      cards = nextCards;
+      if (!isEditing) {
+        cardForm.reset();
+        resetMeaningInputs();
+        hiraganaManuallyEdited = false;
+        renderAddDeckMatches();
+        showAddFeedback(japanese);
+        japaneseInput.focus();
+        return;
+      }
+      const returnScreen = formReturnScreen;
+      const editedIndex = editingCardIndex;
+      editingCardIndex = null;
+      showScreen(returnScreen);
+      if (returnScreen === "deck") focusDeckCard(editedIndex);
+    };
+    if (isEditing) save();
+    else requestCardOverwrite(japanese, save);
+  } finally { cardForm.dataset.saving = "false"; }
 });
 
-japaneseInput.addEventListener("input", renderAddDeckMatches);
+japaneseInput.addEventListener("input", () => {
+  if (japaneseInput.value.trim() === "") clearCardDependentFields();
+  renderAddDeckMatches();
+});
 
 cardForm.addEventListener("keydown", (event) => {
-  if (!(event.target instanceof HTMLInputElement) || !event.target.closest("#english-meanings")) return;
+  if ((!(event.target instanceof HTMLInputElement) && !event.target.matches(".example-previous-button, .example-next-button")) || !event.target.closest("#english-meanings")) return;
   const group = event.target.closest(".meaning-entry-group");
+  const isPreviousButton = event.target.matches(".example-previous-button");
+  const isNextButton = event.target.matches(".example-next-button");
   const groups = [...englishMeanings.querySelectorAll(".meaning-entry-group")];
   const isLastGroup = groups.at(-1) === group;
-  if (event.key === "Tab" && !event.shiftKey && event.target.matches(".meaning-example-romaji")) {
+  if ((isPreviousButton || isNextButton) && (event.key === "Enter" || event.key === " ")) return;
+  if (event.key === "Tab" && !event.shiftKey && isNextButton) {
     event.preventDefault();
     group.querySelector(".meaning-example-english")?.focus();
+  } else if (event.key === "Tab" && !event.shiftKey && isPreviousButton) {
+    event.preventDefault();
+    const nextButton = group.querySelector(".example-next-button");
+    (nextButton && !nextButton.disabled ? nextButton : group.querySelector(".meaning-example-english"))?.focus();
+  } else if (event.key === "Tab" && !event.shiftKey && event.target.matches(".meaning-example-romaji")) {
+    event.preventDefault();
+    const previousButton = group.querySelector(".example-previous-button");
+    (previousButton && !previousButton.disabled ? previousButton : group.querySelector(".meaning-example-english"))?.focus();
     return;
   }
   if (event.key === "Tab" && !event.shiftKey && event.target.matches(".meaning-example-english") && isLastGroup) {
@@ -1680,6 +2023,11 @@ japaneseInput.addEventListener("input", () => {
 });
 
 hiraganaInput.addEventListener("input", () => { hiraganaManuallyEdited = true; });
+
+// Registered after romaji-to-hiragana conversion so readiness sees the new reading.
+wordList.addEventListener("input", () => refreshExampleFields(wordList));
+cardForm.addEventListener("input", () => refreshExampleFields(cardForm));
+englishMeanings.querySelectorAll(".meaning-entry-group").forEach(group => setupExampleFields(group));
 
 flashcard.addEventListener("pointerdown", startFlashcardDrag);
 flashcard.addEventListener("pointermove", moveFlashcardDrag);

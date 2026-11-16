@@ -33,7 +33,7 @@ test("inline entry prepends each saved card below the form and keeps focus at th
   const addDeck = app.slice(addStart, addEnd);
 
   assert.match(addDeck, /const groups = \[\.\.\.row\.querySelectorAll\("\.deck-entry-meaning-group"\)\]/);
-  assert.match(addDeck, /const examples = meaningEntries\.map\(\(entry\) => entry\.example\)/);
+  assert.match(addDeck, /let examples = meaningEntries\.map\(\(entry\) => entry\.example\)/);
   assert.match(addDeck, /const nextCards = existingIndex < 0\s*\? \[\{ id:[^\n]*, \.\.\.entry \}, \.\.\.cards\]/);
   assert.match(addDeck, /cards = nextCards;\s*renderDeckList\(existingIndex < 0 \? 0 : existingIndex\);\s*wordList\.scrollTop = 0;\s*wordList\.querySelector\("\.deck-entry-japanese"\)\?\.focus\(\{ preventScroll: true \}\)/);
   assert.doesNotMatch(addDeck, /scrollIntoView/);
@@ -50,6 +50,6 @@ test("web shortcut labels appear above their corresponding buttons", () => {
 });
 
 test("Tab from example romaji skips the editable hiragana input in both add surfaces", () => {
-  assert.match(app, /event\.key === "Tab" && !event\.shiftKey && isExampleRomajiField[\s\S]*?querySelector\("\.deck-entry-example-english"\)\?\.focus\(\)/);
-  assert.match(app, /event\.key === "Tab" && !event\.shiftKey && event\.target\.matches\("\.meaning-example-romaji"\)[\s\S]*?querySelector\("\.meaning-example-english"\)\?\.focus\(\)/);
+  assert.match(app, /event\.key === "Tab" && !event\.shiftKey && isExampleRomajiField[\s\S]*?previousButton && !previousButton\.disabled \? previousButton[\s\S]*?target\?\.focus\(\)/);
+  assert.match(app, /event\.key === "Tab" && !event\.shiftKey && event\.target\.matches\("\.meaning-example-romaji"\)[\s\S]*?previousButton && !previousButton\.disabled \? previousButton[\s\S]*?\.focus\(\)/);
 });

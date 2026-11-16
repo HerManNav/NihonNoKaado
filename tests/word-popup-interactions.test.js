@@ -117,6 +117,7 @@ function makeSession({ realLookup = false, fetchLookup = false, savedCards = nul
   flashcard.append(prompt, answer);
   const window = {
     JapaneseCardsCore: core,
+    JapaneseExampleSuggestions: require("../example-suggestions.js"),
     JapaneseWordFormLookup: realLookup ? require("../word-form-lookup.js")
       : { findWordMeanings: (key, _data, previous) => [`${key}:${previous || "none"}`] },
     innerWidth: 400,

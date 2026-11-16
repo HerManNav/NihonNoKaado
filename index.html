@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="deck-core.js" defer></script>
     <script src="word-form-lookup.js" defer></script>
+    <script src="example-search.js" defer></script>
+    <script src="example-suggestions.js" defer></script>
     <script src="export-storage.js" defer></script>
     <script src="app.js" defer></script>
   </head>
@@ -179,9 +181,9 @@
             <div class="meaning-entry-group">
               <input id="english-translation" class="meaning-translation" name="meanings" type="text" placeholder="e.g. good morning" required />
               <div class="meaning-example-fields">
-                <input class="meaning-example-romaji" type="text" placeholder="Example (romaji)" aria-label="Example in romaji" autocomplete="off" />
-                <input class="meaning-example-hiragana" type="text" placeholder="Example (hiragana)" aria-label="Example in hiragana" autocomplete="off" data-manually-edited="false" />
-                <input class="meaning-example-english" type="text" placeholder="Example translation" aria-label="Example translation" autocomplete="off" />
+                <input class="meaning-example-romaji" type="text" placeholder="Example (romaji)" aria-label="Example in romaji" autocomplete="off" disabled />
+                <input class="meaning-example-hiragana" type="text" placeholder="Example (hiragana)" aria-label="Example in hiragana" autocomplete="off" data-manually-edited="false" disabled />
+                <input class="meaning-example-english" type="text" placeholder="Example translation" aria-label="Example translation" autocomplete="off" disabled />
               </div>
             </div>
           </div>
@@ -197,6 +199,7 @@
           <h2>Current deck</h2>
           <div id="add-deck-matches" class="add-deck-matches"></div>
           <p id="add-deck-empty" class="empty-word-list" role="status" hidden>No matching words in this deck.</p>
+          <section id="add-spelling-suggestions" class="spelling-suggestions" aria-label="Spelling suggestions" aria-live="polite" hidden></section>
         </div>
       </section>
 

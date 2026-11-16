@@ -1,4 +1,4 @@
-const CACHE_NAME = "japanese-cards-pwa-v56";
+const CACHE_NAME = "japanese-cards-pwa-v62";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -11,8 +11,11 @@ const APP_FILES = [
   "../export-storage.js",
   "../deck-core.js",
   "../word-form-lookup.js",
+  "../example-suggestions.js",
+  "../example-search.js",
   "../language.js",
   "../decks/manifest.json",
+  "../decks/example-suggestions.json",
   "../decks/english/most-common-50.json",
   "../decks/spanish/most-common-50-es.json",
   "../decks/english/most-common-100.json",

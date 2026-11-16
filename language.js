@@ -18,6 +18,14 @@
   let hasEnteredApp = false;
 
   const translations = new Map(Object.entries({
+    "Did you mean…?": "¿Querías decir…?",
+    "Spelling suggestions": "Sugerencias de escritura",
+    "Fill in Japanese (romaji), hiragana, and the meaning above first.": "Primero rellena japonés (romaji), hiragana y el significado de arriba.",
+    "Next example": "Siguiente ejemplo",
+    "Previous example": "Ejemplo anterior",
+    "No more matching examples.": "No hay más ejemplos coincidentes.",
+    "No matching bundled example. You can enter your own.": "No hay un ejemplo incluido para este significado. Puedes escribir el tuyo.",
+    "Examples could not be loaded. Enter your own, or focus here to retry.": "No se pudieron cargar los ejemplos. Escribe el tuyo o vuelve a este campo para reintentar.",
     "Settings": "Ajustes",
     "Language": "Idioma",
     "Back to settings": "Volver a ajustes",

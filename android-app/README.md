@@ -4,7 +4,7 @@ This separate Capacitor project bundles the shared web app files into an Android
 
 ## Shared source
 
-The root project remains the source of truth for `index.html`, `styles.css`, `app.js`, `deck-core.js`, `word-form-lookup.js`, `language.js`, and `decks/`. Before syncing or building Android, `npm run copy-web` copies those shared files, the deck manifest, default decks, and romaji lookup into the generated `www/` directory. Maintenance source archives are excluded, and the generated deck directory is replaced on each copy to remove stale assets. The generated directory is ignored by Git.
+The root project remains the source of truth for `index.html`, `styles.css`, `app.js`, `deck-core.js`, `word-form-lookup.js`, `example-search.js`, `example-suggestions.js`, `language.js`, and `decks/`. Before syncing or building Android, `npm run copy-web` copies those shared files, the deck manifest, default decks, example suggestion index and every part named by its manifest, and romaji lookup into the generated `www/` directory. All example parts are available offline in Android, while only relevant parts are parsed in memory. Maintenance source archives are excluded, and the generated deck directory is replaced on each copy to remove stale assets. The generated directory is ignored by Git.
 
 ## Build prerequisites
 
