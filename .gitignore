@@ -11,3 +11,9 @@ android-app/android/local.properties
 android-app/android/**/build/
 *.jks
 *.keystore
+
+# Local Serena/Codex machine paths and generated symbol state.
+/.codex/config.toml
+/.serena/cache/
+/.serena/memories/
+/.serena/logs/

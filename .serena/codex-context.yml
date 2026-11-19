@@ -1,0 +1,14 @@
+# A single-project variant of Serena's Codex context keeps tools/list small.
+description: Read-only symbol discovery for the JapanCards Codex project
+single_project: true
+prompt: >-
+  Use Serena for scoped symbol discovery and references before reading code bodies.
+  Use Codex's built-in tools for edits, shell commands, and non-code reads.
+  Follow AGENTS.md and the relevant docs/specs file; do not repeat broad onboarding.
+excluded_tools:
+  - create_text_file
+  - read_file
+  - execute_shell_command
+  - replace_content
+  - find_file
+  - list_dir

@@ -1,0 +1,7 @@
+# Copy this section into this checkout's .codex/config.toml and adjust paths.
+[mcp_servers.serena]
+command = 'C:\Users\YOUR_USER\.local\bin\serena.exe'
+args = ["start-mcp-server", "--context", 'C:\path\to\JapanCards_project\.serena\codex-context.yml', "--agent-interface", "tools", "--project", 'C:\path\to\JapanCards_project', "--enable-web-dashboard", "false", "--open-web-dashboard", "false", "--enable-gui-log-window", "false", "--log-level", "WARNING"]
+startup_timeout_sec = 120
+tool_timeout_sec = 60
+enabled = true

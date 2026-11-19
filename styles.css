@@ -368,7 +368,7 @@ button:disabled { cursor: wait; opacity: .6; }
 
 .screen.is-export-success { animation: export-success-blink 360ms ease-out both; }
 .screen.is-export-leaving { animation: export-screen-out 200ms ease-in both; pointer-events: none; }
-.home-screen.is-export-returning { animation: export-screen-in 240ms ease-out both; pointer-events: none; }
+.home-screen.is-export-returning, #deck-screen.is-export-returning { animation: export-screen-in 240ms ease-out both; pointer-events: none; }
 .export-toast { position: fixed; z-index: 20; top: max(24px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; width: max-content; max-width: calc(100% - 40px); padding: 16px 20px; border: 1px solid #bdd2b4; border-radius: 14px; background: #e7f2e2; color: #354b32; box-shadow: 0 8px 24px #20211f18; pointer-events: none; animation: export-toast-in 180ms ease-out both; }
 .export-toast svg { width: 24px; height: 24px; flex: none; fill: none; stroke: #45733b; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 .export-toast strong { font-size: 16px; }

@@ -3,6 +3,8 @@ Learn Japanese with ready-made flashcard decks, or... create your own!
 
 ## Project layout
 
+For feature behavior, source ownership, test coverage, and maintenance workflows, start with the [feature spec index](docs/specs/README.md).
+
 - `index.html`, `app.js`, and `styles.css` are the web app.
 - `decks/` contains the default decks, catalog, and romaji lookup data.
 - `android-app/` contains the Capacitor Android project.

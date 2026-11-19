@@ -160,10 +160,10 @@ let editingDeckScrollTop = 0;
 let lastDeckScrollTop = 0;
 let editingPageScrollTop = 0;
 let formReturnScreen = "home";
+let deckFeatureReturnScreen = "home";
 let hiraganaManuallyEdited = false;
 let addFeedbackTimeout = null;
 let pendingDefaultDeck = null;
-let pendingDefaultDeckTrigger = null;
 let defaultDeckLoadInProgress = false;
 let fingerprintRegistrationSequence = 0;
 const fingerprintRegistrationByContent = Object.create(null);
@@ -859,6 +859,10 @@ function showScreen(name, onShown = () => {}) {
   else update();
 }
 
+function returnFromDeckFeature() {
+  showScreen(deckFeatureReturnScreen);
+}
+
 // Called by Android's system Back gesture. Return false only at the root so
 // Android can apply its normal behavior; all in-app screens use their existing
 // cancellation paths, including their loading and form guards.
@@ -885,6 +889,10 @@ window.JapaneseCardsHandleBack = function handleSystemBack() {
   }
   if (!screens.export.hidden && exportInProgress) return true;
   if (!screens.about.hidden) { openSettings(); return true; }
+  if (!screens.defaults.hidden || !screens.clear.hidden || !screens.export.hidden) {
+    returnFromDeckFeature();
+    return true;
+  }
   if (!screens.settings.hidden || !screens.export.hidden || !screens.practice.hidden || !screens.deck.hidden || !screens.defaults.hidden || !screens.clear.hidden) {
     showScreen("home");
     return true;
@@ -1152,6 +1160,7 @@ function openSettings() {
 }
 
 function exportDeck() {
+  deckFeatureReturnScreen = screens.deck.hidden ? "home" : "deck";
   closeDeckMenu();
   window.clearTimeout(exportToastTimeout);
   document.querySelector("#export-toast").hidden = true;
@@ -1178,13 +1187,13 @@ async function finishDeckExport(downloaded) {
     await pause(reducedMotion ? 250 : 360);
     screens.export.classList.add("is-export-leaving");
     await pause(reducedMotion ? 0 : 200);
-    showScreen("home");
-    screens.home.classList.add("is-export-returning");
+    returnFromDeckFeature();
+    screens[deckFeatureReturnScreen].classList.add("is-export-returning");
     await pause(reducedMotion ? 0 : 240);
   } finally {
     screens.export.classList.remove("is-export-success");
     screens.export.classList.remove("is-export-leaving");
-    screens.home.classList.remove("is-export-returning");
+    screens[deckFeatureReturnScreen].classList.remove("is-export-returning");
   }
 }
 
@@ -1219,7 +1228,7 @@ function getSafeDeckFilename(deckName) {
 }
 
 async function importDeck(file) {
-  if (!file) return;
+  if (!file) { returnFromDeckFeature(); return; }
   try {
     const importedData = JSON.parse(await file.text());
     const importedCards = parseImportedDeck(importedData);
@@ -1230,6 +1239,7 @@ async function importDeck(file) {
       return;
     }
     cards = importedCards;
+    renderDeckList();
     updateDeckCount();
     deckCount.textContent += ` · Imported ${cards.length} ${cards.length === 1 ? "card" : "cards"}.`;
   } catch (error) {
@@ -1237,6 +1247,7 @@ async function importDeck(file) {
   } finally {
     importFile.value = "";
     closeDeckMenu();
+    returnFromDeckFeature();
   }
 }
 
@@ -1974,6 +1985,7 @@ function startAddingWord() {
 }
 
 async function openDefaultDecks() {
+  if (!screens.deck.hidden) deckFeatureReturnScreen = "deck";
   closeDeckMenu();
   showScreen("defaults");
   defaultDeckList.replaceChildren();
@@ -2025,15 +2037,14 @@ function renderDefaultDecks(decks) {
     const description = document.createElement("span");
     description.textContent = `${deck.count} ${deck.count === 1 ? "card" : "cards"}`;
     button.append(name, description);
-    button.addEventListener("click", () => requestDefaultDeckLoad(deck, button));
+    button.addEventListener("click", () => requestDefaultDeckLoad(deck));
     fragment.append(button);
   });
   defaultDeckList.replaceChildren(fragment);
 }
 
-function requestDefaultDeckLoad(deck, trigger) {
+function requestDefaultDeckLoad(deck) {
   pendingDefaultDeck = deck;
-  pendingDefaultDeckTrigger = trigger;
   defaultDeckConfirmTitle.textContent = cards.length ? "Replace your deck?" : "Load this deck?";
   defaultDeckConfirmDescription.textContent = cards.length
     ? `“${deck.name}” contains ${deck.count} cards. It will replace your current deck of ${cards.length} ${cards.length === 1 ? "card" : "cards"}.`
@@ -2051,11 +2062,8 @@ function requestDefaultDeckLoad(deck, trigger) {
 
 function cancelDefaultDeckLoad() {
   if (defaultDeckLoadInProgress) return;
-  const trigger = pendingDefaultDeckTrigger;
   pendingDefaultDeck = null;
-  pendingDefaultDeckTrigger = null;
-  showScreen("defaults");
-  trigger?.focus();
+  returnFromDeckFeature();
 }
 
 async function loadDefaultDeck() {
@@ -2074,9 +2082,9 @@ async function loadDefaultDeck() {
     const defaultDeckId = defaultDeckIdentityId(deck.file);
     if (!saveCards(importedCards, defaultDeckId)) throw new Error("The new deck could not be saved in this browser.");
     cards = importedCards;
+    renderDeckList();
     pendingDefaultDeck = null;
-    pendingDefaultDeckTrigger = null;
-    showScreen("home");
+    returnFromDeckFeature();
   } catch (error) {
     defaultDeckConfirmStatus.textContent = `${defaultDeckErrorMessage(`decks/${deck.file}`, error)} Your current deck is unchanged; try again.`;
     confirmDefaultDeckLoadButton.disabled = false;
@@ -2161,6 +2169,7 @@ function showAddFeedback(japanese) {
 }
 
 function confirmClearDeck() {
+  deckFeatureReturnScreen = screens.deck.hidden ? "home" : "deck";
   document.querySelector("#clear-description").textContent = cards.length === 1
     ? "This will delete the 1 card saved in this browser."
     : `This will delete all ${cards.length} cards saved in this browser.`;
@@ -2179,7 +2188,8 @@ function clearDeck() {
   activeDeckId = makeDeckId("custom");
   persistActiveDeckIdentity(activeDeckId);
   storageWarning = "";
-  showScreen("home");
+  renderDeckList();
+  returnFromDeckFeature();
 }
 
 addButton.addEventListener("click", () => {
@@ -2223,19 +2233,28 @@ document.addEventListener("keydown", (event) => {
     cancelDefaultDeckLoad();
   }
 });
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  if (!screens.defaults.hidden || !screens.clear.hidden || (!screens.export.hidden && !exportInProgress)) {
+    returnFromDeckFeature();
+  }
+});
 document.querySelector("#export-action").addEventListener("click", exportDeck);
 document.querySelector("#settings-button").addEventListener("click", openSettings);
 window.addEventListener("japanese-cards:show-settings", openSettings);
 document.querySelectorAll("[data-go-settings]").forEach(button => button.addEventListener("click", openSettings));
 document.querySelector("#about-button").addEventListener("click", () => showScreen("about"));
 document.querySelector("#export-form").addEventListener("submit", saveDeckExport);
-document.querySelector("#cancel-export").addEventListener("click", () => { if (!exportInProgress) showScreen("home"); });
+document.querySelector("#cancel-export").addEventListener("click", () => { if (!exportInProgress) returnFromDeckFeature(); });
 document.querySelector("#import-action").addEventListener("click", openDefaultDecks);
 document.querySelector("#clear-action").addEventListener("click", confirmClearDeck);
 document.querySelector("#confirm-clear").addEventListener("click", clearDeck);
+document.querySelector("#default-decks-back-button").addEventListener("click", returnFromDeckFeature);
+document.querySelector("#cancel-clear").addEventListener("click", returnFromDeckFeature);
 cancelDefaultDeckLoadButton.addEventListener("click", cancelDefaultDeckLoad);
 confirmDefaultDeckLoadButton.addEventListener("click", loadDefaultDeck);
 importFile.addEventListener("change", () => importDeck(importFile.files?.[0]));
+importFile.addEventListener("cancel", returnFromDeckFeature);
 backToLearningButton.addEventListener("click", cancelCardForm);
 
 wordList.addEventListener("input", (event) => {
@@ -2286,6 +2305,13 @@ wordList.addEventListener("keydown", (event) => {
   const isExampleHiraganaField = event.target.matches(".deck-entry-example-hiragana");
   const isExampleEndField = event.target.matches(".deck-entry-example-english");
   if (!isJapaneseField && !isMeaningField && !isExampleRomajiField && !isExampleHiraganaField && !isExampleEndField && !isPreviousButton && !isNextButton) return;
+  if (event.key === "Escape" && isJapaneseField) {
+    event.preventDefault();
+    event.target.value = "";
+    clearCardDependentFields(row);
+    filterDeckList("");
+    return;
+  }
   const meaningInputs = [...row.querySelectorAll(".deck-entry-meaning")];
   const meaningIndex = meaningInputs.indexOf(event.target.closest(".deck-entry-meaning-group")?.querySelector(".deck-entry-meaning"));
   const isLastGroup = meaningIndex === meaningInputs.length - 1;
@@ -2297,8 +2323,7 @@ wordList.addEventListener("keydown", (event) => {
     meaningInputs[0]?.focus();
   } else if (event.key === "Tab" && !event.shiftKey && isExampleRomajiField) {
     event.preventDefault();
-    const target = previousButton && !previousButton.disabled ? previousButton : group?.querySelector(".deck-entry-example-english");
-    target?.focus();
+    group?.querySelector(".deck-entry-example-english")?.focus();
   } else if (event.key === "Tab" && !event.shiftKey && isPreviousButton) {
     event.preventDefault();
     (nextButton && !nextButton.disabled ? nextButton : group?.querySelector(".deck-entry-example-english"))?.focus();
@@ -2419,8 +2444,7 @@ cardForm.addEventListener("keydown", (event) => {
     (nextButton && !nextButton.disabled ? nextButton : group.querySelector(".meaning-example-english"))?.focus();
   } else if (event.key === "Tab" && !event.shiftKey && event.target.matches(".meaning-example-romaji")) {
     event.preventDefault();
-    const previousButton = group.querySelector(".example-previous-button");
-    (previousButton && !previousButton.disabled ? previousButton : group.querySelector(".meaning-example-english"))?.focus();
+    group.querySelector(".meaning-example-english")?.focus();
     return;
   }
   if (event.key === "Tab" && !event.shiftKey && event.target.matches(".meaning-example-english") && isLastGroup) {
@@ -2435,6 +2459,13 @@ cardForm.addEventListener("keydown", (event) => {
 });
 
 japaneseInput.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    event.preventDefault();
+    japaneseInput.value = "";
+    clearCardDependentFields();
+    renderAddDeckMatches();
+    return;
+  }
   if (!shouldSkipHiraganaOnTab(event.key, event.shiftKey)) return;
   event.preventDefault();
   meaningInputs()[0]?.focus();
