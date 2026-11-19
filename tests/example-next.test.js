@@ -126,6 +126,43 @@ const examples = [
   {romaji: "kono resutoran de tabeyou.", hiragana: "このレストランでたべよう。", english: "Let's eat at this restaurant."},
 ];
 
+test("editing loads the current example counter without replacing the saved fields", async () => {
+  for (const [saved,expected] of [[examples[1],{position:2,total:3}],
+    [{romaji:"my own sentence",hiragana:"じぶん",english:"My sentence."},{position:1,total:4}]]) {
+    const h = harness({allSuggestions:async()=>examples});
+    h.fields.forEach((field,index)=>{field.value=Object.values(saved)[index];});
+    h.controller.refresh();
+    await h.controller.inspect();
+    assert.deepEqual(h.fields.map(field=>field.value),Object.values(saved));
+    assert.deepEqual(h.nextStates.at(-1),{disabled:false,busy:false,...expected});
+    await h.controller.next();
+    assert.equal(h.fields[0].value,saved===examples[1] ? examples[2].romaji : examples[0].romaji);
+    await h.controller.previous();
+    assert.equal(h.fields[0].value,saved.romaji);
+  }
+});
+
+test("counter inspection handles no matches, stale edits, retries and blank examples", async () => {
+  let calls=0;
+  const blank=harness({allSuggestions:async()=>{calls++;return examples;}});
+  blank.controller.refresh();await blank.controller.inspect();assert.equal(calls,0);
+  const empty=harness({allSuggestions:async()=>[]});
+  empty.fields[0].value='custom';empty.controller.refresh();await empty.controller.inspect();
+  assert.deepEqual(empty.nextStates.at(-1),{disabled:false,busy:false,position:1,total:1});
+  const pending=deferred();
+  const stale=harness({allSuggestions:()=>pending.promise});
+  stale.fields[0].value=examples[0].romaji;stale.controller.refresh();
+  const request=stale.controller.inspect();await Promise.resolve();
+  stale.fields[0].value='new custom';stale.controller.refresh();pending.resolve(examples);await request;
+  assert.equal(stale.fields[0].value,'new custom');
+  assert.deepEqual(stale.nextStates.at(-1),{disabled:false,busy:false,position:0,total:0});
+  let attempts=0;
+  const retry=harness({allSuggestions:async()=>{if (++attempts===1) throw Error('offline');return examples;}});
+  retry.fields[0].value=examples[1].romaji;retry.controller.refresh();await retry.controller.inspect();
+  assert.equal(retry.fields[0].value,examples[1].romaji);await retry.controller.inspect();
+  assert.equal(retry.nextStates.at(-1).position,2);
+});
+
 test("actual form wiring warns on locked taps and enables focus suggestions only for the ready group", async () => {
   const ui = setupUiGroups();
   for (const item of [ui.inlineA,ui.standalone]) {

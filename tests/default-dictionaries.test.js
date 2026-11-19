@@ -88,7 +88,7 @@ test("import opens default decks and selection opens confirmation", () => {
   const showConfirmationIndex = app.indexOf('showScreen("defaultConfirm");', app.indexOf("function requestDefaultDeckLoad"));
   const loadFunctionIndex = app.indexOf("async function loadDefaultDeck()");
   const fetchIndex = app.indexOf('const response = await fetch(`decks/${deck.file.split("/").map(encodeURIComponent).join("/")}`);');
-  const saveIndex = app.indexOf("if (!saveCards(importedCards)) throw");
+  const saveIndex = app.indexOf("if (!saveCards(importedCards, defaultDeckId)) throw");
   const replaceIndex = app.indexOf("cards = importedCards;", saveIndex);
   assert.ok(showConfirmationIndex >= 0 && showConfirmationIndex < fetchIndex);
   assert.ok(loadFunctionIndex >= 0 && loadFunctionIndex < fetchIndex);

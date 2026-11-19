@@ -95,10 +95,18 @@
         </header>
         <div class="practice-content">
           <p id="swipe-reveal-hint" class="swipe-reveal-hint is-hidden" role="status" aria-live="polite">Tap the card to discover its meaning before moving on.</p>
-          <button id="flashcard" class="flashcard" type="button" aria-expanded="false">
-            <span id="prompt-word" class="prompt-word"></span>
-            <span id="reveal-hint" class="reveal-hint">Tap to reveal translation</span>
-            <span id="answer-word" class="answer-word" hidden></span>
+          <button id="flashcard" class="flashcard" type="button" aria-expanded="false" aria-label="Reveal the answer">
+            <span class="flashcard-inner">
+              <span class="flashcard-face flashcard-front" id="flashcard-front" aria-hidden="false">
+                <span id="prompt-word" class="prompt-word"></span>
+                <span id="reveal-hint" class="reveal-hint">Tap to reveal translation</span>
+              </span>
+              <span class="flashcard-face flashcard-back" id="flashcard-back" aria-hidden="true">
+                <span id="back-prompt-word" class="prompt-word back-prompt-word"></span>
+                <span id="answer-word" class="answer-word"></span>
+              </span>
+            </span>
+            <span id="drag-miss-hint" class="drag-miss-hint" aria-hidden="true">Remember me later</span>
           </button>
           <div class="session-progress">
             <div id="progress-track" class="progress-track" role="group" aria-label="Session progress. Click a shown dot to review that card.">
@@ -109,8 +117,18 @@
             </div>
             <p id="cards-remaining" class="cards-remaining" aria-live="polite"></p>
           </div>
+          <button id="remember-later-button" class="remember-later-button" type="button" disabled>
+            Remember me later
+          </button>
         </div>
-        <p class="subtle-text deck-credit practice-credit">Romaji meanings use <a href="https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project" target="_blank" rel="noreferrer">JMdict</a> by James William Breen and EDRDG. Ranking uses <a href="https://github.com/hermitdave/FrequencyWords" target="_blank" rel="noreferrer">FrequencyWords</a>. Data is <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
+        <section id="practice-summary" class="practice-summary" aria-labelledby="practice-summary-title" hidden>
+          <h1 id="practice-summary-title">Session complete</h1>
+          <p id="summary-correct" class="summary-correct"></p>
+          <h2 id="summary-missed-title">Failed cards</h2>
+          <ul id="summary-missed-list" class="summary-missed-list"></ul>
+          <button id="summary-back-button" class="primary-button" type="button">Back to main</button>
+        </section>
+        <p id="practice-announcement" class="visually-hidden" role="status" aria-live="polite"></p>
       </section>
 
       <section id="deck-screen" class="screen deck-screen" aria-labelledby="deck-title" hidden>

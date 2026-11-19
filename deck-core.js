@@ -236,9 +236,9 @@
     return cards.slice(0, count);
   }
 
-  function serializeDeck(cards, name, exportedAt = new Date().toISOString()) {
+  function serializeDeck(cards, name, exportedAt = new Date().toISOString(), deckId) {
     if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
-    return JSON.stringify({
+    const data = {
       format: EXPORT_FORMAT,
       version: 3,
       name,
@@ -265,7 +265,9 @@
         else exported.english = meanings[0];
         return exported;
       }),
-    }, null, 2);
+    };
+    if (typeof deckId === "string" && deckId.trim()) data.deckId = deckId.trim();
+    return JSON.stringify(data, null, 2);
   }
 
   function createId(index) {
@@ -281,14 +283,36 @@
     return result;
   }
 
-  function createPracticeDeck(cards, size, random = Math.random) {
+  function normalizedWeight(weight) {
+    return Number.isFinite(weight) && weight > 0 ? weight : 1;
+  }
+
+  function weightedIndex(items, weightForItem, random) {
+    const weights = items.map((item) => normalizedWeight(weightForItem(item)));
+    const total = weights.reduce((sum, weight) => sum + weight, 0);
+    let target = Math.max(0, Math.min(0.9999999999999999, random())) * total;
+    for (let index = 0; index < weights.length; index += 1) {
+      target -= weights[index];
+      if (target < 0) return index;
+    }
+    return weights.length - 1;
+  }
+
+  function weightedPermutation(items, weightForItem, random) {
+    const remaining = [...items];
+    const result = [];
+    while (remaining.length) result.push(remaining.splice(weightedIndex(remaining, weightForItem, random), 1)[0]);
+    return result;
+  }
+
+  function createPracticeDeck(cards, size, random = Math.random, weightForCard = () => 1) {
     if (!Array.isArray(cards)) throw new TypeError("Cards must be an array.");
     if (!Number.isInteger(size) || size < 0) throw new RangeError("Session size must be a non-negative integer.");
     if (size > 0 && cards.length === 0) throw new RangeError("Cannot practice an empty deck.");
 
     const deck = [];
     while (deck.length < size) {
-      const batch = shuffle(cards, random);
+      const batch = weightedPermutation(cards, weightForCard, random);
       if (batch.length > 1 && deck.length > 0 && batch[0] === deck[deck.length - 1]) {
         const differentCardIndex = batch.findIndex((card) => card !== deck[deck.length - 1]);
         [batch[0], batch[differentCardIndex]] = [batch[differentCardIndex], batch[0]];
@@ -353,7 +377,7 @@
     return reviewIndex + 1 >= currentIndex ? null : reviewIndex + 1;
   }
 
-  function createMeaningPracticeRun(cards, random = Math.random) {
+  function createMeaningPracticeRun(cards, random = Math.random, weightForCard = () => 1) {
     if (!Array.isArray(cards) || cards.length === 0) throw new RangeError("Cannot practice an empty deck.");
     if (cards.some((card) => !Array.isArray(card.meanings) || card.meanings.length === 0)) {
       throw new TypeError("Every practice card must have at least one English meaning.");
@@ -368,7 +392,7 @@
 
     function draw() {
       if (pool.length === 0) reset();
-      const cardIndex = Math.floor(random() * pool.length);
+      const cardIndex = weightedIndex(pool, weightForCard, random);
       const card = pool[cardIndex];
       const seen = seenMeanings.get(card);
       const unseenIndices = seen.flatMap((wasSeen, index) => wasSeen ? [] : [index]);

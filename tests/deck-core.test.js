@@ -175,6 +175,17 @@ test("imports and trims an explicit hiragana field", () => {
   assert.equal(cards[0].hiragana, "ねこ");
 });
 
+test("exported deck IDs round-trip without learning or user history", () => {
+  const cards = [{ japanese: "inu", hiragana: "いぬ", meanings: ["dog"], examples: [] }];
+  const exported = JSON.parse(serializeDeck(cards, "Travel", "2026-11-16T00:00:00.000Z", "default:english/most-common-50.json"));
+  assert.equal(exported.deckId, "default:english/most-common-50.json");
+  assert.equal(Object.hasOwn(exported, "learning"), false);
+  assert.equal(Object.hasOwn(exported, "history"), false);
+  assert.deepEqual(parseImportedDeck(exported).map((card) => card.japanese), ["inu"]);
+  const withoutId = JSON.parse(serializeDeck(cards, "Travel", "2026-11-16T00:00:00.000Z"));
+  assert.equal(Object.hasOwn(withoutId, "deckId"), false);
+});
+
 test("exports edited hiragana with each card and preserves it on import", () => {
   const sourceCards = [{ japanese: "arigatou", hiragana: "ありがとー", english: "thank you (casual)" }];
   const json = serializeDeck(sourceCards, "Travel", "2026-11-02T12:00:00.000Z");
@@ -424,6 +435,16 @@ test("practice deck has the selected length and avoids repeats before exhausting
   }
 });
 
+test("weighted practice permutation favors higher weights without repeating within a batch", () => {
+  const cards = [{ japanese: "a" }, { japanese: "b" }, { japanese: "c" }];
+  const weights = new Map([["a", 1], ["b", 1], ["c", 20]]);
+  const weighted = createPracticeDeck(cards, 3, () => 0.8, (card) => weights.get(card.japanese));
+  assert.equal(weighted[0].japanese, "c");
+  assert.equal(new Set(weighted).size, 3);
+  const fallback = createPracticeDeck(cards, 3, () => 0, () => Number.NaN);
+  assert.equal(new Set(fallback).size, 3);
+});
+
 test("whole-deck deck includes every current card exactly once", () => {
   const cards = [{ japanese: "a" }, { japanese: "b" }, { japanese: "c" }];
   const deck = createPracticeDeck(cards, cards.length, () => 0);
@@ -523,6 +544,13 @@ test("English practice shows every meaning once per run, then resets for the nex
   const nextRunDraw = run.draw();
   assert.equal(nextRunDraw.meaning, "chopsticks");
   assert.equal(nextRunDraw.runComplete, false);
+});
+
+test("weighted English practice selects the higher-weight eligible card", () => {
+  const cards = [{ japanese: "a", meanings: ["a"] }, { japanese: "b", meanings: ["b"] }];
+  const run = createMeaningPracticeRun(cards, () => 0.9, (card) => card.japanese === "b" ? 8 : 1);
+  assert.equal(run.draw().card.japanese, "b");
+  assert.equal(run.draw().card.japanese, "a");
 });
 
 test("English practice tracks duplicate meaning strings by their separate field positions", () => {

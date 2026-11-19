@@ -1,6 +1,8 @@
 const STORAGE_KEY = "japanese-cards.deck.v1";
 const LEGACY_STORAGE_KEY = "japanese-cards.dictionary.v1";
 const CONTEXT_ANNOTATION_MIGRATION_KEY = "japanese-cards.context-annotation-migration.v1";
+const DECK_IDENTITY_KEY = "japanese-cards.deck-identity.v1";
+const LEARNING_KEY = "japanese-cards.learning.v2";
 const { parseImportedDeck, prepareDefaultDeck, serializeDeck, normalizeWordMeanings, romajiToHiragana, searchDeckCards, shouldSkipHiraganaOnTab, shouldAutoConvertHiragana, createPracticeDeck, createMeaningPracticeRun, getSessionProgressState, nextReviewIndex, removeCardAt, updateCardAt } = window.JapaneseCardsCore;
 const { findWordMeanings } = window.JapaneseWordFormLookup;
 document.documentElement.classList.toggle("native-app", Boolean(window.Capacitor?.isNativePlatform?.()));
@@ -117,10 +119,20 @@ function renderAddDeckMatches() {
   document.querySelector("#add-deck-search").hidden = editingCardIndex !== null;
 }
 const flashcard = document.querySelector("#flashcard");
+const flashcardInner = flashcard.querySelector(".flashcard-inner");
 const wordTranslationPopup = document.querySelector("#word-translation-popup");
 const promptWord = document.querySelector("#prompt-word");
+const backPromptWord = document.querySelector("#back-prompt-word");
 const answerWord = document.querySelector("#answer-word");
 const revealHint = document.querySelector("#reveal-hint");
+const flashcardFront = document.querySelector("#flashcard-front");
+const flashcardBack = document.querySelector("#flashcard-back");
+const dragMissHint = document.querySelector("#drag-miss-hint");
+const rememberLaterButton = document.querySelector("#remember-later-button");
+const practiceSummary = document.querySelector("#practice-summary");
+const summaryCorrect = document.querySelector("#summary-correct");
+const summaryMissedList = document.querySelector("#summary-missed-list");
+const practiceAnnouncement = document.querySelector("#practice-announcement");
 const swipeRevealHint = document.querySelector("#swipe-reveal-hint");
 const progressLabel = document.querySelector("#progress-label");
 const sessionOptions = document.querySelectorAll("[data-session-size]");
@@ -153,8 +165,15 @@ let addFeedbackTimeout = null;
 let pendingDefaultDeck = null;
 let pendingDefaultDeckTrigger = null;
 let defaultDeckLoadInProgress = false;
+let fingerprintRegistrationSequence = 0;
+const fingerprintRegistrationByContent = Object.create(null);
+const pendingFingerprintRegistrations = new Map();
 
 let cards = loadCards();
+let deckIdentity = loadDeckIdentity();
+let activeDeckId = deckIdentity.activeDeckId || makeDeckId("custom");
+persistActiveDeckIdentity(activeDeckId);
+if (cards.length) void registerDeckFingerprint(cards, activeDeckId);
 let practiceDeck = [];
 let englishPracticeRun = null;
 let practiceTarget = 0;
@@ -163,6 +182,17 @@ let reviewIndex = null;
 let shownPracticeIndices = new Set();
 let shownPracticeCards = new Map();
 let answerRevealed = false;
+let practicePhase = "guessing";
+let attemptGrades = [];
+let sessionDeckId = null;
+let sessionDirection = "japanese";
+let correctConfirmationTimer = null;
+let practiceAdvanceTimer = null;
+let correctConfirmationGeneration = 0;
+let flipUnlockTimer = null;
+let flipGeneration = 0;
+let practiceAdvanceGeneration = 0;
+let rememberPopupDismissTap = false;
 let selectedSessionSize = 5;
 let advancingPractice = false;
 let keyboardNavigation = false;
@@ -573,16 +603,177 @@ function loadCards() {
   }
 }
 
-function saveCards(nextCards) {
+function saveCards(nextCards, deckId = activeDeckId) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(nextCards));
     storageWarning = "";
+    persistActiveDeckIdentity(deckId);
+    void registerDeckFingerprint(nextCards, deckId);
     return true;
   } catch {
     storageWarning = "Browser storage is unavailable. Export a backup before closing this page.";
     updateDeckCount();
     return false;
   }
+}
+
+function makeDeckId(prefix = "custom") {
+  const uuid = window.crypto?.randomUUID?.() || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+  return `${prefix}:${uuid}`;
+}
+
+function defaultDeckIdentityId(deckFile) {
+  return `default:${String(deckFile)}`;
+}
+
+function isValidDeckId(value) {
+  return typeof value === "string" && value.length > 0 && value.length <= 200 && !/[\u0000-\u001f\u007f]/.test(value);
+}
+
+function loadDeckIdentity() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(DECK_IDENTITY_KEY) || "null");
+    if (!saved || saved.version !== 1 || !saved.fingerprints || typeof saved.fingerprints !== "object" || Array.isArray(saved.fingerprints)) {
+      return { version: 1, activeDeckId: null, fingerprints: {} };
+    }
+    const fingerprints = {};
+    Object.entries(saved.fingerprints).forEach(([digest, deckId]) => {
+      if (/^[a-f0-9]{64}$/.test(digest) && isValidDeckId(deckId)) fingerprints[digest] = deckId;
+    });
+    return { version: 1, activeDeckId: isValidDeckId(saved.activeDeckId) ? saved.activeDeckId : null, fingerprints };
+  } catch {
+    return { version: 1, activeDeckId: null, fingerprints: {} };
+  }
+}
+
+function persistActiveDeckIdentity(deckId) {
+  if (isValidDeckId(deckId)) activeDeckId = deckId;
+  deckIdentity.activeDeckId = activeDeckId;
+  try { localStorage.setItem(DECK_IDENTITY_KEY, JSON.stringify(deckIdentity)); } catch { /* identity is an optional local enhancement */ }
+}
+
+function canonicalDeckContent(deckCards) {
+  const norm = (value) => String(value ?? "").trim().normalize("NFC");
+  return JSON.stringify((Array.isArray(deckCards) ? deckCards : []).map((card) => {
+    const meanings = Array.isArray(card?.meanings) ? card.meanings : [card?.english];
+    return [norm(card?.japanese), norm(card?.hiragana), meanings.map(norm), meanings.map((_, index) => {
+      const example = card?.examples?.[index] || {};
+      return [norm(example.romaji), norm(example.hiragana), norm(example.english)];
+    })];
+  }));
+}
+
+async function fingerprintDeck(deckCards) {
+  try {
+    const bytes = new TextEncoder().encode(canonicalDeckContent(deckCards));
+    const digest = await window.crypto.subtle.digest("SHA-256", bytes);
+    return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+  } catch { return null; }
+}
+
+async function registerDeckFingerprint(deckCards, deckId) {
+  const canonicalContent = canonicalDeckContent(deckCards);
+  const registrationSequence = ++fingerprintRegistrationSequence;
+  fingerprintRegistrationByContent[canonicalContent] = registrationSequence;
+  let finishRegistration;
+  const completion = new Promise((resolve) => { finishRegistration = resolve; });
+  pendingFingerprintRegistrations.set(canonicalContent, { deckId, registrationSequence, completion });
+  try {
+    const digest = await fingerprintDeck(deckCards);
+    if (!digest || !isValidDeckId(deckId) || fingerprintRegistrationByContent[canonicalContent] !== registrationSequence) return;
+    deckIdentity.fingerprints[digest] = deckId;
+    try { localStorage.setItem(DECK_IDENTITY_KEY, JSON.stringify(deckIdentity)); } catch { /* the deck remains usable without identity persistence */ }
+  } finally {
+    if (pendingFingerprintRegistrations.get(canonicalContent)?.registrationSequence === registrationSequence) pendingFingerprintRegistrations.delete(canonicalContent);
+    if (fingerprintRegistrationByContent[canonicalContent] === registrationSequence) delete fingerprintRegistrationByContent[canonicalContent];
+    finishRegistration();
+  }
+}
+
+async function resolveDeckId(deckCards, preferredId = null) {
+  if (isValidDeckId(preferredId)) return preferredId;
+  const canonicalContent = canonicalDeckContent(deckCards);
+  while (pendingFingerprintRegistrations.has(canonicalContent)) {
+    await pendingFingerprintRegistrations.get(canonicalContent).completion;
+  }
+  const digest = await fingerprintDeck(deckCards);
+  return (digest && deckIdentity.fingerprints[digest]) || makeDeckId("custom");
+}
+
+function loadLearningStore() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(LEARNING_KEY) || "null");
+    if (!saved || saved.version !== 2 || !saved.decks || typeof saved.decks !== "object" || Array.isArray(saved.decks)) return { version: 2, decks: Object.create(null) };
+    const decks = Object.create(null);
+    Object.entries(saved.decks).forEach(([deckId, directions]) => {
+      if (!isValidDeckId(deckId) || !directions || typeof directions !== "object" || Array.isArray(directions)) return;
+      const validatedDirections = Object.create(null);
+      ["japanese", "english"].forEach((direction) => {
+        const words = directions[direction];
+        if (!words || typeof words !== "object" || Array.isArray(words)) return;
+        const validated = Object.create(null);
+        Object.entries(words).forEach(([rawKey, counts]) => {
+          const key = normalizeDeckWord(rawKey);
+          if (!key || !counts || typeof counts !== "object") return;
+          const correct = Number.isSafeInteger(counts.correct) && counts.correct >= 0 ? Math.min(counts.correct, 1000000000) : 0;
+          const incorrect = Number.isSafeInteger(counts.incorrect) && counts.incorrect >= 0 ? Math.min(counts.incorrect, 1000000000) : 0;
+          const prior = Object.hasOwn(validated, key) ? validated[key] : { correct: 0, incorrect: 0 };
+          validated[key] = { correct: Math.min(1000000000, prior.correct + correct), incorrect: Math.min(1000000000, prior.incorrect + incorrect) };
+        });
+        validatedDirections[direction] = validated;
+      });
+      decks[deckId] = validatedDirections;
+    });
+    return { version: 2, decks };
+  } catch { return { version: 2, decks: Object.create(null) }; }
+}
+
+function saveLearningStore(store) {
+  try { localStorage.setItem(LEARNING_KEY, JSON.stringify(store)); return true; } catch { return false; }
+}
+
+function learningForCard(card, deckId = activeDeckId, direction = "japanese") {
+  const store = loadLearningStore();
+  return store.decks[deckId]?.[direction]?.[normalizeDeckWord(card?.japanese)] || { correct: 0, incorrect: 0 };
+}
+
+function learningWeight(card, deckId = activeDeckId, direction = "japanese") {
+  const record = learningForCard(card, deckId, direction);
+  return 1 + Math.min(4, Math.max(0, record.incorrect - record.correct));
+}
+
+function learningWeightFromStore(card, store, deckId, direction) {
+  const record = store.decks[deckId]?.[direction]?.[normalizeDeckWord(card?.japanese)] || { correct: 0, incorrect: 0 };
+  return 1 + Math.min(4, Math.max(0, record.incorrect - record.correct));
+}
+
+function commitLearning(card, grade, deckId = sessionDeckId || activeDeckId, direction = sessionDirection) {
+  const store = loadLearningStore();
+  const words = Object.hasOwn(store.decks, deckId) ? store.decks[deckId] : (store.decks[deckId] = Object.create(null));
+  const directionWords = Object.hasOwn(words, direction) ? words[direction] : (words[direction] = Object.create(null));
+  const key = normalizeDeckWord(card?.japanese);
+  const record = Object.hasOwn(directionWords, key) ? directionWords[key] : (directionWords[key] = { correct: 0, incorrect: 0 });
+  const field = grade === "correct" ? "correct" : "incorrect";
+  record[field] = Math.min(1000000000, record[field] + 1);
+  saveLearningStore(store);
+}
+
+function migrateLearningKey(oldJapanese, newJapanese) {
+  const oldKey = normalizeDeckWord(oldJapanese);
+  const newKey = normalizeDeckWord(newJapanese);
+  if (!oldKey || !newKey || oldKey === newKey) return;
+  const store = loadLearningStore();
+  const directions = store.decks[activeDeckId];
+  if (!directions) return;
+  ["japanese", "english"].forEach((direction) => {
+    const words = directions[direction];
+    if (!words || !Object.hasOwn(words, oldKey)) return;
+    const existing = Object.hasOwn(words, newKey) ? words[newKey] : { correct: 0, incorrect: 0 };
+    const migrated = words[oldKey];
+    words[newKey] = { correct: Math.min(1000000000, existing.correct + migrated.correct), incorrect: Math.min(1000000000, existing.incorrect + migrated.incorrect) };
+    delete words[oldKey];
+  });
+  saveLearningStore(store);
 }
 
 function contextualExampleKey(example) {
@@ -649,7 +840,8 @@ async function restoreContextMeaningsForSavedCards() {
   }
 }
 
-function showScreen(name) {
+function showScreen(name, onShown = () => {}) {
+  if (name !== "practice") cancelPracticeTimers();
   if (name !== "practice") {
     wordPopupBlocksCardAdvance = false;
     hideWordTranslationPopup();
@@ -660,6 +852,7 @@ function showScreen(name) {
     Object.entries(screens).forEach(([key, screen]) => { screen.hidden = key !== name; });
     if (name === "home") updateDeckCount();
     if (name === "add") renderAddDeckMatches();
+    onShown();
   };
   if (currentScreen === nextScreen) { update(); return; }
   if (typeof document.startViewTransition === "function") document.startViewTransition(update);
@@ -921,6 +1114,7 @@ async function addDeckEntry() {
         window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
         return;
       }
+      if (existingIndex >= 0) migrateLearningKey(cards[existingIndex]?.japanese, japanese);
       cards = nextCards;
       renderDeckList(existingIndex < 0 ? 0 : existingIndex);
       wordList.scrollTop = 0;
@@ -1016,7 +1210,7 @@ async function saveDeckExport(event) {
 }
 
 function createDeckJson(deckName) {
-  return serializeDeck(cards, deckName);
+  return serializeDeck(cards, deckName, new Date().toISOString(), activeDeckId);
 }
 
 function getSafeDeckFilename(deckName) {
@@ -1027,9 +1221,11 @@ function getSafeDeckFilename(deckName) {
 async function importDeck(file) {
   if (!file) return;
   try {
-    const importedCards = parseImportedDeck(JSON.parse(await file.text()));
+    const importedData = JSON.parse(await file.text());
+    const importedCards = parseImportedDeck(importedData);
     if (cards.length > 0 && !window.confirm(`Replace your current deck of ${cards.length} cards with ${importedCards.length} imported cards?`)) return;
-    if (!saveCards(importedCards)) {
+    const importedDeckId = await resolveDeckId(importedCards, !Array.isArray(importedData) ? importedData.deckId : null);
+    if (!saveCards(importedCards, importedDeckId)) {
       window.alert("The deck could not be saved in this browser. Export a backup before closing this page.");
       return;
     }
@@ -1055,14 +1251,22 @@ function startPractice() {
   const fromEnglish = originLanguage.value === "english";
   const allMeaningCount = cards.reduce((total, card) => total + card.meanings.length, 0);
   const sessionSize = selectedSessionSize === "all" ? allMeaningCount : selectedSessionSize;
+  cancelPracticeTimers();
+  sessionDeckId = activeDeckId;
+  sessionDirection = fromEnglish ? "english" : "japanese";
+  const learningSnapshot = loadLearningStore();
+  const weightSnapshot = new Map(cards.map((card) => [card, learningWeightFromStore(card, learningSnapshot, sessionDeckId, sessionDirection)]));
+  const weightForCard = (card) => weightSnapshot.get(card) || 1;
   practiceTarget = sessionSize;
-  practiceDeck = fromEnglish ? [] : createPracticeDeck(cards, sessionSize);
-  englishPracticeRun = fromEnglish ? createMeaningPracticeRun(cards) : null;
+  practiceDeck = fromEnglish ? [] : createPracticeDeck(cards, sessionSize, Math.random, weightForCard);
+  englishPracticeRun = fromEnglish ? createMeaningPracticeRun(cards, Math.random, weightForCard) : null;
   practiceIndex = 0;
   reviewIndex = null;
   shownPracticeIndices = new Set();
   shownPracticeCards = new Map();
   answerRevealed = false;
+  practicePhase = "guessing";
+  attemptGrades = Array.from({ length: practiceTarget }, () => null);
   showScreen("practice");
   renderPracticeCard();
 }
@@ -1070,7 +1274,7 @@ function startPractice() {
 function renderPracticeCard(entranceAnimation = "") {
   wordPopupBlocksCardAdvance = false;
   hideWordTranslationPopup();
-  const fromEnglish = originLanguage.value === "english";
+  const fromEnglish = sessionDirection === "english";
   const displayIndex = reviewIndex ?? practiceIndex;
   if (fromEnglish && !practiceDeck[displayIndex]) drawEnglishPracticeCard(displayIndex);
   const entry = practiceDeck[displayIndex];
@@ -1082,26 +1286,37 @@ function renderPracticeCard(entranceAnimation = "") {
   }
   if (fromEnglish) {
     promptWord.textContent = entry.meaning;
+    backPromptWord.textContent = entry.meaning;
     renderJapaneseWord(answerWord, card);
     const exampleBlock = createPracticeExample(card.examples?.[entry.meaningIndex]);
     if (exampleBlock) answerWord.append(exampleBlock);
   } else {
     renderJapaneseWord(promptWord, card);
+    renderJapaneseWord(backPromptWord, card);
     renderPracticeAnswer(answerWord, card, card.meanings.map((_, index) => index));
   }
-  const showFullCard = isReviewing || answerRevealed;
-  answerWord.hidden = !showFullCard;
+  const showFullCard = isReviewing || practicePhase === "revealed" || practicePhase === "confirmingCorrect";
   answerWord.classList.remove("is-appearing");
   if (isReviewing) answerWord.classList.add("is-appearing");
-  revealHint.hidden = showFullCard;
+  flashcard.classList.add("is-render-reset");
+  revealHint.hidden = isReviewing || showFullCard;
+  flashcard.classList.toggle("is-flipped", showFullCard);
+  flashcardFront.setAttribute("aria-hidden", String(showFullCard));
+  flashcardBack.setAttribute("aria-hidden", String(!showFullCard));
+  flashcard.setAttribute("aria-label", isReviewing ? "Reviewed card" : showFullCard ? "Answer revealed. Select to mark correct." : "Reveal the answer");
+  const canRememberLater = !isReviewing && practicePhase === "revealed";
+  rememberLaterButton.disabled = !canRememberLater;
+  rememberLaterButton.classList.toggle("is-active", canRememberLater);
+  practiceSummary.hidden = true;
+  document.querySelector(".practice-content").hidden = false;
   swipeRevealHint.classList.add("is-hidden");
   swipeRevealHint.classList.remove("is-fading", "is-attention");
   window.clearTimeout(deniedSwipeFeedbackTimeout);
-  flashcard.classList.remove("is-revealing", "is-advancing", "is-entering", "is-dragging", "is-drag-snap", "is-denied-jitter", "is-swipe-exit-left", "is-swipe-exit-right", "is-swipe-enter-from-left", "is-swipe-enter-from-right");
+  flashcard.classList.remove("is-confirming-correct", "is-correct-hold", "is-advancing", "is-entering", "is-dragging", "is-drag-snap", "is-denied-jitter", "is-swipe-exit-left", "is-swipe-exit-right", "is-swipe-exit-down", "is-swipe-enter-from-left", "is-swipe-enter-from-right");
   clearFlashcardDragStyles();
   if (entranceAnimation) flashcard.classList.add(entranceAnimation);
-  flashcard.disabled = false;
-  advancingPractice = false;
+  flashcard.disabled = practicePhase === "flipping" || practicePhase === "confirmingCorrect" || practicePhase === "committingMiss" || practicePhase === "exiting";
+  advancingPractice = flashcard.disabled;
   flashcard.setAttribute("aria-expanded", String(showFullCard));
   progressLabel.textContent = `${practiceIndex} of ${practiceTarget} completed`;
   renderSessionProgress();
@@ -1248,16 +1463,16 @@ function renderSessionProgress() {
 }
 
 function revealAnswer() {
-  if (answerRevealed) return;
+  if (reviewIndex !== null || practicePhase !== "guessing") return;
   window.clearTimeout(deniedSwipeFeedbackTimeout);
   answerRevealed = true;
-  answerWord.hidden = false;
-  answerWord.classList.remove("is-appearing");
-  flashcard.classList.remove("is-revealing");
-  void flashcard.offsetWidth;
-  flashcard.classList.add("is-revealing");
-  answerWord.classList.add("is-appearing");
-  revealHint.hidden = true;
+  practicePhase = "flipping";
+  const generation = ++flipGeneration;
+  flashcard.classList.remove("is-render-reset");
+  void flashcardInner.offsetWidth;
+  flashcard.classList.add("is-flipped");
+  flashcard.disabled = true;
+  advancingPractice = true;
   flashcard.classList.remove("is-denied-jitter");
   if (!swipeRevealHint.classList.contains("is-hidden")) {
     swipeRevealHint.classList.remove("is-attention");
@@ -1267,12 +1482,120 @@ function revealAnswer() {
       swipeRevealHint.classList.remove("is-fading");
     }, 1000);
   }
-  flashcard.setAttribute("aria-expanded", "true");
+  if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+    finishFlip(generation);
+  } else {
+    window.clearTimeout(flipUnlockTimer);
+    flipUnlockTimer = window.setTimeout(() => finishFlip(generation), 450);
+  }
   renderSessionProgress();
+}
+
+function finishFlip(generation) {
+  if (generation !== flipGeneration || practicePhase !== "flipping") return;
+  window.clearTimeout(flipUnlockTimer);
+  flipUnlockTimer = null;
+  practicePhase = "revealed";
+  revealHint.hidden = true;
+  flashcard.disabled = false;
+  advancingPractice = false;
+  flashcardFront.setAttribute("aria-hidden", "true");
+  flashcardBack.setAttribute("aria-hidden", "false");
+  flashcard.setAttribute("aria-expanded", "true");
+  flashcard.setAttribute("aria-label", "Answer revealed. Select to mark correct.");
+  const entry = practiceDeck[practiceIndex];
+  practiceAnnouncement.textContent = sessionDirection === "english" ? entry?.card?.japanese : entry?.meanings?.join("; ");
+  rememberLaterButton.disabled = reviewIndex !== null;
+  rememberLaterButton.classList.toggle("is-active", reviewIndex === null);
+  renderSessionProgress();
+}
+
+flashcardInner.addEventListener("transitionend", (event) => {
+  if (event.target === flashcardInner && event.propertyName === "transform" && practicePhase === "flipping") finishFlip(flipGeneration);
+});
+
+function cancelPracticeTimers() {
+  correctConfirmationGeneration += 1;
+  flipGeneration += 1;
+  practiceAdvanceGeneration += 1;
+  window.clearTimeout(correctConfirmationTimer);
+  window.clearTimeout(flipUnlockTimer);
+  window.clearTimeout(practiceAdvanceTimer);
+  correctConfirmationTimer = null;
+  flipUnlockTimer = null;
+  practiceAdvanceTimer = null;
+}
+
+function commitCurrentGrade(grade) {
+  if (reviewIndex !== null || practicePhase !== "revealed" || attemptGrades[practiceIndex] !== null) return false;
+  const entry = practiceDeck[practiceIndex];
+  if (!entry) return false;
+  wordPopupBlocksCardAdvance = false;
+  hideWordTranslationPopup();
+  const card = sessionDirection === "english" ? entry.card : entry;
+  attemptGrades[practiceIndex] = grade;
+  commitLearning(card, grade);
+  return true;
+}
+
+function confirmCurrentCorrect() {
+  if (!commitCurrentGrade("correct")) return;
+  practicePhase = "confirmingCorrect";
+  advancingPractice = true;
+  flashcard.disabled = true;
+  rememberLaterButton.disabled = true;
+  rememberLaterButton.classList.remove("is-active");
+  flashcard.setAttribute("aria-label", "Marked correct");
+  const generation = ++correctConfirmationGeneration;
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) {
+    flashcard.classList.add("is-correct-hold");
+    correctConfirmationTimer = window.setTimeout(() => finishCorrectConfirmation(generation), 510);
+  } else {
+    flashcard.classList.remove("is-correct-hold", "is-confirming-correct");
+    void flashcard.offsetWidth;
+    flashcard.classList.add("is-confirming-correct");
+    correctConfirmationTimer = window.setTimeout(() => {
+      if (generation !== correctConfirmationGeneration) return;
+      flashcard.classList.remove("is-confirming-correct");
+      flashcard.classList.add("is-correct-hold");
+      correctConfirmationTimer = window.setTimeout(() => finishCorrectConfirmation(generation), 150);
+    }, 360);
+  }
+}
+
+function finishCorrectConfirmation(generation) {
+  if (generation !== correctConfirmationGeneration || practicePhase !== "confirmingCorrect") return;
+  correctConfirmationTimer = null;
+  flashcard.classList.remove("is-correct-hold");
+  practicePhase = "revealed";
+  advancingPractice = false;
+  advancePractice();
+}
+
+function commitCurrentMiss() {
+  if (!commitCurrentGrade("incorrect")) return false;
+  practicePhase = "committingMiss";
+  advancingPractice = true;
+  flashcard.disabled = true;
+  rememberLaterButton.disabled = true;
+  rememberLaterButton.classList.remove("is-active");
+  flashcard.classList.remove("is-dragging", "is-drag-snap");
+  clearFlashcardDragStyles();
+  flashcard.classList.add("is-swipe-exit-down");
+  practicePhase = "exiting";
+  const generation = ++practiceAdvanceGeneration;
+  practiceAdvanceTimer = window.setTimeout(() => {
+    if (generation !== practiceAdvanceGeneration || screens.practice.hidden) return;
+    practiceAdvanceTimer = null;
+    finishPracticeAdvance();
+  }, 190);
+  return true;
 }
 
 function reviewPracticeCard(index) {
   if (advancingPractice || !shownPracticeIndices.has(index)) return;
+  if (correctConfirmationTimer !== null) cancelPracticeTimers();
   reviewIndex = index === practiceIndex ? null : index;
   renderPracticeCard();
 }
@@ -1284,10 +1607,11 @@ function advanceReview(entranceAnimation = "") {
 }
 
 function handleFlashcardAction() {
+  if (flashcard.disabled || practicePhase === "flipping" || practicePhase === "confirmingCorrect" || practicePhase === "committingMiss" || practicePhase === "exiting" || practicePhase === "summary") return;
   if (reviewIndex !== null) {
     transitionFlashcardSwipe(-1, () => advanceReview("is-swipe-enter-from-right"));
-  } else if (answerRevealed) {
-    advancePractice();
+  } else if (practicePhase === "revealed") {
+    confirmCurrentCorrect();
   } else {
     revealAnswer();
   }
@@ -1296,25 +1620,65 @@ function handleFlashcardAction() {
 function finishPracticeAdvance(entranceAnimation = "is-swipe-enter-from-right") {
   if (practiceIndex === practiceTarget - 1) {
     progressLabel.textContent = `${practiceTarget} of ${practiceTarget} completed`;
-    showScreen("home");
+    renderPracticeSummary();
     return;
   }
   practiceIndex += 1;
   reviewIndex = null;
   answerRevealed = false;
+  practicePhase = "guessing";
   renderPracticeCard(entranceAnimation);
 }
 
+function renderPracticeSummary() {
+  cancelPracticeTimers();
+  wordPopupBlocksCardAdvance = false;
+  hideWordTranslationPopup();
+  practicePhase = "summary";
+  const correct = attemptGrades.filter((grade) => grade === "correct").length;
+  summaryCorrect.textContent = `${correct} / ${practiceTarget} correct`;
+  summaryMissedList.replaceChildren();
+  const missed = attemptGrades.flatMap((grade, index) => grade === "incorrect" ? [{ entry: practiceDeck[index], index }] : []);
+  if (!missed.length) {
+    const item = document.createElement("li");
+    item.textContent = "No failed cards.";
+    summaryMissedList.append(item);
+  } else {
+    missed.forEach(({ entry, index }) => {
+      const card = sessionDirection === "english" ? entry.card : entry;
+      const prompt = sessionDirection === "english" ? entry.meaning : card.japanese;
+      const answer = sessionDirection === "english" ? `${card.japanese} (${card.hiragana})` : card.meanings.join(" · ");
+      const item = document.createElement("li");
+      item.dataset.attemptIndex = String(index);
+      const promptNode = document.createElement("strong");
+      promptNode.textContent = prompt;
+      const answerNode = document.createElement("span");
+      answerNode.textContent = answer;
+      item.append(promptNode, answerNode);
+      summaryMissedList.append(item);
+    });
+  }
+  document.querySelector(".practice-content").hidden = true;
+  practiceSummary.hidden = false;
+  rememberLaterButton.disabled = true;
+  rememberLaterButton.classList.remove("is-active");
+}
+
 function advancePractice() {
-  if (advancingPractice) return;
+  if (advancingPractice || reviewIndex !== null) return;
+  practicePhase = "exiting";
   transitionFlashcardSwipe(-1, () => finishPracticeAdvance());
 }
 
 function clearFlashcardDragStyles() {
   flashcard.style.removeProperty("--drag-x");
+  flashcard.style.removeProperty("--drag-y");
   flashcard.style.removeProperty("--drag-rotation");
   flashcard.style.removeProperty("--drag-opacity");
-  flashcard.style.removeProperty("background-color");
+  flashcard.style.removeProperty("--drag-miss-opacity");
+  flashcard.style.removeProperty("--flashcard-drag-bg");
+  rememberLaterButton.style.removeProperty("--drop-lift");
+  rememberLaterButton.classList.remove("is-drop-approaching");
 }
 
 function resetFlashcardDrag() {
@@ -1336,6 +1700,8 @@ function startFlashcardDrag(event) {
     startX: event.clientX,
     startY: event.clientY,
     deltaX: 0,
+    deltaY: 0,
+    axis: null,
     dragging: false,
   };
   flashcard.setPointerCapture(event.pointerId);
@@ -1345,23 +1711,39 @@ function moveFlashcardDrag(event) {
   if (!flashcardDrag || event.pointerId !== flashcardDrag.pointerId) return;
   const deltaX = event.clientX - flashcardDrag.startX;
   const deltaY = event.clientY - flashcardDrag.startY;
-  if (!flashcardDrag.dragging) {
-    if (Math.abs(deltaX) < 8 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+  flashcardDrag.deltaX = deltaX;
+  flashcardDrag.deltaY = deltaY;
+  if (!flashcardDrag.axis) {
+    if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < 8) return;
+    if (Math.abs(deltaX) >= Math.abs(deltaY)) flashcardDrag.axis = "horizontal";
+    else if (reviewIndex === null && practicePhase === "revealed" && deltaY > 0) flashcardDrag.axis = "vertical";
+    else return;
     flashcardDrag.dragging = true;
     flashcard.classList.add("is-dragging");
   }
   if (event.cancelable) event.preventDefault();
-  flashcardDrag.deltaX = deltaX;
-  const width = flashcard.getBoundingClientRect().width || 320;
-  const ratio = deltaX / width;
-  flashcard.style.setProperty("--drag-x", `${deltaX}px`);
-  flashcard.style.setProperty("--drag-rotation", `${Math.max(-9, Math.min(9, ratio * 16))}deg`);
-  flashcard.style.setProperty("--drag-opacity", String(Math.max(0.48, 1 - Math.abs(ratio) * 0.5)));
-  if (reviewIndex === null && !answerRevealed && deltaX < 0) {
-    const redTint = Math.min(0.38, Math.abs(ratio) * 0.75);
-    flashcard.style.backgroundColor = `rgba(194, 54, 47, ${redTint})`;
+  const rect = flashcard.getBoundingClientRect();
+  const width = rect.width || 320;
+  const horizontalRatio = deltaX / width;
+  if (flashcardDrag.axis === "horizontal") {
+    flashcard.style.setProperty("--drag-x", `${deltaX}px`);
+    flashcard.style.setProperty("--drag-rotation", `${Math.max(-9, Math.min(9, horizontalRatio * 16))}deg`);
   } else {
-    flashcard.style.removeProperty("background-color");
+    const threshold = Math.max(80, (rect.height || 280) * 0.22);
+    const ratio = Math.max(0, Math.min(1, deltaY / threshold));
+    flashcard.style.setProperty("--drag-y", `${deltaY}px`);
+    flashcard.style.setProperty("--drag-opacity", String(Math.max(0.48, 1 - ratio * 0.45)));
+    flashcard.style.setProperty("--drag-miss-opacity", String(ratio));
+    flashcard.style.setProperty("--flashcard-drag-bg", `rgba(194, 54, 47, ${ratio * 0.3})`);
+    rememberLaterButton.style.setProperty("--drop-lift", `${Math.min(deltaY * 0.45, 38)}px`);
+    rememberLaterButton.classList.toggle("is-drop-approaching", ratio > 0.08);
+    return;
+  }
+  if (reviewIndex === null && practicePhase === "guessing" && deltaX < 0) {
+    const redTint = Math.min(0.38, Math.abs(horizontalRatio) * 0.75);
+    flashcard.style.setProperty("--flashcard-drag-bg", `rgba(194, 54, 47, ${redTint})`);
+  } else {
+    flashcard.style.removeProperty("--flashcard-drag-bg");
   }
 }
 
@@ -1369,16 +1751,23 @@ function transitionFlashcardSwipe(direction, updateCard) {
   if (advancingPractice) return false;
   advancingPractice = true;
   flashcard.disabled = true;
+  rememberLaterButton.disabled = true;
+  rememberLaterButton.classList.remove("is-active");
   flashcard.classList.remove("is-dragging", "is-drag-snap", "is-entering", "is-swipe-enter-from-left", "is-swipe-enter-from-right");
   clearFlashcardDragStyles();
   flashcard.classList.add(direction < 0 ? "is-swipe-exit-left" : "is-swipe-exit-right");
-  window.setTimeout(updateCard, 190);
+  const generation = ++practiceAdvanceGeneration;
+  practiceAdvanceTimer = window.setTimeout(() => {
+    if (generation !== practiceAdvanceGeneration || screens.practice.hidden) return;
+    practiceAdvanceTimer = null;
+    updateCard();
+  }, 190);
   return true;
 }
 
 function navigateWithFlashcardSwipe(direction) {
   if (direction < 0) {
-    if (reviewIndex === null && !answerRevealed) return false;
+    if (reviewIndex === null && practicePhase !== "revealed") return false;
     if (reviewIndex !== null) {
       if (reviewIndex >= practiceIndex) return false;
       return transitionFlashcardSwipe(direction, () => advanceReview("is-swipe-enter-from-right"));
@@ -1409,7 +1798,7 @@ function showSwipeDeniedFeedback() {
 
 function endFlashcardDrag(event) {
   if (!flashcardDrag || event.pointerId !== flashcardDrag.pointerId) return;
-  const { dragging, deltaX, startTarget, pointerType } = flashcardDrag;
+  const { dragging, deltaX, deltaY, axis, startTarget, pointerType } = flashcardDrag;
   flashcardDrag = null;
   const startedOnRomajiToken = startTarget instanceof Element && startTarget.closest(".romaji-token");
   if (!dragging) {
@@ -1435,12 +1824,27 @@ function endFlashcardDrag(event) {
   suppressFlashcardClickTimeout = window.setTimeout(() => { suppressFlashcardClick = false; }, 0);
 
   const width = flashcard.getBoundingClientRect().width || 320;
-  const threshold = Math.max(60, width * 0.18);
-  if (Math.abs(deltaX) >= threshold && deltaX < 0 && reviewIndex === null && !answerRevealed) {
+  const rect = flashcard.getBoundingClientRect();
+  const horizontalThreshold = Math.max(60, width * 0.18);
+  const verticalThreshold = Math.max(80, (rect.height || 280) * 0.22);
+  if (axis === "vertical") {
+    if (deltaY >= verticalThreshold && commitCurrentMiss()) return;
+    resetFlashcardDrag();
+    return;
+  }
+  if (axis === "horizontal" && Math.abs(deltaX) >= horizontalThreshold && deltaX < 0 && reviewIndex === null && practicePhase === "guessing") {
     showSwipeDeniedFeedback();
     return;
   }
-  if (Math.abs(deltaX) >= threshold && navigateWithFlashcardSwipe(deltaX < 0 ? -1 : 1)) return;
+  if (axis === "horizontal" && Math.abs(deltaX) >= horizontalThreshold && deltaX < 0 && reviewIndex === null && practicePhase === "revealed") {
+    flashcard.classList.remove("is-dragging", "is-drag-snap");
+    clearFlashcardDragStyles();
+    if (!commitCurrentGrade("correct")) return;
+    practicePhase = "exiting";
+    transitionFlashcardSwipe(-1, () => finishPracticeAdvance());
+    return;
+  }
+  if (axis === "horizontal" && Math.abs(deltaX) >= horizontalThreshold && navigateWithFlashcardSwipe(deltaX < 0 ? -1 : 1)) return;
   resetFlashcardDrag();
 }
 
@@ -1448,6 +1852,11 @@ function cancelFlashcardDrag(event) {
   if (!flashcardDrag || event.pointerId !== flashcardDrag.pointerId) return;
   const startedOutsideRomajiToken = !(flashcardDrag.startTarget instanceof Element
     && flashcardDrag.startTarget.closest(".romaji-token"));
+  if (flashcardDrag.dragging) {
+    suppressFlashcardClick = true;
+    window.clearTimeout(suppressFlashcardClickTimeout);
+    suppressFlashcardClickTimeout = window.setTimeout(() => { suppressFlashcardClick = false; }, 0);
+  }
   if (startedOutsideRomajiToken && wordTranslationPopup.hidden) wordPopupBlocksCardAdvance = false;
   resetFlashcardDrag();
 }
@@ -1479,6 +1888,19 @@ function handleFlashcardClick(event) {
     return;
   }
   handleFlashcardAction();
+}
+
+function handleRememberLaterAction(event) {
+  if (rememberLaterButton.disabled || reviewIndex !== null || practicePhase !== "revealed") return;
+  const dismissOnly = rememberPopupDismissTap || wordPopupBlocksCardAdvance || !wordTranslationPopup.hidden;
+  rememberPopupDismissTap = false;
+  if (dismissOnly) {
+    wordPopupBlocksCardAdvance = false;
+    hideWordTranslationPopup();
+    event.preventDefault();
+    return;
+  }
+  commitCurrentMiss();
 }
 
 flashcard.addEventListener("pointerover", (event) => {
@@ -1649,7 +2071,8 @@ async function loadDefaultDeck() {
     if (!response.ok) throw new Error(`Deck request failed (${response.status}).`);
     const source = await response.json();
     const importedCards = prepareDefaultDeck(source, deck.count);
-    if (!saveCards(importedCards)) throw new Error("The new deck could not be saved in this browser.");
+    const defaultDeckId = defaultDeckIdentityId(deck.file);
+    if (!saveCards(importedCards, defaultDeckId)) throw new Error("The new deck could not be saved in this browser.");
     cards = importedCards;
     pendingDefaultDeck = null;
     pendingDefaultDeckTrigger = null;
@@ -1678,7 +2101,7 @@ function defaultDeckErrorMessage(resource, error) {
 function startEditingCard(index) {
   const card = cards[index];
   if (!card) return;
-  editingDeckScrollTop = wordList.scrollTop || lastDeckScrollTop;
+  editingDeckScrollTop = wordList.scrollTop;
   editingPageScrollTop = window.scrollY;
   editingCardIndex = index;
   formReturnScreen = "deck";
@@ -1691,27 +2114,31 @@ function startEditingCard(index) {
   cancelEditButton.hidden = false;
   backToLearningButton.hidden = true;
   enterHint.hidden = true;
-  showScreen("add");
-  japaneseInput.focus();
+  showScreen("add", () => {
+    if (editingCardIndex !== index) return;
+    englishMeanings.querySelectorAll(".meaning-entry-group").forEach(group => {
+      void exampleControllers.get(group)?.inspect();
+    });
+    japaneseInput.focus();
+  });
 }
 
 function cancelCardForm() {
   const returnScreen = formReturnScreen;
   const editedIndex = editingCardIndex;
   editingCardIndex = null;
-  showScreen(returnScreen);
-  if (returnScreen === "deck" && editedIndex !== null) focusDeckCard(editedIndex, false);
+  showScreen(returnScreen, () => {
+    if (returnScreen === "deck" && editedIndex !== null) focusDeckCard(editedIndex, false);
+  });
 }
 
 function focusDeckCard(index, highlight = true) {
   renderDeckList(highlight ? index : -1);
   const row = wordList.children[index + 1];
-  requestAnimationFrame(() => {
-    wordList.scrollTop = editingDeckScrollTop;
-    lastDeckScrollTop = editingDeckScrollTop;
-    window.scrollTo(0, editingPageScrollTop);
-    row?.querySelector(".edit-word-button")?.focus({ preventScroll: true });
-  });
+  wordList.scrollTop = editingDeckScrollTop;
+  lastDeckScrollTop = editingDeckScrollTop;
+  window.scrollTo(0, editingPageScrollTop);
+  row?.querySelector(".edit-word-button")?.focus({ preventScroll: true });
 }
 
 wordList.addEventListener("scroll", () => { lastDeckScrollTop = wordList.scrollTop; }, { passive: true });
@@ -1749,6 +2176,8 @@ function clearDeck() {
     return;
   }
   cards = [];
+  activeDeckId = makeDeckId("custom");
+  persistActiveDeckIdentity(activeDeckId);
   storageWarning = "";
   showScreen("home");
 }
@@ -1944,6 +2373,8 @@ cardForm.addEventListener("submit", async (event) => {
         window.alert("The card could not be saved in this browser. Export a backup before closing this page.");
         return;
       }
+      const priorJapanese = isEditing ? cards[editingCardIndex]?.japanese : (existingIndex >= 0 ? cards[existingIndex]?.japanese : "");
+      if (priorJapanese) migrateLearningKey(priorJapanese, japanese);
       cards = nextCards;
       if (!isEditing) {
         cardForm.reset();
@@ -1957,8 +2388,9 @@ cardForm.addEventListener("submit", async (event) => {
       const returnScreen = formReturnScreen;
       const editedIndex = editingCardIndex;
       editingCardIndex = null;
-      showScreen(returnScreen);
-      if (returnScreen === "deck") focusDeckCard(editedIndex);
+      showScreen(returnScreen, () => {
+        if (returnScreen === "deck") focusDeckCard(editedIndex);
+      });
     };
     if (isEditing) save();
     else requestCardOverwrite(japanese, save);
@@ -2041,6 +2473,12 @@ flashcard.addEventListener("pointermove", moveFlashcardDrag);
 flashcard.addEventListener("pointerup", endFlashcardDrag);
 flashcard.addEventListener("pointercancel", cancelFlashcardDrag);
 flashcard.addEventListener("click", handleFlashcardClick);
+rememberLaterButton.addEventListener("pointerdown", () => {
+  rememberPopupDismissTap = wordPopupBlocksCardAdvance || !wordTranslationPopup.hidden;
+});
+rememberLaterButton.addEventListener("pointercancel", () => { rememberPopupDismissTap = false; });
+rememberLaterButton.addEventListener("click", handleRememberLaterAction);
+document.querySelector("#summary-back-button").addEventListener("click", () => showScreen("home"));
 
 document.addEventListener("keydown", (event) => {
   if (event.code !== "Space" || screens.practice.hidden) return;

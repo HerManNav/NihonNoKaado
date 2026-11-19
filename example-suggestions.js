@@ -379,6 +379,15 @@
         if (!isActive() || version !== revision || before !== signature()) return;
         availableExamples = examples;
         lookupComplete = true;
+        if (mode === "inspect") {
+          selectedIndex = currentExampleIndex();
+          if (selectedIndex < 0 && values()[0].trim()) {
+            const [romaji, hiragana, english] = values();
+            availableExamples = [{romaji, hiragana, english}, ...availableExamples];
+            selectedIndex = 0;
+          }
+          return;
+        }
         if (!examples.length) {
           selectedIndex = -1;
           if (mode === "focus") {
@@ -431,7 +440,11 @@
       }
       return runRequest(direction > 0 ? "next" : "previous", direction);
     }
-    return {refresh, warn, focus, next: () => navigate(1), previous: () => navigate(-1), wait: () => pending || Promise.resolve()};
+    function inspect() {
+      if (!ready() || !values().some(value => value.trim()) || lookupComplete) return pending || Promise.resolve();
+      return pending || runRequest("inspect", 0);
+    }
+    return {refresh, warn, focus, inspect, next: () => navigate(1), previous: () => navigate(-1), wait: () => pending || Promise.resolve()};
   }
   return {createService, createController, senseScore};
 });
